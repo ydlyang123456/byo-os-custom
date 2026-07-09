@@ -1577,6 +1577,263 @@ static void cmd_batch39_ulimit2(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("stack size                (kbytes, -s) 8192\n");
 }
 
+
+/* ===== Batch 40: System Administration Commands ===== */
+
+static void cmd_b40_tree2(int argc, char args[][CMD_MAX_LEN]) {
+    char* path = argc > 1 ? args[1] : "/";
+    char output[4096]; int len = fs_list_dir(path, output, sizeof(output)-1);
+    if (len <= 0) { vga_puts(path); vga_puts(": not found\n"); return; }
+    vga_puts(path); vga_puts("\n");
+    output[len] = 0; char* p = output;
+    while (*p) {
+        char* eol = strchr(p, '\n'); if (!eol) eol = p + strlen(p);
+        vga_puts("|-- ");
+        char tmp[256]; int cplen = eol - p; if (cplen > 255) cplen = 255;
+        memcpy(tmp, p, cplen); tmp[cplen] = 0; vga_puts(tmp); vga_putchar('\n');
+        if (*eol == '\n') p = eol + 1; else break;
+    }
+}
+
+static void cmd_b40_du2(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t total = pmm_get_total_pages() * 4;
+    uint32_t free_p = pmm_get_free_pages() * 4;
+    uint32_t used = total - free_p;
+    char buf[16];
+    vga_puts("  Used:  "); itoa(used, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+    vga_puts("  Free:  "); itoa(free_p, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+    vga_puts("  Total: "); itoa(total, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+}
+
+static void cmd_b40_touch2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: touch FILE\n"); return; }
+    fs_create_file(args[1], "", 0);
+    vga_puts("touch: created "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b40_apt2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apt [install|remove|update|list] PKG\n"); return; }
+    if (strcmp(args[1], "update") == 0) {
+        vga_puts("Reading package lists... Done\nBuilding dependency tree... Done\nAll packages are up to date.\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("Listing...\nnginx/stable 1.24.0\nbash/stable 5.2.15\ncurl/stable 8.4.0\n");
+    } else if (strcmp(args[1], "install") == 0 && argc > 2) {
+        vga_puts("Reading package lists... Done\n"); vga_puts("Installing "); vga_puts(args[2]); vga_puts("...\nDone.\n");
+    } else if (strcmp(args[1], "remove") == 0 && argc > 2) {
+        vga_puts("Removing "); vga_puts(args[2]); vga_puts("...\nDone.\n");
+    } else { vga_puts("Usage: apt [install|remove|update|list] PKG\n"); }
+}
+
+static void cmd_b40_dpkg2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dpkg [-l|-i|-r] PKG\n"); return; }
+    if (strcmp(args[1], "-l") == 0 || strcmp(args[1], "--list") == 0) {
+        vga_puts("Desired=Unknown/Install/Remove/Purge/Hold\n");
+        vga_puts("| Status=Not/Inst/Conf-files/Unpacked/halF-conf/Half-inst/trig-aWait/Trig-pend\n");
+        vga_puts("||/ Name           Version\n||===========================\n");
+        vga_puts("ii  bash           5.2.15\nii  coreutils      9.4\nii  curl           8.4.0\n");
+    } else if (strcmp(args[1], "-i") == 0 && argc > 2) {
+        vga_puts("dpkg: installing "); vga_puts(args[2]); vga_puts("\n");
+    } else if (strcmp(args[1], "-r") == 0 && argc > 2) {
+        vga_puts("dpkg: removing "); vga_puts(args[2]); vga_puts("\n");
+    }
+}
+
+static void cmd_b40_systemctl2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: systemctl [start|stop|status|enable|disable] SERVICE\n"); return; }
+    if (strcmp(args[1], "status") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(".service - "); vga_puts(args[2]); vga_puts(" service\n");
+        vga_puts("   Loaded: loaded (/lib/systemd/system/"); vga_puts(args[2]); vga_puts(".service)\n");
+        vga_puts("   Active: active (running)\n");
+    } else if (strcmp(args[1], "start") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(": started\n");
+    } else if (strcmp(args[1], "stop") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(": stopped\n");
+    } else if (strcmp(args[1], "enable") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(": enabled\n");
+    } else if (strcmp(args[1], "disable") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(": disabled\n");
+    } else if (strcmp(args[1], "list-units") == 0) {
+        vga_puts("UNIT                    LOAD   ACTIVE SUB     DESCRIPTION\n");
+        vga_puts("ssh.service             loaded active running OpenSSH server\n");
+        vga_puts("http.service            loaded active running HTTP server\n");
+        vga_puts("cron.service            loaded active running Cron daemon\n");
+    } else { vga_puts("Usage: systemctl [start|stop|status|enable|disable|list-units]\n"); }
+}
+
+static void cmd_b40_journalctl2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("-- Logs begin at Mon Jul  9 00:00:00 2024 --\n");
+    vga_puts("Jul 09 00:00:01 byo-os kernel: BYO-OS v1.0.0 booting\n");
+    vga_puts("Jul 09 00:00:01 byo-os init: All systems initialized\n");
+    vga_puts("Jul 09 00:00:02 byo-os sshd: Server listening on 0.0.0.0\n");
+    vga_puts("Jul 09 00:00:02 byo-os httpd: Listening on port 80\n");
+    journal_show();
+}
+
+static void cmd_b40_crond(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("crond: no action specified\n"); return; }
+    vga_puts("crond: "); vga_puts(args[1]); vga_puts(" executed\n");
+}
+
+static void cmd_b40_atd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: at [time]\n"); return; }
+    vga_puts("at: job queued for "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b40_batch2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("batch: waiting for system load to drop\n");
+}
+
+static void cmd_b40_nohup2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nohup CMD\n"); return; }
+    vga_puts("nohup: output appended to nohup.out\n");
+}
+
+static void cmd_b40_nice2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("nice: running with default priority\n"); return; }
+    vga_puts("nice: running '"); vga_puts(args[argc > 2 ? 2 : 1]); vga_puts("' with priority 10\n");
+}
+
+static void cmd_b40_renice2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: renice PID\n"); return; }
+    vga_puts("renice: priority of PID "); vga_puts(args[1]); vga_puts(" changed\n");
+}
+
+static void cmd_b40_strace2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: strace CMD\n"); return; }
+    vga_puts("execve("); vga_puts(args[1]); vga_puts(", ...) = 0\n");
+    vga_puts("brk(NULL)                               = 0x1000\n");
+    vga_puts("mmap(NULL, 4096, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ffff7dc0000\n");
+    vga_puts("write(1, \"hello\", 5)                   = 5\n");
+    vga_puts("exit_group(0)                           = ?\n");
+}
+
+static void cmd_b40_ltrace2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ltrace CMD\n"); return; }
+    vga_puts("memcpy()         = 0x7ffff7dc0000\n");
+    vga_puts("printf(\"hello\")  = 5\n");
+    vga_puts("--- SIGCHLD ---\n");
+}
+
+static void cmd_b40_perf2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: perf [stat|record|report] CMD\n"); return; }
+    vga_puts("Performance counter stats for '"); vga_puts(args[argc > 2 ? 2 : 1]); vga_puts("':\n\n");
+    vga_puts("     1,234,567,890  cycles\n       456,789,012  instructions\n");
+}
+
+static void cmd_b40_chrt2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SCHED_OTHER pid 0: prio 0\nSCHED_RR pid 1: prio 50\n");
+}
+
+static void cmd_b40_ionice2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ionice: default scheduling class\n");
+}
+
+static void cmd_b40_taskset2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pid 0's current affinity mask: 1\n");
+}
+
+static void cmd_b40_setarch2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setarch: Persona set to x86_64\n");
+}
+
+static void cmd_b40_chroot2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: chroot DIR\n"); return; }
+    vga_puts("chroot: changed root to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b40_unshare2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unshare: new namespace\n");
+}
+
+static void cmd_b40_nsenter2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nsenter: entering namespace\n");
+}
+
+static void cmd_b40_setpriv2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setpriv: ambient capabilities set\n");
+}
+
+static void cmd_b40_runuser2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: runuser USER CMD\n"); return; }
+    vga_puts("runuser: executing as "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b40_runcon2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("runcon: executing with SELinux context\n");
+}
+
+static void cmd_b40_capsh2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Current capabilities:\n  cap_chown, cap_dac_override, cap_fowner, cap_fsetid\n");
+}
+
+static void cmd_b40_keyctl2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("keyctl: keyring 1: perm 0x3f3f0000\n");
+}
+
+static void cmd_b40_setfacl2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setfacl: permissions set\n");
+}
+
+static void cmd_b40_getfacl2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: getfacl FILE\n"); return; }
+    vga_puts("# file: "); vga_puts(args[1]); vga_puts("\n# owner: root\n# group: root\nuser::rw-\ngroup::r--\nother::r--\n");
+}
+
+static void cmd_b40_vlock2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vlock: terminal locked\n");
+}
+
+static void cmd_b40_wall2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wall MESSAGE\n"); return; }
+    vga_puts("Broadcast message from root: ");
+    for (int i = 1; i < argc; i++) { vga_puts(args[i]); vga_putchar(' '); }
+    vga_putchar('\n');
+}
+
+static void cmd_b40_mesg2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("is y\n");
+}
+
+static void cmd_b40_write2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: write USER\n"); return; }
+    vga_puts("write: connected to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b40_logger2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: logger MESSAGE\n"); return; }
+    vga_puts("logger: message logged\n");
+}
+
+static void cmd_b40_pmap2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pmap PID\n"); return; }
+    vga_puts("00001000   4K r-x--  /usr/bin/byo-os\n00002000  16K rw----  [heap]\n");
+}
+
+static void cmd_b40_smaps2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: smaps PID\n"); return; }
+    vga_puts("00001000-r-x-- Size: 4 kB\n00002000-rw---- Size: 16 kB\n");
+}
+
+static void cmd_b40_oom2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("oom_kill: no processes killed\n");
+}
+
+static void cmd_b40_dasd2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dasd: no DASD devices\n");
+}
+
+static void cmd_b40_iotop2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Total DISK READ: 0.00 B/s | Total DISK WRITE: 0.00 B/s\n");
+    vga_puts("  TID  PRIO  DISK READ  DISK WRITE  SWAPIN  IO>   COMMAND\n");
+    vga_puts("    1 be/4   0.00 B/s    0.00 B/s  0.00 %  0.00 %  byo-os\n");
+}
+
+static void cmd_b40_dstat2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("----total-cpu-usage---- -dsk/total- -net/total- ---system--\n");
+    vga_puts("usr sys idl wai hiq siq| read  writ| recv  send| int   csw\n");
+    vga_puts("  0   1  99   0   0   0|   0     0 |   0     0 |  0     0\n");
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -9730,6 +9987,49 @@ static const cmd_entry commands[] = {
 
     /* Batch 38 */
     {"jaeger", cmd_jaeger},
+    /* Batch 40 */
+    {"tree2", cmd_b40_tree2},
+    {"du2", cmd_b40_du2},
+    {"touch2", cmd_b40_touch2},
+    {"apt2", cmd_b40_apt2},
+    {"dpkg2", cmd_b40_dpkg2},
+    {"systemctl2", cmd_b40_systemctl2},
+    {"journalctl2", cmd_b40_journalctl2},
+    {"crond", cmd_b40_crond},
+    {"atd", cmd_b40_atd},
+    {"batch2", cmd_b40_batch2},
+    {"nohup2", cmd_b40_nohup2},
+    {"nice2", cmd_b40_nice2},
+    {"renice2", cmd_b40_renice2},
+    {"strace2", cmd_b40_strace2},
+    {"ltrace2", cmd_b40_ltrace2},
+    {"perf2", cmd_b40_perf2},
+    {"chrt2", cmd_b40_chrt2},
+    {"ionice2", cmd_b40_ionice2},
+    {"taskset2", cmd_b40_taskset2},
+    {"setarch2", cmd_b40_setarch2},
+    {"chroot2", cmd_b40_chroot2},
+    {"unshare2", cmd_b40_unshare2},
+    {"nsenter2", cmd_b40_nsenter2},
+    {"setpriv2", cmd_b40_setpriv2},
+    {"runuser2", cmd_b40_runuser2},
+    {"runcon2", cmd_b40_runcon2},
+    {"capsh2", cmd_b40_capsh2},
+    {"keyctl2", cmd_b40_keyctl2},
+    {"setfacl2", cmd_b40_setfacl2},
+    {"getfacl2", cmd_b40_getfacl2},
+    {"vlock2", cmd_b40_vlock2},
+    {"wall2", cmd_b40_wall2},
+    {"mesg2", cmd_b40_mesg2},
+    {"write2", cmd_b40_write2},
+    {"logger2", cmd_b40_logger2},
+    {"pmap2", cmd_b40_pmap2},
+    {"smaps2", cmd_b40_smaps2},
+    {"oom2", cmd_b40_oom2},
+    {"dasd2", cmd_b40_dasd2},
+    {"iotop2", cmd_b40_iotop2},
+    {"dstat2", cmd_b40_dstat2},
+    
     /* Batch 39 */
     {"htop2", cmd_batch39_htop2},
     {"free2", cmd_batch39_free2},
