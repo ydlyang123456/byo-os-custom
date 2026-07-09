@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -18,7 +18,6 @@ body{font-family:system-ui,-apple-system,sans-serif;background:#0a0e1a;color:#e2
 #sb nav .sep{padding:5px 18px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-top:10px}
 #sb .ft{padding:12px 18px;border-top:1px solid #1e293b;font-size:10px;color:#475569}
 #mn{margin-left:220px;padding:24px}
-.pg{display:none}.pg.on{display:block}
 h2{font-size:20px;margin-bottom:16px;font-weight:600}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:18px}
 .card{background:#111827;border-radius:10px;padding:16px;border:1px solid #1e293b}
@@ -58,30 +57,30 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v9</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v10</p></div>
   <nav id="sidebar">
     <div class="sep">Main</div>
-    <a href="javascript:void(0)" data-page="dashboard" class="on">&#128202; Dashboard</a>
-    <a href="javascript:void(0)" data-page="terminal">&#128187; Terminal</a>
-    <a href="javascript:void(0)" data-page="sysinfo">&#9432; System Info</a>
+    <a data-page="dashboard" class="on">&#128202; Dashboard</a>
+    <a data-page="terminal">&#128187; Terminal</a>
+    <a data-page="sysinfo">&#9432; System Info</a>
     <div class="sep">Management</div>
-    <a href="javascript:void(0)" data-page="processes">&#128203; Processes</a>
-    <a href="javascript:void(0)" data-page="network">&#127760; Network</a>
-    <a href="javascript:void(0)" data-page="files">&#128193; Files</a>
-    <a href="javascript:void(0)" data-page="users">&#128100; Users</a>
-    <a href="javascript:void(0)" data-page="services">&#9881; Services</a>
+    <a data-page="processes">&#128203; Processes</a>
+    <a data-page="network">&#127760; Network</a>
+    <a data-page="files">&#128193; Files</a>
+    <a data-page="users">&#128100; Users</a>
+    <a data-page="services">&#9881; Services</a>
     <div class="sep">Tools</div>
-    <a href="javascript:void(0)" data-page="packages">&#128230; Packages</a>
-    <a href="javascript:void(0)" data-page="commands">&#128295; Commands</a>
-    <a href="javascript:void(0)" data-page="logs">&#128220; Logs</a>
-    <a href="javascript:void(0)" data-page="settings">&#9881; Settings</a>
+    <a data-page="packages">&#128230; Packages</a>
+    <a data-page="commands">&#128295; Commands</a>
+    <a data-page="logs">&#128220; Logs</a>
+    <a data-page="settings">&#9881; Settings</a>
   </nav>
-  <div class="ft">BYO-OS v1.14 | <span id="connst"><span class="status st-off"></span>Connecting...</span></div>
+  <div class="ft">BYO-OS v1.22 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
 </div>
 
 <div id="mn">
   <!-- Dashboard -->
-  <div id="pg-dashboard" class="pg on">
+  <div id="pg-dashboard" class="pg" style="display:block">
     <h2>Dashboard</h2>
     <div class="grid">
       <div class="card">
@@ -103,7 +102,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
       <div class="card">
         <h3>Runtime</h3>
         <div class="big" id="d-upt">-</div>
-        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">-</span></div>
+        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">0 tasks</span></div>
         <div class="row"><span class="lbl">Load Avg</span><span class="val" id="d-load">-</span></div>
         <div class="row"><span class="lbl">IP Address</span><span class="val" id="d-ip">-</span></div>
       </div>
@@ -125,7 +124,6 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
         <button class="btn btn-outline" onclick="quickCmd('ifconfig')">ifconfig</button>
         <button class="btn btn-outline" onclick="quickCmd('uptime')">uptime</button>
         <button class="btn btn-outline" onclick="quickCmd('dmesg')">dmesg</button>
-        <button class="btn btn-outline" onclick="quickCmd('neofetch')">neofetch</button>
       </div>
     </div>
   </div>
@@ -135,7 +133,8 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
     <h2>Terminal</h2>
     <div class="input-group">
       <button class="btn btn-outline" onclick="termClear()">Clear</button>
-      <button class="btn btn-outline" onclick="termHistory(-1)">&#9664; History</button>
+      <button class="btn btn-outline" onclick="termHistory(-1)">&#9664; Prev</button>
+      <button class="btn btn-outline" onclick="termHistory(1)">Next &#9654;</button>
     </div>
     <div id="term">BYO-OS> </div>
     <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off" spellcheck="false">
@@ -145,11 +144,10 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <div id="pg-sysinfo" class="pg">
     <h2>System Information</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('sysinfo','si-out','sysinfo')">sysinfo</button>
-      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','uname -a')">uname -a</button>
-      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','neofetch')">neofetch</button>
-      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','cat /proc/cpuinfo')">cpuinfo</button>
-      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','lscpu')">lscpu</button>
+      <button class="btn btn-primary" onclick="loadPage('si-out','sysinfo')">sysinfo</button>
+      <button class="btn btn-outline" onclick="loadPage('si-out','uname -a')">uname -a</button>
+      <button class="btn btn-outline" onclick="loadPage('si-out','neofetch')">neofetch</button>
+      <button class="btn btn-outline" onclick="loadPage('si-out','help')">help</button>
     </div>
     <div id="si-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -158,11 +156,9 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <div id="pg-processes" class="pg">
     <h2>Processes</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('processes','pr-out','ps')">ps</button>
-      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','top')">top</button>
-      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','free')">free</button>
-      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','ps aux')">ps aux</button>
-      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','lsmem')">lsmem</button>
+      <button class="btn btn-primary" onclick="loadPage('pr-out','ps')">ps</button>
+      <button class="btn btn-outline" onclick="loadPage('pr-out','top')">top</button>
+      <button class="btn btn-outline" onclick="loadPage('pr-out','free')">free</button>
     </div>
     <div id="pr-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -171,56 +167,44 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <div id="pg-network" class="pg">
     <h2>Network</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('network','nw-out','ifconfig')">ifconfig</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','net')">net status</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','arp')">arp</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','route')">route</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','ping 10.0.2.2')">Ping Gateway</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','netstat')">netstat</button>
+      <button class="btn btn-primary" onclick="loadPage('nw-out','ifconfig')">ifconfig</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','net status')">net status</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','arp')">arp</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','ping 10.0.2.2')">Ping Gateway</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','netstat')">netstat</button>
     </div>
     <div id="nw-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Files -->
   <div id="pg-files" class="pg">
-    <h2>File System</h2>
+    <h2>Files</h2>
     <div class="input-group">
-      <input id="fl-path" type="text" placeholder="Path (e.g. / or /home)" value="/">
-      <button class="btn btn-primary" onclick="loadPage('files','fl-out','ls '+document.getElementById('fl-path').value)">Go</button>
-      <button class="btn btn-outline" onclick="loadPage('files','fl-out','ls /')">ls /</button>
-      <button class="btn btn-outline" onclick="loadPage('files','fl-out','df')">df</button>
-      <button class="btn btn-outline" onclick="loadPage('files','fl-out','du /')">du /</button>
-      <button class="btn btn-outline" onclick="loadPage('files','fl-out','mount')">mount</button>
-      <button class="btn btn-outline" onclick="loadPage('files','fl-out','lsblk')">lsblk</button>
+      <button class="btn btn-primary" onclick="loadPage('fl-out','ls /')">ls /</button>
+      <button class="btn btn-outline" onclick="loadPage('fl-out','df')">df</button>
+      <button class="btn btn-outline" onclick="loadPage('fl-out','mount')">mount</button>
     </div>
     <div id="fl-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Users -->
   <div id="pg-users" class="pg">
-    <h2>Users & Groups</h2>
+    <h2>Users</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('users','us-out','whoami')">whoami</button>
-      <button class="btn btn-outline" onclick="loadPage('users','us-out','users')">users</button>
-      <button class="btn btn-outline" onclick="loadPage('users','us-out','id')">id</button>
-      <button class="btn btn-outline" onclick="loadPage('users','us-out','groups')">groups</button>
-      <button class="btn btn-outline" onclick="loadPage('users','us-out','cat /etc/passwd')">passwd</button>
+      <button class="btn btn-primary" onclick="loadPage('us-out','whoami')">whoami</button>
+      <button class="btn btn-outline" onclick="loadPage('us-out','users')">users</button>
+      <button class="btn btn-outline" onclick="loadPage('us-out','id')">id</button>
     </div>
     <div id="us-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Services -->
   <div id="pg-services" class="pg">
-    <h2>Services & Cron</h2>
+    <h2>Services</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('services','sv-out','service2 list')">service list</button>
-      <button class="btn btn-outline" onclick="loadPage('services','sv-out','systemctl2 list-units')">systemctl list</button>
-      <button class="btn btn-outline" onclick="loadPage('services','sv-out','crontab2 status')">cron status</button>
-      <button class="btn btn-outline" onclick="loadPage('services','sv-out','jobs2')">jobs</button>
-    </div>
-    <div class="input-group">
-      <input id="sv-input" type="text" placeholder="Service command (e.g. service2 httpd start)">
-      <button class="btn btn-primary" onclick="loadPage('services','sv-out',document.getElementById('sv-input').value)">Run</button>
+      <button class="btn btn-primary" onclick="loadPage('sv-out','service list')">service list</button>
+      <button class="btn btn-outline" onclick="loadPage('sv-out','cron status')">cron status</button>
+      <button class="btn btn-outline" onclick="loadPage('sv-out','net status')">net status</button>
     </div>
     <div id="sv-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -229,35 +213,29 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <div id="pg-packages" class="pg">
     <h2>Packages</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('packages','pk-out','dpkg2 -l')">dpkg list</button>
-      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','apt2 list')">apt list</button>
-      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','apt2 update')">apt update</button>
-    </div>
-    <div class="input-group">
-      <input id="pk-input" type="text" placeholder="Package command (e.g. apt2 install vim)">
-      <button class="btn btn-primary" onclick="loadPage('packages','pk-out',document.getElementById('pk-input').value)">Run</button>
+      <button class="btn btn-primary" onclick="loadPage('pk-out','dpkg -l')">dpkg -l</button>
+      <button class="btn btn-outline" onclick="loadPage('pk-out','apt list')">apt list</button>
     </div>
     <div id="pk-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
-  <!-- Commands Reference -->
+  <!-- Commands -->
   <div id="pg-commands" class="pg">
-    <h2>Command Reference</h2>
+    <h2>Commands</h2>
     <div class="input-group">
       <input id="cmd-search" type="text" placeholder="Search commands..." oninput="filterCmds()">
-      <button class="btn btn-primary" onclick="loadPage('commands','cmd-out','help')">Load All</button>
+      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">Load All</button>
     </div>
-    <div id="cmd-out" class="output-box"><span class="empty">Click "Load All" or search above</span></div>
+    <div id="cmd-out" class="output-box"><span class="empty">Click Load All to see available commands</span></div>
   </div>
 
   <!-- Logs -->
   <div id="pg-logs" class="pg">
     <h2>Logs</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('logs','lg-out','journal')">journal</button>
-      <button class="btn btn-outline" onclick="loadPage('logs','lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" onclick="loadPage('logs','lg-out','cat /var/log/syslog')">syslog</button>
-      <button class="btn btn-outline" id="autoRefreshBtn" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
+      <button class="btn btn-primary" onclick="loadPage('lg-out','journal')">journal</button>
+      <button class="btn btn-outline" onclick="loadPage('lg-out','dmesg')">dmesg</button>
+      <button class="btn btn-outline" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
     </div>
     <div id="lg-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -265,18 +243,22 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <!-- Settings -->
   <div id="pg-settings" class="pg">
     <h2>Settings</h2>
-    <div class="card" style="margin-bottom:14px">
+    <div class="card" style="max-width:600px">
       <h3>Serial Connection</h3>
       <div class="row"><span class="lbl">Status</span><span class="val" id="set-ser"><span class="status st-off"></span>Checking...</span></div>
-      <div class="row"><span class="lbl">Port</span><span class="val">TCP 127.0.0.1:4321</span></div>
-      <div class="row"><span class="lbl">Panel</span><span class="val">http://localhost:7777</span></div>
-      <div class="row"><span class="lbl">Version</span><span class="val">v9</span></div>
       <div style="margin-top:12px">
         <button class="btn btn-primary" onclick="reconnect()">Reconnect</button>
-        <button class="btn btn-outline" onclick="loadDebug()">Debug Info</button>
+        <button class="btn btn-outline" onclick="loadDebug()" style="margin-left:8px">Show Debug</button>
       </div>
+      <div id="set-debug" style="display:none;margin-top:12px" class="output-box"></div>
     </div>
-    <div id="set-debug" class="output-box" style="display:none"></div>
+    <div class="card" style="max-width:600px;margin-top:14px">
+      <h3>About</h3>
+      <div class="row"><span class="lbl">OS Version</span><span class="val">BYO-OS v1.22.0</span></div>
+      <div class="row"><span class="lbl">Panel Version</span><span class="val">v10</span></div>
+      <div class="row"><span class="lbl">Architecture</span><span class="val">x86 (i686)</span></div>
+      <div class="row"><span class="lbl">Commands</span><span class="val">800+</span></div>
+    </div>
   </div>
 </div>
 
@@ -290,48 +272,46 @@ var autoRefreshTimer = null;
 
 /* ===== Navigation ===== */
 function nav(p) {
-  // Hide all pages
   var pages = document.querySelectorAll('.pg');
-  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('on');
-  // Show target page
+  for (var i = 0; i < pages.length; i++) {
+    pages[i].style.display = 'none';
+    pages[i].classList.remove('on');
+  }
   var el = document.getElementById('pg-' + p);
-  if (el) el.classList.add('on');
-  // Update sidebar
+  if (el) {
+    el.style.display = 'block';
+    el.classList.add('on');
+  }
   var links = document.querySelectorAll('#sidebar a');
   for (var i = 0; i < links.length; i++) {
     links[i].classList.remove('on');
-    if (links[i].getAttribute('data-page') === p) links[i].classList.add('on');
+    if (links[i].getAttribute('data-page') === p) {
+      links[i].classList.add('on');
+    }
   }
   cur = p;
-  // Auto-load data
   if (p === 'dashboard') refreshDash();
   if (p === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
-  if (p === 'sysinfo') loadPage('sysinfo','si-out','sysinfo');
-  if (p === 'processes') loadPage('processes','pr-out','ps');
-  if (p === 'network') loadPage('network','nw-out','ifconfig');
-  if (p === 'files') loadPage('files','fl-out','ls /');
-  if (p === 'users') loadPage('users','us-out','whoami');
-  if (p === 'services') loadPage('services','sv-out','service2 list');
-  if (p === 'packages') loadPage('packages','pk-out','dpkg2 -l');
-  if (p === 'logs') loadPage('logs','lg-out','journal');
+  if (p === 'sysinfo') loadPage('si-out','sysinfo');
+  if (p === 'processes') loadPage('pr-out','ps');
+  if (p === 'network') loadPage('nw-out','ifconfig');
+  if (p === 'files') loadPage('fl-out','ls /');
+  if (p === 'users') loadPage('us-out','whoami');
+  if (p === 'services') loadPage('sv-out','service list');
+  if (p === 'packages') loadPage('pk-out','dpkg -l');
+  if (p === 'logs') loadPage('lg-out','journal');
   if (p === 'settings') refreshSettings();
-  if (p === 'commands') loadPage('commands','cmd-out','help');
-  // Prevent default anchor behavior
-  return false;
+  if (p === 'commands') loadPage('cmd-out','help');
 }
 
-// Bind sidebar clicks
-(function(){
-  var links = document.querySelectorAll('#sidebar a[data-page]');
-  for (var i = 0; i < links.length; i++) {
-    links[i].addEventListener('click', function(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      var page = this.getAttribute('data-page');
-      if (page) nav(page);
-    });
-  }
-})();
+/* Bind sidebar clicks */
+document.getElementById('sidebar').addEventListener('click', function(e) {
+  var a = e.target.closest('a[data-page]');
+  if (!a) return;
+  e.preventDefault();
+  var page = a.getAttribute('data-page');
+  if (page) nav(page);
+});
 
 /* ===== API ===== */
 function api(url, body) {
@@ -344,7 +324,7 @@ function api(url, body) {
   return fetch(url, opts).then(function(r){ return r.json(); }).catch(function(e){ return {error: String(e)}; });
 }
 
-function loadPage(page, elId, cmd) {
+function loadPage(elId, cmd) {
   var el = document.getElementById(elId);
   if (!el) return;
   el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
@@ -363,8 +343,7 @@ function quickCmd(cmd) {
   nav('terminal');
   setTimeout(function() {
     var inp = document.getElementById('tinp');
-    inp.value = cmd;
-    sendTerm();
+    if (inp) { inp.value = cmd; sendTerm(); }
   }, 200);
 }
 
@@ -381,10 +360,9 @@ function sendTerm() {
   term.textContent += 'Loading...\n';
   term.scrollTop = term.scrollHeight;
   api('/api/exec', {cmd: cmd}).then(function(d) {
-    // Remove "Loading..." line
     var lines = term.textContent.split('\n');
-    lines.pop(); // remove "Loading..."
-    lines.pop(); // remove empty trailing
+    lines.pop();
+    lines.pop();
     term.textContent = lines.join('\n') + '\n';
     term.textContent += (d.output || d.error || '(no output)') + '\n';
     term.textContent += 'BYO-OS> ';
@@ -394,8 +372,7 @@ function sendTerm() {
     lines.pop();
     lines.pop();
     term.textContent = lines.join('\n') + '\n';
-    term.textContent += 'Error: ' + e + '\n';
-    term.textContent += 'BYO-OS> ';
+    term.textContent += 'Error: ' + e + '\nBYO-OS> ';
     term.scrollTop = term.scrollHeight;
   });
 }
@@ -456,10 +433,12 @@ function refreshDash() {
 function refreshSettings() {
   api('/api/ping').then(function(d) {
     var e2 = document.getElementById('set-ser');
-    if (d.serial) {
-      if (e2) e2.innerHTML = '<span class="status st-on"></span>Connected';
-    } else {
-      if (e2) e2.innerHTML = '<span class="status st-off"></span>Offline';
+    if (e2) {
+      if (d.serial) {
+        e2.innerHTML = '<span class="status st-on"></span>Connected';
+      } else {
+        e2.innerHTML = '<span class="status st-off"></span>Offline';
+      }
     }
   });
 }
@@ -470,6 +449,7 @@ function loadDebug() {
   el.innerHTML = '<span class="spinner"></span> Loading debug info...';
   api('/api/debug').then(function(d) {
     var lines = ['Serial: ' + (d.serial ? 'CONNECTED' : 'OFFLINE')];
+    lines.push('Send count: ' + (d.send_count || 0) + ', Recv count: ' + (d.recv_count || 0));
     lines.push('Last response: ' + (d.last_response || 'none'));
     lines.push('--- Debug Log ---');
     if (d.log) d.log.forEach(function(l){ lines.push(l); });
@@ -478,20 +458,6 @@ function loadDebug() {
 }
 
 /* ===== Connection ===== */
-function refreshConn() {
-  api('/api/ping').then(function(d) {
-    var e1 = document.getElementById('connst');
-    if (d.serial) {
-      if (e1) e1.innerHTML = '<span class="status st-on"></span>Connected';
-    } else {
-      if (e1) e1.innerHTML = '<span class="status st-off"></span>Offline';
-    }
-  }).catch(function() {
-    var e1 = document.getElementById('connst');
-    if (e1) e1.innerHTML = '<span class="status st-off"></span>Gateway down';
-  });
-}
-
 function reconnect() {
   toast('Reconnecting...', '');
   api('/api/reconnect').then(function(d) {
@@ -500,19 +466,35 @@ function reconnect() {
     if (cur === 'settings') refreshSettings();
     toast(d.serial ? 'Connected!' : 'Failed', d.serial ? 'ok' : 'err');
   }).catch(function(e) {
-    toast('Reconnect failed: ' + e, 'err');
+    toast('Reconnect failed', 'err');
+  });
+}
+
+function refreshConn() {
+  api('/api/ping').then(function(d) {
+    var e1 = document.getElementById('connst');
+    if (e1) {
+      if (d.serial) {
+        e1.innerHTML = '<span class="status st-on"></span>Connected';
+      } else {
+        e1.innerHTML = '<span class="status st-off"></span>Offline';
+      }
+    }
+  }).catch(function() {
+    var e1 = document.getElementById('connst');
+    if (e1) e1.innerHTML = '<span class="status st-off"></span>Gateway down';
   });
 }
 
 /* ===== Auto-refresh ===== */
 function toggleAutoRefresh() {
-  var btn = document.getElementById('autoRefreshBtn');
+  var btn = event.target;
   if (autoRefreshTimer) {
     clearInterval(autoRefreshTimer);
     autoRefreshTimer = null;
     btn.textContent = 'Auto-refresh: OFF';
   } else {
-    autoRefreshTimer = setInterval(function(){ loadPage('logs','lg-out','journal'); }, 5000);
+    autoRefreshTimer = setInterval(function(){ loadPage('lg-out','journal'); }, 5000);
     btn.textContent = 'Auto-refresh: ON';
   }
 }
