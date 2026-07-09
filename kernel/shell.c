@@ -5560,6 +5560,106 @@ static void cmd_ethstatus(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("ethstatus: NIC statistics\n");
 }
 
+static void cmd_fail2ban(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fail2ban: intrusion prevention\n");
+}
+
+static void cmd_clamav_daemon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("clamd: antivirus daemon\n");
+}
+
+static void cmd_yara(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("YARA: malware research\n");
+}
+
+static void cmd_volatility2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Volatility: memory forensics\n");
+}
+
+static void cmd_nftables(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nftables: packet filtering\n");
+}
+
+static void cmd_ipset(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ipset: IP sets\n");
+}
+
+static void cmd_conntrack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("conntrack: connection tracking\n");
+}
+
+static void cmd_ip_forward(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ip_forward: IP forwarding\n");
+}
+
+static void cmd_tunctl2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tunctl: TUN/TAP control\n");
+}
+
+static void cmd_vtun(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vtun: VPN tunnel\n");
+}
+
+static void cmd_cgroup2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cgroups v2: resource control\n");
+}
+
+static void cmd_namespaces2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("namespaces: isolation\n");
+}
+
+static void cmd_seccomp2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("seccomp: syscall filtering\n");
+}
+
+static void cmd_apparmor2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("AppArmor: MAC\n");
+}
+
+static void cmd_selinux2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SELinux: MAC\n");
+}
+
+static void cmd_auditd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("auditd: audit daemon\n");
+}
+
+static void cmd_syslog(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("syslog: system logging\n");
+}
+
+static void cmd_llvm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LLVM: compiler infrastructure\n");
+}
+
+static void cmd_clang(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Clang: C/C++ compiler\n");
+}
+
+static void cmd_lld(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lld: LLVM linker\n");
+}
+
+static void cmd_llvm_sanitize(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("sanitizers: runtime checks\n");
+}
+
+static void cmd_gdb_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gdbserver: remote debugging\n");
+}
+
+static void cmd_lldb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LLDB: LLVM debugger\n");
+}
+
+static void cmd_cscope(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cscope: code browsing\n");
+}
+
+static void cmd_ctags(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ctags: tag generator\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -6093,6 +6193,27 @@ static const cmd_entry commands[] = {
     {"btop", cmd_btop},
     {"iptraf", cmd_iptraf},
     {"ethstatus", cmd_ethstatus},
+    /* Batch 25: Security */
+    {"fail2ban", cmd_fail2ban},
+    {"yara", cmd_yara},
+    /* Batch 25: Network */
+    {"nftables", cmd_nftables},
+    {"ipset", cmd_ipset},
+    {"conntrack", cmd_conntrack},
+    /* Batch 25: System */
+    {"cgroup2", cmd_cgroup2},
+    {"seccomp2", cmd_seccomp2},
+    {"auditd", cmd_auditd},
+    {"syslog", cmd_syslog},
+    /* Batch 25: Dev */
+    {"llvm", cmd_llvm},
+    {"clang", cmd_clang},
+    {"lld", cmd_lld},
+    {"gdbserver", cmd_gdb_server},
+    {"lldb", cmd_lldb},
+    {"cscope", cmd_cscope},
+    {"ctags", cmd_ctags},
+    /* Batch 25: Tools */
     {0, 0}
 };
 
