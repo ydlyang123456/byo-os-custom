@@ -3079,6 +3079,17 @@ static void cmd_traefik(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Traefik: reverse proxy\n");
 }
 
+static void cmd_gpio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gpio: GPIO control\n");
+}
+
+static void cmd_xenomai(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xenomai: real-time framework\n");
+}
+
+static void cmd_tailscale(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tailscale: mesh VPN\n");
+}
 static void cmd_caddy(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Caddy: web server with HTTPS\n");
 }
@@ -5244,6 +5255,105 @@ static void cmd_lsusb_fn(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_lshw_fn(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("lshw: list hardware\n");
 }
+static void cmd_mqtt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mqtt: MQTT client\n");
+}
+
+static void cmd_coap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("coap: CoAP client\n");
+}
+
+static void cmd_zigbee(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zigbee: Zigbee tools\n");
+}
+
+static void cmd_lora(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lora: LoRaWAN tools\n");
+}
+
+static void cmd_esp_tool(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("esptool: ESP32 flasher\n");
+}
+
+static void cmd_platformio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("platformio: IoT development\n");
+}
+
+static void cmd_geth(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("geth: Go Ethereum client\n");
+}
+
+static void cmd_solidity(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("solc: Solidity compiler\n");
+}
+
+static void cmd_hardhat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hardhat: Ethereum dev environment\n");
+}
+
+static void cmd_foundry(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("forge: Foundry toolkit\n");
+}
+
+static void cmd_truffle(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("truffle: smart contract framework\n");
+}
+
+
+static void cmd_r_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("R: statistical computing\n");
+}
+
+static void cmd_octave(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("octave: GNU MATLAB alternative\n");
+}
+
+
+
+
+static void cmd_i2c(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("i2c: I2C bus tools\n");
+}
+
+static void cmd_spi(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("spi: SPI bus tools\n");
+}
+
+static void cmd_uart(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("uart: serial port tools\n");
+}
+
+static void cmd_udev(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("udev: device manager\n");
+}
+
+
+static void cmd_unity_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unity: Unity game engine\n");
+}
+
+static void cmd_unreal(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unreal: Unreal Engine CLI\n");
+}
+
+
+static void cmd_rt_preempt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PREEMPT_RT: real-time patches\n");
+}
+
+static void cmd_freertos(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("FreeRTOS: embedded RTOS\n");
+}
+
+static void cmd_zephyr(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zephyr: IoT RTOS\n");
+}
+
+
+
+static void cmd_caddy_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("caddy: reverse proxy\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -5706,6 +5816,28 @@ static const cmd_entry commands[] = {
     /* Batch 21: System Info */
     {"lscpu", cmd_lscpu_fn}, {"lspci", cmd_lspci_fn},
     {"lsusb", cmd_lsusb_fn}, {"lshw", cmd_lshw_fn},
+    /* Batch 22: IoT */
+    {"mqtt", cmd_mqtt}, {"coap", cmd_coap}, {"zigbee", cmd_zigbee},
+    {"lora", cmd_lora}, {"esptool", cmd_esp_tool}, {"platformio", cmd_platformio},
+    /* Batch 22: Blockchain/Web3 */
+    {"geth", cmd_geth}, {"solc", cmd_solidity}, {"hardhat", cmd_hardhat},
+    {"forge", cmd_foundry}, {"truffle", cmd_truffle}, {"ipfs", cmd_ipfs}, 
+    /* Batch 22: Scientific Computing */
+    {"R", cmd_r_fn}, {"octave", cmd_octave}, {"scipy", cmd_scipy},
+    {"numpy", cmd_numpy}, {"jupyter", cmd_jupyter}, {"pandas", cmd_pandas},
+    {"matplotlib", cmd_matplotlib},
+    /* Batch 22: Hardware */
+    {"gpio", cmd_gpio}, {"i2c", cmd_i2c}, {"spi", cmd_spi},
+    {"uart", cmd_uart}, {"udev", cmd_udev}, {"modprobe", cmd_modprobe}, {"lsmod", cmd_lsmod},
+    /* Batch 22: Game Dev */
+     {"unity", cmd_unity_fn}, {"unreal", cmd_unreal},
+    {"blender", cmd_blender}, {"gimp", cmd_gimp}, {"inkscape", cmd_inkscape},
+    /* Batch 22: Real-time */
+    {"xenomai", cmd_xenomai}, {"rt-preempt", cmd_rt_preempt},
+    {"freertos", cmd_freertos}, {"zephyr", cmd_zephyr},
+    /* Batch 22: Networking */
+    {"wireguard", cmd_wireguard}, {"openvpn", cmd_openvpn}, {"tailscale", cmd_tailscale},
+    {"caddy", cmd_caddy},
     {0, 0}
 };
 
