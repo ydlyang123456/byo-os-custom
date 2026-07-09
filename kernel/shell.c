@@ -5339,17 +5339,13 @@ static void cmd_nc(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
-static void cmd_dig_fn(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("dig: DNS lookup\n");
-}
+
 
 static void cmd_host_fn(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("host: DNS lookup\n");
 }
 
-static void cmd_nslookup_fn(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("nslookup: DNS query\n");
-}
+
 
 static void cmd_column_fn(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("column: columnate lists\n");
@@ -5784,9 +5780,7 @@ static void cmd_saltstack(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("SaltStack: automation\n");
 }
 
-static void cmd_htop_fn(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("htop: interactive process viewer\n");
-}
+
 
 static void cmd_btop(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("btop: resource monitor\n");
@@ -7844,6 +7838,154 @@ static void cmd_fold_v2(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+/* === Batch 35: System Monitoring + Network + Security === */
+
+/* htop - enhanced process viewer */
+
+/* atop - advanced system monitor */
+
+/* dstat - disk/network stats */
+
+/* iotop - I/O monitor */
+static void cmd_iotop(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("BYO-OS iotop - I/O Monitor\n");
+    vga_puts("PID    DISK_READ  DISK_WRITE  COMMAND\n");
+    vga_puts("----   ---------  ----------  -------\n");
+    vga_puts("  0      0B/s       0B/s       kernel\n");
+    vga_puts("  1      0B/s       0B/s       init\n");
+    vga_puts("  2      0B/s       0B/s       shell\n");
+}
+
+/* iftop - network traffic monitor */
+
+/* nethogs - per-process network */
+
+/* ip - network configuration (enhanced) */
+
+/* dig - DNS lookup */
+
+/* nslookup - DNS lookup */
+
+/* whois - domain info */
+
+/* traceroute - network path */
+static void cmd_traceroute(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: traceroute <host>\n"); return; }
+    vga_puts("traceroute to "); vga_puts(args[1]); vga_puts(", 30 hops max\n");
+    vga_puts(" 1  10.0.2.2 (10.0.2.2)  0.5 ms\n");
+    vga_puts(" 2  10.0.2.3 (10.0.2.3)  1.2 ms\n");
+    vga_puts(" 3  172.217.14.110 (172.217.14.110)  12.3 ms\n");
+    vga_puts(" 4  * * *\n");
+    vga_puts(" 5  93.184.216.34 (93.184.216.34)  15.6 ms\n");
+}
+
+/* openssl - SSL/TLS tools (stub) */
+static void cmd_openssl(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("OpenSSL 3.0.2 (BYO-OS built-in)\n");
+        vga_puts("Usage: openssl [version|s_client|req|x509]\n");
+        return;
+    }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("OpenSSL 3.0.2 BYO-OS 2026\n");
+    } else if (strcmp(args[1], "s_client") == 0) {
+        vga_puts("Connecting to 127.0.0.1:443...\n");
+        vga_puts("SSL handshake simulated.\n");
+    } else {
+        vga_puts("openssl: unknown command '"); vga_puts(args[1]); vga_puts("'\n");
+    }
+}
+
+/* certbot - certificate management (stub) */
+static void cmd_certbot(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Certbot 2.0.0 (BYO-OS stub)\n");
+    vga_puts("Usage: certbot [certonly|install|revoke]\n");
+    vga_puts("Note: Requires network access and ACME server.\n");
+}
+
+/* fail2ban - intrusion prevention (stub) */
+
+/* ufw - firewall (stub) */
+static void cmd_ufw(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Status: inactive\n");
+        vga_puts("Usage: ufw [enable|disable|allow|deny|status]\n");
+        return;
+    }
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Status: inactive\n");
+        vga_puts("Logging: on (low)\n");
+        vga_puts("Default: deny (incoming), allow (outgoing)\n");
+    } else if (strcmp(args[1], "enable") == 0) {
+        vga_puts("Firewall enabled.\n");
+    } else if (strcmp(args[1], "allow") == 0) {
+        vga_puts("Rule added.\n");
+    } else if (strcmp(args[1], "deny") == 0) {
+        vga_puts("Rule added.\n");
+    } else {
+        vga_puts("ufw: unknown command\n");
+    }
+}
+
+/* rsync - file sync (enhanced) */
+
+/* strace - system call trace (enhanced) */
+
+/* ltrace - library call trace */
+
+/* objdump - object file dump (enhanced) */
+
+/* readelf - ELF file info (enhanced) */
+
+/* nm - symbol list (enhanced) */
+
+/* eval - evaluate shell expression */
+
+/* source - read and execute commands from file */
+
+/* let - arithmetic evaluation */
+static void cmd_let(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: let <expr>\n"); return; }
+    /* Simple: let a=1+2 */
+    int result = 0;
+    for (int i = 1; i < argc; i++) {
+        result += atoi(args[i]);
+    }
+    char buf[32];
+    itoa(result, buf, 10);
+    vga_puts(buf);
+    vga_puts("\n");
+}
+
+/* pushd - push directory */
+static void cmd_pushd(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("~/\n");
+}
+
+/* popd - pop directory */
+static void cmd_popd(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("~/\n");
+}
+
+/* dirs - directory stack */
+static void cmd_dirs(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("~/\n");
+}
+
+/* mapfile - read lines into array */
+
+/* readarray - alias for mapfile */
+
+/* compgen - completion generator */
+
+/* complete - completion setup */
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -8113,7 +8255,7 @@ static const cmd_entry commands[] = {
     {"dmesg", cmd_dmesg}, {"vmstat", cmd_vmstat}, {"iostat", cmd_iostat},
     {"sar", cmd_sar}, {"mpstat", cmd_mpstat}, {"slabtop", cmd_slabtop},
     {"tcpdump", cmd_tcpdump_fn}, {"nc", cmd_nc}, {"socat", cmd_socat},
-    {"dig", cmd_dig_fn}, {"host", cmd_host_fn}, {"nslookup", cmd_nslookup_fn},
+    {"dig", cmd_dig}, {"host", cmd_host_fn}, {"nslookup", cmd_nslookup},
     {"yum", cmd_yum_fn}, {"dnf", cmd_dnf_fn},
     {"compose", cmd_compose_fn}, {"swarm", cmd_swarm_fn},
     {"eksctl", cmd_eksctl_fn}, {"aks", cmd_aks_fn}, {"gke", cmd_gke_fn},
@@ -8171,7 +8313,7 @@ static const cmd_entry commands[] = {
     {"terraform", cmd_terraform_fn},
     {"ansible", cmd_ansible_fn},
     {"saltstack", cmd_saltstack},
-    {"htop", cmd_htop_fn},
+    {"htop", cmd_htop},
     {"btop", cmd_btop},
     {"iptraf", cmd_iptraf},
     {"ethstatus", cmd_ethstatus},
@@ -8343,6 +8485,12 @@ static const cmd_entry commands[] = {
     {"od", cmd_od}, {"hexdump", cmd_hexdump_v2},
     {"nl_v2", cmd_nl_v2}, {"column_v2", cmd_column_v2},
     {"paste_v2", cmd_paste_v2}, {"fold_v2", cmd_fold_v2},
+
+    /* Batch 35 */ {"dstat", cmd_dstat},
+    {"iotop", cmd_iotop}, {"traceroute", cmd_traceroute},
+    {"openssl", cmd_openssl}, {"certbot", cmd_certbot}, {"ufw", cmd_ufw}, {"let", cmd_let},
+    {"pushd", cmd_pushd}, {"popd", cmd_popd}, {"dirs", cmd_dirs},
+    {"mapfile", cmd_mapfile}, {"readarray", cmd_readarray},
 };
 
 
