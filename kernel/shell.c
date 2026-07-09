@@ -4803,6 +4803,447 @@ static void cmd_ev(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("EVM: extended verification\n");
 }
 
+static void cmd_dockerpush(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker push: push image to registry\n");
+}
+
+static void cmd_dockerpull(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker pull: pull image from registry\n");
+}
+
+static void cmd_dockerexec(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker exec: run command in container\n");
+}
+
+static void cmd_dockerlogs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker logs: fetch container logs\n");
+}
+
+static void cmd_dockerinspect(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker inspect: return container info\n");
+}
+
+static void cmd_dockerstats(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker stats: resource usage\n");
+}
+
+static void cmd_dockersystem(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker system: manage Docker\n");
+}
+
+static void cmd_docker_buildx(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker buildx: extended build\n");
+}
+
+static void cmd_kubelet(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubelet: node agent\n");
+}
+
+static void cmd_kube_proxy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kube-proxy: network proxy\n");
+}
+
+static void cmd_kube_apiserver(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kube-apiserver: API server\n");
+}
+
+static void cmd_kube_scheduler(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kube-scheduler: pod scheduler\n");
+}
+
+static void cmd_etcdctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("etcdctl: etcd CLI\n");
+}
+
+static void cmd_kubeadm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubeadm: cluster bootstrap\n");
+}
+
+static void cmd_k3s(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k3s: lightweight Kubernetes\n");
+}
+
+static void cmd_k3sup(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k3sup: install k3s\n");
+}
+
+static void cmd_k0s(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k0s: zero-friction Kubernetes\n");
+}
+
+static void cmd_git_lfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git-lfs: large file storage\n");
+}
+
+static void cmd_git_crypt_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git-crypt: transparent encryption\n");
+}
+
+static void cmd_git_filter_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git-filter-branch: rewrite history\n");
+}
+
+static void cmd_git_worktree(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git worktree: multiple working trees\n");
+}
+
+static void cmd_git_subtree_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git-subtree: subtree repository\n");
+}
+
+static void cmd_git_bisect(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git bisect: binary search\n");
+}
+
+static void cmd_git_blame(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git blame: line annotation\n");
+}
+
+static void cmd_git_bundle(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git bundle: pack refs\n");
+}
+
+static void cmd_git_cherry(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git cherry: find commits\n");
+}
+
+static void cmd_git_clean_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git clean: remove untracked\n");
+}
+
+static void cmd_git_credential(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git credential: helper\n");
+}
+
+static void cmd_git_describe(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git describe: tag name\n");
+}
+
+static void cmd_git_fsck(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git fsck: object integrity\n");
+}
+
+static void cmd_git_gc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git gc: garbage collection\n");
+}
+
+static void cmd_git_grep_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git grep: search blobs\n");
+}
+
+static void cmd_git_merge_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git merge: merge branches\n");
+}
+
+static void cmd_git_notes_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git notes: attach notes\n");
+}
+
+static void cmd_git_prune_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git prune: prune objects\n");
+}
+
+static void cmd_git_rebase(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git rebase: reapply commits\n");
+}
+
+static void cmd_git_reflog(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git reflog: reference log\n");
+}
+
+static void cmd_git_rerere(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git rerere: reuse resolution\n");
+}
+
+static void cmd_git_rev_parse(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git rev-parse: parse revision\n");
+}
+
+static void cmd_git_rev_list(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git rev-list: list commits\n");
+}
+
+static void cmd_git_show_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git show: show objects\n");
+}
+
+static void cmd_git_stash(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git stash: stash changes\n");
+}
+
+static void cmd_git_submodule_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git submodule: submodules\n");
+}
+
+static void cmd_git_svn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git svn: SVN interface\n");
+}
+
+static void cmd_git_switch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git switch: switch branches\n");
+}
+
+static void cmd_git_tag_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git tag: create tags\n");
+}
+
+static void cmd_git_verify(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("git verify: verify GPG\n");
+}
+
+static void cmd_bgp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BGP: border gateway protocol\n");
+}
+
+static void cmd_ospf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OSPF: open shortest path first\n");
+}
+
+static void cmd_isis(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("IS-IS: intermediate system\n");
+}
+
+static void cmd_vrrp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VRRP: virtual router redundancy\n");
+}
+
+static void cmd_hsrp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("HSRP: hot standby router protocol\n");
+}
+
+static void cmd_stp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("STP: spanning tree protocol\n");
+}
+
+static void cmd_lacp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LACP: link aggregation control\n");
+}
+
+static void cmd_mlag(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MLAG: multi-chassis LAG\n");
+}
+
+static void cmd_evpn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("EVPN: ethernet VPN\n");
+}
+
+static void cmd_vxlan(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VXLAN: virtual extensible LAN\n");
+}
+
+static void cmd_geneve(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GENEVE: generic network virtualization\n");
+}
+
+static void cmd_mpls(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MPLS: multi-protocol label switching\n");
+}
+
+static void cmd_sdn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SDN: software-defined networking\n");
+}
+
+static void cmd_openflow(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenFlow: SDN protocol\n");
+}
+
+static void cmd_p4(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("P4: protocol-independent forwarding\n");
+}
+
+static void cmd_crane(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("crane: Kubernetes deploy tool\n");
+}
+
+static void cmd_oras(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("oras: OCI registry as storage\n");
+}
+
+static void cmd_dive(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dive: explore container layers\n");
+}
+
+static void cmd_dockle(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dockle: container linter\n");
+}
+
+static void cmd_dmesg(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dmesg: kernel ring buffer\n");
+}
+
+
+
+
+
+static void cmd_slabtop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("slabtop: slab allocator statistics\n");
+}
+
+static void cmd_tcpdump_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tcpdump: network packet analyzer\n");
+}
+
+static void cmd_nc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nc: netcat TCP/UDP utility\n");
+}
+
+
+static void cmd_dig_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dig: DNS lookup\n");
+}
+
+static void cmd_host_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("host: DNS lookup\n");
+}
+
+static void cmd_nslookup_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nslookup: DNS query\n");
+}
+
+static void cmd_column_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("column: columnate lists\n");
+}
+
+
+static void cmd_nl_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nl: number lines\n");
+}
+
+static void cmd_free_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("free: display memory usage\n");
+}
+
+static void cmd_lsof_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lsof: list open files\n");
+}
+
+static void cmd_mount_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mount: mount filesystem\n");
+}
+
+static void cmd_umount_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("umount: unmount filesystem\n");
+}
+
+static void cmd_lsblk_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lsblk: list block devices\n");
+}
+
+static void cmd_apt_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("apt: Debian package manager\n");
+}
+
+static void cmd_dpkg_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dpkg: low-level package manager\n");
+}
+
+static void cmd_rpm_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rpm: RPM package manager\n");
+}
+
+static void cmd_yum_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("yum: package manager\n");
+}
+
+static void cmd_dnf_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dnf: next-gen yum\n");
+}
+
+static void cmd_compose_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker-compose: multi-container apps\n");
+}
+
+static void cmd_swarm_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("docker swarm: orchestration\n");
+}
+
+static void cmd_eksctl_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("eksctl: EKS cluster management\n");
+}
+
+static void cmd_aks_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("az aks: Azure Kubernetes Service\n");
+}
+
+static void cmd_gke_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gcloud container: GKE\n");
+}
+
+static void cmd_lynis_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lynis: security auditing\n");
+}
+
+static void cmd_clamav_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("clamav: antivirus scanner\n");
+}
+
+static void cmd_rkhunter_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rkhunter: rootkit detector\n");
+}
+
+static void cmd_aide_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("aide: file integrity checker\n");
+}
+
+static void cmd_pg_dump_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pg_dump: PostgreSQL backup\n");
+}
+
+static void cmd_pg_restore_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pg_restore: PostgreSQL restore\n");
+}
+
+static void cmd_redis_cli_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("redis-cli: Redis CLI\n");
+}
+
+static void cmd_psql_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("psql: PostgreSQL terminal\n");
+}
+
+static void cmd_cmake_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cmake: build system\n");
+}
+
+static void cmd_ninja_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ninja: build system\n");
+}
+
+static void cmd_meson_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("meson: build system\n");
+}
+
+static void cmd_valgrind_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("valgrind: memory debugger\n");
+}
+
+static void cmd_perf_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("perf: Linux profiling\n");
+}
+
+static void cmd_strace_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("strace: system call tracer\n");
+}
+
+static void cmd_ltrace_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ltrace: library call tracer\n");
+}
+
+static void cmd_lscpu_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lscpu: CPU information\n");
+}
+
+static void cmd_lspci_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lspci: PCI devices\n");
+}
+
+static void cmd_lsusb_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lsusb: USB devices\n");
+}
+
+static void cmd_lshw_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lshw: list hardware\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -5201,6 +5642,70 @@ static const cmd_entry commands[] = {
     /* Batch 19: Security Advanced */
     {"apparmor", cmd_apparmor}, {"selinux", cmd_selinux}, {"seccomp", cmd_seccomp},
     {"keyctl", cmd_keyctl}, {"tpm2", cmd_tpm2}, {"ima", cmd_ima},
+    /* Batch 20: Container Deep */
+    {"docker-push", cmd_dockerpush}, {"docker-pull", cmd_dockerpull},
+    {"docker-exec", cmd_dockerexec}, {"docker-logs", cmd_dockerlogs},
+    {"docker-inspect", cmd_dockerinspect}, {"docker-stats", cmd_dockerstats},
+    {"docker-system", cmd_dockersystem}, {"buildx", cmd_docker_buildx},
+    /* Batch 20: Kubernetes Deep */
+    {"kubelet", cmd_kubelet}, {"kube-proxy", cmd_kube_proxy},
+    {"kube-apiserver", cmd_kube_apiserver}, {"kube-scheduler", cmd_kube_scheduler},
+    {"etcdctl", cmd_etcdctl}, {"kubeadm", cmd_kubeadm},
+    {"k3s", cmd_k3s}, {"k3sup", cmd_k3sup}, {"k0s", cmd_k0s},
+    /* Batch 20: Git Deep */
+    {"git-lfs", cmd_git_lfs}, {"git-crypt", cmd_git_crypt_fn},
+    {"git-filter-branch", cmd_git_filter_fn}, {"git-worktree", cmd_git_worktree},
+    {"git-subtree", cmd_git_subtree_fn}, {"git-bisect", cmd_git_bisect},
+    {"git-blame", cmd_git_blame}, {"git-bundle", cmd_git_bundle},
+    {"git-cherry", cmd_git_cherry}, {"git-clean", cmd_git_clean_fn},
+    {"git-credential", cmd_git_credential}, {"git-describe", cmd_git_describe},
+    {"git-fsck", cmd_git_fsck}, {"git-gc", cmd_git_gc},
+    {"git-grep", cmd_git_grep_fn}, {"git-merge", cmd_git_merge_fn},
+    {"git-notes", cmd_git_notes_fn}, {"git-prune", cmd_git_prune_fn},
+    {"git-rebase", cmd_git_rebase}, {"git-reflog", cmd_git_reflog},
+    {"git-rerere", cmd_git_rerere}, {"git-rev-parse", cmd_git_rev_parse},
+    {"git-rev-list", cmd_git_rev_list}, {"git-show", cmd_git_show_fn},
+    {"git-stash", cmd_git_stash}, {"git-submodule", cmd_git_submodule_fn},
+    {"git-svn", cmd_git_svn}, {"git-switch", cmd_git_switch},
+    {"git-tag", cmd_git_tag_fn}, {"git-verify", cmd_git_verify},
+    /* Batch 20: Networking Deep */
+    {"bgp", cmd_bgp}, {"ospf", cmd_ospf}, {"isis", cmd_isis},
+    {"vrrp", cmd_vrrp}, {"hsrp", cmd_hsrp}, {"stp", cmd_stp},
+    {"lacp", cmd_lacp}, {"mlag", cmd_mlag}, {"evpn", cmd_evpn},
+    {"vxlan", cmd_vxlan}, {"geneve", cmd_geneve}, {"mpls", cmd_mpls},
+    {"sdn", cmd_sdn}, {"openflow", cmd_openflow}, {"p4", cmd_p4},
+    {"crane", cmd_crane}, {"oras", cmd_oras}, {"dive", cmd_dive}, {"dockle", cmd_dockle},
+    /* Batch 21: System Monitoring */
+    {"dmesg", cmd_dmesg}, {"vmstat", cmd_vmstat}, {"iostat", cmd_iostat},
+    {"sar", cmd_sar}, {"mpstat", cmd_mpstat}, {"slabtop", cmd_slabtop},
+    /* Batch 21: Network Debugging */
+    {"tcpdump", cmd_tcpdump_fn}, {"nc", cmd_nc}, {"socat", cmd_socat},
+    {"dig", cmd_dig_fn}, {"host", cmd_host_fn}, {"nslookup", cmd_nslookup_fn},
+    /* Batch 21: Text Processing */
+    {"column", cmd_column_fn}, {"tr", cmd_tr_fn}, {"nl", cmd_nl_fn},
+    /* Batch 21: System Tools */
+    {"free", cmd_free_fn}, {"lsof", cmd_lsof_fn},
+    {"mount", cmd_mount_fn}, {"umount", cmd_umount_fn}, {"lsblk", cmd_lsblk_fn},
+    /* Batch 21: Package Management */
+    {"apt", cmd_apt_fn}, {"dpkg", cmd_dpkg_fn}, {"rpm", cmd_rpm_fn},
+    {"yum", cmd_yum_fn}, {"dnf", cmd_dnf_fn},
+    /* Batch 21: Container Orchestration */
+    {"compose", cmd_compose_fn}, {"swarm", cmd_swarm_fn},
+    /* Batch 21: Cloud */
+    {"eksctl", cmd_eksctl_fn}, {"aks", cmd_aks_fn}, {"gke", cmd_gke_fn},
+    /* Batch 21: Security */
+    {"lynis", cmd_lynis_fn}, {"clamav", cmd_clamav_fn},
+    {"rkhunter", cmd_rkhunter_fn}, {"aide", cmd_aide_fn},
+    /* Batch 21: Database */
+    {"pg_dump", cmd_pg_dump_fn}, {"pg_restore", cmd_pg_restore_fn},
+    {"redis-cli", cmd_redis_cli_fn}, {"psql", cmd_psql_fn},
+    /* Batch 21: Dev Tools */
+    {"cmake", cmd_cmake_fn}, {"ninja", cmd_ninja_fn}, {"meson", cmd_meson_fn},
+    {"valgrind", cmd_valgrind_fn}, {"perf", cmd_perf_fn},
+    {"strace", cmd_strace_fn}, {"ltrace", cmd_ltrace_fn},
+    /* Batch 21: System Info */
+    {"lscpu", cmd_lscpu_fn}, {"lspci", cmd_lspci_fn},
+    {"lsusb", cmd_lsusb_fn}, {"lshw", cmd_lshw_fn},
     {0, 0}
 };
 

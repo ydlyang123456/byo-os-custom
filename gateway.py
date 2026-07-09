@@ -186,6 +186,13 @@ pre{font-family:'Cascadia Code','Fira Code',monospace;white-space:pre-wrap;word-
 <a href="#" onclick="go('cont',this);return false">&#128230; Containers</a>
 <div class="sep">Media</div>
 <a href="#" onclick="go('media',this);return false">&#127909; Multimedia</a>
+
+<div class="sep">Monitoring</div>
+<a href="#" onclick="go('sysmon',this);return false">&#128200; System Monitor</a>
+<div class="sep">Database</div>
+<a href="#" onclick="go('db',this);return false">&#128451; Database</a>
+<div class="sep">Cloud</div>
+<a href="#" onclick="go('cloud',this);return false">&#9729; Cloud</a>
 </nav>
 <div class="ft" id="sfoot">Serial: checking...</div>
 </div>
@@ -453,6 +460,46 @@ pre{font-family:'Cascadia Code','Fira Code',monospace;white-space:pre-wrap;word-
 <button class="btn" onclick="rcmd('alsamixer','mediaout')">alsamixer</button>
 </div>
 <div class="card mt"><pre id="mediaout" class="fview">Multimedia output.</pre></div></div>
+</div>
+<!-- ===== System Monitor ===== -->
+<div class="pg" id="p-sysmon">
+<div class="card"><h2>&#128200; System Monitor</h2>
+<p>VM statistics, I/O monitoring, and system activity reports.</p>
+<div class="row">
+<button class="btn" onclick="rcmd('vmstat','sysmonout')">vmstat</button>
+<button class="btn" onclick="rcmd('iostat','sysmonout')">iostat</button>
+<button class="btn" onclick="rcmd('sar','sysmonout')">sar</button>
+<button class="btn" onclick="rcmd('mpstat','sysmonout')">mpstat</button>
+<button class="btn" onclick="rcmd('slabtop','sysmonout')">slabtop</button>
+<button class="btn" onclick="rcmd('dmesg','sysmonout')">dmesg</button>
+</div>
+<div class="card mt"><pre id="sysmonout" class="fview">System monitor output.</pre></div></div>
+</div>
+<!-- ===== Database ===== -->
+<div class="pg" id="p-db">
+<div class="card"><h2>&#128451; Database</h2>
+<p>Database management and administration tools.</p>
+<div class="row">
+<button class="btn" onclick="rcmd('psql','dbout')">psql</button>
+<button class="btn" onclick="rcmd('pg_dump','dbout')">pg_dump</button>
+<button class="btn" onclick="rcmd('pg_restore','dbout')">pg_restore</button>
+<button class="btn" onclick="rcmd('redis-cli','dbout')">redis-cli</button>
+<button class="btn" onclick="rcmd('mongoimport','dbout')">mongoimport</button>
+</div>
+<div class="card mt"><pre id="dbout" class="fview">Database output.</pre></div></div>
+</div>
+<!-- ===== Cloud ===== -->
+<div class="pg" id="p-cloud">
+<div class="card"><h2>&#9729; Cloud Services</h2>
+<p>Cloud platform management tools.</p>
+<div class="row">
+<button class="btn" onclick="rcmd('eksctl','cloudout')">eksctl</button>
+<button class="btn" onclick="rcmd('aks','cloudout')">az aks</button>
+<button class="btn" onclick="rcmd('gke','cloudout')">gcloud</button>
+<button class="btn" onclick="rcmd('terraform','cloudout')">terraform</button>
+<button class="btn" onclick="rcmd('ansible','cloudout')">ansible</button>
+</div>
+<div class="card mt"><pre id="cloudout" class="fview">Cloud output.</pre></div></div>
 </div>
 <div class="pg" id="p-sysinfo">
 <h2>System Information</h2>
