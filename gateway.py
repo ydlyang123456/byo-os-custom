@@ -1,10 +1,11 @@
-#!/usr/bin/env python3
-"""BYO-OS Web Management Panel v7 - Reliable serial bridge with retry."""
+﻿#!/usr/bin/env python3
+"""BYO-OS Web Management Panel v8 - Full rewrite with robust serial bridge."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SERIAL_PORT = 4321
 HTTP_PORT = 7777
+PANEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "panel.html")
 
 class SerialBridge:
     def __init__(self):
@@ -13,23 +14,24 @@ class SerialBridge:
         self.ok = False
         self._last_attempt = 0.0
         self._debug_log = []
+        self._last_response = ""
 
     def _log(self, msg):
         ts = time.strftime("%H:%M:%S")
         entry = f"[{ts}] {msg}"
         self._debug_log.append(entry)
-        if len(self._debug_log) > 200:
-            self._debug_log = self._debug_log[-200:]
-        print(entry)
+        if len(self._debug_log) > 500:
+            self._debug_log = self._debug_log[-500:]
+        print(entry, flush=True)
 
-    def connect(self, retries=3):
+    def connect(self, retries=5):
         with self.lock:
             for attempt in range(retries):
                 try:
                     if self.sock:
-                        self.sock.close()
-                except:
-                    pass
+                        try: self.sock.close()
+                        except: pass
+                except: pass
                 self.sock = None
                 self.ok = False
                 self._last_attempt = time.time()
@@ -41,22 +43,22 @@ class SerialBridge:
                     self.sock.connect(("127.0.0.1", SERIAL_PORT))
                     self.sock.settimeout(None)
                     self.ok = True
-                    time.sleep(1.0)
+                    time.sleep(1.5)
                     self._drain()
-                    self._log("Serial CONNECTED")
+                    self._log("Serial CONNECTED OK")
                     return True
                 except Exception as e:
                     self._log(f"Connect attempt {attempt+1} failed: {e}")
                     self.ok = False
-                    time.sleep(0.5)
-            self._log("All connect attempts failed")
+                    time.sleep(1.0)
+            self._log("All connect attempts failed - QEMU serial not available")
             return False
 
     def _drain(self):
         if not self.sock:
             return
         try:
-            self.sock.settimeout(0.2)
+            self.sock.settimeout(0.3)
             while True:
                 d = self.sock.recv(4096)
                 if not d:
@@ -72,24 +74,24 @@ class SerialBridge:
     def _ensure_connected(self):
         if self.ok:
             return True
-        if time.time() - self._last_attempt < 2.0:
+        if time.time() - self._last_attempt < 3.0:
             return False
         return self.connect()
 
-    def send_command(self, cmd, timeout=8.0):
+    def send_command(self, cmd, timeout=10.0):
         if not self._ensure_connected():
-            return "ERROR: Serial not connected to BYO-OS. Start QEMU first with: qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait -display sdl"
+            return "ERROR: Serial not connected. Start QEMU with: qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait"
 
         with self.lock:
             try:
                 self._drain()
                 self._log(f"SEND: {cmd}")
                 self.sock.settimeout(3)
-                self.sock.sendall((cmd + "\n").encode())
+                self.sock.sendall((cmd + "\r\n").encode())
 
                 resp = b""
                 end_time = time.time() + timeout
-                self.sock.settimeout(1.0)
+                self.sock.settimeout(0.5)
                 idle = 0
                 while time.time() < end_time:
                     try:
@@ -102,11 +104,11 @@ class SerialBridge:
                                 break
                         else:
                             idle += 1
-                            if idle > 10:
+                            if idle > 20:
                                 break
                     except socket.timeout:
                         idle += 1
-                        if idle > 10:
+                        if idle > 20:
                             break
                     except Exception as e:
                         self._log(f"Recv error: {e}")
@@ -114,7 +116,10 @@ class SerialBridge:
                         break
 
                 result = resp.decode("utf-8", errors="ignore")
-                self._log(f"RECV ({len(result)} bytes): {result[:200]}")
+                self._last_response = result
+                self._log(f"RECV ({len(result)} bytes): {result[:300]}")
+
+                # Clean up prompt lines
                 clean_lines = []
                 for line in result.split("\n"):
                     ls = line.strip()
@@ -123,6 +128,7 @@ class SerialBridge:
                     if ls in ("BYO-OS>", "BYO-OS $", "BYO-OS $ "):
                         continue
                     if ls.startswith("BYO-OS>"):
+                        clean_lines.append(ls[7:])
                         continue
                     clean_lines.append(line)
                 return "\n".join(clean_lines)
@@ -138,19 +144,20 @@ class SerialBridge:
 
 br = SerialBridge()
 
-_panel_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'panel.html')
+HTML = ""
 try:
-    with open(_panel_path, 'r', encoding='utf-8') as _f:
-        HTML = _f.read()
-    print(f"[OK] Loaded panel.html ({len(HTML)} bytes)")
+    with open(PANEL_FILE, "r", encoding="utf-8") as f:
+        HTML = f.read()
 except Exception as e:
-    HTML = f"<h1>Error loading panel.html: {e}</h1>"
-    print(f"[ERROR] {e}")
+    HTML = f"<html><body><h1>BYO-OS Panel</h1><p>Error loading panel.html: {e}</p></body></html>"
+
 
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
         p = urllib.parse.urlparse(self.path).path
-        if p == "/" or p == "":
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
+
+        if p == "/" or p == "/index.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.end_headers()
@@ -191,26 +198,38 @@ class H(BaseHTTPRequestHandler):
                 elif "Uptime:" in l:
                     try: info["uptime"] = int(l.split("Uptime:")[1].strip().replace("s", ""))
                     except: pass
-            self.j(info)
+                elif "Tasks:" in l:
+                    try: info["tasks"] = int(l.split("Tasks:")[1].strip().split()[0])
+                    except: pass
+                elif "Load:" in l:
+                    try: info["load"] = l.split("Load:")[1].strip()
+                    except: pass
+                elif "IP:" in l:
+                    try: info["ip"] = l.split("IP:")[1].strip()
+                    except: pass
+            self._json(info)
         elif p == "/api/tasks":
             raw = br.send_command("ps", 3.0)
-            self.j({"output": raw})
+            self._json({"output": raw})
         elif p == "/api/files":
             raw = br.send_command("ls /", 3.0)
-            self.j({"output": raw})
+            self._json({"output": raw})
         elif p == "/api/network":
             raw = br.send_command("ifconfig", 3.0)
-            self.j({"output": raw})
+            self._json({"output": raw})
         elif p == "/api/logs":
             raw = br.send_command("journal", 3.0)
-            self.j({"output": raw})
+            self._json({"output": raw})
         elif p == "/api/ping":
-            self.j({"ok": True, "serial": br.ok})
+            self._json({"ok": True, "serial": br.ok})
         elif p == "/api/reconnect":
             ok = br.connect()
-            self.j({"ok": ok})
+            self._json({"ok": ok, "serial": br.ok})
         elif p == "/api/debug":
-            self.j({"serial": br.ok, "log": br._debug_log[-50:]})
+            self._json({"serial": br.ok, "log": br._debug_log[-100:], "last_response": br._last_response[:500]})
+        elif p == "/api/shell":
+            raw = br.send_command("help", 3.0)
+            self._json({"output": raw, "serial": br.ok})
         else:
             self.send_response(404)
             self.end_headers()
@@ -224,14 +243,14 @@ class H(BaseHTTPRequestHandler):
                 data = json.loads(body) if body else {}
                 cmd = data.get("cmd", "").strip()
                 if not cmd:
-                    self.j({"error": "no command"})
+                    self._json({"error": "no command"})
                     return
                 resp = br.send_command(cmd, 10.0)
-                self.j({"output": resp})
+                self._json({"output": resp})
             except json.JSONDecodeError:
-                self.j({"error": "invalid JSON"})
+                self._json({"error": "invalid JSON"})
             except Exception as e:
-                self.j({"error": str(e)})
+                self._json({"error": str(e)})
         else:
             self.send_response(404)
             self.end_headers()
@@ -243,7 +262,7 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
-    def j(self, d):
+    def _json(self, d):
         b = json.dumps(d, ensure_ascii=False).encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
@@ -254,14 +273,29 @@ class H(BaseHTTPRequestHandler):
     def log_message(self, *a):
         pass
 
+
+def serial_retry_thread():
+    """Background thread that retries serial connection every 5 seconds."""
+    while True:
+        time.sleep(5)
+        if not br.ok:
+            br._log("Auto-retry: attempting reconnect...")
+            br.connect(retries=2)
+
+
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v7")
+    print("  BYO-OS Web Management Panel v8")
     print("=" * 60)
-    print(f"Panel file: {_panel_path}")
+    print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
     br.connect(retries=5)
     print(f"Serial: {'CONNECTED' if br.ok else 'OFFLINE (start QEMU first)'}")
+
+    # Start background reconnection thread
+    t = threading.Thread(target=serial_retry_thread, daemon=True)
+    t.start()
+
     srv = HTTPServer(("0.0.0.0", HTTP_PORT), H)
     print(f"Panel:  http://localhost:{HTTP_PORT}")
     print(f"Debug:  http://localhost:{HTTP_PORT}/api/debug")
