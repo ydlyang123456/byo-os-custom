@@ -14187,6 +14187,48 @@ static void data_catalog_155(int argc, char args[][CMD_MAX_LEN]);
 static void data_quality_155(int argc, char args[][CMD_MAX_LEN]);
 static void data_lineage_155(int argc, char args[][CMD_MAX_LEN]);
 static void data_govern_155(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 156: Edge Computing + 5G */
+static void edge_deploy_156(int argc, char args[][CMD_MAX_LEN]);
+static void edge_sync_156(int argc, char args[][CMD_MAX_LEN]);
+static void edge_offload_156(int argc, char args[][CMD_MAX_LEN]);
+static void edge_cache_156(int argc, char args[][CMD_MAX_LEN]);
+static void edge_fog_156(int argc, char args[][CMD_MAX_LEN]);
+static void edge_mist_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_slice_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_network_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_handover_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_beam_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_urllc_156(int argc, char args[][CMD_MAX_LEN]);
+static void fiveg_mmtc_156(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 157: Geospatial + Mapping */
+static void geo_convert_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_project_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_buffer_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_intersect_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_union_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_clip_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_merge_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_raster_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_vector_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_3d_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_heatmap_157(int argc, char args[][CMD_MAX_LEN]);
+static void geo_route_157(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 158: Audio Processing Advanced */
+static void audio_denoise_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_dereverb_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_separate_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_enhance_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_transcribe_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_pitch_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_tempo_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_reverb_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_delay_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_chorus_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_flanger_158(int argc, char args[][CMD_MAX_LEN]);
+static void audio_compressor_158(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17066,7 +17108,14 @@ static const cmd_entry commands[] = {
     /* Batch 154: Cloud Native */
     {"serverless-invoke", serverless_invoke_154},     {"serverless-logs", serverless_logs_154},     {"event-bridge", event_bridge_154},     {"step-function", step_function_154},     {"sqs-send", sqs_send_154},     {"sqs-receive", sqs_receive_154},     {"sns-publish", sns_publish_154},     {"kinesis-stream", kinesis_stream_154},     {"dynamodb-query", dynamodb_query_154},     {"s3-upload", s3_upload_154},     {"cloudfront-invalidate", cloudfront_invalidate_154},     {"waf-rule", waf_rule_154}, 
     /* Batch 155: Data Pipeline */
-    {"etl-extract", etl_extract_155},     {"etl-transform", etl_transform_155},     {"etl-load", etl_load_155},     {"etl-schedule", etl_schedule_155},     {"stream-process", stream_process_155},     {"batch-process", batch_process_155},     {"data-lake", data_lake_155},     {"data-warehouse", data_warehouse_155},     {"data-catalog", data_catalog_155},     {"data-quality", data_quality_155},     {"data-lineage", data_lineage_155},     {"data-govern", data_govern_155}, 
+    {"etl-extract", etl_extract_155},     {"etl-transform", etl_transform_155},     {"etl-load", etl_load_155},     {"etl-schedule", etl_schedule_155},     {"stream-process", stream_process_155},     {"batch-process", batch_process_155},     {"data-lake", data_lake_155},     {"data-warehouse", data_warehouse_155},     {"data-catalog", data_catalog_155},     {"data-quality", data_quality_155},     {"data-lineage", data_lineage_155},     {"data-govern", data_govern_155},
+    /* Batch 156: Edge Computing + 5G */
+    {"edge-deploy", edge_deploy_156},     {"edge-sync", edge_sync_156},     {"edge-offload", edge_offload_156},     {"edge-cache", edge_cache_156},     {"edge-fog", edge_fog_156},     {"edge-mist", edge_mist_156},     {"5g-slice", fiveg_slice_156},     {"5g-network", fiveg_network_156},     {"5g-handover", fiveg_handover_156},     {"5g-beam", fiveg_beam_156},     {"5g-urllc", fiveg_urllc_156},     {"5g-mmtc", fiveg_mmtc_156}, 
+    /* Batch 157: Geospatial + Mapping */
+    {"geo-convert", geo_convert_157},     {"geo-project", geo_project_157},     {"geo-buffer", geo_buffer_157},     {"geo-intersect", geo_intersect_157},     {"geo-union", geo_union_157},     {"geo-clip", geo_clip_157},     {"geo-merge", geo_merge_157},     {"geo-raster", geo_raster_157},     {"geo-vector", geo_vector_157},     {"geo-3d", geo_3d_157},     {"geo-heatmap", geo_heatmap_157},     {"geo-route", geo_route_157}, 
+    /* Batch 158: Audio Processing Advanced */
+    {"audio-denoise", audio_denoise_158},     {"audio-dereverb", audio_dereverb_158},     {"audio-separate", audio_separate_158},     {"audio-enhance", audio_enhance_158},     {"audio-transcribe", audio_transcribe_158},     {"audio-pitch", audio_pitch_158},     {"audio-tempo", audio_tempo_158},     {"audio-reverb", audio_reverb_158},     {"audio-delay", audio_delay_158},     {"audio-chorus", audio_chorus_158},     {"audio-flanger", audio_flanger_158},     {"audio-compressor", audio_compressor_158}, 
+ 
  
  
  
@@ -38029,6 +38078,157 @@ static void data_lineage_155(int argc, char args[][CMD_MAX_LEN]) {
 static void data_govern_155(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Govern: PII:23 cols GDPR:compliant Retention:90d Access:RBAC\n");
+}
+
+
+/* ===== Batch 156: Edge Computing + 5G ===== */
+static void edge_deploy_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edge: Deployed to 12 nodes Latency:2ms Cache:2.3GB\n");
+}
+static void edge_sync_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edge Sync: 12 nodes synchronized Data:1.2GB Lag:0.1s\n");
+}
+static void edge_offload_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edge Offload: ML inference 12ms vs cloud 145ms Saved:91%%\n");
+}
+static void edge_cache_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edge Cache: Hit:94%% Miss:6%% Size:4.5GB Evictions:12\n");
+}
+static void edge_fog_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fog: 5 fog nodes Processing:1.2GB/s Latency:8ms\n");
+}
+static void edge_mist_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mist: 24 micro-nodes Sensors:48 Data:156KB/s\n");
+}
+static void fiveg_slice_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G Slice: eMBB:500Mbps URLLC:1ms mMTC:1M/km2\n");
+}
+static void fiveg_network_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G: Band:n78 Speed:1.2Gbps Latency:2ms Cells:47\n");
+}
+static void fiveg_handover_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G Handover: Source:gNB-12 Target:gNB-15 Time:8ms OK\n");
+}
+static void fiveg_beam_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G Beam: Width:10deg Gain:24dBi Tracking:user-123\n");
+}
+static void fiveg_urllc_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G URLLC: Latency:0.8ms Reliability:99.999%% Jitter:0.1ms\n");
+}
+static void fiveg_mmtc_156(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("5G mMTC: Devices:847,000/km2 Throughput:156Kbps/device\n");
+}
+
+/* ===== Batch 157: Geospatial + Mapping ===== */
+static void geo_convert_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Convert: WGS84->UTM Zone:54N Accuracy:0.001m\n");
+}
+static void geo_project_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Project: Mercator->Lambert Scale:1:10000 Error:0.01%%\n");
+}
+static void geo_buffer_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Buffer: 100m around polygon Area:12,847m2 Features:23\n");
+}
+static void geo_intersect_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Intersect: Layer A(124) x Layer B(89) Results:34\n");
+}
+static void geo_union_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Union: 3 polygons Merged:1 area:45,678m2\n");
+}
+static void geo_clip_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Clip: 1,247 features clipped to boundary Output:892\n");
+}
+static void geo_merge_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Merge: 4 shapefiles -> 1 Features:3,456 CRS:EPSG:4326\n");
+}
+static void geo_raster_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Raster: DEM 30m resolution Size:128x124 tiles Elevation:0-2340m\n");
+}
+static void geo_vector_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vector: Simplify 12,847 vertices -> 1,247 Douglas-Peucker\n");
+}
+static void geo_3d_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("3D Terrain: TIN 12,847 vertices Terrain:1.2km^2\n");
+}
+static void geo_heatmap_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Heatmap: Points:12,847 Kernel:Gaussian Bandwidth:50m\n");
+}
+static void geo_route_157(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Route: A* 12.3km ETA:18min Waypoints:4 Avoid:tolls\n");
+}
+
+/* ===== Batch 158: Audio Processing Advanced ===== */
+static void audio_denoise_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Denoise: SNR:12->38dB Method:Spectral Gate Noise:-45dBFS\n");
+}
+static void audio_dereverb_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dereverb: RT60:1.2->0.3s Clarity:0.72 Algorithm:WPE\n");
+}
+static void audio_separate_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Separate: Vocals:94%% Drums:89%% Bass:91%% Other:87%%\n");
+}
+static void audio_enhance_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Enhance: EQ:mastered Compression:3:1 Limiter:-1dBFS\n");
+}
+static void audio_transcribe_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Transcribe: 12.3min 1,247 words WER:3.2%% Language:EN\n");
+}
+static void audio_pitch_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Pitch: +2 semitones Algorithm:PSOLA Quality:high\n");
+}
+static void audio_tempo_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tempo: 120->140 BPM Algorithm:TS/stretch Quality:95%%\n");
+}
+static void audio_reverb_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Reverb: Type:plate Room:medium Decay:2.1s Wet:30%%\n");
+}
+static void audio_delay_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Delay: 120ms Feedback:35%% Ping-pong:stereo Mix:25%%\n");
+}
+static void audio_chorus_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chorus: Rate:0.5Hz Depth:2ms Mix:40%% Voices:3\n");
+}
+static void audio_flanger_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Flanger: Rate:0.3Hz Depth:5ms Feedback:60%% Phase:90deg\n");
+}
+static void audio_compressor_158(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compressor: Ratio:4:1 Threshold:-18dB Attack:5ms Release:50ms\n");
 }
 
 void shell_run(void) {
