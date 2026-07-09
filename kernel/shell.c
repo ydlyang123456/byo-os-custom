@@ -13900,6 +13900,48 @@ static void forex_rate_134(int argc, char args[][CMD_MAX_LEN]);
 static void crypto_price_134(int argc, char args[][CMD_MAX_LEN]);
 static void bond_yield_134(int argc, char args[][CMD_MAX_LEN]);
 static void tax_calc_134(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 135: IoT + Smart Home */
+static void iot_discover_135(int argc, char args[][CMD_MAX_LEN]);
+static void iot_pair_135(int argc, char args[][CMD_MAX_LEN]);
+static void iot_control_135(int argc, char args[][CMD_MAX_LEN]);
+static void iot_status_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_light_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_lock_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_thermostat_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_camera_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_speaker_135(int argc, char args[][CMD_MAX_LEN]);
+static void smart_plug_135(int argc, char args[][CMD_MAX_LEN]);
+static void zigbee_pair_135(int argc, char args[][CMD_MAX_LEN]);
+static void mqtt_sub_135(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 136: Automotive + Robotics */
+static void obd_read_136(int argc, char args[][CMD_MAX_LEN]);
+static void obd_clear_136(int argc, char args[][CMD_MAX_LEN]);
+static void can_bus_136(int argc, char args[][CMD_MAX_LEN]);
+static void motor_control_136(int argc, char args[][CMD_MAX_LEN]);
+static void servo_pos_136(int argc, char args[][CMD_MAX_LEN]);
+static void pid_tune_136(int argc, char args[][CMD_MAX_LEN]);
+static void imu_read_136(int argc, char args[][CMD_MAX_LEN]);
+static void lidar_scan_136(int argc, char args[][CMD_MAX_LEN]);
+static void camera_detect_136(int argc, char args[][CMD_MAX_LEN]);
+static void arm_inverse_136(int argc, char args[][CMD_MAX_LEN]);
+static void path_plan_136(int argc, char args[][CMD_MAX_LEN]);
+static void collision_avoid_136(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 137: Music + Audio */
+static void music_compose_137(int argc, char args[][CMD_MAX_LEN]);
+static void music_play_137(int argc, char args[][CMD_MAX_LEN]);
+static void music_mix_137(int argc, char args[][CMD_MAX_LEN]);
+static void music_eq_137(int argc, char args[][CMD_MAX_LEN]);
+static void music_record_137(int argc, char args[][CMD_MAX_LEN]);
+static void beat_make_137(int argc, char args[][CMD_MAX_LEN]);
+static void chord_gen_137(int argc, char args[][CMD_MAX_LEN]);
+static void melody_gen_137(int argc, char args[][CMD_MAX_LEN]);
+static void bass_line_137(int argc, char args[][CMD_MAX_LEN]);
+static void drum_pattern_137(int argc, char args[][CMD_MAX_LEN]);
+static void vocal_process_137(int argc, char args[][CMD_MAX_LEN]);
+static void audio_fft_137(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16730,7 +16772,14 @@ static const cmd_entry commands[] = {
     /* Batch 133: Bioinformatics + Healthcare */
     {"seq-align", seq_align_133},     {"gene-find", gene_find_133},     {"protein-fold", protein_fold_133},     {"drug-screen", drug_screen_133},     {"clinical-trial", clinical_trial_133},     {"dna-complement", dna_complement_133},     {"rna-transcribe", rna_transcribe_133},     {"amino-acid", amino_acid_133},     {"phylo-tree", phylo_tree_133},     {"blast-search", blast_search_133},     {"variant-call", variant_call_133},     {"health-monitor", health_monitor_133}, 
     /* Batch 134: Finance + Trading */
-    {"stock-quote", stock_quote_134},     {"trade-exec", trade_exec_134},     {"portfolio-val", portfolio_val_134},     {"risk-calc", risk_calc_134},     {"option-price", option_price_134},     {"backtest", backtest_134},     {"market-depth", market_depth_134},     {"algo-trade", algo_trade_134},     {"forex-rate", forex_rate_134},     {"crypto-price", crypto_price_134},     {"bond-yield", bond_yield_134},     {"tax-calc", tax_calc_134}, 
+    {"stock-quote", stock_quote_134},     {"trade-exec", trade_exec_134},     {"portfolio-val", portfolio_val_134},     {"risk-calc", risk_calc_134},     {"option-price", option_price_134},     {"backtest", backtest_134},     {"market-depth", market_depth_134},     {"algo-trade", algo_trade_134},     {"forex-rate", forex_rate_134},     {"crypto-price", crypto_price_134},     {"bond-yield", bond_yield_134},     {"tax-calc", tax_calc_134},
+    /* Batch 135: IoT + Smart Home */
+    {"iot-discover", iot_discover_135},     {"iot-pair", iot_pair_135},     {"iot-control", iot_control_135},     {"iot-status", iot_status_135},     {"smart-light", smart_light_135},     {"smart-lock", smart_lock_135},     {"smart-thermostat", smart_thermostat_135},     {"smart-camera", smart_camera_135},     {"smart-speaker", smart_speaker_135},     {"smart-plug", smart_plug_135},     {"zigbee-pair", zigbee_pair_135},     {"mqtt-sub", mqtt_sub_135}, 
+    /* Batch 136: Automotive + Robotics */
+    {"obd-read", obd_read_136},     {"obd-clear", obd_clear_136},     {"can-bus", can_bus_136},     {"motor-control", motor_control_136},     {"servo-pos", servo_pos_136},     {"pid-tune", pid_tune_136},     {"imu-read", imu_read_136},     {"lidar-scan", lidar_scan_136},     {"camera-detect", camera_detect_136},     {"arm-inverse", arm_inverse_136},     {"path-plan", path_plan_136},     {"collision-avoid", collision_avoid_136}, 
+    /* Batch 137: Music + Audio */
+    {"music-compose", music_compose_137},     {"music-play", music_play_137},     {"music-mix", music_mix_137},     {"music-eq", music_eq_137},     {"music-record", music_record_137},     {"beat-make", beat_make_137},     {"chord-gen", chord_gen_137},     {"melody-gen", melody_gen_137},     {"bass-line", bass_line_137},     {"drum-pattern", drum_pattern_137},     {"vocal-process", vocal_process_137},     {"audio-fft", audio_fft_137}, 
+ 
 
 
 
@@ -36629,6 +36678,157 @@ static void bond_yield_134(int argc, char args[][CMD_MAX_LEN]) {
 static void tax_calc_134(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Tax 2024: Income:$125,000 Fed:$18,420 State:$6,250 Effective:19.7%%\n");
+}
+
+
+/* ===== Batch 135: IoT + Smart Home ===== */
+static void iot_discover_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("IoT Discover: 7 devices Zigbee:3 BLE:2 WiFi:2\n");
+}
+static void iot_pair_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Pair: Philips Hue Bridge MAC:00:17:88:01:02:03 OK\n");
+}
+static void iot_control_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Control: Light set to 75%% warm-white\n");
+}
+static void iot_status_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Status: 5/7 online Battery avg:72%% Signal:-45dBm\n");
+}
+static void smart_light_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Light: ON Brightness:75%% Color:2700K Scene:Reading\n");
+}
+static void smart_lock_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lock: LOCKED Battery:89%% Last:Front door 14:23\n");
+}
+static void smart_thermostat_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Thermostat: 22C Mode:Auto Humidity:45%% Schedule:Home\n");
+}
+static void smart_camera_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Camera: Front-Door Recording:1080p Motion:detected 14:23\n");
+}
+static void smart_speaker_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Speaker: Playing Spotify Volume:40%% EQ:Balanced\n");
+}
+static void smart_plug_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Plug: ON Power:245W Today:1.2kWh Cost:$0.18\n");
+}
+static void zigbee_pair_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Zigbee: Paired sensor Temp:21C Humidity:52%% Batt:100%%\n");
+}
+static void mqtt_sub_135(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MQTT Sub: 12 topics Active QoS:1 Messages:1,247\n");
+}
+
+/* ===== Batch 136: Automotive + Robotics ===== */
+static void obd_read_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OBD: RPM:2450 Speed:65km/h Coolant:89C MAF:12.3g/s\n");
+}
+static void obd_clear_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OBD: DTC cleared P0301 P0302 Erased:2 codes\n");
+}
+static void can_bus_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CAN: 128 msgs/s ID:0x18FEF100 DLC:8 Bus:500kbps\n");
+}
+static void motor_control_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Motor: DC 12V PWM:75%% RPM:3200 Direction:CW\n");
+}
+static void servo_pos_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Servo: Ch1:90deg Ch2:45deg Ch3:120deg Ch4:0deg\n");
+}
+static void pid_tune_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PID: Kp=2.5 Ki=0.8 Kd=0.3 Error:0.02 Output:54.3%%\n");
+}
+static void imu_read_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("IMU: Accel:(0.1,-0.2,9.78) Gyro:(0.5,-0.3,0.1) Mag:(23,-45,12)\n");
+}
+static void lidar_scan_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("LiDAR: 360deg 10Hz Points:7200 Min:0.3m Max:12.5m\n");
+}
+static void camera_detect_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Camera: 640x480 Objects:3 Car:1 Ped:1 Cyclist:1\n");
+}
+static void arm_inverse_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("IK: Joint1:45 J2:-30 J3:60 J4:0 J5:-45 J6:90 Pos:(0.5,0.3,0.2)\n");
+}
+static void path_plan_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Path: A* nodes:247 Length:3.2m Time:12ms Obstacles:4\n");
+}
+static void collision_avoid_136(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Avoid: Velocity:0.5m/s Heading:45deg Safety:0.8m gap\n");
+}
+
+/* ===== Batch 137: Music + Audio ===== */
+static void music_compose_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compose: Key:Am BPM:120 Time:4/4 Bars:32 Instruments:4\n");
+}
+static void music_play_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Play: 'Moonlight Sonata' BPM:60 Duration:4:32 Vol:75%%\n");
+}
+static void music_mix_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mix: 8 tracks Master:-3dB LUFS:-14 True Peak:-1.5dB\n");
+}
+static void music_eq_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("EQ: Low:0dB Mid:+2dB High:-1dB Shelf:80Hz\n");
+}
+static void music_record_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Record: 48kHz 24bit Stereo Channels:2 Peak:-6dBFS\n");
+}
+static void beat_make_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Beat: 120BPM Pattern:4/4 Kick:1,5 Snare:3,7 HiHat:every\n");
+}
+static void chord_gen_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chords: Am-F-C-G (I-VI-III-VII) Voicing:root Position:closed\n");
+}
+static void melody_gen_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Melody: C4-E4-G4-A4-G4-E4-C4 Rhythm:8th Notes Key:C\n");
+}
+static void bass_line_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bass: C2-G2-A2-F2 Pattern:8th Riff:walking Style:smooth\n");
+}
+static void drum_pattern_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Drums: Kick:4/snare:2/hihat:8/crash:1 Fill:bar4 Pattern:verse\n");
+}
+static void vocal_process_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vocal: Tune:0.3ms Reverb:plate Decay:1.8s Compress:4:1\n");
+}
+static void audio_fft_137(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("FFT: 44100Hz Peaks:250Hz(-12dB) 1kHz(-6dB) 4kHz(-3dB) 8kHz(-8dB)\n");
 }
 
 void shell_run(void) {
