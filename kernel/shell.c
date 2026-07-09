@@ -14556,6 +14556,48 @@ static void docker_build_182(int argc, char args[][CMD_MAX_LEN]);
 static void docker_run_182(int argc, char args[][CMD_MAX_LEN]);
 static void docker_ps_182(int argc, char args[][CMD_MAX_LEN]);
 static void docker_logs_182(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 183: Space Exploration */
+static void mars_colony_183(int argc, char args[][CMD_MAX_LEN]);
+static void lunar_base_183(int argc, char args[][CMD_MAX_LEN]);
+static void asteroid_mine_183(int argc, char args[][CMD_MAX_LEN]);
+static void space_elevator_183(int argc, char args[][CMD_MAX_LEN]);
+static void solar_sail_183(int argc, char args[][CMD_MAX_LEN]);
+static void ion_drive_183(int argc, char args[][CMD_MAX_LEN]);
+static void fusion_reactor_183(int argc, char args[][CMD_MAX_LEN]);
+static void antimatter_183(int argc, char args[][CMD_MAX_LEN]);
+static void wormhole_calc_183(int argc, char args[][CMD_MAX_LEN]);
+static void dyson_sphere_183(int argc, char args[][CMD_MAX_LEN]);
+static void bertrand_russell_183(int argc, char args[][CMD_MAX_LEN]);
+static void kardashev_183(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 184: Biology + Genetics */
+static void genome_seq_184(int argc, char args[][CMD_MAX_LEN]);
+static void gene_edit_184(int argc, char args[][CMD_MAX_LEN]);
+static void protein_synth_184(int argc, char args[][CMD_MAX_LEN]);
+static void cell_sim_184(int argc, char args[][CMD_MAX_LEN]);
+static void crispr_design_184(int argc, char args[][CMD_MAX_LEN]);
+static void microbiome_184(int argc, char args[][CMD_MAX_LEN]);
+static void stem_cell_184(int argc, char args[][CMD_MAX_LEN]);
+static void cloning_184(int argc, char args[][CMD_MAX_LEN]);
+static void biotech_ferment_184(int argc, char args[][CMD_MAX_LEN]);
+static void dna_storage_184(int argc, char args[][CMD_MAX_LEN]);
+static void synthetic_bio_184(int argc, char args[][CMD_MAX_LEN]);
+static void bioethics_184(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 185: Psychology + Neuroscience */
+static void eeg_read_185(int argc, char args[][CMD_MAX_LEN]);
+static void fmri_analyze_185(int argc, char args[][CMD_MAX_LEN]);
+static void neural_decode_185(int argc, char args[][CMD_MAX_LEN]);
+static void brain_computer_185(int argc, char args[][CMD_MAX_LEN]);
+static void cognitive_test_185(int argc, char args[][CMD_MAX_LEN]);
+static void memory_train_185(int argc, char args[][CMD_MAX_LEN]);
+static void attention_test_185(int argc, char args[][CMD_MAX_LEN]);
+static void emotion_rec_185(int argc, char args[][CMD_MAX_LEN]);
+static void behavior_model_185(int argc, char args[][CMD_MAX_LEN]);
+static void neuro_stim_185(int argc, char args[][CMD_MAX_LEN]);
+static void brain_map_185(int argc, char args[][CMD_MAX_LEN]);
+static void consciousness_185(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17498,7 +17540,14 @@ static const cmd_entry commands[] = {
     /* Batch 181: Cryptography + Math */
     {"rsa-keygen", rsa_keygen_181},     {"aes-encrypt", aes_encrypt_181},     {"aes-decrypt", aes_decrypt_181},     {"ecdsa-sign", ecdsa_sign_181},     {"ecdsa-verify", ecdsa_verify_181},     {"sha256-hash", sha256_hash_181},     {"hmac-generate", hmac_generate_181},     {"pbkdf2-derive", pbkdf2_derive_181},     {"diffie-hellman", diffie_hellman_181},     {"prime-check", prime_check_181},     {"matrix-inverse", matrix_inverse_181},     {"fft-compute", fft_compute_181}, 
     /* Batch 182: Dev Tools */
-    {"git-status", git_status_182},     {"git-commit", git_commit_182},     {"git-branch", git_branch_182},     {"git-merge", git_merge_182},     {"git-rebase", git_rebase_182},     {"git-stash", git_stash_182},     {"git-blame", git_blame_182},     {"git-bisect", git_bisect_182},     {"docker-build", docker_build_182},     {"docker-run", docker_run_182},     {"docker-ps", docker_ps_182},     {"docker-logs", docker_logs_182}, 
+    {"git-status", git_status_182},     {"git-commit", git_commit_182},     {"git-branch", git_branch_182},     {"git-merge", git_merge_182},     {"git-rebase", git_rebase_182},     {"git-stash", git_stash_182},     {"git-blame", git_blame_182},     {"git-bisect", git_bisect_182},     {"docker-build", docker_build_182},     {"docker-run", docker_run_182},     {"docker-ps", docker_ps_182},     {"docker-logs", docker_logs_182},
+    /* Batch 183: Space Exploration */
+    {"mars-colony", mars_colony_183},     {"lunar-base", lunar_base_183},     {"asteroid-mine", asteroid_mine_183},     {"space-elevator", space_elevator_183},     {"solar-sail", solar_sail_183},     {"ion-drive", ion_drive_183},     {"fusion-reactor", fusion_reactor_183},     {"antimatter", antimatter_183},     {"wormhole-calc", wormhole_calc_183},     {"dyson-sphere", dyson_sphere_183},     {"bertrand-russell", bertrand_russell_183},     {"kardashev", kardashev_183}, 
+    /* Batch 184: Biology + Genetics */
+    {"genome-seq", genome_seq_184},     {"gene-edit", gene_edit_184},     {"protein-synth", protein_synth_184},     {"cell-sim", cell_sim_184},     {"crispr-design", crispr_design_184},     {"microbiome", microbiome_184},     {"stem-cell", stem_cell_184},     {"cloning", cloning_184},     {"biotech-ferment", biotech_ferment_184},     {"dna-storage", dna_storage_184},     {"synthetic-bio", synthetic_bio_184},     {"bioethics", bioethics_184}, 
+    /* Batch 185: Psychology + Neuroscience */
+    {"eeg-read", eeg_read_185},     {"fmri-analyze", fmri_analyze_185},     {"neural-decode", neural_decode_185},     {"brain-computer", brain_computer_185},     {"cognitive-test", cognitive_test_185},     {"memory-train", memory_train_185},     {"attention-test", attention_test_185},     {"emotion-rec", emotion_rec_185},     {"behavior-model", behavior_model_185},     {"neuro-stim", neuro_stim_185},     {"brain-map", brain_map_185},     {"consciousness", consciousness_185}, 
+ 
  
  
  
@@ -39829,6 +39878,157 @@ static void docker_ps_182(int argc, char args[][CMD_MAX_LEN]) {
 static void docker_logs_182(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Docker: abc123 [14:23:45] Server started [14:23:46] Ready\n");
+}
+
+
+/* ===== Batch 183: Space Exploration ===== */
+static void mars_colony_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mars Colony: Pop:24 Habitats:6 Power:120kW Water:recycled Air:98%%\n");
+}
+static void lunar_base_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lunar Base: Crater:Shackleton Modules:3 Pressurized:1,200m2\n");
+}
+static void asteroid_mine_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Asteroid Mine: Target:2014 MU39 Metals:platinum 12t Water:100t\n");
+}
+static void space_elevator_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Space Elevator: Height:36,000km Cable:carbon nanotube Capacity:20t\n");
+}
+static void solar_sail_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Solar Sail: Area:12,000m2 Thrust:9.1N/m2 Max Speed:0.1c\n");
+}
+static void ion_drive_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ion Drive: Thrust:0.5N Isp:3,100s Power:10kW Mars ETA:180 days\n");
+}
+static void fusion_reactor_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fusion: D-T plasma T:150M K Power:500MW Efficiency:40%%\n");
+}
+static void antimatter_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Antimatter: Stored:1g Production:1ng/day Cost:$62.5T/g\n");
+}
+static void wormhole_calc_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wormhole: Stable:needs exotic matter Mass:-M_sun Size:1m\n");
+}
+static void dyson_sphere_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dyson Sphere: Coverage:67%% Power:3.8e26W Stars:12 candidates\n");
+}
+static void bertrand_russell_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Russell: Paradox:Self-reference Set:all-sets Notation:ZFC\n");
+}
+static void kardashev_183(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Kardashev: Humanity:0.73 Type I target:10^16W ETA:2300\n");
+}
+
+/* ===== Batch 184: Biology + Genetics ===== */
+static void genome_seq_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Genome: 3.2B base pairs Coding:20,000 genes Assembly:99.9%%\n");
+}
+static void gene_edit_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CRISPR: Target:BRCA1 Exon:11 Guide:GCAGC Efficiency:87%%\n");
+}
+static void protein_synth_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Protein: Insulin 51aa MW:5,808Da Fold:correct Yield:12mg/L\n");
+}
+static void cell_sim_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cell Sim: 12,847 genes 156 pathways Time:2.3s Cells:1,247\n");
+}
+static void crispr_design_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CRISPR: SpCas9 Guide:20nt PAM:NGG Off-target:0.3%%\n");
+}
+static void microbiome_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Microbiome: Diversity:4.2 Shannon Bacteria:12phyla Ratio:firm/bacto:2:1\n");
+}
+static void stem_cell_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stem Cell: iPSC Passage:12 Differentiation:cardiomyocyte Purity:94%%\n");
+}
+static void cloning_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cloning: Somatic cell nuclear transfer Efficiency:2%% Viable:3/150\n");
+}
+static void biotech_ferment_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ferment: E.coli 37C 48h Product:1.2g/L Yield:85%%\n");
+}
+static void dna_storage_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DNA Storage: 12GB data -> 1.2mg DNA Encoding:error-correction\n");
+}
+static void synthetic_bio_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SynBio: Circuit:3 genes Logic:AND Gate:inducible Output:GFP\n");
+}
+static void bioethics_184(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ethics: Review:approved Risk:BSL-2 Compliance:NIH Guidelines\n");
+}
+
+/* ===== Batch 185: Psychology + Neuroscience ===== */
+static void eeg_read_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("EEG: 64 channels Alpha:12Hz Beta:22Hz Gamma:40Hz Artifacts:none\n");
+}
+static void fmri_analyze_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("fMRI: Voxel:2x2x2mm Activation:prefrontal Talairach:(32,45,12)\n");
+}
+static void neural_decode_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Decoding: Accuracy:87%% Features:128 Classifier:SVM Stimulus:visual\n");
+}
+static void brain_computer_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("BCI: Commands:4 Speed:12bits/min Accuracy:92%% Latency:200ms\n");
+}
+static void cognitive_test_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CogTest: IQ:128 Memory:95th Verbal:90th Processing:85th\n");
+}
+static void memory_train_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Memory: Technique:method-of-loki Score:72/100 Improvement:+15%%\n");
+}
+static void attention_test_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Attention: Sustained:12min Selective:94%% Divided:78%%\n");
+}
+static void emotion_rec_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Emotion: Happy:45%% Neutral:35%% Sad:12%% Angry:5%% Surprised:3%%\n");
+}
+static void behavior_model_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Behavior: Model:RL Reward:delay-discounting Rate:0.95\n");
+}
+static void neuro_stim_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TMS: Target:DLPFC Intensity:80%% Motor threshold Frequency:1Hz\n");
+}
+static void brain_map_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Brain: Atlas:MNI152 Parcels:84 Regions:activated:12\n");
+}
+static void consciousness_185(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Consciousness: Theory:IIT Phi:4.7 Integrated:high Awareness:67%%\n");
 }
 
 void shell_run(void) {
