@@ -136,6 +136,7 @@ void isr_register_handler(int isr, isr_t handler);
 void keyboard_init(void);
 int keyboard_getchar(void);
 int keyboard_has_input(void);
+void keyboard_flush(void);
 
 /* ===== Timer ===== */
 void timer_init(uint32_t freq);
