@@ -134,7 +134,7 @@ void isr_register_handler(int isr, isr_t handler);
 
 /* ===== Keyboard ===== */
 void keyboard_init(void);
-char keyboard_getchar(void);
+int keyboard_getchar(void);
 int keyboard_has_input(void);
 
 /* ===== Timer ===== */

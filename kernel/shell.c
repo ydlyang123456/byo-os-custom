@@ -8769,6 +8769,55 @@ static void cmd_npm_v2(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* jaeger - tracing */
+static void cmd_jaeger(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Jaeger version v1.52.0\n");
+        vga_puts("Usage: jaeger [all-in-one|agent|collector|query]\n");
+        return;
+    }
+    vga_puts("Jaeger "); vga_puts(args[1]); vga_puts(" starting...\n");
+    vga_puts("JSON file logger disabled\n");
+    vga_puts("Starting admin server on port 14269\n");
+}
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -9318,6 +9367,11 @@ static const cmd_entry commands[] = {
 
     /* Batch 37 */
     {"npm-v2", cmd_npm_v2},
+
+    {"rpm", cmd_rpm},
+
+    /* Batch 38 */
+    {"jaeger", cmd_jaeger},
 };
 
 
@@ -9416,27 +9470,31 @@ void shell_run(void) {
     while (1) {
         net_poll();
 
+        /* Priority 1: Serial input (from gateway/web panel) */
         if (serial_has_input()) {
             serial_mode = 1;
             vga_set_serial_mode(1);
             char serial_cmd[CMD_MAX_LEN];
             int si = 0;
-            int timeout = 500;
-            while (timeout-- > 0) {
-                if (!serial_has_input()) {
-                    for (volatile int d = 0; d < 2000; d++) {}
-                    if (!serial_has_input()) break;
+            /* Read until newline with generous timeout */
+            int idle_count = 0;
+            while (idle_count < 200) {
+                if (serial_has_input()) {
+                    idle_count = 0;
+                    char sc = serial_getchar();
+                    if (sc == 10 || sc == 13) {
+                        serial_cmd[si] = 0;
+                        if (si > 0) shell_execute(serial_cmd);
+                        break;
+                    }
+                    if (sc == 8 && si > 0) { si--; }
+                    else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = sc; }
+                } else {
+                    idle_count++;
+                    for (volatile int d = 0; d < 500; d++) {}
                 }
-                char sc = serial_getchar();
-                if (sc == 10 || sc == 13) {
-                    serial_cmd[si] = 0;
-                    if (si > 0) shell_execute(serial_cmd);
-                    break;
-                }
-                if (sc == 8 && si > 0) { si--; }
-                else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = sc; }
             }
-            if (timeout <= 0 && si > 0) {
+            if (idle_count >= 200 && si > 0) {
                 serial_cmd[si] = 0;
                 shell_execute(serial_cmd);
             }
@@ -9446,13 +9504,14 @@ void shell_run(void) {
             continue;
         }
 
-        char c = keyboard_getchar();
-
-        /* keyboard_getchar returns 0 when serial data is available */
-        if (c == 0) {
-            /* Check serial separately */
+        /* Priority 2: Keyboard input */
+        int kc = keyboard_getchar();
+        if (kc == -1) {
+            /* No keyboard input, small delay then loop */
+            for (volatile int d = 0; d < 2000; d++) {}
             continue;
         }
+        char c = (char)kc;
 
         if (c == 13 || c == 10) {
             input_buf[input_len] = 0;
