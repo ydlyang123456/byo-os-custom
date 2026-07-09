@@ -716,13 +716,18 @@ static void cmd_grep(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_sort(int argc, char args[][CMD_MAX_LEN]) {
-    int reverse = 0;
+    int reverse = 0, numeric = 0, unique = 0;
     const char *fname = 0;
     for (int i = 1; i < argc; i++) {
-        if (args[i][0] == '-' && args[i][1] == 'r') reverse = 1;
-        else fname = args[i];
+        if (args[i][0] == '-') {
+            for (int j = 1; args[i][j]; j++) {
+                if (args[i][j] == 'r') reverse = 1;
+                else if (args[i][j] == 'n') numeric = 1;
+                else if (args[i][j] == 'u') unique = 1;
+            }
+        } else fname = args[i];
     }
-    if (!fname) { vga_puts("Usage: sort [-r] <file>\n"); return; }
+    if (!fname) { vga_puts("Usage: sort [-r|-n|-u] <file>\n"); return; }
     memset(file_buf, 0, FILE_BUF_SIZE);
     int r = fs_read_file(fname, file_buf, FILE_BUF_SIZE - 1);
     if (r <= 0) { vga_puts("sort: "); vga_puts(fname); vga_puts(": No such file\n"); return; }
@@ -738,7 +743,9 @@ static void cmd_sort(int argc, char args[][CMD_MAX_LEN]) {
     }
     for (int i = 0; i < nlines - 1; i++) {
         for (int j = 0; j < nlines - 1 - i; j++) {
-            int cmp = strcmp(lines[j], lines[j+1]);
+            int cmp;
+            if (numeric) { cmp = atoi(lines[j]) - atoi(lines[j+1]); }
+            else { cmp = strcmp(lines[j], lines[j+1]); }
             if (reverse ? (cmp < 0) : (cmp > 0)) {
                 char tmp[128];
                 strcpy(tmp, lines[j]);
@@ -747,8 +754,11 @@ static void cmd_sort(int argc, char args[][CMD_MAX_LEN]) {
             }
         }
     }
+    char prev[128] = "";
     for (int i = 0; i < nlines; i++) {
+        if (unique && strcmp(lines[i], prev) == 0) continue;
         vga_puts(lines[i]); vga_putchar('\n');
+        strcpy(prev, lines[i]);
     }
 }
 
