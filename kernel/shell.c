@@ -14146,6 +14146,48 @@ static void nav_goal_152(int argc, char args[][CMD_MAX_LEN]);
 static void grasp_plan_152(int argc, char args[][CMD_MAX_LEN]);
 static void force_control_152(int argc, char args[][CMD_MAX_LEN]);
 static void vision_detect_152(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 153: Cybersecurity Offensive */
+static void pentest_scan_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_exploit_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_enum_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_privesc_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_exfil_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_persist_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_c2_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_obfuscate_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_encode_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_inject_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_bypass_153(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_cleanup_153(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 154: Cloud Native */
+static void serverless_invoke_154(int argc, char args[][CMD_MAX_LEN]);
+static void serverless_logs_154(int argc, char args[][CMD_MAX_LEN]);
+static void event_bridge_154(int argc, char args[][CMD_MAX_LEN]);
+static void step_function_154(int argc, char args[][CMD_MAX_LEN]);
+static void sqs_send_154(int argc, char args[][CMD_MAX_LEN]);
+static void sqs_receive_154(int argc, char args[][CMD_MAX_LEN]);
+static void sns_publish_154(int argc, char args[][CMD_MAX_LEN]);
+static void kinesis_stream_154(int argc, char args[][CMD_MAX_LEN]);
+static void dynamodb_query_154(int argc, char args[][CMD_MAX_LEN]);
+static void s3_upload_154(int argc, char args[][CMD_MAX_LEN]);
+static void cloudfront_invalidate_154(int argc, char args[][CMD_MAX_LEN]);
+static void waf_rule_154(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 155: Data Pipeline */
+static void etl_extract_155(int argc, char args[][CMD_MAX_LEN]);
+static void etl_transform_155(int argc, char args[][CMD_MAX_LEN]);
+static void etl_load_155(int argc, char args[][CMD_MAX_LEN]);
+static void etl_schedule_155(int argc, char args[][CMD_MAX_LEN]);
+static void stream_process_155(int argc, char args[][CMD_MAX_LEN]);
+static void batch_process_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_lake_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_warehouse_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_catalog_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_quality_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_lineage_155(int argc, char args[][CMD_MAX_LEN]);
+static void data_govern_155(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17018,7 +17060,14 @@ static const cmd_entry commands[] = {
     /* Batch 151: AR/VR Advanced */
     {"xr-scene", xr_scene_151},     {"xr-spawn", xr_spawn_151},     {"xr-physics", xr_physics_151},     {"xr-shader", xr_shader_151},     {"xr-audio", xr_audio_151},     {"xr-haptic", xr_haptic_151},     {"xr-gesture", xr_gesture_151},     {"xr-eye-track", xr_eye_track_151},     {"xr-hand-track", xr_hand_track_151},     {"xr-body-track", xr_body_track_151},     {"xr-space-map", xr_space_map_151},     {"xr-collab", xr_collab_151}, 
     /* Batch 152: Robotics Advanced */
-    {"ros-init", ros_init_152},     {"ros-topic", ros_topic_152},     {"ros-service", ros_service_152},     {"ros-param", ros_param_152},     {"motor-pid", motor_pid_152},     {"servo-sweep", servo_sweep_152},     {"imu-calibrate", imu_calibrate_152},     {"lidar-slam", lidar_slam_152},     {"nav-goal", nav_goal_152},     {"grasp-plan", grasp_plan_152},     {"force-control", force_control_152},     {"vision-detect", vision_detect_152}, 
+    {"ros-init", ros_init_152},     {"ros-topic", ros_topic_152},     {"ros-service", ros_service_152},     {"ros-param", ros_param_152},     {"motor-pid", motor_pid_152},     {"servo-sweep", servo_sweep_152},     {"imu-calibrate", imu_calibrate_152},     {"lidar-slam", lidar_slam_152},     {"nav-goal", nav_goal_152},     {"grasp-plan", grasp_plan_152},     {"force-control", force_control_152},     {"vision-detect", vision_detect_152},
+    /* Batch 153: Cybersecurity Offensive */
+    {"pentest-scan", pentest_scan_153},     {"pentest-exploit", pentest_exploit_153},     {"pentest-enum", pentest_enum_153},     {"pentest-privesc", pentest_privesc_153},     {"pentest-exfil", pentest_exfil_153},     {"pentest-persist", pentest_persist_153},     {"pentest-c2", pentest_c2_153},     {"pentest-obfuscate", pentest_obfuscate_153},     {"pentest-encode", pentest_encode_153},     {"pentest-inject", pentest_inject_153},     {"pentest-bypass", pentest_bypass_153},     {"pentest-cleanup", pentest_cleanup_153}, 
+    /* Batch 154: Cloud Native */
+    {"serverless-invoke", serverless_invoke_154},     {"serverless-logs", serverless_logs_154},     {"event-bridge", event_bridge_154},     {"step-function", step_function_154},     {"sqs-send", sqs_send_154},     {"sqs-receive", sqs_receive_154},     {"sns-publish", sns_publish_154},     {"kinesis-stream", kinesis_stream_154},     {"dynamodb-query", dynamodb_query_154},     {"s3-upload", s3_upload_154},     {"cloudfront-invalidate", cloudfront_invalidate_154},     {"waf-rule", waf_rule_154}, 
+    /* Batch 155: Data Pipeline */
+    {"etl-extract", etl_extract_155},     {"etl-transform", etl_transform_155},     {"etl-load", etl_load_155},     {"etl-schedule", etl_schedule_155},     {"stream-process", stream_process_155},     {"batch-process", batch_process_155},     {"data-lake", data_lake_155},     {"data-warehouse", data_warehouse_155},     {"data-catalog", data_catalog_155},     {"data-quality", data_quality_155},     {"data-lineage", data_lineage_155},     {"data-govern", data_govern_155}, 
+ 
  
  
  
@@ -37829,6 +37878,157 @@ static void force_control_152(int argc, char args[][CMD_MAX_LEN]) {
 static void vision_detect_152(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Vision: Objects:3 Class:box(cyl,plate) Conf:94%% Pose:(0.5,0.3,0.2)\n");
+}
+
+
+/* ===== Batch 153: Cybersecurity Offensive ===== */
+static void pentest_scan_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Scan: 1,247 ports 12 open 3 vulns found Services:8\n");
+}
+static void pentest_exploit_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Exploit: MS17-010 Target:10.0.2.15 Status:SUCCESS Shell:NT AUTHORITY\n");
+}
+static void pentest_enum_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Enum: Users:12 Groups:8 Shares:3 Domains:1 SID:S-1-5-21\n");
+}
+static void pentest_privesc_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Privesc: Token impersonation SYSTEM:yes Admin:yes\n");
+}
+static void pentest_exfil_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Exfil: 2.3MB data Encrypted:AES-256 Channel:DNS\n");
+}
+static void pentest_persist_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Persist: Registry Run key installed COM hijack active\n");
+}
+static void pentest_c2_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("C2: Beacon 120s HTTP jitter:15%% Malleable profile:office\n");
+}
+static void pentest_obfuscate_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Obfuscate: AMSI bypass ETW patch APLib packed\n");
+}
+static void pentest_encode_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Encode: shellcode XOR+base64 Length:456 bytes Decoder:stub\n");
+}
+static void pentest_inject_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Inject: Process:notepad.exe PID:1247 Technique:CreateRemoteThread\n");
+}
+static void pentest_bypass_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bypass: AppLocker WDAC Defender Exclusion:folder+extension\n");
+}
+static void pentest_cleanup_153(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cleanup: Logs:cleared Artifacts:removed Persistence:removed\n");
+}
+
+/* ===== Batch 154: Cloud Native ===== */
+static void serverless_invoke_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lambda: Invoke api-handler Duration:145ms Memory:128MB Cost:$0.000003\n");
+}
+static void serverless_logs_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Logs: api-handler 1,247 invocations Errors:3 Throttles:0\n");
+}
+static void event_bridge_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("EventBridge: Rule:api-events Targets:3 Matched:1,247\n");
+}
+static void step_function_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("StepFn: OrderFlow Executions:128 Success:125 Failed:3\n");
+}
+static void sqs_send_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SQS: Message sent Queue:orders Delay:0 Size:1.2KB\n");
+}
+static void sqs_receive_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SQS: Received 12 messages Visible:8 In-Flight:4\n");
+}
+static void sns_publish_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SNS: Published to alerts Topic:deploy Subscribers:24\n");
+}
+static void kinesis_stream_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Kinesis: Stream:events Shards:4 Write:156KB/s Read:312KB/s\n");
+}
+static void dynamodb_query_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DynamoDB: Query pk='user#123' Items:3 Latency:8ms RCU:5\n");
+}
+static void s3_upload_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("S3: Upload report.pdf 2.3MB Bucket:artifacts Key:reports/\n");
+}
+static void cloudfront_invalidate_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CloudFront: Invalidated /* Status:Completed 128 paths\n");
+}
+static void waf_rule_154(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("WAF: Rule:sql-injection Block:12 Challenge:47 Pass:1,247\n");
+}
+
+/* ===== Batch 155: Data Pipeline ===== */
+static void etl_extract_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ETL Extract: Source:MySQL Tables:12 Rows:1,247,893 Time:45s\n");
+}
+static void etl_transform_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ETL Transform: Clean:12,847 Dedup:234 Aggregate:ok\n");
+}
+static void etl_load_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ETL Load: Target:Redshift Rows:1,235,046 Time:12s Status:OK\n");
+}
+static void etl_schedule_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Schedule: Daily 02:00 UTC Next:2024-01-16 Retry:3 Timeout:2h\n");
+}
+static void stream_process_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stream: Kafka 128 partitions Throughput:15,000 msg/s\n");
+}
+static void batch_process_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Batch: Spark 12 executors Data:2.3GB Time:45s Status:OK\n");
+}
+static void data_lake_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DataLake: Delta Lake Tables:47 Size:2.3TB Partitions:1,247\n");
+}
+static void data_warehouse_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Warehouse: Redshift Cluster:3 nodes Size:1.2TB Queries:12/day\n");
+}
+static void data_catalog_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Catalog: Tables:234 Columns:1,247 Tags:89 Owner:team-data\n");
+}
+static void data_quality_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quality: Score:94.7%% Nulls:0.3%% Duplicates:0.1%% Schema:98%%\n");
+}
+static void data_lineage_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lineage: 12 pipelines 47 transformations 3 sources 2 sinks\n");
+}
+static void data_govern_155(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Govern: PII:23 cols GDPR:compliant Retention:90d Access:RBAC\n");
 }
 
 void shell_run(void) {
