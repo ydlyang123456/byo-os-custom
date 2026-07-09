@@ -11034,6 +11034,155 @@ static void cmd_type44(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_watch44(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_time44(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* ===== Batch 45: Signals, Background, Cron, Services ===== */
+#define SIGINT45  2
+#define SIGTERM45 15
+#define SIGKILL45 9
+typedef struct { int pid; int signum; int pending; } signal45_t;
+static signal45_t signals45[32];
+static int sig_count45 = 0;
+static void sig_send45(int pid, int signum) {
+    if (sig_count45 < 32) { signals45[sig_count45].pid = pid; signals45[sig_count45].signum = signum; signals45[sig_count45].pending = 1; sig_count45++; }
+}
+static void sig_process45(void) {
+    for (int i = 0; i < sig_count45; i++) { if (!signals45[i].pending) continue; if (signals45[i].signum == SIGKILL45) task_kill(signals45[i].pid); signals45[i].pending = 0; }
+    int j = 0; for (int i = 0; i < sig_count45; i++) { if (signals45[i].pending) signals45[j++] = signals45[i]; } sig_count45 = j;
+}
+typedef struct { int pid; char cmd[128]; int running; } bg45_t;
+static bg45_t bg_jobs45[16];
+static int bg_count45 = 0;
+static void bg_add45(int pid, const char *cmd) {
+    if (bg_count45 < 16) { bg_jobs45[bg_count45].pid = pid; strncpy(bg_jobs45[bg_count45].cmd, cmd, 127); bg_jobs45[bg_count45].running = 1; bg_count45++; }
+}
+static void bg_check45(void) {
+    for (int i = 0; i < bg_count45; i++) { if (bg_jobs45[i].running && !task_is_active(bg_jobs45[i].pid)) bg_jobs45[i].running = 0; }
+}
+static void cmd_jobs45(int argc, char args[][CMD_MAX_LEN]) {
+    bg_check45(); if (bg_count45 == 0) { vga_puts("No background jobs\n"); return; }
+    char buf[16]; for (int i = 0; i < bg_count45; i++) { itoa(i+1, buf, 10); vga_puts(buf); vga_puts("  "); vga_puts(bg_jobs45[i].running ? "Running" : "Done"); vga_puts("  "); vga_puts(bg_jobs45[i].cmd); vga_putchar('\n'); }
+}
+static void cmd_bg45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bg <jobid>\n"); return; }
+    int idx = atoi(args[1]) - 1; if (idx < 0 || idx >= bg_count45) { vga_puts("bg: no such job\n"); return; }
+    bg_jobs45[idx].running = 1; vga_puts("bg: "); vga_puts(bg_jobs45[idx].cmd); vga_puts(" resumed\n");
+}
+static void cmd_fg45(int argc, char args[][CMD_MAX_LEN]) { vga_puts("fg: foreground not supported in serial\n"); }
+static void cmd_disown45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: disown <jobid>\n"); return; }
+    int idx = atoi(args[1]) - 1; if (idx < 0 || idx >= bg_count45) { vga_puts("disown: no such job\n"); return; }
+    for (int i = idx; i < bg_count45 - 1; i++) bg_jobs45[i] = bg_jobs45[i+1]; bg_count45--; vga_puts("disown: removed\n");
+}
+static void cmd_nohup45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nohup <command>\n"); return; }
+    bg_add45(task_get_count() + 1, args[1]); vga_puts("nohup: running in background\n");
+}
+static void cmd_wait45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wait <pid>\n"); return; }
+    int pid = atoi(args[1]); vga_puts("wait: PID "); char buf[8]; itoa(pid, buf, 10); vga_puts(buf); vga_putchar('\n');
+    while (task_is_active(pid)) timer_sleep(100); vga_puts("wait: done\n");
+}
+static void cmd_kill45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kill [-signal] <pid>\n"); return; }
+    int signum = SIGTERM45; int pid_idx = 1;
+    if (args[1][0] == '-') { signum = atoi(args[1] + 1); pid_idx = 2; }
+    if (pid_idx >= argc) { vga_puts("kill: no pid\n"); return; }
+    int pid = atoi(args[pid_idx]); char buf[16];
+    vga_puts("Signal "); itoa(signum, buf, 10); vga_puts(buf); vga_puts(" to PID "); itoa(pid, buf, 10); vga_puts(buf); vga_putchar('\n');
+    sig_send45(pid, signum); if (signum == SIGKILL45) task_kill(pid);
+}
+/* Cron data (before table) */
+typedef struct { int minute; int hour; int active; char cmd[128]; } cron45_t;
+static cron45_t cron_jobs45[16];
+static int cron_count45 = 0;
+static int cron_enabled45 = 0;
+static void cmd_crontab45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Crontab:\n"); if (cron_count45 == 0) { vga_puts("No jobs\n"); return; }
+        char buf[16]; for (int i = 0; i < cron_count45; i++) {
+            if (cron_jobs45[i].minute == -1) vga_puts("*"); else { itoa(cron_jobs45[i].minute, buf, 10); vga_puts(buf); }
+            vga_puts(" "); if (cron_jobs45[i].hour == -1) vga_puts("*"); else { itoa(cron_jobs45[i].hour, buf, 10); vga_puts(buf); }
+            vga_puts(" * * * "); vga_puts(cron_jobs45[i].cmd); vga_putchar('\n'); } return;
+    }
+    if (strcmp(args[1], "-e") == 0 && argc >= 4 && cron_count45 < 16) {
+        cron_jobs45[cron_count45].minute = strcmp(args[2], "*") == 0 ? -1 : atoi(args[2]);
+        cron_jobs45[cron_count45].hour = strcmp(args[3], "*") == 0 ? -1 : atoi(args[3]);
+        cron_jobs45[cron_count45].active = 1;
+        if (argc > 4) strncpy(cron_jobs45[cron_count45].cmd, args[4], 127);
+        cron_count45++; vga_puts("Cron job added\n");
+    } else if (strcmp(args[1], "start") == 0) { cron_enabled45 = 1; vga_puts("Cron started\n"); }
+    else if (strcmp(args[1], "stop") == 0) { cron_enabled45 = 0; vga_puts("Cron stopped\n"); }
+    else if (strcmp(args[1], "clear") == 0) { cron_count45 = 0; vga_puts("All jobs removed\n"); }
+    else if (strcmp(args[1], "status") == 0) { vga_puts("Cron: "); vga_puts(cron_enabled45 ? "running" : "stopped"); vga_putchar('\n'); }
+}
+static void cmd_service45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: service <name> <start|stop|status|restart>\n"); return; }
+    const char *name = args[1]; const char *action = args[2];
+    if (strcmp(action, "status") == 0) { vga_puts(name); vga_puts(": ");
+        if (strcmp(name, "httpd") == 0) vga_puts("running (port 80)");
+        else if (strcmp(name, "crond") == 0) vga_puts(cron_enabled45 ? "running" : "stopped");
+        else if (strcmp(name, "network") == 0) vga_puts("running (eth0)");
+        else vga_puts("unknown"); vga_putchar('\n');
+    } else if (strcmp(action, "start") == 0) { vga_puts(name); vga_puts(": started\n"); if (strcmp(name, "crond") == 0) cron_enabled45 = 1; }
+    else if (strcmp(action, "stop") == 0) { vga_puts(name); vga_puts(": stopped\n"); if (strcmp(name, "crond") == 0) cron_enabled45 = 0; }
+    else if (strcmp(action, "restart") == 0) { vga_puts(name); vga_puts(": restarted\n"); }
+}
+static void cmd_systemctl45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: systemctl <command>\n"); return; }
+    if (strcmp(args[1], "list-units") == 0 || strcmp(args[1], "list") == 0) {
+        vga_puts("UNIT                    STATE\nhttpd.service           active\nsshd.service            active\n");
+        vga_puts("crond.service           "); vga_puts(cron_enabled45 ? "active" : "inactive"); vga_putchar('\n');
+        vga_puts("network.service         active\njournal.service         active\n");
+    } else if (argc > 2 && (strcmp(args[1], "status") == 0 || strcmp(args[1], "start") == 0 || strcmp(args[1], "stop") == 0 || strcmp(args[1], "restart") == 0)) {
+        vga_puts(args[2]); vga_puts(": "); vga_puts(args[1]); vga_puts(" OK\n");
+    } else { vga_puts("Unknown command\n"); }
+}
+static void cmd_httpd45(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BYO-OS HTTP Server v1.0\nPort 80\nRoutes: / /api/sys /api/mem /api/net /api/proc /api/exec\n");
+}
+static void cmd_apt45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apt <update|install|remove|search|list|upgrade>\n"); return; }
+    if (strcmp(args[1], "update") == 0) { vga_puts("Reading package lists... Done\nAll up to date.\n"); }
+    else if (strcmp(args[1], "install") == 0) { if (argc < 3) { vga_puts("apt: no package\n"); return; } vga_puts("Setting up "); vga_puts(args[2]); vga_puts(" ... Done\n"); }
+    else if (strcmp(args[1], "remove") == 0) { if (argc < 3) { vga_puts("apt: no package\n"); return; } vga_puts("Removing "); vga_puts(args[2]); vga_puts(" ... Done\n"); }
+    else if (strcmp(args[1], "search") == 0) { if (argc < 3) { vga_puts("apt: no term\n"); return; } vga_puts(args[2]); vga_puts("/stable 1.0.0 amd64\n"); }
+    else if (strcmp(args[1], "list") == 0) { vga_puts("base-files/stable 12.4 amd64 [installed]\nbash/stable 5.2.15 amd64 [installed]\ncoreutils/stable 9.1 amd64 [installed]\n"); }
+    else if (strcmp(args[1], "upgrade") == 0) { vga_puts("0 upgraded.\n"); }
+    else { vga_puts("E: Invalid operation\n"); }
+}
+static void cmd_dpkg45(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dpkg <-l|-s> [package]\n"); return; }
+    if (strcmp(args[1], "-l") == 0) { vga_puts("ii  base-files    12.4    amd64\nii  bash          5.2.15  amd64\nii  coreutils     9.1     amd64\nii  gcc           12.2.0  amd64\n"); }
+    else if (strcmp(args[1], "-s") == 0 && argc > 2) { vga_puts("Package: "); vga_puts(args[2]); vga_puts("\nStatus: installed\n"); }
+    else { vga_puts("dpkg: unknown option\n"); }
+}
+
+/* Batch 46 forward declarations */
+static void cmd_sysctl46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_journalctl46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timedatectl46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hostnamectl46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_locale46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_getent46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsns46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsipc46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsirq46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_watch46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_time46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nice46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_renice46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timeout46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nohup46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_setsid46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_taskset46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ionice46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_strace46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ltrace46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pmap46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_slabtop46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vmstat46(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_iostat46(int argc, char args[][CMD_MAX_LEN]);
+
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -11408,7 +11557,153 @@ static const cmd_entry commands[] = {
     {"od", cmd_od44}, {"nm2", cmd_nm44}, {"objdump2", cmd_objdump44}, {"readelf2", cmd_readelf44},
     {"file3", cmd_file44}, {"ldd3", cmd_ldd44},
 
+
+
+    /* Batch 45: Signals, Background, Cron, Services */
+    {"kill2", cmd_kill45}, {"jobs2", cmd_jobs45}, {"bg2", cmd_bg45}, {"fg2", cmd_fg45},
+    {"disown2", cmd_disown45}, {"nohup2", cmd_nohup45}, {"wait2", cmd_wait45},
+    {"crontab2", cmd_crontab45}, {"service2", cmd_service45}, {"systemctl2", cmd_systemctl45},
+    {"httpd2", cmd_httpd45}, {"apt2", cmd_apt45}, {"dpkg2", cmd_dpkg45},
+
+    /* Batch 46: System Enhancements */
+    {"sysctl", cmd_sysctl46}, {"journalctl", cmd_journalctl46}, {"timedatectl", cmd_timedatectl46},
+    {"hostnamectl", cmd_hostnamectl46}, {"locale", cmd_locale46}, {"getent", cmd_getent46},
+    {"lsns", cmd_lsns46}, {"lsipc", cmd_lsipc46}, {"lsirq", cmd_lsirq46},
+    {"watch3", cmd_watch46}, {"time3", cmd_time46}, {"nice3", cmd_nice46},
+    {"renice2", cmd_renice46}, {"timeout3", cmd_timeout46}, {"nohup3", cmd_nohup46},
+    {"setsid2", cmd_setsid46}, {"taskset2", cmd_taskset46}, {"ionice2", cmd_ionice46},
+    {"strace2", cmd_strace46}, {"ltrace2", cmd_ltrace46}, {"pmap2", cmd_pmap46},
+    {"slabtop2", cmd_slabtop46}, {"vmstat2", cmd_vmstat46}, {"iostat2", cmd_iostat46},
+
 };
+
+/* ===== Batch 46: System Enhancements ===== */
+static void cmd_sysctl46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sysctl [name] [value]\n"); return; }
+    if (strcmp(args[1], "-a") == 0) { vga_puts("kernel.hostname = BYO-OS\nnet.ipv4.ip_forward = 1\nvm.swappiness = 60\nfs.file-max = 65536\n"); }
+    else if (argc == 2) { vga_puts(args[1]); vga_puts(" = (not set)\n"); }
+    else { vga_puts(args[1]); vga_puts(" = "); vga_puts(args[2]); vga_putchar('\n'); }
+}
+static void cmd_journalctl46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("-- Logs begin at boot --\n[  0.000] Kernel booting...\n[  0.001] Memory: 64MB\n[  0.002] NE2000 NIC detected\n[  0.003] Keyboard initialized\n[  0.004] VGA text mode\n[  0.005] Filesystem mounted\n[  0.006] Shell ready\n");
+}
+static void cmd_timedatectl46(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t sec = timer_get_seconds(); int h=(sec/3600)%24,m=(sec/60)%60,s=sec%60; char buf[16];
+    vga_puts("               Local time: "); itoa(h,buf,10); if(h<10)vga_putchar('0'); vga_puts(buf); vga_putchar(':');
+    itoa(m,buf,10); if(m<10)vga_putchar('0'); vga_puts(buf); vga_putchar(':');
+    itoa(s,buf,10); if(s<10)vga_putchar('0'); vga_puts(buf); vga_putchar('\n');
+    vga_puts("           Universal time: UTC\n                 Timezone: UTC\nSystem clock synchronized: yes\n");
+}
+static void cmd_hostnamectl46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc > 1) { vga_puts("Hostname set to: "); vga_puts(args[1]); vga_putchar('\n'); return; }
+    vga_puts("   Static hostname: BYO-OS\n  Operating System: BYO-OS v1.0\n            Kernel: Linux 1.0.0\n      Architecture: x86\n");
+}
+static void cmd_locale46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LANG=en_US.UTF-8\nLC_CTYPE=en_US.UTF-8\nLC_NUMERIC=en_US.UTF-8\nLC_TIME=en_US.UTF-8\n");
+}
+static void cmd_getent46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: getent <passwd|group|hosts>\n"); return; }
+    if (strcmp(args[1], "passwd") == 0) vga_puts("root:x:0:0:root:/root:/bin/byosh\n");
+    else if (strcmp(args[1], "group") == 0) vga_puts("root:x:0:\ndaemon:x:1:\nadm:x:4:\n");
+    else if (strcmp(args[1], "hosts") == 0) vga_puts("127.0.0.1       localhost\n10.0.2.15       BYO-OS\n");
+}
+static void cmd_lsns46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("         NS TYPE  NPROCS   PID USER\n       4026836 pid       1     1 root\n       4026833 net       1     1 root\n       4026832 mnt       1     1 root\n");
+}
+static void cmd_lsipc46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("KEY        ID       SHARED   BYTES    NATTCH STATUS\n0x00000000 0        64K      64K      0      dest \n");
+}
+static void cmd_lsirq46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("  IRQ  NAME              COUNT\n    1  i8042-keyboard      42\n    8  rtc0                 0\n   11  ne2000             128\n");
+}
+static void cmd_watch46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: watch <command>\n"); return; }
+    vga_puts("Watching: "); vga_puts(args[1]); vga_putchar('\n');
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; commands[j].name; j++) {
+            if (strcmp(args[1], commands[j].name) == 0) { commands[j].func(1, &args[1]); break; }
+        }
+        vga_puts("--- iteration "); char buf[8]; itoa(i+1, buf, 10); vga_puts(buf); vga_puts(" ---\n");
+        timer_sleep(2000);
+    }
+}
+static void cmd_time46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: time <command>\n"); return; }
+    uint32_t start = timer_get_ticks();
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[1], commands[j].name) == 0) { commands[j].func(argc-1, &args[1]); break; }
+    }
+    uint32_t elapsed = timer_get_ticks() - start; char buf[32];
+    vga_puts("real\t"); itoa(elapsed/100, buf, 10); vga_puts(buf); vga_putchar('.');
+    itoa(elapsed%100, buf, 10); vga_puts(buf); vga_puts("s\n");
+}
+static void cmd_nice46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: nice -<priority> <command>\n"); return; }
+    vga_puts("nice: set priority to "); vga_puts(args[1]); vga_putchar('\n');
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[2], commands[j].name) == 0) { commands[j].func(argc-2, &args[2]); break; }
+    }
+}
+static void cmd_renice46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: renice <priority> <pid>\n"); return; }
+    vga_puts("renice: priority adjusted\n");
+}
+static void cmd_timeout46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: timeout <seconds> <command>\n"); return; }
+    vga_puts("Running with timeout: "); vga_puts(args[1]); vga_puts("s\n");
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[2], commands[j].name) == 0) { commands[j].func(argc-2, &args[2]); break; }
+    }
+}
+static void cmd_nohup46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nohup <command>\n"); return; }
+    vga_puts("nohup: running in background\n");
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[1], commands[j].name) == 0) { commands[j].func(argc-1, &args[1]); break; }
+    }
+}
+static void cmd_setsid46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: setsid <command>\n"); return; }
+    vga_puts("setsid: new session started\n");
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[1], commands[j].name) == 0) { commands[j].func(argc-1, &args[1]); break; }
+    }
+}
+static void cmd_taskset46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: taskset <mask> <command>\n"); return; }
+    vga_puts("taskset: affinity set to "); vga_puts(args[1]); vga_putchar('\n');
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[2], commands[j].name) == 0) { commands[j].func(argc-2, &args[2]); break; }
+    }
+}
+static void cmd_ionice46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: ionice -c <class> <command>\n"); return; }
+    vga_puts("ionice: IO scheduling class set\n");
+    for (int j = 0; commands[j].name; j++) {
+        if (strcmp(args[2], commands[j].name) == 0) { commands[j].func(argc-2, &args[2]); break; }
+    }
+}
+static void cmd_strace46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: strace <command>\n"); return; }
+    vga_puts("execve(\""); vga_puts(args[1]); vga_puts("\") = 0\nbrk(NULL) = 0x1000\nmmap(NULL, 4096, ...) = 0x7f000000\nwrite(1, ..., 10) = 10\n+++ exited with 0 +++\n");
+}
+static void cmd_ltrace46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ltrace <command>\n"); return; }
+    vga_puts("__libc_start_main() = 0\nprintf(\"hello\") = 5\nexit(0)\n");
+}
+static void cmd_pmap46(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pmap <pid>\n"); return; }
+    vga_puts("00000000  00000K  r-xp  /boot/byo-os.kernel\n00010000  00004K  rw-p  [heap]\n7fffc000  00012K  rw-p  [stack]\ntotal: 16K\n");
+}
+static void cmd_slabtop46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("  OBJS ACTIVE  USE OBJ SIZE  SLABS OBJ/SLAB  NAME\n   128    128 100%    0.25K     8       16  inode_cache\n   256    256 100%    0.12K     8       32  dentry\n");
+}
+static void cmd_vmstat46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("procs -----------memory----------\n r  b   swpd   free   buff\n 1  0      0  32330      0\n");
+}
+static void cmd_iostat46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Device  tps    kB_read/s  kB_wrtn/s\nsda     0.00   0.00       0.00\n");
+}
 
 
 static char redirect_file[128];
@@ -11512,6 +11807,13 @@ static char serial_cmd_buf[CMD_MAX_LEN];
 static int serial_cmd_len = 0;
 static int serial_collecting = 0;
 
+/* Forward declarations for Batch 45 */
+static void sig_process45(void);
+static void cron_tick45(void);
+static void bg_check45(void);
+
+
+
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
@@ -11525,6 +11827,9 @@ void shell_run(void) {
 
     while (1) {
         net_poll();
+        sig_process45();
+        cron_tick45();
+        bg_check45();
 
         /* === Handle serial input (non-blocking) === */
         if (serial_has_input()) {
@@ -11595,6 +11900,22 @@ static void cmd_time44(int argc, char args[][CMD_MAX_LEN]) {
     uint32_t start=timer_get_ticks();
     for(int i=0;commands[i].name;i++){if(strcmp(args[1],commands[i].name)==0){commands[i].func(argc-1,&args[1]);break;}}
     uint32_t elapsed=timer_get_ticks()-start;char buf[32];vga_puts("real\t");itoa(elapsed/100,buf,10);vga_puts(buf);vga_puts(".");itoa(elapsed%100,buf,10);vga_puts(buf);vga_puts("s\n");
+}
+
+
+
+static void cron_tick45(void) {
+    if (!cron_enabled45) return;
+    uint32_t sec = timer_get_seconds();
+    int minute = (sec / 60) % 60;
+    for (int i = 0; i < cron_count45; i++) {
+        if (!cron_jobs45[i].active) continue;
+        if (cron_jobs45[i].minute == -1 || cron_jobs45[i].minute == minute) {
+            for (int j = 0; commands[j].name; j++) {
+                if (strcmp(cron_jobs45[i].cmd, commands[j].name) == 0) { commands[j].func(0, 0); break; }
+            }
+        }
+    }
 }
 
 
