@@ -3158,7 +3158,20 @@ static void cmd_file(int argc, char args[][CMD_MAX_LEN]) {
 
 static void cmd_strace(int argc, char args[][CMD_MAX_LEN]) {
     if(argc<2){vga_puts("Usage: strace <cmd>\n");return;}
-    vga_puts("execve(\"");vga_puts(args[1]);vga_puts("\") = 0\n+++ exited 0 +++\n");
+    char cl[CMD_MAX_LEN]={0};
+    for(int i=1;i<argc;i++){if(i>1)strcat(cl," ");strcat(cl,args[i]);}
+    vga_puts("strace: tracing '"); vga_puts(cl); vga_puts("'\n");
+    vga_puts("execve(\""); vga_puts(cl); vga_puts("\", [/\""); vga_puts(cl); vga_puts("\"]) = 0\n");
+    vga_puts("brk(NULL) = 0x1000\n");
+    vga_puts("mmap(NULL, 4096, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ffff7dc0000\n");
+    vga_puts("open(\"/etc/ld.so.cache\", O_RDONLY) = 3\n");
+    vga_puts("read(3, \"...\", 1024) = 1024\n");
+    vga_puts("close(3) = 0\n");
+    vga_puts("open(\"/lib/libc.so.6\", O_RDONLY) = 3\n");
+    vga_puts("mmap(NULL, 2097152, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ffff7c00000\n");
+    vga_puts("write(1, \"Hello\\n\", 6) = 6\n");
+    vga_puts("exit_group(0) = ?\n");
+    vga_puts("+++ exited with 0 +++\n");
 }
 
 static void cmd_ltrace(int argc, char args[][CMD_MAX_LEN]) {
@@ -4136,9 +4149,20 @@ static void cmd_cpupower(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_lscpu(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Architecture:        x86\nCPU op-mode(s):      32-bit\nByte Order:          Little Endian\n");
-    vga_puts("CPU(s):              1\nModel name:          BYO-OS Custom CPU\nCPU MHz:             2400.000\n");
-    vga_puts("BogoMIPS:            4800.00\nL1d cache:           32K\nL1i cache:           32K\n");
+    vga_puts("Architecture:           x86\n");
+    vga_puts("CPU op-mode(s):         32-bit\n");
+    vga_puts("Byte Order:             Little Endian\n");
+    vga_puts("CPU(s):                 1\n");
+    vga_puts("Model name:             BYO-OS Custom CPU\n");
+    vga_puts("CPU MHz:                2400.000\n");
+    vga_puts("BogoMIPS:               4800.00\n");
+    vga_puts("L1d cache:              32K\n");
+    vga_puts("L1i cache:              32K\n");
+    vga_puts("L2 cache:               256K\n");
+    vga_puts("L3 cache:               4096K\n");
+    vga_puts("Flags:                  fpu de pse tsc msr pae mce cx8 apic sep\n");
+    vga_puts("                        mtrr pge mca cmov pat pse36 mmx fxsr sse\n");
+    vga_puts("                        sse2 ht syscall nx mmxext fxsr_opt\n");
 }
 
 static void cmd_lshw(int argc, char args[][CMD_MAX_LEN]) {
@@ -4146,13 +4170,30 @@ static void cmd_lshw(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_lsusb(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Bus 001 Device 001: ID 8087:0026\n");
+    vga_puts("Bus 001 Device 001: ID 8087:0026 Intel Corp.\n");
+    vga_puts("Bus 001 Device 002: ID 0627:0001 Adomax Technology Co., Ltd\n");
+    vga_puts("Bus 001 Device 003: ID 0e0f:0003 VMware, Inc.\n");
+    vga_puts("Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub\n");
 }
 
 static void cmd_lspci(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("00:00.0 Host bridge: Intel 440FX\n00:01.0 ISA bridge: Intel PIIX3\n");
-    vga_puts("00:02.0 VGA: Cirrus Logic GD 5446\n00:03.0 Ethernet: NE2000 Compatible\n");
-    vga_puts("00:04.0 USB: Intel UHCI\n");
+    int verbose = 0;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 118) verbose = 1;
+    }
+    vga_puts("00:00.0 Host bridge: Intel Corporation 440FX\n");
+    vga_puts("00:01.0 ISA bridge: Intel Corporation PIIX3\n");
+    vga_puts("00:02.0 VGA compatible controller: Cirrus Logic GD 5446\n");
+    vga_puts("00:03.0 Ethernet controller: NE2000 Compatible\n");
+    vga_puts("00:04.0 USB controller: Intel Corporation UHCI\n");
+    vga_puts("00:05.0 Multimedia audio controller: Intel Corporation AC97\n");
+    vga_puts("00:06.0 SCSI storage controller: LSI Logic / Symbios Logic 53c810\n");
+    vga_puts("00:07.0 Bridge: Intel Corporation 82441FX\n");
+    if (verbose) {
+        vga_puts("\nDetailed info:\n");
+        vga_puts("00:03.0: Region 0: I/O ports at c000 [size=32]\n");
+        vga_puts("00:03.0: Region 1: Memory at ec000000 (32-bit, non-prefetchable) [size=32K]\n");
+    }
 }
 
 static void cmd_lsmod(int argc, char args[][CMD_MAX_LEN]) {
@@ -4527,9 +4568,21 @@ static void cmd_chef(int argc, char args[][CMD_MAX_LEN]) {
 /* BATCH 13: Monitoring Advanced */
 static void cmd_htop(int argc, char args[][CMD_MAX_LEN]) {
     vga_clear();
+    char buf[32];
+    unsigned int total = pmm_get_total_pages() * 4;
+    unsigned int free_p = pmm_get_free_pages() * 4;
+    unsigned int used = total - free_p;
     vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
-    vga_puts("PID  STAT  NAME\n");
-    vga_puts("---- ----  --------------------\n");
+    vga_puts("BYO-OS System Monitor");
+    vga_puts("  |  ");
+    vga_puts("Mem: ");
+    itoa(used / 1024, buf, 10); vga_puts(buf); vga_puts("M/");
+    itoa(total / 1024, buf, 10); vga_puts(buf); vga_puts("M");
+    vga_puts("  |  Tasks: ");
+    itoa(task_get_count(), buf, 10); vga_puts(buf);
+    vga_puts("\n");
+    vga_puts("  PID  STAT  CPU  MEM    NAME\n");
+    vga_puts("  ---- ----  ---  -----  --------------------\n");
     vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
     int max = task_get_max_tasks();
     for (int i = 0; i < max; i++) {
