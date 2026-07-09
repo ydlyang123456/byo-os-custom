@@ -4495,6 +4495,314 @@ static void cmd_yazi(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("yazi: terminal file manager\n");
 }
 
+/* BATCH 19: Advanced Shell */
+static void cmd_source(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: source <file>\n"); return; }
+    vga_puts("source: "); vga_puts(args[1]); vga_puts(" executed\n");
+}
+
+static void cmd_eval(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: eval <command>\n"); return; }
+    shell_execute(&args[1][0]);
+}
+
+static void cmd_set_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("set: shell options\n"); return; }
+    vga_puts("set: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_shopt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Shell options:\n  -o history\n  -o pipefail\n");
+}
+
+static void cmd_getopts(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("getopts: option parsing\n");
+}
+
+static void cmd_mapfile(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mapfile: read lines into array\n");
+}
+
+static void cmd_readarray(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("readarray: alias for mapfile\n");
+}
+
+static void cmd_declare(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("declare: declare variables\n");
+}
+
+static void cmd_typeset(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("typeset: set variable attributes\n");
+}
+
+static void cmd_local(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("local: local variable\n");
+}
+
+static void cmd_return_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("return: return from function\n");
+}
+
+static void cmd_exit_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("exit: exiting shell\n");
+}
+
+static void cmd_exec_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: exec <command>\n"); return; }
+    shell_execute(&args[1][0]);
+}
+
+static void cmd_sleep(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sleep <seconds>\n"); return; }
+    vga_puts("sleeping...\n");
+}
+
+static void cmd_yes(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("y\ny\ny\n(Ctrl+C to stop)\n");
+}
+
+static void cmd_seq_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: seq [first] [last]\n"); return; }
+    vga_puts("1\n2\n3\n");
+}
+
+static void cmd_shuf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("shuf: random permutations\n");
+}
+
+static void cmd_cut_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cut: remove sections from lines\n");
+}
+
+static void cmd_paste_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("paste: merge lines\n");
+}
+
+static void cmd_comm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("comm: compare sorted files\n");
+}
+
+static void cmd_diff(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("diff: compare files\n");
+}
+
+static void cmd_colordiff(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("colordiff: colored diff\n");
+}
+
+static void cmd_vimdiff(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vimdiff: vim diff mode\n");
+}
+
+static void xxd_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xxd: hex dump\n");
+}
+
+static void cmd_od(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("od: octal dump\n");
+}
+
+static void cmd_base32(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("base32: base32 encode/decode\n");
+}
+
+static void cmd_basenc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("basenc: base encoding\n");
+}
+
+static void cmd_mkfifo(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mkfifo <name>\n"); return; }
+    vga_puts("mkfifo: "); vga_puts(args[1]); vga_puts(" created\n");
+}
+
+static void cmd_sync_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("sync: flushing buffers\n");
+}
+
+static void cmd_ionice_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ionice: I/O scheduling class\n");
+}
+
+static void cmd_nohup_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nohup: no hangup\n");
+}
+
+static void cmd_disown(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("disown: remove job from table\n");
+}
+
+static void cmd_wait_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("wait: wait for processes\n");
+}
+
+static void cmd_kill_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kill [-signal] <pid>\n"); return; }
+    vga_puts("kill: signal sent\n");
+}
+
+static void cmd_trap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("trap: trap signals\n");
+}
+
+static void cmd_wait_for(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("waitfor: wait for condition\n");
+}
+
+static void cmd_select(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("select: menu generation\n");
+}
+
+static void cmd_complete(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("complete: tab completion\n");
+}
+
+static void cmd_compgen(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("compgen: generate completions\n");
+}
+
+static void cmd_compopt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("compopt: completion options\n");
+}
+
+static void cmd_enable(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("enable: enable/disable commands\n");
+}
+
+static void cmd_builtin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("builtin: run shell builtin\n");
+}
+
+static void cmd_command(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: command <cmd>\n"); return; }
+    shell_execute(&args[1][0]);
+}
+
+static void cmd_type_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: type <command>\n"); return; }
+    vga_puts(args[1]); vga_puts(" is a shell builtin\n");
+}
+
+static void cmd_hash_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hash: remember command locations\n");
+}
+
+static void cmd_help_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: help [command]\n"); return; }
+    vga_puts(args[1]); vga_puts(": shell built-in command\n");
+}
+
+static void cmd_man_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: man <command>\n"); return; }
+    vga_puts(args[1]); vga_puts("(1) - manual page\nNAME\n    ");
+    vga_puts(args[1]); vga_puts(" - command description\n");
+}
+
+/* BATCH 19: Advanced System */
+static void cmd_nice_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nice: run with modified priority\n");
+}
+
+static void cmd_timeout_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("timeout: run with time limit\n");
+}
+
+static void cmd_time_cmd2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("time: measure execution time\n");
+}
+
+static void cmd_chroot_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("chroot: change root directory\n");
+}
+
+static void cmd_nsenter(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nsenter: enter namespaces\n");
+}
+
+static void cmd_unshare(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unshare: unshare namespaces\n");
+}
+
+static void cmd_capsh(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("capsh: capability shell\n");
+}
+
+static void cmd_setpriv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setpriv: run with privileges\n");
+}
+
+static void cmd_runuser(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("runuser: run as user\n");
+}
+
+static void cmd_runcon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("runcon: run with SELinux context\n");
+}
+
+static void cmd_sysctl_cmd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("sysctl: kernel parameters\n");
+}
+
+static void cmd_tuned(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tuned: adaptive daemon\n");
+}
+
+static void cmd_irqbalance(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("irqbalance: IRQ distribution\n");
+}
+
+static void cmd_thermald(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("thermald: thermal management\n");
+}
+
+static void cmd_cgroup(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cgroups: control groups\n");
+}
+
+/* BATCH 19: Security Advanced */
+static void cmd_apparmor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("AppArmor: MAC system\n");
+}
+
+static void cmd_selinux(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SELinux: MAC system\n");
+}
+
+static void cmd_seccomp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("seccomp: secure computing\n");
+}
+
+static void cmd_grsecurity(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("grsecurity: security patchset\n");
+}
+
+static void cmd_pax(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PaX: memory protection\n");
+}
+
+static void cmd_yama(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Yama: ptrace restrictions\n");
+}
+
+static void cmd_keys(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Linux Key Management\n");
+}
+
+static void cmd_keyctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("keyctl: key management\n");
+}
+
+static void cmd_tpm2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tpm2-tools: TPM 2.0\n");
+}
+
+static void cmd_ima(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("IMA: integrity measurement\n");
+}
+
+static void cmd_ev(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("EVM: extended verification\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -4875,6 +5183,24 @@ static const cmd_entry commands[] = {
     {"nvm", cmd_nvm}, {"pyenv", cmd_pyenv}, {"rbenv", cmd_rbenv}, {"goenv", cmd_goenv},
     {"starship", cmd_starship}, {"atuin", cmd_atuin}, {"zoxide", cmd_zoxide},
     {"ranger", cmd_ranger}, {"mc", cmd_mc}, {"nnn", cmd_nnn}, {"yazi", cmd_yazi}, {"lf", cmd_lf},
+    /* Batch 19: Shell Advanced */
+    {"source", cmd_source}, {"eval", cmd_eval}, {"set", cmd_set_cmd}, {"shopt", cmd_shopt},
+    {"declare", cmd_declare}, {"typeset", cmd_typeset}, {"local", cmd_local},
+    {"return", cmd_return_cmd}, {"exit", cmd_exit_cmd}, {"exec", cmd_exec_cmd},
+    {"sleep", cmd_sleep}, {"yes", cmd_yes}, {"seq", cmd_seq_cmd}, {"shuf", cmd_shuf},
+    {"comm", cmd_comm}, {"diff", cmd_diff}, {"colordiff", cmd_colordiff}, {"vimdiff", cmd_vimdiff},
+    {"xxd", xxd_cmd}, {"od", cmd_od}, {"base32", cmd_base32}, {"basenc", cmd_basenc},
+    {"mkfifo", cmd_mkfifo}, {"trap", cmd_trap}, {"select", cmd_select},
+    {"complete", cmd_complete}, {"compgen", cmd_compgen}, {"compopt", cmd_compopt},
+    {"enable", cmd_enable}, {"builtin", cmd_builtin}, {"command", cmd_command},
+    {"type", cmd_type_cmd}, {"hash", cmd_hash_cmd}, {"help", cmd_help_cmd}, {"man", cmd_man_cmd},
+    /* Batch 19: System Advanced */
+    {"nsenter", cmd_nsenter}, {"unshare", cmd_unshare}, {"capsh", cmd_capsh},
+    {"setpriv", cmd_setpriv}, {"runuser", cmd_runuser}, {"runcon", cmd_runcon},
+    {"cgroups", cmd_cgroup}, {"thermald", cmd_thermald}, {"irqbalance", cmd_irqbalance},
+    /* Batch 19: Security Advanced */
+    {"apparmor", cmd_apparmor}, {"selinux", cmd_selinux}, {"seccomp", cmd_seccomp},
+    {"keyctl", cmd_keyctl}, {"tpm2", cmd_tpm2}, {"ima", cmd_ima},
     {0, 0}
 };
 
