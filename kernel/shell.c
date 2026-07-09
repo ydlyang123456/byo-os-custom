@@ -11598,6 +11598,128 @@ static void cmd_kfp56(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_seldon56(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_bentoml56(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_ray56(int argc, char args[][CMD_MAX_LEN]);
+/* Forward declarations for Batch 57-59 */
+static void cmd_nextcloud57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_owncloud57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_seafile57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_syncthing57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_resilio57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mattermost57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rocketchat57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zulip57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_element57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_matrix57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jitsi57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bigbluebutton57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hedgehog57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kasm57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_guacamole57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rustdesk57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_taizen57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_anydesk57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_obsidian57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_logseq57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_appflowy57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_outline57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bookstack57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dokuwiki57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_confluence57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redmine57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openproject57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_taiga57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_planka57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_focalboard57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_metabase57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_superset57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apache_sedona57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dbt57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_airbyte57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_meltano57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_prefect57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dagster57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_n8n57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_automatisch57(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hass58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openhab58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_domoticz58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mqtt58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_node_red58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zigbee2mqtt58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zwavejs58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_esphome58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tasmota58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wled58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_frigate58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zoneminder58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_shinobi58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_motion58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vaultwarden58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bitwarden58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_passbolt58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keeWeb58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_trilium58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_joplin58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_memos58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_linkwarden58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_shiori58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wallabag58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_miniflux58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_freshrss58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_yarr58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_anubis58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_crowdsec58_guard(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_crowdsec58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_step_ca58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_boulder58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_certbot58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_acme_sh58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_trivy58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_grype58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_snyk58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sonarqube58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_semgrep58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_codeql58(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gazebo59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_webots59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mujoco59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pybullet59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bullet59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vrep59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nengo59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_neuron59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_brian259(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_neo59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openfoam59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_elmer59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fenics59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dealii59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_salome59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_freecad59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_opencascade59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openscad59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_solvespace59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_librecad59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kicad59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gerber59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openems59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_qucs59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ngspice59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xyce59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lumerical59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mEEP59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ansys59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_comsol59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_matlab59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scilab59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_r_project59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sas59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_spss59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_stata59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jasp59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jamovi59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pspp59(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gretl59(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 static const cmd_entry commands[] = {
@@ -12298,6 +12420,128 @@ static const cmd_entry commands[] = {
     {"seldon", cmd_seldon56},
     {"bentoml", cmd_bentoml56},
     {"ray", cmd_ray56},
+    /* Batch 57-59 commands */
+    {"nextcloud", cmd_nextcloud57},
+    {"owncloud", cmd_owncloud57},
+    {"seafile", cmd_seafile57},
+    {"syncthing", cmd_syncthing57},
+    {"resilio", cmd_resilio57},
+    {"mattermost", cmd_mattermost57},
+    {"rocketchat", cmd_rocketchat57},
+    {"zulip", cmd_zulip57},
+    {"element", cmd_element57},
+    {"matrix", cmd_matrix57},
+    {"jitsi", cmd_jitsi57},
+    {"bigbluebutton", cmd_bigbluebutton57},
+    {"hedgehog", cmd_hedgehog57},
+    {"kasm", cmd_kasm57},
+    {"guacamole", cmd_guacamole57},
+    {"rustdesk", cmd_rustdesk57},
+    {"taizen", cmd_taizen57},
+    {"anydesk", cmd_anydesk57},
+    {"obsidian", cmd_obsidian57},
+    {"logseq", cmd_logseq57},
+    {"appflowy", cmd_appflowy57},
+    {"outline", cmd_outline57},
+    {"bookstack", cmd_bookstack57},
+    {"dokuwiki", cmd_dokuwiki57},
+    {"confluence", cmd_confluence57},
+    {"redmine", cmd_redmine57},
+    {"openproject", cmd_openproject57},
+    {"taiga", cmd_taiga57},
+    {"planka", cmd_planka57},
+    {"focalboard", cmd_focalboard57},
+    {"metabase", cmd_metabase57},
+    {"superset", cmd_superset57},
+    {"apache-sedona", cmd_apache_sedona57},
+    {"dbt", cmd_dbt57},
+    {"airbyte", cmd_airbyte57},
+    {"meltano", cmd_meltano57},
+    {"prefect", cmd_prefect57},
+    {"dagster", cmd_dagster57},
+    {"n8n", cmd_n8n57},
+    {"automatisch", cmd_automatisch57},
+    {"hass", cmd_hass58},
+    {"openhab", cmd_openhab58},
+    {"domoticz", cmd_domoticz58},
+    {"mqtt", cmd_mqtt58},
+    {"node-red", cmd_node_red58},
+    {"zigbee2mqtt", cmd_zigbee2mqtt58},
+    {"zwavejs", cmd_zwavejs58},
+    {"esphome", cmd_esphome58},
+    {"tasmota", cmd_tasmota58},
+    {"wled", cmd_wled58},
+    {"frigate", cmd_frigate58},
+    {"zoneminder", cmd_zoneminder58},
+    {"shinobi", cmd_shinobi58},
+    {"motion", cmd_motion58},
+    {"vaultwarden", cmd_vaultwarden58},
+    {"bitwarden", cmd_bitwarden58},
+    {"passbolt", cmd_passbolt58},
+    {"keeWeb", cmd_keeWeb58},
+    {"trilium", cmd_trilium58},
+    {"joplin", cmd_joplin58},
+    {"memos", cmd_memos58},
+    {"linkwarden", cmd_linkwarden58},
+    {"shiori", cmd_shiori58},
+    {"wallabag", cmd_wallabag58},
+    {"miniflux", cmd_miniflux58},
+    {"freshrss", cmd_freshrss58},
+    {"yarr", cmd_yarr58},
+    {"anubis", cmd_anubis58},
+    {"crowdsec58-guard", cmd_crowdsec58_guard},
+    {"crowdsec", cmd_crowdsec58},
+    {"step-ca", cmd_step_ca58},
+    {"boulder", cmd_boulder58},
+    {"certbot", cmd_certbot58},
+    {"acme-sh", cmd_acme_sh58},
+    {"trivy", cmd_trivy58},
+    {"grype", cmd_grype58},
+    {"snyk", cmd_snyk58},
+    {"sonarqube", cmd_sonarqube58},
+    {"semgrep", cmd_semgrep58},
+    {"codeql", cmd_codeql58},
+    {"gazebo", cmd_gazebo59},
+    {"webots", cmd_webots59},
+    {"mujoco", cmd_mujoco59},
+    {"pybullet", cmd_pybullet59},
+    {"bullet", cmd_bullet59},
+    {"vrep", cmd_vrep59},
+    {"nengo", cmd_nengo59},
+    {"neuron", cmd_neuron59},
+    {"brian2", cmd_brian259},
+    {"neo", cmd_neo59},
+    {"openfoam", cmd_openfoam59},
+    {"elmer", cmd_elmer59},
+    {"fenics", cmd_fenics59},
+    {"dealii", cmd_dealii59},
+    {"salome", cmd_salome59},
+    {"freecad", cmd_freecad59},
+    {"opencascade", cmd_opencascade59},
+    {"openscad", cmd_openscad59},
+    {"solvespace", cmd_solvespace59},
+    {"librecad", cmd_librecad59},
+    {"kicad", cmd_kicad59},
+    {"gerber", cmd_gerber59},
+    {"openems", cmd_openems59},
+    {"qucs", cmd_qucs59},
+    {"ngspice", cmd_ngspice59},
+    {"xyce", cmd_xyce59},
+    {"lumerical", cmd_lumerical59},
+    {"mEEP", cmd_mEEP59},
+    {"ansys", cmd_ansys59},
+    {"comsol", cmd_comsol59},
+    {"matlab", cmd_matlab59},
+    {"scilab", cmd_scilab59},
+    {"r-project", cmd_r_project59},
+    {"sas", cmd_sas59},
+    {"spss", cmd_spss59},
+    {"stata", cmd_stata59},
+    {"jasp", cmd_jasp59},
+    {"jamovi", cmd_jamovi59},
+    {"pspp", cmd_pspp59},
+    {"gretl", cmd_gretl59},
+
 
 
 
@@ -18307,6 +18551,3129 @@ static void cmd_ray56(int argc, char args[][CMD_MAX_LEN])
     else {
         vga_set_color(VGA_RED, VGA_BLACK);
         vga_puts("  Unknown option.\n");
+    }
+}
+
+
+/* ===== Batch 57-59 Functions ===== */
+
+static void cmd_nextcloud57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: nextcloud <status|upload|download|share|quota|sync|users>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[nextcloud] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Storage: 128 GB / 512 GB  |  Users: 247 active\n");
+        vga_puts("PHP: 8.2.15  |  DB: PostgreSQL 16.1  |  Redis: 7.2.3\n");
+    } else if (strcmp(args[1], "upload") == 0) {
+        vga_puts("Uploading to Nextcloud...\n");
+        vga_puts("transfer: 15.7 MB / 15.7 MB [================] 100%\n");
+    } else if (strcmp(args[1], "download") == 0) {
+        vga_puts("Downloaded: 8.3 MB  |  Speed: 42.1 MB/s\n");
+    } else if (strcmp(args[1], "share") == 0) {
+        vga_puts("Share link: https://cloud.example.com/s/a8F3kQ2x\n");
+    } else if (strcmp(args[1], "quota") == 0) {
+        vga_puts("Quota: 128 GB / 512 GB (25%)\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Client sync: 42 files pending  |  Delta: ON\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Active users: 247  |  Groups: 12  |  Shares: 1,834\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|upload|download|share|quota|sync|users\n");
+    }
+}
+
+static void cmd_owncloud57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: owncloud <status|files|quota|sync|shares|users>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[owncloud] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Storage: 96 GB / 256 GB  |  PHP: 8.2.12  |  DB: MySQL 8.0\n");
+    } else if (strcmp(args[1], "files") == 0) {
+        vga_puts("Files: 24,891  |  Folders: 1,247  |  Versions: 8,342\n");
+    } else if (strcmp(args[1], "quota") == 0) {
+        vga_puts("Global quota: 96 GB / 256 GB (37.5% used)\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Sync clients: 89  |  Pending: 127 files\n");
+    } else if (strcmp(args[1], "shares") == 0) {
+        vga_puts("Shares: 3,456 user  |  128 public  |  56 federated\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 189 active  |  Admins: 3  |  Groups: 8\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|files|quota|sync|shares|users\n");
+    }
+}
+
+static void cmd_seafile57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: seafile <status|libs|sync|quota|activity|shares>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[seafile] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Storage: 234 GB / 1 TB  |  Libraries: 892  |  DB: MariaDB\n");
+    } else if (strcmp(args[1], "libs") == 0) {
+        vga_puts("Libraries: 892  |  Encrypted: 45  |  Shared: 312\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Sync: 156 clients  |  Upload: 12 MB/s  |  Download: 45 MB/s\n");
+    } else if (strcmp(args[1], "quota") == 0) {
+        vga_puts("Quota: 234 GB / 1 TB (22.8%)\n");
+    } else if (strcmp(args[1], "activity") == 0) {
+        vga_puts("Edits today: 1,247  |  Uploads: 89  |  Shares: 23\n");
+    } else if (strcmp(args[1], "shares") == 0) {
+        vga_puts("Shared libs: 312  |  Folders: 1,890  |  Links: 456\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|libs|sync|quota|activity|shares\n");
+    }
+}
+
+static void cmd_syncthing57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: syncthing <status|devices|folders|connections|browse>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[syncthing] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("ID: A7B2-C9D3  |  Uptime: 14d 7h 23m  |  GUI: :8384\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Devices: 6 paired  |  Online: 4  |  Offline: 2\n");
+    } else if (strcmp(args[1], "folders") == 0) {
+        vga_puts("Folders: 4  |  /docs(23GB)  /projects(89GB)  /photos(156GB)\n");
+    } else if (strcmp(args[1], "connections") == 0) {
+        vga_puts("Active: 3  |  Transfer: 2.3 MB/s up  8.7 MB/s down\n");
+    } else if (strcmp(args[1], "browse") == 0) {
+        vga_puts("Index: 48,912 files  |  3,456 folders  |  Version: 28\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|devices|folders|connections|browse\n");
+    }
+}
+
+static void cmd_resilio57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: rslsync <status|folders|peers|transfer|license>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[rslsync] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Peer: X7K9-M2P4  |  License: Business  |  Uptime: 45d\n");
+    } else if (strcmp(args[1], "folders") == 0) {
+        vga_puts("Shared: 8  |  Encryption: AES-256  |  Selective sync: ON\n");
+    } else if (strcmp(args[1], "peers") == 0) {
+        vga_puts("Peers: 12 connected  |  Online: 15/18  |  Relay: off\n");
+    } else if (strcmp(args[1], "transfer") == 0) {
+        vga_puts("Transfer: 5.6 MB/s up  12.3 MB/s down  |  Queued: 2,341\n");
+    } else if (strcmp(args[1], "license") == 0) {
+        vga_puts("License: Business  |  Seats: 50/50  |  Expires: 2027-01-15\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|folders|peers|transfer|license\n");
+    }
+}
+
+static void cmd_mattermost57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: mattermost <status|channels|users|messages|plugins|api>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[mattermost] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("DB: PostgreSQL 16  |  Cache: Redis 7.2  |  WS: 342 active\n");
+    } else if (strcmp(args[1], "channels") == 0) {
+        vga_puts("Channels: 1,247  |  Private: 389  |  DMs: 8,912\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 2,891  |  Active(30d): 2,345  |  Online: 678\n");
+    } else if (strcmp(args[1], "messages") == 0) {
+        vga_puts("Today: 12,456  |  Files: 234  |  Reactions: 891\n");
+    } else if (strcmp(args[1], "plugins") == 0) {
+        vga_puts("Plugins: 18  |  Jira 4.1  |  GitHub 2.3  |  Zoom 1.6\n");
+    } else if (strcmp(args[1], "api") == 0) {
+        vga_puts("API req/min: 4,567  |  Rate hits: 23  |  Webhooks: 89\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|channels|users|messages|plugins|api\n");
+    }
+}
+
+static void cmd_rocketchat57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: rocketchat <status|channels|users|omnichannel|apps|ldap>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[rocketchat] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("MongoDB: 7.0  |  Node: 20.11  |  Sessions: 1,456\n");
+    } else if (strcmp(args[1], "channels") == 0) {
+        vga_puts("Channels: 2,891  |  DMs: 12,345  |  Threads: 4,567\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 3,456  |  Active today: 1,234  |  Bots: 45\n");
+    } else if (strcmp(args[1], "omnichannel") == 0) {
+        vga_puts("Agents: 23  |  Queue: 8  |  Avg response: 2.3min\n");
+    } else if (strcmp(args[1], "apps") == 0) {
+        vga_puts("Marketplace: 12  |  Custom: 5  |  Active: 16\n");
+    } else if (strcmp(args[1], "ldap") == 0) {
+        vga_puts("LDAP synced  |  Users: 3,200  |  Groups: 45\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|channels|users|omnichannel|apps|ldap\n");
+    }
+}
+
+static void cmd_zulip57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: zulip <status|streams|messages|users|integrations|stats>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[zulip] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Tornado 6.4  |  PostgreSQL 16  |  RabbitMQ 3.13\n");
+    } else if (strcmp(args[1], "streams") == 0) {
+        vga_puts("Streams: 345  |  Web-public: 123  |  Private: 189\n");
+    } else if (strcmp(args[1], "messages") == 0) {
+        vga_puts("Today: 8,912  |  Topics: 2,345  |  Attachments: 123\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 1,890  |  Bots: 67  |  Active: 945\n");
+    } else if (strcmp(args[1], "integrations") == 0) {
+        vga_puts("Integrations: 23  |  GitHub  |  Jira  |  Jenkins\n");
+    } else if (strcmp(args[1], "stats") == 0) {
+        vga_puts("Week: 45,678  |  DAU/MAU: 78%  |  Avg response: 4.2min\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|streams|messages|users|integrations|stats\n");
+    }
+}
+
+static void cmd_element57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: element <status|rooms|encryption|spaces|calls>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[element] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("E2EE: Active  |  Verified: 89/123  |  Cross-signing: ON\n");
+    } else if (strcmp(args[1], "rooms") == 0) {
+        vga_puts("Rooms: 234 joined  |  Favourites: 12  |  Low-priority: 45\n");
+    } else if (strcmp(args[1], "encryption") == 0) {
+        vga_puts("E2EE: Active  |  Verified devices: 89/123\n");
+    } else if (strcmp(args[1], "spaces") == 0) {
+        vga_puts("Spaces: 8  |  Org: 1  |  Team: 4  |  Project: 3\n");
+    } else if (strcmp(args[1], "calls") == 0) {
+        vga_puts("Calls: 3 active  |  Avg: 12.4min  |  Jitsi: ON\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|rooms|encryption|spaces|calls\n");
+    }
+}
+
+static void cmd_matrix57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: synapse <status|rooms|federation|workers|db|metrics>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[synapse] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Python: 3.12  |  DB: PostgreSQL 16  |  Workers: 4\n");
+    } else if (strcmp(args[1], "rooms") == 0) {
+        vga_puts("Rooms: 12,456 local  |  Federated: 89,234\n");
+    } else if (strcmp(args[1], "federation") == 0) {
+        vga_puts("Federation: 892 servers  |  Tx: 23,456/hr\n");
+    } else if (strcmp(args[1], "workers") == 0) {
+        vga_puts("Workers: main(23%) synchrotron(18%) federation(12%)\n");
+    } else if (strcmp(args[1], "db") == 0) {
+        vga_puts("DB: 34.5 GB  |  Connections: 50/100  |  Slow: 2/hr\n");
+    } else if (strcmp(args[1], "metrics") == 0) {
+        vga_puts("Rate: 1,234/s  |  P99: 45ms  |  Memory: 2.3 GB\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|rooms|federation|workers|db|metrics\n");
+    }
+}
+
+static void cmd_jitsi57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: jitsi <status|conferences|participants|recordings|config>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[jitsi] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Jicofo: running  |  JVB 2.3  |  E2EE: enabled\n");
+    } else if (strcmp(args[1], "conferences") == 0) {
+        vga_puts("Active: 12  |  Today: 234  |  Peak: 45 (14:32)\n");
+    } else if (strcmp(args[1], "participants") == 0) {
+        vga_puts("Online: 67  |  Audio: 34  |  Video: 23\n");
+    } else if (strcmp(args[1], "recordings") == 0) {
+        vga_puts("Today: 8  |  Storage: 2.3 GB  |  Pending: 0\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("E2EE: ON  |  Transcription: ON  |  Codec: VP9\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|conferences|participants|recordings|config\n");
+    }
+}
+
+static void cmd_bigbluebutton57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: bbb <status|rooms|recordings|load|config>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[bbb] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Redis: 7.2  |  FreeSWITCH: 1.10.12  |  Kurento: 7.0\n");
+    } else if (strcmp(args[1], "rooms") == 0) {
+        vga_puts("Active: 8  |  Participants: 156  |  Recording: 3\n");
+    } else if (strcmp(args[1], "recordings") == 0) {
+        vga_puts("Stored: 456  |  Processing: 2  |  Total: 34.5 GB\n");
+    } else if (strcmp(args[1], "load") == 0) {
+        vga_puts("CPU: 34%  |  Memory: 67%  |  Network: 45 Mbps\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("Max: 500/meeting  |  Video: 1080p  |  Whiteboard: v2\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|rooms|recordings|load|config\n");
+    }
+}
+
+static void cmd_hedgehog57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: hedgehog <status|notes|users|templates|collab>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[hedgehog] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("DB: PostgreSQL 16  |  Notes: 12,456  |  Users: 892\n");
+    } else if (strcmp(args[1], "notes") == 0) {
+        vga_puts("Total: 12,456  |  Public: 3,456  |  Private: 6,789\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 892  |  LDAP: 678  |  Local: 214\n");
+    } else if (strcmp(args[1], "templates") == 0) {
+        vga_puts("Templates: 45  |  Meeting  |  Sprint retro  |  RFC\n");
+    } else if (strcmp(args[1], "collab") == 0) {
+        vga_puts("Editors: 34  |  Revisions: 8,912  |  Comments: 2,345\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|notes|users|templates|collab\n");
+    }
+}
+
+static void cmd_kasm57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: kasm <status|sessions|images|policies|audit>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[kasm] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Nodes: 8  |  Sessions: 156  |  License: Enterprise\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active: 156  |  Chromium: 89  |  Desktop: 45\n");
+    } else if (strcmp(args[1], "images") == 0) {
+        vga_puts("Images: 18  |  Chromium  |  Firefox  |  Ubuntu  |  Kali\n");
+    } else if (strcmp(args[1], "policies") == 0) {
+        vga_puts("Policies: 12  |  Clipboard: restricted  |  USB: disabled\n");
+    } else if (strcmp(args[1], "audit") == 0) {
+        vga_puts("Entries: 89,234  |  Failed auth: 12/m  |  Admin: 234\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|sessions|images|policies|audit\n");
+    }
+}
+
+static void cmd_guacamole57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: guacamole <status|connections|sessions|rdp|vnc|ssh>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[guacamole] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Guacd: running  |  DB: PostgreSQL 16  |  Users: 456\n");
+    } else if (strcmp(args[1], "connections") == 0) {
+        vga_puts("Defined: 234  |  RDP: 123  |  SSH: 67  |  VNC: 34\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active: 89  |  RDP: 45  |  SSH: 23  |  VNC: 15\n");
+    } else if (strcmp(args[1], "rdp") == 0) {
+        vga_puts("RDP: 45 active  |  Audio: redirected  |  Clipboard: shared\n");
+    } else if (strcmp(args[1], "vnc") == 0) {
+        vga_puts("VNC: 15 active  |  Encoding: Tight  |  Quality: 6\n");
+    } else if (strcmp(args[1], "ssh") == 0) {
+        vga_puts("SSH: 23 active  |  SFTP: 12  |  Tunnel: 3\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|connections|sessions|rdp|vnc|ssh\n");
+    }
+}
+
+static void cmd_rustdesk57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: rustdesk <status|peers|relay|sessions|config>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[rustdesk] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("hbbs: running  |  hbbr: running  |  Clients: 567\n");
+    } else if (strcmp(args[1], "peers") == 0) {
+        vga_puts("Registered: 567  |  Online: 234  |  Offline: 333\n");
+    } else if (strcmp(args[1], "relay") == 0) {
+        vga_puts("Relay: hbbr  |  Connections: 45  |  Bandwidth: 12.3 Mbps\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active: 23  |  File transfer: 8  |  Clipboard: 15\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("Encryption: AES-256  |  NAT: Symmetric  |  Key: verified\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|peers|relay|sessions|config\n");
+    }
+}
+
+static void cmd_taizen57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: todesk <status|devices|sessions|transfer|logs>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[todesk] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Device: 123 456 789  |  Security: set  |  License: Enterprise\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Managed: 345  |  Online: 234  |  Groups: 12\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active: 45  |  Unattended: 34  |  Attended: 11\n");
+    } else if (strcmp(args[1], "transfer") == 0) {
+        vga_puts("Transfer: 8 sessions  |  Speed: 56 MB/s  |  Queue: 123\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Today: 891  |  Failed: 12  |  Avg: 18.5min\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|devices|sessions|transfer|logs\n");
+    }
+}
+
+static void cmd_anydesk57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: anydesk <status|sessions|address|unattended|reports>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[anydesk] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Address: 123 456 789  |  License: Enterprise  |  TLS: 1.3\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active: 12  |  Incoming: 5  |  Outgoing: 7\n");
+    } else if (strcmp(args[1], "address") == 0) {
+        vga_puts("Book: 567 entries  |  Groups: 12  |  Tags: 45\n");
+    } else if (strcmp(args[1], "unattended") == 0) {
+        vga_puts("Unattended: 234 devices  |  Password: enforced\n");
+    } else if (strcmp(args[1], "reports") == 0) {
+        vga_puts("Month: 12,345 sessions  |  Duration: 234.5h\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|sessions|address|unattended|reports\n");
+    }
+}
+
+static void cmd_obsidian57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: obsidian <status|vaults|notes|plugins|sync|graph>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[obsidian] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Vault: /data/notes  |  Size: 2.3 GB  |  Notes: 4,567\n");
+    } else if (strcmp(args[1], "vaults") == 0) {
+        vga_puts("3 vaults  |  Personal(1,234)  |  Work(2,890)  |  Wiki(443)\n");
+    } else if (strcmp(args[1], "notes") == 0) {
+        vga_puts("Notes: 4,567  |  Tags: 234  |  Links: 12,891\n");
+    } else if (strcmp(args[1], "plugins") == 0) {
+        vga_puts("Community: 23  |  Dataview  |  Templater  |  Calendar\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Sync: active  |  Push: 2s ago  |  Conflicts: 0\n");
+    } else if (strcmp(args[1], "graph") == 0) {
+        vga_puts("Graph: 4,567 nodes  |  12,891 edges  |  Clusters: 12\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|vaults|notes|plugins|sync|graph\n");
+    }
+}
+
+static void cmd_logseq57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: logseq <status|journals|pages|graph|plugins|sync>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[logseq] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Graph: 3,456 blocks  |  Pages: 1,234  |  Journals: 345\n");
+    } else if (strcmp(args[1], "journals") == 0) {
+        vga_puts("345 days  |  Today: 23 blocks  |  Avg: 18/day\n");
+    } else if (strcmp(args[1], "pages") == 0) {
+        vga_puts("Pages: 1,234  |  Orphaned: 23  |  Namespaces: 89\n");
+    } else if (strcmp(args[1], "graph") == 0) {
+        vga_puts("Graph: 3,456 blocks  |  8,912 links  |  Clusters: 5\n");
+    } else if (strcmp(args[1], "plugins") == 0) {
+        vga_puts("Plugins: 12  |  TODO  |  Heatmap  |  Query Builder\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Git-based  |  Remote: origin  |  Last push: 5m ago\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|journals|pages|graph|plugins|sync\n");
+    }
+}
+
+static void cmd_appflowy57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: appflowy <status|workspaces|docs|tables|users|views>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[appflowy] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Workspaces: 8  |  Documents: 234  |  Users: 123\n");
+    } else if (strcmp(args[1], "workspaces") == 0) {
+        vga_puts("8 workspaces  |  Engineering: 3  |  Marketing: 2\n");
+    } else if (strcmp(args[1], "docs") == 0) {
+        vga_puts("Documents: 234  |  Pages: 1,890  |  Blocks: 12,456\n");
+    } else if (strcmp(args[1], "tables") == 0) {
+        vga_puts("Databases: 67  |  Rows: 4,567  |  Views: 123\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 123  |  Editors: 89  |  Viewers: 34\n");
+    } else if (strcmp(args[1], "views") == 0) {
+        vga_puts("Grid(45) Board(12) Calendar(8) Timeline(5) Doc(234)\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|workspaces|docs|tables|users|views\n");
+    }
+}
+
+static void cmd_outline57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: outline <status|collections|docs|users|search|api>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[outline] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Collections: 34  |  Documents: 1,234  |  Users: 89\n");
+    } else if (strcmp(args[1], "collections") == 0) {
+        vga_puts("34 total  |  Public: 12  |  Private: 15\n");
+    } else if (strcmp(args[1], "docs") == 0) {
+        vga_puts("Documents: 1,234  |  Published: 456  |  Draft: 89\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 89  |  Admin: 3  |  Editor: 56  |  Viewer: 30\n");
+    } else if (strcmp(args[1], "search") == 0) {
+        vga_puts("Index: 1,234 docs  |  Size: 34 MB\n");
+    } else if (strcmp(args[1], "api") == 0) {
+        vga_puts("API/hour: 2,345  |  Integrations: 12\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|collections|docs|users|search|api\n");
+    }
+}
+
+static void cmd_bookstack57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: bookstack <status|shelves|books|pages|users|search>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[bookstack] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Shelves: 12  |  Books: 89  |  Pages: 2,345\n");
+    } else if (strcmp(args[1], "shelves") == 0) {
+        vga_puts("12 shelves  |  Onboarding(3)  |  Engineering(8)\n");
+    } else if (strcmp(args[1], "books") == 0) {
+        vga_puts("89 books  |  Updated today: 8  |  Draft: 5\n");
+    } else if (strcmp(args[1], "pages") == 0) {
+        vga_puts("Pages: 2,345  |  Comments: 567  |  Views: 45,678\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("156 users  |  Admin: 3  |  Editor: 67  |  Viewer: 52\n");
+    } else if (strcmp(args[1], "search") == 0) {
+        vga_puts("Index: 2,345 pages  |  Size: 12 MB\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|shelves|books|pages|users|search\n");
+    }
+}
+
+static void cmd_dokuwiki57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: dokuwiki <status|pages|revisions|plugins|users|acl>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[dokuwiki] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Pages: 3,456  |  Revisions: 23,456  |  Users: 234\n");
+    } else if (strcmp(args[1], "pages") == 0) {
+        vga_puts("Pages: 3,456  |  Media: 1,234  |  Depth: 5\n");
+    } else if (strcmp(args[1], "revisions") == 0) {
+        vga_puts("Total: 23,456  |  Today: 34  |  Top: admin(567)\n");
+    } else if (strcmp(args[1], "plugins") == 0) {
+        vga_puts("Installed: 23  |  Updated: 20  |  Available: 3\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("234 users  |  Admin: 2  |  Editor: 89\n");
+    } else if (strcmp(args[1], "acl") == 0) {
+        vga_puts("Rules: 123  |  Auth: LDAP  |  OpenID: enabled\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|pages|revisions|plugins|users|acl\n");
+    }
+}
+
+static void cmd_confluence57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: confluence <status|spaces|pages|users|plugins|search>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[confluence] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Nodes: 3  |  DB: PostgreSQL 16  |  Cache: Hazelcast\n");
+    } else if (strcmp(args[1], "spaces") == 0) {
+        vga_puts("Spaces: 456  |  Pages: 23,456  |  Templates: 89\n");
+    } else if (strcmp(args[1], "pages") == 0) {
+        vga_puts("Pages: 23,456  |  Attachments: 12,345\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("Users: 5,678  |  Active today: 2,345\n");
+    } else if (strcmp(args[1], "plugins") == 0) {
+        vga_puts("Plugins: 34  |  Gliffy  |  draw.io  |  ScriptRunner\n");
+    } else if (strcmp(args[1], "search") == 0) {
+        vga_puts("Index: 23,456 pages  |  Size: 1.2 GB\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|spaces|pages|users|plugins|search\n");
+    }
+}
+
+static void cmd_redmine57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: redmine <status|projects|issues|users|gantt|wiki>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[redmine] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Projects: 89  |  Issues: 12,456  |  Users: 345\n");
+    } else if (strcmp(args[1], "projects") == 0) {
+        vga_puts("Total: 89  |  Active: 67  |  Archived: 22\n");
+    } else if (strcmp(args[1], "issues") == 0) {
+        vga_puts("Total: 12,456  |  Open: 3,456  |  Resolved: 8,234\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("345 users  |  Admin: 3  |  Developer: 189\n");
+    } else if (strcmp(args[1], "gantt") == 0) {
+        vga_puts("Milestones: 34  |  Overdue: 5  |  On-track: 23\n");
+    } else if (strcmp(args[1], "wiki") == 0) {
+        vga_puts("Pages: 567  |  Today: 12  |  Revisions: 4,567\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|projects|issues|users|gantt|wiki\n");
+    }
+}
+
+static void cmd_openproject57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: openproject <status|projects|workpackages|gantt|agile|meetings>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[openproject] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Projects: 56  |  Work packages: 8,912\n");
+    } else if (strcmp(args[1], "projects") == 0) {
+        vga_puts("Total: 56  |  Active: 45  |  Archived: 11\n");
+    } else if (strcmp(args[1], "workpackages") == 0) {
+        vga_puts("Total: 8,912  |  Tasks: 4,567  |  Bugs: 1,234\n");
+    } else if (strcmp(args[1], "gantt") == 0) {
+        vga_puts("Milestones: 34  |  Critical: 8  |  Overdue: 3\n");
+    } else if (strcmp(args[1], "agile") == 0) {
+        vga_puts("Boards: 12  |  Backlog: 345  |  Velocity: 42\n");
+    } else if (strcmp(args[1], "meetings") == 0) {
+        vga_puts("Today: 5  |  Upcoming: 23  |  Recurring: 12\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|projects|workpackages|gantt|agile|meetings\n");
+    }
+}
+
+static void cmd_taiga57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: taiga <status|projects|sprints|stories|users|kanban>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[taiga] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Projects: 34  |  Users: 234  |  DB: PostgreSQL 16\n");
+    } else if (strcmp(args[1], "projects") == 0) {
+        vga_puts("Scrum: 23  |  Kanban: 8  |  Simple: 3\n");
+    } else if (strcmp(args[1], "sprints") == 0) {
+        vga_puts("Sprint 47  |  Stories: 23  |  Points: 89/120\n");
+    } else if (strcmp(args[1], "stories") == 0) {
+        vga_puts("Total: 456  |  Open: 234  |  Done: 177\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("234 users  |  Scrum Master: 5  |  PO: 8\n");
+    } else if (strcmp(args[1], "kanban") == 0) {
+        vga_puts("Boards: 4  |  Columns: 6 avg  |  WIP: 5/column\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|projects|sprints|stories|users|kanban\n");
+    }
+}
+
+static void cmd_planka57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: planka <status|boards|cards|users|labels|activity>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[planka] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Boards: 23  |  Cards: 1,234  |  Users: 89\n");
+    } else if (strcmp(args[1], "boards") == 0) {
+        vga_puts("Total: 23  |  Public: 5  |  Private: 18\n");
+    } else if (strcmp(args[1], "cards") == 0) {
+        vga_puts("Total: 1,234  |  Open: 456  |  Done: 655\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("89 users  |  Online: 23  |  Admin: 2\n");
+    } else if (strcmp(args[1], "labels") == 0) {
+        vga_puts("Labels: 34  |  Bug(123) Feature(89) Urgent(45)\n");
+    } else if (strcmp(args[1], "activity") == 0) {
+        vga_puts("Today: 456 actions  |  Comments: 89\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|boards|cards|users|labels|activity\n");
+    }
+}
+
+static void cmd_focalboard57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: focalboard <status|boards|cards|views|templates|users>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[focalboard] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Boards: 56  |  Cards: 3,456  |  Users: 123\n");
+    } else if (strcmp(args[1], "boards") == 0) {
+        vga_puts("Kanban: 34  |  Table: 12  |  Calendar: 8\n");
+    } else if (strcmp(args[1], "cards") == 0) {
+        vga_puts("Total: 3,456  |  Open: 1,234  |  Done: 1,877\n");
+    } else if (strcmp(args[1], "views") == 0) {
+        vga_puts("Total: 89  |  Board: 34  |  Table: 23\n");
+    } else if (strcmp(args[1], "templates") == 0) {
+        vga_puts("Templates: 23  |  Sprint  |  Calendar  |  Bug tracker\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("123 users  |  Admin: 2  |  Editor: 78\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|boards|cards|views|templates|users\n");
+    }
+}
+
+static void cmd_metabase57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: metabase <status|questions|dashboards|alerts|databases|users>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[metabase] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Questions: 345  |  Dashboards: 67  |  Users: 567\n");
+    } else if (strcmp(args[1], "questions") == 0) {
+        vga_puts("Total: 345  |  SQL: 89  |  GUI: 234\n");
+    } else if (strcmp(args[1], "dashboards") == 0) {
+        vga_puts("Total: 67  |  Public: 12  |  Embedded: 8\n");
+    } else if (strcmp(args[1], "alerts") == 0) {
+        vga_puts("Total: 89  |  Slack: 34  |  Email: 45\n");
+    } else if (strcmp(args[1], "databases") == 0) {
+        vga_puts("DBs: 12  |  PostgreSQL: 5  |  MySQL: 3\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("567 users  |  Admin: 3  |  Normal: 456\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|questions|dashboards|alerts|databases|users\n");
+    }
+}
+
+static void cmd_superset57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: superset <status|dashboards|charts|datasets|sql-lab|users>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[superset] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Dashboards: 123  |  Charts: 891  |  Datasets: 234\n");
+    } else if (strcmp(args[1], "dashboards") == 0) {
+        vga_puts("Total: 123  |  Published: 89  |  Draft: 34\n");
+    } else if (strcmp(args[1], "charts") == 0) {
+        vga_puts("Total: 891  |  Time series: 345  |  Pie: 89\n");
+    } else if (strcmp(args[1], "datasets") == 0) {
+        vga_puts("Total: 234  |  SQL: 89  |  Table: 123\n");
+    } else if (strcmp(args[1], "sql-lab") == 0) {
+        vga_puts("Queries today: 1,234  |  Avg: 2.3s\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("456 users  |  Admin: 5  |  Alpha: 23\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|dashboards|charts|datasets|sql-lab|users\n");
+    }
+}
+
+static void cmd_apache_sedona57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: sedona <status|spatial|queries|catalog|geoparquet|joins>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[sedona] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Spark: 3.5.1  |  SpatialRDD: 12  |  Indexed: 8\n");
+    } else if (strcmp(args[1], "spatial") == 0) {
+        vga_puts("Datasets: 12  |  Points: 4  |  Polygons: 5\n");
+    } else if (strcmp(args[1], "queries") == 0) {
+        vga_puts("Today: 345  |  Join: 123  |  Range: 89\n");
+    } else if (strcmp(args[1], "catalog") == 0) {
+        vga_puts("Tables: 23  |  Indexes: 18  |  Size: 34.5 GB\n");
+    } else if (strcmp(args[1], "geoparquet") == 0) {
+        vga_puts("Files: 12  |  Size: 23.4 GB\n");
+    } else if (strcmp(args[1], "joins") == 0) {
+        vga_puts("Executed: 8,912  |  Avg: 1.2s  |  Cache: 78%\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|spatial|queries|catalog|geoparquet|joins\n");
+    }
+}
+
+static void cmd_dbt57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: dbt <status|models|seeds|snapshots|runs|tests>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[dbt] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Project: analytics_core  |  Models: 345\n");
+    } else if (strcmp(args[1], "models") == 0) {
+        vga_puts("Total: 345  |  Staging: 89  |  Mart: 89\n");
+    } else if (strcmp(args[1], "seeds") == 0) {
+        vga_puts("Seeds: 23  |  Size: 12.3 MB\n");
+    } else if (strcmp(args[1], "snapshots") == 0) {
+        vga_puts("Total: 12  |  SCD Type 2: 8  |  Rows: 345,678\n");
+    } else if (strcmp(args[1], "runs") == 0) {
+        vga_puts("Last: SUCCESS  |  Duration: 4m 23s  |  0 errors\n");
+    } else if (strcmp(args[1], "tests") == 0) {
+        vga_puts("Tests: 567  |  Pass: 562  |  Fail: 5\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|models|seeds|snapshots|runs|tests\n");
+    }
+}
+
+static void cmd_airbyte57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: airbyte <status|connections|syncs|sources|destinations|logs>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[airbyte] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Connections: 56  |  Sources: 34  |  Destinations: 23\n");
+    } else if (strcmp(args[1], "connections") == 0) {
+        vga_puts("Total: 56  |  Active: 45  |  Paused: 8\n");
+    } else if (strcmp(args[1], "syncs") == 0) {
+        vga_puts("Today: 234  |  OK: 228  |  Failed: 6\n");
+    } else if (strcmp(args[1], "sources") == 0) {
+        vga_puts("Total: 34  |  PostgreSQL: 12  |  MySQL: 8\n");
+    } else if (strcmp(args[1], "destinations") == 0) {
+        vga_puts("Total: 23  |  Snowflake: 8  |  BigQuery: 6\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Last: SUCCESS  |  Records: 123,456\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|connections|syncs|sources|destinations|logs\n");
+    }
+}
+
+static void cmd_meltano57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: meltano <status|extractors|loaders|pipelines|runs|config>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[meltano] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Project: data_warehouse  |  Extractors: 12\n");
+    } else if (strcmp(args[1], "extractors") == 0) {
+        vga_puts("Total: 12  |  tap-github  |  tap-mysql\n");
+    } else if (strcmp(args[1], "loaders") == 0) {
+        vga_puts("Total: 8  |  target-snowflake(3)  |  target-bigquery(2)\n");
+    } else if (strcmp(args[1], "pipelines") == 0) {
+        vga_puts("Total: 23  |  Scheduled: 18  |  Running: 3\n");
+    } else if (strcmp(args[1], "runs") == 0) {
+        vga_puts("Today: 89  |  OK: 85  |  Failed: 4\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("Mode: standard  |  Backend: PostgreSQL\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|extractors|loaders|pipelines|runs|config\n");
+    }
+}
+
+static void cmd_prefect57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: prefect-server <status|flows|deployments|runs|workers|workspaces>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[prefect-server] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Flows: 89  |  Deployments: 123  |  Workers: 4\n");
+    } else if (strcmp(args[1], "flows") == 0) {
+        vga_puts("Total: 89  |  Active: 78  |  Archived: 11\n");
+    } else if (strcmp(args[1], "deployments") == 0) {
+        vga_puts("Total: 123  |  Scheduled: 45  |  Running: 12\n");
+    } else if (strcmp(args[1], "runs") == 0) {
+        vga_puts("Today: 345  |  OK: 312  |  Failed: 23\n");
+    } else if (strcmp(args[1], "workers") == 0) {
+        vga_puts("Workers: 4  |  Active: 3  |  Idle: 1\n");
+    } else if (strcmp(args[1], "workspaces") == 0) {
+        vga_puts("3: production  |  staging  |  development\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|flows|deployments|runs|workers|workspaces\n");
+    }
+}
+
+static void cmd_dagster57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: dagster-server <status|jobs|ops|schedules|sensors|runs>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[dagster-server] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Repo: analytics_platform  |  Jobs: 56\n");
+    } else if (strcmp(args[1], "jobs") == 0) {
+        vga_puts("Total: 56  |  Assets: 34  |  Graphs: 12\n");
+    } else if (strcmp(args[1], "ops") == 0) {
+        vga_puts("Ops: 345  |  IO managers: 23  |  Resources: 45\n");
+    } else if (strcmp(args[1], "schedules") == 0) {
+        vga_puts("Total: 34  |  Active: 28  |  Paused: 6\n");
+    } else if (strcmp(args[1], "sensors") == 0) {
+        vga_puts("Total: 12  |  Active: 10  |  Ticks today: 234\n");
+    } else if (strcmp(args[1], "runs") == 0) {
+        vga_puts("Today: 234  |  OK: 212  |  Failed: 18\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|jobs|ops|schedules|sensors|runs\n");
+    }
+}
+
+static void cmd_n8n57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: n8n <status|workflows|executions|credentials|nodes|webhooks>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[n8n] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Workflows: 234  |  Active: 189  |  Executions: 12,456\n");
+    } else if (strcmp(args[1], "workflows") == 0) {
+        vga_puts("Total: 234  |  Active: 189  |  Inactive: 45\n");
+    } else if (strcmp(args[1], "executions") == 0) {
+        vga_puts("Today: 12,456  |  OK: 12,234  |  Error: 189\n");
+    } else if (strcmp(args[1], "credentials") == 0) {
+        vga_puts("Total: 56  |  OAuth2: 23  |  API key: 23\n");
+    } else if (strcmp(args[1], "nodes") == 0) {
+        vga_puts("HTTP(234) IF(189) Set(156) Gmail(89) Slack(67)\n");
+    } else if (strcmp(args[1], "webhooks") == 0) {
+        vga_puts("Active: 45  |  Hits today: 8,912  |  Avg: 12ms\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|workflows|executions|credentials|nodes|webhooks\n");
+    }
+}
+
+static void cmd_automatisch57(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: automatisch <status|flows|executions|connections|triggers|logs>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[automatisch] ");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Flows: 67  |  Active: 56  |  Executions: 4,567\n");
+    } else if (strcmp(args[1], "flows") == 0) {
+        vga_puts("Total: 67  |  Active: 56  |  Paused: 8\n");
+    } else if (strcmp(args[1], "executions") == 0) {
+        vga_puts("Today: 4,567  |  OK: 4,456  |  Failed: 89\n");
+    } else if (strcmp(args[1], "connections") == 0) {
+        vga_puts("Total: 23  |  Slack(5) Gmail(4) Stripe(3)\n");
+    } else if (strcmp(args[1], "triggers") == 0) {
+        vga_puts("Webhook(12) Schedule(18) Polling(28) Event(9)\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Last: sync-contacts  |  SUCCESS  |  0.8s\n");
+    } else {
+        vga_puts("Unknown subcommand. Try: status|flows|executions|connections|triggers|logs\n");
+    }
+}
+
+static void cmd_hass58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: hass <start|stop|status|devices|automations>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Home Assistant] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Home Assistant 2024.7 | Entities: 1247 | Automations: 89\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Z-Wave(34) Zigbee(67) WiFi(123) MQTT(45) Total: 269\n");
+    } else {
+        vga_puts("Home Assistant started on port 8123\n");
+    }
+}
+
+static void cmd_openhab58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: openhab <start|stop|status|items|rules>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[openHAB] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("openHAB 4.2 | Items: 856 | Sitemaps: 12 | Rules: 234\n");
+    } else if (strcmp(args[1], "items") == 0) {
+        vga_puts("Switch(145) Number(89) String(67) Dimmer(34) Contact(56)\n");
+    } else {
+        vga_puts("openHAB started on port 8080\n");
+    }
+}
+
+static void cmd_domoticz58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: domoticz <start|stop|status|devices|scenes>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Domoticz] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Domoticz 2024.1 | Devices: 312 | Scenes: 18 | Timers: 67\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Temperature(45) Humidity(23) Light(89) Switch(112) Sensor(43)\n");
+    } else {
+        vga_puts("Domoticz started on port 8080\n");
+    }
+}
+
+static void cmd_mqtt58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: mosquitto <start|stop|status|topics|clients>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Mosquitto MQTT] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Mosquitto 2.0 | Port: 1883 | Clients: 47 | Msgs/s: 1234\n");
+    } else if (strcmp(args[1], "topics") == 0) {
+        vga_puts("home/sensor(123) home/light(89) home/switch(67) sys/health(12)\n");
+    } else {
+        vga_puts("Mosquitto MQTT broker started on port 1883\n");
+    }
+}
+
+static void cmd_node_red58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: node-red <start|stop|status|flows|deploy>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_BLUE, VGA_BLACK);
+    vga_puts("[Node-RED] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Node-RED 3.1 | Flows: 24 | Nodes: 312 | Deployed: yes\n");
+    } else if (strcmp(args[1], "flows") == 0) {
+        vga_puts("active_flow(12) inactive_flow(8) subflow(4) global_config(5)\n");
+    } else {
+        vga_puts("Node-RED started on port 1880\n");
+    }
+}
+
+static void cmd_zigbee2mqtt58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: zigbee2mqtt <start|stop|status|devices|permit>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Zigbee2MQTT] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Z2M 1.35 | Coordinator: CC2652 | Devices: 67 | Network: OK\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Bulb(23) Sensor(18) Switch(14) Lock(6) Outlet(6) Other(0)\n");
+    } else {
+        vga_puts("Zigbee2MQTT bridge started on port 8080\n");
+    }
+}
+
+static void cmd_zwavejs58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: zwavejs <start|stop|status|devices|heal>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Z-Wave JS] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Z-Wave JS 12.4 | Controller: ZST10 | Devices: 34 | TX: OK\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Switch(12) Sensor(9) Dimmer(6) Lock(4) Thermostat(3)\n");
+    } else {
+        vga_puts("Z-Wave JS server started on port 3000\n");
+    }
+}
+
+static void cmd_esphome58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: esphome <compile|upload|status|logs|devices>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[ESPHome] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("ESPHome 2024.6 | Devices: 23 | Online: 21 | OTA: pending\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("ESP32(8) ESP8266(12) ESP32-S2(1) ESP32-C3(2)\n");
+    } else {
+        vga_puts("ESPHome Dashboard started on port 6052\n");
+    }
+}
+
+static void cmd_tasmota58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: tasmota <status|devices|rules|console>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Tasmota] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Tasmota 13.4 | Devices: 18 | Rules: 45 | Uptime: 14d 6h\n");
+    } else if (strcmp(args[1], "devices") == 0) {
+        vga_puts("Sonoff(8) Shelly(5) Wemos(3) Generic(2) | All online\n");
+    } else {
+        vga_puts("Tasmota console: firmware v13.4.0 ready\n");
+    }
+}
+
+static void cmd_wled58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: wled <status|segments|presets|palettes>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+    vga_puts("[WLED] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("WLED 0.14.0 | LEDs: 300 | Brightness: 75% | FPS: 42\n");
+    } else if (strcmp(args[1], "segments") == 0) {
+        vga_puts("seg0(main:150) seg1(top:80) seg2(side:70) | Effects: 132\n");
+    } else {
+        vga_puts("WLED controller started on port 80 | 300 LEDs active\n");
+    }
+}
+
+static void cmd_frigate58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: frigate <start|stop|status|cameras|events>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Frigate NVR] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Frigate 0.13 | Cameras: 8 | Detectors: 2(Coral) | FPS: 5\n");
+    } else if (strcmp(args[1], "cameras") == 0) {
+        vga_puts("front_door(1080p) backyard(720p) garage(480p) side(720p)\n");
+    } else {
+        vga_puts("Frigate NVR started on port 5000 | Edge TPU detected\n");
+    }
+}
+
+static void cmd_zoneminder58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: zoneminder <start|stop|status|monitors|events>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[ZoneMinder] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("ZoneMinder 1.37 | Monitors: 6 | Events today: 234 | 45GB\n");
+    } else if (strcmp(args[1], "monitors") == 0) {
+        vga_puts("cam1(MOC) cam2(MOC) cam3(NOD) cam4(MOC) cam5(MOC) cam6(MOC)\n");
+    } else {
+        vga_puts("ZoneMinder started on port 80 | Apache/MySQL running\n");
+    }
+}
+
+static void cmd_shinobi58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: shinobi <start|stop|status|monitors|plugins>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Shinobi] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Shinobi 24.1.1 | Monitors: 10 | FPS: 30 | Storage: 120GB\n");
+    } else if (strcmp(args[1], "monitors") == 0) {
+        vga_puts("entry1(1080p) entry2(720p) parking(480p) lobby(1080p) ...\n");
+    } else {
+        vga_puts("Shinobi started on port 8080 | ML: active\n");
+    }
+}
+
+static void cmd_motion58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: motion <start|stop|status|cameras|detection>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Motion] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Motion 4.6 | Cameras: 4 | Events: 56 | Threshold: 3000\n");
+    } else if (strcmp(args[1], "detection") == 0) {
+        vga_puts("Detection: ON | Noise: 32 | Threshold: 3000 | Tuning: AUTO\n");
+    } else {
+        vga_puts("Motion daemon started | Output: JPEG | movies: ON\n");
+    }
+}
+
+static void cmd_vaultwarden58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: vaultwarden <start|stop|status|users|backup>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Vaultwarden] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Vaultwarden 1.30 | Users: 5 | Orgs: 1 | Ciphers: 1234\n");
+    } else if (strcmp(args[1], "users") == 0) {
+        vga_puts("admin(admin@local) user1(u1@mail) user2(u2@mail) ...\n");
+    } else {
+        vga_puts("Vaultwarden started on port 80 | HTTPS: enabled\n");
+    }
+}
+
+static void cmd_bitwarden58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: bitwarden <start|stop|status|sync|bwsession>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Bitwarden] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Bitwarden 2024.6 | Server: self-hosted | License: premium\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Last sync: 2024-07-09 14:30 | Items: 856 | Orgs: 3\n");
+    } else {
+        vga_puts("Bitwarden server started on port 443\n");
+    }
+}
+
+static void cmd_passbolt58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: passbolt <start|stop|status|users|secrets>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Passbolt] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Passbolt 4.7 | Users: 12 | Groups: 4 | Secrets: 567\n");
+    } else if (strcmp(args[1], "secrets") == 0) {
+        vga_puts("Passwords(423) Notes(89) Files(55) | Shared groups: 4\n");
+    } else {
+        vga_puts("Passbolt server started on port 443 | GPG: ready\n");
+    }
+}
+
+static void cmd_keeWeb58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: keeweb <start|stop|status|databases|sync>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[KeeWeb] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("KeeWeb 0.6.22 | Databases: 3 | Entries: 891 | Groups: 34\n");
+    } else if (strcmp(args[1], "databases") == 0) {
+        vga_puts("personal.kdbx(456) work.kdbx(312) shared.kdbx(123)\n");
+    } else {
+        vga_puts("KeeWeb started on port 8080 | KDBX format: KDBX4\n");
+    }
+}
+
+static void cmd_trilium58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: trilium <start|stop|status|notes|search>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Trilium Notes] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Trilium 0.88 | Notes: 2456 | Size: 45MB | Last sync: now\n");
+    } else if (strcmp(args[1], "notes") == 0) {
+        vga_puts("Root(12) Tech(345) Personal(567) Projects(891) Archive(641)\n");
+    } else {
+        vga_puts("Trilium Notes started on port 8082 | Tree sync: active\n");
+    }
+}
+
+static void cmd_joplin58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: joplin <start|stop|status|sync|notebooks>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Joplin] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Joplin 3.0 | Notes: 1234 | Notebooks: 15 | Sync: WebDAV\n");
+    } else if (strcmp(args[1], "notebooks") == 0) {
+        vga_puts("Personal(345) Work(567) Research(234) Recipes(88)\n");
+    } else {
+        vga_puts("Joplin Server started on port 22300 | E2EE: enabled\n");
+    }
+}
+
+static void cmd_memos58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: memos <start|stop|status|memos|tags>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Memos] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Memos 0.22 | Memos: 891 | Users: 3 | Tags: 45\n");
+    } else if (strcmp(args[1], "tags") == 0) {
+        vga_puts("#todo(234) #idea(123) #work(345) #personal(189)\n");
+    } else {
+        vga_puts("Memos started on port 5230 | SQLite: ready\n");
+    }
+}
+
+static void cmd_linkwarden58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: linkwarden <start|stop|status|links|collections>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Linkwarden] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Linkwarden 2.5 | Links: 3456 | Collections: 23 | Users: 5\n");
+    } else if (strcmp(args[1], "collections") == 0) {
+        vga_puts("Dev(1234) News(891) Design(456) Research(567) Archive(308)\n");
+    } else {
+        vga_puts("Linkwarden started on port 3000 | Archive: ON\n");
+    }
+}
+
+static void cmd_shiori58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: shiori <start|stop|status|bookmarks|tags>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Shiori] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Shiori 1.6 | Bookmarks: 2345 | Tags: 67 | Users: 3\n");
+    } else if (strcmp(args[1], "tags") == 0) {
+        vga_puts("go(456) rust(345) web(678) linux(234) security(189)\n");
+    } else {
+        vga_puts("Shiori started on port 8080 | SQLite: ready\n");
+    }
+}
+
+static void cmd_wallabag58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: wallabag <start|stop|status|articles|tags>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Wallabag] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Wallabag 2.6 | Articles: 4567 | Unread: 234 | Tags: 89\n");
+    } else if (strcmp(args[1], "articles") == 0) {
+        vga_puts("Read(3456) Unread(234) Starred(89) Archived(788)\n");
+    } else {
+        vga_puts("Wallabag started on port 26000 | Readability: ON\n");
+    }
+}
+
+static void cmd_miniflux58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: miniflux <start|stop|status|feeds|categories>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Miniflux] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Miniflux 2.2 | Feeds: 156 | Unread: 1234 | Categories: 12\n");
+    } else if (strcmp(args[1], "feeds") == 0) {
+        vga_puts("Tech(45) News(23) Blog(67) Dev(21) | Last refresh: 5m ago\n");
+    } else {
+        vga_puts("Miniflux started on port 8080 | PostgreSQL: ready\n");
+    }
+}
+
+static void cmd_freshrss58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: freshrss <start|stop|status|feeds|refresh>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[FreshRSS] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("FreshRSS 1.24 | Feeds: 234 | Articles: 8912 | Users: 3\n");
+    } else if (strcmp(args[1], "feeds") == 0) {
+        vga_puts("Tech(67) News(45) HN(1) Reddit(23) YouTube(12) Other(86)\n");
+    } else {
+        vga_puts("FreshRSS started on port 80 | MariaDB: ready\n");
+    }
+}
+
+static void cmd_yarr58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: yarr <start|stop|status|feeds|import>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("[Yarr] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Yarr v2.4 | Feeds: 78 | Items: 2345 | Storage: SQLite\n");
+    } else if (strcmp(args[1], "feeds") == 0) {
+        vga_puts("Blogs(34) News(12) Dev(23) Podcast(9) | All healthy\n");
+    } else {
+        vga_puts("Yarr started on port 7070 | Database: SQLite ready\n");
+    }
+}
+
+static void cmd_anubis58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: anubis <start|stop|status|stats|rules>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[Anubis] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Anubis 1.14 | Challenges: 56789 | Blocked: 2345 | Active: 89\n");
+    } else if (strcmp(args[1], "stats") == 0) {
+        vga_puts("Passed(54444) Blocked(2345) PoW_hashrate(12MH/s) Backends:3\n");
+    } else {
+        vga_puts("Anubis anti-bot started | Challenge difficulty: 18 bits\n");
+    }
+}
+
+static void cmd_crowdsec58_guard(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: crowdsec-guard <start|stop|status|alerts|bouncers>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[CrowdSec Bouncer] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Bouncer v1.20 | Decisions: 1234 | CAPTCHA: ON | Mode: stream\n");
+    } else if (strcmp(args[1], "bouncers") == 0) {
+        vga_puts("nginx(1234) caddy(567) traefik(890) apache(234)\n");
+    } else {
+        vga_puts("CrowdSec bouncer started | LAPI: connected | Remediation: block\n");
+    }
+}
+
+static void cmd_crowdsec58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: crowdsec <start|stop|status|alerts|scenarios|machines>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[CrowdSec Engine] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("CrowdSec 1.6 | Alerts: 4567 | Scenarios: 89 | Bouncers: 4\n");
+    } else if (strcmp(args[1], "alerts") == 0) {
+        vga_puts("ssh_brute(2345) web_scan(1234) http_probe(890) ddos(98)\n");
+    } else {
+        vga_puts("CrowdSec engine started | Acquisition: 3 files | CAPI: linked\n");
+    }
+}
+
+static void cmd_step_ca58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: step-ca <start|stop|status|certs|revoke>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Smallstep CA] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Step-CA 0.27 | Certificates: 56 | Provisioners: 3 | Root: OK\n");
+    } else if (strcmp(args[1], "certs") == 0) {
+        vga_puts("Intermediate(1) Leaf(54) Revoked(1) | KMS: SoftKMS\n");
+    } else {
+        vga_puts("Step-CA started on port 9000 | ACME: enabled\n");
+    }
+}
+
+static void cmd_boulder58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: boulder <start|stop|status|orders|accounts>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Boulder CA] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Boulder (Lets Encrypt) | Orders today: 234 | Validated: 230\n");
+    } else if (strcmp(args[1], "orders") == 0) {
+        vga_puts("Pending(4) Valid(230) Invalid(0) Expired(0) Revoked(0)\n");
+    } else {
+        vga_puts("Boulder CA started | SA: MySQL | VA: 4 instances | OCSP: ON\n");
+    }
+}
+
+static void cmd_certbot58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: certbot <renew|status|certificates|revoke>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[Certbot] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Certbot 2.10 | Certificates: 12 | Next renewal: 23 days\n");
+    } else if (strcmp(args[1], "certificates") == 0) {
+        vga_puts("example.com(Jul 2024) api.example.com(Aug) mail.dev(Sep)\n");
+    } else {
+        vga_puts("Certbot renewal: all certificates valid | Next: Jul 2024\n");
+    }
+}
+
+static void cmd_acme_sh58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: acme.sh <renew|status|list|install-cert>\n");
+        return;
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("[acme.sh] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("acme.sh 3.0.7 | Certificates: 18 | CA: Lets Encrypt\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("example.com(Sep 2024) cdn.dev(Aug) vpn.lab(Oct 2024)\n");
+    } else {
+        vga_puts("acme.sh renewal: all certs valid | Standalone mode\n");
+    }
+}
+
+static void cmd_trivy58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: trivy <image|fs|repo|sbom> <target>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[Trivy Scanner] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "image") == 0) {
+        vga_puts("Scan: CRITICAL(3) HIGH(12) MEDIUM(45) LOW(89) UNKNOWN(4)\n");
+    } else if (strcmp(args[1], "fs") == 0) {
+        vga_puts("Filesystem scan: 23 vulns | Misconfigs: 8 | Secrets: 2\n");
+    } else {
+        vga_puts("Trivy 0.52 | DB: 245678 CVEs | Last update: 2h ago\n");
+    }
+}
+
+static void cmd_grype58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: grype <image|dir|sbom> <target>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[Grype Scanner] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "image") == 0) {
+        vga_puts("Scan: Critical(2) High(8) Medium(23) Low(56) Negligible(12)\n");
+    } else if (strcmp(args[1], "dir") == 0) {
+        vga_puts("Directory scan: 31 vulns | Matches: dpkg, rpm, apk\n");
+    } else {
+        vga_puts("Grype 0.79 | DB: 234567 vulns | Matcher: dpkg, rpm\n");
+    }
+}
+
+static void cmd_snyk58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: snyk <test|monitor|code|config> <target>\n");
+        return;
+    }
+    vga_set_color(VGA_RED, VGA_BLACK);
+    vga_puts("[Snyk] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "test") == 0) {
+        vga_puts("Vulnerabilities: Critical(1) High(5) Medium(12) Low(34)\n");
+    } else if (strcmp(args[1], "monitor") == 0) {
+        vga_puts("Project monitored | Policy: org-default | Org: my-org\n");
+    } else {
+        vga_puts("Snyk CLI 1.1234 | Org: my-org | Licenses: 123 packages\n");
+    }
+}
+
+static void cmd_sonarqube58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: sonarqube <scan|status|quality|issues|hotspots>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[SonarQube] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("SonarQube 10.5 | Projects: 34 | Rating: A | Issues: 567\n");
+    } else if (strcmp(args[1], "issues") == 0) {
+        vga_puts("BLOCKER(12) CRITICAL(45) MAJOR(123) MINOR(345) INFO(42)\n");
+    } else {
+        vga_puts("SonarQube scan: Quality gate PASSED | Coverage: 87%\n");
+    }
+}
+
+static void cmd_semgrep58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: semgrep <scan|config|login|ci> <target>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[Semgrep] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "scan") == 0) {
+        vga_puts("Findings: 23 | Rules: 1456 | Time: 45s | Exit code: 1\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("Rulesets: p/default p/owasp p/audit p/ci | Auto-update: ON\n");
+    } else {
+        vga_puts("Semgrep 1.77 | Pro: available | Languages: 30+\n");
+    }
+}
+
+static void cmd_codeql58(int argc, char args[][CMD_MAX_LEN])
+{
+    if (argc < 2) {
+        vga_puts("Usage: codeql <database|analyze|interpret> <target>\n");
+        return;
+    }
+    vga_set_color(VGA_YELLOW, VGA_BLACK);
+    vga_puts("[CodeQL] ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    if (strcmp(args[1], "analyze") == 0) {
+        vga_puts("Alerts: 18 | Security: 5 | Quality: 13 | Time: 120s\n");
+    } else if (strcmp(args[1], "database") == 0) {
+        vga_puts("Database created | Language: cpp | Size: 45MB | Traces: 34\n");
+    } else {
+        vga_puts("CodeQL 2.17 | Languages: cpp java js py go | Packs: 234\n");
+    }
+}
+
+static void cmd_gazebo59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: gazebo <start|stop|status|spawn|step|reset>\n");
+        return;
+    }
+    if (strcmp(args[1], "start") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Gazebo] Robot simulator engine starting...\n");
+        vga_puts("[Gazebo] Loading SDF world: empty_world.sdf\n");
+        vga_puts("[Gazebo] Physics: ODE solver, dt=1ms, RTF=1.0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Gazebo] Simulation started. Port 11345, 247 topics.\n");
+    } else if (strcmp(args[1], "spawn") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Gazebo] Spawning pioneer3dx at (0,0,0.1)\n");
+        vga_puts("[Gazebo] Links: 8, Joints: 7, Sensors: 3\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "step") == 0) {
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("[Gazebo] Physics step: 1ms, contacts: 3, forces: 42\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "stop") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Gazebo] Simulation stopped. Total: 342.5s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "status") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Gazebo] RUNNING | Models: 4 | Sensors: 12 | FPS: 60\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "reset") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Gazebo] World reset to initial state.\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: gazebo <start|stop|status|spawn|step|reset>\n");
+    }
+}
+
+static void cmd_webots59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: webots <load|run|pause|step|supervisor|robotinfo>\n");
+        return;
+    }
+    if (strcmp(args[1], "load") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Webots] Loading world: robot_arena.wbt\n");
+        vga_puts("[Webots] Env: 10x10m, walls: 12, robots: 6\n");
+        vga_puts("[Webots] Physics: ODE, gravity=-9.81, ERP=0.8\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "run") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Webots] Running real-time. ts=32ms, 6 controllers\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "step") == 0) {
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("[Webots] Step 32ms: motors=12, sensors=36, coll=1\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "pause") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Webots] Paused at t=45.2s.\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "supervisor") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Webots] Supervisor: 6 robots, goals=3, resets=0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "robotinfo") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Webots] e-puck: bat=92%, 8 dist | turtlebot: bat=85%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: webots <load|run|pause|step|supervisor|robotinfo>\n");
+    }
+}
+
+static void cmd_mujoco59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: mujoco <load|simulate|forward|inverse|contacts|energy>\n");
+        return;
+    }
+    if (strcmp(args[1], "load") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[MuJoCo] Loading humanoid.xml: 14 bodies, 12 joints\n");
+        vga_puts("[MuJoCo] Solver: PGS, iter=50, tol=1e-8\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "simulate") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[MuJoCo] Forward dynamics: dt=2ms, Euler, 1200x RT\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[MuJoCo] Contacts: avg=45.2N, max=312.8N\n");
+    } else if (strcmp(args[1], "forward") == 0) {
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("[MuJoCo] FK: EE=(0.45,0.12,0.89), COM=(0.01,0,0.92)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "inverse") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[MuJoCo] IK: target=(0.5,0,1), Newton, 12 iters\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "contacts") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[MuJoCo] 3 contacts: foot_L=340N, foot_R=280N, hand=15N\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "energy") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[MuJoCo] KE=45.2J, PE=892.1J, eff=93.4%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: mujoco <load|simulate|forward|inverse|contacts|energy>\n");
+    }
+}
+
+static void cmd_pybullet59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: pybullet <connect|load|step|debug|restitution|dynamics>\n");
+        return;
+    }
+    if (strcmp(args[1], "connect") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[PyBullet] Connected to Bullet 3.25, GUI mode\n");
+        vga_puts("[PyBullet] Gravity: (0,0,-9.81), dt: 1/240\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "load") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[PyBullet] URDF: kuka_iiwa, 9 links, 7 revolute joints\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "step") == 0) {
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("[PyBullet] Step 1/240s: pairs=15, contacts=4\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "debug") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[PyBullet] Debug viz: 12 drawn, 3 text, 5 sliders\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "restitution") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[PyBullet] Steel=0.82, Rubber=0.91, Plastic=0.45\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dynamics") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[PyBullet] Damp=0.5, Stiff=240, Friction=0.9, MaxF=240Nm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: pybullet <connect|load|step|debug|restitution|dynamics>\n");
+    }
+}
+
+static void cmd_bullet59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: bullet <init|rigidbody|softbody|constraint|collision|raycast>\n");
+        return;
+    }
+    if (strcmp(args[1], "init") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Bullet] Bullet 3.25: DBVT broadphase, SI solver, dt=1/60\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "rigidbody") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Bullet] 3 bodies: box(1kg), sphere(0.5kg), plane(static)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "softbody") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Bullet] Cloth 32x32: mass=1kg, 1089 vertices\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "constraint") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Bullet] P2P constraint + Hinge motor [-1.57, 1.57]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "collision") == 0) {
+        vga_set_color(VGA_RED, VGA_BLACK);
+        vga_puts("[Bullet] AABB=12, Manifolds=3, Contacts=7, Impulse=12.4N\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "raycast") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Bullet] Ray hit plane at t=0.998, dist=0.02m\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: bullet <init|rigidbody|softbody|constraint|collision|raycast>\n");
+    }
+}
+
+static void cmd_vrep59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: coppeliasim <connect|scene|script|remote|joint|sensor>\n");
+        return;
+    }
+    if (strcmp(args[1], "connect") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[CoppeliaSim] Remote API on port 19997, client=123456\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "scene") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[CoppeliaSim] industrial_arms.ttt: 24 objs, 18 joints, 10 scripts\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "script") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[CoppeliaSim] controller.lua: RUN(line245), planner.py: IDLE\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "remote") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[CoppeliaSim] API calls: 1247 (get_pos=342, set_tgt=298)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "joint") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[CoppeliaSim] UR5: J1=12.5 J2=-45.2 J3=90 J4=0 J5=30.1 J6=-15.8\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sensor") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[CoppeliaSim] prox=0.234m, vision=640x480(3obj), force=(0.12,0.03,-0.45)N\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: coppeliasim <connect|scene|script|remote|joint|sensor>\n");
+    }
+}
+
+static void cmd_nengo59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: nengo <create|simulate|probe|transform|learn|network>\n");
+        return;
+    }
+    if (strcmp(args[1], "create") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Nengo] Ensemble: 200 LIF neurons, 2D, radius=1.0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "simulate") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Nengo] NEF sim dt=1ms: out=[0.452,-0.128], RMS=0.023\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "probe") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Nengo] 3 probes: decoded(2D), spikes, voltage\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "transform") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Nengo] Transform: in=2D, out=3D, matrix computed\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "learn") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Nengo] PES rule: lr=0.001, epoch=5000, err_red=67.3%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "network") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Nengo] 5 ensembles, 7 connections, 850 neurons total\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: nengo <create|simulate|probe|transform|learn|network>\n");
+    }
+}
+
+static void cmd_neuron59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: neuron <load|run|morphology|channel|synapse|currentclamp>\n");
+        return;
+    }
+    if (strcmp(args[1], "load") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[NEURON] cortical_pyramidal.hoc: 147 segs, 3 sections\n");
+        vga_puts("[NEURON] Channels: Na, K, Ca, leak, h\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "run") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[NEURON] t=0-100ms, dt=25us: 12 spikes @ 120Hz\n");
+        vga_puts("[NEURON] Vrest=-65mV, Vpeak=+35mV, Vth=-50mV\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "morphology") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[NEURON] Soma: 20x15um | Apical: 350um(80seg) | Basal: 180um(66seg)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "channel") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[NEURON] Na(open=0.34) K(open=0.72) Ca(open=0.12) @ t=50ms\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "synapse") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[NEURON] AMPA=12, NMDA=8, GABA_A=15 synapses\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "currentclamp") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[NEURON] 0.5nA @ 100ms for 300ms: 34 spikes, 85Hz\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: neuron <load|run|morphology|channel|synapse|currentclamp>\n");
+    }
+}
+
+static void cmd_brian259(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: brian2 <equations|monitors|connections|spikes|rates|poisson>\n");
+        return;
+    }
+    if (strcmp(args[1], "equations") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Brian2] dV/dt=(-V+I)/tau, tau=10ms, Vth=-50mV, Vreset=-70mV\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "monitors") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Brian2] SpikeMon: 100 neurons, 847 spikes | StateMon: V,I,t\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "connections") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Brian2] Exe: 2340(5nS,0.5-2ms) | Inh: 1560(-10nS,0.5-3ms)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "spikes") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Brian2] Raster: burst1=12-18ms(45n), burst2=45-52ms(38n)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "rates") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Brian2] Rate: mean=42.3Hz, peak=189Hz, CV=0.37\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "poisson") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Brian2] Poisson: 500n @ 100Hz, 4832 spikes in 100ms\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: brian2 <equations|monitors|connections|spikes|rates|poisson>\n");
+    }
+}
+
+static void cmd_neo59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: neo-sim <load|analyze|filter|segment|spike|lfp>\n");
+        return;
+    }
+    if (strcmp(args[1], "load") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Neo] NWB: 5 segs, 12 epochs, 64ch, 30kHz, 3600s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "analyze") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Neo] Seg1: 64ch analog, 48 units(sorted), 234 events\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "filter") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Neo] Butterworth order=4, 300-3000Hz, 64ch applied\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "segment") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Neo] Seg0: 0-600s(50tr) Seg1: 600-1200s(48tr) Seg2: 1200-1800s(52tr)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "spike") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Neo] Unit1: 1234spk ISI=12.3ms CV=0.45 | Unit2: 892spk\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "lfp") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Neo] LFP: Delta=45.2uV, Theta=32.1uV, Gamma=12.8uV\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: neo-sim <load|analyze|filter|segment|spike|lfp>\n");
+    }
+}
+
+static void cmd_openfoam59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: openfoam <create|solve|mesh|boundary|turbulence|postprocess>\n");
+        return;
+    }
+    if (strcmp(args[1], "create") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OpenFOAM] Case: lid_driven_cavity, Solver: icoFoam\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OpenFOAM] blockMesh: 40x40x1=1600 hex, 5 patches\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "solve") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OpenFOAM] icoFoam: dt=5ms, p-U res=1.2e-6, Umax=2.85m/s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "turbulence") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[OpenFOAM] kOmegaSST: k=0.15, omega=5.2, Re=1.5e6\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "boundary") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OpenFOAM] inlet:U=(1,0,0) | outlet:noGrad | walls:no-slip\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "postprocess") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[OpenFOAM] Umax=2.85 pmax=12.4Pa Cd=1.23 Cl=0.04\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: openfoam <create|solve|mesh|boundary|turbulence|postprocess>\n");
+    }
+}
+
+static void cmd_elmer59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: elmer <mesh|equations|solve|heat|stress|coupled>\n");
+        return;
+    }
+    if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Elmer] 12500 nodes, 48200 tets, quality=0.87\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "equations") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Elmer] Heat(k=45) + Elasticity(E=210GPa,nu=0.3) + Electrostatics\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "solve") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Elmer] BiCGStab+ILU2: 45 iters, res=2.3e-9, 8.4s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "heat") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Elmer] Heat: Tmin=295.2K Tmax=342.8K grad=2340K/m\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "stress") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Elmer] vonMises=145.2MPa, disp=0.12mm, SF=1.72\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "coupled") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Elmer] Thermal-Structural: 5 iter, conv=YES, err=0.8%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: elmer <mesh|equations|solve|heat|stress|coupled>\n");
+    }
+}
+
+static void cmd_fenics59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: fenics <define|mesh|solve|variational|poisson|elasticity>\n");
+        return;
+    }
+    if (strcmp(args[1], "define") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[FEniCS] -div(grad(u))=f, u=0 on dOmega, P2 Lagrange\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[FEniCS] Unit square x4: 4225 verts, 4096 cells\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "solve") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[FEniCS] PETSc LU(mumps): 4225 DOFs, 38017 NNZ, 0.34s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "variational") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[FEniCS] a=inner(grad(u),grad(v))dx, L=f*vdx+g*vds\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "poisson") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[FEniCS] Poisson: L2=1.2e-6, H1=3.4e-4 (vs analytical)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "elasticity") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[FEniCS] Elasticity: E=1, nu=0.3, disp_max=0.0142\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: fenics <define|mesh|solve|variational|poisson|elasticity>\n");
+    }
+}
+
+static void cmd_dealii59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: dealii <triangulate|assemble|solve|refine|output|laplace>\n");
+        return;
+    }
+    if (strcmp(args[1], "triangulate") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[deal.II] 3D tri: 6144 cells, 5329 verts, 5 refinements\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "assemble") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[deal.II] DOFs=5329, NNZ=87234, assembly=2.1s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "solve") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[deal.II] CG+AMG: 89 iters, res=1.4e-10, 0.56s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "refine") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[deal.II] Kelly estimator: 234 marked(25%), new=15876 cells\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "output") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[deal.II] VTK: 21317 points, 15876 cells, fields: u,grad_u\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "laplace") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[deal.II] L-shape: L2=8.7e-5, H1=2.3e-3, conv=O(h^1.33)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: dealii <triangulate|assemble|solve|refine|output|laplace>\n");
+    }
+}
+
+static void cmd_salome59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: salome <geom|mesh|study|python|export|import>\n");
+        return;
+    }
+    if (strcmp(args[1], "geom") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Salome] Geom: 6 shapes, 4 groups, Extrude/Fillet/Bool\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Salome] Mesh: 45000 nodes, 128000 elems, min_angle=18.2deg\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "study") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Salome] Chain: Geom->Mesh->Calculix, 24 objs, 3 views\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "python") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Salome] geompy.MakeBox(0,0,0,10,10,10) - 156 API fns\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "export") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Salome] UNV export: 45000 nodes, 128000 elems, 2.3MB\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "import") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Salome] STEP import: 8 solids, 64 faces, 192 edges\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: salome <geom|mesh|study|python|export|import>\n");
+    }
+}
+
+static void cmd_freecad59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: freecad <new|part|assembly|parametric|export|render>\n");
+        return;
+    }
+    if (strcmp(args[1], "new") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[FreeCAD] New doc, Part Design workbench, MMKS units\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "part") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[FreeCAD] Bracket_v3: pad=20mm, 3x8mm holes, R3fillet\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "assembly") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[FreeCAD] A2plus: 12 parts, 24 constraints, solve=OK\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "parametric") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[FreeCAD] w=50mm, h=80mm, t=3mm, hole=8mm, R=3mm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "export") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[FreeCAD] STEP(245KB) STL(1.2MB,24800 tri) IGES(312KB)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "render") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[FreeCAD] LuxRender 1920x1080, 3 materials, 12.4s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: freecad <new|part|assembly|parametric|export|render>\n");
+    }
+}
+
+static void cmd_opencascade59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: occt <brep|boolean|fillet|surface|nurbs|tessellate>\n");
+        return;
+    }
+    if (strcmp(args[1], "brep") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OCCT] BRep: 2 solids, 4 shells, 32 faces, 128 edges\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "boolean") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OCCT] Union(24f) + Cut(18f) + Common(6f) = OK\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "fillet") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[OCCT] Fillet R=2.5mm(12 edges) + Chamfer 1mm(8 edges)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "surface") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OCCT] B-Spline surf: U3xV4, 20x16 pts, G1=94.2%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "nurbs") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OCCT] NURBS: deg=3, knots=8, poles=10, bounds=100x50x25\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "tessellate") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[OCCT] Tess: 48200 tri, 25100 verts, 0.1mm deflection\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: occt <brep|boolean|fillet|surface|nurbs|tessellate>\n");
+    }
+}
+
+static void cmd_openscad59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: openscad <compile|preview|render|module|difference|union>\n");
+        return;
+    }
+    if (strcmp(args[1], "compile") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OpenSCAD] bracket.scad: 14 modules, 32 primitives, 0 warnings\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "preview") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OpenSCAD] F5 preview: 24800 poly, 50x80x20mm, 0.23s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "render") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OpenSCAD] F6 render: 6 unions+3 diffs, 48200 tri, 3.2s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "module") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[OpenSCAD] bracket()->base_plate()+arms()+holes(), w=50,d=30,h=20\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "difference") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[OpenSCAD] cube(50,80,20) - 4xcyl(r=4,h=25) = 4 holes\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "union") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[OpenSCAD] cube+2cyls+sphere: 42 faces, 0 self-int\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: openscad <compile|preview|render|module|difference|union>\n");
+    }
+}
+
+static void cmd_solvespace59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: solvespace <sketch|extrude|revolve|constraint|solve|export>\n");
+        return;
+    }
+    if (strcmp(args[1], "sketch") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SolveSpace] XY sketch: 12 lines, 4 arcs, 6 circles, 22 constraints\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "extrude") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SolveSpace] Extrude +Z 20mm: 14 faces, 30 edges\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "revolve") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[SolveSpace] Revolve X-axis 360deg: 8 faces\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "constraint") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SolveSpace] DOF=0 (fully constrained), Jacobian=1.0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "solve") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SolveSpace] Newton: 4 iters, RMS=1.2e-12, all satisfied\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "export") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[SolveSpace] STEP(89KB) STL(320KB) SVG(12KB)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: solvespace <sketch|extrude|revolve|constraint|solve|export>\n");
+    }
+}
+
+static void cmd_librecad59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: librecad <draw|dimension|layer|block|hatch|export>\n");
+        return;
+    }
+    if (strcmp(args[1], "draw") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[LibreCAD] 91 entities: 45 lines, 12 arcs, 8 circles, 14 dims\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dimension") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[LibreCAD] Linear=8, Aligned=3, Angular=2, Radius=1, tol=0.1mm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "layer") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[LibreCAD] 4 layers: default(34), CONSTR(12), DIM(14), HIDDEN(8)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "block") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[LibreCAD] SCREW_M6: 12 ent,16 ins | WASHER: 6 ent,8 ins\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "hatch") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[LibreCAD] ANSI31(3 regions,45deg) + SOLID(2 regions)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "export") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[LibreCAD] DXF(45KB) PDF(128KB,A3) SVG(67KB)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: librecad <draw|dimension|layer|block|hatch|export>\n");
+    }
+}
+
+static void cmd_kicad59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: kicad <schematic|pcb|drc|erc|rercoute|bom>\n");
+        return;
+    }
+    if (strcmp(args[1], "schematic") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[KiCad] power_supply_v2: 34 syms, 87 wires, 2 hier-sheets\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "pcb") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[KiCad] PCB: 34 footprints, 245 tracks, 3 zones, 85x52mm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "drc") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[KiCad] DRC: clear=0.15mm, trace=0.25mm, err=0, warn=2\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "erc") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[KiCad] ERC: unconn=0, multi_drv=0, pwr_flag=1 warn\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "rercoute") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[KiCad] Routed: 245/245(100%), vias=28, len=4523mm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "bom") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[KiCad] BOM: R=18, C=12, L=2, IC=1, D=1, Conn=2 => 48 parts\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: kicad <schematic|pcb|drc|erc|rercoute|bom>\n");
+    }
+}
+
+static void cmd_gerber59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: gerber <generate|verify|drill|outline|silk|fabricate>\n");
+        return;
+    }
+    if (strcmp(args[1], "generate") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Gerber] 8 files: F.Cu(245KB) B.Cu(198KB) Silk(45KB) Mask(67KB)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "verify") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Gerber] RS-274X, mm, 42 apertures, err=0, warn=0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "drill") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Gerber] Excellon: 124 holes (98 plated, 26 NPTH)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "outline") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Gerber] Edge.Cuts: 85x52mm, R2mm fillets\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "silk") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Gerber] Front: 34 refs+12 vals+logo | Back: 6 refs\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "fabricate") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Gerber] Fab pkg: 10 files, 892KB, 2-layer, HASL, 1oz Cu\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: gerber <generate|verify|drill|outline|silk|fabricate>\n");
+    }
+}
+
+static void cmd_openems59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: openEMS <mesh|excite|simulate|sparameter|field|near2far>\n");
+        return;
+    }
+    if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[openEMS] FDTD: 200x150x100 cells, dx=0.1mm, PML=8\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "excite") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[openEMS] Gaussian: Fc=10GHz, port=50ohm, Z0=377ohm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "simulate") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[openEMS] 20000 steps, -60dB@step18500, 9.5s wall\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sparameter") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[openEMS] S11=-18.2dB S21=-0.3dB @10GHz (2-port)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "field") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[openEMS] Ey=12.4V/m, Hz=0.033A/m, SAR=0.45W/kg\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "near2far") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[openEMS] NF2FF: 12.4dBi, BW3dB=62deg, FBR=18.2dB\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: openEMS <mesh|excite|simulate|sparameter|field|near2far>\n");
+    }
+}
+
+static void cmd_qucs59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: qucs <schematic|simulate|dc|ac|transient|parametric>\n");
+        return;
+    }
+    if (strcmp(args[1], "schematic") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Qucs] lowpass_filter: R=3,L=2,C=2,Src=1,14 wires\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "simulate") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Qucs] Qucsator: 200 pts, 1Hz-100MHz sweep\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dc") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Qucs] DC: V(R1)=2.34V I=2.34mA Vout=1.25V\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ac") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Qucs] AC: fc=15.9kHz, pass=0dB, stop=-45dB@1MHz, -40dB/dec\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "transient") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Qucs] Tran: 1ms,1us step, square 1kHz, OS=2.1%, tr=22us\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "parametric") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Qucs] Sweep C1: 1nF-100nF, fc: 1.6kHz-159kHz\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: qucs <schematic|simulate|dc|ac|transient|parametric>\n");
+    }
+}
+
+static void cmd_ngspice59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: ngspice <source|dc|ac|transient|noise|montecarlo>\n");
+        return;
+    }
+    if (strcmp(args[1], "source") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[ngspice] diff_amp.spice: 5 MOS, 8 R, BSIM3v3, Vdd=3.3V\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dc") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[ngspice] DC: Vin=0->3.3V, Vout(0)=3.3V, Vout(1.65)=1.68V\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ac") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[ngspice] AC: gain=42.3dB, f-3dB=8.7MHz, GBW=180MHz, PM=65deg\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "transient") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[ngspice] Tran: 10us, 10MHz sine 100mVpp -> 4.23Vpp, THD=0.12%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "noise") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[ngspice] Noise: in=3.2nV/rHz, out=135nV/rHz@1kHz, NF=1.8dB\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "montecarlo") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[ngspice] MC(1000): Vout=1.68V+-0.042V, yield=97.3%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: ngspice <source|dc|ac|transient|noise|montecarlo>\n");
+    }
+}
+
+static void cmd_xyce59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: xyce <netlist|dc|ac|tran|sensitivity|hb>\n");
+        return;
+    }
+    if (strcmp(args[1], "netlist") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Xyce] rf_amplifier.cir: 12 dev, BFP740F SiGe HBT\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dc") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Xyce] DC: Vcc=1.0-3.6V, ICc(1.8V)=5.2mA, ICc(3.0V)=8.7mA\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ac") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Xyce] AC 1MHz-40GHz: S21=18.5dB S11=-15.2dB NF=1.2dB\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "tran") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Xyce] Tran: 100ns, max_dt=0.1ns, Gear2, 1000 steps\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sensitivity") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Xyce] dG/dR1=-0.042dB/ohm, dBW/dC1=-12.3MHz/pF\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "hb") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Xyce] HB: 2.4GHz x5 harm, Pout=10.2dBm, HD2=-32.1dBc\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: xyce <netlist|dc|ac|tran|sensitivity|hb>\n");
+    }
+}
+
+static void cmd_lumerical59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: lumerical <fdtd|mode|parameterize|export|convergence|ring>\n");
+        return;
+    }
+    if (strcmp(args[1], "fdtd") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Lumerical] FDTD: 500x500x200, dx=25nm, TFSF 1500-1600nm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mode") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Lumerical] MODE: Si 500x220nm, 4 modes, TE0 neff=2.456\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "parameterize") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Lumerical] Sweep width 400-700nm: neff=2.312-2.589\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "export") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Lumerical] E_field.ldf(45MB) S_params.ldf(12KB) modes.ldf(8KB)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "convergence") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Lumerical] Mesh=3, power balance: src=1 abs=0.85 trans=0.12, err=3%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ring") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Lumerical] Ring: R=10um gap=200nm FSR=2.6nm Q=12000\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: lumerical <fdtd|mode|parameterize|export|convergence|ring>\n");
+    }
+}
+
+static void cmd_mEEP59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: meep <cell|sources|materials|fields|sparameter|farfield>\n");
+        return;
+    }
+    if (strcmp(args[1], "cell") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Meep] 3D cell: 20x20x10um, res=50px/um, PML=1um\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sources") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Meep] GaussianSource fc=1.0(1550nm) Ez @ (5,10,5)um\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "materials") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Meep] Si:eps=12.25 | SiO2:eps=2.1 | Air:eps=1.0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "fields") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Meep] Hz=0.92, Ex=0.45, Ey=0.38, energy=2.34e-14 J/um3\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sparameter") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Meep] S11=-22.4dB S21=-0.8dB @1550nm, 200 pts 1500-1600nm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "farfield") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Meep] NF2FF: 1000um, dir=15.2dBi, BW3dB=8.5deg\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: meep <cell|sources|materials|fields|sparameter|farfield>\n");
+    }
+}
+
+static void cmd_ansys59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: ansys <mechanical|fluent|hfss|maxwell|lsdyna|workbench>\n");
+        return;
+    }
+    if (strcmp(args[1], "mechanical") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Ansys Mechanical] 285K nodes, 142K hex, Steel 304, E=193GPa\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Ansys Mechanical] disp_max=0.082mm, stress_max=156MPa\n");
+    } else if (strcmp(args[1], "fluent") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Ansys Fluent] 2.4M poly cells, k-omega SST, y+<1\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Ansys Fluent] Conv 845 iters: Cd=0.342 Cl=0.018\n");
+    } else if (strcmp(args[1], "hfss") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Ansys HFSS] FEM tet adaptive, patch 2.4GHz\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Ansys HFSS] S11=-28.5dB Gain=8.2dBi BW=85MHz\n");
+    } else if (strcmp(args[1], "maxwell") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Ansys Maxwell] 2D Transient IPMSM 4-pair 3000RPM\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Ansys Maxwell] Torque=12.5Nm Flux=0.038Wb\n");
+    } else if (strcmp(args[1], "lsdyna") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Ansys LS-DYNA] car crash 56km/h: 42 parts 1.2M nodes\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("[Ansys LS-DYNA] 100ms, max_def=185mm, energy OK\n");
+    } else if (strcmp(args[1], "workbench") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Ansys Workbench] 4 systems, 3/4 solved, geometry shared\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: ansys <mechanical|fluent|hfss|maxwell|lsdyna|workbench>\n");
+    }
+}
+
+static void cmd_comsol59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: comsol <geometry|mesh|physics|study|results|coupling>\n");
+        return;
+    }
+    if (strcmp(args[1], "geometry") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[COMSOL] cylinder(r=25,h=50)+box(10), union, R2 fillet, V=98.2cm3\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mesh") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[COMSOL] Free tet: 85K nodes, 312K elems, 5 BL layers\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "physics") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[COMSOL] ht(solid) + solid(structural) + coupled\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "study") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[COMSOL] Stationary Newton-Raphson: 6 iter, conv=YES, 255K DOFs\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "results") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[COMSOL] T=452K max, vonMises=89.2MPa, disp=0.045mm\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "coupling") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[COMSOL] Thermo-structural bidir: 3 iter, res=2.1e-9\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: comsol <geometry|mesh|physics|study|results|coupling>\n");
+    }
+}
+
+static void cmd_matlab59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: matlab <workspace|matrix|plot|ode|fft|eigenvalue>\n");
+        return;
+    }
+    if (strcmp(args[1], "workspace") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[MATLAB] 24 vars, 1.2MB, largest A(1000x1000 double)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "matrix") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[MATLAB] A(100)x B(100x50): 2.3ms | det=1.42e12 rank=98\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ode") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[MATLAB] ode45 Lorenz: 2847 steps, final=(-4.2,-6.8,23.1)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "fft") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[MATLAB] FFT 1024@44.1kHz: 440Hz(A4), SNR=42.3dB, THD=0.12%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "eigenvalue") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[MATLAB] Eig 50x50 SPD: min=0.023 max=12.4 cond=539.1\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "plot") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[MATLAB] surf(peak(50)) jet 1920x1080 -> figure1.png\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: matlab <workspace|matrix|plot|ode|fft|eigenvalue>\n");
+    }
+}
+
+static void cmd_scilab59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: scilab <workspace|matrix|poly|ode|optim|signal>\n");
+        return;
+    }
+    if (strcmp(args[1], "workspace") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Scilab] 18 vars, 2.4MB, 42 functions loaded\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "matrix") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Scilab] A(200)x .* B: 0.8ms | svd=[12.4..0.002]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "poly") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Scilab] roots([1 -3 3 -1])=[1,1,1] | poly degree=3\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ode") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Scilab] rk45 Van der Pol mu=1: 1523 steps, max_dt=0.042s\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "optim") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Scilab] fminunc Rosenbrock: x*=[1,1], f=0, 42 iters\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "signal") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Scilab] Butterworth LP order=4 fc=100Hz, fft: 50Hz\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: scilab <workspace|matrix|poly|ode|optim|signal>\n");
+    }
+}
+
+static void cmd_r_project59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: R <env|dataframe|ggplot|regression|clustering|ts>\n");
+        return;
+    }
+    if (strcmp(args[1], "env") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[R] 4.3.2 x86_64, 12 pkgs, 45.2MB, 18 objects\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dataframe") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[R] mtcars: 32x11, mpg mean=20.1 sd=6.0\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ggplot") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[R] ggplot2: geom_point+smooth, R2=0.753, p=1.29e-10\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regression") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[R] lm(mpg~wt+hp+cyl): R2=0.834 F=46.2 p<0.001\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "clustering") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[R] kmeans K=3: iter=12, between/total=78.4%, sizes=14,10,8\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ts") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[R] ARIMA(2,1,1): AIC=452.3, Ljung-Box p=0.34\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: R <env|dataframe|ggplot|regression|clustering|ts>\n");
+    }
+}
+
+static void cmd_sas59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: sas <proc|dataset|glm|logistic|mixed|sql>\n");
+        return;
+    }
+    if (strcmp(args[1], "proc") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SAS] 42 procs: MEANS FREQ REG LOGISTIC MIXED GLM\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "dataset") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SAS] WORK.TRIAL: 1000 obs x 15 vars, 2.4MB\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "glm") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[SAS] GLM: Y=A*B, A(p=0.001) B(p=0.023) R2=0.456\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "logistic") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SAS] Logistic: AUC=0.847, Sens=82.3% Spec=78.5%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mixed") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SAS] Mixed: Var(Subj)=2.34 Var(Err)=5.67, p=0.003\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "sql") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[SAS] PROC SQL: SELECT...GROUP BY...3 rows (0.23s)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: sas <proc|dataset|glm|logistic|mixed|sql>\n");
+    }
+}
+
+static void cmd_spss59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: spss <data|descriptives|ttest|anova|regression|factor>\n");
+        return;
+    }
+    if (strcmp(args[1], "data") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SPSS] survey.sav: 2500 cases x 42 vars\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "descriptives") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SPSS] Age: mean=42.3 sd=12.8 | Income: mean=52400\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ttest") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[SPSS] t(296)=3.92 p<0.001 d=0.46 (independent)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "anova") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[SPSS] ANOVA: F(2,297)=8.45 p<0.001 eta2=0.054\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regression") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[SPSS] R=0.678 R2=0.460 F(5,294)=49.8 p<0.001\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "factor") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[SPSS] PCA: KMO=0.847, 5 factors, var=68.3%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: spss <data|descriptives|ttest|anova|regression|factor>\n");
+    }
+}
+
+static void cmd_stata59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: stata <summarize|regress|xtreg|ivregress|mergemany|table>\n");
+        return;
+    }
+    if (strcmp(args[1], "summarize") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Stata] 5000 obs, GDP mean=45200 sd=12800\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regress") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Stata] OLS: ln(wage)~educ+exper R2=0.312 educ coef=0.109\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "xtreg") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[Stata] RE: 150 groups x 20 periods, Hausman p=0.12\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ivregress") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[Stata] 2SLS: F=42.3(strong IV), Hausman p=0.003\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "mergemany") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[Stata] Merge: 5000+3200 key=firm_id match=4800(96%)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "table") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[Stata] Summary: wage educ exper female, N=5000\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: stata <summarize|regress|xtreg|ivregress|mergemany|table>\n");
+    }
+}
+
+static void cmd_jasp59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: jasp <bayesian|frequentist|anova|regression|meta|reliability>\n");
+        return;
+    }
+    if (strcmp(args[1], "bayesian") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[JASP] Bayesian t-test: BF10=15.2 HDI=[0.28,0.62]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "frequentist") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[JASP] Chi2(3)=12.4 p=0.006, V=0.18\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "anova") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[JASP] 2-way: A F(2,117)=8.92 p<0.001 eta2=0.13\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regression") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[JASP] Bayes reg: best Y~X1+X3 BF10=23.4 X1:0.52[0.38,0.66]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "meta") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[JASP] Meta: 12 studies N=4520 g=0.45[0.31,0.59] I2=34.2%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "reliability") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[JASP] alpha=0.847 omega=0.862 lambda6=0.831\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: jasp <bayesian|frequentist|anova|regression|meta|reliability>\n");
+    }
+}
+
+static void cmd_jamovi59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: jamovi <ttest|anova|regression|contingency|descriptives|pmc>\n");
+        return;
+    }
+    if (strcmp(args[1], "ttest") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[jamovi] t(298)=3.82 p<0.001 d=0.44 CI=[1.14,3.54]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "anova") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[jamovi] RM-ANOVA: F(2,198)=12.4 p<0.001 np2=0.11\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regression") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[jamovi] Logistic: Nagelkerke R2=0.201, acc=74.2%\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "contingency") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[jamovi] Chi2(4)=18.2 p<0.001 Fisher p=0.003\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "descriptives") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[jamovi] Score: mean=72.4 med=74 sd=12.3 SW=0.987\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "pmc") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[jamovi] PMC: r(X,Y|Z)=0.342 p<0.001\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: jamovi <ttest|anova|regression|contingency|descriptives|pmc>\n");
+    }
+}
+
+static void cmd_pspp59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: pspp <descriptives|ttest|regression|crosstab|frequency|compare>\n");
+        return;
+    }
+    if (strcmp(args[1], "descriptives") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[PSPP] N=1200, Income: mean=$48500 med=$42000\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "ttest") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[PSPP] 1-sample: t(1199)=-2.34 p=0.019 CI=[-2.26,-0.20]\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "regression") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[PSPP] OLS: R=0.567 R2=0.321 F(3,1196)=189.2\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "crosstab") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[PSPP] Chi2(2)=8.45 p=0.015, V=0.084\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "frequency") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[PSPP] A=45.2% B=28.7% C=15.3% D=10.8% mode=A\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "compare") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[PSPP] ANOVA: F(3,1196)=6.78 p<0.001 Bonferroni 2 sig\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: pspp <descriptives|ttest|regression|crosstab|frequency|compare>\n");
+    }
+}
+
+static void cmd_gretl59(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: gretl <ols|tsls|arima|heckman|panel|var>\n");
+        return;
+    }
+    if (strcmp(args[1], "ols") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[gretl] OLS: gdp~cons+inv+gov+nx R2=0.967 DW=1.89\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "tsls") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[gretl] 2SLS: F=38.7(strong), Sargan p=0.42(valid)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "arima") == 0) {
+        vga_set_color(VGA_YELLOW, VGA_BLACK);
+        vga_puts("[gretl] ARIMA(1,1,1): phi=0.45 theta=-0.32 AIC=496.6\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "heckman") == 0) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("[gretl] Heckman: N=1500 sel=980, lambda=0.34(sig)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "panel") == 0) {
+        vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+        vga_puts("[gretl] FE: 200 firms x 10yr, Hausman p=0.008, R2w=0.456\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else if (strcmp(args[1], "var") == 0) {
+        vga_set_color(VGA_LIGHT_MAGENTA, VGA_BLACK);
+        vga_puts("[gretl] VAR lag=2(BIC): Granger gdp->ltrate(p=0.003)\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+    } else {
+        vga_puts("Usage: gretl <ols|tsls|arima|heckman|panel|var>\n");
     }
 }
 
