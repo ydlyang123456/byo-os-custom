@@ -666,53 +666,46 @@ static void cmd_unalias(int argc, char args[][CMD_MAX_LEN]) {
 
 /* ===== Text Commands ===== */
 static void cmd_grep(int argc, char args[][CMD_MAX_LEN]) {
-    int case_insensitive = 0, invert = 0, line_numbers = 0;
-    char *pattern = 0;
-    char *filename = 0;
+    int ci = 0, inv = 0, ln = 0, cnt = 0, fonly = 0;
+    char *pat = 0;
+    char *fn = 0;
     for (int i = 1; i < argc; i++) {
-        if (args[i][0] == '-') {
+        if (args[i][0] == 45) {
             for (int j = 1; args[i][j]; j++) {
-                if (args[i][j] == 'i') case_insensitive = 1;
-                else if (args[i][j] == 'v') invert = 1;
-                else if (args[i][j] == 'n') line_numbers = 1;
+                if (args[i][j] == 105) ci = 1;
+                else if (args[i][j] == 118) inv = 1;
+                else if (args[i][j] == 110) ln = 1;
+                else if (args[i][j] == 99) cnt = 1;
+                else if (args[i][j] == 108) fonly = 1;
             }
-        } else if (!pattern) {
-            pattern = args[i];
-        } else {
-            filename = args[i];
-        }
+        } else if (!pat) { pat = args[i]; }
+        else { fn = args[i]; }
     }
-    if (!pattern) { vga_puts("Usage: grep [-i|-v|-n] <pattern> [file]\n"); return; }
-    if (filename) {
+    if (!pat) { vga_puts("Usage: grep [-ivncl] <pat> [file]\n"); return; }
+    if (fn) {
         memset(file_buf, 0, FILE_BUF_SIZE);
-        int r = fs_read_file(filename, file_buf, FILE_BUF_SIZE - 1);
-        if (r <= 0) { vga_puts("grep: "); vga_puts(filename); vga_puts(": No such file\n"); return; }
-        char line[256];
-        int lnum = 1;
+        int r = fs_read_file(fn, file_buf, FILE_BUF_SIZE - 1);
+        if (r < 0) { vga_puts("grep: "); vga_puts(fn); vga_puts(": not found\n"); return; }
+        char line[256]; int lnum = 1, mc = 0, am = 0;
         char *p = file_buf;
         while (*p) {
             int j = 0;
-            while (*p && *p != '\n') { line[j++] = *p++; }
+            while (*p && *p != 10) { line[j++] = *p++; }
             line[j] = 0;
-            if (*p == '\n') p++;
-            int match = 0;
-            if (case_insensitive) {
-                if (strstr(line, pattern)) match = 1;
-            } else {
-                if (strstr(line, pattern)) match = 1;
-            }
-            if (invert) match = !match;
-            if (match) {
-                if (line_numbers) {
-                    char buf[16]; itoa(lnum, buf, 10); vga_puts(buf); vga_puts(":");
+            if (*p == 10) p++;
+            int m = (strstr(line, pat) != 0);
+            if (inv) m = !m;
+            if (m) { mc++; am = 1;
+                if (!cnt && !fonly) {
+                    if (ln) { char buf[16]; itoa(lnum, buf, 10); vga_puts(buf); vga_puts(":"); }
+                    vga_puts(line); vga_putchar(10);
                 }
-                vga_puts(line); vga_putchar('\n');
             }
             lnum++;
         }
-    } else {
-        vga_puts("Usage: grep [-i|-v|-n] <pattern> <file>\n");
-    }
+        if (cnt) { char buf[16]; itoa(mc, buf, 10); vga_puts(buf); vga_putchar(10); }
+        if (fonly && am) { vga_puts(fn); vga_putchar(10); }
+    } else { vga_puts("Usage: grep [-ivncl] <pat> <file>\n"); }
 }
 
 static void cmd_sort(int argc, char args[][CMD_MAX_LEN]) {
