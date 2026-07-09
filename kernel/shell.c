@@ -14392,6 +14392,48 @@ static void podcast_distribute_170(int argc, char args[][CMD_MAX_LEN]);
 static void video_stream_170(int argc, char args[][CMD_MAX_LEN]);
 static void video_archive_170(int argc, char args[][CMD_MAX_LEN]);
 static void content_manage_170(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 171: Research + Science */
+static void paper_search_171(int argc, char args[][CMD_MAX_LEN]);
+static void paper_cite_171(int argc, char args[][CMD_MAX_LEN]);
+static void paper_review_171(int argc, char args[][CMD_MAX_LEN]);
+static void experiment_design_171(int argc, char args[][CMD_MAX_LEN]);
+static void data_collect_171(int argc, char args[][CMD_MAX_LEN]);
+static void data_analyze_171(int argc, char args[][CMD_MAX_LEN]);
+static void hypothesis_test_171(int argc, char args[][CMD_MAX_LEN]);
+static void stat_test_171(int argc, char args[][CMD_MAX_LEN]);
+static void peer_review_171(int argc, char args[][CMD_MAX_LEN]);
+static void journal_submit_171(int argc, char args[][CMD_MAX_LEN]);
+static void grant_write_171(int argc, char args[][CMD_MAX_LEN]);
+static void research_collab_171(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 172: UX/UI Design */
+static void ux_research_172(int argc, char args[][CMD_MAX_LEN]);
+static void ux_personas_172(int argc, char args[][CMD_MAX_LEN]);
+static void ux_journey_172(int argc, char args[][CMD_MAX_LEN]);
+static void ux_wireframe_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_prototype_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_style_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_motion_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_accessibility_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_theme_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_layout_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_responsive_172(int argc, char args[][CMD_MAX_LEN]);
+static void ui_testing_172(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 173: Business Intelligence */
+static void bi_dashboard_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_report_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_kpi_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_forecast_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_segment_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_cohort_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_funnel_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_attribution_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_abtest_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_metric_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_alert_173(int argc, char args[][CMD_MAX_LEN]);
+static void bi_export_173(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17306,7 +17348,14 @@ static const cmd_entry commands[] = {
     /* Batch 169: Logistics + Supply */
     {"warehouse-manage", warehouse_manage_169},     {"route-optimize", route_optimize_169},     {"load-plan", load_plan_169},     {"track-shipment", track_shipment_169},     {"customs-clear", customs_clear_169},     {"freight-calc", freight_calc_169},     {"last-mile", last_mile_169},     {"reverse-logistics", reverse_logistics_169},     {"cold-chain", cold_chain_169},     {"hazmat-manage", hazmat_manage_169},     {"cross-dock", cross_dock_169},     {"yard-manage", yard_manage_169}, 
     /* Batch 170: Media + Publishing */
-    {"news-write", news_write_170},     {"news-publish", news_publish_170},     {"news-analyze", news_analyze_170},     {"news-aggregate", news_aggregate_170},     {"blog-create", blog_create_170},     {"blog-seo", blog_seo_170},     {"podcast-record", podcast_record_170},     {"podcast-edit", podcast_edit_170},     {"podcast-distribute", podcast_distribute_170},     {"video-stream", video_stream_170},     {"video-archive", video_archive_170},     {"content-manage", content_manage_170}, 
+    {"news-write", news_write_170},     {"news-publish", news_publish_170},     {"news-analyze", news_analyze_170},     {"news-aggregate", news_aggregate_170},     {"blog-create", blog_create_170},     {"blog-seo", blog_seo_170},     {"podcast-record", podcast_record_170},     {"podcast-edit", podcast_edit_170},     {"podcast-distribute", podcast_distribute_170},     {"video-stream", video_stream_170},     {"video-archive", video_archive_170},     {"content-manage", content_manage_170},
+    /* Batch 171: Research + Science */
+    {"paper-search", paper_search_171},     {"paper-cite", paper_cite_171},     {"paper-review", paper_review_171},     {"experiment-design", experiment_design_171},     {"data-collect", data_collect_171},     {"data-analyze", data_analyze_171},     {"hypothesis-test", hypothesis_test_171},     {"stat-test", stat_test_171},     {"peer-review", peer_review_171},     {"journal-submit", journal_submit_171},     {"grant-write", grant_write_171},     {"research-collab", research_collab_171}, 
+    /* Batch 172: UX/UI Design */
+    {"ux-research", ux_research_172},     {"ux-personas", ux_personas_172},     {"ux-journey", ux_journey_172},     {"ux-wireframe", ux_wireframe_172},     {"ui-prototype", ui_prototype_172},     {"ui-style", ui_style_172},     {"ui-motion", ui_motion_172},     {"ui-accessibility", ui_accessibility_172},     {"ui-theme", ui_theme_172},     {"ui-layout", ui_layout_172},     {"ui-responsive", ui_responsive_172},     {"ui-testing", ui_testing_172}, 
+    /* Batch 173: Business Intelligence */
+    {"bi-dashboard", bi_dashboard_173},     {"bi-report", bi_report_173},     {"bi-kpi", bi_kpi_173},     {"bi-forecast", bi_forecast_173},     {"bi-segment", bi_segment_173},     {"bi-cohort", bi_cohort_173},     {"bi-funnel", bi_funnel_173},     {"bi-attribution", bi_attribution_173},     {"bi-abtest", bi_abtest_173},     {"bi-metric", bi_metric_173},     {"bi-alert", bi_alert_173},     {"bi-export", bi_export_173}, 
+ 
  
  
  
@@ -39029,6 +39078,157 @@ static void video_archive_170(int argc, char args[][CMD_MAX_LEN]) {
 static void content_manage_170(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("CMS: Articles:234 Drafts:12 Scheduled:8 Published:214\n");
+}
+
+
+/* ===== Batch 171: Research + Science ===== */
+static void paper_search_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Search: 1,247 papers Keywords:3 Topics:12 Citations:45,678\n");
+}
+static void paper_cite_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cite: APA7 Format:correct References:47 BibTeX:exported\n");
+}
+static void paper_review_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Review: Clarity:8/10 Novelty:7/10 Rigor:9/10 Score:8/10\n");
+}
+static void experiment_design_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Design: RCT N=120 Power:0.8 Alpha:0.05 Effect:0.5\n");
+}
+static void data_collect_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Collect: 1,247 samples Response:89%% Time:2 weeks\n");
+}
+static void data_analyze_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Analyze: ANOVA F=12.3 p=0.001 Effect:0.45 CI:95%%\n");
+}
+static void hypothesis_test_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Test: H0:rejected H1:supported p=0.001 Effect:large\n");
+}
+static void stat_test_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stats: Mean:45.2 SD:12.3 t=8.7 p<0.001 Cohen d=0.8\n");
+}
+static void peer_review_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Review: 3 reviewers Accept:2 Minor:1 Major:0\n");
+}
+static void journal_submit_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Submit: Nature IF:69.5 Status:under-review Manuscript:#12848\n");
+}
+static void grant_write_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grant: NIH R01 Budget:$250K Duration:3 years Score:92/100\n");
+}
+static void research_collab_171(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Collab: 12 researchers 4 institutions Data:shared Code:open\n");
+}
+
+/* ===== Batch 172: UX/UI Design ===== */
+static void ux_research_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Research: Users:120 Interviews:24 Surveys:456 Tasks:12\n");
+}
+static void ux_personas_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Personas: 4 created Primary:Developer(35%%) Secondary:Admin(25%%)\n");
+}
+static void ux_journey_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Journey: 6 stages Pain points:3 Opportunities:5 Touchpoints:12\n");
+}
+static void ux_wireframe_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wireframe: 8 screens Lo-fi Components:47 Flows:3\n");
+}
+static void ui_prototype_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Prototype: 12 screens Interactive:true Fidelity:high Clickable:true\n");
+}
+static void ui_style_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Style: Primary:#38bdf8 Font:Inter Radius:8px Spacing:4/8/16\n");
+}
+static void ui_motion_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Motion: Duration:200ms Easing:ease-in-out Stagger:50ms\n");
+}
+static void ui_accessibility_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("A11y: WCAG:AA Contrast:7.2:1 Focus:visible Screen reader:OK\n");
+}
+static void ui_theme_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Theme: Light+Dark Colors:12 Tokens:24 Components:18\n");
+}
+static void ui_layout_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Layout: Grid:12col Gutter:16px Max:1200px Break:768/1024\n");
+}
+static void ui_responsive_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Responsive: Mobile:320px Tablet:768px Desktop:1024px Print:OK\n");
+}
+static void ui_testing_172(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Testing: Usability:87%% task success SUS:82 Time-on-task:-15%%\n");
+}
+
+/* ===== Batch 173: Business Intelligence ===== */
+static void bi_dashboard_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dashboard: 12 widgets Data:real-time Refresh:5s Users:24\n");
+}
+static void bi_report_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Report: Q4 2023 Revenue:$12.5M Growth:23%% Margin:18%%\n");
+}
+static void bi_kpi_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("KPI: MRR:$450K Churn:2.1%% NPS:67 CAC:$234 LTV:$2,340\n");
+}
+static void bi_forecast_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Forecast: Next quarter:$14.2M Confidence:85%% Trend:upward\n");
+}
+static void bi_segment_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Segment: Enterprise:34%% SMB:45%% Startup:21%% Active:1,247\n");
+}
+static void bi_cohort_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cohort: Jan retention:89%% Feb:85%% Mar:82%% Churn:avg:18%%\n");
+}
+static void bi_funnel_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Funnel: Visit:12,847 Signup:1,247 Activate:892 Retain:678\n");
+}
+static void bi_attribution_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Attribution: Paid:35%% Organic:28%% Referral:22%% Direct:15%%\n");
+}
+static void bi_abtest_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("A/B Test: Variant B +12%% conversion 95%% significant n=2,400\n");
+}
+static void bi_metric_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Metric: DAU:4,567 WAU:12,847 MAU:45,678 Stickiness:33%%\n");
+}
+static void bi_alert_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Alert: Revenue -15%% vs forecast Triggered:14:23 Channel:slack\n");
+}
+static void bi_export_173(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Export: Format:CSV Rows:12,847 Size:2.3MB Scheduled:daily\n");
 }
 
 void shell_run(void) {
