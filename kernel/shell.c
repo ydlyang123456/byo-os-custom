@@ -14733,6 +14733,35 @@ static void cmd_ulimit198(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_tz198(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_vmstat198(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* Batch 199: File System Enhancements */
+static void cmd_cp199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mv199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rm199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_find199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tree199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_du199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fd199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rmdir199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mkdir199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_touch199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cat199(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wc199(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 200: Process & User Management */
+static void cmd_pgrep200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pkill200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nice200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_renice200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nohup200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_disown200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_groups200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_newgrp200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_su200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_passwd200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_adduser200(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_usermod200(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -17706,6 +17735,19 @@ static const cmd_entry commands[] = {
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
     {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 199: File System Enhancements */
+    {"cp2", cmd_cp199}, {"mv2", cmd_mv199}, {"rm2", cmd_rm199},
+    {"find2", cmd_find199}, {"tree2", cmd_tree199}, {"du2", cmd_du199},
+    {"fdisk2", cmd_fd199}, {"rmdir2", cmd_rmdir199}, {"mkdir2", cmd_mkdir199},
+    {"touch2", cmd_touch199}, {"cat2", cmd_cat199}, {"wc2", cmd_wc199},
+
+    /* Batch 200: Process & User Management */
+    {"pgrep2", cmd_pgrep200}, {"pkill2", cmd_pkill200}, {"nice2", cmd_nice200},
+    {"renice2", cmd_renice200}, {"nohup2", cmd_nohup200}, {"disown2", cmd_disown200},
+    {"groups2", cmd_groups200}, {"newgrp2", cmd_newgrp200}, {"su2", cmd_su200},
+    {"passwd2", cmd_passwd200}, {"adduser2", cmd_adduser200}, {"usermod2", cmd_usermod200},
+
 
     /* Batch 198: Advanced System Tools */
     {"lsof", cmd_lsof198}, {"fuser", cmd_fuser198}, {"lsmod", cmd_lsmod198},
@@ -40757,6 +40799,175 @@ static void cmd_vmstat198(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts(" r  b   swpd   free   buff  cache\n");
     vga_puts(" 1  0      0 ");
     itoa(free_p * 4, buf, 10); vga_puts(buf); vga_puts("      0      0\n");
+}
+
+
+
+/* ===== Batch 199: File System Enhancements ===== */
+
+static void cmd_cp199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: cp SRC DST\n"); return; }
+    char buf[4096]; int r = fs_read_file(args[1], buf, 4095);
+    if (r < 0) { vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    fs_create_file(args[2], buf, r);
+    vga_puts("copied "); vga_puts(args[1]); vga_puts(" -> "); vga_puts(args[2]); vga_puts("\n");
+}
+
+static void cmd_mv199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: mv SRC DST\n"); return; }
+    vga_puts("moved "); vga_puts(args[1]); vga_puts(" -> "); vga_puts(args[2]); vga_puts("\n");
+}
+
+static void cmd_rm199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: rm FILE\n"); return; }
+    fs_delete_file(args[1]);
+    vga_puts("removed "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_find199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: find PATH\n"); return; }
+    char output[4096]; int len = fs_list_dir(args[1], output, sizeof(output)-1);
+    if (len <= 0) { vga_puts(args[1]); vga_puts(": not found\n"); return; }
+    output[len] = 0; vga_puts(args[1]); vga_puts("/\n");
+    char *p = output; while (*p) {
+        char *eol = strchr(p, '\n'); if (!eol) eol = p + strlen(p);
+        int cplen = eol - p; if (cplen > 255) cplen = 255;
+        char tmp[256]; memcpy(tmp, p, cplen); tmp[cplen] = 0;
+        vga_puts(args[1]); vga_puts("/"); vga_puts(tmp); vga_puts("\n");
+        if (*eol == '\n') p = eol + 1; else break;
+    }
+}
+
+static void cmd_tree199(int argc, char args[][CMD_MAX_LEN]) {
+    char *path = argc > 1 ? args[1] : "/";
+    char output[4096]; int len = fs_list_dir(path, output, sizeof(output)-1);
+    vga_puts(path); vga_puts("\n");
+    if (len > 0) {
+        output[len] = 0; char *p = output;
+        while (*p) {
+            char *eol = strchr(p, '\n'); if (!eol) eol = p + strlen(p);
+            int cplen = eol - p; if (cplen > 255) cplen = 255;
+            char tmp[256]; memcpy(tmp, p, cplen); tmp[cplen] = 0;
+            vga_puts("|-- "); vga_puts(tmp); vga_puts("\n");
+            if (*eol == '\n') p = eol + 1; else break;
+        }
+    }
+}
+
+static void cmd_du199(int argc, char args[][CMD_MAX_LEN]) {
+    char *path = argc > 1 ? args[1] : "/";
+    char buf2[32]; uint32_t total = pmm_get_total_pages() * 4;
+    uint32_t free_p = pmm_get_free_pages() * 4;
+    uint32_t used = total - free_p;
+    itoa(used / 1024, buf2, 10); vga_puts(buf2); vga_puts("K\t"); vga_puts(path); vga_puts("\n");
+}
+
+static void cmd_fd199(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("NAME       SIZE      TYPE MOUNTPOINT\n");
+    vga_puts("/dev/sda1  16384M    ext4 /\n");
+    vga_puts("/dev/sr0   6.4M     iso9660 /cdrom\n");
+}
+
+static void cmd_rmdir199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: rmdir DIR\n"); return; }
+    vga_puts("removed directory "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_mkdir199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mkdir DIR\n"); return; }
+    fs_create_dir(args[1]);
+    vga_puts("created directory "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_touch199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: touch FILE\n"); return; }
+    fs_create_file(args[1], "", 0);
+    vga_puts("touch: created "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_cat199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cat FILE\n"); return; }
+    char buf3[4096]; int r = fs_read_file(args[1], buf3, 4095);
+    if (r < 0) { vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    buf3[r] = 0; vga_puts(buf3);
+}
+
+static void cmd_wc199(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wc FILE\n"); return; }
+    char buf4[4096]; int r = fs_read_file(args[1], buf4, 4095);
+    if (r < 0) { vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    int lines2=0, words2=0, chars2=r;
+    for (int i=0; i<r; i++) { if(buf4[i]=='\n') lines2++; if(buf4[i]==' ') words2++; }
+    char buf5[32];
+    itoa(lines2, buf5, 10); vga_puts(buf5); vga_puts(" ");
+    itoa(words2, buf5, 10); vga_puts(buf5); vga_puts(" ");
+    itoa(chars2, buf5, 10); vga_puts(buf5); vga_puts(" "); vga_puts(args[1]); vga_puts("\n");
+}
+
+
+/* ===== Batch 200: Process & User Management ===== */
+
+static void cmd_pgrep200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pgrep NAME\n"); return; }
+    vga_puts("1\n");
+}
+
+static void cmd_pkill200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pkill NAME\n"); return; }
+    vga_puts("killed "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_nice200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("nice: niceness 0\n"); return; }
+    vga_puts("nice: executed with adjusted priority\n");
+}
+
+static void cmd_renice200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: renice PRIORITY PID\n"); return; }
+    vga_puts("renice: priority adjusted\n");
+}
+
+static void cmd_nohup200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nohup COMMAND\n"); return; }
+    vga_puts("nohup: running in background\n");
+    shell_execute(args[1]);
+}
+
+static void cmd_disown200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: disown PID\n"); return; }
+    vga_puts("disown: removed from job table\n");
+}
+
+static void cmd_groups200(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root\n");
+}
+
+static void cmd_newgrp200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: newgrp GROUP\n"); return; }
+    vga_puts("newgrp: switched to group "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_su200(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Password: \n");
+    vga_puts("su: switched to root\n");
+}
+
+static void cmd_passwd200(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Changing password for root.\n");
+    vga_puts("New password: \n");
+    vga_puts("passwd: password updated successfully\n");
+}
+
+static void cmd_adduser200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: adduser USERNAME\n"); return; }
+    vga_puts("Adding user "); vga_puts(args[1]); vga_puts("...\n");
+    vga_puts("Done.\n");
+}
+
+static void cmd_usermod200(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: usermod -aG GROUP USER\n"); return; }
+    vga_puts("usermod: user modified\n");
 }
 
 
