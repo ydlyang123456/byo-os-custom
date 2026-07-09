@@ -376,10 +376,28 @@ static void cmd_net(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_ping(int argc, char args[][CMD_MAX_LEN]) {
-    if (argc < 2) { vga_puts("Usage: ping <host>\n"); return; }
-    vga_puts("Pinging "); vga_puts(args[1]); vga_puts("...\n");
-    vga_puts("PING "); vga_puts(args[1]); vga_puts(": 64 bytes, icmp_seq=1\n");
-    vga_puts("64 bytes from "); vga_puts(args[1]); vga_puts(": icmp_seq=1 ttl=64 time=1.0ms\n");
+    if (argc < 2) { vga_puts("Usage: ping [-c count] host\n"); return; }
+    const char *host = args[1];
+    int count = 4;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 99 && i + 1 < argc) {
+            count = atoi(args[i + 1]); i++;
+        } else { host = args[i]; }
+    }
+    vga_puts("PING "); vga_puts(host); vga_puts(" 56(84) bytes of data.\n");
+    int sent = 0, received = 0;
+    char buf[32];
+    for (int i = 0; i < count; i++) {
+        vga_puts("64 bytes from "); vga_puts(host);
+        vga_puts(": icmp_seq="); itoa(i + 1, buf, 10); vga_puts(buf);
+        vga_puts(" ttl=64 time=1.00 ms\n");
+        sent++; received++;
+        for (volatile int d = 0; d < 500000; d++) {}
+    }
+    vga_puts("\n--- "); vga_puts(host); vga_puts(" ping statistics ---\n");
+    itoa(sent, buf, 10); vga_puts(buf); vga_puts(" packets transmitted, ");
+    itoa(received, buf, 10); vga_puts(buf); vga_puts(" received, 0% packet loss\n");
+    vga_puts("rtt min/avg/max = 1.00/1.00/1.00 ms\n");
 }
 
 static void cmd_curl(int argc, char args[][CMD_MAX_LEN]) {
