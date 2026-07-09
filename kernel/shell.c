@@ -1277,11 +1277,24 @@ static void cmd_df_h(int argc, char args[][CMD_MAX_LEN]) {
     unsigned int total = 0, used = 0, free_s = 0;
     fs_get_stats(&total, &used, &free_s);
     char buf[32];
-    vga_puts("Filesystem      Size   Used  Avail\n");
-    vga_puts("/dev/fs         ");
-    itoa(total / 1024, buf, 10); vga_puts(buf); vga_puts("K  ");
-    itoa(used / 1024, buf, 10); vga_puts(buf); vga_puts("K  ");
-    itoa(free_s / 1024, buf, 10); vga_puts(buf); vga_puts("K\n");
+    vga_puts("Filesystem      Size  Used Avail Use%% Mounted on\n");
+    vga_puts("/dev/fs        ");
+    if (total > 1048576) { itoa(total / 1048576, buf, 10); vga_puts(buf); vga_puts("G"); }
+    else if (total > 1024) { itoa(total / 1024, buf, 10); vga_puts(buf); vga_puts("M"); }
+    else { itoa(total, buf, 10); vga_puts(buf); vga_puts("K"); }
+    int pad = 7 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+    if (used > 1048576) { itoa(used / 1048576, buf, 10); vga_puts(buf); vga_puts("G"); }
+    else if (used > 1024) { itoa(used / 1024, buf, 10); vga_puts(buf); vga_puts("M"); }
+    else { itoa(used, buf, 10); vga_puts(buf); vga_puts("K"); }
+    pad = 6 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+    if (free_s > 1048576) { itoa(free_s / 1048576, buf, 10); vga_puts(buf); vga_puts("G"); }
+    else if (free_s > 1024) { itoa(free_s / 1024, buf, 10); vga_puts(buf); vga_puts("M"); }
+    else { itoa(free_s, buf, 10); vga_puts(buf); vga_puts("K"); }
+    pad = 6 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+    int pct = total > 0 ? (used * 100 / total) : 0;
+    itoa(pct, buf, 10); vga_puts(buf); vga_puts("%%");
+    pad = 4 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+    vga_puts(" /\n");
 }
 
 /* tee - write to file and stdout */
