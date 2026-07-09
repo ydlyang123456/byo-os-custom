@@ -4708,12 +4708,54 @@ static void cmd_vimdiff(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void xxd_cmd(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("xxd: hex dump\n");
+    if (argc < 2) { vga_puts("Usage: xxd <file>\n"); return; }
+    char buf[4096];
+    int r = fs_read_file(args[1], buf, 4095);
+    if (r < 0) { vga_puts("xxd: "); vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    char hex[] = "0123456789abcdef";
+    for (int i = 0; i < r; i += 16) {
+        char addr[16];
+        { int a = i; char *p = addr + 7; *p = 0; for (int k = 0; k < 8; k++) { *--p = hex[a & 0xf]; a >>= 4; } }
+        vga_puts(addr); vga_puts(": ");
+        for (int j = 0; j < 16; j++) {
+            if (i + j < r) {
+                vga_putchar(hex[((unsigned char)buf[i+j]) >> 4]);
+                vga_putchar(hex[((unsigned char)buf[i+j]) & 0xf]);
+            } else {
+                vga_puts("  ");
+            }
+            if (j == 7) vga_putchar(' ');
+            vga_putchar(' ');
+        }
+        vga_puts(" |");
+        for (int j = 0; j < 16 && (i+j) < r; j++) {
+            unsigned char c = (unsigned char)buf[i+j];
+            vga_putchar((c >= 32 && c < 127) ? c : '.');
+        }
+        vga_puts("|\n");
+    }
 }
 
+
 static void cmd_od(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("od: octal dump\n");
+    if (argc < 2) { vga_puts("Usage: od <file>\n"); return; }
+    char buf[4096];
+    int r = fs_read_file(args[1], buf, 4095);
+    if (r < 0) { vga_puts("od: "); vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    char oct[] = "01234567";
+    for (int i = 0; i < r; i += 8) {
+        char addr[16];
+        { int a = i; char *p = addr + 7; *p = 0; char hx[] = "01234567"; for (int k = 0; k < 8; k++) { *--p = hx[a & 7]; a >>= 3; } }
+        vga_puts(addr); vga_puts("  ");
+        for (int j = 0; j < 8 && (i+j) < r; j++) {
+            unsigned char c = (unsigned char)buf[i+j];
+            char octet[4]; octet[0] = oct[(c>>6)&7]; octet[1] = oct[(c>>3)&7]; octet[2] = oct[c&7]; octet[3] = 0;
+            vga_puts(octet); vga_putchar(' ');
+        }
+        vga_putchar('\n');
+    }
 }
+
 
 static void cmd_base32(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("base32: base32 encode/decode\n");
