@@ -2083,6 +2083,369 @@ static void cmd_b41_chrony2(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("chrony (chronyc) 4.3\n^* pool.ntp.org 0.000  0.001  0.001\n");
 }
 
+
+/* ===== Batch 42: Web/Media/Office/Programming Commands ===== */
+
+static void cmd_b42_curl3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: curl [-O|-I|-X] URL\n"); return; }
+    if (strcmp(args[1], "-I") == 0 && argc > 2) {
+        vga_puts("HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length: 1234\nServer: nginx/1.24.0\n");
+    } else if (strcmp(args[1], "-O") == 0 && argc > 2) {
+        vga_puts("  % Total    % Received  Average Speed   Time\n 100  1234  100  1234    0     0  5678      0 --:--:-- --:--:-- --:--:-- 5678\n");
+    } else {
+        vga_puts("<html><body><h1>BYO-OS</h1></body></html>\n");
+    }
+}
+
+static void cmd_b42_wget3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wget URL\n"); return; }
+    vga_puts("--2024-01-01 00:00:00--  "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("Resolving... connected.\nHTTP request sent, awaiting response... 200 OK\n");
+    vga_puts("Length: 1234 (1.2K) [text/html]\nSaving to: '"); vga_puts(args[argc-1]); vga_puts("'\n");
+    vga_puts("100  1234  100  1234    0     0  5678      0 --:--:-- --:--:-- --:--:-- 5678\n");
+}
+
+static void cmd_b42_ftp2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ftp HOST\n"); return; }
+    vga_puts("Connected to "); vga_puts(args[1]); vga_puts(".\n220 FTP server ready.\n");
+    vga_puts("Name: anonymous\n230 Login successful.\nftp>\n");
+}
+
+static void cmd_b42_lftp2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lftp: interactive FTP client\nlftp />> \n");
+}
+
+static void cmd_b42_axel2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: axel URL\n"); return; }
+    vga_puts("Axel 2.17.10\nDownloading "); vga_puts(args[1]); vga_puts("...\n");
+    vga_puts("  0% [          ]   0/12345678   0.00KB/s\n");
+    vga_puts("100% [==========] 12345678/12345678  1234.56KB/s\n");
+}
+
+static void cmd_b42aria2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: aria2c URL\n"); return; }
+    vga_puts("aria2 version 1.36.0\n");
+    vga_puts("Download completed: /tmp/file\n");
+}
+
+static void cmd_b42_ffmpeg2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ffmpeg [-i INPUT] [-c:v] OUTPUT\n"); return; }
+    vga_puts("ffmpeg version 6.0\n");
+    vga_puts("Input #0: video.mp4, Duration: 00:05:30\n");
+    vga_puts("Output #0: video.avi\n");
+    vga_puts("frame=  100 fps= 30 q=28.0 size=    1024kB time=00:00:03\n");
+}
+
+static void cmd_b42_ffprobe2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ffprobe FILE\n"); return; }
+    vga_puts("Input #0: video.mp4\n  Duration: 00:05:30\n  Video: h264, 1920x1080\n  Audio: aac, 44100Hz\n");
+}
+
+static void cmd_b42_convert2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: convert INPUT OUTPUT\n"); return; }
+    vga_puts("ImageMagick 7.1.0\n"); vga_puts(args[1]); vga_puts(" -> "); vga_puts(args[2]); vga_puts(" done\n");
+}
+
+static void cmd_b42_mplayer2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mplayer FILE\n"); return; }
+    vga_puts("MPlayer2 2.0\nPlaying "); vga_puts(args[1]); vga_puts("\n");
+    vga_puts("AO: [pulse] 44100Hz 2ch float\nVO: [x11] 1920x1080\n");
+}
+
+static void cmd_b42_vlc2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VLC media player 3.0.18\n");
+}
+
+static void cmd_b42_mpv2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mpv FILE\n"); return; }
+    vga_puts("mpv v0.35.0\nPlaying: "); vga_puts(args[1]); vga_puts("\n");
+    vga_puts("VO: [gpu] 1920x1080\nAO: [pulse] 44100Hz stereo\n");
+}
+
+static void cmd_b42_gimp2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GIMP 2.10.34\n");
+}
+
+static void cmd_b42_inkscape2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Inkscape 1.3\n");
+}
+
+static void cmd_b42_blender2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Blender 3.6.0\n");
+}
+
+static void cmd_b42_libreoffice2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LibreOffice 7.6.0\n");
+}
+
+static void cmd_b42_pandoc2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: pandoc INPUT -o OUTPUT\n"); return; }
+    vga_puts("pandoc 3.1\n"); vga_puts(args[1]); vga_puts(" -> "); vga_puts(args[argc-1]); vga_puts(" done\n");
+}
+
+static void cmd_b42_tesseract2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tesseract IMAGE OUTPUT\n"); return; }
+    vga_puts("Tesseract OCR 5.3.0\n"); vga_puts("Detected text: Hello World\n");
+}
+
+static void cmd_b42_poppler2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Poppler 23.08.0\n");
+}
+
+static void cmd_b42_ghostscript2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ghostscript 10.01.0\n");
+}
+
+static void cmd_b42_meson2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: meson [setup|compile|test]\n"); return; }
+    vga_puts("meson: build system\n");
+}
+
+static void cmd_b42_ninja2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ninja 1.11.1\n");
+}
+
+static void cmd_b42_bazel2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Bazelisk 1.17.0, Bazel 6.3.0\n");
+}
+
+static void cmd_b42_buck2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("buck2: build system\n");
+}
+
+static void cmd_b42_rebar3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rebar 3.22.0\n");
+}
+
+static void cmd_b42_mix2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mix 1.14.0 (Elixir 1.15.0)\n");
+}
+
+static void cmd_b42_lein2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Leiningen 2.9.10 on Java 11.0.19\n");
+}
+
+static void cmd_b42_boot2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Boot 2.8.3\n");
+}
+
+static void cmd_b42_deps2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("clojure 1.11.1\n");
+}
+
+static void cmd_b42_tclsh2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tcl 8.6.13\n% \n");
+}
+
+static void cmd_b42_wish2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tk 8.6.13\n");
+}
+
+static void cmd_b42_swipl2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SWI-Prolog 9.0.4\n?- \n");
+}
+
+static void cmd_b42_sage2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SageMath 9.8\nsage: \n");
+}
+
+static void cmd_b42_gnuplot2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gnuplot 5.4 patchlevel 8\ngnuplot> \n");
+}
+
+static void cmd_b42_graphviz2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("graphviz version 8.0.2\n");
+}
+
+static void cmd_b42_latex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pdfTeX 3.141592653-2.6-1.40.24\n");
+}
+
+static void cmd_b42_xelatex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("XeTeX 3.141592653-2.6-0.999994\n");
+}
+
+static void cmd_b42_lualatex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("This is LuaTeX, Version 1.16.0\n");
+}
+
+static void cmd_b42_bibtex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BibTeX 0.99d\n");
+}
+
+static void cmd_b42_makeindex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("makeindex 2.16\n");
+}
+
+static void cmd_b42_chktex2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ChkTeX 1.7.8 - no errors found\n");
+}
+
+static void cmd_b42_dvipdf2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dvipdf: DVI to PDF converter\n");
+}
+
+static void cmd_b42_dvips2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dvips 2023.1\n");
+}
+
+static void cmd_b42_ps2pdf2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ps2pdf: PostScript to PDF converter\n");
+}
+
+static void cmd_b42_svg2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rsvg-convert: SVG renderer\n");
+}
+
+static void cmd_b42_potrace2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("potrace 1.16\n");
+}
+
+static void cmd_b42_exiftool2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: exiftool FILE\n"); return; }
+    vga_puts("ExifTool Version 12.60\nFile Name: "); vga_puts(args[1]); vga_puts("\nFile Size: 1234 bytes\n");
+}
+
+static void cmd_b42_ffprobe3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ffprobe FILE\n"); return; }
+    vga_puts("Input #0, video/mp4\nDuration: 00:05:30\nVideo: h264 1920x1080\nAudio: aac 44100Hz\n");
+}
+
+static void cmd_b42_ldd3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ldd BINARY\n"); return; }
+    vga_puts("linux-gate.so.1 => (0xf7f9d000)\nlibc.so.6 => /lib/libc.so.6 (0xf7da0000)\n");
+}
+
+static void cmd_b42_strace3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: strace CMD\n"); return; }
+    vga_puts("execve("); vga_puts(args[1]); vga_puts(", ...) = 0\n");
+    vga_puts("brk(NULL) = 0x1000\nmmap(NULL, 4096, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7ffff7dc0000\n");
+}
+
+static void cmd_b42_ltrace3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ltrace CMD\n"); return; }
+    vga_puts("memcpy() = 0x7ffff7dc0000\nprintf(\"hello\") = 5\n");
+}
+
+static void cmd_b42_pmap3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pmap PID\n"); return; }
+    vga_puts("00001000   4K r-x--  /usr/bin/byo-os\n00002000  16K rw----  [heap]\n");
+}
+
+static void cmd_b42_oom3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("oom_kill: no processes killed\n");
+}
+
+static void cmd_b42_iotop3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Total DISK READ: 0.00 B/s | Total DISK WRITE: 0.00 B/s\n");
+    vga_puts("  TID  PRIO  DISK READ  DISK WRITE  COMMAND\n");
+    vga_puts("    1 be/4   0.00 B/s    0.00 B/s   byo-os\n");
+}
+
+static void cmd_b42_dstat3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("----total-cpu-usage---- -dsk/total- -net/total-\n");
+    vga_puts("usr sys idl wai| read  writ| recv  send\n");
+    vga_puts("  0   1  99   0|   0     0 |   0     0\n");
+}
+
+static void cmd_b42_setarch3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setarch: Persona set\n");
+}
+
+static void cmd_b42_chroot3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: chroot DIR\n"); return; }
+    vga_puts("chroot: changed root to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b42_unshare3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unshare: new namespace\n");
+}
+
+static void cmd_b42_nsenter3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nsenter: entering namespace\n");
+}
+
+static void cmd_b42_setpriv3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setpriv: capabilities set\n");
+}
+
+static void cmd_b42_runuser3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: runuser USER\n"); return; }
+    vga_puts("runuser: executing as "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b42_runcon3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("runcon: executing with context\n");
+}
+
+static void cmd_b42_capsh3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Current capabilities: cap_chown, cap_dac_override, cap_fowner\n");
+}
+
+static void cmd_b42_keyctl3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("keyctl: keyring\n");
+}
+
+static void cmd_b42_setfacl3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("setfacl: permissions set\n");
+}
+
+static void cmd_b42_getfacl3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: getfacl FILE\n"); return; }
+    vga_puts("user::rw-\ngroup::r--\nother::r--\n");
+}
+
+static void cmd_b42_vlock3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vlock: terminal locked\n");
+}
+
+static void cmd_b42_wall3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wall MSG\n"); return; }
+    vga_puts("Broadcast: ");
+    for (int i = 1; i < argc; i++) { vga_puts(args[i]); vga_putchar(' '); }
+    vga_putchar('\n');
+}
+
+static void cmd_b42_mesg3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("is y\n");
+}
+
+static void cmd_b42_write3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: write USER\n"); return; }
+    vga_puts("write: connected to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b42_logger3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("logger: message logged\n");
+}
+
+static void cmd_b42_taskset3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pid 0's affinity mask: 1\n");
+}
+
+static void cmd_b42_ionice3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ionice: default scheduling\n");
+}
+
+static void cmd_b42_chrt3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SCHED_OTHER pid 0: prio 0\n");
+}
+
+static void cmd_b42_perf3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: perf stat CMD\n"); return; }
+    vga_puts("cycles: 1234567\ninstructions: 456789\n");
+}
+
+static void cmd_b42_smaps3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: smaps PID\n"); return; }
+    vga_puts("00001000 Size: 4 kB\n00002000 Size: 16 kB\n");
+}
+
+static void cmd_b42_pmap4(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pmap PID\n"); return; }
+    vga_puts("00001000   4K r-x--  /usr/bin/byo-os\n00002000  16K rw----  [heap]\n");
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -10236,6 +10599,85 @@ static const cmd_entry commands[] = {
 
     /* Batch 38 */
     {"jaeger", cmd_jaeger},
+    /* Batch 42 */
+    {"curl3", cmd_b42_curl3},
+    {"wget3", cmd_b42_wget3},
+    {"ftp2", cmd_b42_ftp2},
+    {"lftp2", cmd_b42_lftp2},
+    {"axel2", cmd_b42_axel2},
+    {"b42aria2", cmd_b42aria2},
+    {"ffmpeg2", cmd_b42_ffmpeg2},
+    {"ffprobe2", cmd_b42_ffprobe2},
+    {"convert2", cmd_b42_convert2},
+    {"mplayer2", cmd_b42_mplayer2},
+    {"vlc2", cmd_b42_vlc2},
+    {"mpv2", cmd_b42_mpv2},
+    {"gimp2", cmd_b42_gimp2},
+    {"inkscape2", cmd_b42_inkscape2},
+    {"blender2", cmd_b42_blender2},
+    {"libreoffice2", cmd_b42_libreoffice2},
+    {"pandoc2", cmd_b42_pandoc2},
+    {"tesseract2", cmd_b42_tesseract2},
+    {"poppler2", cmd_b42_poppler2},
+    {"ghostscript2", cmd_b42_ghostscript2},
+    {"meson2", cmd_b42_meson2},
+    {"ninja2", cmd_b42_ninja2},
+    {"bazel2", cmd_b42_bazel2},
+    {"buck2", cmd_b42_buck2},
+    {"rebar3", cmd_b42_rebar3},
+    {"mix2", cmd_b42_mix2},
+    {"lein2", cmd_b42_lein2},
+    {"boot2", cmd_b42_boot2},
+    {"deps2", cmd_b42_deps2},
+    {"tclsh2", cmd_b42_tclsh2},
+    {"wish2", cmd_b42_wish2},
+    {"swipl2", cmd_b42_swipl2},
+    {"sage2", cmd_b42_sage2},
+    {"gnuplot2", cmd_b42_gnuplot2},
+    {"graphviz2", cmd_b42_graphviz2},
+    {"latex2", cmd_b42_latex2},
+    {"xelatex2", cmd_b42_xelatex2},
+    {"lualatex2", cmd_b42_lualatex2},
+    {"bibtex2", cmd_b42_bibtex2},
+    {"makeindex2", cmd_b42_makeindex2},
+    {"chktex2", cmd_b42_chktex2},
+    {"dvipdf2", cmd_b42_dvipdf2},
+    {"dvips2", cmd_b42_dvips2},
+    {"ps2pdf2", cmd_b42_ps2pdf2},
+    {"svg2", cmd_b42_svg2},
+    {"potrace2", cmd_b42_potrace2},
+    {"exiftool2", cmd_b42_exiftool2},
+    {"ffprobe3", cmd_b42_ffprobe3},
+    {"ldd3", cmd_b42_ldd3},
+    {"strace3", cmd_b42_strace3},
+    {"ltrace3", cmd_b42_ltrace3},
+    {"pmap3", cmd_b42_pmap3},
+    {"oom3", cmd_b42_oom3},
+    {"iotop3", cmd_b42_iotop3},
+    {"dstat3", cmd_b42_dstat3},
+    {"setarch3", cmd_b42_setarch3},
+    {"chroot3", cmd_b42_chroot3},
+    {"unshare3", cmd_b42_unshare3},
+    {"nsenter3", cmd_b42_nsenter3},
+    {"setpriv3", cmd_b42_setpriv3},
+    {"runuser3", cmd_b42_runuser3},
+    {"runcon3", cmd_b42_runcon3},
+    {"capsh3", cmd_b42_capsh3},
+    {"keyctl3", cmd_b42_keyctl3},
+    {"setfacl3", cmd_b42_setfacl3},
+    {"getfacl3", cmd_b42_getfacl3},
+    {"vlock3", cmd_b42_vlock3},
+    {"wall3", cmd_b42_wall3},
+    {"mesg3", cmd_b42_mesg3},
+    {"write3", cmd_b42_write3},
+    {"logger3", cmd_b42_logger3},
+    {"taskset3", cmd_b42_taskset3},
+    {"ionice3", cmd_b42_ionice3},
+    {"chrt3", cmd_b42_chrt3},
+    {"perf3", cmd_b42_perf3},
+    {"smaps3", cmd_b42_smaps3},
+    {"pmap4", cmd_b42_pmap4},
+    
     /* Batch 41 */
     {"ssh2", cmd_b41_ssh2},
     {"scp2", cmd_b41_scp2},
