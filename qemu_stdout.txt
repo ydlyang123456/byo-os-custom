@@ -1,0 +1,116 @@
+c[?7l[2J[0mSeaBIOS (version rel-1.17.0-0-gb52ca86e094d-prebuilt.qemu.org)
+
+
+iPXE (http://ipxe.org) 00:03.0 CA00 PCI2.10 PnP PMM+06FD1F90+06F31F90 CA00
+Press Ctrl-B to configure iPXE (PCI 00:03.0)...                                                                               
+
+
+Booting from Hard Disk...
+Boot failed: could not read the boot disk
+
+Booting from Floppy...
+Boot failed: could not read the boot disk
+
+Booting from DVD/CD...
+[01;01H[2J[02;30HGNU GRUB  version 2.12[04;02H┌──[04;04H[04;05H───────────────────────────────────[04;39H[04;40H───────────────────────────────────────┐[05;02H│[05;79H│[06;02H│[06;79H│[07;02H│[07;79H│[08;02H│[08;79H│[09;02H│[09;79H│[10;02H│[10;79H│[11;02H│[11;79H│[12;02H│[12;79H│[13;02H│[13;79H│[14;02H│[14;79H│[15;02H│[15;79H│[16;02H│[16;79H│[17;02H│[17;79H│[18;02H└─────────────[18;15H[18;16H───────────────────────────────────────────────────────────────┘[20;02H     Use the ↑ and ↓ keys[20;26H[20;27H to select which entry is highlighted.          
+      Press enter to boot the selected OS, `e' to edit the commands       
+      befor[22;11H[22;12He booting or `c' for a command-line.                           [05;80H [05;03H[0;30;47m*BYO-OS                                                                     [06;03H[0m                                                                            [07;03H                                 [07;35H[07;36H                                           [08;03H                                                                            [09;03H  [09;04H[09;05H                                                                          [10;03H                                                 [10;51H[10;52H                           [11;03H                                                                            [12;03H                     [12;23H[12;24H                                                       [13;03H                                                                            [14;03H                                                                            [15;03H                                                                            [16;03H                                                                            [17;03H                            [17;30H[17;31H                                                [17;80H 
+
+
+
+
+
+   The highlighted entry will be executed automatically in 5s. [23;63H[23;64H                [05;78H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   The highlighted entry will be executed automatically in 4s.                 [05;78H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ [23;02H  The highlighted entry will be executed automatically in 3s.                 [05;78H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   The highlighted entry will be executed automatically in 2s.                 [05;78H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   The highlighted entry will be executed automatically in 1s.                 [05;78H
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   The highlighted entry will be executed [23;42H[23;43Hautomatically in 0s.                 [01;01H[2J[2J[BOOT] 1. Serial OK
+[BOOT] 2. VGA text OK
+[VGA] Booting in text mode (no FB from GRUB)
+[BOOT] 3. GDT OK

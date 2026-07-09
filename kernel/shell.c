@@ -3428,34 +3428,6 @@ static void cmd_matomo_cli(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Matomo CLI\n");
 }
 
-static void cmd_grafana_agent(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Grafana Agent: telemetry collector\n");
-}
-
-static void cmd_vector(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Vector: data pipeline\n");
-}
-
-static void cmd_fluentd(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Fluentd: data collector\n");
-}
-
-static void cmd_fluentbit(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Fluent Bit: log processor\n");
-}
-
-static void cmd_filebeat(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Filebeat: log shipper\n");
-}
-
-static void cmd_logstash(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Logstash: log processing\n");
-}
-
-static void cmd_kibana(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Kibana: visualization\n");
-}
-
 static void cmd_chronograf(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Chronograf: InfluxDB UI\n");
 }
@@ -3464,32 +3436,8 @@ static void cmd_kapacitor(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Kapacitor: alerting\n");
 }
 
-static void cmd_telegraf(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Telegraf: metrics collection\n");
-}
-
-static void cmd_containerruntime(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("containerd: OCI runtime\n");
-}
-
 static void cmd_cri_o(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("CRI-O: Kubernetes runtime\n");
-}
-
-static void cmd_runc(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("runc: OCI runtime\n");
-}
-
-static void cmd_crictl(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("crictl: CRI CLI\n");
-}
-
-static void cmd_buildah(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Buildah: container image builder\n");
-}
-
-static void cmd_skopeo(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Skopeo: image operations\n");
 }
 
 static void cmd_kaniko(int argc, char args[][CMD_MAX_LEN]) {
@@ -3843,6 +3791,207 @@ static void cmd_frrouting(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_quagga(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Quagga: routing daemon\n");
 }
+/* BATCH 17: Service Mesh */
+static void cmd_istioctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("istioctl: Istio CLI\n");
+}
+
+static void cmd_kuma(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kuma: service mesh\n");
+}
+
+/* BATCH 17: API Gateway */
+static void cmd_kong(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kong: API gateway\n");
+}
+
+static void cmd_apisix(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Apache APISIX: API gateway\n");
+}
+
+static void cmd_tyk(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tyk: API gateway\n");
+}
+
+/* BATCH 17: Serverless */
+static void cmd_openfaas(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenFaaS: serverless functions\n");
+}
+
+static void cmd_knative(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Knative: serverless platform\n");
+}
+
+static void cmd_fission(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fission: serverless functions\n");
+}
+
+/* BATCH 17: PostgreSQL HA */
+static void cmd_citus(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Citus: distributed PostgreSQL\n");
+}
+
+static void cmd_vitess(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Vitess: database clustering\n");
+}
+
+static void cmd_patroni(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Patroni: PostgreSQL HA\n");
+}
+
+static void cmd_pgbouncer(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PgBouncer: connection pooler\n");
+}
+
+static void cmd_repmgr(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("repmgr: replication manager\n");
+}
+
+static void cmd_barman(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Barman: backup manager\n");
+}
+
+static void cmd_pgbackrest(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pgBackRest: PostgreSQL backup\n");
+}
+
+/* BATCH 17: Data Pipeline */
+static void cmd_airflow(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Apache Airflow: workflow orchestration\n");
+}
+
+static void cmd_dagster(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dagster: data orchestrator\n");
+}
+
+static void cmd_dbt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dbt: data transformation\n");
+}
+
+static void cmd_spark(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Apache Spark: analytics engine\n");
+}
+
+static void cmd_flink(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Apache Flink: stream processing\n");
+}
+
+/* BATCH 17: Service Discovery */
+static void cmd_etcd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("etcd: distributed KV store\n");
+}
+
+static void cmd_zookeeper(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ZooKeeper: coordination service\n");
+}
+
+static void cmd_nacos(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nacos: service discovery\n");
+}
+
+/* BATCH 17: Cache */
+static void cmd_hazelcast(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Hazelcast: in-memory computing\n");
+}
+
+static void cmd_keydb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("KeyDB: Redis fork\n");
+}
+
+static void cmd_dragonfly(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dragonfly: Redis replacement\n");
+}
+
+/* BATCH 17: Monitoring Extended */
+static void cmd_thanos(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Thanos: Prometheus HA\n");
+}
+
+static void cmd_victoriametrics(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VictoriaMetrics: metrics\n");
+}
+
+static void cmd_netdata(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Netdata: real-time monitoring\n");
+}
+
+static void cmd_uptimekuma(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Uptime Kuma: uptime monitor\n");
+}
+
+/* BATCH 17: Security */
+static void cmd_trivy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Trivy: vulnerability scanner\n");
+}
+
+static void cmd_grype(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Grype: vulnerability scanner\n");
+}
+
+static void cmd_syft(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Syft: SBOM generator\n");
+}
+
+static void cmd_cosign(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Cosign: container signing\n");
+}
+
+static void cmd_sonarqube(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SonarQube: code quality\n");
+}
+
+static void cmd_watchtower(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Watchtower: container updater\n");
+}
+
+/* BATCH 17: Browser */
+static void cmd_brave_browser(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Brave: privacy browser\n");
+}
+
+static void cmd_tor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tor Browser\n");
+}
+
+/* BATCH 17: P2P */
+static void cmd_ipfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("IPFS: distributed web\n");
+}
+
+static void cmd_i2p(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("I2P: anonymous network\n");
+}
+
+/* BATCH 17: Matrix */
+static void cmd_synapse(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Synapse: Matrix homeserver\n");
+}
+
+static void cmd_dendrite(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dendrite: Matrix homeserver\n");
+}
+
+static void cmd_mautrix_tg(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mautrix-telegram: Telegram bridge\n");
+}
+
+static void cmd_mautrix_wa(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mautrix-whatsapp: WhatsApp bridge\n");
+}
+
+static void cmd_mautrix_dc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mautrix-discord: Discord bridge\n");
+}
+
+static void cmd_mautrix_sig(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mautrix-signal: Signal bridge\n");
+}
+
+/* BATCH 17: Messaging Extended */
+/* BATCH 17: Misc */
+static void cmd_renovate(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Renovate: dependency updater\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -4107,12 +4256,9 @@ static const cmd_entry commands[] = {
     /* Batch 15: Analytics */
     {"matomo", cmd_matomo}, {"plausible", cmd_plausible}, {"umami", cmd_umami},
     /* Batch 15: Observability */
-    {"vector", cmd_vector}, {"fluentd", cmd_fluentd}, {"fluent-bit", cmd_fluentbit},
-    {"filebeat", cmd_filebeat}, {"logstash", cmd_logstash}, {"kibana", cmd_kibana},
-    {"telegraf", cmd_telegraf}, {"kapacitor", cmd_kapacitor},
+    {"kapacitor", cmd_kapacitor},
     /* Batch 15: Container Runtime */
-    {"containerd", cmd_containerruntime}, {"cri-o", cmd_cri_o}, {"runc", cmd_runc},
-    {"crictl", cmd_crictl}, {"buildah", cmd_buildah}, {"skopeo", cmd_skopeo}, {"buildkit", cmd_buildkit},
+    {"cri-o", cmd_cri_o}, {"buildkit", cmd_buildkit},
     /* Batch 16: Game */
     {"steam", cmd_steam}, {"wine", cmd_wine}, {"proton", cmd_proton}, {"lutris", cmd_lutris},
     {"dosbox", cmd_dosbox}, {"retroarch", cmd_retroarch},
@@ -4150,6 +4296,40 @@ static const cmd_entry commands[] = {
     {"dmidecode", cmd_dmidecode}, {"ipmitool", cmd_ipmitool},
     /* Batch 16: Routing */
     {"lldpd", cmd_lldpd}, {"bird", cmd_bird}, {"frr", cmd_frrouting}, {"quagga", cmd_quagga},
+    /* Batch 17: Service Mesh */
+    {"istioctl", cmd_istioctl}, {"kuma", cmd_kuma},
+    /* Batch 17: API Gateway */
+    {"kong", cmd_kong}, {"apisix", cmd_apisix}, {"tyk", cmd_tyk},
+    /* Batch 17: Serverless */
+    {"openfaas", cmd_openfaas}, {"knative", cmd_knative}, {"fission", cmd_fission},
+    /* Batch 17: PostgreSQL HA */
+    {"citus", cmd_citus}, {"vitess", cmd_vitess}, {"patroni", cmd_patroni},
+    {"pgbouncer", cmd_pgbouncer}, {"repmgr", cmd_repmgr},
+    {"barman", cmd_barman}, {"pgbackrest", cmd_pgbackrest},
+    /* Batch 17: Data Pipeline */
+    {"airflow", cmd_airflow}, {"dagster", cmd_dagster}, {"dbt", cmd_dbt},
+    {"spark", cmd_spark}, {"flink", cmd_flink},
+    /* Batch 17: Service Discovery */
+    {"etcd", cmd_etcd}, {"zookeeper", cmd_zookeeper}, {"nacos", cmd_nacos},
+    /* Batch 17: Cache */
+    {"hazelcast", cmd_hazelcast}, {"keydb", cmd_keydb}, {"dragonfly", cmd_dragonfly},
+    /* Batch 17: Monitoring Extended */
+    {"thanos", cmd_thanos}, {"victoriametrics", cmd_victoriametrics},
+    {"netdata", cmd_netdata}, {"uptime-kuma", cmd_uptimekuma},
+    /* Batch 17: Security */
+    {"trivy", cmd_trivy}, {"grype", cmd_grype}, {"syft", cmd_syft}, {"cosign", cmd_cosign},
+    {"sonarqube", cmd_sonarqube}, {"watchtower", cmd_watchtower}, {"renovate", cmd_renovate},
+    /* Batch 17: Browser */
+    {"brave-browser", cmd_brave_browser}, {"tor", cmd_tor},
+    /* Batch 17: P2P */
+    {"ipfs", cmd_ipfs}, {"i2p", cmd_i2p},
+    /* Batch 17: Matrix */
+    {"synapse", cmd_synapse}, {"dendrite", cmd_dendrite},
+    {"mautrix-telegram", cmd_mautrix_tg}, {"mautrix-whatsapp", cmd_mautrix_wa},
+    {"mautrix-discord", cmd_mautrix_dc}, {"mautrix-signal", cmd_mautrix_sig},
+    /* Batch 17: Messaging Extended */
+    /* Batch 17: Observability */
+    /* Batch 17: Container Runtime */
     {0, 0}
 };
 
