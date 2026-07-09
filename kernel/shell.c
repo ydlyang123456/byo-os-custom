@@ -14679,6 +14679,48 @@ static void env_report_191(int argc, char args[][CMD_MAX_LEN]);
 static void env_compliance_191(int argc, char args[][CMD_MAX_LEN]);
 static void env_audit_191(int argc, char args[][CMD_MAX_LEN]);
 static void env_optimize_191(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 192: Medical Imaging */
+static void mri_analyze_192(int argc, char args[][CMD_MAX_LEN]);
+static void ct_scan_192(int argc, char args[][CMD_MAX_LEN]);
+static void xray_detect_192(int argc, char args[][CMD_MAX_LEN]);
+static void ultrasound_192(int argc, char args[][CMD_MAX_LEN]);
+static void pet_scan_192(int argc, char args[][CMD_MAX_LEN]);
+static void mammogram_192(int argc, char args[][CMD_MAX_LEN]);
+static void retinal_scan_192(int argc, char args[][CMD_MAX_LEN]);
+static void bone_density_192(int argc, char args[][CMD_MAX_LEN]);
+static void tumor_detect_192(int argc, char args[][CMD_MAX_LEN]);
+static void organ_segment_192(int argc, char args[][CMD_MAX_LEN]);
+static void threed_reconstruct_192(int argc, char args[][CMD_MAX_LEN]);
+static void ai_diagnose_192(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 193: Legal Compliance */
+static void kyc_check_193(int argc, char args[][CMD_MAX_LEN]);
+static void aml_scan_193(int argc, char args[][CMD_MAX_LEN]);
+static void sanctions_screen_193(int argc, char args[][CMD_MAX_LEN]);
+static void pep_check_193(int argc, char args[][CMD_MAX_LEN]);
+static void transaction_monitor_193(int argc, char args[][CMD_MAX_LEN]);
+static void suspicious_report_193(int argc, char args[][CMD_MAX_LEN]);
+static void compliance_train_193(int argc, char args[][CMD_MAX_LEN]);
+static void policy_enforce_193(int argc, char args[][CMD_MAX_LEN]);
+static void audit_trail_193(int argc, char args[][CMD_MAX_LEN]);
+static void regulatory_filing_193(int argc, char args[][CMD_MAX_LEN]);
+static void breach_notify_193(int argc, char args[][CMD_MAX_LEN]);
+static void data_retain_193(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 194: Smart City */
+static void traffic_signal_194(int argc, char args[][CMD_MAX_LEN]);
+static void parking_sensor_194(int argc, char args[][CMD_MAX_LEN]);
+static void air_monitor_194(int argc, char args[][CMD_MAX_LEN]);
+static void water_quality_city_194(int argc, char args[][CMD_MAX_LEN]);
+static void waste_collection_194(int argc, char args[][CMD_MAX_LEN]);
+static void street_light_194(int argc, char args[][CMD_MAX_LEN]);
+static void noise_map_194(int argc, char args[][CMD_MAX_LEN]);
+static void green_space_194(int argc, char args[][CMD_MAX_LEN]);
+static void public_safety_194(int argc, char args[][CMD_MAX_LEN]);
+static void emergency_response_194(int argc, char args[][CMD_MAX_LEN]);
+static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
+static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17642,7 +17684,14 @@ static const cmd_entry commands[] = {
     /* Batch 190: Food Science + Culinary */
     {"flavor-pair", flavor_pair_190},     {"recipe-scale", recipe_scale_190},     {"sous-vide", sous_vide_190},     {"ferment-process", ferment_process_190},     {"nutrition-calc", nutrition_calc_190},     {"allergen-check", allergen_check_190},     {"food-preserve", food_preserve_190},     {"emulsify", emulsify_190},     {"spherify", spherify_190},     {"sous-vide-ctrl", sous_vide_ctrl_190},     {"bread-bake", bread_bake_190},     {"chocolate-temper", chocolate_temper_190}, 
     /* Batch 191: Environmental Monitoring */
-    {"env-sensor", env_sensor_191},     {"env-calibrate", env_calibrate_191},     {"env-alert", env_alert_191},     {"env-log", env_log_191},     {"env-visualize", env_visualize_191},     {"env-predict", env_predict_191},     {"env-correlate", env_correlate_191},     {"env-anomaly", env_anomaly_191},     {"env-report", env_report_191},     {"env-compliance", env_compliance_191},     {"env-audit", env_audit_191},     {"env-optimize", env_optimize_191}, 
+    {"env-sensor", env_sensor_191},     {"env-calibrate", env_calibrate_191},     {"env-alert", env_alert_191},     {"env-log", env_log_191},     {"env-visualize", env_visualize_191},     {"env-predict", env_predict_191},     {"env-correlate", env_correlate_191},     {"env-anomaly", env_anomaly_191},     {"env-report", env_report_191},     {"env-compliance", env_compliance_191},     {"env-audit", env_audit_191},     {"env-optimize", env_optimize_191},
+    /* Batch 192: Medical Imaging */
+    {"mri-analyze", mri_analyze_192},     {"ct-scan", ct_scan_192},     {"xray-detect", xray_detect_192},     {"ultrasound", ultrasound_192},     {"pet-scan", pet_scan_192},     {"mammogram", mammogram_192},     {"retinal-scan", retinal_scan_192},     {"bone-density", bone_density_192},     {"tumor-detect", tumor_detect_192},     {"organ-segment", organ_segment_192},     {"3d-reconstruct", threed_reconstruct_192},     {"ai-diagnose", ai_diagnose_192}, 
+    /* Batch 193: Legal Compliance */
+    {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
+    /* Batch 194: Smart City */
+    {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194}, 
+ 
  
  
  
@@ -40429,6 +40478,157 @@ static void env_audit_191(int argc, char args[][CMD_MAX_LEN]) {
 static void env_optimize_191(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Optimize: HVAC schedule saved:12%% CO2 ventilation:optimized\n");
+}
+
+
+/* ===== Batch 192: Medical Imaging ===== */
+static void mri_analyze_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MRI: Brain 3T T1/T2 FLAIR Lesions:0 Atrophy:none Normal\n");
+}
+static void ct_scan_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CT: Chest Abdomen Contrast:yes Dose:8mSv Findings:1 nodule 4mm\n");
+}
+static void xray_detect_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("X-ray: Chest PA Findings:No acute abnormality Cardiac:silhouette normal\n");
+}
+static void ultrasound_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ultrasound: Abdomen Liver:normal Kidney:normal Gallbladder:sludge\n");
+}
+static void pet_scan_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PET-CT: FDG Uptake:SUVmax:2.3 Lesion:right lung Biopsy:recommended\n");
+}
+static void mammogram_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mammogram: BI-RADS:2 Benign calcifications No mass No architectural distortion\n");
+}
+static void retinal_scan_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Retina: OCT Macula:normal Optic disc:C/D=0.3 No hemorrhage\n");
+}
+static void bone_density_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DEXA: Lumbar T-score:-1.2 Osteopenia Hip T-score:-0.8 Normal\n");
+}
+static void tumor_detect_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tumor: Detection:confidence:94%% Size:1.2cm Location:segment VI\n");
+}
+static void organ_segment_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Segment: Liver:1,247ml Kidney:145ml Spleen:189ml Pancreas:78ml\n");
+}
+static void threed_reconstruct_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("3D: Reconstructed CT Points:1.2M Mesh:456K Faces Render:real-time\n");
+}
+static void ai_diagnose_192(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AI Dx: pneumonia:87%% normal:11%% other:2%% Confidence:high\n");
+}
+
+/* ===== Batch 193: Legal Compliance ===== */
+static void kyc_check_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("KYC: Customer:C12848 Identity:verified Risk:low Tier:standard\n");
+}
+static void aml_scan_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AML: Transaction:12,847 Flagged:12 Cleared:11 Pending:1\n");
+}
+static void sanctions_screen_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sanctions: OFAC:clear EU:clear UN:clear PEP:no Match:0\n");
+}
+static void pep_check_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PEP: Customer not politically exposed Risk:low\n");
+}
+static void transaction_monitor_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Monitor: 12,847 txns 24h Threshold:>$10k Alerts:3\n");
+}
+static void suspicious_report_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SAR: Filed:23 YTD Review:pending Filing deadline:30d\n");
+}
+static void compliance_train_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Training: 89%% completed 12 employees pending deadline:Jan 31\n");
+}
+static void policy_enforce_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Policy: InfoSec:active Acceptable Use:active Data Privacy:active\n");
+}
+static void audit_trail_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Trail: 12,847 events logged 24h Integrity:SHA-256 verified\n");
+}
+static void regulatory_filing_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Filing: SEC 10-Q filed on time FINRA:compliant State:registered\n");
+}
+static void breach_notify_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Breach: None active Last incident:never Notification:NA\n");
+}
+static void data_retain_193(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Retention: Financial:7yr Medical:10yr Personal:3yr Purge:automated\n");
+}
+
+/* ===== Batch 194: Smart City ===== */
+static void traffic_signal_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Signal: Main-12:Green Time:45s Queue:12 vehicles Optimization:active\n");
+}
+static void parking_sensor_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Parking: 47/200 spots available Nearest:50m Rate:$2/hr\n");
+}
+static void air_monitor_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Air: AQI:42 PM2.5:12ug O3:35ppb Station:Central Park\n");
+}
+static void water_quality_city_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Water: pH:7.2 Chlorine:1.2mg/L Turbidity:0.1NTU Safe:yes\n");
+}
+static void waste_collection_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Waste: Route:optimized Bins:47 Collected:12.5t Efficiency:94%%\n");
+}
+static void street_light_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Street: 12/47 dimmed Energy:35%% saved Motion:activated\n");
+}
+static void noise_map_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Noise: Avg:58dB Max:72dB Hotspots:3 Compliance:97%%\n");
+}
+static void green_space_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Green: Parks:12 Trees:2,347 Coverage:34%% Air quality:improved\n");
+}
+static void public_safety_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Safety: Incidents:12 Response:3.2min Cameras:47 Coverage:89%%\n");
+}
+static void emergency_response_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Emergency: Calls:12 Ambulance:4 Fire:2 Police:6 Avg:4.2min\n");
+}
+static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Portal: Users:12,847 Requests:234 Resolved:89%% Satisfaction:4.2/5\n");
+}
+static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dashboard: Population:234,000 Traffic:moderate Air:good Events:2\n");
 }
 
 void shell_run(void) {
