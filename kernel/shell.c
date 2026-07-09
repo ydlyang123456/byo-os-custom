@@ -14228,6 +14228,48 @@ static void audio_delay_158(int argc, char args[][CMD_MAX_LEN]);
 static void audio_chorus_158(int argc, char args[][CMD_MAX_LEN]);
 static void audio_flanger_158(int argc, char args[][CMD_MAX_LEN]);
 static void audio_compressor_158(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 159: Material Science */
+static void mat_simulate_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_analyze_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_optimize_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_test_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_fatigue_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_corrosion_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_thermal_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_composite_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_ceramic_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_polymer_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_metal_159(int argc, char args[][CMD_MAX_LEN]);
+static void mat_nano_159(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 160: Textiles + Fashion */
+static void fabric_design_160(int argc, char args[][CMD_MAX_LEN]);
+static void fabric_weave_160(int argc, char args[][CMD_MAX_LEN]);
+static void fabric_knit_160(int argc, char args[][CMD_MAX_LEN]);
+static void fabric_dye_160(int argc, char args[][CMD_MAX_LEN]);
+static void fabric_print_160(int argc, char args[][CMD_MAX_LEN]);
+static void pattern_make_160(int argc, char args[][CMD_MAX_LEN]);
+static void pattern_grade_160(int argc, char args[][CMD_MAX_LEN]);
+static void pattern_nest_160(int argc, char args[][CMD_MAX_LEN]);
+static void garment_construct_160(int argc, char args[][CMD_MAX_LEN]);
+static void garment_fit_160(int argc, char args[][CMD_MAX_LEN]);
+static void garment_cost_160(int argc, char args[][CMD_MAX_LEN]);
+static void garment_sustain_160(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 161: Agriculture + Food */
+static void crop_monitor_161(int argc, char args[][CMD_MAX_LEN]);
+static void crop_irrigate_161(int argc, char args[][CMD_MAX_LEN]);
+static void crop_fertilize_161(int argc, char args[][CMD_MAX_LEN]);
+static void crop_harvest_161(int argc, char args[][CMD_MAX_LEN]);
+static void soil_analyze_161(int argc, char args[][CMD_MAX_LEN]);
+static void pest_detect_161(int argc, char args[][CMD_MAX_LEN]);
+static void livestock_track_161(int argc, char args[][CMD_MAX_LEN]);
+static void dairy_monitor_161(int argc, char args[][CMD_MAX_LEN]);
+static void food_process_161(int argc, char args[][CMD_MAX_LEN]);
+static void food_safety_161(int argc, char args[][CMD_MAX_LEN]);
+static void food_packaging_161(int argc, char args[][CMD_MAX_LEN]);
+static void supply_optimize_161(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17114,7 +17156,14 @@ static const cmd_entry commands[] = {
     /* Batch 157: Geospatial + Mapping */
     {"geo-convert", geo_convert_157},     {"geo-project", geo_project_157},     {"geo-buffer", geo_buffer_157},     {"geo-intersect", geo_intersect_157},     {"geo-union", geo_union_157},     {"geo-clip", geo_clip_157},     {"geo-merge", geo_merge_157},     {"geo-raster", geo_raster_157},     {"geo-vector", geo_vector_157},     {"geo-3d", geo_3d_157},     {"geo-heatmap", geo_heatmap_157},     {"geo-route", geo_route_157}, 
     /* Batch 158: Audio Processing Advanced */
-    {"audio-denoise", audio_denoise_158},     {"audio-dereverb", audio_dereverb_158},     {"audio-separate", audio_separate_158},     {"audio-enhance", audio_enhance_158},     {"audio-transcribe", audio_transcribe_158},     {"audio-pitch", audio_pitch_158},     {"audio-tempo", audio_tempo_158},     {"audio-reverb", audio_reverb_158},     {"audio-delay", audio_delay_158},     {"audio-chorus", audio_chorus_158},     {"audio-flanger", audio_flanger_158},     {"audio-compressor", audio_compressor_158}, 
+    {"audio-denoise", audio_denoise_158},     {"audio-dereverb", audio_dereverb_158},     {"audio-separate", audio_separate_158},     {"audio-enhance", audio_enhance_158},     {"audio-transcribe", audio_transcribe_158},     {"audio-pitch", audio_pitch_158},     {"audio-tempo", audio_tempo_158},     {"audio-reverb", audio_reverb_158},     {"audio-delay", audio_delay_158},     {"audio-chorus", audio_chorus_158},     {"audio-flanger", audio_flanger_158},     {"audio-compressor", audio_compressor_158},
+    /* Batch 159: Material Science */
+    {"mat-simulate", mat_simulate_159},     {"mat-analyze", mat_analyze_159},     {"mat-optimize", mat_optimize_159},     {"mat-test", mat_test_159},     {"mat-fatigue", mat_fatigue_159},     {"mat-corrosion", mat_corrosion_159},     {"mat-thermal", mat_thermal_159},     {"mat-composite", mat_composite_159},     {"mat-ceramic", mat_ceramic_159},     {"mat-polymer", mat_polymer_159},     {"mat-metal", mat_metal_159},     {"mat-nano", mat_nano_159}, 
+    /* Batch 160: Textiles + Fashion */
+    {"fabric-design", fabric_design_160},     {"fabric-weave", fabric_weave_160},     {"fabric-knit", fabric_knit_160},     {"fabric-dye", fabric_dye_160},     {"fabric-print", fabric_print_160},     {"pattern-make", pattern_make_160},     {"pattern-grade", pattern_grade_160},     {"pattern-nest", pattern_nest_160},     {"garment-construct", garment_construct_160},     {"garment-fit", garment_fit_160},     {"garment-cost", garment_cost_160},     {"garment-sustain", garment_sustain_160}, 
+    /* Batch 161: Agriculture + Food */
+    {"crop-monitor", crop_monitor_161},     {"crop-irrigate", crop_irrigate_161},     {"crop-fertilize", crop_fertilize_161},     {"crop-harvest", crop_harvest_161},     {"soil-analyze", soil_analyze_161},     {"pest-detect", pest_detect_161},     {"livestock-track", livestock_track_161},     {"dairy-monitor", dairy_monitor_161},     {"food-process", food_process_161},     {"food-safety", food_safety_161},     {"food-packaging", food_packaging_161},     {"supply-optimize", supply_optimize_161}, 
+ 
  
  
  
@@ -38229,6 +38278,157 @@ static void audio_flanger_158(int argc, char args[][CMD_MAX_LEN]) {
 static void audio_compressor_158(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Compressor: Ratio:4:1 Threshold:-18dB Attack:5ms Release:50ms\n");
+}
+
+
+/* ===== Batch 159: Material Science ===== */
+static void mat_simulate_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MD Sim: 12,847 atoms T=300K P=1atm Steps:100000 Energy:-45.2eV\n");
+}
+static void mat_analyze_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XRD: 2theta:15-80 Peaks:12 Phase:alpha Phase:beta Purity:98.7%%\n");
+}
+static void mat_optimize_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Optimize: Alloy Al-Cu-Mg Strength:450MPa Density:2.71 Cost:$12/kg\n");
+}
+static void mat_test_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tensile: UTS:520MPa YS:450MPa Elongation:12%% Hardness:HV145\n");
+}
+static void mat_fatigue_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fatigue: S-N curve Nf:1e6 at 200MPa Endurance:180MPa\n");
+}
+static void mat_corrosion_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Corrosion: Rate:0.02mm/yr Type:pitting Passivity:stable\n");
+}
+static void mat_thermal_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Thermal: Conductivity:237W/mK Expansion:23e-6/C Melting:660C\n");
+}
+static void mat_composite_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Composite: CF-Epoxy Vf:60%% Longitudinal:150GPa Transverse:10GPa\n");
+}
+static void mat_ceramic_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ceramic: Al2O3 Hardness:HV2000 Toughness:3.5MPa.m^0.5\n");
+}
+static void mat_polymer_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Polymer: PE Tg:-120C Tm:135C MFI:2.3g/10min\n");
+}
+static void mat_metal_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Metal: Ti-6Al-4V UTS:950MPa Density:4.43g/cm3 Biocompat:excellent\n");
+}
+static void mat_nano_159(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Nano: Particle:12nm Surface:45m2/g Distribution:sigma:1.2nm\n");
+}
+
+/* ===== Batch 160: Textiles + Fashion ===== */
+static void fabric_design_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Design: Pattern:geometric Colors:3 repeat:12cm Width:150cm\n");
+}
+static void fabric_weave_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Weave: Plain/Twill/Satin Picks:45/cm Ends:56/cm Density:OK\n");
+}
+static void fabric_knit_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Knit: Jersey/Gauge:18 Weight:180gsm Stretch:45%% Recovery:92%%\n");
+}
+static void fabric_dye_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dye: Reactive Color:navy Fastness:4-5 Levelness:excellent\n");
+}
+static void fabric_print_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Print: Digital Resolution:600dpi Colors:12 Wash:fast\n");
+}
+static void pattern_make_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Pattern: Size:S-M-L-XL Pieces:12 Seam:1.5cm Ease:2cm\n");
+}
+static void pattern_grade_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grade: S->M delta:1.2cm M->L delta:1.2cm L->XL delta:1.2cm\n");
+}
+static void pattern_nest_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Nest: Efficiency:87%% Waste:13%% Marker:128cm Layout:optimized\n");
+}
+static void garment_construct_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Construct: Seam:felled Collar:spread Closure:buttons Lining:yes\n");
+}
+static void garment_fit_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fit: Bust:+1cm Waist:+0.5cm Hip:+1.5cm Overall:good\n");
+}
+static void garment_cost_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cost: Fabric:$12 Labor:$8 Trim:$3 Total:$23 Wholesale:$46\n");
+}
+static void garment_sustain_160(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sustain: Organic:yes Recycled:30%% Water:-45%% Carbon:-32%%\n");
+}
+
+/* ===== Batch 161: Agriculture + Food ===== */
+static void crop_monitor_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Crop: Wheat Growth:stage-4 NDVI:0.78 Health:good Area:12ha\n");
+}
+static void crop_irrigate_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Irrigate: Soil moisture:32%% Target:60%% Flow:2.3L/min Schedule:daily\n");
+}
+static void crop_fertilize_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fertilize: N:P:K = 100:50:80 kg/ha Method:foliar Timing:VE\n");
+}
+static void crop_harvest_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Harvest: Wheat Yield:6.2t/ha Moisture:14%% Quality:grade-A\n");
+}
+static void soil_analyze_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Soil: pH:6.8 N:45ppm P:23ppm K:180ppm OM:3.2%% Texture:loam\n");
+}
+static void pest_detect_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Pest: Aphids detected Field:B3 Severity:moderate Action:spray\n");
+}
+static void livestock_track_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Livestock: Cattle:124 Weight:avg520kg Health:good Location:pasture-2\n");
+}
+static void dairy_monitor_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dairy: Cows milking:89 Milk:22L/cow/day Quality:3.8%%fat Somatic:180K\n");
+}
+static void food_process_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Process: Batch:#12848 Product:yogurt Volume:5000L Temp:42C Time:6h\n");
+}
+static void food_safety_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Safety: HACCP:compliant Temp:4C pH:4.2 Pathogen:none Expiry:2024-02-15\n");
+}
+static void food_packaging_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Packaging: Material:PP Size:500ml Seal:heat Weight:45g Label:OK\n");
+}
+static void supply_optimize_161(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Supply: Routes:12 Trucks:8 Capacity:85%% Cost:$12,400/week\n");
 }
 
 void shell_run(void) {
