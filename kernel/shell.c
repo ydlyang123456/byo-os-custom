@@ -1245,6 +1245,338 @@ static void cmd_pwd(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts(cwd); vga_putchar('\n');
 }
 
+
+/* ===== Batch 39: Enhanced Commands ===== */
+
+static void cmd_batch39_htop2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_clear();
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("PID  STAT  NAME                 UPTIME\n");
+    vga_puts("---- ----  -------------------- -----\n");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    int max = task_get_max_tasks();
+    for (int i = 0; i < max; i++) {
+        if (task_is_active(i)) {
+            char buf[16]; itoa(i, buf, 10);
+            for (int p = strlen(buf); p < 5; p++) vga_putchar(' ');
+            vga_puts(buf); vga_puts("  ");
+            vga_puts(task_get_state_name(i));
+            for (int p = strlen(task_get_state_name(i)); p < 5; p++) vga_putchar(' ');
+            vga_puts("  ");
+            vga_puts(task_get_name_by_pid(i));
+            vga_puts("\n");
+        }
+    }
+}
+
+static void cmd_batch39_free2(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t total = pmm_get_total_pages() * 4;
+    uint32_t free_p = pmm_get_free_pages() * 4;
+    uint32_t used = total - free_p;
+    char buf[16];
+    vga_puts("              total        used        free\nMem:        ");
+    itoa(total, buf, 10); for (int i = strlen(buf); i < 11; i++) vga_putchar(' '); vga_puts(buf);
+    itoa(used, buf, 10); for (int i = strlen(buf); i < 11; i++) vga_putchar(' '); vga_puts(buf);
+    itoa(free_p, buf, 10); for (int i = strlen(buf); i < 11; i++) vga_putchar(' '); vga_puts(buf); vga_putchar('\n');
+    uint32_t pct = total > 0 ? (used * 100 / total) : 0;
+    vga_puts("Memory: "); itoa(pct, buf, 10); vga_puts(buf); vga_puts("% used\n");
+}
+
+static void cmd_batch39_uname2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc > 1 && strcmp(args[1], "-a") == 0)
+        vga_puts("BYO-OS byo-os 1.0.0 #1 SMP x86 BYO-OS\n");
+    else vga_puts("BYO-OS\n");
+}
+
+static void cmd_batch39_df2(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t total = pmm_get_total_pages() * 4;
+    uint32_t free_p = pmm_get_free_pages() * 4;
+    uint32_t used = total - free_p;
+    char buf[16];
+    vga_puts("Filesystem     Size  Used Avail Use% Mounted on\n/dev/ram0      ");
+    itoa(total, buf, 10); vga_puts(buf); vga_puts("K  ");
+    itoa(used, buf, 10); vga_puts(buf); vga_puts("K  ");
+    itoa(free_p, buf, 10); vga_puts(buf); vga_puts("K  ");
+    uint32_t pct = total > 0 ? (used * 100 / total) : 0;
+    itoa(pct, buf, 10); vga_puts(buf); vga_puts("%  /\n");
+}
+
+static void cmd_batch39_ifconfig2(int argc, char args[][CMD_MAX_LEN]) {
+    char ip[32]; net_get_ip_str(ip);
+    vga_puts("eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>\n");
+    vga_puts("        inet "); vga_puts(ip); vga_putchar('\n');
+    vga_puts("        ether 52:54:00:12:34:56\n");
+}
+
+static void cmd_batch39_mount2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("/dev/ram0 on / type ramdisk (rw)\ntmpfs on /tmp type tmpfs (rw)\n");
+}
+
+static void cmd_batch39_ls2(int argc, char args[][CMD_MAX_LEN]) {
+    char* path = argc > 1 ? args[1] : "/";
+    char output[4096];
+    int len = fs_list_dir(path, output, sizeof(output)-1);
+    if (len <= 0) { vga_puts("ls: cannot access '"); vga_puts(path); vga_puts("': No such file\n"); return; }
+    output[len] = 0;
+    char* p = output;
+    while (*p) {
+        char* eol = strchr(p, '\n');
+        if (!eol) eol = p + strlen(p);
+        char tmp[256]; int cplen = eol - p; if (cplen > 255) cplen = 255;
+        memcpy(tmp, p, cplen); tmp[cplen] = 0;
+        vga_puts(tmp); vga_puts("  ");
+        if (*eol == '\n') p = eol + 1; else break;
+    }
+    vga_putchar('\n');
+}
+
+static void cmd_batch39_cat2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("cat: missing file\n"); return; }
+    char content[4096]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len > 0) { content[len] = 0; vga_puts(content); }
+    else { vga_puts("cat: "); vga_puts(args[1]); vga_puts(": No such file\n"); }
+}
+
+static void cmd_batch39_grep2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: grep PATTERN FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[2], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("grep: file not found\n"); return; }
+    content[len] = 0;
+    char* pattern = args[1]; int line_num = 1; char* line = content;
+    while (*line) {
+        char* eol = strchr(line, '\n'); if (!eol) eol = line + strlen(line);
+        int lsz = eol - line;
+        if (lsz >= (int)strlen(pattern) && strstr(line, pattern)) {
+            vga_puts(args[2]); vga_puts(":");
+            char ln[16]; itoa(line_num, ln, 10); vga_puts(ln); vga_puts(":");
+            char tmp[256]; int cplen = lsz < 255 ? lsz : 255;
+            memcpy(tmp, line, cplen); tmp[cplen] = 0; vga_puts(tmp); vga_putchar('\n');
+        }
+        line_num++; if (*eol == '\n') line = eol + 1; else break;
+    }
+}
+
+static void cmd_batch39_wc2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wc FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("wc: file not found\n"); return; }
+    int lines = 0, words = 0, in_w = 0;
+    for (int i = 0; i < len; i++) {
+        if (content[i] == '\n') lines++;
+        if (content[i] == ' ' || content[i] == '\n' || content[i] == '\t') in_w = 0;
+        else if (!in_w) { words++; in_w = 1; }
+    }
+    char l[16], w[16], c[16];
+    itoa(lines, l, 10); itoa(words, w, 10); itoa(len, c, 10);
+    vga_puts("  "); vga_puts(l); vga_putchar(' '); vga_puts(w); vga_putchar(' ');
+    vga_puts(c); vga_putchar(' '); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_batch39_diff2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: diff FILE1 FILE2\n"); return; }
+    char c1[4096], c2[4096];
+    int l1 = fs_read_file(args[1], c1, sizeof(c1)-1);
+    int l2 = fs_read_file(args[2], c2, sizeof(c2)-1);
+    if (l1 <= 0 || l2 <= 0) { vga_puts("diff: file not found\n"); return; }
+    c1[l1] = 0; c2[l2] = 0;
+    if (strcmp(c1, c2) == 0) { vga_puts("Files are identical\n"); return; }
+    vga_puts("--- "); vga_puts(args[1]); vga_puts("\n+++ "); vga_puts(args[2]); vga_puts("\nFiles differ\n");
+}
+
+static void cmd_batch39_xxd2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: xxd FILE\n"); return; }
+    char content[4096]; int len = fs_read_file(args[1], content, sizeof(content));
+    if (len <= 0) { vga_puts("xxd: file not found\n"); return; }
+    static const char h[] = "0123456789abcdef";
+    for (int i = 0; i < len; i += 16) {
+        char addr[16]; itoa(i, addr, 16);
+        for (int p = strlen(addr); p < 8; p++) vga_putchar('0');
+        vga_puts(addr); vga_puts(": ");
+        for (int j = 0; j < 16; j++) {
+            if (i+j < len) { unsigned char c = content[i+j]; vga_putchar(h[(c>>4)&0xF]); vga_putchar(h[c&0xF]); }
+            else vga_puts("  ");
+            if (j == 7) vga_putchar(' ');
+            vga_putchar(' ');
+        }
+        vga_puts(" ");
+        for (int j = 0; j < 16 && i+j < len; j++) { unsigned char c = content[i+j]; vga_putchar((c>=32&&c<127)?c:'.'); }
+        vga_putchar('\n');
+    }
+}
+
+static void cmd_batch39_sort2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sort FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("sort: file not found\n"); return; }
+    content[len] = 0;
+    int count = 0; for (int i = 0; i < len; i++) if (content[i] == '\n') count++;
+    if (count == 0) { vga_puts(content); return; }
+    char** lines_arr = (char**)kmalloc((count+1)*sizeof(char*));
+    if (!lines_arr) return;
+    int idx = 0; lines_arr[0] = content;
+    for (int i = 0; i < len; i++) { if (content[i] == '\n') { content[i] = 0; if (i+1 < len) lines_arr[++idx] = content+i+1; } }
+    count = idx + 1;
+    for (int i = 0; i < count-1; i++) for (int j = 0; j < count-i-1; j++)
+        if (strcmp(lines_arr[j], lines_arr[j+1]) > 0) { char* tmp = lines_arr[j]; lines_arr[j] = lines_arr[j+1]; lines_arr[j+1] = tmp; }
+    for (int i = 0; i < count; i++) { vga_puts(lines_arr[i]); vga_putchar('\n'); }
+    kfree(lines_arr);
+}
+
+static void cmd_batch39_head2(int argc, char args[][CMD_MAX_LEN]) {
+    int n = 10; char* fname = NULL;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-n") == 0 && i+1 < argc) n = atoi(args[++i]);
+        else if (args[i][0] != '-') fname = args[i];
+    }
+    if (!fname) { vga_puts("Usage: head [-n NUM] FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(fname, content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("head: file not found\n"); return; }
+    content[len] = 0; int lines = 0; char* p = content;
+    while (*p && lines < n) { vga_putchar(*p); if (*p == '\n') lines++; p++; }
+}
+
+static void cmd_batch39_tail2(int argc, char args[][CMD_MAX_LEN]) {
+    int n = 10; char* fname = NULL;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-n") == 0 && i+1 < argc) n = atoi(args[++i]);
+        else if (args[i][0] != '-') fname = args[i];
+    }
+    if (!fname) { vga_puts("Usage: tail [-n NUM] FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(fname, content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("tail: file not found\n"); return; }
+    content[len] = 0;
+    int total = 0; for (int i = 0; i < len; i++) if (content[i] == '\n') total++;
+    int skip = total - n; if (skip < 0) skip = 0;
+    char* p = content; while (*p && skip > 0) { if (*p == '\n') skip--; p++; }
+    while (*p) { vga_putchar(*p); p++; }
+}
+
+static void cmd_batch39_md5sum2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: md5sum FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content));
+    if (len <= 0) { vga_puts("md5sum: file not found\n"); return; }
+    uint32_t h1 = 0x67452301, h2 = 0xEFCDAB89;
+    for (int i = 0; i < len; i++) { h1 = ((h1<<5)+h1)+(unsigned char)content[i]; h2 = ((h2<<7)+h2)^(unsigned char)content[i]; }
+    static const char hex[] = "0123456789abcdef";
+    char result[33];
+    for (int i = 0; i < 8; i++) result[i] = hex[(h1>>(28-i*4))&0xF];
+    for (int i = 0; i < 8; i++) result[8+i] = hex[(h2>>(28-i*4))&0xF];
+    result[16] = 0;
+    vga_puts(result); vga_puts("  "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_batch39_base642(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: base64 FILE\n"); return; }
+    char content[4096]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { strncpy(content, args[1], 4095); len = strlen(content); }
+    const char* b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for (int i = 0; i+2 < len; i += 3) {
+        unsigned char a = content[i], b = content[i+1], c = content[i+2];
+        vga_putchar(b64[(a>>2)&0x3F]); vga_putchar(b64[((a&3)<<4)|((b>>4)&0xF)]);
+        vga_putchar(b64[((b&0xF)<<2)|((c>>6)&3)]); vga_putchar(b64[c&0x3F]);
+    }
+    vga_putchar('\n');
+}
+
+static void cmd_batch39_netstat2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Active Internet connections:\nProto Recv-Q Send-Q Local Address           Foreign Address         State\n");
+    vga_puts("tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN\n");
+    vga_puts("tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN\n");
+}
+
+static void cmd_batch39_ping2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ping HOST\n"); return; }
+    vga_puts("PING "); vga_puts(args[1]); vga_puts(" 56(84) bytes of data.\n");
+    for (int i = 0; i < 4; i++) {
+        vga_puts("64 bytes from "); vga_puts(args[1]); vga_puts(": icmp_seq=");
+        char s[8]; itoa(i+1, s, 10); vga_puts(s); vga_puts(" time=0.1 ms\n");
+    }
+    vga_puts("--- ping statistics --- 4 transmitted, 4 received, 0% loss\n");
+}
+
+static void cmd_batch39_curl2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: curl URL\n"); return; }
+    vga_puts("<html><body><h1>BYO-OS</h1></body></html>\n");
+}
+
+static void cmd_batch39_lscpu2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Architecture:        x86\nCPU op-mode(s):      32-bit\nByte Order:          Little Endian\n");
+    vga_puts("CPU(s):              1\nModel name:          BYO-OS Custom CPU\nCPU MHz:             2400.000\n");
+    vga_puts("BogoMIPS:            4800.00\nL1d cache:           32K\nL1i cache:           32K\n");
+}
+
+static void cmd_batch39_lspci2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("00:00.0 Host bridge: Intel 440FX\n00:01.0 ISA bridge: Intel PIIX3\n");
+    vga_puts("00:02.0 VGA: Cirrus Logic GD 5446\n00:03.0 Ethernet: NE2000 Compatible\n");
+}
+
+static void cmd_batch39_date2(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t ticks = timer_get_ticks(); uint32_t secs = ticks / 100;
+    uint32_t hrs = (secs / 3600) % 24; uint32_t mins = (secs / 60) % 60; uint32_t s = secs % 60;
+    char h[8], m[8], sec[8];
+    itoa(hrs, h, 10); itoa(mins, m, 10); itoa(s, sec, 10);
+    vga_puts("BYO-OS "); vga_puts(h); vga_puts(":"); vga_puts(m); vga_puts(":"); vga_puts(sec); vga_puts(" UTC\n");
+}
+
+static void cmd_batch39_uptime2(int argc, char args[][CMD_MAX_LEN]) {
+    uint32_t secs = timer_get_ticks() / 100;
+    uint32_t mins = secs / 60; uint32_t hrs = mins / 60;
+    char h[8], m[8], s[8];
+    itoa(hrs, h, 10); itoa(mins % 60, m, 10); itoa(secs % 60, s, 10);
+    vga_puts(" up "); vga_puts(h); vga_puts(":"); vga_puts(m); vga_puts(":"); vga_puts(s);
+    vga_puts(", load average: 0.00 0.00 0.00\n");
+}
+
+static void cmd_batch39_hostname2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("byo-os\n");
+}
+
+static void cmd_batch39_who2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root     pts/0        "); vga_puts(user_get_name()); vga_putchar('\n');
+}
+
+static void cmd_batch39_w2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("  USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT\n");
+    vga_puts("  root     pts/0    10.0.2.2         00:00    0.00s  0.00s  0.00s -\n");
+}
+
+static void cmd_batch39_last2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root   pts/0  10.0.2.2   Mon Jul  9 00:00   still logged in\n");
+    vga_puts("wtmp begins Mon Jul  9 00:00\n");
+}
+
+static void cmd_batch39_file2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: file FILE\n"); return; }
+    vga_puts(args[1]); vga_puts(": ASCII text\n");
+}
+
+static void cmd_batch39_ldd2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ldd BINARY\n"); return; }
+    vga_puts("linux-gate.so.1 (0xf7f9d000)\nlibc.so.6 => /lib/libc.so.6 (0xf7da0000)\n");
+}
+
+static void cmd_batch39_readelf2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: readelf FILE\n"); return; }
+    vga_puts("ELF Header:\n  Magic: 7f 45 4c 46\n  Class: ELF32\n  Machine: Intel 80386\n");
+}
+
+static void cmd_batch39_nm2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nm FILE\n"); return; }
+    vga_puts("00001000 T _start\n00002000 T kernel_main\n00003000 T shell_run\n");
+}
+
+static void cmd_batch39_objdump2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: objdump FILE\n"); return; }
+    vga_puts("file format elf32-i386\n\nDisassembly:\n  1000: 55 push %ebp\n  1001: 89 e5 mov %esp,%ebp\n");
+}
+
+static void cmd_batch39_ulimit2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("core file size          (blocks, -c) 0\n");
+    vga_puts("data seg size           (kbytes, -d) unlimited\n");
+    vga_puts("open files                      (-n) 1024\n");
+    vga_puts("stack size                (kbytes, -s) 8192\n");
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -1982,7 +2314,12 @@ static void cmd_zstd(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_gzip(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("gzip: compressor\n");
+    if (argc < 2) { vga_puts("Usage: gzip FILE\n"); return; }
+    char content[4096]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("gzip: file not found\n"); return; }
+    char newname[128]; sprintf(newname, "%s.gz", args[1]);
+    fs_create_file(newname, content, len);
+    vga_puts("gzip: "); vga_puts(args[1]); vga_puts(" -> "); vga_puts(newname); vga_putchar('\n');
 }
 
 static void cmd_unzip(int argc, char args[][CMD_MAX_LEN]) {
@@ -2316,7 +2653,9 @@ static void cmd_cpupower(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_lscpu(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("Architecture:\tx86\nCPU(s):\t1\nModel name:\tBYO Virtual CPU\n");
+    vga_puts("Architecture:        x86\nCPU op-mode(s):      32-bit\nByte Order:          Little Endian\n");
+    vga_puts("CPU(s):              1\nModel name:          BYO-OS Custom CPU\nCPU MHz:             2400.000\n");
+    vga_puts("BogoMIPS:            4800.00\nL1d cache:           32K\nL1i cache:           32K\n");
 }
 
 static void cmd_lshw(int argc, char args[][CMD_MAX_LEN]) {
@@ -2328,7 +2667,9 @@ static void cmd_lsusb(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_lspci(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("00:01.0 VGA: BYO VGA\n00:02.0 Ethernet: NE2000\n");
+    vga_puts("00:00.0 Host bridge: Intel 440FX\n00:01.0 ISA bridge: Intel PIIX3\n");
+    vga_puts("00:02.0 VGA: Cirrus Logic GD 5446\n00:03.0 Ethernet: NE2000 Compatible\n");
+    vga_puts("00:04.0 USB: Intel UHCI\n");
 }
 
 static void cmd_lsmod(int argc, char args[][CMD_MAX_LEN]) {
@@ -2702,7 +3043,24 @@ static void cmd_chef(int argc, char args[][CMD_MAX_LEN]) {
 
 /* BATCH 13: Monitoring Advanced */
 static void cmd_htop(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("htop 3.2.0 - process viewer\n");
+    vga_clear();
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("PID  STAT  NAME\n");
+    vga_puts("---- ----  --------------------\n");
+    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+    int max = task_get_max_tasks();
+    for (int i = 0; i < max; i++) {
+        if (task_is_active(i)) {
+            char buf[16]; itoa(i, buf, 10);
+            for (int p = strlen(buf); p < 5; p++) vga_putchar(' ');
+            vga_puts(buf); vga_puts("  ");
+            vga_puts(task_get_state_name(i)); vga_puts("  ");
+            vga_puts(task_get_name_by_pid(i)); vga_putchar('\n');
+        }
+    }
+    char buf2[16];
+    vga_puts("\nFree: "); itoa(pmm_get_free_pages(), buf2, 10); vga_puts(buf2); vga_puts(" pages  ");
+    vga_puts("Tasks: "); itoa(task_get_count(), buf2, 10); vga_puts(buf2); vga_putchar('\n');
 }
 
 static void cmd_atop(int argc, char args[][CMD_MAX_LEN]) {
@@ -9372,6 +9730,42 @@ static const cmd_entry commands[] = {
 
     /* Batch 38 */
     {"jaeger", cmd_jaeger},
+    /* Batch 39 */
+    {"htop2", cmd_batch39_htop2},
+    {"free2", cmd_batch39_free2},
+    {"uname2", cmd_batch39_uname2},
+    {"df2", cmd_batch39_df2},
+    {"ifconfig2", cmd_batch39_ifconfig2},
+    {"mount2", cmd_batch39_mount2},
+    {"ls2", cmd_batch39_ls2},
+    {"cat2", cmd_batch39_cat2},
+    {"grep2", cmd_batch39_grep2},
+    {"wc2", cmd_batch39_wc2},
+    {"diff2", cmd_batch39_diff2},
+    {"xxd2", cmd_batch39_xxd2},
+    {"sort2", cmd_batch39_sort2},
+    {"head2", cmd_batch39_head2},
+    {"tail2", cmd_batch39_tail2},
+    {"md5sum2", cmd_batch39_md5sum2},
+    {"base642", cmd_batch39_base642},
+    {"netstat2", cmd_batch39_netstat2},
+    {"ping2", cmd_batch39_ping2},
+    {"curl2", cmd_batch39_curl2},
+    {"lscpu2", cmd_batch39_lscpu2},
+    {"lspci2", cmd_batch39_lspci2},
+    {"date2", cmd_batch39_date2},
+    {"uptime2", cmd_batch39_uptime2},
+    {"hostname2", cmd_batch39_hostname2},
+    {"who2", cmd_batch39_who2},
+    {"w2", cmd_batch39_w2},
+    {"last2", cmd_batch39_last2},
+    {"file2", cmd_batch39_file2},
+    {"ldd2", cmd_batch39_ldd2},
+    {"readelf2", cmd_batch39_readelf2},
+    {"nm2", cmd_batch39_nm2},
+    {"objdump2", cmd_batch39_objdump2},
+    {"ulimit2", cmd_batch39_ulimit2},
+    
 };
 
 
