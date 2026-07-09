@@ -12,3 +12,4 @@ start*.bat
 *.html
 p*.c
 isodir/
+__pycache__/

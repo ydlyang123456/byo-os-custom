@@ -1444,7 +1444,7 @@ static void cmd_systemctl(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_pstree(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("systemd─┬─network\n        ├─shell\n        ├─timer\n        └─journal\n");
+    vga_puts("systemd鈹€鈹攢network\n        鈹溾攢shell\n        鈹溾攢timer\n        鈹斺攢journal\n");
 }
 
 static void cmd_pgrep(int argc, char args[][CMD_MAX_LEN]) {
@@ -2355,7 +2355,7 @@ static void cmd_tlp(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_cpupower(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("cpu0:频率 2400MHz  策略: powersave\n");
+    vga_puts("cpu0:棰戠巼 2400MHz  绛栫暐: powersave\n");
 }
 
 static void cmd_lscpu(int argc, char args[][CMD_MAX_LEN]) {
@@ -7988,6 +7988,12 @@ void shell_run(void) {
         }
 
         char c = keyboard_getchar();
+
+        /* keyboard_getchar returns 0 when serial data is available */
+        if (c == 0) {
+            /* Check serial separately */
+            continue;
+        }
 
         if (c == 13 || c == 10) {
             input_buf[input_len] = 0;

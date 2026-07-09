@@ -80,7 +80,18 @@ void keyboard_init(void) {
 
 char keyboard_getchar(void) {
     while (key_head == key_tail) {
-        asm volatile("hlt");
+        /* Check serial first - don't block if serial has data */
+        if (serial_has_input()) {
+            return 0;  /* Signal: caller should check serial */
+        }
+        /* Small busy-wait before HLT to catch serial data */
+        for (volatile int d = 0; d < 5000; d++) {
+            if (serial_has_input()) return 0;
+            if (key_head != key_tail) break;
+        }
+        if (key_head == key_tail) {
+            asm volatile("hlt");
+        }
     }
     char c = (char)key_buffer[key_tail];
     key_tail = (key_tail + 1) % 256;

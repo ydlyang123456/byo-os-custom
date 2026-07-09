@@ -887,50 +887,9 @@ class H(BaseHTTPRequestHandler):
                     return
                 resp = br.send(cmd, 8.0)
                 lines_resp = resp.strip().split('\n')
-                clean = '\n'.join(
+                clean = chr(10).join(
                     l for l in lines_resp
-                    if not l.startswith('BYO-OS') and l.strip() and l.strip() != '
-                self.j({"output": clean})
-            except json.JSONDecodeError:
-                self.j({"error": "invalid JSON"})
-            except Exception as e:
-                self.j({"error": str(e)})
-        else:
-            self.send_response(404)
-            self.end_headers()
-
-    def do_OPTIONS(self):
-        """Handle CORS preflight requests."""
-        self.send_response(204)
-        self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
-        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
-        self.end_headers()
-
-    def j(self, d):
-        b = json.dumps(d, ensure_ascii=False).encode('utf-8')
-        self.send_response(200)
-        self.send_header('Content-Type','application/json; charset=utf-8')
-        self.send_header('Access-Control-Allow-Origin','*')
-        self.end_headers()
-        self.wfile.write(b)
-
-    def log_message(self, *a):
-        pass
-
-
-if __name__ == '__main__':
-    print("=== BYO-OS Web Management Panel v3 ===")
-    print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
-    br.connect()
-    print("Serial: " + ("CONNECTED" if br.ok else "OFFLINE"))
-    srv = HTTPServer(('0.0.0.0', HTTP_PORT), H)
-    print(f"Panel: http://localhost:{HTTP_PORT}")
-    try:
-        srv.serve_forever()
-    except KeyboardInterrupt:
-        print("Stopped.")
-
+                    if not l.startswith('BYO-OS') and l.strip() and l.strip() != 'BYO-OS>'
                 )
                 self.j({"output": clean})
             except json.JSONDecodeError:
