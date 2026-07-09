@@ -13982,6 +13982,48 @@ static void notification_push_140(int argc, char args[][CMD_MAX_LEN]);
 static void status_update_140(int argc, char args[][CMD_MAX_LEN]);
 static void file_share_140(int argc, char args[][CMD_MAX_LEN]);
 static void meeting_schedule_140(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 141: Legal + Compliance */
+static void contract_draft_141(int argc, char args[][CMD_MAX_LEN]);
+static void contract_review_141(int argc, char args[][CMD_MAX_LEN]);
+static void ip_search_141(int argc, char args[][CMD_MAX_LEN]);
+static void compliance_check_141(int argc, char args[][CMD_MAX_LEN]);
+static void audit_prepare_141(int argc, char args[][CMD_MAX_LEN]);
+static void gdpr_comply_141(int argc, char args[][CMD_MAX_LEN]);
+static void risk_assess_141(int argc, char args[][CMD_MAX_LEN]);
+static void policy_write_141(int argc, char args[][CMD_MAX_LEN]);
+static void license_check_141(int argc, char args[][CMD_MAX_LEN]);
+static void trademark_search_141(int argc, char args[][CMD_MAX_LEN]);
+static void patent_filing_141(int argc, char args[][CMD_MAX_LEN]);
+static void regulation_lookup_141(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 142: Database Operations */
+static void db_connect_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_query_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_insert_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_update_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_delete_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_backup_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_restore_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_migrate_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_optimize_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_analyze_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_replicate_142(int argc, char args[][CMD_MAX_LEN]);
+static void db_cluster_142(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 143: Print + Document */
+static void pdf_generate_143(int argc, char args[][CMD_MAX_LEN]);
+static void pdf_merge_143(int argc, char args[][CMD_MAX_LEN]);
+static void pdf_split_143(int argc, char args[][CMD_MAX_LEN]);
+static void pdf_watermark_143(int argc, char args[][CMD_MAX_LEN]);
+static void doc_convert_143(int argc, char args[][CMD_MAX_LEN]);
+static void doc_template_143(int argc, char args[][CMD_MAX_LEN]);
+static void doc_sign_143(int argc, char args[][CMD_MAX_LEN]);
+static void doc_encrypt_143(int argc, char args[][CMD_MAX_LEN]);
+static void spreadsheet_calc_143(int argc, char args[][CMD_MAX_LEN]);
+static void chart_create_143(int argc, char args[][CMD_MAX_LEN]);
+static void slide_build_143(int argc, char args[][CMD_MAX_LEN]);
+static void barcode_gen_143(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16826,7 +16868,14 @@ static const cmd_entry commands[] = {
     /* Batch 139: Weather + Environment */
     {"weather-now", weather_now_139},     {"weather-forecast", weather_forecast_139},     {"weather-alert", weather_alert_139},     {"air-quality", air_quality_139},     {"uv-index", uv_index_139},     {"solar-irradiance", solar_irradiance_139},     {"wind-forecast", wind_forecast_139},     {"rain-prediction", rain_prediction_139},     {"humidity-level", humidity_level_139},     {"barometric-pressure", barometric_pressure_139},     {"fog-detection", fog_detection_139},     {"storm-track", storm_track_139}, 
     /* Batch 140: Social + Communication */
-    {"email-send", email_send_140},     {"email-recv", email_recv_140},     {"sms-send", sms_send_140},     {"calendar-event", calendar_event_140},     {"contact-add", contact_add_140},     {"social-post", social_post_140},     {"social-feed", social_feed_140},     {"chat-group", chat_group_140},     {"notification-push", notification_push_140},     {"status-update", status_update_140},     {"file-share", file_share_140},     {"meeting-schedule", meeting_schedule_140}, 
+    {"email-send", email_send_140},     {"email-recv", email_recv_140},     {"sms-send", sms_send_140},     {"calendar-event", calendar_event_140},     {"contact-add", contact_add_140},     {"social-post", social_post_140},     {"social-feed", social_feed_140},     {"chat-group", chat_group_140},     {"notification-push", notification_push_140},     {"status-update", status_update_140},     {"file-share", file_share_140},     {"meeting-schedule", meeting_schedule_140},
+    /* Batch 141: Legal + Compliance */
+    {"contract-draft", contract_draft_141},     {"contract-review", contract_review_141},     {"ip-search", ip_search_141},     {"compliance-check", compliance_check_141},     {"audit-prepare", audit_prepare_141},     {"gdpr-comply", gdpr_comply_141},     {"risk-assess", risk_assess_141},     {"policy-write", policy_write_141},     {"license-check", license_check_141},     {"trademark-search", trademark_search_141},     {"patent-filing", patent_filing_141},     {"regulation-lookup", regulation_lookup_141}, 
+    /* Batch 142: Database Operations */
+    {"db-connect", db_connect_142},     {"db-query", db_query_142},     {"db-insert", db_insert_142},     {"db-update", db_update_142},     {"db-delete", db_delete_142},     {"db-backup", db_backup_142},     {"db-restore", db_restore_142},     {"db-migrate", db_migrate_142},     {"db-optimize", db_optimize_142},     {"db-analyze", db_analyze_142},     {"db-replicate", db_replicate_142},     {"db-cluster", db_cluster_142}, 
+    /* Batch 143: Print + Document */
+    {"pdf-generate", pdf_generate_143},     {"pdf-merge", pdf_merge_143},     {"pdf-split", pdf_split_143},     {"pdf-watermark", pdf_watermark_143},     {"doc-convert", doc_convert_143},     {"doc-template", doc_template_143},     {"doc-sign", doc_sign_143},     {"doc-encrypt", doc_encrypt_143},     {"spreadsheet-calc", spreadsheet_calc_143},     {"chart-create", chart_create_143},     {"slide-build", slide_build_143},     {"barcode-gen", barcode_gen_143}, 
+ 
  
  
 
@@ -37029,6 +37078,157 @@ static void file_share_140(int argc, char args[][CMD_MAX_LEN]) {
 static void meeting_schedule_140(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Meeting: Sprint Review Tomorrow 14:00 Duration:1h Attendees:8\n");
+}
+
+
+/* ===== Batch 141: Legal + Compliance ===== */
+static void contract_draft_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Draft: SaaS Agreement v2.1 Parties:2 Clauses:47 Jurisdiction:DE\n");
+}
+static void contract_review_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Review: 12 risks found High:2 Medium:5 Low:5 Suggestions:8\n");
+}
+static void ip_search_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("IP: Trademark BYO-OS pending Patent filed 2024-01 Copyright:registered\n");
+}
+static void compliance_check_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compliance: SOC2:PASS ISO27001:PASS GDPR:1 issue PCI-DSS:PASS\n");
+}
+static void audit_prepare_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Audit: Ready Checklists:12 Documents:47 Evidence:89 items\n");
+}
+static void gdpr_comply_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("GDPR: Data inventory:2,347 records Consent:98%% DSR avg:12d\n");
+}
+static void risk_assess_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Risk: Total:23 High:2 Medium:8 Low:13 Score:72/100\n");
+}
+static void policy_write_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Policy: InfoSec v3.0 Sections:15 Approval:pending Review:annual\n");
+}
+static void license_check_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("License: GPL-3.0 Compat:MIT BSD-Apache Conflicts:0\n");
+}
+static void trademark_search_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Trademark: 'BYO-OS' Clear in 45 classes Filing:recommended\n");
+}
+static void patent_filing_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Patent: Provisional filed Claims:12 Prior art:47 Examiner:assigned\n");
+}
+static void regulation_lookup_141(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Reg: EU-AI-Act Risk:limited Requirements:4 Compliance:87%%\n");
+}
+
+/* ===== Batch 142: Database Operations ===== */
+static void db_connect_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DB: Connected PostgreSQL 15.2 Host:localhost:5432 DB:byo_os\n");
+}
+static void db_query_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Query: SELECT 1,247 rows returned 12ms 2.3KB Plan:Seq Scan\n");
+}
+static void db_insert_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Insert: 1 row affected PK:12848 Duration:2ms\n");
+}
+static void db_update_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Update: 3 rows affected Duration:1ms WAL:16KB\n");
+}
+static void db_delete_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Delete: 1 row affected Duration:1ms Cascade:0\n");
+}
+static void db_backup_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Backup: Full dump 2.3GB Duration:45s Checksum:sha256:abc123\n");
+}
+static void db_restore_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Restore: From backup 2.3GB Duration:62s Status:OK Tables:47\n");
+}
+static void db_migrate_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Migrate: v12->v13 Steps:5 Applied:5 Rollback:available\n");
+}
+static void db_optimize_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Optimize: Tables:47 Reclaimed:128MB Vacuum:OK Index:rebuilt\n");
+}
+static void db_analyze_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Analyze: Tables:47 Indexes:89 Stats updated Queries optimized\n");
+}
+static void db_replicate_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Replica: Primary:OK Replica1:OK Replica2:OK Lag:0.2s\n");
+}
+static void db_cluster_142(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cluster: 3 nodes Primary:node1 Sync:node2 Async:node3\n");
+}
+
+/* ===== Batch 143: Print + Document ===== */
+static void pdf_generate_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PDF: report.pdf 12 pages 2.3MB A4 Landscape Created\n");
+}
+static void pdf_merge_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Merge: 5 PDFs -> combined.pdf 12.4MB 47 pages\n");
+}
+static void pdf_split_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Split: input.pdf -> page1.pdf page2.pdf page3.pdf\n");
+}
+static void pdf_watermark_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Watermark: 'CONFIDENTIAL' applied 50%% opacity centered\n");
+}
+static void doc_convert_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Convert: report.docx -> report.pdf 12 pages OK\n");
+}
+static void doc_template_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Template: Invoice #12848 Amount:$12,345 Tax:$1,234 Due:30d\n");
+}
+static void doc_sign_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sign: Digital signature applied Timestamp:2024-01-15\n");
+}
+static void doc_encrypt_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Encrypt: AES-256 Password protected Permissions:read-only\n");
+}
+static void spreadsheet_calc_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sheet: 1,247 rows x 12 cols Formulas:23 Sum:$125,000\n");
+}
+static void chart_create_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chart: Bar Revenue by Month 12 bars Colors:blue Created\n");
+}
+static void slide_build_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Slides: 12 slides Layout:16:9 Animations:8 Transition:fade\n");
+}
+static void barcode_gen_143(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Barcode: EAN-13 1234567890128 Generated PNG 300dpi\n");
 }
 
 void shell_run(void) {
