@@ -11526,6 +11526,11 @@ void shell_init(void) {
 }
 
 /* ===== Main Shell Loop ===== */
+/* Serial command buffer (persistent across iterations) */
+static char serial_cmd_buf[CMD_MAX_LEN];
+static int serial_cmd_len = 0;
+static int serial_collecting = 0;
+
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
@@ -11533,49 +11538,38 @@ void shell_run(void) {
     vga_puts("Type 'help' for available commands.\n\n");
     input_len = 0;
     input_buf[0] = 0;
+    serial_cmd_len = 0;
+    serial_collecting = 0;
     print_prompt();
 
     while (1) {
         net_poll();
 
-        /* Priority 1: Serial input (from gateway/web panel) */
+        /* === Handle serial input (non-blocking) === */
         if (serial_has_input()) {
-            serial_mode = 1;
-            vga_set_serial_mode(1);
-            char serial_cmd[CMD_MAX_LEN];
-            int si = 0;
-            /* Read until newline with generous timeout */
-            int idle_count = 0;
-            while (idle_count < 200) {
-                if (serial_has_input()) {
-                    idle_count = 0;
-                    char sc = serial_getchar();
-                    if (sc == 10 || sc == 13) {
-                        serial_cmd[si] = 0;
-                        if (si > 0) shell_execute(serial_cmd);
-                        break;
-                    }
-                    if (sc == 8 && si > 0) { si--; }
-                    else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = sc; }
-                } else {
-                    idle_count++;
-                    for (volatile int d = 0; d < 500; d++) {}
+            char sc = serial_getchar();
+            if (sc == 10 || sc == 13) {
+                serial_cmd_buf[serial_cmd_len] = 0;
+                if (serial_cmd_len > 0) {
+                    vga_set_serial_mode(1);
+                    shell_execute(serial_cmd_buf);
+                    vga_set_serial_mode(0);
                 }
+                serial_cmd_len = 0;
+                serial_collecting = 0;
+                serial_puts("BYO-OS>\n");
+            } else if (sc == 8 && serial_cmd_len > 0) {
+                serial_cmd_len--;
+            } else if (serial_cmd_len < CMD_MAX_LEN - 1) {
+                serial_cmd_buf[serial_cmd_len++] = sc;
+                serial_collecting = 1;
             }
-            if (idle_count >= 200 && si > 0) {
-                serial_cmd[si] = 0;
-                shell_execute(serial_cmd);
-            }
-            vga_set_serial_mode(0);
-            serial_mode = 0;
-            print_prompt();
-            continue;
+            if (serial_has_input()) continue;
         }
 
-        /* Priority 2: Keyboard input */
+        /* === Handle keyboard input (non-blocking) === */
         int kc = keyboard_getchar();
         if (kc == -1) {
-            /* No keyboard input, small delay then loop */
             for (volatile int d = 0; d < 2000; d++) {}
             continue;
         }
@@ -11583,7 +11577,7 @@ void shell_run(void) {
 
         if (c == 13 || c == 10) {
             input_buf[input_len] = 0;
-            vga_putchar('\n');
+            vga_putchar("\n");
             if (input_len > 0) shell_execute(input_buf);
             input_len = 0;
             input_buf[0] = 0;
@@ -11592,7 +11586,7 @@ void shell_run(void) {
             if (input_len > 0) {
                 input_len--;
                 input_buf[input_len] = 0;
-                vga_putchar('\b'); vga_putchar(' '); vga_putchar('\b');
+                vga_putchar("\b"); vga_putchar(" "); vga_putchar("\b");
             }
         } else if (c >= 32 && c <= 126) {
             if (input_len < CMD_MAX_LEN - 1) {

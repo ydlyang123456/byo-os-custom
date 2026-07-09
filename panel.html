@@ -1,199 +1,331 @@
 ﻿<!DOCTYPE html>
-<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>BYO-OS Panel</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,-apple-system,sans-serif;background:#0a0e1a;color:#e2e8f0;min-height:100vh}
-#sb{position:fixed;width:210px;height:100%;background:#111827;border-right:1px solid #1e293b;display:flex;flex-direction:column;z-index:100}
-#sb .logo{padding:18px;text-align:center;border-bottom:1px solid #1e293b}
-#sb .logo h1{color:#38bdf8;font-size:17px;letter-spacing:1px}
-#sb .logo p{color:#64748b;font-size:10px;margin-top:3px}
+#sb{position:fixed;width:220px;height:100%;background:#111827;border-right:1px solid #1e293b;display:flex;flex-direction:column;z-index:100}
+#sb .logo{padding:20px;text-align:center;border-bottom:1px solid #1e293b}
+#sb .logo h1{color:#38bdf8;font-size:18px;letter-spacing:1px}
+#sb .logo p{color:#64748b;font-size:10px;margin-top:4px}
 #sb nav{flex:1;overflow-y:auto;padding:8px 0}
-#sb nav a{display:flex;align-items:center;gap:8px;padding:9px 16px;color:#94a3b8;text-decoration:none;font-size:13px;border-left:3px solid transparent;transition:all .15s}
+#sb nav a{display:flex;align-items:center;gap:10px;padding:10px 18px;color:#94a3b8;text-decoration:none;font-size:13px;border-left:3px solid transparent;transition:all .15s;cursor:pointer}
 #sb nav a:hover{background:#1e293b;color:#e2e8f0}
 #sb nav a.on{color:#38bdf8;background:rgba(56,189,248,.08);border-left-color:#38bdf8}
-#sb nav .sep{padding:4px 16px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-top:8px}
-#sb .ft{padding:10px 16px;border-top:1px solid #1e293b;font-size:10px;color:#475569}
-#mn{margin-left:210px;padding:20px}
+#sb nav .sep{padding:5px 18px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+#sb .ft{padding:12px 18px;border-top:1px solid #1e293b;font-size:10px;color:#475569}
+#mn{margin-left:220px;padding:24px}
 .pg{display:none}.pg.on{display:block}
-h2{font-size:18px;margin-bottom:14px;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-bottom:16px}
-.card{background:#111827;border-radius:10px;padding:14px;border:1px solid #1e293b}
-.card h3{color:#64748b;font-size:11px;text-transform:uppercase;margin-bottom:8px;letter-spacing:.5px}
-.big{font-size:24px;font-weight:700}
-.row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #1e293b;font-size:12px}
+h2{font-size:20px;margin-bottom:16px;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:18px}
+.card{background:#111827;border-radius:10px;padding:16px;border:1px solid #1e293b}
+.card h3{color:#64748b;font-size:11px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.5px}
+.big{font-size:26px;font-weight:700}
+.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e293b;font-size:12px}
 .row:last-child{border:none}
 .lbl{color:#64748b}.val{color:#e2e8f0;font-weight:500}
-.bar{background:#1e293b;border-radius:3px;height:5px;margin:6px 0}
+.bar{background:#1e293b;border-radius:3px;height:6px;margin:8px 0}
 .fill{height:100%;border-radius:3px;transition:width .3s}
-.btn{display:inline-block;padding:6px 14px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
+.btn{display:inline-block;padding:7px 16px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
 .btn-primary{background:#38bdf8;color:#0a0e1a}.btn-primary:hover{background:#7dd3fc}
 .btn-outline{background:transparent;border:1px solid #334155;color:#94a3b8}.btn-outline:hover{background:#1e293b}
-#term{background:#000;border-radius:8px;padding:12px;font-family:Consolas,monospace;font-size:13px;height:500px;overflow-y:auto;white-space:pre-wrap;word-wrap:break-word;line-height:1.5}
-#tinp{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:8px 12px;color:#e2e8f0;font-family:monospace;font-size:13px;width:100%;margin-top:8px;outline:none}
+#term{background:#000;border-radius:8px;padding:14px;font-family:Consolas,monospace;font-size:13px;height:500px;overflow-y:auto;white-space:pre-wrap;word-wrap:break-word;line-height:1.5}
+#tinp{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:9px 14px;color:#e2e8f0;font-family:monospace;font-size:13px;width:100%;margin-top:10px;outline:none}
 #tinp:focus{border-color:#38bdf8}
 .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
 .st-on{background:#22c55e}.st-off{background:#ef4444}
+.output-box{background:#0f172a;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:12px;max-height:400px;overflow:auto;white-space:pre-wrap;line-height:1.4;margin-top:12px;border:1px solid #1e293b}
 .input-group{display:flex;gap:8px;margin-bottom:12px}
-.input-group input{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:6px 10px;color:#e2e8f0;font-size:12px;outline:none;flex:1}
+.input-group input{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:7px 12px;color:#e2e8f0;font-size:12px;outline:none;flex:1}
 .input-group input:focus{border-color:#38bdf8}
+.spinner{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-top-color:#38bdf8;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty{color:#475569;font-style:italic;padding:20px;text-align:center}
 </style>
-</head><body>
+</head>
+<body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v4</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v6</p></div>
   <nav>
     <div class="sep">Main</div>
-    <a href="#/dashboard" class="on" onclick="nav('dashboard')">Dashboard</a>
-    <a href="#/terminal" onclick="nav('terminal')">Terminal</a>
-    <a href="#/sysinfo" onclick="nav('sysinfo')">System Info</a>
+    <a data-page="dashboard" class="on">&#128202; Dashboard</a>
+    <a data-page="terminal">&#128187; Terminal</a>
+    <a data-page="sysinfo">&#9432; System Info</a>
     <div class="sep">Management</div>
-    <a href="#/processes" onclick="nav('processes')">Processes</a>
-    <a href="#/network" onclick="nav('network')">Network</a>
-    <a href="#/files" onclick="nav('files')">Files</a>
-    <a href="#/users" onclick="nav('users')">Users</a>
-    <a href="#/services" onclick="nav('services')">Services</a>
+    <a data-page="processes">&#128203; Processes</a>
+    <a data-page="network">&#127760; Network</a>
+    <a data-page="files">&#128193; Files</a>
+    <a data-page="users">&#128100; Users</a>
+    <a data-page="services">&#9881; Services</a>
     <div class="sep">Tools</div>
-    <a href="#/packages" onclick="nav('packages')">Packages</a>
-    <a href="#/logs" onclick="nav('logs')">Logs</a>
-    <a href="#/settings" onclick="nav('settings')">Settings</a>
+    <a data-page="packages">&#128230; Packages</a>
+    <a data-page="logs">&#128220; Logs</a>
+    <a data-page="settings">&#9881; Settings</a>
   </nav>
-  <div class="ft">BYO-OS v1.0 | <span id="connst"><span class="status st-off"></span>Connecting</span></div>
+  <div class="ft">BYO-OS v1.0 | <span id="connst"><span class="status st-off"></span>Connecting...</span></div>
 </div>
+
 <div id="mn">
+  <!-- Dashboard -->
   <div id="pg-dashboard" class="pg on">
     <h2>Dashboard</h2>
     <div class="grid">
-      <div class="card"><h3>System</h3><div class="big" id="d-os">-</div><div class="row"><span class="lbl">Platform</span><span class="val" id="d-plat">-</span></div><div class="row"><span class="lbl">Arch</span><span class="val" id="d-arch">-</span></div></div>
-      <div class="card"><h3>Memory</h3><div class="big" id="d-mem">-</div><div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div><div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">-</span></div><div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">-</span></div></div>
-      <div class="card"><h3>Tasks</h3><div class="big" id="d-tasks">-</div><div class="row"><span class="lbl">Load</span><span class="val" id="d-load">-</span></div><div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">-</span></div></div>
-      <div class="card"><h3>Network</h3><div class="big" id="d-ip">-</div><div class="row"><span class="lbl">Serial</span><span class="val" id="d-ser">-</span></div></div>
+      <div class="card">
+        <h3>System</h3>
+        <div class="big" id="d-os">Loading...</div>
+        <div class="row"><span class="lbl">Platform</span><span class="val" id="d-plat">-</span></div>
+        <div class="row"><span class="lbl">Arch</span><span class="val" id="d-arch">-</span></div>
+        <div class="row"><span class="lbl">User</span><span class="val" id="d-user">-</span></div>
+      </div>
+      <div class="card">
+        <h3>Memory</h3>
+        <div class="big" id="d-mem">-</div>
+        <div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div>
+        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">-</span></div>
+        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">-</span></div>
+        <div class="row"><span class="lbl">Heap Used</span><span class="val" id="d-heap">-</span></div>
+      </div>
+      <div class="card">
+        <h3>Status</h3>
+        <div class="big" id="d-tasks">-</div>
+        <div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">-</span></div>
+        <div class="row"><span class="lbl">Load Avg</span><span class="val" id="d-load">-</span></div>
+        <div class="row"><span class="lbl">IP Address</span><span class="val" id="d-ip">-</span></div>
+      </div>
+      <div class="card">
+        <h3>Connection</h3>
+        <div class="big" id="d-ser">-</div>
+        <div class="row"><span class="lbl">Serial Port</span><span class="val">4321</span></div>
+        <div class="row"><span class="lbl">Web Panel</span><span class="val" id="d-panel">7777</span></div>
+        <div style="margin-top:10px"><button class="btn btn-primary" onclick="refreshDash()">Refresh</button></div>
+      </div>
     </div>
   </div>
+
+  <!-- Terminal -->
   <div id="pg-terminal" class="pg">
     <h2>Terminal</h2>
-    <div id="term">Connecting to BYO-OS...</div>
-    <input id="tinp" placeholder="Type command and press Enter..." autofocus>
+    <div id="term">Welcome to BYO-OS Terminal\nType commands below...</div>
+    <div class="input-group" style="margin-top:10px">
+      <input id="tinp" placeholder="Enter command..." autocomplete="off">
+      <button class="btn btn-primary" onclick="sendTerm()">Send</button>
+    </div>
   </div>
+
+  <!-- System Info -->
   <div id="pg-sysinfo" class="pg">
     <h2>System Information</h2>
-    <button class="btn btn-primary" onclick="rcmd('sysinfo','sysout')">Refresh</button>
-    <pre id="sysout" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:400px;overflow:auto"></pre>
+    <button class="btn btn-primary" onclick="loadPage('sysinfo','sysinfo_out','sysinfo')">Load Info</button>
+    <pre id="sysinfo_out" class="output-box"><span class="empty">Click "Load Info" to fetch system information</span></pre>
   </div>
+
+  <!-- Processes -->
   <div id="pg-processes" class="pg">
-    <h2>Processes</h2>
-    <button class="btn btn-primary" onclick="rcmd('ps','psout')">Refresh</button>
-    <pre id="psout" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:400px;overflow:auto"></pre>
+    <h2>Running Processes</h2>
+    <button class="btn btn-primary" onclick="loadPage('processes','proc_out','ps')">Refresh</button>
+    <pre id="proc_out" class="output-box"><span class="empty">Click "Refresh" to load processes</span></pre>
   </div>
+
+  <!-- Network -->
   <div id="pg-network" class="pg">
     <h2>Network</h2>
-    <button class="btn btn-primary" onclick="rcmd('ifconfig','nwout')">Refresh</button>
-    <pre id="nwout" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:400px;overflow:auto"></pre>
+    <button class="btn btn-primary" onclick="loadPage('network','net_out','ifconfig')">ifconfig</button>
+    <button class="btn btn-outline" onclick="loadPage('network','net_out','netstat')" style="margin-left:8px">netstat</button>
+    <button class="btn btn-outline" onclick="loadPage('network','net_out','route')" style="margin-left:8px">route</button>
+    <pre id="net_out" class="output-box"><span class="empty">Click a button to load network info</span></pre>
   </div>
+
+  <!-- Files -->
   <div id="pg-files" class="pg">
     <h2>File Manager</h2>
-    <div class="input-group"><input id="fpath" placeholder="Path" value="/"><button class="btn btn-primary" onclick="rcmd('ls '+document.getElementById('fpath').value,'flout')">Browse</button></div>
-    <pre id="flout" style="background:#0f172a;padding:12px;border-radius:6px;font-size:12px;min-height:200px;white-space:pre-wrap"></pre>
+    <div class="input-group">
+      <input id="fspath" placeholder="Path (e.g. /)" value="/">
+      <button class="btn btn-primary" onclick="loadPage('files','fs_out','ls '+document.getElementById('fspath').value)">Browse</button>
+    </div>
+    <button class="btn btn-outline" onclick="loadPage('files','fs_out','df -h')" style="margin-bottom:8px">Disk Usage</button>
+    <pre id="fs_out" class="output-box"><span class="empty">Enter a path and click Browse</span></pre>
   </div>
+
+  <!-- Users -->
   <div id="pg-users" class="pg">
-    <h2>Users</h2>
-    <button class="btn btn-primary" onclick="rcmd('whoami','usrout')">Who Am I</button>
-    <button class="btn btn-outline" onclick="rcmd('users','usrout')" style="margin-left:8px">List Users</button>
-    <pre id="usrout" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:300px;overflow:auto"></pre>
+    <h2>User Management</h2>
+    <button class="btn btn-primary" onclick="loadPage('users','user_out','whoami')">whoami</button>
+    <button class="btn btn-outline" onclick="loadPage('users','user_out','id')" style="margin-left:8px">id</button>
+    <button class="btn btn-outline" onclick="loadPage('users','user_out','users')" style="margin-left:8px">users</button>
+    <pre id="user_out" class="output-box"><span class="empty">Click a button to query users</span></pre>
   </div>
+
+  <!-- Services -->
   <div id="pg-services" class="pg">
     <h2>Services</h2>
-    <button class="btn btn-primary" onclick="rcmd('service list','svc')">List Services</button>
-    <pre id="svc" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:300px;overflow:auto"></pre>
+    <button class="btn btn-primary" onclick="loadPage('services','svc_out','systemctl list')">List Services</button>
+    <pre id="svc_out" class="output-box"><span class="empty">Click "List Services" to load</span></pre>
   </div>
+
+  <!-- Packages -->
   <div id="pg-packages" class="pg">
     <h2>Packages</h2>
-    <div class="input-group"><input id="pkgcmd" placeholder="Command"><button class="btn btn-primary" onclick="rcmd(document.getElementById('pkgcmd').value,'pkgout')">Run</button></div>
-    <pre id="pkgout" style="background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:300px;overflow:auto"></pre>
+    <div class="input-group">
+      <input id="pkgcmd" placeholder="Package command...">
+      <button class="btn btn-primary" onclick="execCmd('pkgcmd','pkg_out')">Run</button>
+    </div>
+    <button class="btn btn-outline" onclick="loadPage('packages','pkg_out','dpkg -l')" style="margin-bottom:8px">List Packages</button>
+    <pre id="pkg_out" class="output-box"><span class="empty">Enter a command or click "List Packages"</span></pre>
   </div>
+
+  <!-- Logs -->
   <div id="pg-logs" class="pg">
-    <h2>Logs</h2>
-    <button class="btn btn-primary" onclick="rcmd('journal','log')">Load Logs</button>
-    <button class="btn btn-outline" onclick="rcmd('dmesg','log')" style="margin-left:8px">dmesg</button>
-    <pre id="log" style="margin-top:10px;background:#0f172a;padding:12px;border-radius:6px;font-size:12px;max-height:500px;overflow:auto"></pre>
+    <h2>System Logs</h2>
+    <button class="btn btn-primary" onclick="loadPage('logs','log_out','journal')">journal</button>
+    <button class="btn btn-outline" onclick="loadPage('logs','log_out','dmesg')" style="margin-left:8px">dmesg</button>
+    <button class="btn btn-outline" onclick="loadPage('logs','log_out','last')" style="margin-left:8px">last</button>
+    <pre id="log_out" class="output-box"><span class="empty">Click a button to load logs</span></pre>
   </div>
+
+  <!-- Settings -->
   <div id="pg-settings" class="pg">
     <h2>Settings</h2>
     <div class="card" style="max-width:500px">
       <h3>Serial Connection</h3>
       <div class="row"><span class="lbl">Port</span><span class="val">4321</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" id="set-ser">-</span></div>
-      <button class="btn btn-primary" onclick="reconnect()" style="margin-top:10px">Reconnect</button>
+      <button class="btn btn-primary" onclick="reconnect()" style="margin-top:12px">Reconnect Serial</button>
     </div>
   </div>
 </div>
+
 <script>
-var cur='dashboard';
-function nav(p){
-  document.querySelectorAll('.pg').forEach(function(e){e.classList.remove('on')});
-  var el=document.getElementById('pg-'+p);
-  if(el) el.classList.add('on');
-  document.querySelectorAll('#sb nav a').forEach(function(e){e.classList.remove('on')});
-  document.querySelectorAll('#sb nav a').forEach(function(e){if(e.getAttribute('href')==='#/'+p) e.classList.add('on')});
-  cur=p;
-  if(p==='dashboard') refreshDash();
-  if(p==='terminal') setTimeout(function(){document.getElementById('tinp').focus()},100);
-}
-function api(url,body){
-  var opts={method:'GET'};
-  if(body){opts.method='POST';opts.headers={'Content-Type':'application/json'};opts.body=JSON.stringify(body);}
-  return fetch(url,opts).then(function(r){return r.json()}).catch(function(e){return{error:String(e)}});
-}
-function rcmd(cmd,el){
-  document.getElementById(el).textContent='Running: '+cmd+' ...';
-  api('/api/exec',{cmd:cmd}).then(function(d){
-    document.getElementById(el).textContent=d.output||d.error||'No output';
+var cur = 'dashboard';
+
+function nav(p) {
+  // Hide all pages
+  document.querySelectorAll('.pg').forEach(function(e){ e.classList.remove('on') });
+  // Show target page
+  var el = document.getElementById('pg-' + p);
+  if (el) el.classList.add('on');
+  // Update sidebar active state
+  document.querySelectorAll('#sb nav a').forEach(function(e){
+    e.classList.remove('on');
+    if (e.getAttribute('data-page') === p) e.classList.add('on');
   });
+  cur = p;
+  // Auto-load data for certain pages
+  if (p === 'dashboard') refreshDash();
+  if (p === 'terminal') setTimeout(function(){ document.getElementById('tinp').focus(); }, 100);
 }
-function refreshDash(){
-  api('/api/sysinfo').then(function(d){
-    if(d.error){document.getElementById('d-os').textContent='Error';return;}
-    document.getElementById('d-os').textContent=d.os||'BYO-OS';
-    document.getElementById('d-plat').textContent=d.platform||'x86';
-    document.getElementById('d-arch').textContent=d.arch||'-';
-    document.getElementById('d-mem').textContent=(d.mem_free||0)+'MB/'+(d.mem_total||0)+'MB';
-    var pct=d.mem_total>0?((d.mem_total-d.mem_free)/d.mem_total*100):0;
-    document.getElementById('d-membar').style.width=pct+'%';
-    document.getElementById('d-mt').textContent=d.mem_total+' MB';
-    document.getElementById('d-mf').textContent=d.mem_free+' MB';
-    document.getElementById('d-tasks').textContent=d.tasks||'-';
-    document.getElementById('d-load').textContent=d.load||'-';
-    document.getElementById('d-upt').textContent=d.uptime+'s';
-    document.getElementById('d-ip').textContent=d.ip||'-';
-    document.getElementById('d-ser').innerHTML=d.serial?'<span class="status st-on"></span>Connected':'<span class="status st-off"></span>Offline';
-  });
-}
-function refreshConn(){
-  api('/api/ping').then(function(d){
-    var e1=document.getElementById('connst');
-    var e2=document.getElementById('set-ser');
-    if(d.serial){if(e1)e1.innerHTML='<span class="status st-on"></span>Connected';if(e2)e2.innerHTML='<span class="status st-on"></span>Connected';}
-    else{if(e1)e1.innerHTML='<span class="status st-off"></span>Offline';if(e2)e2.innerHTML='<span class="status st-off"></span>Offline';}
-  });
-}
-function reconnect(){api('/api/reconnect').then(function(d){refreshConn();});}
-var tinp=document.getElementById('tinp');
-var term=document.getElementById('term');
-tinp.addEventListener('keydown',function(e){
-  if(e.key==='Enter'){
-    var cmd=tinp.value.trim();
-    if(!cmd)return;
-    term.textContent+='\nBYO-OS> '+cmd+'\n';
-    tinp.value='';
-    api('/api/exec',{cmd:cmd}).then(function(d){
-      term.textContent+=(d.output||d.error||'')+'\n';
-      term.scrollTop=term.scrollHeight;
-    });
+
+// Sidebar click handler
+document.querySelectorAll('#sb nav a[data-page]').forEach(function(a) {
+  a.addEventListener('click', function(e) {
     e.preventDefault();
-  }
+    var page = this.getAttribute('data-page');
+    if (page) nav(page);
+  });
 });
+
+function api(url, body) {
+  var opts = { method: 'GET' };
+  if (body) {
+    opts.method = 'POST';
+    opts.headers = { 'Content-Type': 'application/json' };
+    opts.body = JSON.stringify(body);
+  }
+  return fetch(url, opts).then(function(r){ return r.json(); }).catch(function(e){ return {error: String(e)}; });
+}
+
+function loadPage(page, elId, cmd) {
+  var el = document.getElementById(elId);
+  if (el) el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
+  api('/api/exec', {cmd: cmd}).then(function(d) {
+    if (el) el.textContent = d.output || d.error || 'No output';
+  });
+}
+
+function execCmd(inputId, elId) {
+  var inp = document.getElementById(inputId);
+  if (!inp) return;
+  var cmd = inp.value.trim();
+  if (!cmd) return;
+  loadPage(cur, elId, cmd);
+}
+
+function sendTerm() {
+  var inp = document.getElementById('tinp');
+  var term = document.getElementById('term');
+  var cmd = inp.value.trim();
+  if (!cmd) return;
+  term.textContent += '\nBYO-OS> ' + cmd + '\n';
+  inp.value = '';
+  api('/api/exec', {cmd: cmd}).then(function(d) {
+    term.textContent += (d.output || d.error || '') + '\n';
+    term.scrollTop = term.scrollHeight;
+  });
+}
+
+function refreshDash() {
+  document.getElementById('d-os').textContent = 'Loading...';
+  api('/api/sysinfo').then(function(d) {
+    if (d.error) {
+      document.getElementById('d-os').textContent = 'Error';
+      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Error';
+      return;
+    }
+    document.getElementById('d-os').textContent = d.os || 'BYO-OS';
+    document.getElementById('d-plat').textContent = d.platform || 'x86';
+    document.getElementById('d-arch').textContent = d.arch || '-';
+    document.getElementById('d-user').textContent = d.user || '-';
+    var mt = d.mem_total || 0;
+    var mf = d.mem_free || 0;
+    document.getElementById('d-mem').textContent = mf + 'MB / ' + mt + 'MB';
+    var pct = mt > 0 ? ((mt - mf) / mt * 100) : 0;
+    document.getElementById('d-membar').style.width = pct + '%';
+    document.getElementById('d-mt').textContent = mt + ' MB';
+    document.getElementById('d-mf').textContent = mf + ' MB';
+    document.getElementById('d-heap').textContent = (d.heap_used || 0) + ' bytes';
+    document.getElementById('d-tasks').textContent = (d.tasks || 0) + ' tasks';
+    document.getElementById('d-upt').textContent = (d.uptime || 0) + 's';
+    document.getElementById('d-load').textContent = d.load || '-';
+    document.getElementById('d-ip').textContent = d.ip || '-';
+    document.getElementById('d-ser').innerHTML = d.serial ?
+      '<span class="status st-on"></span>Connected' :
+      '<span class="status st-off"></span>Offline';
+  });
+}
+
+function refreshConn() {
+  api('/api/ping').then(function(d) {
+    var e1 = document.getElementById('connst');
+    var e2 = document.getElementById('set-ser');
+    if (d.serial) {
+      if (e1) e1.innerHTML = '<span class="status st-on"></span>Connected';
+      if (e2) e2.innerHTML = '<span class="status st-on"></span>Connected';
+    } else {
+      if (e1) e1.innerHTML = '<span class="status st-off"></span>Offline';
+      if (e2) e2.innerHTML = '<span class="status st-off"></span>Offline';
+    }
+  });
+}
+
+function reconnect() {
+  api('/api/reconnect').then(function(d) { refreshConn(); });
+}
+
+// Terminal Enter key
+document.getElementById('tinp').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { sendTerm(); e.preventDefault(); }
+});
+
+// Initial load
 refreshDash();
 refreshConn();
-setInterval(refreshConn,10000);
-var h=location.hash.replace('#/','');
-if(h&&document.getElementById('pg-'+h)) nav(h);
-</script></body></html>
+setInterval(refreshConn, 15000);
+
+// Handle hash navigation on load
+var h = location.hash.replace('#/', '');
+if (h && document.getElementById('pg-' + h)) nav(h);
+</script>
+</body>
+</html>
