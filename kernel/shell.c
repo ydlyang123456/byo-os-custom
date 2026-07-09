@@ -814,31 +814,34 @@ static void cmd_uniq(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_wc(int argc, char args[][CMD_MAX_LEN]) {
+    int show_lines = 0, show_words = 0, show_chars = 0;
     const char *fname = 0;
     for (int i = 1; i < argc; i++) {
-        if (args[i][0] != '-') fname = args[i];
+        if (args[i][0] == 45) {
+            for (int j = 1; args[i][j]; j++) {
+                if (args[i][j] == 108) show_lines = 1;
+                else if (args[i][j] == 119) show_words = 1;
+                else if (args[i][j] == 99) show_chars = 1;
+            }
+        } else { fname = args[i]; }
     }
-    if (!fname) { vga_puts("Usage: wc <file>\n"); return; }
+    if (!fname) { vga_puts("Usage: wc [-lwc] <file>\n"); return; }
     memset(file_buf, 0, FILE_BUF_SIZE);
     int r = fs_read_file(fname, file_buf, FILE_BUF_SIZE - 1);
     if (r <= 0) { vga_puts("wc: "); vga_puts(fname); vga_puts(": No such file\n"); return; }
-    int lines = 0, words = 0, chars = 0;
+    int lines = 0, words = 0, chars = r;
     int in_word = 0;
     for (int i = 0; i < r; i++) {
-        chars++;
-        if (file_buf[i] == '\n') lines++;
-        if (file_buf[i] == ' ' || file_buf[i] == '\n' || file_buf[i] == '\t') {
-            in_word = 0;
-        } else if (!in_word) {
-            in_word = 1;
-            words++;
-        }
+        if (file_buf[i] == 10) lines++;
+        if (file_buf[i] == 32 || file_buf[i] == 10 || file_buf[i] == 9) in_word = 0;
+        else if (!in_word) { words++; in_word = 1; }
     }
+    int show_all = (!show_lines && !show_words && !show_chars);
     char buf[32];
-    itoa(lines, buf, 10); vga_puts(buf); vga_putchar(' ');
-    itoa(words, buf, 10); vga_puts(buf); vga_putchar(' ');
-    itoa(chars, buf, 10); vga_puts(buf); vga_putchar(' ');
-    vga_puts(fname); vga_putchar('\n');
+    if (show_all || show_lines) { itoa(lines, buf, 10); vga_puts("  "); vga_puts(buf); }
+    if (show_all || show_words) { itoa(words, buf, 10); vga_puts("  "); vga_puts(buf); }
+    if (show_all || show_chars) { itoa(chars, buf, 10); vga_puts("  "); vga_puts(buf); }
+    vga_putchar(32); vga_puts(fname); vga_putchar(10);
 }
 
 static void cmd_head(int argc, char args[][CMD_MAX_LEN]) {
