@@ -14064,6 +14064,48 @@ static void img_convert_146(int argc, char args[][CMD_MAX_LEN]);
 static void img_watermark_146(int argc, char args[][CMD_MAX_LEN]);
 static void img_color_grade_146(int argc, char args[][CMD_MAX_LEN]);
 static void img_stitch_146(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 147: DevOps Advanced */
+static void terraform_plan_147(int argc, char args[][CMD_MAX_LEN]);
+static void terraform_apply_147(int argc, char args[][CMD_MAX_LEN]);
+static void ansible_run_147(int argc, char args[][CMD_MAX_LEN]);
+static void puppet_apply_147(int argc, char args[][CMD_MAX_LEN]);
+static void chef_converge_147(int argc, char args[][CMD_MAX_LEN]);
+static void vagrant_up_147(int argc, char args[][CMD_MAX_LEN]);
+static void packer_build_147(int argc, char args[][CMD_MAX_LEN]);
+static void consul_kv_147(int argc, char args[][CMD_MAX_LEN]);
+static void vault_read_147(int argc, char args[][CMD_MAX_LEN]);
+static void vault_write_147(int argc, char args[][CMD_MAX_LEN]);
+static void boundary_auth_147(int argc, char args[][CMD_MAX_LEN]);
+static void waypoint_deploy_147(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 148: NLP + Speech */
+static void nlp_tokenize_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_pos_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_ner_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_sentiment_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_translate_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_summarize_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp问答_148(int argc, char args[][CMD_MAX_LEN]);
+static void nlp_classify_148(int argc, char args[][CMD_MAX_LEN]);
+static void speech_to_text_148(int argc, char args[][CMD_MAX_LEN]);
+static void text_to_speech_148(int argc, char args[][CMD_MAX_LEN]);
+static void voice_clone_148(int argc, char args[][CMD_MAX_LEN]);
+static void language_detect_148(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 149: Video + Animation */
+static void video_encode_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_decode_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_edit_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_composite_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_animate_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_particle_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_transition_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_subtitle_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_color_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_stabilize_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_enhance_149(int argc, char args[][CMD_MAX_LEN]);
+static void video_export_149(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16922,7 +16964,14 @@ static const cmd_entry commands[] = {
     /* Batch 145: Simulation + Modeling */
     {"sim-fluid", sim_fluid_145},     {"sim-structural", sim_structural_145},     {"sim-thermal", sim_thermal_145},     {"sim-electromagnetic", sim_electromagnetic_145},     {"sim-traffic", sim_traffic_145},     {"sim-ecosystem", sim_ecosystem_145},     {"sim-economic", sim_economic_145},     {"sim-epidemic", sim_epidemic_145},     {"sim-climate", sim_climate_145},     {"sim-urban", sim_urban_145},     {"sim-supply-chain", sim_supply_chain_145},     {"sim-wargame", sim_wargame_145}, 
     /* Batch 146: Image Processing */
-    {"img-resize", img_resize_146},     {"img-crop", img_crop_146},     {"img-filter", img_filter_146},     {"img-enhance", img_enhance_146},     {"img-segment", img_segment_146},     {"img-recognize", img_recognize_146},     {"img-generate", img_generate_146},     {"img-compress", img_compress_146},     {"img-convert", img_convert_146},     {"img-watermark", img_watermark_146},     {"img-color-grade", img_color_grade_146},     {"img-stitch", img_stitch_146}, 
+    {"img-resize", img_resize_146},     {"img-crop", img_crop_146},     {"img-filter", img_filter_146},     {"img-enhance", img_enhance_146},     {"img-segment", img_segment_146},     {"img-recognize", img_recognize_146},     {"img-generate", img_generate_146},     {"img-compress", img_compress_146},     {"img-convert", img_convert_146},     {"img-watermark", img_watermark_146},     {"img-color-grade", img_color_grade_146},     {"img-stitch", img_stitch_146},
+    /* Batch 147: DevOps Advanced */
+    {"terraform-plan", terraform_plan_147},     {"terraform-apply", terraform_apply_147},     {"ansible-run", ansible_run_147},     {"puppet-apply", puppet_apply_147},     {"chef-converge", chef_converge_147},     {"vagrant-up", vagrant_up_147},     {"packer-build", packer_build_147},     {"consul-kv", consul_kv_147},     {"vault-read", vault_read_147},     {"vault-write", vault_write_147},     {"boundary-auth", boundary_auth_147},     {"waypoint-deploy", waypoint_deploy_147}, 
+    /* Batch 148: NLP + Speech */
+    {"nlp-tokenize", nlp_tokenize_148},     {"nlp-pos", nlp_pos_148},     {"nlp-ner", nlp_ner_148},     {"nlp-sentiment", nlp_sentiment_148},     {"nlp-translate", nlp_translate_148},     {"nlp-summarize", nlp_summarize_148},     {"nlp问答", nlp问答_148},     {"nlp-classify", nlp_classify_148},     {"speech-to-text", speech_to_text_148},     {"text-to-speech", text_to_speech_148},     {"voice-clone", voice_clone_148},     {"language-detect", language_detect_148}, 
+    /* Batch 149: Video + Animation */
+    {"video-encode", video_encode_149},     {"video-decode", video_decode_149},     {"video-edit", video_edit_149},     {"video-composite", video_composite_149},     {"video-animate", video_animate_149},     {"video-particle", video_particle_149},     {"video-transition", video_transition_149},     {"video-subtitle", video_subtitle_149},     {"video-color", video_color_149},     {"video-stabilize", video_stabilize_149},     {"video-enhance", video_enhance_149},     {"video-export", video_export_149}, 
+ 
  
  
  
@@ -37429,6 +37478,157 @@ static void img_color_grade_146(int argc, char args[][CMD_MAX_LEN]) {
 static void img_stitch_146(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Stitch: 4 images -> panorama 7680x2160 Blending:seamless\n");
+}
+
+
+/* ===== Batch 147: DevOps Advanced ===== */
+static void terraform_plan_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Terraform: Plan 12 to add 3 change 1 destroy 0 Cost:$45/mo\n");
+}
+static void terraform_apply_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Terraform: Apply complete! Resources:12 added 3 changed 0 destroyed\n");
+}
+static void ansible_run_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ansible: Playbook applied 47 tasks OK Changed:12 Unreachable:0 Failed:0\n");
+}
+static void puppet_apply_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Puppet: Catalog compiled Resources:234 Applied:12 Unchanged:222\n");
+}
+static void chef_converge_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chef: Run complete 1247 resources 12 updated 0 errors\n");
+}
+static void vagrant_up_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vagrant: VM 'dev' booted 192.168.56.10 Provider:VirtualBox\n");
+}
+static void packer_build_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Packer: Build 'ubuntu-base' 12 provisioners Complete 45s\n");
+}
+static void consul_kv_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Consul KV: key=api/config value=2.3KB Index:12847\n");
+}
+static void vault_read_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vault: secret/api Key:*** Expired:false Lease:3600s\n");
+}
+static void vault_write_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vault: secret/api key=*** written Version:2\n");
+}
+static void boundary_auth_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Boundary: Authenticated User:admin Host:worker-1 Session:12848\n");
+}
+static void waypoint_deploy_147(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Waypoint: Deploy 'api' Artifact:1234 Status:running URL:https://api.dev\n");
+}
+
+/* ===== Batch 148: NLP + Speech ===== */
+static void nlp_tokenize_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tokenize: 128 tokens Subwords:87 Words:42 Punctuation:12\n");
+}
+static void nlp_pos_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("POS: Noun:23 Verb:12 Adj:8 Adv:3 Prep:5 Det:4 Conj:2\n");
+}
+static void nlp_ner_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("NER: ORG:5 PER:8 LOC:3 DATE:4 MONEY:2 EVENT:1\n");
+}
+static void nlp_sentiment_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sentiment: Positive:0.72 Neutral:0.18 Negative:0.10 Confidence:89%%\n");
+}
+static void nlp_translate_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Translate: EN->ZH 'Hello world' -> '你好世界' BLEU:0.87\n");
+}
+static void nlp_summarize_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Summarize: 1,247 words -> 128 words Compression:10:1 ROUGE:0.45\n");
+}
+static void nlp问答_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Q&A: Q:'What is BYO-OS?' A:'Custom x86 OS' Confidence:94%%\n");
+}
+static void nlp_classify_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Classify: Tech:78%% Business:15%% Other:7%% Model:BERT\n");
+}
+static void speech_to_text_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("STT: 12.3s audio -> 87 words WER:4.2%% Language:EN\n");
+}
+static void text_to_speech_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TTS: 128 words -> 8.7s audio Voice:default Quality:high\n");
+}
+static void voice_clone_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Voice Clone: Source:5min Target voice:similar Fidelity:92%%\n");
+}
+static void language_detect_148(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Language: EN:87%% ZH:8%% JA:3%% Other:2%%\n");
+}
+
+/* ===== Batch 149: Video + Animation ===== */
+static void video_encode_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Encode: H.264 1080p 30fps CRF:23 Size:145MB Duration:5:32\n");
+}
+static void video_decode_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Decode: H.265 4K 60fps Frames:3,247 Time:2.3s\n");
+}
+static void video_edit_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edit: Cut 00:30-01:45 Merge 3 clips Trim OK\n");
+}
+static void video_composite_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Composite: 4 layers Alpha blend OK Output:1080p\n");
+}
+static void video_animate_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Animate: Keyframes:12 Duration:5s Easing:ease-in-out\n");
+}
+static void video_particle_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Particles: 10,000 Physics:gravity Wind:2.3 Color:rainbow\n");
+}
+static void video_transition_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Transition: Crossfade 1s between scenes 12 transitions\n");
+}
+static void video_subtitle_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Subtitle: SRT 128 lines Sync:OK Font:Arial Size:24px\n");
+}
+static void video_color_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Color: LUT applied Saturation:+15%% Contrast:+10%%\n");
+}
+static void video_stabilize_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stabilize: Motion detected:245 frames Corrected:OK\n");
+}
+static void video_enhance_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Enhance: Upscale 1080p->4K Denoise:medium Sharpness:+20%%\n");
+}
+static void video_export_149(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Export: MOV ProRes 422 HQ 4K 30fps Size:2.3GB\n");
 }
 
 void shell_run(void) {
