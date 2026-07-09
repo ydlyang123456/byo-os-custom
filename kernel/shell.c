@@ -3184,6 +3184,325 @@ static void cmd_jmeter(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_gatling(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Gatling: performance testing\n");
 }
+/* BATCH 15: Network Services */
+static void cmd_samba(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Samba: SMB/CIFS file server\n");
+}
+
+static void cmd_nfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NFS: Network File System\n");
+}
+
+static void cmd_ftp_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vsftpd: FTP server\n");
+}
+
+static void cmd_scp_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenSSH SCP server\n");
+}
+
+static void cmd_rsync_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rsync daemon\n");
+}
+
+static void cmd_tftp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("TFTP: Trivial FTP\n");
+}
+
+static void cmd_xinetd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xinetd: extended internet services\n");
+}
+
+static void cmd_stunnel(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("stunnel: SSL tunnel\n");
+}
+
+static void cmd_haproxy_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("HAProxy: load balancer\n");
+}
+
+static void cmd_keepalived(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Keepalived: VRRP\n");
+}
+
+/* BATCH 15: Mail Server */
+static void cmd_postfix(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Postfix: MTA\n");
+}
+
+static void cmd_dovecot(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dovecot: IMAP/POP3 server\n");
+}
+
+static void cmd_spamassassin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SpamAssassin: spam filter\n");
+}
+
+static void cmd_clamav_milter(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ClamAV milter: mail antivirus\n");
+}
+
+/* BATCH 15: Virtualization */
+static void cmd_qemu_system(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("QEMU: system emulator\n");
+}
+
+static void cmd_vboxmanage(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VirtualBox: VM manager\n");
+}
+
+static void cmd_virsh(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: virsh [list|start|stop|info]\n"); return; }
+    if (strcmp(args[1], "list") == 0) {
+        vga_puts("Id Name                 State\n------------------------------------\n");
+    } else { vga_puts("virsh: operation completed\n"); }
+}
+
+static void cmd_xen(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Xen: hypervisor\n");
+}
+
+static void cmd_kvm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("KVM: kernel-based VM\n");
+}
+
+static void cmd_lxc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LXC: Linux containers\n");
+}
+
+static void cmd_proxmox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Proxmox VE: virtual environment\n");
+}
+
+/* BATCH 15: Storage */
+static void cmd_ceph(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ceph: distributed storage\n");
+}
+
+static void cmd_minio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MinIO: S3-compatible storage\n");
+}
+
+static void cmd_glusterfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GlusterFS: distributed filesystem\n");
+}
+
+static void cmd_nfs_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NFS server: /exports\n");
+}
+
+static void cmd_iscsi(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("iSCSI: block storage\n");
+}
+
+static void cmd_fc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fibre Channel: SAN\n");
+}
+
+/* BATCH 15: Authentication */
+static void cmd_ldap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenLDAP: directory service\n");
+}
+
+static void cmd_kerberos(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kerberos: authentication\n");
+}
+
+static void cmd_sssd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SSSD: system security services\n");
+}
+
+static void cmd_pam(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PAM: pluggable authentication\n");
+}
+
+static void cmd_sudo_ldap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("sudo-ldap: LDAP-based sudo\n");
+}
+
+/* BATCH 15: Monitoring Extended */
+static void cmd_cacti(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Cacti: network monitoring\n");
+}
+
+static void cmd_munin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Munin: resource monitoring\n");
+}
+
+static void cmd_icinga(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Icinga: monitoring system\n");
+}
+
+static void cmd_datadog(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Datadog: cloud monitoring\n");
+}
+
+static void cmd_newrelic(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("New Relic: observability\n");
+}
+
+static void cmd_sentry(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Sentry: error tracking\n");
+}
+
+/* BATCH 15: CI/CD Extended */
+static void cmd_drone(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Drone: CI/CD platform\n");
+}
+
+static void cmd_argo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ArgoCD: GitOps\n");
+}
+
+static void cmd_flux(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Flux: GitOps toolkit\n");
+}
+
+static void cmd_tekton(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tekton: cloud-native CI/CD\n");
+}
+
+static void cmd_concourse(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Concourse: CI/CD\n");
+}
+
+/* BATCH 15: Security Extended */
+static void cmd_crowdsec(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CrowdSec: collaborative security\n");
+}
+
+static void cmd_authelia(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Authelia: SSO authentication\n");
+}
+
+static void cmd_keycloak(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Keycloak: identity management\n");
+}
+
+static void cmd_dex(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dex: OpenID Connect provider\n");
+}
+
+static void cmd_oauth2_proxy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OAuth2 Proxy: authentication proxy\n");
+}
+
+/* BATCH 15: Misc Extended */
+static void cmd_gitea(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Gitea: self-hosted Git\n");
+}
+
+static void cmd_gitlab(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GitLab: DevOps platform\n");
+}
+
+static void cmd_gogs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Gogs: self-hosted Git\n");
+}
+
+static void cmd_nextcloud(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nextcloud: file sync\n");
+}
+
+static void cmd_owncloud(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ownCloud: file sync\n");
+}
+
+static void cmd_seafile(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Seafile: file sync\n");
+}
+
+static void cmd_matomo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Matomo: web analytics\n");
+}
+
+static void cmd_plausible(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Plausible: privacy-friendly analytics\n");
+}
+
+static void cmd_umami(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Umami: web analytics\n");
+}
+
+static void cmd_matomo_cli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Matomo CLI\n");
+}
+
+static void cmd_grafana_agent(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Grafana Agent: telemetry collector\n");
+}
+
+static void cmd_vector(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Vector: data pipeline\n");
+}
+
+static void cmd_fluentd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fluentd: data collector\n");
+}
+
+static void cmd_fluentbit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fluent Bit: log processor\n");
+}
+
+static void cmd_filebeat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Filebeat: log shipper\n");
+}
+
+static void cmd_logstash(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Logstash: log processing\n");
+}
+
+static void cmd_kibana(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kibana: visualization\n");
+}
+
+static void cmd_chronograf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Chronograf: InfluxDB UI\n");
+}
+
+static void cmd_kapacitor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kapacitor: alerting\n");
+}
+
+static void cmd_telegraf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Telegraf: metrics collection\n");
+}
+
+static void cmd_containerruntime(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("containerd: OCI runtime\n");
+}
+
+static void cmd_cri_o(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CRI-O: Kubernetes runtime\n");
+}
+
+static void cmd_runc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("runc: OCI runtime\n");
+}
+
+static void cmd_crictl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("crictl: CRI CLI\n");
+}
+
+static void cmd_buildah(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Buildah: container image builder\n");
+}
+
+static void cmd_skopeo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Skopeo: image operations\n");
+}
+
+static void cmd_kaniko(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kaniko: container image builder\n");
+}
+
+static void cmd_buildkit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BuildKit: container builder\n");
+}
+
+static void cmd_kaniko_cli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kaniko CLI\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -3422,6 +3741,38 @@ static const cmd_entry commands[] = {
     {"hey", cmd_hey}, {"wrk", cmd_wrk}, {"ab", cmd_ab}, {"vegeta", cmd_vegeta},
     {"k6", cmd_k6}, {"locust", cmd_locust}, {"artillery", cmd_artillery}, {"siege", cmd_siege},
     {"jmeter", cmd_jmeter}, {"gatling", cmd_gatling},
+    /* Batch 15: Network Services */
+    {"samba", cmd_samba}, {"nfs", cmd_nfs}, {"vsftpd", cmd_ftp_server},
+    {"tftp", cmd_tftp}, {"xinetd", cmd_xinetd}, {"stunnel", cmd_stunnel},
+    {"keepalived", cmd_keepalived},
+    /* Batch 15: Mail */
+    {"postfix", cmd_postfix}, {"dovecot", cmd_dovecot}, {"spamassassin", cmd_spamassassin},
+    /* Batch 15: Virtualization */
+    {"virsh", cmd_virsh}, {"vboxmanage", cmd_vboxmanage}, {"xen", cmd_xen}, {"kvm", cmd_kvm},
+    {"lxc", cmd_lxc}, {"proxmox", cmd_proxmox},
+    /* Batch 15: Storage */
+    {"ceph", cmd_ceph}, {"minio", cmd_minio}, {"glusterfs", cmd_glusterfs}, {"iscsi", cmd_iscsi},
+    /* Batch 15: Auth */
+    {"ldap", cmd_ldap}, {"kerberos", cmd_kerberos}, {"sssd", cmd_sssd}, {"pam", cmd_pam},
+    /* Batch 15: Monitoring */
+    {"cacti", cmd_cacti}, {"munin", cmd_munin}, {"icinga", cmd_icinga},
+    {"datadog", cmd_datadog}, {"newrelic", cmd_newrelic}, {"sentry", cmd_sentry},
+    /* Batch 15: CI/CD Extended */
+    {"drone", cmd_drone}, {"argocd", cmd_argo}, {"flux", cmd_flux}, {"tekton", cmd_tekton},
+    /* Batch 15: Security Extended */
+    {"crowdsec", cmd_crowdsec}, {"authelia", cmd_authelia}, {"keycloak", cmd_keycloak}, {"dex", cmd_dex},
+    /* Batch 15: Self-hosted */
+    {"gitea", cmd_gitea}, {"gitlab", cmd_gitlab}, {"gogs", cmd_gogs},
+    {"nextcloud", cmd_nextcloud}, {"owncloud", cmd_owncloud}, {"seafile", cmd_seafile},
+    /* Batch 15: Analytics */
+    {"matomo", cmd_matomo}, {"plausible", cmd_plausible}, {"umami", cmd_umami},
+    /* Batch 15: Observability */
+    {"vector", cmd_vector}, {"fluentd", cmd_fluentd}, {"fluent-bit", cmd_fluentbit},
+    {"filebeat", cmd_filebeat}, {"logstash", cmd_logstash}, {"kibana", cmd_kibana},
+    {"telegraf", cmd_telegraf}, {"kapacitor", cmd_kapacitor},
+    /* Batch 15: Container Runtime */
+    {"containerd", cmd_containerruntime}, {"cri-o", cmd_cri_o}, {"runc", cmd_runc},
+    {"crictl", cmd_crictl}, {"buildah", cmd_buildah}, {"skopeo", cmd_skopeo}, {"buildkit", cmd_buildkit},
     {0, 0}
 };
 
