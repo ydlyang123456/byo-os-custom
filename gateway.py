@@ -57,7 +57,7 @@ class SerialBridge:
                 return ""
             with self.lock:
                 try:
-                    self.sock.settimeout(0.1)
+                    self.sock.settimeout(0.05)
                     try:
                         while self.sock.recv(4096):
                             pass
@@ -839,7 +839,7 @@ class H(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(HTML.encode('utf-8'))
         elif p == '/api/sysinfo':
-            raw = br.send("sysinfo", 2.0)
+            raw = br.send("sysinfo", 5.0)
             info = {"serial": br.ok, "os": "BYO-OS v1.0.0", "arch": "x86", "user": "root",
                     "free_pages": 0, "total_pages": 0, "heap_used": 0, "uptime": 0,
                     "platform": "BYO-OS", "tasks": 8, "load": "0.15", "ip": "10.0.2.15",
@@ -889,7 +889,48 @@ class H(BaseHTTPRequestHandler):
                 lines_resp = resp.strip().split('\n')
                 clean = '\n'.join(
                     l for l in lines_resp
-                    if not l.startswith('root@byo-os>') and l.strip()
+                    if not l.startswith('BYO-OS') and l.strip() and l.strip() != '
+                self.j({"output": clean})
+            except json.JSONDecodeError:
+                self.j({"error": "invalid JSON"})
+            except Exception as e:
+                self.j({"error": str(e)})
+        else:
+            self.send_response(404)
+            self.end_headers()
+
+    def do_OPTIONS(self):
+        """Handle CORS preflight requests."""
+        self.send_response(204)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+        self.send_header('Access-Control-Allow-Headers', 'Content-Type')
+        self.end_headers()
+
+    def j(self, d):
+        b = json.dumps(d, ensure_ascii=False).encode('utf-8')
+        self.send_response(200)
+        self.send_header('Content-Type','application/json; charset=utf-8')
+        self.send_header('Access-Control-Allow-Origin','*')
+        self.end_headers()
+        self.wfile.write(b)
+
+    def log_message(self, *a):
+        pass
+
+
+if __name__ == '__main__':
+    print("=== BYO-OS Web Management Panel v3 ===")
+    print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
+    br.connect()
+    print("Serial: " + ("CONNECTED" if br.ok else "OFFLINE"))
+    srv = HTTPServer(('0.0.0.0', HTTP_PORT), H)
+    print(f"Panel: http://localhost:{HTTP_PORT}")
+    try:
+        srv.serve_forever()
+    except KeyboardInterrupt:
+        print("Stopped.")
+
                 )
                 self.j({"output": clean})
             except json.JSONDecodeError:

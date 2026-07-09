@@ -7529,6 +7529,7 @@ void shell_run(void) {
     vga_puts("Type 'help' for available commands.\n\n");
     input_len = 0;
     input_buf[0] = 0;
+    print_prompt();
 
     while (1) {
         net_poll();
@@ -7538,15 +7539,24 @@ void shell_run(void) {
             vga_set_serial_mode(1);
             char serial_cmd[CMD_MAX_LEN];
             int si = 0;
-            while (1) {
-                char c = serial_getchar();
-                if (c == '\n' || c == '\r') {
+            int timeout = 500;
+            while (timeout-- > 0) {
+                if (!serial_has_input()) {
+                    for (volatile int d = 0; d < 2000; d++) {}
+                    if (!serial_has_input()) break;
+                }
+                char sc = serial_getchar();
+                if (sc == 10 || sc == 13) {
                     serial_cmd[si] = 0;
                     if (si > 0) shell_execute(serial_cmd);
                     break;
                 }
-                if (c == 8 && si > 0) { si--; }
-                else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = c; }
+                if (sc == 8 && si > 0) { si--; }
+                else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = sc; }
+            }
+            if (timeout <= 0 && si > 0) {
+                serial_cmd[si] = 0;
+                shell_execute(serial_cmd);
             }
             vga_set_serial_mode(0);
             serial_mode = 0;
@@ -7554,63 +7564,26 @@ void shell_run(void) {
             continue;
         }
 
-        print_prompt();
+        char c = keyboard_getchar();
 
-        /* Keyboard input loop */
-        input_len = 0;
-        input_buf[0] = 0;
-        while (1) {
-            /* Check serial in keyboard loop */
-            if (serial_has_input()) {
-                serial_mode = 1;
-                vga_set_serial_mode(1);
-                char serial_cmd[CMD_MAX_LEN];
-                int si = 0;
-                while (1) {
-                    char c = serial_getchar();
-                    if (c == '\n' || c == '\r') {
-                        serial_cmd[si] = 0;
-                        if (si > 0) {
-                            vga_putchar('\n');
-                            shell_execute(serial_cmd);
-                        }
-                        break;
-                    }
-                    if (c == 8 && si > 0) { si--; }
-                    else if (si < CMD_MAX_LEN - 1) { serial_cmd[si++] = c; }
-                }
-                vga_set_serial_mode(0);
-                serial_mode = 0;
-                input_len = 0;
-                input_buf[0] = 0;
-                break;
-            }
-            char c = keyboard_getchar();
-            if (!c) continue;
-
-            if (c == 13 || c == 10) {
-                /* Enter */
+        if (c == 13 || c == 10) {
+            input_buf[input_len] = 0;
+            vga_putchar('\n');
+            if (input_len > 0) shell_execute(input_buf);
+            input_len = 0;
+            input_buf[0] = 0;
+            print_prompt();
+        } else if (c == 8) {
+            if (input_len > 0) {
+                input_len--;
                 input_buf[input_len] = 0;
-                vga_putchar('\n');
-                shell_execute(input_buf);
-                input_len = 0;
-                input_buf[0] = 0;
-                break;
-            } else if (c == 8) {
-                /* Backspace */
-                if (input_len > 0) {
-                    input_len--;
-                    input_buf[input_len] = 0;
-                    vga_putchar('\b'); vga_putchar(' '); vga_putchar('\b');
-                }
-            } else if (c >= 32 && c <= 126) {
-                if (input_len < CMD_MAX_LEN - 1) {
-                    input_buf[input_len++] = c;
-                    input_buf[input_len] = 0;
-                    vga_putchar(c);
-                }
-            } else if (c == 9) {
-                /* Tab - ignore */
+                vga_putchar('\b'); vga_putchar(' '); vga_putchar('\b');
+            }
+        } else if (c >= 32 && c <= 126) {
+            if (input_len < CMD_MAX_LEN - 1) {
+                input_buf[input_len++] = c;
+                input_buf[input_len] = 0;
+                vga_putchar(c);
             }
         }
     }
