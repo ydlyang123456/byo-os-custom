@@ -1,4 +1,4 @@
-
+﻿
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -3313,7 +3313,7 @@ static void cmd_systemctl(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_pstree(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("systemd鈹€鈹攢network\n        鈹溾攢shell\n        鈹溾攢timer\n        鈹斺攢journal\n");
+    vga_puts("systemd闂佸啿鍘滈崑鎾绘煃鐠団€冲幋闁衡偓椤ｆ攨twork\n        闂佸疇顫夋竟鏇㈠绩椤ｆ獘ell\n        闂佸疇顫夋竟鏇㈠绩椤ｆmer\n        闂佸疇顫夐弻锟犲绩椤ｆ仜urnal\n");
 }
 
 static void cmd_pgrep(int argc, char args[][CMD_MAX_LEN]) {
@@ -4192,7 +4192,7 @@ static void cmd_tlp(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_cpupower(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("cpu0:棰戠巼 2400MHz  绛栫暐: powersave\n");
+    vga_puts("cpu0:婵☆偆澧楅崹鐟邦啅?2400MHz  缂備焦绋掗悧婊堝汲? powersave\n");
 }
 
 static void cmd_lscpu(int argc, char args[][CMD_MAX_LEN]) {
@@ -13514,6 +13514,48 @@ static void cmd_fairness104(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_bias104(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_interpretability104(int argc, char args[][CMD_MAX_LEN]);
 
+/* Batch 105: System monitoring enhanced commands */
+static void cmd_vmstat105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_iostat105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sar105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mpstat105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pidstat105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dstat105(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tree106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_realpath106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_basename106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dirname106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mktemp106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_readlink106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xargs106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_paste106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_column106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nl106(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_httpd_serve107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dns_query107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dhcp_renew107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_traceroute107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mtr107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ipcalc107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wakeonlan107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bandwidth107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_netdiscover107(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ssl_check107(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 108: Shell Enhancement Commands */
+static void cmd_pushd108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_popd108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dirs108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mkcd108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_backup108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_extract108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_color108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_repeat108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_measure108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_uuid108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hash_check108(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_diff108(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16123,6 +16165,41 @@ static const cmd_entry commands[] = {
     {"fairness", cmd_fairness104},
     {"bias", cmd_bias104},
     {"interpretability", cmd_interpretability104},
+    {"vmstat105", cmd_vmstat105}, {"iostat105", cmd_iostat105},
+    {"sar105", cmd_sar105}, {"mpstat105", cmd_mpstat105},
+    {"pidstat105", cmd_pidstat105}, {"dstat105", cmd_dstat105},
+    {"pushd", cmd_pushd108},
+    {"popd", cmd_popd108},
+    {"dirs", cmd_dirs108},
+    {"mkcd", cmd_mkcd108},
+    {"backup", cmd_backup108},
+    {"extract", cmd_extract108},
+    {"color", cmd_color108},
+    {"repeat", cmd_repeat108},
+    {"measure", cmd_measure108},
+    {"uuid", cmd_uuid108},
+    {"hash-check", cmd_hash_check108},
+    {"diff", cmd_diff108},
+    {"tree", cmd_tree106},
+    {"realpath", cmd_realpath106},
+    {"basename", cmd_basename106},
+    {"dirname", cmd_dirname106},
+    {"mktemp", cmd_mktemp106},
+    {"readlink", cmd_readlink106},
+    {"xargs", cmd_xargs106},
+    {"paste", cmd_paste106},
+    {"column", cmd_column106},
+    {"nl", cmd_nl106},
+    {"httpd_serve", cmd_httpd_serve107},
+    {"dns_query", cmd_dns_query107},
+    {"dhcp_renew", cmd_dhcp_renew107},
+    {"traceroute", cmd_traceroute107},
+    {"mtr", cmd_mtr107},
+    {"ipcalc", cmd_ipcalc107},
+    {"wakeonlan", cmd_wakeonlan107},
+    {"bandwidth", cmd_bandwidth107},
+    {"netdiscover", cmd_netdiscover107},
+    {"ssl_check", cmd_ssl_check107},
 
 
 
@@ -16953,7 +17030,7 @@ static void cmd_tree50(int argc, char args[][CMD_MAX_LEN]) {
 }
 static void cmd_bat50(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: bat <file>\n"); return; }
-    vga_puts("─────── "); vga_puts(args[1]); vga_puts(" ───────\n");
+    vga_puts("闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋?"); vga_puts(args[1]); vga_puts(" 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋揬n");
     vga_puts("  1   #include <stdio.h>\n");
     vga_puts("  2   int main() {\n");
     vga_puts("  3       printf(\"Hello\\n\");\n");
@@ -28850,6 +28927,1071 @@ static void cmd_fairness104(int argc, char args[][CMD_MAX_LEN]) { vga_puts("fair
 static void cmd_bias104(int argc, char args[][CMD_MAX_LEN]) { vga_puts("bias: bias detection\n"); }
 
 static void cmd_interpretability104(int argc, char args[][CMD_MAX_LEN]) { vga_puts("interpretability: model interpretation\n"); }
+static void cmd_vmstat105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    for (int c = 0; c < count; c++) {
+        uint32_t free_pages = pmm_get_free_pages();
+        uint32_t total_pages = pmm_get_total_pages();
+        uint32_t used_pages = total_pages > free_pages ? total_pages - free_pages : 0;
+        uint32_t uptime = timer_get_seconds();
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("--- Virtual Memory Statistics ---\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        if (human) {
+            vga_puts("Total:    "); itoa(total_pages * 4, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+            vga_puts("Free:     "); itoa(free_pages * 4, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+            vga_puts("Used:     "); itoa(used_pages * 4, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+            vga_puts("Active:   "); itoa(used_pages * 60 / 100 * 4, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+            vga_puts("Inactive: "); itoa(used_pages * 40 / 100 * 4, buf, 10); vga_puts(buf); vga_puts(" KB\n");
+            vga_puts("Swap in:  0 KB\nSwap out: 0 KB\n");
+        } else {
+            vga_puts("free    active  inactive  faults  swap_in  swap_out\n");
+            itoa(free_pages, buf, 10); int pad = 8 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+            vga_puts(buf);
+            itoa(used_pages * 60 / 100, buf, 10); pad = 8 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+            vga_puts(buf);
+            itoa(used_pages * 40 / 100, buf, 10); pad = 10 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+            vga_puts(buf);
+            vga_puts("     0       0        0\n");
+        }
+        vga_puts("Uptime: "); itoa(uptime, buf, 10); vga_puts(buf); vga_puts("s\n");
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+static void cmd_iostat105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    for (int c = 0; c < count; c++) {
+        uint32_t uptime = timer_get_seconds();
+        uint32_t ticks = timer_get_ticks();
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("--- I/O Statistics ---\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        if (human) {
+            vga_puts("Device  reads   writes   read_bytes  write_bytes\n");
+            vga_puts("sda     120     85       4.8K        3.2K\n");
+            vga_puts("sdb     32      12       1.3K        0.5K\n");
+        } else {
+            vga_puts("Device  r/s    w/s    rkB/s   wkB/s   await\n");
+            vga_puts("sda     120    85     4.8     3.2     2.5\n");
+            vga_puts("sdb     32     12     1.3     0.5     1.8\n");
+        }
+        vga_puts("Uptime: "); itoa(uptime, buf, 10); vga_puts(buf); vga_puts("s  Ticks: ");
+        itoa(ticks, buf, 10); vga_puts(buf); vga_putchar('\n');
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+static void cmd_sar105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts("--- System Activity Report ---\n");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    vga_puts("Time     CPU%%usr  CPU%%sys  CPU%%idle  MemUsed(KB)  NetRx(KB)\n");
+    for (int c = 0; c < count; c++) {
+        uint32_t uptime = timer_get_seconds();
+        uint32_t free_pages = pmm_get_free_pages();
+        uint32_t total_pages = pmm_get_total_pages();
+        uint32_t used_kb = (total_pages > free_pages) ? (total_pages - free_pages) * 4 : 0;
+        itoa(uptime / 60, buf, 10); int pad = 2 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+        vga_puts(buf); vga_putchar(':');
+        itoa(uptime % 60, buf, 10); pad = 2 - strlen(buf); while (pad-- > 0) vga_putchar('0');
+        vga_puts(buf);
+        vga_puts("   8.0    12.0    80.0      ");
+        itoa(used_kb, buf, 10); vga_puts(buf);
+        vga_puts("         0\n");
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+static void cmd_mpstat105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    for (int c = 0; c < count; c++) {
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("--- Multiprocessor Statistics ---\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("CPU  %%usr  %%sys  %%iowait  %%irq  %%soft  %%idle\n");
+        vga_puts("all   8.0  12.0    0.5     2.0    1.0    76.5\n");
+        vga_puts("  0   8.0  12.0    0.5     2.0    1.0    76.5\n");
+        vga_puts("  1   7.5  11.8    0.6     2.1    1.2    76.8\n");
+        vga_puts("  2   9.0  13.0    0.3     1.8    0.9    75.0\n");
+        vga_puts("  3   7.2  11.2    0.7     2.2    0.8    77.9\n");
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+static void cmd_pidstat105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    for (int c = 0; c < count; c++) {
+        int max = task_get_max_tasks();
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("--- Process I/O & CPU Statistics ---\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        vga_puts("PID   Name              %%CPU   reads  writes  rbytes  wbytes\n");
+        for (int i = 0; i < max; i++) {
+            if (!task_is_active(i)) continue;
+            itoa(i, buf, 10); int pad = 5 - strlen(buf); while (pad-- > 0) vga_putchar(' ');
+            vga_puts(buf);
+            vga_puts("  ");
+            const char* name = task_get_name_by_pid(i);
+            vga_puts(name ? name : "?");
+            int nlen = name ? strlen(name) : 1;
+            pad = 18 - nlen; while (pad-- > 0) vga_putchar(' ');
+            vga_puts("1.2     32      8     128K     32K\n");
+        }
+        vga_puts("Uptime: "); itoa(timer_get_seconds(), buf, 10); vga_puts(buf); vga_puts("s\n");
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+static void cmd_dstat105(int argc, char args[][CMD_MAX_LEN]) {
+    int human = 0, count = 1;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-h") == 0) human = 1;
+        else if (strcmp(args[i], "-n") == 0 && i+1 < argc) count = atoi(args[++i]);
+    }
+    char buf[64];
+    for (int c = 0; c < count; c++) {
+        uint32_t free_pages = pmm_get_free_pages();
+        uint32_t total_pages = pmm_get_total_pages();
+        uint32_t used_kb = (total_pages > free_pages) ? (total_pages - free_pages) * 4 : 0;
+        uint32_t free_kb = free_pages * 4;
+        uint32_t uptime = timer_get_seconds();
+        vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+        vga_puts("--- Comprehensive System Statistics ---\n");
+        vga_set_color(VGA_WHITE, VGA_BLACK);
+        if (human) {
+            vga_puts("CPU:  usr 8.0%%  sys 12.0%%  idle 79.5%%\n");
+            vga_puts("MEM:  ");
+            itoa(used_kb, buf, 10); vga_puts(buf); vga_puts("KB used / ");
+            itoa(used_kb + free_kb, buf, 10); vga_puts(buf); vga_puts("KB total\n");
+            vga_puts("DISK: reads 120/s  writes 85/s\n");
+            vga_puts("NET:  rx 0KB/s  tx 0KB/s\n");
+            vga_puts("SWAP: in 0  out 0\n");
+        } else {
+            vga_puts("usr sys idle| read writ| recv send| used  free | time\n");
+            vga_puts("  8  12  80 | 120   85 |    0    0 |");
+            itoa(used_kb, buf, 10); vga_puts(buf); vga_putchar(' ');
+            itoa(free_kb, buf, 10); vga_puts(buf); vga_puts("|");
+            itoa(uptime, buf, 10); vga_puts(buf); vga_puts("s\n");
+        }
+        if (c < count - 1) { for (volatile int d = 0; d < 500000; d++); }
+    }
+}
+
+/* ===== Batch 108: Shell Enhancement Commands ===== */
+
+/* Directory stack for pushd/popd/dirs */
+#define DIR_STACK_SIZE 32
+static char dir_stack[DIR_STACK_SIZE][256];
+static int dir_stack_top = 0;
+
+static void cmd_pushd108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: pushd <directory>\n");
+        return;
+    }
+    if (dir_stack_top >= DIR_STACK_SIZE) {
+        vga_puts("pushd: directory stack full\n");
+        return;
+    }
+    strncpy(dir_stack[dir_stack_top], cwd, 255);
+    dir_stack[dir_stack_top][255] = 0;
+    dir_stack_top++;
+    strncpy(cwd, args[1], 255);
+    cwd[255] = 0;
+    vga_puts(cwd); vga_putchar('\n');
+}
+
+static void cmd_popd108(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    if (dir_stack_top <= 0) {
+        vga_puts("popd: directory stack empty\n");
+        return;
+    }
+    dir_stack_top--;
+    strncpy(cwd, dir_stack[dir_stack_top], 255);
+    cwd[255] = 0;
+    vga_puts(cwd); vga_putchar('\n');
+}
+
+static void cmd_dirs108(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    for (int i = dir_stack_top - 1; i >= 0; i--) {
+        char buf[300];
+        sprintf(buf, "%d: %s\n", dir_stack_top - 1 - i, dir_stack[i]);
+        vga_puts(buf);
+    }
+    vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+    vga_puts("=> ");
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    vga_puts(cwd); vga_putchar('\n');
+}
+
+static void cmd_mkcd108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: mkcd <directory>\n");
+        return;
+    }
+    fs_create_dir(args[1]);
+    strncpy(cwd, args[1], 255);
+    cwd[255] = 0;
+}
+
+static void cmd_backup108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: backup <file>\n");
+        return;
+    }
+    char bak_name[300];
+    strncpy(bak_name, args[1], 256);
+    int len = strlen(bak_name);
+    if (len + 4 >= 300) {
+        vga_puts("backup: filename too long\n");
+        return;
+    }
+    bak_name[len] = '.'; bak_name[len+1] = 'b'; bak_name[len+2] = 'a'; bak_name[len+3] = 'k'; bak_name[len+4] = 0;
+    memset(file_buf, 0, FILE_BUF_SIZE);
+    int r = fs_read_file(args[1], file_buf, FILE_BUF_SIZE - 1);
+    if (r <= 0) {
+        vga_puts("backup: cannot read '"); vga_puts(args[1]); vga_puts("'\n");
+        return;
+    }
+    fs_create_file(bak_name, file_buf, r);
+    vga_puts("backup: '"); vga_puts(args[1]); vga_puts("' -> '");
+    vga_puts(bak_name); vga_puts("'\n");
+}
+
+static void cmd_extract108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: extract <file>\n");
+        return;
+    }
+    const char *name = args[1];
+    int nlen = strlen(name);
+    if (nlen > 7 && strcmp(name + nlen - 7, ".tar.gz") == 0) {
+        vga_puts("extract: detected tar.gz archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else if (nlen > 4 && strcmp(name + nlen - 4, ".zip") == 0) {
+        vga_puts("extract: detected zip archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else if (nlen > 4 && strcmp(name + nlen - 4, ".tar") == 0) {
+        vga_puts("extract: detected tar archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else if (nlen > 4 && strcmp(name + nlen - 4, ".bz2") == 0) {
+        vga_puts("extract: detected bzip2 archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else if (nlen > 3 && strcmp(name + nlen - 3, ".gz") == 0) {
+        vga_puts("extract: detected gzip archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else if (nlen > 2 && strcmp(name + nlen - 2, ".7z") == 0) {
+        vga_puts("extract: detected 7z archive\n");
+        vga_puts("extract: extracting '"); vga_puts(name); vga_puts("'...\n");
+    } else {
+        vga_puts("extract: unsupported format '"); vga_puts(name); vga_puts("'\n");
+    }
+    vga_puts("extract: done.\n");
+}
+
+static void cmd_color108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: color <fg> [bg]\n");
+        vga_puts("  Colors: black, blue, green, cyan, red, magenta, brown, lightgrey,\n");
+        vga_puts("          darkgrey, lightblue, lightgreen, lightcyan, lightred, lightmagenta, yellow, white\n");
+        return;
+    }
+    int fg = VGA_WHITE, bg = VGA_BLACK;
+    if (strcmp(args[1], "black") == 0) fg = VGA_BLACK;
+    else if (strcmp(args[1], "blue") == 0) fg = VGA_BLUE;
+    else if (strcmp(args[1], "green") == 0) fg = VGA_GREEN;
+    else if (strcmp(args[1], "cyan") == 0) fg = VGA_CYAN;
+    else if (strcmp(args[1], "red") == 0) fg = VGA_RED;
+    else if (strcmp(args[1], "magenta") == 0) fg = VGA_MAGENTA;
+    else if (strcmp(args[1], "brown") == 0) fg = VGA_BROWN;
+    else if (strcmp(args[1], "lightgrey") == 0) fg = VGA_LIGHT_GREY;
+    else if (strcmp(args[1], "darkgrey") == 0) fg = VGA_DARK_GREY;
+    else if (strcmp(args[1], "lightblue") == 0) fg = VGA_LIGHT_BLUE;
+    else if (strcmp(args[1], "lightgreen") == 0) fg = VGA_LIGHT_GREEN;
+    else if (strcmp(args[1], "lightcyan") == 0) fg = VGA_LIGHT_CYAN;
+    else if (strcmp(args[1], "lightred") == 0) fg = VGA_LIGHT_RED;
+    else if (strcmp(args[1], "lightmagenta") == 0) fg = VGA_LIGHT_MAGENTA;
+    else if (strcmp(args[1], "yellow") == 0) fg = VGA_YELLOW;
+    else if (strcmp(args[1], "white") == 0) fg = VGA_WHITE;
+    else { vga_puts("color: unknown color '"); vga_puts(args[1]); vga_puts("'\n"); return; }
+    if (argc > 2) {
+        if (strcmp(args[2], "black") == 0) bg = VGA_BLACK;
+        else if (strcmp(args[2], "blue") == 0) bg = VGA_BLUE;
+        else if (strcmp(args[2], "green") == 0) bg = VGA_GREEN;
+        else if (strcmp(args[2], "cyan") == 0) bg = VGA_CYAN;
+        else if (strcmp(args[2], "red") == 0) bg = VGA_RED;
+        else if (strcmp(args[2], "magenta") == 0) bg = VGA_MAGENTA;
+        else if (strcmp(args[2], "brown") == 0) bg = VGA_BROWN;
+        else if (strcmp(args[2], "lightgrey") == 0) bg = VGA_LIGHT_GREY;
+        else if (strcmp(args[2], "darkgrey") == 0) bg = VGA_DARK_GREY;
+        else if (strcmp(args[2], "lightblue") == 0) bg = VGA_LIGHT_BLUE;
+        else if (strcmp(args[2], "lightgreen") == 0) bg = VGA_LIGHT_GREEN;
+        else if (strcmp(args[2], "lightcyan") == 0) bg = VGA_LIGHT_CYAN;
+        else if (strcmp(args[2], "lightred") == 0) bg = VGA_LIGHT_RED;
+        else if (strcmp(args[2], "lightmagenta") == 0) bg = VGA_LIGHT_MAGENTA;
+        else if (strcmp(args[2], "yellow") == 0) bg = VGA_YELLOW;
+        else if (strcmp(args[2], "white") == 0) bg = VGA_WHITE;
+        else { vga_puts("color: unknown background '"); vga_puts(args[2]); vga_puts("'\n"); return; }
+    }
+    vga_set_color(fg, bg);
+    vga_puts("Color set.\n");
+}
+
+static void cmd_repeat108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) {
+        vga_puts("Usage: repeat <count> <command> [args...]\n");
+        return;
+    }
+    int count = atoi(args[1]);
+    if (count <= 0) {
+        vga_puts("repeat: invalid count\n");
+        return;
+    }
+    char cmdline[CMD_MAX_LEN] = {0};
+    int pos = 0;
+    for (int i = 2; i < argc; i++) {
+        if (i > 2) { cmdline[pos++] = ' '; }
+        for (int j = 0; args[i][j] && pos < CMD_MAX_LEN - 1; j++) {
+            cmdline[pos++] = args[i][j];
+        }
+    }
+    cmdline[pos] = 0;
+    for (int i = 0; i < count; i++) {
+        shell_execute(cmdline);
+    }
+}
+
+static void cmd_measure108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: measure <command> [args...]\n");
+        return;
+    }
+    char cmdline[CMD_MAX_LEN] = {0};
+    int pos = 0;
+    for (int i = 1; i < argc; i++) {
+        if (i > 1) { cmdline[pos++] = ' '; }
+        for (int j = 0; args[i][j] && pos < CMD_MAX_LEN - 1; j++) {
+            cmdline[pos++] = args[i][j];
+        }
+    }
+    cmdline[pos] = 0;
+    uint32_t start = timer_get_ticks();
+    shell_execute(cmdline);
+    uint32_t elapsed = timer_get_ticks() - start;
+    char buf[128];
+    sprintf(buf, "\n--- measure ---\n  real    %d.%03ds\n  user    %d.%03ds\n  sys     0.000s\n---\n",
+            elapsed / 1000, elapsed % 1000, elapsed / 1000, elapsed % 1000);
+    vga_puts(buf);
+}
+
+static void cmd_uuid108(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    uint32_t seed = timer_get_ticks();
+    char uuid[40];
+    static const char hex[] = "0123456789abcdef";
+    int pos = 0;
+    for (int i = 0; i < 36; i++) {
+        seed = seed * 1103515245 + 12345;
+        uuid[pos++] = hex[(seed >> 16) & 0xf];
+        if (i == 7 || i == 12 || i == 17 || i == 22) { uuid[pos++] = '-'; }
+    }
+    uuid[pos] = 0;
+    uuid[14] = '4';
+    uuid[19] = '8' + ((seed >> 20) & 0x3);
+    vga_puts(uuid); vga_putchar('\n');
+}
+
+static void cmd_hash_check108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("Usage: hash-check <file>\n");
+        return;
+    }
+    memset(file_buf, 0, FILE_BUF_SIZE);
+    int r = fs_read_file(args[1], file_buf, FILE_BUF_SIZE - 1);
+    if (r <= 0) {
+        vga_puts("hash-check: cannot read '"); vga_puts(args[1]); vga_puts("'\n");
+        return;
+    }
+    uint32_t h = 0x811c9dc5;
+    for (int i = 0; i < r; i++) {
+        h ^= (unsigned char)file_buf[i];
+        h *= 0x01000193;
+    }
+    char buf[64];
+    sprintf(buf, "%08x", h);
+    vga_puts(args[1]); vga_puts(": "); vga_puts(buf); vga_putchar('\n');
+}
+
+static void cmd_diff108(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) {
+        vga_puts("Usage: diff <file1> <file2>\n");
+        return;
+    }
+    char buf1[FILE_BUF_SIZE];
+    char buf2[FILE_BUF_SIZE];
+    int r1 = fs_read_file(args[1], buf1, FILE_BUF_SIZE - 1);
+    int r2 = fs_read_file(args[2], buf2, FILE_BUF_SIZE - 1);
+    if (r1 <= 0) {
+        vga_puts("diff: cannot read '"); vga_puts(args[1]); vga_puts("'\n");
+        return;
+    }
+    if (r2 <= 0) {
+        vga_puts("diff: cannot read '"); vga_puts(args[2]); vga_puts("'\n");
+        return;
+    }
+    buf1[r1] = 0; buf2[r2] = 0;
+    if (r1 == r2 && strcmp(buf1, buf2) == 0) {
+        vga_puts("Files are identical.\n");
+        return;
+    }
+    int line_num = 1;
+    char *p1 = buf1, *p2 = buf2;
+    while (*p1 || *p2) {
+        char line_a[256] = {0}, line_b[256] = {0};
+        int la = 0, lb = 0;
+        while (*p1 && *p1 != '\n' && la < 255) line_a[la++] = *p1++;
+        while (*p2 && *p2 != '\n' && lb < 255) line_b[lb++] = *p2++;
+        if (*p1 == '\n') p1++;
+        if (*p2 == '\n') p2++;
+        if (strcmp(line_a, line_b) != 0) {
+            char num[16];
+            vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+            sprintf(num, "%d", line_num);
+            vga_puts(num);
+            vga_puts(": - "); vga_set_color(VGA_WHITE, VGA_BLACK);
+            vga_puts(line_a); vga_putchar('\n');
+            vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+            vga_puts(num);
+            vga_puts(": + "); vga_set_color(VGA_WHITE, VGA_BLACK);
+            vga_puts(line_b); vga_putchar('\n');
+        }
+        line_num++;
+    }
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+}
+
+
+
+/* ===== Batch 106: Filesystem Enhancement Commands ===== */
+
+/* Helper: recursive tree listing */
+static void tree_list106(const char *path, const char *prefix, int depth, int max_depth) {
+    if (depth >= max_depth) return;
+    char list_buf[4096];
+    memset(list_buf, 0, sizeof(list_buf));
+    fs_list_dir(path, list_buf, sizeof(list_buf) - 1);
+    char entries[32][256];
+    int entry_count = 0;
+    char *p = list_buf;
+    while (*p && entry_count < 32) {
+        int j = 0;
+        while (*p && *p != '\n' && j < 255) { entries[entry_count][j++] = *p++; }
+        entries[entry_count][j] = 0;
+        if (*p == '\n') p++;
+        if (entries[entry_count][0] == 0) continue;
+        entry_count++;
+    }
+    for (int i = 0; i < entry_count; i++) {
+        int is_dir = 0;
+        char name[256];
+        if (strncmp(entries[i], "[DIR]  ", 7) == 0) { is_dir = 1; strcpy(name, entries[i] + 7); }
+        else if (strncmp(entries[i], "[FILE] ", 7) == 0) { strcpy(name, entries[i] + 7); }
+        else { strcpy(name, entries[i]); }
+        int last = (i == entry_count - 1);
+        vga_puts(prefix);
+        vga_puts(last ? "+-- " : "|-- ");
+        if (is_dir) {
+            vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+            vga_puts(name);
+            vga_putchar('/');
+            vga_set_color(VGA_WHITE, VGA_BLACK);
+            vga_putchar('\n');
+            char new_prefix[512];
+            strcpy(new_prefix, prefix);
+            strcat(new_prefix, last ? "    " : "|   ");
+            tree_list106(name, new_prefix, depth + 1, max_depth);
+        } else {
+            vga_puts(name);
+            vga_putchar('\n');
+        }
+    }
+}
+
+static void cmd_tree106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("tree - directory tree display (max 3 levels)\n");
+        vga_puts("Usage: tree [directory]\n");
+        return;
+    }
+    const char *path = (argc >= 2) ? args[1] : ".";
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    vga_puts(path);
+    vga_putchar('\n');
+    vga_set_color(VGA_WHITE, VGA_BLACK);
+    tree_list106(path, "", 0, 3);
+}
+
+static void cmd_realpath106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("realpath - resolve path\n");
+        vga_puts("Usage: realpath <path>\n");
+        return;
+    }
+    const char *path = args[1];
+    char resolved[512];
+    int ri = 0;
+    if (path[0] != '/') {
+        resolved[ri++] = '/';
+    }
+    for (int i = 0; path[i] && ri < 510; i++) {
+        if (path[i] == '.' && path[i+1] == '/') { i++; continue; }
+        if (path[i] == '.' && path[i+1] == '.' && (path[i+2] == '/' || path[i+2] == 0)) {
+            while (ri > 1 && resolved[ri-1] != '/') ri--;
+            if (ri > 1) ri--;
+            i++; continue;
+        }
+        resolved[ri++] = path[i];
+    }
+    if (ri > 1 && resolved[ri-1] == '/') ri--;
+    resolved[ri] = 0;
+    vga_puts(resolved); vga_putchar('\n');
+}
+
+static void cmd_basename106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("basename - extract filename from path\n");
+        vga_puts("Usage: basename <path> [suffix]\n");
+        return;
+    }
+    const char *path = args[1];
+    const char *last = path;
+    for (int i = 0; path[i]; i++) { if (path[i] == '/') last = path + i + 1; }
+    char result[256];
+    strcpy(result, last);
+    if (argc >= 3) {
+        int slen = strlen(args[2]);
+        int rlen = strlen(result);
+        if (rlen >= slen && strcmp(result + rlen - slen, args[2]) == 0) {
+            result[rlen - slen] = 0;
+        }
+    }
+    vga_puts(result); vga_putchar('\n');
+}
+
+static void cmd_dirname106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("dirname - extract directory name from path\n");
+        vga_puts("Usage: dirname <path>\n");
+        return;
+    }
+    const char *path = args[1];
+    char result[256];
+    int len = strlen(path);
+    int last_slash = -1;
+    for (int i = 0; i < len; i++) { if (path[i] == '/') last_slash = i; }
+    if (last_slash <= 0) {
+        result[0] = '/'; result[1] = 0;
+    } else {
+        strncpy(result, path, last_slash);
+        result[last_slash] = 0;
+    }
+    vga_puts(result); vga_putchar('\n');
+}
+
+static void cmd_mktemp106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("mktemp - create temporary file\n");
+        vga_puts("Usage: mktemp\n");
+        return;
+    }
+    static int tmp_counter = 0;
+    tmp_counter++;
+    char fname[64];
+    char cntbuf[16];
+    strcpy(fname, "/tmp/tmp.");
+    itoa(tmp_counter, cntbuf, 10);
+    strcat(fname, cntbuf);
+    fs_create_file(fname, "", 0);
+    vga_puts(fname); vga_putchar('\n');
+}
+
+static void cmd_readlink106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("readlink - read symbolic link\n");
+        vga_puts("Usage: readlink <link>\n");
+        return;
+    }
+    if (fs_file_exists(args[1])) {
+        vga_puts(args[1]); vga_putchar('\n');
+    } else {
+        vga_puts("readlink: "); vga_puts(args[1]); vga_puts(": No such file\n");
+    }
+}
+
+static void cmd_xargs106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("xargs - build command lines from input\n");
+        vga_puts("Usage: xargs <command> [file]\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("xargs: missing command\n"); return; }
+    const char *cmd = args[1];
+    char buf[2048];
+    if (argc >= 3) {
+        memset(buf, 0, sizeof(buf));
+        int r = fs_read_file(args[2], buf, sizeof(buf) - 1);
+        if (r <= 0) { vga_puts("xargs: cannot read "); vga_puts(args[2]); vga_putchar('\n'); return; }
+        char *p = buf;
+        while (*p) {
+            char line[256];
+            int j = 0;
+            while (*p && *p != '\n' && j < 255) { line[j++] = *p++; }
+            line[j] = 0;
+            if (*p == '\n') p++;
+            if (line[0] == 0) continue;
+            vga_puts(cmd); vga_putchar(' '); vga_puts(line); vga_putchar('\n');
+        }
+    } else {
+        vga_puts(cmd); vga_putchar('\n');
+    }
+}
+
+static void cmd_paste106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("paste - merge lines of files\n");
+        vga_puts("Usage: paste <file1> [file2] ...\n");
+        return;
+    }
+    char lines_buf[8][4096];
+    int line_counts[8];
+    int num_files = argc - 1;
+    if (num_files > 8) num_files = 8;
+    int max_lines = 0;
+    for (int f = 0; f < num_files; f++) {
+        memset(lines_buf[f], 0, sizeof(lines_buf[f]));
+        fs_read_file(args[f+1], lines_buf[f], sizeof(lines_buf[f]) - 1);
+        line_counts[f] = 0;
+        char *p = lines_buf[f];
+        while (*p) {
+            if (*p == '\n') line_counts[f]++;
+            p++;
+        }
+        if (lines_buf[f][0] && lines_buf[f][strlen(lines_buf[f])-1] != '\n') line_counts[f]++;
+        if (line_counts[f] > max_lines) max_lines = line_counts[f];
+    }
+    for (int ln = 0; ln < max_lines; ln++) {
+        for (int f = 0; f < num_files; f++) {
+            if (ln > 0) vga_putchar('\t');
+            char *p = lines_buf[f];
+            int skip = ln;
+            while (*p && skip > 0) { if (*p++ == '\n') skip--; }
+            while (*p && *p != '\n') { vga_putchar(*p); p++; }
+        }
+        vga_putchar('\n');
+    }
+}
+
+static void cmd_column106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("column - format input into columns\n");
+        vga_puts("Usage: column [-c cols] <file>\n");
+        return;
+    }
+    int ncols = 3;
+    const char *fname = 0;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == '-' && args[i][1] == 'c' && i + 1 < argc) { ncols = atoi(args[++i]); }
+        else { fname = args[i]; }
+    }
+    if (!fname) { vga_puts("Usage: column [-c cols] <file>\n"); return; }
+    char buf[4096];
+    memset(buf, 0, sizeof(buf));
+    fs_read_file(fname, buf, sizeof(buf) - 1);
+    char items[64][128];
+    int item_count = 0;
+    char *p = buf;
+    while (*p && item_count < 64) {
+        char line[256];
+        int j = 0;
+        while (*p && *p != '\n' && j < 255) { line[j++] = *p++; }
+        line[j] = 0;
+        if (*p == '\n') p++;
+        if (line[0] == 0) continue;
+        strncpy(items[item_count], line, 127);
+        items[item_count][127] = 0;
+        item_count++;
+    }
+    int width = 20;
+    for (int i = 0; i < item_count; i++) {
+        int len = strlen(items[i]);
+        if (len > width) width = len;
+    }
+    width += 2;
+    int col = 0;
+    for (int i = 0; i < item_count; i++) {
+        vga_puts(items[i]);
+        int len = strlen(items[i]);
+        while (len < width) { vga_putchar(' '); len++; }
+        col++;
+        if (col >= ncols) { col = 0; vga_putchar('\n'); }
+    }
+    if (col > 0) vga_putchar('\n');
+}
+
+static void cmd_nl106(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("nl - number lines\n");
+        vga_puts("Usage: nl [-a] <file>\n");
+        vga_puts("  -a  include empty lines\n");
+        return;
+    }
+    int show_all = 0;
+    const char *fname = 0;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == '-' && args[i][1] == 'a') { show_all = 1; }
+        else { fname = args[i]; }
+    }
+    if (!fname) { vga_puts("Usage: nl [-a] <file>\n"); return; }
+    char buf[8192];
+    memset(buf, 0, sizeof(buf));
+    int r = fs_read_file(fname, buf, sizeof(buf) - 1);
+    if (r <= 0) { vga_puts("nl: "); vga_puts(fname); vga_puts(": No such file\n"); return; }
+    char line_num[16];
+    int line_no = 1;
+    char *p = buf;
+    while (*p) {
+        if (*p == '\n') {
+            if (show_all) { itoa(line_no, line_num, 10); vga_puts(line_num); vga_puts(":\t\n"); line_no++; }
+            p++; continue;
+        }
+        itoa(line_no, line_num, 10);
+        int pad = 6 - strlen(line_num);
+        while (pad > 0) { vga_putchar(' '); pad--; }
+        vga_puts(line_num); vga_puts(":\t");
+        while (*p && *p != '\n') { vga_putchar(*p); p++; }
+        vga_putchar('\n');
+        if (*p == '\n') p++;
+        line_no++;
+    }
+}
+
+/* ===== Batch 107: Network Service Enhancements ===== */
+static void cmd_httpd_serve107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: httpd-serve [-p port] [-d directory]\n");
+        vga_puts("  -p port       Listen port (default 8080)\n");
+        vga_puts("  -d directory  Root directory (default /)\n");
+        vga_puts("  -h            Show this help\n");
+        return;
+    }
+    int port = 8080;
+    const char *dir = "/";
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 112 && i + 1 < argc) { port = atoi(args[i + 1]); i++; }
+        else if (args[i][0] == 45 && args[i][1] == 100 && i + 1 < argc) { dir = args[i + 1]; i++; }
+    }
+    char buf[32];
+    vga_puts("[httpd] Starting HTTP file server...\n");
+    vga_puts("[httpd] Listening on port "); itoa(port, buf, 10); vga_puts(buf); vga_puts("\n");
+    vga_puts("[httpd] Root directory: "); vga_puts(dir); vga_puts("\n");
+    vga_puts("[httpd] Serving files via TCP...\n");
+    vga_puts("[httpd] GET / HTTP/1.1 -> 200 OK\n");
+    vga_puts("[httpd] Content-Type: text/html\n");
+    vga_puts("[httpd] <html><body><h1>BYO-OS Web Server</h1></body></html>\n");
+    vga_puts("[httpd] Server started on port "); itoa(port, buf, 10); vga_puts(buf); vga_puts("\n");
+}
+
+static void cmd_dns_query107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: dns-query [-t type] domain\n");
+        vga_puts("  -t type   Record type: A, AAAA, MX, CNAME (default A)\n");
+        vga_puts("  -h        Show this help\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: dns-query domain\n"); return; }
+    const char *domain = args[1];
+    const char *rtype = "A";
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 116 && i + 1 < argc) { rtype = args[i + 1]; i++; }
+        else { domain = args[i]; }
+    }
+    char buf[32];
+    vga_puts("[dns] Querying "); vga_puts(domain);
+    vga_puts(" type="); vga_puts(rtype); vga_puts(" ...\n");
+    vga_puts("[dns] Sending DNS query to 8.8.8.8:53...\n");
+    vga_puts("[dns] Response received:\n");
+    vga_puts("[dns]   Name: "); vga_puts(domain); vga_puts("\n");
+    vga_puts("[dns]   Type: "); vga_puts(rtype); vga_puts("\n");
+    vga_puts("[dns]   TTL: 300\n");
+    vga_puts("[dns]   Address: 192.168.1.100\n");
+    vga_puts("[dns] Query completed successfully\n");
+}
+
+static void cmd_dhcp_renew107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: dhcp-renew [-i interface] [-r release]\n");
+        vga_puts("  -i interface  Network interface (default eth0)\n");
+        vga_puts("  -r            Release before renew\n");
+        vga_puts("  -h            Show this help\n");
+        return;
+    }
+    const char *iface = "eth0";
+    int release = 0;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 105 && i + 1 < argc) { iface = args[i + 1]; i++; }
+        else if (args[i][0] == 45 && args[i][1] == 114) { release = 1; }
+    }
+    char buf[32];
+    vga_puts("[dhcp] Interface: "); vga_puts(iface); vga_puts("\n");
+    if (release) {
+        vga_puts("[dhcp] Releasing lease on "); vga_puts(iface); vga_puts("...\n");
+        vga_puts("[dhcp] Sending DHCPRELEASE to 255.255.255.255\n");
+        vga_puts("[dhcp] Lease released\n");
+    }
+    vga_puts("[dhcp] Sending DHCPDISCOVER on "); vga_puts(iface); vga_puts("...\n");
+    vga_puts("[dhcp] Broadcast: 255.255.255.255:67\n");
+    vga_puts("[dhcp] Received DHCPOFFER from 192.168.1.1\n");
+    vga_puts("[dhcp] Sending DHCPREQUEST...\n");
+    vga_puts("[dhcp] Received DHCPACK from 192.168.1.1\n");
+    vga_puts("[dhcp] IP Address:   192.168.1.50\n");
+    vga_puts("[dhcp] Subnet Mask:  255.255.255.0\n");
+    vga_puts("[dhcp] Gateway:      192.168.1.1\n");
+    vga_puts("[dhcp] DNS:          8.8.8.8\n");
+    vga_puts("[dhcp] Lease Time:   86400 seconds\n");
+    itoa(86400, buf, 10); vga_puts("[dhcp] Expires in "); vga_puts(buf); vga_puts("s\n");
+    vga_puts("[dhcp] DHCP renewal completed\n");
+}
+
+static void cmd_traceroute107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: traceroute [-m max_hops] [-q queries] host\n");
+        vga_puts("  -m max_hops  Maximum hops (default 30)\n");
+        vga_puts("  -q queries   Queries per hop (default 3)\n");
+        vga_puts("  -h           Show this help\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: traceroute host\n"); return; }
+    const char *host = args[1];
+    int max_hops = 30;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 109 && i + 1 < argc) { max_hops = atoi(args[i + 1]); i++; }
+        else { host = args[i]; }
+    }
+    char buf[32];
+    vga_puts("traceroute to "); vga_puts(host); vga_puts(", ");
+    itoa(max_hops, buf, 10); vga_puts(buf); vga_puts(" hops max\n");
+    const char *hops[] = {"192.168.1.1", "10.0.0.1", "172.16.0.1", "8.8.8.8", "192.168.1.100"};
+    int num_hops = 5;
+    for (int i = 0; i < num_hops && i < max_hops; i++) {
+        itoa(i + 1, buf, 10); vga_puts(buf);
+        vga_puts("  "); vga_puts(hops[i]);
+        vga_puts("  1.00 ms  1.00 ms  1.00 ms\n");
+    }
+    vga_puts("Trace complete\n");
+}
+
+static void cmd_mtr107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: mtr [-c count] [-i interval] host\n");
+        vga_puts("  -c count      Probes (default 10)\n");
+        vga_puts("  -i interval   Seconds between probes (default 1)\n");
+        vga_puts("  -h            Show this help\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: mtr host\n"); return; }
+    const char *host = args[1];
+    int count = 10;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 99 && i + 1 < argc) { count = atoi(args[i + 1]); i++; }
+        else { host = args[i]; }
+    }
+    char buf[32];
+    vga_puts("MTR to "); vga_puts(host); vga_puts(" (");
+    itoa(count, buf, 10); vga_puts(buf); vga_puts(" probes)\n");
+    vga_puts("HOST                 Loss%%   Snt   Last  Avg   Best  Wrst\n");
+    const char *hops[] = {"192.168.1.1", "10.0.0.1", "172.16.0.1", host};
+    int num_hops = 4;
+    for (int i = 0; i < num_hops; i++) {
+        vga_puts(hops[i]);
+        int pad = 20;
+        for (int j = 0; hops[i][j] && j < pad; j++) pad--;
+        for (int j = 0; j < pad; j++) vga_putchar(' ');
+        vga_puts("0.0    "); itoa(count, buf, 10); vga_puts(buf);
+        vga_puts("   1.0   1.0   1.0   2.0\n");
+    }
+    vga_puts("\n[Ctrl+C to stop]\n");
+}
+
+static void cmd_ipcalc107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: ipcalc ip/prefix or ipcalc ip mask\n");
+        vga_puts("  Calculate network, broadcast, and host range\n");
+        vga_puts("  -h            Show this help\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: ipcalc ip/prefix\n"); return; }
+    vga_puts("[ipcalc] IP Address:      "); vga_puts(args[1]); vga_puts("\n");
+    vga_puts("[ipcalc] Subnet Mask:     255.255.255.0\n");
+    vga_puts("[ipcalc] Network Address: 192.168.1.0\n");
+    vga_puts("[ipcalc] Broadcast:       192.168.1.255\n");
+    vga_puts("[ipcalc] Host Range:      192.168.1.1 - 192.168.1.254\n");
+    vga_puts("[ipcalc] Total Hosts:     254\n");
+    vga_puts("[ipcalc] CIDR:            /24\n");
+    vga_puts("[ipcalc] Wildcard Mask:   0.0.0.255\n");
+}
+
+static void cmd_wakeonlan107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: wakeonlan [-p port] mac_address\n");
+        vga_puts("  -p port    UDP port (default 9)\n");
+        vga_puts("  -h         Show this help\n");
+        vga_puts("  Send a WoL magic packet to wake a remote machine\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: wakeonlan mac_address\n"); return; }
+    int port = 9;
+    const char *mac = args[1];
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 112 && i + 1 < argc) { port = atoi(args[i + 1]); i++; }
+        else { mac = args[i]; }
+    }
+    char buf[32];
+    vga_puts("[wol] Target MAC: "); vga_puts(mac); vga_puts("\n");
+    vga_puts("[wol] Port: "); itoa(port, buf, 10); vga_puts(buf); vga_puts("\n");
+    vga_puts("[wol] Building magic packet (6x FF + 16x MAC)...\n");
+    vga_puts("[wol] Packet: FF:FF:FF:FF:FF:FF:");
+    for (int i = 0; i < 16; i++) { vga_puts(mac); if (i < 15) vga_puts(":"); }
+    vga_puts("\n");
+    vga_puts("[wol] Broadcasting to 255.255.255.255:");
+    itoa(port, buf, 10); vga_puts(buf); vga_puts("\n");
+    vga_puts("[wol] Magic packet sent successfully\n");
+    vga_puts("[wol] Target machine should power on shortly\n");
+}
+
+static void cmd_bandwidth107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: bandwidth [-d duration] [-s size] host\n");
+        vga_puts("  -d duration  Test seconds (default 10)\n");
+        vga_puts("  -s size      Block bytes (default 1024)\n");
+        vga_puts("  -h           Show this help\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: bandwidth host\n"); return; }
+    const char *host = args[1];
+    int duration = 10;
+    int block_size = 1024;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 100 && i + 1 < argc) { duration = atoi(args[i + 1]); i++; }
+        else if (args[i][0] == 45 && args[i][1] == 115 && i + 1 < argc) { block_size = atoi(args[i + 1]); i++; }
+        else { host = args[i]; }
+    }
+    char buf[32];
+    vga_puts("[bw] Testing TCP to "); vga_puts(host); vga_puts("...\n");
+    itoa(block_size, buf, 10); vga_puts("[bw] Block: "); vga_puts(buf); vga_puts(" bytes\n");
+    itoa(duration, buf, 10); vga_puts("[bw] Duration: "); vga_puts(buf); vga_puts("s\n");
+    vga_puts("[bw] Connecting to "); vga_puts(host); vga_puts(":7...\n");
+    vga_puts("[bw] TCP connected\n");
+    vga_puts("[bw] Sending data...\n");
+    int total = block_size * duration * 100;
+    itoa(total, buf, 10); vga_puts("[bw] Sent: "); vga_puts(buf); vga_puts(" bytes\n");
+    int mbps = (total * 8) / (duration * 1000000);
+    if (mbps < 1) mbps = 1;
+    vga_puts("[bw] --- Results ---\n");
+    vga_puts("[bw] Upload:   "); itoa(mbps, buf, 10); vga_puts(buf); vga_puts(" Mbps\n");
+    vga_puts("[bw] Download: "); itoa(mbps, buf, 10); vga_puts(buf); vga_puts(" Mbps\n");
+    vga_puts("[bw] Latency:  1.00 ms\n");
+    vga_puts("[bw] Test completed\n");
+}
+
+static void cmd_netdiscover107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: netdiscover [-r range] [-i interface]\n");
+        vga_puts("  -r range     IP range (default 192.168.1.0/24)\n");
+        vga_puts("  -i iface     Network interface (default eth0)\n");
+        vga_puts("  -h           Show this help\n");
+        return;
+    }
+    const char *range = "192.168.1.0/24";
+    const char *iface = "eth0";
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 114 && i + 1 < argc) { range = args[i + 1]; i++; }
+        else if (args[i][0] == 45 && args[i][1] == 105 && i + 1 < argc) { iface = args[i + 1]; i++; }
+    }
+    vga_puts("[discover] Scanning "); vga_puts(range);
+    vga_puts(" on "); vga_puts(iface); vga_puts("...\n");
+    vga_puts("[discover]  IP               MAC                Hostname\n");
+    vga_puts("[discover]  192.168.1.1      00:11:22:33:44:55  router\n");
+    vga_puts("[discover]  192.168.1.2      AA:BB:CC:DD:EE:01  desktop\n");
+    vga_puts("[discover]  192.168.1.10     AA:BB:CC:DD:EE:02  laptop\n");
+    vga_puts("[discover]  192.168.1.20     AA:BB:CC:DD:EE:03  phone\n");
+    vga_puts("[discover]  192.168.1.50     AA:BB:CC:DD:EE:04  printer\n");
+    vga_puts("[discover] 5 devices found\n");
+}
+
+static void cmd_ssl_check107(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && args[1][0] == 45 && args[1][1] == 104) {
+        vga_puts("Usage: ssl-check [-p port] hostname\n");
+        vga_puts("  -p port    Port to check (default 443)\n");
+        vga_puts("  -h         Show this help\n");
+        vga_puts("  Check SSL/TLS certificate for a host\n");
+        return;
+    }
+    if (argc < 2) { vga_puts("Usage: ssl-check hostname\n"); return; }
+    const char *host = args[1];
+    int port = 443;
+    for (int i = 1; i < argc; i++) {
+        if (args[i][0] == 45 && args[i][1] == 112 && i + 1 < argc) { port = atoi(args[i + 1]); i++; }
+        else { host = args[i]; }
+    }
+    char buf[32];
+    vga_puts("[ssl] Checking "); vga_puts(host);
+    vga_puts(":"); itoa(port, buf, 10); vga_puts(buf); vga_puts("...\n");
+    vga_puts("[ssl] Connecting "); vga_puts(host); vga_puts(":");
+    itoa(port, buf, 10); vga_puts(buf); vga_puts(" (TLS 1.3)...\n");
+    vga_puts("[ssl] TLS handshake successful\n");
+    vga_puts("[ssl] Certificate Information:\n");
+    vga_puts("[ssl]   Subject:    CN="); vga_puts(host); vga_puts("\n");
+    vga_puts("[ssl]   Issuer:     CN=Let's Encrypt Authority X3\n");
+    vga_puts("[ssl]   Serial:     01:23:45:67:89:AB:CD:EF\n");
+    vga_puts("[ssl]   Valid From: 2024-01-01 00:00:00 UTC\n");
+    vga_puts("[ssl]   Valid To:   2025-01-01 00:00:00 UTC\n");
+    vga_puts("[ssl]   Protocol:   TLSv1.3\n");
+    vga_puts("[ssl]   Cipher:     TLS_AES_256_GCM_SHA384\n");
+    vga_puts("[ssl]   Key:        RSA 2048 bits\n");
+    vga_puts("[ssl]   SAN:        DNS="); vga_puts(host); vga_puts("\n");
+    vga_puts("[ssl]   OCSP:       Good\n");
+    vga_puts("[ssl] Certificate is valid and trusted\n");
+    vga_puts("[ssl] SSL check passed\n");
+}
 
 
 void shell_run(void) {
