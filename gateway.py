@@ -186,6 +186,10 @@ pre{font-family:'Cascadia Code','Fira Code',monospace;white-space:pre-wrap;word-
 <a href="#" onclick="go('cont',this);return false">&#128230; Containers</a>
 <div class="sep">Media</div>
 <a href="#" onclick="go('media',this);return false">&#127909; Multimedia</a>
+<a href="#" onclick="go('editor',this);return false">&#9998; File Editor</a>
+<a href="#" onclick="go('pkgmgr',this);return false">&#128230; Pkg Manager</a>
+<a href="#" onclick="go('secscan',this);return false">&#128274; Security Scan</a>
+
 
 <div class="sep">Monitoring</div>
 <a href="#" onclick="go('sysmon',this);return false">&#128200; System Monitor</a>
@@ -573,6 +577,9 @@ if(id==='sec'){rcmd('iptables -L','secout');rcmd('getent passwd','secout');}
 if(id==='dev'){rcmd('gcc --version','devout');rcmd('git status','devout');}
 if(id==='cont'){rcmd('docker ps','contout');}
 if(id==='media'){rcmd('ffmpeg -version','mediaout');}
+if(id==='editor'){}
+if(id==='pkgmgr')rpkg();
+if(id==='secscan'){rcmd('id','secout2');rcmd('uname -a','secout2');}
 if(id==='pkg')rcmd('ls /bin','pkcon');
 if(id==='set')rset();
 }
@@ -824,6 +831,89 @@ function rsysinfo(){
       }).catch(()=>el.innerHTML=h);
     } else el.innerHTML="<p class=\"r\">Failed</p>";
   }).catch(e=>el.innerHTML="<p class=\"r\">"+escHtml(String(e))+"</p>");
+}
+
+<!-- ===== File Editor ===== -->
+<div class="pg" id="p-editor">
+<h2>File Editor</h2>
+<div style="display:flex;gap:8px;margin-bottom:12px">
+<input type="text" id="edfile" placeholder="File path..." style="flex:1;background:#0c0c0c;border:1px solid #1e293b;color:#e2e8f0;padding:8px 12px;border-radius:6px;font-size:13px">
+<button class="btn bp" onclick="edload()">Load</button>
+<button class="btn bg" onclick="edsave()">Save</button>
+</div>
+<textarea id="edcontent" style="width:100%;height:400px;background:#0c0c0c;border:1px solid #1e293b;color:#e2e8f0;padding:12px;font-family:'Cascadia Code','Fira Code',monospace;font-size:12px;border-radius:8px;resize:vertical" placeholder="Click Load to edit a file..."></textarea>
+<div id="edstatus" style="margin-top:8px;font-size:12px;color:#64748b"></div>
+</div>
+
+<!-- ===== Package Manager ===== -->
+<div class="pg" id="p-pkgmgr">
+<h2>Package Manager</h2>
+<div class="grid">
+<div class="card"><h3>System Packages</h3><div class="big" id="pkgcount">--</div><div class="dim" style="font-size:11px">installed packages</div></div>
+<div class="card"><h3>Disk Usage</h3><div class="big" id="pkgdisk">--</div></div>
+<div class="card"><h3>Architecture</h3><div class="big" id="pkgarch">x86</div></div>
+</div>
+<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+<button class="btn bp" onclick="rcmd('ls /bin','pkgout')">List /bin</button>
+<button class="btn bk" onclick="rcmd('ls /usr','pkgout')">List /usr</button>
+<button class="btn bk" onclick="rcmd('df','pkgout')">Disk</button>
+<button class="btn bk" onclick="rcmd('du','pkgout')">Usage</button>
+</div>
+<div class="card" id="pkgout"><p class="dim">Click a button to view packages.</p></div>
+</div>
+
+<!-- ===== Security Scanner ===== -->
+<div class="pg" id="p-secscan">
+<h2>Security Scanner</h2>
+<div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+<button class="btn bp" onclick="rcmd('cat /etc/passwd','secout2')">Users</button>
+<button class="btn bk" onclick="rcmd('id','secout2')">Current User</button>
+<button class="btn bk" onclick="rcmd('chmod','secout2')">Permissions</button>
+<button class="btn bk" onclick="rcmd('netstat','secout2')">Open Ports</button>
+<button class="btn bd" onclick="rcmd('iptables -L','secout2')">Firewall</button>
+<button class="btn bk" onclick="rcmd('uname -a','secout2')">Kernel Info</button>
+</div>
+<div class="card" id="secout2"><p class="dim">Click a button to scan.</p></div>
+</div>
+
+
+/* ---- File Editor ---- */
+function edload(){
+  var f=document.getElementById("edfile").value.trim();
+  if(!f){toast("Enter file path",true);return;}
+  fetch("/api/exec",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cmd:"cat "+f})})
+  .then(function(r){return r.json()})
+  .then(function(d){
+    if(d.output){
+      document.getElementById("edcontent").value=d.output;
+      document.getElementById("edstatus").textContent="Loaded: "+f+" ("+d.output.length+" chars)";
+    } else {
+      document.getElementById("edstatus").textContent="Error: "+(d.error||"File not found");
+    }
+  }).catch(function(e){document.getElementById("edstatus").textContent="Error: "+e;});
+}
+function edsave(){
+  var f=document.getElementById("edfile").value.trim();
+  var c=document.getElementById("edcontent").value;
+  if(!f){toast("Enter file path",true);return;}
+  fetch("/api/exec",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cmd:"write "+f+" "+c.replace(/\n/g," ")})})
+  .then(function(r){return r.json()})
+  .then(function(d){
+    document.getElementById("edstatus").textContent=d.output?"Saved: "+f:"Error: "+(d.error||"Save failed");
+    toast(d.output?"File saved!":"Save failed",!d.output);
+  }).catch(function(e){document.getElementById("edstatus").textContent="Error: "+e;});
+}
+/* ---- Package Manager Init ---- */
+function rpkg(){
+  rcmd("ls /bin","pkgout");
+  fetch("/api/exec",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cmd:"ls /bin"}})
+  .then(r=>r.json()).then(d=>{
+    if(d.output){var n=d.output.split("\n").filter(l=>l.trim()).length;document.getElementById("pkgcount").textContent=n;}
+  });
+  fetch("/api/exec",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({cmd:"df"}})
+  .then(r=>r.json()).then(d=>{
+    if(d.output){var lines=d.output.split("\n");for(var i=0;i<lines.length;i++){if(lines[i].indexOf("/dev")>=0){document.getElementById("pkgdisk").textContent=lines[i].trim();break;}}}
+  });
 }
 </script></body></html>
 
