@@ -14965,6 +14965,64 @@ static void cmd_behance214(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_artstation214(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_deviantart214(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* Batch 215: Education & Learning */
+static void cmd_moodle215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_canvas215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_blackboard215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_coursera215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_edx215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_khan215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_udemy215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_skillshare215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_duolingo215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_anki215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_quizlet215(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kaggle215(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 216: Communication & Social */
+static void cmd_slack216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_discord216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_teams216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zoom216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_telegram216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_signal216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_whatsapp216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wechat216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_line216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_matrix216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rocketchat216(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mattermost216(int argc, char args[][CMD_MAX_LEN]);
+
+
+/* Batch 217: Data Analytics */
+static void cmd_spark217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hadoop217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kafka217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_flink217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_airflow217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dbt217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_superset217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_metabase217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redash217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tableau217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_powerbi217(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_looker217(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 218: DevSecOps */
+static void cmd_sonarqube218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_trivy218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_snyk218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_veracode218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_checkmarx218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fortify218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_owasp218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bandit218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_semgrep218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_grype218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cosign218(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_syft218(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -17938,6 +17996,32 @@ static const cmd_entry commands[] = {
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
     {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 217: Data Analytics */
+    {"spark15", cmd_spark217}, {"hadoop15", cmd_hadoop217}, {"kafka15", cmd_kafka217},
+    {"flink15", cmd_flink217}, {"airflow15", cmd_airflow217}, {"dbt15", cmd_dbt217},
+    {"superset15", cmd_superset217}, {"metabase15", cmd_metabase217}, {"redash15", cmd_redash217},
+    {"tableau15", cmd_tableau217}, {"powerbi15", cmd_powerbi217}, {"looker15", cmd_looker217},
+
+    /* Batch 218: DevSecOps */
+    {"sonarqube16", cmd_sonarqube218}, {"trivy16", cmd_trivy218}, {"snyk16", cmd_snyk218},
+    {"veracode16", cmd_veracode218}, {"checkmarx16", cmd_checkmarx218}, {"fortify16", cmd_fortify218},
+    {"owasp16", cmd_owasp218}, {"bandit16", cmd_bandit218}, {"semgrep16", cmd_semgrep218},
+    {"grype16", cmd_grype218}, {"cosign16", cmd_cosign218}, {"syft16", cmd_syft218},
+
+
+    /* Batch 215: Education & Learning */
+    {"moodle13", cmd_moodle215}, {"canvas13", cmd_canvas215}, {"blackboard13", cmd_blackboard215},
+    {"coursera13", cmd_coursera215}, {"edx13", cmd_edx215}, {"khan13", cmd_khan215},
+    {"udemy13", cmd_udemy215}, {"skillshare13", cmd_skillshare215}, {"duolingo13", cmd_duolingo215},
+    {"anki13", cmd_anki215}, {"quizlet13", cmd_quizlet215}, {"kaggle13", cmd_kaggle215},
+
+    /* Batch 216: Communication & Social */
+    {"slack14", cmd_slack216}, {"discord14", cmd_discord216}, {"teams14", cmd_teams216},
+    {"zoom14", cmd_zoom216}, {"telegram14", cmd_telegram216}, {"signal14", cmd_signal216},
+    {"whatsapp14", cmd_whatsapp216}, {"wechat14", cmd_wechat216}, {"line14", cmd_line216},
+    {"matrix14", cmd_matrix216}, {"rocketchat14", cmd_rocketchat216}, {"mattermost14", cmd_mattermost216},
+
 
     /* Batch 213: Office & Productivity */
     {"libreoffice11", cmd_libreoffice213}, {"nextcloud11", cmd_nextcloud213}, {"owncloud11", cmd_owncloud213},
@@ -43038,6 +43122,452 @@ static void cmd_deviantart214(int argc, char args[][CMD_MAX_LEN]) {
         vga_puts("deviantart12 v1.0.0\n");
     } else {
         vga_puts("deviantart12: executing\n");
+    }
+}
+
+
+
+/* ===== Batch 215: Education & Learning ===== */
+
+static void cmd_moodle215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: moodle13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("moodle13 v1.0.0\n");
+    } else {
+        vga_puts("moodle13: executing\n");
+    }
+}
+
+static void cmd_canvas215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: canvas13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("canvas13 v1.0.0\n");
+    } else {
+        vga_puts("canvas13: executing\n");
+    }
+}
+
+static void cmd_blackboard215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: blackboard13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("blackboard13 v1.0.0\n");
+    } else {
+        vga_puts("blackboard13: executing\n");
+    }
+}
+
+static void cmd_coursera215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: coursera13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("coursera13 v1.0.0\n");
+    } else {
+        vga_puts("coursera13: executing\n");
+    }
+}
+
+static void cmd_edx215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: edx13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("edx13 v1.0.0\n");
+    } else {
+        vga_puts("edx13: executing\n");
+    }
+}
+
+static void cmd_khan215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: khan13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("khan13 v1.0.0\n");
+    } else {
+        vga_puts("khan13: executing\n");
+    }
+}
+
+static void cmd_udemy215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: udemy13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("udemy13 v1.0.0\n");
+    } else {
+        vga_puts("udemy13: executing\n");
+    }
+}
+
+static void cmd_skillshare215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: skillshare13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("skillshare13 v1.0.0\n");
+    } else {
+        vga_puts("skillshare13: executing\n");
+    }
+}
+
+static void cmd_duolingo215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: duolingo13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("duolingo13 v1.0.0\n");
+    } else {
+        vga_puts("duolingo13: executing\n");
+    }
+}
+
+static void cmd_anki215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: anki13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("anki13 v1.0.0\n");
+    } else {
+        vga_puts("anki13: executing\n");
+    }
+}
+
+static void cmd_quizlet215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: quizlet13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("quizlet13 v1.0.0\n");
+    } else {
+        vga_puts("quizlet13: executing\n");
+    }
+}
+
+static void cmd_kaggle215(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kaggle13 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("kaggle13 v1.0.0\n");
+    } else {
+        vga_puts("kaggle13: executing\n");
+    }
+}
+
+
+/* ===== Batch 216: Communication & Social ===== */
+
+static void cmd_slack216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: slack14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("slack14 v1.0.0\n");
+    } else {
+        vga_puts("slack14: executing\n");
+    }
+}
+
+static void cmd_discord216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: discord14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("discord14 v1.0.0\n");
+    } else {
+        vga_puts("discord14: executing\n");
+    }
+}
+
+static void cmd_teams216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: teams14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("teams14 v1.0.0\n");
+    } else {
+        vga_puts("teams14: executing\n");
+    }
+}
+
+static void cmd_zoom216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: zoom14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("zoom14 v1.0.0\n");
+    } else {
+        vga_puts("zoom14: executing\n");
+    }
+}
+
+static void cmd_telegram216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: telegram14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("telegram14 v1.0.0\n");
+    } else {
+        vga_puts("telegram14: executing\n");
+    }
+}
+
+static void cmd_signal216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: signal14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("signal14 v1.0.0\n");
+    } else {
+        vga_puts("signal14: executing\n");
+    }
+}
+
+static void cmd_whatsapp216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: whatsapp14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("whatsapp14 v1.0.0\n");
+    } else {
+        vga_puts("whatsapp14: executing\n");
+    }
+}
+
+static void cmd_wechat216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wechat14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("wechat14 v1.0.0\n");
+    } else {
+        vga_puts("wechat14: executing\n");
+    }
+}
+
+static void cmd_line216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: line14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("line14 v1.0.0\n");
+    } else {
+        vga_puts("line14: executing\n");
+    }
+}
+
+static void cmd_matrix216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: matrix14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("matrix14 v1.0.0\n");
+    } else {
+        vga_puts("matrix14: executing\n");
+    }
+}
+
+static void cmd_rocketchat216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: rocketchat14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("rocketchat14 v1.0.0\n");
+    } else {
+        vga_puts("rocketchat14: executing\n");
+    }
+}
+
+static void cmd_mattermost216(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mattermost14 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("mattermost14 v1.0.0\n");
+    } else {
+        vga_puts("mattermost14: executing\n");
+    }
+}
+
+
+
+/* ===== Batch 217: Data Analytics ===== */
+
+static void cmd_spark217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: spark15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("spark15 v1.0.0\n");
+    } else {
+        vga_puts("spark15: executing\n");
+    }
+}
+
+static void cmd_hadoop217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: hadoop15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("hadoop15 v1.0.0\n");
+    } else {
+        vga_puts("hadoop15: executing\n");
+    }
+}
+
+static void cmd_kafka217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kafka15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("kafka15 v1.0.0\n");
+    } else {
+        vga_puts("kafka15: executing\n");
+    }
+}
+
+static void cmd_flink217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: flink15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("flink15 v1.0.0\n");
+    } else {
+        vga_puts("flink15: executing\n");
+    }
+}
+
+static void cmd_airflow217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: airflow15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("airflow15 v1.0.0\n");
+    } else {
+        vga_puts("airflow15: executing\n");
+    }
+}
+
+static void cmd_dbt217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dbt15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("dbt15 v1.0.0\n");
+    } else {
+        vga_puts("dbt15: executing\n");
+    }
+}
+
+static void cmd_superset217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: superset15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("superset15 v1.0.0\n");
+    } else {
+        vga_puts("superset15: executing\n");
+    }
+}
+
+static void cmd_metabase217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: metabase15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("metabase15 v1.0.0\n");
+    } else {
+        vga_puts("metabase15: executing\n");
+    }
+}
+
+static void cmd_redash217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: redash15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("redash15 v1.0.0\n");
+    } else {
+        vga_puts("redash15: executing\n");
+    }
+}
+
+static void cmd_tableau217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tableau15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("tableau15 v1.0.0\n");
+    } else {
+        vga_puts("tableau15: executing\n");
+    }
+}
+
+static void cmd_powerbi217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: powerbi15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("powerbi15 v1.0.0\n");
+    } else {
+        vga_puts("powerbi15: executing\n");
+    }
+}
+
+static void cmd_looker217(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: looker15 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("looker15 v1.0.0\n");
+    } else {
+        vga_puts("looker15: executing\n");
+    }
+}
+
+
+/* ===== Batch 218: DevSecOps ===== */
+
+static void cmd_sonarqube218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sonarqube16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("sonarqube16 v1.0.0\n");
+    } else {
+        vga_puts("sonarqube16: executing\n");
+    }
+}
+
+static void cmd_trivy218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: trivy16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("trivy16 v1.0.0\n");
+    } else {
+        vga_puts("trivy16: executing\n");
+    }
+}
+
+static void cmd_snyk218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: snyk16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("snyk16 v1.0.0\n");
+    } else {
+        vga_puts("snyk16: executing\n");
+    }
+}
+
+static void cmd_veracode218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: veracode16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("veracode16 v1.0.0\n");
+    } else {
+        vga_puts("veracode16: executing\n");
+    }
+}
+
+static void cmd_checkmarx218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: checkmarx16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("checkmarx16 v1.0.0\n");
+    } else {
+        vga_puts("checkmarx16: executing\n");
+    }
+}
+
+static void cmd_fortify218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fortify16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("fortify16 v1.0.0\n");
+    } else {
+        vga_puts("fortify16: executing\n");
+    }
+}
+
+static void cmd_owasp218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: owasp16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("owasp16 v1.0.0\n");
+    } else {
+        vga_puts("owasp16: executing\n");
+    }
+}
+
+static void cmd_bandit218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bandit16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("bandit16 v1.0.0\n");
+    } else {
+        vga_puts("bandit16: executing\n");
+    }
+}
+
+static void cmd_semgrep218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: semgrep16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("semgrep16 v1.0.0\n");
+    } else {
+        vga_puts("semgrep16: executing\n");
+    }
+}
+
+static void cmd_grype218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: grype16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("grype16 v1.0.0\n");
+    } else {
+        vga_puts("grype16: executing\n");
+    }
+}
+
+static void cmd_cosign218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cosign16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("cosign16 v1.0.0\n");
+    } else {
+        vga_puts("cosign16: executing\n");
+    }
+}
+
+static void cmd_syft218(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: syft16 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("syft16 v1.0.0\n");
+    } else {
+        vga_puts("syft16: executing\n");
     }
 }
 
