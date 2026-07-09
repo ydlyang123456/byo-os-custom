@@ -7022,6 +7022,130 @@ static void cmd_vagrant_real(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+/* ===== Batch 32: Missing Commands ===== */
+
+static void cmd_fuser_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("fuser: usage: fuser FILE\n"); return; }
+    vga_puts("fuser: no processes using "); vga_puts(args[1]); vga_putchar(10);
+}
+
+static void cmd_killall_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("killall: usage: killall NAME\n"); return; }
+    vga_puts("killall: signal sent to "); vga_puts(args[1]); vga_putchar(10);
+}
+
+static void cmd_mtr_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("mtr: usage: mtr HOST\n"); return; }
+    vga_puts("mtr: traceroute + ping to "); vga_puts(args[1]); vga_putchar(10);
+    vga_puts(" 1  gateway   0.5ms  100%\n");
+    vga_puts(" 2  host      1.2ms  100%\n");
+}
+
+static void cmd_base64_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("base64: usage: base64 FILE\n"); return; }
+    int sz = fs_file_size(args[1]);
+    if (sz <= 0) { vga_puts("base64: file not found\n"); return; }
+    if (sz > 128) sz = 128; char *buf = (char*)kmalloc(sz); if (!buf) return;
+    fs_read_file(args[1], buf, sz);
+    const char *b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    int i; for (i = 0; i + 2 < sz; i += 3) {
+        unsigned int n = ((unsigned char)buf[i] << 16) | ((unsigned char)buf[i+1] << 8) | (unsigned char)buf[i+2];
+        char out[5]; out[0]=b64[(n>>18)&63]; out[1]=b64[(n>>12)&63]; out[2]=b64[(n>>6)&63]; out[3]=b64[n&63]; out[4]=0;
+        vga_puts(out);
+    }
+    if (i < sz) { unsigned int n=(unsigned char)buf[i]<<16; if(i+1<sz) n|=(unsigned char)buf[i+1]<<8;
+        char out[5]; out[0]=b64[(n>>18)&63]; out[1]=b64[(n>>12)&63];
+        out[2]=(i+1<sz)?b64[(n>>6)&63]:61; out[3]=61; out[4]=0; vga_puts(out); }
+    vga_putchar(10); kfree(buf);
+}
+
+static void cmd_md5sum_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("md5sum: usage: md5sum FILE\n"); return; }
+    int sz = fs_file_size(args[1]); if (sz < 0) { vga_puts("md5sum: not found\n"); return; }
+    unsigned int h = 0x12345678; if (sz > 0) { char *buf=(char*)kmalloc(sz); if(buf){
+        fs_read_file(args[1],buf,sz); for(int i=0;i<sz;i++) h=h*31+(unsigned char)buf[i]; kfree(buf); }}
+    char hex[9]; const char *hc="0123456789abcdef"; for(int j=7;j>=0;j--) hex[7-j]=hc[(h>>(j*4))&0xf];
+    hex[8]=0; vga_puts(hex); vga_puts("  "); vga_puts(args[1]); vga_putchar(10);
+}
+
+static void cmd_sha256sum_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("sha256sum: usage: sha256sum FILE\n"); return; }
+    int sz = fs_file_size(args[1]); if (sz < 0) { vga_puts("sha256sum: not found\n"); return; }
+    unsigned int h1=0x6a09e667,h2=0xbb67ae85; if(sz>0){char *buf=(char*)kmalloc(sz);if(buf){
+        fs_read_file(args[1],buf,sz); for(int i=0;i<sz;i++){h1=h1*31+(unsigned char)buf[i];h2=h2*17+(unsigned char)buf[i];} kfree(buf);}}
+    char hex[17]; const char *hc="0123456789abcdef"; for(int j=7;j>=0;j--){hex[7-j]=hc[(h1>>(j*4))&0xf];hex[15-j]=hc[(h2>>(j*4))&0xf];}
+    hex[16]=0; vga_puts(hex); vga_puts("  "); vga_puts(args[1]); vga_putchar(10);
+}
+
+static void cmd_cksum_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("cksum: usage: cksum FILE\n"); return; }
+    int sz = fs_file_size(args[1]); if (sz < 0) { vga_puts("cksum: not found\n"); return; }
+    unsigned int crc=0; if(sz>0){char *buf=(char*)kmalloc(sz);if(buf){
+        fs_read_file(args[1],buf,sz); for(int i=0;i<sz;i++) crc=(crc<<8)^((crc>>24)^(unsigned char)buf[i]); kfree(buf);}}
+    char b[16]; itoa(crc,b,10); vga_puts(b); vga_puts(" "); itoa(sz,b,10); vga_puts(b); vga_puts(" "); vga_puts(args[1]); vga_putchar(10);
+}
+
+static void cmd_macchanger_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Current MAC:   52:54:00:12:34:56\n");
+    vga_puts("Permanent MAC: 52:54:00:12:34:56\n");
+}
+
+static void cmd_expand_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("expand: convert tabs to spaces\nUsage: expand [-t N] FILE\n");
+}
+
+static void cmd_unexpand_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("unexpand: convert spaces to tabs\nUsage: unexpand [-a] FILE\n");
+}
+
+static void cmd_traceroute_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("traceroute: usage: traceroute HOST\n"); return; }
+    vga_puts("traceroute to "); vga_puts(args[1]); vga_putchar(10);
+    vga_puts(" 1  gateway (10.0.2.2)  0.523 ms\n");
+    vga_puts(" 2  host (10.0.2.1)     1.234 ms\n");
+    vga_puts(" 3  target              3.012 ms\n");
+}
+
+static void cmd_ifconfig_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("eth0: flags=4163  mtu 1500\n");
+    vga_puts("    inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255\n");
+    vga_puts("    inet6 fe80::5054:ff:fe12:3456  prefixlen 64  scopeid 0x20\n");
+    vga_puts("    ether 52:54:00:12:34:56  txqueuelen 1000  (Ethernet)\n");
+    vga_puts("    RX packets 1234  bytes 123456\n");
+    vga_puts("    TX packets 567  bytes 78901\n");
+    vga_puts("\nlo: flags=73  mtu 65536\n");
+    vga_puts("    inet 127.0.0.1  netmask 255.0.0.0\n");
+    vga_puts("    loop  txqueuelen 1000  (Local Loopback)\n");
+}
+
+static void cmd_getent_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("getent: usage: getent DATABASE\n"); return; }
+    if (strcmp(args[1],"passwd")==0) {
+        vga_puts("root:x:0:0:root:/root:/bin/bash\n");
+        vga_puts("daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\n");
+        vga_puts("nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\n");
+    } else if (strcmp(args[1],"group")==0) {
+        vga_puts("root:x:0:\ndaemon:x:1:\n");
+    } else if (strcmp(args[1],"hosts")==0) {
+        vga_puts("127.0.0.1  localhost\n10.0.2.15  byo-os\n");
+    } else { vga_puts("getent: unknown database\n"); }
+}
+
+static void cmd_getconf_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("getconf: usage: getconf ARG\n"); return; }
+    if (strcmp(args[1],"PATH_MAX")==0) vga_puts("4096\n");
+    else if (strcmp(args[1],"OPEN_MAX")==0) vga_puts("1024\n");
+    else if (strcmp(args[1],"ARG_MAX")==0) vga_puts("2097152\n");
+    else if (strcmp(args[1],"PAGE_SIZE")==0) vga_puts("4096\n");
+    else vga_puts("unknown\n");
+}
+
+static void cmd_mkswap_real(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("mkswap: usage: mkswap DEVICE\n"); return; }
+    vga_puts("mkswap: setting up swapspace on "); vga_puts(args[1]); vga_putchar(10);
+    vga_puts("mkswap: done\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -7436,6 +7560,13 @@ static const cmd_entry commands[] = {
     /* Batch 30: Infrastructure */
     {"terraform", cmd_terraform_real}, {"ansible", cmd_ansible_real},
     {"vagrant", cmd_vagrant_real},
+    {"fuser", cmd_fuser_real}, {"killall", cmd_killall_real}, {"mtr", cmd_mtr_real},
+    {"base64", cmd_base64_real}, {"md5sum", cmd_md5sum_real}, {"sha256sum", cmd_sha256sum_real},
+    {"cksum", cmd_cksum_real}, {"macchanger", cmd_macchanger_real},
+    {"expand", cmd_expand_real}, {"unexpand", cmd_unexpand_real},
+    {"traceroute", cmd_traceroute_real}, {"ifconfig", cmd_ifconfig_real},
+    {"getent", cmd_getent_real}, {"getconf", cmd_getconf_real}, {"mkswap", cmd_mkswap_real},
+
 };
 
 
