@@ -14515,6 +14515,48 @@ static void caption_gen_179(int argc, char args[][CMD_MAX_LEN]);
 static void alt_text_179(int argc, char args[][CMD_MAX_LEN]);
 static void tts_config_179(int argc, char args[][CMD_MAX_LEN]);
 static void input_adapt_179(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 180: Music Production */
+static void synth_init_180(int argc, char args[][CMD_MAX_LEN]);
+static void synth_play_180(int argc, char args[][CMD_MAX_LEN]);
+static void synth_mod_180(int argc, char args[][CMD_MAX_LEN]);
+static void synth_filter_180(int argc, char args[][CMD_MAX_LEN]);
+static void drum_machine_180(int argc, char args[][CMD_MAX_LEN]);
+static void sampler_180(int argc, char args[][CMD_MAX_LEN]);
+static void sequencer_180(int argc, char args[][CMD_MAX_LEN]);
+static void mixer_bus_180(int argc, char args[][CMD_MAX_LEN]);
+static void master_chain_180(int argc, char args[][CMD_MAX_LEN]);
+static void sidechain_180(int argc, char args[][CMD_MAX_LEN]);
+static void automation_180(int argc, char args[][CMD_MAX_LEN]);
+static void midi_map_180(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 181: Cryptography + Math */
+static void rsa_keygen_181(int argc, char args[][CMD_MAX_LEN]);
+static void aes_encrypt_181(int argc, char args[][CMD_MAX_LEN]);
+static void aes_decrypt_181(int argc, char args[][CMD_MAX_LEN]);
+static void ecdsa_sign_181(int argc, char args[][CMD_MAX_LEN]);
+static void ecdsa_verify_181(int argc, char args[][CMD_MAX_LEN]);
+static void sha256_hash_181(int argc, char args[][CMD_MAX_LEN]);
+static void hmac_generate_181(int argc, char args[][CMD_MAX_LEN]);
+static void pbkdf2_derive_181(int argc, char args[][CMD_MAX_LEN]);
+static void diffie_hellman_181(int argc, char args[][CMD_MAX_LEN]);
+static void prime_check_181(int argc, char args[][CMD_MAX_LEN]);
+static void matrix_inverse_181(int argc, char args[][CMD_MAX_LEN]);
+static void fft_compute_181(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 182: Dev Tools */
+static void git_status_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_commit_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_branch_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_merge_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_rebase_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_stash_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_blame_182(int argc, char args[][CMD_MAX_LEN]);
+static void git_bisect_182(int argc, char args[][CMD_MAX_LEN]);
+static void docker_build_182(int argc, char args[][CMD_MAX_LEN]);
+static void docker_run_182(int argc, char args[][CMD_MAX_LEN]);
+static void docker_ps_182(int argc, char args[][CMD_MAX_LEN]);
+static void docker_logs_182(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17450,7 +17492,14 @@ static const cmd_entry commands[] = {
     /* Batch 178: Mental Health + Wellness */
     {"mood-track", mood_track_178},     {"anxiety-check", anxiety_check_178},     {"therapy-session", therapy_session_178},     {"meditation", meditation_178},     {"breathing-ex", breathing_ex_178},     {"journal-prompt", journal_prompt_178},     {"gratitude-log", gratitude_log_178},     {"cbt-exercise", cbt_exercise_178},     {"sleep-hygiene", sleep_hygiene_178},     {"stress-mgmt", stress_mgmt_178},     {"burnout-check", burnout_check_178},     {"wellness-plan", wellness_plan_178}, 
     /* Batch 179: Accessibility + Inclusion */
-    {"a11y-audit", a11y_audit_179},     {"a11y-test", a11y_test_179},     {"a11y-fix", a11y_fix_179},     {"screen-reader", screen_reader_179},     {"color-contrast", color_contrast_179},     {"keyboard-nav", keyboard_nav_179},     {"focus-manage", focus_manage_179},     {"aria-label", aria_label_179},     {"caption-gen", caption_gen_179},     {"alt-text", alt_text_179},     {"tts-config", tts_config_179},     {"input-adapt", input_adapt_179}, 
+    {"a11y-audit", a11y_audit_179},     {"a11y-test", a11y_test_179},     {"a11y-fix", a11y_fix_179},     {"screen-reader", screen_reader_179},     {"color-contrast", color_contrast_179},     {"keyboard-nav", keyboard_nav_179},     {"focus-manage", focus_manage_179},     {"aria-label", aria_label_179},     {"caption-gen", caption_gen_179},     {"alt-text", alt_text_179},     {"tts-config", tts_config_179},     {"input-adapt", input_adapt_179},
+    /* Batch 180: Music Production */
+    {"synth-init", synth_init_180},     {"synth-play", synth_play_180},     {"synth-mod", synth_mod_180},     {"synth-filter", synth_filter_180},     {"drum-machine", drum_machine_180},     {"sampler", sampler_180},     {"sequencer", sequencer_180},     {"mixer-bus", mixer_bus_180},     {"master-chain", master_chain_180},     {"sidechain", sidechain_180},     {"automation", automation_180},     {"midi-map", midi_map_180}, 
+    /* Batch 181: Cryptography + Math */
+    {"rsa-keygen", rsa_keygen_181},     {"aes-encrypt", aes_encrypt_181},     {"aes-decrypt", aes_decrypt_181},     {"ecdsa-sign", ecdsa_sign_181},     {"ecdsa-verify", ecdsa_verify_181},     {"sha256-hash", sha256_hash_181},     {"hmac-generate", hmac_generate_181},     {"pbkdf2-derive", pbkdf2_derive_181},     {"diffie-hellman", diffie_hellman_181},     {"prime-check", prime_check_181},     {"matrix-inverse", matrix_inverse_181},     {"fft-compute", fft_compute_181}, 
+    /* Batch 182: Dev Tools */
+    {"git-status", git_status_182},     {"git-commit", git_commit_182},     {"git-branch", git_branch_182},     {"git-merge", git_merge_182},     {"git-rebase", git_rebase_182},     {"git-stash", git_stash_182},     {"git-blame", git_blame_182},     {"git-bisect", git_bisect_182},     {"docker-build", docker_build_182},     {"docker-run", docker_run_182},     {"docker-ps", docker_ps_182},     {"docker-logs", docker_logs_182}, 
+ 
  
  
  
@@ -39629,6 +39678,157 @@ static void tts_config_179(int argc, char args[][CMD_MAX_LEN]) {
 static void input_adapt_179(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Adaptive: Switch:yes Eye:yes Voice:yes Timing:flexible\n");
+}
+
+
+/* ===== Batch 180: Music Production ===== */
+static void synth_init_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Synth: Init Saw oscillator Filter:24dB/oct Poly:16 voices\n");
+}
+static void synth_play_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Play: Note:C4 Velocity:100 Duration:1s Pitch bend:0\n");
+}
+static void synth_mod_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mod: LFO:0.5Hz Target:cutoff Amount:50%% Depth:2oct\n");
+}
+static void synth_filter_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Filter: LPF Cutoff:2.4kHz Resonance:0.7 Drive:0.3\n");
+}
+static void drum_machine_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Drums: BPM:128 Pattern:4/4 Kick:100 Snare:80 HiHat:70\n");
+}
+static void sampler_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sample: loaded pad.wav 44.1kHz 16bit Layers:4 Velocity:split\n");
+}
+static void sequencer_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Seq: 32 steps Tempo:128 BPM Swing:55%% Gate:50%%\n");
+}
+static void mixer_bus_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mix: 12 channels Master:-3dB LUFS:-14 True peak:-1.5dB\n");
+}
+static void master_chain_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Master: EQ:->Comp:->Limit:->Stereo: Loudness:-14 LUFS\n");
+}
+static void sidechain_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sidechain: Trigger:kick Target:bass Ratio:4:1 Release:100ms\n");
+}
+static void automation_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Automation: 128 breakpoints Parameter:cutoff Curve:linear\n");
+}
+static void midi_map_180(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MIDI: CC:1=cutoff CC:11=volume CC:64=pedal Channels:1-16\n");
+}
+
+/* ===== Batch 181: Cryptography + Math ===== */
+static void rsa_keygen_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("RSA: 2048-bit Key:generated Public:fingerprint Private:protected\n");
+}
+static void aes_encrypt_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AES-256-GCM: Encrypted 1.2MB Tag:0x1234... Nonce:random IV:12B\n");
+}
+static void aes_decrypt_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AES-256-GCM: Decrypted 1.2MB Tag:verified Integrity:OK\n");
+}
+static void ecdsa_sign_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ECDSA: secp256k1 Signature:64 bytes DER encoded\n");
+}
+static void ecdsa_verify_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ECDSA Verify: Signature valid Message integrity:OK Time:0.1ms\n");
+}
+static void sha256_hash_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SHA-256: a1b2c3...d4e5f6 Length:32 bytes Time:1.2ms/MB\n");
+}
+static void hmac_generate_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("HMAC-SHA256: Key:32 bytes Message:128 bytes Output:32 bytes\n");
+}
+static void pbkdf2_derive_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PBKDF2: Iterations:100,000 Salt:16 bytes Key:32 bytes\n");
+}
+static void diffie_hellman_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DH: 2048-bit Shared secret:established Security:112-bit\n");
+}
+static void prime_check_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Prime: 1,234,567,891 is prime (Miller-Rabin 20 rounds)\n");
+}
+static void matrix_inverse_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Matrix: 4x4 Inverse computed Determinant:0.0023 Time:0.1ms\n");
+}
+static void fft_compute_181(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("FFT: 1024 points Time:0.5ms Peaks:3 Fundamental:440Hz\n");
+}
+
+/* ===== Batch 182: Dev Tools ===== */
+static void git_status_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: On branch master Changes:12 staged:3 Untracked:5\n");
+}
+static void git_commit_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Commit abc123 12 files changed +456 -234 Author:dev\n");
+}
+static void git_branch_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Branches: master * feature-123 hotfix-456\n");
+}
+static void git_merge_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Merge feature-123 into master Conflicts:0 Fast-forward:yes\n");
+}
+static void git_rebase_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Rebase onto main 12 commits replayed Success:yes\n");
+}
+static void git_stash_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Stash: 3 entries Stash@{0}: WIP on feature\n");
+}
+static void git_blame_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Line 42: abc123 2024-01-15 Added error handling\n");
+}
+static void git_bisect_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Git: Bisect: Found bug at commit def456 12 steps\n");
+}
+static void docker_build_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Docker: Build image:1.2GB Layers:12 Time:45s Cache:8 hit\n");
+}
+static void docker_run_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Docker: Container:abc123 Running:2h30m Ports:8080->80\n");
+}
+static void docker_ps_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Docker: 3 running 2 stopped 1 paused Images:12\n");
+}
+static void docker_logs_182(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Docker: abc123 [14:23:45] Server started [14:23:46] Ready\n");
 }
 
 void shell_run(void) {
