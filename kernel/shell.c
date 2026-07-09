@@ -996,8 +996,19 @@ static void cmd_crontab(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_tee(int argc, char args[][CMD_MAX_LEN]) {
-    if (argc < 2) { vga_puts("Usage: tee <file>\n"); return; }
-    vga_puts("(input from stdin not supported in shell mode)\n");
+    if (argc < 2) { vga_puts("Usage: tee <file> [text]\n"); return; }
+    /* Write args[2..] to file and stdout */
+    char content[4096];
+    int pos = 0;
+    for (int i = 2; i < argc; i++) {
+        if (i > 2) content[pos++] = ' ';
+        for (int j = 0; args[i][j] && pos < 4095; j++) content[pos++] = args[i][j];
+    }
+    content[pos] = 0;
+    fs_create_file(args[1], content, pos);
+    vga_puts(content);
+    vga_putchar('\n');
+    vga_puts("Written to "); vga_puts(args[1]); vga_putchar('\n');
 }
 
 static void cmd_tr(int argc, char args[][CMD_MAX_LEN]) {
