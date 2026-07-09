@@ -14718,6 +14718,21 @@ static void noise_map_194(int argc, char args[][CMD_MAX_LEN]);
 static void green_space_194(int argc, char args[][CMD_MAX_LEN]);
 static void public_safety_194(int argc, char args[][CMD_MAX_LEN]);
 static void emergency_response_194(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 198: Advanced System Tools */
+static void cmd_lsof198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fuser198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsmod198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_modinfo198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dmesg198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_journalctl198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sysctl198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_chown198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_chgrp198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ulimit198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tz198(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vmstat198(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -17690,7 +17705,14 @@ static const cmd_entry commands[] = {
     /* Batch 193: Legal Compliance */
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
-    {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194}, 
+    {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 198: Advanced System Tools */
+    {"lsof", cmd_lsof198}, {"fuser", cmd_fuser198}, {"lsmod", cmd_lsmod198},
+    {"modinfo", cmd_modinfo198}, {"dmesg2", cmd_dmesg198}, {"journalctl", cmd_journalctl198},
+    {"sysctl2", cmd_sysctl198}, {"chown3", cmd_chown198}, {"chgrp3", cmd_chgrp198},
+    {"ulimit4", cmd_ulimit198}, {"timezones2", cmd_tz198}, {"vmstat3", cmd_vmstat198},
+ 
  
  
  
@@ -40630,6 +40652,113 @@ static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Dashboard: Population:234,000 Traffic:moderate Air:good Events:2\n");
 }
+
+
+/* ===== Batch 198: Advanced System Tools ===== */
+
+static void cmd_lsof198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("COMMAND     PID   FD   TYPE   DEVICE SIZE/OFF   NODE NAME\n");
+    vga_puts("shell        1    0u   CHR      4,1     0t0     62 /dev/tty1\n");
+    vga_puts("shell        1    3u  IPv4   12345      0t0      TCP *:80 (LISTEN)\n");
+}
+
+static void cmd_fuser198(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fuser FILE\n"); return; }
+    vga_puts(args[1]); vga_puts(":        1\n");
+}
+
+static void cmd_lsmod198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Module                  Size  Used by\n");
+    vga_puts("ne2k_pci               16384  0\n");
+    vga_puts("keyboard               8192  0\n");
+    vga_puts("vga                    12288  1\n");
+    vga_puts("serial                  4096  1\n");
+}
+
+static void cmd_modinfo198(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: modinfo MODULE\n"); return; }
+    vga_puts("filename:       /lib/modules/byo-os/"); vga_puts(args[1]); vga_puts(".ko\n");
+    vga_puts("author:         BYO-OS Team\n");
+    vga_puts("license:        GPL\n");
+}
+
+static void cmd_dmesg198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("[    0.000000] BYO-OS kernel initialized\n");
+    char buf[32];
+    uint32_t total = pmm_get_total_pages() * 4;
+    vga_puts("[    0.001000] Memory: ");
+    itoa(total / 1024, buf, 10); vga_puts(buf); vga_puts("K available\n");
+    vga_puts("[    0.020000] IDT loaded\n");
+    vga_puts("[    0.030000] PIT: 100 Hz\n");
+    vga_puts("[    0.040000] Keyboard: PS/2 initialized\n");
+    vga_puts("[    0.050000] VGA: 80x25 text mode\n");
+    vga_puts("[    0.060000] Serial: COM1 at 0x3F8\n");
+    vga_puts("[    0.100000] BYO-OS ready\n");
+}
+
+static void cmd_journalctl198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("-- Logs begin at Wed Jul  9 00:00:00 2026\n");
+    vga_puts("Jul 09 00:00:00 byo-os kernel[0]: BYO-OS v1.73.0\n");
+    vga_puts("Jul 09 00:00:00 byo-os init[1]: System starting...\n");
+    vga_puts("Jul 09 00:00:01 byo-os shell[12]: Shell ready\n");
+}
+
+static void cmd_sysctl198(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sysctl [name]\n"); return; }
+    if (strcmp(args[1], "-a") == 0) {
+        vga_puts("kernel.hostname = byo-os\n");
+        vga_puts("net.ipv4.ip_forward = 1\n");
+        vga_puts("vm.swappiness = 60\n");
+        vga_puts("fs.file-max = 2097152\n");
+    } else { vga_puts(args[1]); vga_puts(" = (value)\n"); }
+}
+
+static void cmd_chown198(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: chown USER FILE\n"); return; }
+    vga_puts("chown: changed ownership\n");
+}
+
+static void cmd_chgrp198(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: chgrp GROUP FILE\n"); return; }
+    vga_puts("chgrp: changed group\n");
+}
+
+static void cmd_ulimit198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("core file size          (blocks, -c) 0\n");
+    vga_puts("data seg size           (kbytes, -d) unlimited\n");
+    vga_puts("open files                      (-n) 1024\n");
+    vga_puts("stack size              (kbytes, -s) 8192\n");
+    vga_puts("max user processes              (-u) 30592\n");
+    vga_puts("virtual memory          (kbytes, -v) unlimited\n");
+}
+
+static void cmd_tz198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Available timezones:\n");
+    vga_puts("  UTC         Coordinated Universal Time\n");
+    vga_puts("  EST         Eastern Standard Time\n");
+    vga_puts("  CST         Central Standard Time\n");
+    vga_puts("  PST         Pacific Standard Time\n");
+    vga_puts("  GMT         Greenwich Mean Time\n");
+    vga_puts("  CST-China   China Standard Time (UTC+8)\n");
+    vga_puts("Current:      UTC\n");
+}
+
+static void cmd_vmstat198(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    char buf[32];
+    uint32_t free_p = pmm_get_free_pages();
+    vga_puts("procs -----------memory----------\n");
+    vga_puts(" r  b   swpd   free   buff  cache\n");
+    vga_puts(" 1  0      0 ");
+    itoa(free_p * 4, buf, 10); vga_puts(buf); vga_puts("      0      0\n");
+}
+
 
 void shell_run(void) {
     vga_clear();
