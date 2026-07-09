@@ -14638,6 +14638,48 @@ static void poverty_reduce_188(int argc, char args[][CMD_MAX_LEN]);
 static void equality_index_188(int argc, char args[][CMD_MAX_LEN]);
 static void sustainability_score_188(int argc, char args[][CMD_MAX_LEN]);
 static void social_enterprise_188(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 189: Aerospace Engineering */
+static void aero_simulate_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_wind_tunnel_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_composite_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_thrust_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_drag_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_lift_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_heat_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_struct_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_control_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_propulsion_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_material_189(int argc, char args[][CMD_MAX_LEN]);
+static void aero_test_189(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 190: Food Science + Culinary */
+static void flavor_pair_190(int argc, char args[][CMD_MAX_LEN]);
+static void recipe_scale_190(int argc, char args[][CMD_MAX_LEN]);
+static void sous_vide_190(int argc, char args[][CMD_MAX_LEN]);
+static void ferment_process_190(int argc, char args[][CMD_MAX_LEN]);
+static void nutrition_calc_190(int argc, char args[][CMD_MAX_LEN]);
+static void allergen_check_190(int argc, char args[][CMD_MAX_LEN]);
+static void food_preserve_190(int argc, char args[][CMD_MAX_LEN]);
+static void emulsify_190(int argc, char args[][CMD_MAX_LEN]);
+static void spherify_190(int argc, char args[][CMD_MAX_LEN]);
+static void sous_vide_ctrl_190(int argc, char args[][CMD_MAX_LEN]);
+static void bread_bake_190(int argc, char args[][CMD_MAX_LEN]);
+static void chocolate_temper_190(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 191: Environmental Monitoring */
+static void env_sensor_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_calibrate_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_alert_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_log_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_visualize_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_predict_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_correlate_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_anomaly_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_report_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_compliance_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_audit_191(int argc, char args[][CMD_MAX_LEN]);
+static void env_optimize_191(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17594,7 +17636,14 @@ static const cmd_entry commands[] = {
     /* Batch 187: Climate + Sustainability */
     {"carbon-track", carbon_track_187},     {"carbon-offset", carbon_offset_187},     {"lca-assess", lca_assess_187},     {"green-build", green_build_187},     {"renewable-int", renewable_int_187},     {"circular-econ", circular_econ_187},     {"waste-zero", waste_zero_187},     {"water-footprint", water_footprint_187},     {"biodiversity", biodiversity_187},     {"deforestation", deforestation_187},     {"ocean-health", ocean_health_187},     {"climate-model", climate_model_187}, 
     /* Batch 188: Social Impact */
-    {"ngo-track", ngo_track_188},     {"donor-manage", donor_manage_188},     {"volunteer-coord", volunteer_coord_188},     {"grant-manage", grant_manage_188},     {"impact-measure", impact_measure_188},     {"community-engage", community_engage_188},     {"education-outreach", education_outreach_188},     {"health-program", health_program_188},     {"poverty-reduce", poverty_reduce_188},     {"equality-index", equality_index_188},     {"sustainability-score", sustainability_score_188},     {"social-enterprise", social_enterprise_188}, 
+    {"ngo-track", ngo_track_188},     {"donor-manage", donor_manage_188},     {"volunteer-coord", volunteer_coord_188},     {"grant-manage", grant_manage_188},     {"impact-measure", impact_measure_188},     {"community-engage", community_engage_188},     {"education-outreach", education_outreach_188},     {"health-program", health_program_188},     {"poverty-reduce", poverty_reduce_188},     {"equality-index", equality_index_188},     {"sustainability-score", sustainability_score_188},     {"social-enterprise", social_enterprise_188},
+    /* Batch 189: Aerospace Engineering */
+    {"aero-simulate", aero_simulate_189},     {"aero-wind-tunnel", aero_wind_tunnel_189},     {"aero-composite", aero_composite_189},     {"aero-thrust", aero_thrust_189},     {"aero-drag", aero_drag_189},     {"aero-lift", aero_lift_189},     {"aero-heat", aero_heat_189},     {"aero-struct", aero_struct_189},     {"aero-control", aero_control_189},     {"aero-propulsion", aero_propulsion_189},     {"aero-material", aero_material_189},     {"aero-test", aero_test_189}, 
+    /* Batch 190: Food Science + Culinary */
+    {"flavor-pair", flavor_pair_190},     {"recipe-scale", recipe_scale_190},     {"sous-vide", sous_vide_190},     {"ferment-process", ferment_process_190},     {"nutrition-calc", nutrition_calc_190},     {"allergen-check", allergen_check_190},     {"food-preserve", food_preserve_190},     {"emulsify", emulsify_190},     {"spherify", spherify_190},     {"sous-vide-ctrl", sous_vide_ctrl_190},     {"bread-bake", bread_bake_190},     {"chocolate-temper", chocolate_temper_190}, 
+    /* Batch 191: Environmental Monitoring */
+    {"env-sensor", env_sensor_191},     {"env-calibrate", env_calibrate_191},     {"env-alert", env_alert_191},     {"env-log", env_log_191},     {"env-visualize", env_visualize_191},     {"env-predict", env_predict_191},     {"env-correlate", env_correlate_191},     {"env-anomaly", env_anomaly_191},     {"env-report", env_report_191},     {"env-compliance", env_compliance_191},     {"env-audit", env_audit_191},     {"env-optimize", env_optimize_191}, 
+ 
  
  
  
@@ -40229,6 +40278,157 @@ static void sustainability_score_188(int argc, char args[][CMD_MAX_LEN]) {
 static void social_enterprise_188(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Enterprise: Revenue:$450K Impact:1,247 lives Profit:12%%\n");
+}
+
+
+/* ===== Batch 189: Aerospace Engineering ===== */
+static void aero_simulate_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CFD: Mach:0.85 AoA:2deg Cl:0.45 Cd:0.023 L/D:19.6\n");
+}
+static void aero_wind_tunnel_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tunnel: V:80m/s Re:2.4M Force:L=45N D=2.3N Moment:1.2Nm\n");
+}
+static void aero_composite_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Composite: CF/PEEK Vf:60%% Tensile:1.8GPa Density:1.6g/cm3\n");
+}
+static void aero_thrust_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Thrust: Turbofan:120kN SFC:0.55lb/hr/lb BPR:11:1\n");
+}
+static void aero_drag_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Drag: Wave:12%% Induced:23%% Skin:45%% Base:20%% Cd:0.023\n");
+}
+static void aero_lift_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lift: Cl:0.45 CLmax:1.8 Stall:16deg Wing:36m span\n");
+}
+static void aero_heat_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Heat: T stagnation:340K T surface:89K Heat flux:45kW/m2\n");
+}
+static void aero_struct_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Struct: Wing root moment:1.2MNm Stress:145MPa Safety:2.1x\n");
+}
+static void aero_control_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Control: Pitch:0.5deg/s Roll:2.3deg/s Yaw:0.8deg/s Stability:OK\n");
+}
+static void aero_propulsion_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Propulsion: Engine:CFM56 TSFC:0.34lb/hr/lb BPR:6:1\n");
+}
+static void aero_material_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Material: Ti-6Al-4V Temp:450C Stress:680MPa Fatigue:1e7\n");
+}
+static void aero_test_189(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Test: Static load:1.5x Design Ultimate:2.2x Safety factor:2.1x\n");
+}
+
+/* ===== Batch 190: Food Science + Culinary ===== */
+static void flavor_pair_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Flavor: Tomato+Basil:92%% Chocolate+Chili:87%% Cheese+Apple:81%%\n");
+}
+static void recipe_scale_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Scale: 4->12 servings Multiply:3.0x Flour:750g Sugar:360g\n");
+}
+static void sous_vide_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sous Vide: 56.5C 2h30m Core temp:56.3C Doneness:medium-rare\n");
+}
+static void ferment_process_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ferment: Sourdough Day:3 pH:4.2 Yeast:active Rise:2.5x\n");
+}
+static void nutrition_calc_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Nutrition: Cal:456 Protein:28g Fat:18g Carb:42g Fiber:6g\n");
+}
+static void allergen_check_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Allergens: Gluten:yes Dairy:no Nuts:yes Soy:no Egg:no\n");
+}
+static void food_preserve_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Preserve: Canning:115C 10min Shelf:12mo Vacuum:sealed\n");
+}
+static void emulsify_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Emulsion: Oil:Water:3:1 Emulsifier:lecithin Stability:48h\n");
+}
+static void spherify_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sphere: Alginate:0.5%% Calcium:0.5%% Size:2cm Texture:liquid core\n");
+}
+static void sous_vide_ctrl_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Controller: Set:56.5C Actual:56.3C Diff:0.2C PID:stable\n");
+}
+static void bread_bake_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bread: Proof:2h Bake:220C 35min Internal:96C Crust:golden\n");
+}
+static void chocolate_temper_190(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Temper: Melt:50C Cool:27C Reheat:31C Snap:clean Gloss:high\n");
+}
+
+/* ===== Batch 191: Environmental Monitoring ===== */
+static void env_sensor_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sensor: Temp:24.3C Humidity:65%% PM2.5:12ug CO2:420ppm Noise:58dB\n");
+}
+static void env_calibrate_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Calibrate: Temp:offset+0.2C Humidity:offset-1%% PM2.5:factory OK\n");
+}
+static void env_alert_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Alert: CO2>1000ppm Threshold:exceeded Severity:medium Action:notified\n");
+}
+static void env_log_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Log: 12,847 records 24h 5-min intervals Storage:2.3MB Compressed:450KB\n");
+}
+static void env_visualize_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Visualize: Temp:line PM2.5:bar CO2:area Dashboard:real-time\n");
+}
+static void env_predict_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Predict: Temp tomorrow:26C PM2.5:15ug AQI:48 Model:LSTM\n");
+}
+static void env_correlate_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Correlate: PM2.5-traffic:r=0.78 CO2-occupancy:r=0.85\n");
+}
+static void env_anomaly_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Anomaly: PM2.5 spike at 14:23 Value:89ug Threshold:3x normal\n");
+}
+static void env_report_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Report: Monthly AQI avg:42 Max:89 Days good:28/30\n");
+}
+static void env_compliance_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compliance: EPA:pass EU:pass Local:pass Violations:0\n");
+}
+static void env_audit_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Audit: Sensors:24 Calibrated:22 Due:2 Accuracy:98%%\n");
+}
+static void env_optimize_191(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Optimize: HVAC schedule saved:12%% CO2 ventilation:optimized\n");
 }
 
 void shell_run(void) {
