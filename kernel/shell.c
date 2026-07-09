@@ -2717,6 +2717,473 @@ static void cmd_whois(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: whois <domain>\n"); return; }
     vga_puts(args[1]); vga_puts(": domain info\nRegistrar: BYO\n");
 }
+/* BATCH 14: Advanced Security */
+static void cmd_clamav(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ClamAV: antivirus scanner\n");
+}
+
+static void cmd_aide(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("AIDE: file integrity checker\n");
+}
+
+static void cmd_tripwire(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tripwire: intrusion detection\n");
+}
+
+static void cmd_lynis(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Lynis: security auditing tool\n");
+}
+
+static void cmd_rkhunter(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rkhunter: rootkit detector\n");
+}
+
+static void cmd_chkrootkit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("chkrootkit: rootkit checker\n");
+}
+
+static void cmd_ossec(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OSSEC: host-based IDS\n");
+}
+
+static void cmd_suricata(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Suricata: IDS/IPS engine\n");
+}
+
+static void cmd_snort(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Snort: network intrusion detection\n");
+}
+
+static void cmd_openvas(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenVAS: vulnerability scanner\n");
+}
+
+static void cmd_nessus(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nessus: vulnerability scanner\n");
+}
+
+static void cmd_burpsuite(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Burp Suite: web security testing\n");
+}
+
+static void cmd_owasp_zap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OWASP ZAP: web app security\n");
+}
+
+static void cmd_hydra(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("THC Hydra: password cracker\n");
+}
+
+static void cmd_john(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("John the Ripper: password cracker\n");
+}
+
+static void cmd_hashcat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hashcat: password recovery\n");
+}
+
+static void cmd_ettercap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ettercap: MITM attack tool\n");
+}
+
+static void cmd_bettercap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bettercap: network attack tool\n");
+}
+
+static void cmd_reaver(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Reaver: WPS attack tool\n");
+}
+
+static void cmd_aircrack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("aircrack-ng: WiFi security\n");
+}
+
+static void cmd_wifite(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("wifite: automated WiFi attack\n");
+}
+
+static void cmd_setoolkit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SET: Social Engineering Toolkit\n");
+}
+
+/* BATCH 14: Forensics */
+static void cmd_autopsy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Autopsy: digital forensics\n");
+}
+
+static void cmd_volatility(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Volatility: memory forensics\n");
+}
+
+static void cmd_binwalk(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("binwalk: firmware analysis\n");
+}
+
+static void cmd_foremost(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("foremost: file carving\n");
+}
+
+static void cmd_strings_adv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("strings: extract printable strings\n");
+}
+
+/* BATCH 14: Reverse Engineering */
+static void cmd_ghidra(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ghidra: software reverse engineering\n");
+}
+
+static void cmd_radare2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("radare2: reverse engineering framework\n");
+}
+
+static void cmd_ida(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("IDA Pro: disassembler\n");
+}
+
+static void cmd_hexdump_adv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hexdump: display hex output\n");
+}
+
+/* BATCH 14: Network Advanced Tools */
+static void cmd_zeek(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zeek: network security monitor\n");
+}
+
+static void cmd_wireshark_tshark(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tshark: terminal Wireshark\n");
+}
+
+static void cmd_masscan(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("masscan: fast port scanner\n");
+}
+
+static void cmd_zmap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zmap: network scanner\n");
+}
+
+static void cmd_recon_ng(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("recon-ng: OSINT framework\n");
+}
+
+static void cmd_theHarvester(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("theHarvester: email/domain harvester\n");
+}
+
+static void cmd_sublist3r(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Sublist3r: subdomain enumeration\n");
+}
+
+static void cmd_amass(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Amass: attack surface mapping\n");
+}
+
+static void cmd_dnsrecon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dnsrecon: DNS enumeration\n");
+}
+
+static void cmd_enum4linux(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("enum4linux: Samba enumeration\n");
+}
+
+static void cmd_smbclient(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("smbclient: SMB client\n");
+}
+
+static void cmd_rpcclient(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rpcclient: RPC client\n");
+}
+
+static void cmd_windump(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("windump: packet capture\n");
+}
+
+/* BATCH 14: Database Advanced */
+static void cmd_mariadb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MariaDB 10.11\n");
+}
+
+static void cmd_cassandra(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Cassandra: distributed database\n");
+}
+
+static void cmd_elasticsearch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Elasticsearch 8.0\n");
+}
+
+static void cmd_couchdb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CouchDB: document database\n");
+}
+
+static void cmd_influxdb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("InfluxDB: time series database\n");
+}
+
+static void cmd_neo4j(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Neo4j: graph database\n");
+}
+
+static void cmd_riak(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Riak: distributed database\n");
+}
+
+static void cmd_memcached(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Memcached: memory cache\n");
+}
+
+static void cmd_mongodb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MongoDB 6.0\n");
+}
+
+/* BATCH 14: Messaging */
+static void cmd_rabbitmq(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("RabbitMQ: message broker\n");
+}
+
+static void cmd_kafka(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kafka: event streaming\n");
+}
+
+static void cmd_nats(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NATS: messaging system\n");
+}
+
+static void cmd_redis_server(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Redis 7.0 server\n");
+}
+
+/* BATCH 14: Web Frameworks */
+static void cmd_rails(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ruby on Rails 7.0\n");
+}
+
+static void cmd_django(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Django 4.2\n");
+}
+
+static void cmd_flask(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Flask 3.0\n");
+}
+
+static void cmd_laravel(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Laravel 10.0\n");
+}
+
+static void cmd_spring(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Spring Boot 3.0\n");
+}
+
+static void cmd_express(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Express.js 4.18\n");
+}
+
+static void cmd_nextjs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Next.js 14.0\n");
+}
+
+static void cmd_react(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("React 18.0\n");
+}
+
+static void cmd_vue(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Vue.js 3.3\n");
+}
+
+static void cmd_angular(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Angular 17.0\n");
+}
+
+/* BATCH 14: DevOps */
+static void cmd_grafana_cli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Grafana CLI 10.0\n");
+}
+
+static void cmd_loki(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Loki: log aggregation\n");
+}
+
+static void cmd_tempo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tempo: distributed tracing\n");
+}
+
+static void cmd_mimir(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mimir: metrics backend\n");
+}
+
+static void cmd_alertmanager(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Alertmanager: alert routing\n");
+}
+
+static void cmd_consul(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Consul: service mesh\n");
+}
+
+static void cmd_vault(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Vault: secrets management\n");
+}
+
+static void cmd_nomad(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nomad: workload orchestrator\n");
+}
+
+static void cmd_waypoint(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Waypoint: deployment platform\n");
+}
+
+/* BATCH 14: AI/ML */
+static void cmd_tensorflow(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("TensorFlow 2.15\n");
+}
+
+static void cmd_pytorch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PyTorch 2.1\n");
+}
+
+static void cmd_jupyter(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jupyter Notebook 7.0\n");
+}
+
+static void cmd_scipy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SciPy 1.11\n");
+}
+
+static void cmd_numpy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NumPy 1.25\n");
+}
+
+static void cmd_pandas(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pandas 2.1\n");
+}
+
+static void cmd_matplotlib(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("matplotlib 3.8\n");
+}
+
+static void cmd_sklearn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("scikit-learn 1.3\n");
+}
+
+static void cmd_openai(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenAI API client\n");
+}
+
+static void cmd_ollama(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ollama: local LLM runner\n");
+}
+
+/* BATCH 14: Backup Extended */
+static void cmd_borg_adv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("borg: deduplicating backup\n");
+}
+
+static void cmd_traefik(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Traefik: reverse proxy\n");
+}
+
+static void cmd_caddy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Caddy: web server with HTTPS\n");
+}
+
+static void cmd_envoy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Envoy: edge/service proxy\n");
+}
+
+static void cmd_linkerd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Linkerd: service mesh\n");
+}
+
+static void cmd_istio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Istio: service mesh\n");
+}
+
+/* BATCH 14: Misc Advanced */
+static void cmd_tldr(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tldr <command>\n"); return; }
+    vga_puts(args[1]); vga_puts(": simplified man pages\n");
+}
+
+static void cmd_exa(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("exa: modern ls replacement\n");
+}
+
+static void cmd_bat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bat: cat with syntax highlighting\n");
+}
+
+static void cmd_fzf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fzf: fuzzy finder\n");
+}
+
+static void cmd_ripgrep(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ripgrep: fast grep\n");
+}
+
+static void cmd_fd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fd: fast find\n");
+}
+
+static void cmd_dust(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dust: disk usage\n");
+}
+
+static void cmd_duuf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("duf: disk usage free\n");
+}
+
+static void cmd_httpie(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("HTTPie: friendly HTTP client\n");
+}
+
+static void cmd_yq(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("yq: YAML processor\n");
+}
+
+static void cmd_tokei(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tokei: code statistics\n");
+}
+
+static void cmd_cloc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cloc: count lines of code\n");
+}
+
+static void cmd_hey(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hey: HTTP load generator\n");
+}
+
+static void cmd_wrk(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("wrk: HTTP benchmarking\n");
+}
+
+static void cmd_ab(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ab: Apache benchmark\n");
+}
+
+static void cmd_vegeta(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vegeta: HTTP load testing\n");
+}
+
+static void cmd_k6(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k6: load testing\n");
+}
+
+static void cmd_locust(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Locust: load testing\n");
+}
+
+static void cmd_artillery(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Artillery: load testing\n");
+}
+
+static void cmd_siege(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Siege: HTTP load testing\n");
+}
+
+static void cmd_jmeter(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("JMeter: performance testing\n");
+}
+
+static void cmd_gatling(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Gatling: performance testing\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -2912,6 +3379,49 @@ static const cmd_entry commands[] = {
     /* Batch 13: Network Advanced */
     {"ip", cmd_ip}, {"ip6", cmd_ip6}, {"brctl", cmd_brctl},
     {"socat", cmd_socat}, {"ncat", cmd_ncat}, {"netcat", cmd_netcat}, {"whois", cmd_whois},
+    /* Batch 14: Security Advanced */
+    {"clamav", cmd_clamav}, {"aide", cmd_aide}, {"lynis", cmd_lynis},
+    {"rkhunter", cmd_rkhunter}, {"chkrootkit", cmd_chkrootkit},
+    {"ossec", cmd_ossec}, {"suricata", cmd_suricata}, {"snort", cmd_snort},
+    {"openvas", cmd_openvas}, {"nessus", cmd_nessus},
+    {"hydra", cmd_hydra}, {"john", cmd_john}, {"hashcat", cmd_hashcat},
+    {"ettercap", cmd_ettercap}, {"bettercap", cmd_bettercap},
+    {"aircrack", cmd_aircrack}, {"wifite", cmd_wifite}, {"setoolkit", cmd_setoolkit},
+    /* Batch 14: Forensics */
+    {"autopsy", cmd_autopsy}, {"volatility", cmd_volatility}, {"binwalk", cmd_binwalk}, {"foremost", cmd_foremost},
+    /* Batch 14: Reverse Eng */
+    {"ghidra", cmd_ghidra}, {"radare2", cmd_radare2}, {"ida", cmd_ida},
+    /* Batch 14: Network Tools */
+    {"zeek", cmd_zeek}, {"masscan", cmd_masscan}, {"zmap", cmd_zmap},
+    {"recon-ng", cmd_recon_ng}, {"amass", cmd_amass}, {"dnsrecon", cmd_dnsrecon},
+    {"enum4linux", cmd_enum4linux}, {"smbclient", cmd_smbclient},
+    /* Batch 14: Database Extended */
+    {"mariadb", cmd_mariadb}, {"cassandra", cmd_cassandra}, {"elasticsearch", cmd_elasticsearch},
+    {"couchdb", cmd_couchdb}, {"influxdb", cmd_influxdb}, {"neo4j", cmd_neo4j},
+    {"memcached", cmd_memcached}, {"mongodb", cmd_mongodb},
+    /* Batch 14: Messaging */
+    {"rabbitmq", cmd_rabbitmq}, {"kafka", cmd_kafka}, {"nats", cmd_nats}, {"redis-server", cmd_redis_server},
+    /* Batch 14: Web Frameworks */
+    {"rails", cmd_rails}, {"django", cmd_django}, {"flask", cmd_flask}, {"laravel", cmd_laravel},
+    {"spring", cmd_spring}, {"express", cmd_express}, {"nextjs", cmd_nextjs},
+    {"react", cmd_react}, {"vue", cmd_vue}, {"angular", cmd_angular},
+    /* Batch 14: DevOps */
+    {"loki", cmd_loki}, {"tempo", cmd_tempo}, {"mimir", cmd_mimir}, {"alertmanager", cmd_alertmanager},
+    {"consul", cmd_consul}, {"vault", cmd_vault}, {"nomad", cmd_nomad},
+    {"traefik", cmd_traefik}, {"caddy", cmd_caddy}, {"envoy", cmd_envoy},
+    {"istio", cmd_istio}, {"linkerd", cmd_linkerd},
+    /* Batch 14: AI/ML */
+    {"tensorflow", cmd_tensorflow}, {"pytorch", cmd_pytorch}, {"jupyter", cmd_jupyter},
+    {"scipy", cmd_scipy}, {"numpy", cmd_numpy}, {"pandas", cmd_pandas},
+    {"matplotlib", cmd_matplotlib}, {"sklearn", cmd_sklearn}, {"openai", cmd_openai}, {"ollama", cmd_ollama},
+    /* Batch 14: Modern CLI */
+    {"tldr", cmd_tldr}, {"exa", cmd_exa}, {"bat", cmd_bat}, {"fzf", cmd_fzf},
+    {"rg", cmd_ripgrep}, {"fd", cmd_fd}, {"dust", cmd_dust}, {"duf", cmd_duuf},
+    {"httpie", cmd_httpie}, {"yq", cmd_yq}, {"tokei", cmd_tokei}, {"cloc", cmd_cloc},
+    /* Batch 14: Load Testing */
+    {"hey", cmd_hey}, {"wrk", cmd_wrk}, {"ab", cmd_ab}, {"vegeta", cmd_vegeta},
+    {"k6", cmd_k6}, {"locust", cmd_locust}, {"artillery", cmd_artillery}, {"siege", cmd_siege},
+    {"jmeter", cmd_jmeter}, {"gatling", cmd_gatling},
     {0, 0}
 };
 
