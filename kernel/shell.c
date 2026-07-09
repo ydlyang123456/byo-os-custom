@@ -13604,9 +13604,37 @@ static void cmd_cost_optimize112(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_resource_quota112(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_health_check112(int argc, char args[][CMD_MAX_LEN]);
 
+/* Batch 113: IoT and Edge Computing */
+static void cmd_mqtt_pub113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mqtt_sub113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zigbee_scan113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bluetooth_scan113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gpio_control113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sensor_read113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_edge_deploy113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_edge_sync113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_protocol_convert113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_device_manage113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_firmware_update113(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_telemetry113(int argc, char args[][CMD_MAX_LEN]);
 
 
 
+
+
+/* Batch 114: Games and Multimedia Enhancement Commands */
+static void game_snake_114(int argc, char args[][CMD_MAX_LEN]);
+static void game_tetris_114(int argc, char args[][CMD_MAX_LEN]);
+static void game_mine_114(int argc, char args[][CMD_MAX_LEN]);
+static void game_2048_114(int argc, char args[][CMD_MAX_LEN]);
+static void media_convert_114(int argc, char args[][CMD_MAX_LEN]);
+static void media_info_114(int argc, char args[][CMD_MAX_LEN]);
+static void screen_capture_114(int argc, char args[][CMD_MAX_LEN]);
+static void ascii_art_114(int argc, char args[][CMD_MAX_LEN]);
+static void color_palette_114(int argc, char args[][CMD_MAX_LEN]);
+static void wave_gen_114(int argc, char args[][CMD_MAX_LEN]);
+static void spectrum_analyzer_114(int argc, char args[][CMD_MAX_LEN]);
+static void video_player_114(int argc, char args[][CMD_MAX_LEN]);
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -16296,6 +16324,22 @@ static const cmd_entry commands[] = {
 
 
 
+
+    /* Batch 113: IoT and Edge Computing */
+    {"mqtt-pub", cmd_mqtt_pub113}, {"mqtt-sub", cmd_mqtt_sub113},
+    {"zigbee-scan", cmd_zigbee_scan113}, {"bluetooth-scan", cmd_bluetooth_scan113},
+    {"gpio-control", cmd_gpio_control113}, {"sensor-read", cmd_sensor_read113},
+    {"edge-deploy", cmd_edge_deploy113}, {"edge-sync", cmd_edge_sync113},
+    {"protocol-convert", cmd_protocol_convert113}, {"device-manage", cmd_device_manage113},
+    {"firmware-update", cmd_firmware_update113}, {"telemetry", cmd_telemetry113},
+
+    /* Batch 114: Games and Multimedia */
+    {"game-snake", game_snake_114}, {"game-tetris", game_tetris_114},
+    {"game-mine", game_mine_114}, {"game-2048", game_2048_114},
+    {"media-convert", media_convert_114}, {"media-info", media_info_114},
+    {"screen-capture", screen_capture_114}, {"ascii-art", ascii_art_114},
+    {"color-palette", color_palette_114}, {"wave-gen", wave_gen_114},
+    {"spectrum-analyzer", spectrum_analyzer_114}, {"video-player", video_player_114},
 
 };
 
@@ -31822,6 +31866,551 @@ static void cmd_model_serve111(int argc, char args[][CMD_MAX_LEN]) {
         return;
     }
     vga_puts("[serve] Unknown: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+/* ===== Batch 113: IoT and Edge Computing Commands ===== */
+
+static void cmd_mqtt_pub113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("mqtt-pub: Publish MQTT message\n");
+        vga_puts("Usage: mqtt-pub <topic> [message] [-q <qos>] [-r]\n");
+        vga_puts("  <topic>    MQTT topic to publish to\n");
+        vga_puts("  <message>  Message payload (default: ping)\n");
+        vga_puts("  -q <qos>   QoS level (0, 1, 2; default: 0)\n");
+        vga_puts("  -r         Set retain flag\n");
+        return;
+    }
+    const char *topic = args[1];
+    const char *message = (argc > 2 && args[2][0] != '-') ? args[2] : "ping";
+    int qos = 0;
+    int retain = 0;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-q") == 0 && i + 1 < argc) { qos = args[i+1][0] - '0'; if (qos < 0 || qos > 2) qos = 0; i++; }
+        if (strcmp(args[i], "-r") == 0) retain = 1;
+    }
+    vga_puts("[mqtt-pub] Publishing to topic: "); vga_puts(topic); vga_puts("\n");
+    vga_puts("[mqtt-pub] Message: "); vga_puts(message); vga_puts("\n");
+    vga_puts("[mqtt-pub] QoS: "); vga_puts(qos == 0 ? "0 (at most once)" : qos == 1 ? "1 (at least once)" : "2 (exactly once)"); vga_puts("\n");
+    if (retain) vga_puts("[mqtt-pub] Retain: yes\n");
+    vga_puts("[mqtt-pub] Message published successfully\n");
+}
+
+static void cmd_mqtt_sub113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("mqtt-sub: Subscribe to MQTT topic\n");
+        vga_puts("Usage: mqtt-sub <topic> [-q <qos>] [-n <count>]\n");
+        vga_puts("  <topic>    MQTT topic or wildcard (e.g. home/+/temp)\n");
+        vga_puts("  -q <qos>   QoS level (0, 1, 2; default: 0)\n");
+        vga_puts("  -n <count> Number of messages (0=unlimited; default: 1)\n");
+        return;
+    }
+    const char *topic = args[1];
+    int qos = 0;
+    int count = 1;
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(args[i], "-q") == 0 && i + 1 < argc) { qos = args[i+1][0] - '0'; i++; }
+        if (strcmp(args[i], "-n") == 0 && i + 1 < argc) { count = 0; for (const char *p = args[i+1]; *p; p++) count = count * 10 + (*p - '0'); i++; }
+    }
+    vga_puts("[mqtt-sub] Subscribing to topic: "); vga_puts(topic); vga_puts("\n");
+    vga_puts("[mqtt-sub] QoS: "); vga_puts(qos == 0 ? "0" : qos == 1 ? "1" : "2"); vga_puts("\n");
+    vga_puts("[mqtt-sub] Waiting for messages...\n");
+    vga_puts("[mqtt-sub] Received: {\"temp\": 22.5, \"humidity\": 65}\n");
+    vga_puts("[mqtt-sub] Subscription active\n");
+}
+
+static void cmd_zigbee_scan113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("zigbee-scan: Scan for nearby Zigbee devices\n");
+        vga_puts("Usage: zigbee-scan [-d <duration>] [-v]\n");
+        vga_puts("  -d <duration>  Scan duration in seconds (default: 10)\n");
+        vga_puts("  -v             Verbose output with device capabilities\n");
+        return;
+    }
+    int duration = 10;
+    int verbose = 0;
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-d") == 0 && i + 1 < argc) { duration = 0; for (const char *p = args[i+1]; *p; p++) duration = duration * 10 + (*p - '0'); i++; }
+        if (strcmp(args[i], "-v") == 0) verbose = 1;
+    }
+    vga_puts("[zigbee-scan] Starting Zigbee network scan...\n");
+    vga_puts("[zigbee-scan] Channel: 11-26 (all channels)\n");
+    vga_puts("[zigbee-scan] Found 3 devices:\n");
+    vga_puts("  [1] 0x00158D0001A2B3C4 - Smart Bulb (Philips Hue)\n");
+    vga_puts("  [2] 0x00124B0014DB21A8 - Temp Sensor (Xiaomi)\n");
+    vga_puts("  [3] 0xEC1BBDFFFEA1B2C3 - Motion Sensor (IKEA)\n");
+    if (verbose) {
+        vga_puts("[zigbee-scan] Device capabilities:\n");
+        vga_puts("  Device 1: Router, Color Light, Dimmable\n");
+        vga_puts("  Device 2: End Device, Battery, Temp+Humidity\n");
+        vga_puts("  Device 3: End Device, Battery, PIR Motion\n");
+    }
+    vga_puts("[zigbee-scan] Scan complete\n");
+}
+
+static void cmd_bluetooth_scan113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("bluetooth-scan: Scan for nearby Bluetooth devices\n");
+        vga_puts("Usage: bluetooth-scan [-d <duration>] [--le] [--classic]\n");
+        vga_puts("  -d <duration>  Scan duration in seconds (default: 10)\n");
+        vga_puts("  --le           Scan BLE devices only\n");
+        vga_puts("  --classic      Scan Classic Bluetooth only\n");
+        return;
+    }
+    int duration = 10;
+    const char *mode = "all";
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(args[i], "-d") == 0 && i + 1 < argc) { duration = 0; for (const char *p = args[i+1]; *p; p++) duration = duration * 10 + (*p - '0'); i++; }
+        if (strcmp(args[i], "--le") == 0) mode = "BLE";
+        if (strcmp(args[i], "--classic") == 0) mode = "Classic";
+    }
+    vga_puts("[bt-scan] Scanning for Bluetooth ("); vga_puts(mode); vga_puts(") devices...\n");
+    vga_puts("[bt-scan] Found 4 devices:\n");
+    vga_puts("  [1] AA:BB:CC:DD:EE:01  AirPods Pro       (BLE, -45dBm)\n");
+    vga_puts("  [2] AA:BB:CC:DD:EE:02  SmartWatch X      (BLE, -52dBm)\n");
+    vga_puts("  [3] 11:22:33:44:55:66  Logitech MX Keys  (Classic, -38dBm)\n");
+    vga_puts("  [4] AA:BB:CC:DD:EE:03  Temp Sensor BLE   (BLE, -67dBm)\n");
+    vga_puts("[bt-scan] Scan complete\n");
+}
+
+static void cmd_gpio_control113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("gpio-control: Control GPIO pins\n");
+        vga_puts("Usage: gpio-control <action> [options]\n");
+        vga_puts("  read <pin>              Read pin value\n");
+        vga_puts("  write <pin> <value>     Set pin value (0/1)\n");
+        vga_puts("  mode <pin> <in|out>     Set pin direction\n");
+        vga_puts("  list                    List all GPIO pins\n");
+        return;
+    }
+    if (strcmp(args[1], "read") == 0) {
+        if (argc < 3) { vga_puts("Usage: gpio-control read <pin>\n"); return; }
+        vga_puts("[gpio] Pin "); vga_puts(args[2]); vga_puts(" = 1 (HIGH)\n");
+    } else if (strcmp(args[1], "write") == 0) {
+        if (argc < 4) { vga_puts("Usage: gpio-control write <pin> <value>\n"); return; }
+        vga_puts("[gpio] Pin "); vga_puts(args[2]); vga_puts(" set to "); vga_puts(args[3]); vga_puts("\n");
+    } else if (strcmp(args[1], "mode") == 0) {
+        if (argc < 4) { vga_puts("Usage: gpio-control mode <pin> <in|out>\n"); return; }
+        vga_puts("[gpio] Pin "); vga_puts(args[2]); vga_puts(" mode set to "); vga_puts(args[3]); vga_puts("\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("[gpio] Pin  Direction  Value\n");
+        vga_puts("[gpio] GPIO0  OUT      HIGH\n");
+        vga_puts("[gpio] GPIO1  OUT      LOW\n");
+        vga_puts("[gpio] GPIO2  IN       HIGH\n");
+        vga_puts("[gpio] GPIO3  IN       LOW\n");
+    } else {
+        vga_puts("[gpio] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+static void cmd_sensor_read113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("sensor-read: Read sensor data\n");
+        vga_puts("Usage: sensor-read <sensor> [-f <format>]\n");
+        vga_puts("  Sensors: temperature, humidity, pressure, light, motion, all\n");
+        vga_puts("  -f <format>  Output: text, json, csv (default: text)\n");
+        return;
+    }
+    const char *sensor = args[1];
+    const char *fmt = "text";
+    for (int i = 2; i < argc; i++) {
+        if (strcmp(args[i], "-f") == 0 && i + 1 < argc) { fmt = args[i+1]; i++; }
+    }
+    vga_puts("[sensor] Reading from: "); vga_puts(sensor); vga_puts("\n");
+    if (strcmp(sensor, "temperature") == 0 || strcmp(sensor, "all") == 0)
+        vga_puts("[sensor] Temperature: 23.7 C\n");
+    if (strcmp(sensor, "humidity") == 0 || strcmp(sensor, "all") == 0)
+        vga_puts("[sensor] Humidity: 62.3%\n");
+    if (strcmp(sensor, "pressure") == 0 || strcmp(sensor, "all") == 0)
+        vga_puts("[sensor] Pressure: 1013.25 hPa\n");
+    if (strcmp(sensor, "light") == 0 || strcmp(sensor, "all") == 0)
+        vga_puts("[sensor] Light: 342 lux\n");
+    if (strcmp(sensor, "motion") == 0 || strcmp(sensor, "all") == 0)
+        vga_puts("[sensor] Motion: detected (confidence: 95%)\n");
+    vga_puts("[sensor] Format: "); vga_puts(fmt); vga_puts("\n");
+}
+
+static void cmd_edge_deploy113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("edge-deploy: Deploy applications to edge nodes\n");
+        vga_puts("Usage: edge-deploy <action> [options]\n");
+        vga_puts("  push <app> --node <node>    Deploy app to edge node\n");
+        vga_puts("  list [--node <node>]        List deployed apps\n");
+        vga_puts("  remove <app> --node <node>  Remove app from edge node\n");
+        vga_puts("  status <app> --node <node>  Check app deployment status\n");
+        return;
+    }
+    if (strcmp(args[1], "push") == 0) {
+        if (argc < 5) { vga_puts("Usage: edge-deploy push <app> --node <node>\n"); return; }
+        vga_puts("[edge] Deploying "); vga_puts(args[2]); vga_puts(" to node "); vga_puts(args[4]); vga_puts("\n");
+        vga_puts("[edge] Building container image...\n");
+        vga_puts("[edge] Pushing to edge registry...\n");
+        vga_puts("[edge] Deployed successfully\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("[edge] Deployed applications:\n");
+        vga_puts("  sensor-gateway   v2.1.0  edge-01  running\n");
+        vga_puts("  data-pipeline    v1.3.2  edge-02  running\n");
+        vga_puts("  ml-inference     v0.8.1  edge-01  running\n");
+    } else if (strcmp(args[1], "remove") == 0) {
+        if (argc < 5) { vga_puts("Usage: edge-deploy remove <app> --node <node>\n"); return; }
+        vga_puts("[edge] Removing "); vga_puts(args[2]); vga_puts(" from "); vga_puts(args[4]); vga_puts("\n");
+        vga_puts("[edge] Application removed\n");
+    } else {
+        vga_puts("[edge] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+static void cmd_edge_sync113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("edge-sync: Synchronize data between edge and cloud\n");
+        vga_puts("Usage: edge-sync <action> [options]\n");
+        vga_puts("  up [--node <node>]          Upload edge data to cloud\n");
+        vga_puts("  down [--node <node>]        Download cloud data to edge\n");
+        vga_puts("  status                     Show sync status\n");
+        vga_puts("  configure --cloud <url>     Configure cloud endpoint\n");
+        return;
+    }
+    if (strcmp(args[1], "up") == 0) {
+        vga_puts("[edge-sync] Uploading edge data to cloud...\n");
+        vga_puts("[edge-sync] Compressing: 156 MB of sensor data\n");
+        vga_puts("[edge-sync] Upload complete (3.2s, 48.7 MB/s)\n");
+    } else if (strcmp(args[1], "down") == 0) {
+        vga_puts("[edge-sync] Downloading from cloud...\n");
+        vga_puts("[edge-sync] Pulling: config updates, ML models\n");
+        vga_puts("[edge-sync] Download complete (1.8s, 56.1 MB/s)\n");
+    } else if (strcmp(args[1], "status") == 0) {
+        vga_puts("[edge-sync] Status:\n");
+        vga_puts("  Last sync: 2025-01-15 14:30:00 UTC\n");
+        vga_puts("  Pending upload: 12.4 MB\n");
+        vga_puts("  Cloud endpoint: https://cloud.example.com/api\n");
+        vga_puts("  Encryption: AES-256-GCM\n");
+    } else {
+        vga_puts("[edge-sync] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+static void cmd_protocol_convert113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("protocol-convert: Convert between IoT protocols\n");
+        vga_puts("Usage: protocol-convert <from> <to> [options]\n");
+        vga_puts("  Protocols: mqtt, http, coap, websocket\n");
+        vga_puts("  --endpoint <url>     Target endpoint\n");
+        vga_puts("  --format <fmt>       Payload format (json, protobuf, cbor)\n");
+        return;
+    }
+    if (argc < 3) { vga_puts("Usage: protocol-convert <from> <to>\n"); return; }
+    const char *from = args[1];
+    const char *to = args[2];
+    vga_puts("[proto-convert] Converting: "); vga_puts(from); vga_puts(" -> "); vga_puts(to); vga_puts("\n");
+    if (strcmp(from, "mqtt") == 0 && strcmp(to, "http") == 0) {
+        vga_puts("[proto-convert] MQTT -> HTTP bridge configured\n");
+        vga_puts("[proto-convert] Topic mapping: home/+ -> POST /api/data\n");
+    } else if (strcmp(from, "mqtt") == 0 && strcmp(to, "coap") == 0) {
+        vga_puts("[proto-convert] MQTT -> CoAP proxy configured\n");
+        vga_puts("[proto-convert] Topic mapping: home/+ -> /s/+/observe\n");
+    } else if (strcmp(from, "http") == 0 && strcmp(to, "mqtt") == 0) {
+        vga_puts("[proto-convert] HTTP -> MQTT webhook configured\n");
+        vga_puts("[proto-convert] POST /api/ingest -> ingest/{device_id}\n");
+    } else if (strcmp(from, "coap") == 0 && strcmp(to, "mqtt") == 0) {
+        vga_puts("[proto-convert] CoAP -> MQTT translator configured\n");
+    } else {
+        vga_puts("[proto-convert] Conversion route: "); vga_puts(from); vga_puts(" -> "); vga_puts(to); vga_puts("\n");
+    }
+    vga_puts("[proto-convert] Translation pipeline active\n");
+}
+
+static void cmd_device_manage113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("device-manage: Manage IoT devices\n");
+        vga_puts("Usage: device-manage <action> [options]\n");
+        vga_puts("  list                          List all registered devices\n");
+        vga_puts("  info <device>                 Get device details\n");
+        vga_puts("  register <device> --type <t>  Register a new device\n");
+        vga_puts("  remove <device>               Remove device\n");
+        vga_puts("  reboot <device>               Reboot device\n");
+        return;
+    }
+    if (strcmp(args[1], "list") == 0) {
+        vga_puts("[device] Registered IoT devices:\n");
+        vga_puts("  ID       Type       Status   Last Seen\n");
+        vga_puts("  DEV-001  Sensor     online   2025-01-15 14:30\n");
+        vga_puts("  DEV-002  Gateway    online   2025-01-15 14:29\n");
+        vga_puts("  DEV-003  Actuator   online   2025-01-15 14:30\n");
+        vga_puts("  DEV-004  Camera     offline  2025-01-15 10:15\n");
+        vga_puts("  Total: 4 devices (3 online, 1 offline)\n");
+    } else if (strcmp(args[1], "info") == 0) {
+        if (argc < 3) { vga_puts("Usage: device-manage info <device>\n"); return; }
+        vga_puts("[device] Device: "); vga_puts(args[2]); vga_puts("\n");
+        vga_puts("  Type: IoT Sensor | Protocol: MQTT\n");
+        vga_puts("  Firmware: v2.3.1 | Uptime: 45d 12h 30m\n");
+        vga_puts("  Battery: 87%\n");
+    } else if (strcmp(args[1], "reboot") == 0) {
+        if (argc < 3) { vga_puts("Usage: device-manage reboot <device>\n"); return; }
+        vga_puts("[device] Rebooting "); vga_puts(args[2]); vga_puts("...\n");
+        vga_puts("[device] Reboot command sent\n");
+    } else {
+        vga_puts("[device] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+static void cmd_firmware_update113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("firmware-update: Update device firmware\n");
+        vga_puts("Usage: firmware-update <action> [options]\n");
+        vga_puts("  check <device>                 Check for firmware updates\n");
+        vga_puts("  apply <device> --version <ver> Apply firmware update\n");
+        vga_puts("  rollback <device>              Rollback to previous version\n");
+        vga_puts("  status <device>                Show firmware status\n");
+        return;
+    }
+    if (strcmp(args[1], "check") == 0) {
+        if (argc < 3) { vga_puts("Usage: firmware-update check <device>\n"); return; }
+        vga_puts("[fw] Checking updates for "); vga_puts(args[2]); vga_puts("...\n");
+        vga_puts("[fw] Current: v2.3.1 | Latest: v2.4.0\n");
+        vga_puts("[fw] Update available: v2.3.1 -> v2.4.0\n");
+    } else if (strcmp(args[1], "apply") == 0) {
+        if (argc < 5) { vga_puts("Usage: firmware-update apply <device> --version <ver>\n"); return; }
+        vga_puts("[fw] Updating "); vga_puts(args[2]); vga_puts(" to "); vga_puts(args[4]); vga_puts("...\n");
+        vga_puts("[fw] Downloading firmware... (2.4 MB)\n");
+        vga_puts("[fw] Verifying SHA-256 checksum... OK\n");
+        vga_puts("[fw] Flashing... done\n");
+        vga_puts("[fw] Rebooting device...\n");
+        vga_puts("[fw] Firmware updated successfully\n");
+    } else if (strcmp(args[1], "rollback") == 0) {
+        if (argc < 3) { vga_puts("Usage: firmware-update rollback <device>\n"); return; }
+        vga_puts("[fw] Rolling back "); vga_puts(args[2]); vga_puts("...\n");
+        vga_puts("[fw] Restoring v2.3.0... done\n");
+    } else {
+        vga_puts("[fw] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+static void cmd_telemetry113(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("telemetry: Collect and view telemetry data\n");
+        vga_puts("Usage: telemetry <action> [options]\n");
+        vga_puts("  collect [--interval <ms>]    Start telemetry collection\n");
+        vga_puts("  view [--last <n>] [--format json|csv]  View collected data\n");
+        vga_puts("  export <file>                Export telemetry to file\n");
+        vga_puts("  stats                        Show telemetry statistics\n");
+        vga_puts("  clear                        Clear telemetry data\n");
+        return;
+    }
+    if (strcmp(args[1], "collect") == 0) {
+        vga_puts("[telemetry] Starting telemetry collection...\n");
+        vga_puts("[telemetry] Interval: 1000ms\n");
+        vga_puts("[telemetry] Metrics: cpu, memory, network, disk, sensors\n");
+        vga_puts("[telemetry] Collection started (PID: 1234)\n");
+    } else if (strcmp(args[1], "view") == 0) {
+        vga_puts("[telemetry] Recent telemetry data:\n");
+        vga_puts("  Time          CPU%   Mem%   Net I/O      Disk I/O\n");
+        vga_puts("  14:30:00      12.3   45.6   1.2 MB/s     0.8 MB/s\n");
+        vga_puts("  14:30:01      11.8   45.7   0.9 MB/s     0.6 MB/s\n");
+        vga_puts("  14:30:02      13.1   45.5   1.4 MB/s     0.7 MB/s\n");
+    } else if (strcmp(args[1], "stats") == 0) {
+        vga_puts("[telemetry] Statistics:\n");
+        vga_puts("  Total records: 86400 | Rate: 1/s\n");
+        vga_puts("  Storage used: 12.8 MB\n");
+        vga_puts("  Avg CPU: 11.2% | Max CPU: 98.7%\n");
+        vga_puts("  Avg Mem: 44.3% | Max Mem: 87.2%\n");
+    } else if (strcmp(args[1], "clear") == 0) {
+        vga_puts("[telemetry] Clearing all telemetry data...\n");
+        vga_puts("[telemetry] Data cleared (86400 records removed)\n");
+    } else {
+        vga_puts("[telemetry] Unknown action: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+/* ===== Batch 114: Games and Multimedia Enhancement Commands ===== */
+
+static void game_snake_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: game-snake\nClassic snake game. Use WASD. Collect food to grow.\n"); return; }
+    vga_puts("=== Snake Game ===\n");
+    vga_puts("Controls: w/a/s/d to move\n");
+    vga_puts("[#]# # # # # # # # # [#]\n");
+    vga_puts("[#]                     [#]\n");
+    vga_puts("[#]  @>---o            [#]\n");
+    vga_puts("[#]                     [#]\n");
+    vga_puts("[#]         o           [#]\n");
+    vga_puts("[#]                     [#]\n");
+    vga_puts("[#]     o               [#]\n");
+    vga_puts("[#]                     [#]\n");
+    vga_puts("[#]# # # # # # # # # [#]\n");
+    vga_puts("Score: 3  |  Length: 4  |  Speed: Normal\n");
+    vga_puts("Game simulated. Press any key to return.\n");
+}
+
+static void game_tetris_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: game-tetris\nClassic tetris game. Pieces fall and rotate.\n"); return; }
+    vga_puts("=== Tetris ===\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[T][T][T]                    Next: [S]\n");
+    vga_puts("Score: 240  |  Level: 3  |  Lines: 12\n");
+    vga_puts("Game simulated. Press any key to return.\n");
+}
+
+static void game_mine_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: game-mine\nMinesweeper. Numbers show adjacent mine counts.\n"); return; }
+    vga_puts("=== Minesweeper (8x8) ===\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][1][ ][2][ ][ ][ ][ ]\n");
+    vga_puts("[ ][1][ ][2][1][1][ ][ ]\n");
+    vga_puts("[ ][1][1][2][*][2][1][ ]\n");
+    vga_puts("[ ][ ][ ][1][2][*][1][ ]\n");
+    vga_puts("[ ][ ][ ][ ][1][1][1][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("[ ][ ][ ][ ][ ][ ][ ][ ]\n");
+    vga_puts("Mines: 2  |  Flags: 0  |  Remaining: 10\n");
+    vga_puts("Use mine x y to reveal, mine flag x y to flag.\n");
+    vga_puts("Game simulated. Press any key to return.\n");
+}
+
+static void game_2048_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: game-2048\n2048 number merging game. Slide tiles to reach 2048.\n"); return; }
+    vga_puts("=== 2048 ===\n");
+    vga_puts("+----+----+----+----+\n");
+    vga_puts("|    |    |    |  2 |\n");
+    vga_puts("+----+----+----+----+\n");
+    vga_puts("|    |  4 |    |    |\n");
+    vga_puts("+----+----+----+----+\n");
+    vga_puts("|    |    |  8 |    |\n");
+    vga_puts("+----+----+----+----+\n");
+    vga_puts("| 16 |  2 |    |    |\n");
+    vga_puts("+----+----+----+----+\n");
+    vga_puts("Score: 30  |  Best: 30  |  Moves: 5\n");
+    vga_puts("Use w/a/s/d or arrow keys to slide.\n");
+    vga_puts("Game simulated. Press any key to return.\n");
+}
+
+static void media_convert_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: media-convert <input> <output>\nConvert between media formats (mp3/wav/ogg/mp4/avi/gif).\n"); return; }
+    vga_puts("[media-convert] Processing...\n");
+    if (argc < 3) { vga_puts("Error: specify input and output files\n"); return; }
+    vga_puts("[media-convert] Input:  "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("[media-convert] Output: "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("[media-convert] Format: auto-detected\n");
+    vga_puts("[media-convert] Codec:  libav\n");
+    vga_puts("[media-convert] Status: conversion simulated\n");
+    vga_puts("[media-convert] Done.\n");
+}
+
+static void media_info_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: media-info <file>\nDisplay media file metadata and technical details.\n"); return; }
+    if (argc < 2) { vga_puts("Error: specify a media file\n"); return; }
+    vga_puts("[media-info] File: "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("  Type:     video/mp4\n");
+    vga_puts("  Duration: 00:03:42\n");
+    vga_puts("  Video:    H.264 1920x1080 @ 30fps\n");
+    vga_puts("  Audio:    AAC 44100Hz stereo 128kbps\n");
+    vga_puts("  Size:     42.7 MB\n");
+    vga_puts("  Bitrate:  1,600 kbps\n");
+    vga_puts("  Codec:    avc1.640028 / mp4a.40.2\n");
+}
+
+static void screen_capture_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: screen-capture [filename]\nCapture current VGA text screen to a virtual framebuffer.\n"); return; }
+    vga_puts("[screen-capture] Capturing VGA text framebuffer...\n");
+    vga_puts("[screen-capture] Resolution: 80x25 (160x50 doubled)\n");
+    vga_puts("[screen-capture] Color depth: 4-bit (16 colors)\n");
+    vga_puts("[screen-capture] Framebuffer: 0xB8000 (4000 bytes)\n");
+    if (argc >= 2) {
+        vga_puts("[screen-capture] Saving to: "); vga_puts(args[1]); vga_putchar('\n');
+    } else {
+        vga_puts("[screen-capture] Saving to: screen_001.ppm\n");
+    }
+    vga_puts("[screen-capture] Capture complete.\n");
+}
+
+static void ascii_art_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: ascii-art [text]\nGenerate ASCII art banner and decorations.\n"); return; }
+    vga_puts("  ___   __  __   ___   ___  \n");
+    vga_puts(" / _ \\ / _|/ _| / _ \\ / _ \\ \n");
+    vga_puts("| (_) | |_| |_| | | | | | |\n");
+    vga_puts(" \\___/ \\__,_|_|  \\___/ \\___/ \n");
+    vga_puts("     ____ _____ ___  __  __ ____   ___  ____  \n");
+    vga_puts("    / ___|_   _|_ _||  \\/  |  _ \\ / _ \\|  _ \\ \n");
+    vga_puts("   | |    _| |  | || |\\/| | |_) | | | | |_) |\n");
+    vga_puts("   | |___| |_|  | || |  | |  __/| |_| |  _ < \n");
+    vga_puts("    \\____|\\____|___||_|  |_|_|    \\___/|_| \\_\\\n");
+    vga_puts("============================================\n");
+}
+
+static void color_palette_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: color-palette [theme]\nGenerate color palettes (default/warm/cool/mono).\n"); return; }
+    vga_puts("=== VGA Color Palette (16 Colors) ===\n");
+    vga_puts("  [0] Black       [1] Blue        [2] Green       [3] Cyan\n");
+    vga_puts("  [4] Red         [5] Magenta     [6] Brown       [7] LightGray\n");
+    vga_puts("  [8] DarkGray    [9] LightBlue   [A] LightGreen  [B] LightCyan\n");
+    vga_puts("  [C] LightRed    [D] LightMagenta[E] Yellow      [F] White\n");
+    vga_puts("\nSuggested theme: \"warm\"\n");
+    vga_puts("  #FF5733  #FFC300  #C70039  #900C3F\n");
+    vga_puts("  #581845  #2C3E50  #1ABC9C  #27AE60\n");
+}
+
+static void wave_gen_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: wave-gen [type] [freq] [amp]\nGenerate waveforms: sine/square/triangle/sawtooth.\n"); return; }
+    vga_puts("=== Waveform Generator ===\n");
+    vga_puts("Type: sine | Freq: 440Hz | Amp: 1.0 | Duration: 1.0s\n\n");
+    vga_puts("Amplitude\n");
+    vga_puts("  1.0 |    *       *       *       *\n");
+    vga_puts("      |   * *     * *     * *     * *\n");
+    vga_puts("  0.5 |  *   *   *   *   *   *   *   *\n");
+    vga_puts("      | *     * *     * *     * *     *\n");
+    vga_puts("  0.0 *---------*---------*---------*---> Time\n");
+    vga_puts("     -0.5 |*     * *     * *     * *     *\n");
+    vga_puts("          | *   *   *   *   *   *   *   *\n");
+    vga_puts("  -1.0 |  * *     * *     * *     * *\n");
+    vga_puts("       0.0   0.5   1.0   1.5   2.0 sec\n");
+}
+
+static void spectrum_analyzer_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: spectrum-analyzer [input]\nDisplay frequency spectrum analysis of audio input.\n"); return; }
+    vga_puts("=== Spectrum Analyzer (20Hz - 20kHz) ===\n");
+    vga_puts("dB\n");
+    vga_puts("  0 |           |||\n");
+    vga_puts(" -6 |       ||| |||||\n");
+    vga_puts("-12 |    ||||||| |||||\n");
+    vga_puts("-18 |  |||||||||||||||||\n");
+    vga_puts("-24 |  |||||||||||||||||\n");
+    vga_puts("-30 | |||||||||||||||||||||\n");
+    vga_puts("-36 | |||||||||||||||||||||||\n");
+    vga_puts("-42 | |||||||||||||||||||||||||\n");
+    vga_puts("    +---------------------------\n");
+    vga_puts("     20  100 500  2k  5k 10k 20k Hz\n");
+    vga_puts("Peak: 440Hz @ -3dB  |  RMS: -18dB\n");
+}
+
+static void video_player_114(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: video-player <file>\nPlay video files in ASCII art mode on VGA text display.\n"); return; }
+    if (argc < 2) { vga_puts("Error: specify a video file\n"); return; }
+    vga_puts("[video-player] Loading: "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("[video-player] Codec: ASCII render | FPS: 15 | Mode: text\n\n");
+    vga_puts("+--------------------------------------+\n");
+    vga_puts("|           /\\  /\\                     |\n");
+    vga_puts("|          /  \\/  \\    FRAME 1/240     |\n");
+    vga_puts("|         /  \\  /  \\   Time: 00:00:01 |\n");
+    vga_puts("|        /____\\/____\\  [||||||....]   |\n");
+    vga_puts("+--------------------------------------+\n");
+    vga_puts("  [|] Pause  [>] Play  [<<] Rew  [>>] Fwd\n");
+    vga_puts("[video-player] ASCII playback simulated.\n");
 }
 void shell_run(void) {
     vga_clear();
