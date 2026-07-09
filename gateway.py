@@ -154,11 +154,11 @@ class SerialBridge:
                                 break
                         else:
                             empty_reads += 1
-                            if empty_reads > 3:
+                            if empty_reads > 25:
                                 break
                     except socket.timeout:
                         empty_reads += 1
-                        if empty_reads > 5:
+                        if empty_reads > 25:
                             break
                     except Exception as e:
                         self._log(f"Recv error: {e}")

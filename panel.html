@@ -62,20 +62,20 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   <div class="logo"><h1>BYO-OS</h1><p>Management Panel v13</p></div>
   <nav id="sidebar">
     <div class="sep">Main</div>
-    <a class="nav-link active" data-page="dashboard">&#128202; Dashboard</a>
-    <a class="nav-link" data-page="terminal">&#128187; Terminal</a>
-    <a class="nav-link" data-page="sysinfo">&#9432; System Info</a>
+    <a class="nav-link active" data-page="dashboard" href="#dashboard">&#128202; Dashboard</a>
+    <a class="nav-link" data-page="terminal" href="#terminal">&#128187; Terminal</a>
+    <a class="nav-link" data-page="sysinfo" href="#sysinfo">&#9432; System Info</a>
     <div class="sep">Management</div>
-    <a class="nav-link" data-page="processes">&#128203; Processes</a>
-    <a class="nav-link" data-page="network">&#127760; Network</a>
-    <a class="nav-link" data-page="files">&#128193; Files</a>
-    <a class="nav-link" data-page="users">&#128100; Users</a>
-    <a class="nav-link" data-page="services">&#9881; Services</a>
+    <a class="nav-link" data-page="processes" href="#processes">&#128203; Processes</a>
+    <a class="nav-link" data-page="network" href="#network">&#127760; Network</a>
+    <a class="nav-link" data-page="files" href="#files">&#128193; Files</a>
+    <a class="nav-link" data-page="users" href="#users">&#128100; Users</a>
+    <a class="nav-link" data-page="services" href="#services">&#9881; Services</a>
     <div class="sep">Tools</div>
-    <a class="nav-link" data-page="packages">&#128230; Packages</a>
-    <a class="nav-link" data-page="commands">&#128295; Commands</a>
-    <a class="nav-link" data-page="logs">&#128220; Logs</a>
-    <a class="nav-link" data-page="settings">&#9881; Settings</a>
+    <a class="nav-link" data-page="packages" href="#packages">&#128230; Packages</a>
+    <a class="nav-link" data-page="commands" href="#commands">&#128295; Commands</a>
+    <a class="nav-link" data-page="logs" href="#logs">&#128220; Logs</a>
+    <a class="nav-link" data-page="settings" href="#settings">&#9881; Settings</a>
   </nav>
   <div class="ft">BYO-OS v1.72 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
 </div>
@@ -296,6 +296,13 @@ document.getElementById('sidebar').addEventListener('click', function(e) {
   if (page) nav(page);
 });
 
+
+/* Hash routing */
+function handleHash() {
+  var h = location.hash.replace('#','') || 'dashboard';
+  nav(h);
+}
+window.addEventListener('hashchange', handleHash);
 /* ===== API ===== */
 function api(url, body) {
   var opts = { method: 'GET' };
@@ -502,7 +509,7 @@ function filterCmds() {
 }
 
 /* ===== Init ===== */
-refreshDash();
+handleHash();
 refreshConn();
 setInterval(refreshConn, 15000);
 setInterval(function(){ if(curPage === 'dashboard') refreshDash(); }, 10000);
