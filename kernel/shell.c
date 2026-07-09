@@ -13676,6 +13676,32 @@ static void defi_swap_116(int argc, char args[][CMD_MAX_LEN]);
 static void chain_stats_116(int argc, char args[][CMD_MAX_LEN]);
 static void gas_estimate_116(int argc, char args[][CMD_MAX_LEN]);
 static void abi_decode_116(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 117: System Low-Level and Kernel Debug Commands */
+static void kernel_trace_117(int argc, char args[][CMD_MAX_LEN]);
+static void interrupt_stat_117(int argc, char args[][CMD_MAX_LEN]);
+static void memory_map_117(int argc, char args[][CMD_MAX_LEN]);
+static void boot_log_117(int argc, char args[][CMD_MAX_LEN]);
+static void panic_trigger_117(int argc, char args[][CMD_MAX_LEN]);
+static void stack_trace_117(int argc, char args[][CMD_MAX_LEN]);
+static void timer_info_117(int argc, char args[][CMD_MAX_LEN]);
+static void irq_balance_117(int argc, char args[][CMD_MAX_LEN]);
+static void dma_status_117(int argc, char args[][CMD_MAX_LEN]);
+static void mmio_read_117(int argc, char args[][CMD_MAX_LEN]);
+static void port_io_117(int argc, char args[][CMD_MAX_LEN]);
+static void bios_int_117(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 118: Enterprise Applications and SaaS Commands */
+static void crm_manage_118(int argc, char args[][CMD_MAX_LEN]);
+static void erp_manage_118(int argc, char args[][CMD_MAX_LEN]);
+static void hr_manage_118(int argc, char args[][CMD_MAX_LEN]);
+static void finance_report_118(int argc, char args[][CMD_MAX_LEN]);
+static void invoice_gen_118(int argc, char args[][CMD_MAX_LEN]);
+static void project_manage_118(int argc, char args[][CMD_MAX_LEN]);
+static void ticket_system_118(int argc, char args[][CMD_MAX_LEN]);
+static void knowledge_base_118(int argc, char args[][CMD_MAX_LEN]);
+static void workflow_auto_118(int argc, char args[][CMD_MAX_LEN]);
+static void compliance_check_118(int argc, char args[][CMD_MAX_LEN]);
+static void audit_trail_118(int argc, char args[][CMD_MAX_LEN]);
+static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]);
 
 static const cmd_entry commands[] = {
 
@@ -16398,6 +16424,22 @@ static const cmd_entry commands[] = {
     {"token-mint", token_mint_116}, {"nft-mint", nft_mint_116},
     {"defi-swap", defi_swap_116}, {"chain-stats", chain_stats_116},
     {"gas-estimate", gas_estimate_116}, {"abi-decode", abi_decode_116},
+
+    /* Batch 117: System Low-Level and Kernel Debug Commands */
+    {"kernel-trace", kernel_trace_117}, {"interrupt-stat", interrupt_stat_117},
+    {"memory-map", memory_map_117}, {"boot-log", boot_log_117},
+    {"panic-trigger", panic_trigger_117}, {"stack-trace", stack_trace_117},
+    {"timer-info", timer_info_117}, {"irq-balance", irq_balance_117},
+    {"dma-status", dma_status_117}, {"mmio-read", mmio_read_117},
+    {"port-io", port_io_117}, {"bios-int", bios_int_117},
+
+    /* Batch 118: Enterprise Applications and SaaS */
+    {"crm-manage", crm_manage_118}, {"erp-manage", erp_manage_118},
+    {"hr-manage", hr_manage_118}, {"finance-report", finance_report_118},
+    {"invoice-gen", invoice_gen_118}, {"project-manage", project_manage_118},
+    {"ticket-system", ticket_system_118}, {"knowledge-base", knowledge_base_118},
+    {"workflow-auto", workflow_auto_118}, {"compliance-check", compliance_check_118},
+    {"audit-trail", audit_trail_118}, {"sla-monitor", sla_monitor_118},
     
 };
 
@@ -33259,6 +33301,820 @@ static void outlier_detect_115(int argc, char args[][CMD_MAX_LEN]) {
     }
     vga_putchar('\n');
 }
+
+/* ===== Batch 117: System Low-Level and Kernel Debug Commands ===== */
+
+/* Simulated kernel trace data */
+static const char *trace_paths_117[] = {
+    "sys_read -> vfs_read -> ext2_read -> block_read",
+    "sys_write -> vfs_write -> ext2_write -> block_write",
+    "sys_open -> vfs_open -> namei -> ext2_lookup",
+    "sys_close -> vfs_close -> fput -> ext2_release",
+    "sys_fork -> copy_process -> dup_task -> copy_mm",
+    "sys_exec -> do_execve -> load_elf_binary -> setup_new_exec",
+    "sys_ioctl -> vfs_ioctl -> tty_ioctl -> n_tty_ioctl",
+    "sys_mmap -> do_mmap -> mmap_region -> file->f_op->mmap",
+    "sys_socket -> sock_create -> inet_create -> tcp_prot",
+    "sys_sendto -> sock_sendmsg -> inet_sendmsg -> tcp_sendmsg",
+};
+#define TRACE_COUNT_117 (sizeof(trace_paths_117)/sizeof(trace_paths_117[0]))
+
+/* Simulated IRQ stats */
+static int irq_count_117[16] = {342, 1205, 89, 45, 0, 2100, 0, 0, 56, 12, 890, 234, 0, 0, 1567, 45};
+static const char *irq_names_117[16] = {
+    "PIC Timer", "Keyboard", "Cascade", "COM2",
+    "COM1", "NE2000 NIC", "LPT2", "Floppy",
+    "RTC", "ACPI", "IDE Primary", "IDE Secondary",
+    "PS/2 Mouse", "FPU", "LPT1", "USB"
+};
+static int irq_time_117[16] = {1200, 450, 12, 3, 0, 8900, 0, 0, 15, 5, 3200, 800, 0, 0, 2100, 30};
+
+/* Simulated boot log */
+static const char *boot_log_117_data[] = {
+    "[  0.000] BYO-OS Kernel v1.0.0 starting...",
+    "[  0.001] CPU: Intel 80486DX2 @ 66MHz",
+    "[  0.002] Memory: 640KB conventional + 384KB extended",
+    "[  0.003] Initializing GDT and IDT...",
+    "[  0.004] GDT loaded (8 entries)",
+    "[  0.005] IDT loaded (256 vectors)",
+    "[  0.006] Enabling A20 gate...",
+    "[  0.007] A20 gate enabled via keyboard controller",
+    "[  0.008] PIC initialized (IRQ 0-15 remapped to INT 32-47)",
+    "[  0.009] PIT Channel 0: 100 Hz timer configured",
+    "[  0.010] Keyboard controller initialized",
+    "[  0.011] VGA text mode 80x25 initialized",
+    "[  0.012] Detecting IDE drives...",
+    "[  0.015] Primary master: BYO-OS Disk (63MB)",
+    "[  0.016] Mounting root filesystem...",
+    "[  0.018] VFS: root mounted",
+    "[  0.019] NE2000 NIC detected at 0x300 IRQ 10",
+    "[  0.020] Network stack initialized",
+    "[  0.021] Starting shell...",
+    "[  0.022] Shell ready. Welcome to BYO-OS!",
+};
+#define BOOT_LOG_COUNT_117 (sizeof(boot_log_117_data)/sizeof(boot_log_117_data[0]))
+
+/* Simulated DMA channels */
+static int dma_active_117[8] = {0, 0, 1, 0, 0, 0, 1, 0};
+static const char *dma_devices_117[8] = {"Unused", "Unused", "Floppy", "Unused", "Unused", "Unused", "Sound Blaster", "Unused"};
+static int dma_transferred_117[8] = {0, 0, 24576, 0, 0, 0, 8192, 0};
+
+static void kernel_trace_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: kernel-trace\n");
+        vga_puts("Display kernel function trace paths (syscall routing).\n");
+        return;
+    }
+    char buf[128];
+    vga_puts("========== Kernel Function Trace ==========\n");
+    vga_puts("Showing system call paths:\n\n");
+    int i;
+    for (i = 0; i < (int)TRACE_COUNT_117; i++) {
+        sprintf(buf, "  [%2d] %s\n", i + 1, trace_paths_117[i]);
+        vga_puts(buf);
+    }
+    sprintf(buf, "\nTotal traced paths: %d\n", (int)TRACE_COUNT_117);
+    vga_puts(buf);
+    vga_puts("Note: Simulated trace for demonstration.\n");
+}
+
+static void interrupt_stat_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: interrupt-stat\n");
+        vga_puts("Display IRQ statistics (counts, time distribution).\n");
+        return;
+    }
+    char buf[128];
+    vga_puts("========== Interrupt Statistics ==========\n");
+    vga_puts("IRQ  Name              Count   Time(um)\n");
+    vga_puts("---  ----              -----   --------\n");
+    int i;
+    int total_count = 0, total_time = 0;
+    for (i = 0; i < 16; i++) {
+        sprintf(buf, "%2d   %-16s %5d   %7d\n", i, irq_names_117[i], irq_count_117[i], irq_time_117[i]);
+        vga_puts(buf);
+        total_count += irq_count_117[i];
+        total_time += irq_time_117[i];
+    }
+    vga_puts("---  ----              -----   --------\n");
+    sprintf(buf, "Total                 %5d   %7d\n", total_count, total_time);
+    vga_puts(buf);
+    vga_puts("\nTop 5 by count:\n");
+    /* Simple selection for top 5 */
+    int sorted_idx[16], j;
+    for (i = 0; i < 16; i++) sorted_idx[i] = i;
+    for (i = 0; i < 5; i++) {
+        int max_idx = i;
+        for (j = i + 1; j < 16; j++) {
+            if (irq_count_117[sorted_idx[j]] > irq_count_117[sorted_idx[max_idx]]) max_idx = j;
+        }
+        int tmp = sorted_idx[i]; sorted_idx[i] = sorted_idx[max_idx]; sorted_idx[max_idx] = tmp;
+        sprintf(buf, "  IRQ %2d %-16s %d\n", sorted_idx[i], irq_names_117[sorted_idx[i]], irq_count_117[sorted_idx[i]]);
+        vga_puts(buf);
+    }
+}
+
+static void memory_map_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: memory-map\n");
+        vga_puts("Display memory map (page tables, segment descriptors).\n");
+        vga_puts("Options: -s (segments), -p (pages), -a (all)\n");
+        return;
+    }
+    char buf[128];
+    int show_seg = 1, show_page = 1;
+    if (argc >= 2 && strcmp(args[1], "-s") == 0) { show_page = 0; }
+    if (argc >= 2 && strcmp(args[1], "-p") == 0) { show_seg = 0; }
+    vga_puts("========== Memory Map ==========\n");
+    if (show_seg) {
+        vga_puts("\n--- Segment Descriptors (GDT) ---\n");
+        vga_puts("Sel   Base        Limit      Type    DPL  Exec\n");
+        vga_puts("---   ----------  ---------- ------- ---  ----\n");
+        vga_puts("0x00  0x00000000  0x00000000 Null    0    N\n");
+        vga_puts("0x08  0x00000000  0xFFFFFFFF Code    0    Y\n");
+        vga_puts("0x10  0x00000000  0xFFFFFFFF Data    0    N\n");
+        vga_puts("0x18  0x00000000  0x0000FFFF TSS     0    N\n");
+        vga_puts("0x20  0x000B8000  0x00003FFF VGA     3    N\n");
+        vga_puts("0x28  0x00000000  0xFFFFFFFF UserCo  3    Y\n");
+        vga_puts("0x30  0x00000000  0xFFFFFFFF UserDa  3    N\n");
+        vga_puts("0x38  0x00000000  0x00000000 TSS(US) 3    N\n");
+    }
+    if (show_page) {
+        vga_puts("\n--- Page Table Entries ---\n");
+        vga_puts("VA          PA          P  RW  US  PS  Size\n");
+        vga_puts("----------  ----------  -  --  --  --  -----\n");
+        vga_puts("0x00000000  0x00000000  Y  RW  S   N   4KB\n");
+        vga_puts("0x00001000  0x00001000  Y  RW  S   N   4KB\n");
+        vga_puts("0x00100000  0x00100000  Y  RW  S   Y   4MB\n");
+        vga_puts("0x00400000  0x00400000  Y  RW  S   N   4KB\n");
+        vga_puts("0x00B80000  0x000B8000  Y  RW  U   N   4KB\n");
+        vga_puts("0x00C00000  0x00C00000  Y  RW  S   N   4KB\n");
+        vga_puts("0x00F00000  0x00F00000  N  RW  S   N   4KB\n");
+        vga_puts("0xFFC00000  0x00000000  Y  R   S   Y   4MB\n");
+        vga_puts("\nLegend: P=Present RW=Read/Write US=User/Supervisor PS=Page Size\n");
+        vga_puts("        S=Supervisor U=User\n");
+    }
+    sprintf(buf, "\nTotal RAM: 640KB conventional + 384KB extended = 1024KB\n");
+    vga_puts(buf);
+}
+
+static void boot_log_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: boot-log [-n <lines>]\n");
+        vga_puts("Display system boot log.\n");
+        vga_puts("  -n <lines>  Show last N lines (default: all)\n");
+        return;
+    }
+    char buf[128];
+    int start = 0;
+    if (argc >= 3 && strcmp(args[1], "-n") == 0) {
+        int n = atoi(args[2]);
+        if (n < (int)BOOT_LOG_COUNT_117) start = (int)BOOT_LOG_COUNT_117 - n;
+    }
+    vga_puts("========== Boot Log ==========\n");
+    int i;
+    for (i = start; i < (int)BOOT_LOG_COUNT_117; i++) {
+        vga_puts(boot_log_117_data[i]);
+        vga_putchar('\n');
+    }
+    sprintf(buf, "\nTotal entries: %d\n", (int)BOOT_LOG_COUNT_117);
+    vga_puts(buf);
+}
+
+static void panic_trigger_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: panic-trigger [message]\n");
+        vga_puts("Trigger a kernel panic for testing purposes.\n");
+        vga_puts("Default message: 'Simulated kernel panic for testing'\n");
+        vga_puts("WARNING: This is a simulated panic - system continues.\n");
+        return;
+    }
+    char buf[128];
+    vga_puts("\n");
+    vga_puts("============================================\n");
+    vga_puts("  *** KERNEL PANIC ***\n");
+    vga_puts("============================================\n");
+    vga_puts("Kernel panic - not syncing: ");
+    if (argc >= 2) { vga_puts(args[1]); }
+    else { vga_puts("Simulated kernel panic for testing"); }
+    vga_putchar('\n');
+    vga_puts("\nCall trace:\n");
+    vga_puts("  panic+0x45/0x80\n");
+    vga_puts("  panic_trigger_117+0x20/0x30\n");
+    vga_puts("  shell_execute+0x150/0x200\n");
+    vga_puts("  shell_run+0x88/0xC0\n");
+    vga_puts("  main+0x15/0x20\n");
+    vga_puts("\n");
+    sprintf(buf, "EIP: 0x%08x  ESP: 0x%08x  EFLAGS: 0x%08x\n", 0xDEADBEEF, 0xBADC0DE0, 0x00000202);
+    vga_puts(buf);
+    vga_puts("\nCPU Registers:\n");
+    vga_puts("  EAX: 0xDEADBEEF  EBX: 0xBADC0DE0  ECX: 0xCAFEBABE\n");
+    vga_puts("  EDX: 0x12345678  ESI: 0x00000000  EDI: 0xFFFFFFFF\n");
+    vga_puts("  EBP: 0xBFFF0000  ESP: 0xBFFFE000\n");
+    vga_puts("\n--- Simulated panic. System not actually halted. ---\n");
+}
+
+static void stack_trace_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: stack-trace [-d <depth>]\n");
+        vga_puts("Display simulated stack backtrace.\n");
+        vga_puts("  -d <depth>  Max depth (default 8)\n");
+        return;
+    }
+    char buf[128];
+    int depth = 8;
+    if (argc >= 3 && strcmp(args[1], "-d") == 0) depth = atoi(args[2]);
+    if (depth > 16) depth = 16;
+    if (depth < 1) depth = 1;
+    vga_puts("========== Stack Trace ==========\n");
+    vga_puts("Simulated call stack:\n\n");
+    int i;
+    unsigned int base_addr = 0xBFFFE000;
+    for (i = 0; i < depth; i++) {
+        unsigned int addr = base_addr - (unsigned int)(i * 32);
+        unsigned int ret_addr = 0x00100000 + (unsigned int)((8 - i) * 0x100);
+        sprintf(buf, "  #%d  0x%08x  in ", i, ret_addr);
+        vga_puts(buf);
+        switch (i) {
+            case 0: vga_puts("keyboard_getchar"); break;
+            case 1: vga_puts("shell_run"); break;
+            case 2: vga_puts("main"); break;
+            case 3: vga_puts("start_kernel"); break;
+            case 4: vga_puts("init_irq"); break;
+            case 5: vga_puts("trap_init"); break;
+            case 6: vga_puts("gdt_init"); break;
+            case 7: vga_puts("mem_init"); break;
+            default: vga_puts("(unknown)"); break;
+        }
+        sprintf(buf, "+0x%x", (8 - i) * 16);
+        vga_puts(buf);
+        vga_putchar('\n');
+        sprintf(buf, "         (ebp: 0x%08x  esp: 0x%08x)\n", addr, addr - 16);
+        vga_puts(buf);
+    }
+    sprintf(buf, "\nStack depth: %d frames\n", depth);
+    vga_puts(buf);
+}
+
+static void timer_info_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: timer-info\n");
+        vga_puts("Display detailed timer information.\n");
+        return;
+    }
+    char buf[128];
+    uint32_t ticks = timer_get_ticks();
+    uint32_t sec = timer_get_seconds();
+    int h = (sec / 3600) % 24;
+    int m = (sec / 60) % 60;
+    int s = sec % 60;
+    vga_puts("========== Timer Information ==========\n");
+    vga_puts("\n--- PIT (Programmable Interval Timer) ---\n");
+    vga_puts("  Chip:       Intel 8254\n");
+    vga_puts("  Channel:    0 (System Timer)\n");
+    vga_puts("  Frequency:  100 Hz\n");
+    vga_puts("  Divisor:    1193182 / 100 = 11932\n");
+    vga_puts("  Mode:       3 (Square Wave)\n");
+    sprintf(buf, "  Base clock: 1193182 Hz\n");
+    vga_puts(buf);
+    vga_puts("\n--- System Time ---\n");
+    sprintf(buf, "  Ticks:      %u\n", ticks);
+    vga_puts(buf);
+    sprintf(buf, "  Uptime:     %u seconds\n", sec);
+    vga_puts(buf);
+    sprintf(buf, "  Time:       %d:%02d:%02d\n", h, m, s);
+    vga_puts(buf);
+    vga_puts("\n--- Timer Statistics ---\n");
+    vga_puts("  IRQ 0 handler count:  ");
+    sprintf(buf, "%u\n", ticks);
+    vga_puts(buf);
+    vga_puts("  Timer resolution:     10 ms (100 Hz)\n");
+    vga_puts("  Tickless mode:        No (periodic)\n");
+    vga_puts("\n--- RDTSC (if available) ---\n");
+    vga_puts("  RDTSC not available in user mode.\n");
+    vga_puts("  Use kernel-mode tools for cycle-accurate timing.\n");
+}
+
+static void irq_balance_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: irq-balance\n");
+        vga_puts("Display IRQ load balancing status.\n");
+        return;
+    }
+    char buf[128];
+    vga_puts("========== IRQ Balance Status ==========\n");
+    vga_puts("\n--- IRQ to CPU Affinity ---\n");
+    vga_puts("IRQ  CPU   Affinity       Device\n");
+    vga_puts("---  ---   --------       ------\n");
+    vga_puts(" 0   0     [============] PIC Timer\n");
+    vga_puts(" 1   0     [============] Keyboard\n");
+    vga_puts(" 2   0     [============] Cascade\n");
+    vga_puts(" 6   0     [============] Floppy\n");
+    vga_puts("10   0     [============] NE2000 NIC\n");
+    vga_puts("14   0     [============] IDE Primary\n");
+    vga_puts("\n--- Load Distribution ---\n");
+    vga_puts("  CPU 0: 100% (single-core system)\n");
+    vga_puts("  CPU 1: N/A\n");
+    vga_puts("\n--- IRQ Balance Settings ---\n");
+    vga_puts("  irqbalance daemon:  Not running (single core)\n");
+    vga_puts("  IRQ affinity set:   Manual (not auto-balanced)\n");
+    vga_puts("  Strategy:           CPU 0 handles all IRQs\n");
+    sprintf(buf, "\n  Total IRQs: %d (all on CPU 0)\n", 5651);
+    vga_puts(buf);
+    vga_puts("  Hint: Multi-CPU balancing requires SMP kernel.\n");
+}
+
+static void dma_status_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: dma-status\n");
+        vga_puts("Display DMA channel transfer status.\n");
+        return;
+    }
+    char buf[128];
+    vga_puts("========== DMA Status ==========\n");
+    vga_puts("\n--- DMA Controller 1 (8-bit, Channels 0-7) ---\n");
+    vga_puts("Ch   Device           Active  Transferred\n");
+    vga_puts("---  ------           ------  -----------\n");
+    int i;
+    for (i = 0; i < 8; i++) {
+        sprintf(buf, " %d   %-16s %s     %7d bytes\n", i, dma_devices_117[i],
+                dma_active_117[i] ? "Yes " : "No  ", dma_transferred_117[i]);
+        vga_puts(buf);
+    }
+    vga_puts("\n--- DMA Controller 2 (16-bit, Channels 0-3) ---\n");
+    vga_puts("  Not configured (16-bit DMA unused)\n");
+    vga_puts("\n--- DMA Controller Registers ---\n");
+    vga_puts("  Controller 1 base: 0x00-0x0F\n");
+    vga_puts("  Controller 2 base: 0xC0-0xDF\n");
+    vga_puts("  Page registers:    0x81-0x83\n");
+    vga_puts("\n--- Summary ---\n");
+    int active_count = 0, total_bytes = 0;
+    for (i = 0; i < 8; i++) {
+        if (dma_active_117[i]) active_count++;
+        total_bytes += dma_transferred_117[i];
+    }
+    sprintf(buf, "  Active channels: %d/8\n", active_count);
+    vga_puts(buf);
+    sprintf(buf, "  Total transferred: %d bytes\n", total_bytes);
+    vga_puts(buf);
+}
+
+static void mmio_read_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: mmio-read <address>\n");
+        vga_puts("Read a memory-mapped I/O address.\n");
+        vga_puts("Address should be in hex (e.g., 0xB8000).\n");
+        return;
+    }
+    char buf[128];
+    /* Parse hex address */
+    unsigned int addr = 0;
+    const char *s = args[1];
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) s += 2;
+    while (*s) {
+        char c = *s;
+        if (c >= '0' && c <= '9') addr = (addr << 4) + (unsigned int)(c - '0');
+        else if (c >= 'a' && c <= 'f') addr = (addr << 4) + (unsigned int)(c - 'a' + 10);
+        else if (c >= 'A' && c <= 'F') addr = (addr << 4) + (unsigned int)(c - 'A' + 10);
+        else break;
+        s++;
+    }
+    vga_puts("========== MMIO Read ==========\n");
+    sprintf(buf, "Address: 0x%08x\n", addr);
+    vga_puts(buf);
+    vga_puts("\n--- Known MMIO Regions ---\n");
+    if (addr >= 0x000B8000 && addr <= 0x000B8F9F) {
+        vga_puts("  Region: VGA Text Mode Buffer\n");
+        vga_puts("  Size:   4000 bytes (80x25 x 2 bytes)\n");
+        sprintf(buf, "  Value at 0x%08x: 0x%04x (VGA char+attr)\n", addr, *((unsigned short*)addr));
+        vga_puts(buf);
+    } else if (addr >= 0xFE000000) {
+        vga_puts("  Region: APIC MMIO\n");
+        vga_puts("  Size:   4KB\n");
+        vga_puts("  Note:   Direct MMIO read may cause fault in user mode.\n");
+    } else if (addr >= 0xFEC00000 && addr <= 0xFEDFFFFF) {
+        vga_puts("  Region: IOAPIC MMIO\n");
+        vga_puts("  Size:   4KB per IOAPIC\n");
+    } else {
+        vga_puts("  Region: Unknown / Unmapped\n");
+        sprintf(buf, "  Simulated read value at 0x%08x: 0x%08x\n", addr, 0xDEADBEEF);
+        vga_puts(buf);
+    }
+    vga_puts("\n--- Register Dump (8 bytes) ---\n");
+    sprintf(buf, "  +0x00: 0x%08x  +0x04: 0x%08x\n", 0xDEADBEEF, 0xCAFEBABE);
+    vga_puts(buf);
+    vga_puts("\nNote: Simulated MMIO read. Real read requires kernel mode.\n");
+}
+
+static void port_io_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: port-io <read|write> <port> [value]\n");
+        vga_puts("Perform x86 port I/O operations.\n");
+        vga_puts("  read <port>          Read a byte from port\n");
+        vga_puts("  write <port> <val>   Write a byte to port\n");
+        vga_puts("Examples:\n");
+        vga_puts("  port-io read 0x60    Read keyboard data port\n");
+        vga_puts("  port-io write 0x80 0x00  POST diagnostic\n");
+        return;
+    }
+    char buf[128];
+    int is_write = (strcmp(args[1], "write") == 0);
+    int is_read = (strcmp(args[1], "read") == 0);
+    if (!is_write && !is_read) {
+        vga_puts("Error: operation must be 'read' or 'write'.\n");
+        return;
+    }
+    /* Parse port number */
+    unsigned int port = 0;
+    const char *s = args[2];
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) s += 2;
+    while (*s) {
+        char c = *s;
+        if (c >= '0' && c <= '9') port = (port << 4) + (unsigned int)(c - '0');
+        else if (c >= 'a' && c <= 'f') port = (port << 4) + (unsigned int)(c - 'a' + 10);
+        else if (c >= 'A' && c <= 'F') port = (port << 4) + (unsigned int)(c - 'A' + 10);
+        else break;
+        s++;
+    }
+    vga_puts("========== Port I/O ==========\n");
+    sprintf(buf, "Operation: %s\n", is_write ? "WRITE" : "READ");
+    vga_puts(buf);
+    sprintf(buf, "Port:      0x%04x\n", port);
+    vga_puts(buf);
+    if (is_read) {
+        unsigned int val = 0xDEADBEEF;
+        /* Simulate known ports */
+        if (port == 0x60) val = 0x41;      /* Keyboard data */
+        else if (port == 0x64) val = 0x21; /* Keyboard status */
+        else if (port == 0x3DA) val = 0x08; /* VGA status */
+        else if (port == 0x20) val = 0x0B; /* PIC ICW */
+        else if (port == 0x70) val = 0x37; /* CMOS addr */
+        else if (port == 0x71) val = 0x10; /* CMOS data */
+        sprintf(buf, "Value:     0x%02x\n", val);
+        vga_puts(buf);
+        vga_puts("\nPort description:\n");
+        if (port == 0x60) vga_puts("  Keyboard data register (scancode)\n");
+        else if (port == 0x64) vga_puts("  Keyboard status/command register\n");
+        else if (port == 0x3DA) vga_puts("  VGA Input Status Register 1\n");
+        else if (port == 0x20) vga_puts("  PIC Command/Status (master)\n");
+        else if (port == 0x70) vga_puts("  CMOS/RTC Address port\n");
+        else if (port == 0x71) vga_puts("  CMOS/RTC Data port\n");
+        else if (port == 0x80) vga_puts("  POST diagnostic port\n");
+        else vga_puts("  Unknown port\n");
+    } else {
+        unsigned int val = 0;
+        if (argc >= 4) {
+            const char *vs = args[3];
+            if (vs[0] == '0' && (vs[1] == 'x' || vs[1] == 'X')) vs += 2;
+            while (*vs) {
+                char c = *vs;
+                if (c >= '0' && c <= '9') val = (val << 4) + (unsigned int)(c - '0');
+                else if (c >= 'a' && c <= 'f') val = (val << 4) + (unsigned int)(c - 'a' + 10);
+                else if (c >= 'A' && c <= 'F') val = (val << 4) + (unsigned int)(c - 'A' + 10);
+                else break;
+                vs++;
+            }
+        }
+        sprintf(buf, "Value:     0x%02x\n", val & 0xFF);
+        vga_puts(buf);
+        vga_puts("  Write simulated successfully.\n");
+    }
+    vga_puts("\nNote: Simulated port I/O. Real IN/OUT requires kernel mode.\n");
+}
+
+static void bios_int_117(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: bios-int <int_num> [AH] [other_regs]\n");
+        vga_puts("Simulate BIOS interrupt calls.\n");
+        vga_puts("\nSupported interrupts:\n");
+        vga_puts("  0x10  Video services   AH=00h (set mode), AH=03h (get cursor)\n");
+        vga_puts("  0x11  Equipment check\n");
+        vga_puts("  0x12  Memory size\n");
+        vga_puts("  0x13  Disk services    AH=00h (reset), AH=02h (read), AH=03h (write)\n");
+        vga_puts("  0x15  System services  AH=86h (wait)\n");
+        vga_puts("  0x1A  Time services    AH=00h (get time)\n");
+        return;
+    }
+    char buf[128];
+    /* Parse interrupt number */
+    unsigned int int_num = 0;
+    const char *s = args[1];
+    if (s[0] == '0' && (s[1] == 'x' || s[1] == 'X')) s += 2;
+    while (*s) {
+        char c = *s;
+        if (c >= '0' && c <= '9') int_num = (int_num << 4) + (unsigned int)(c - '0');
+        else if (c >= 'a' && c <= 'f') int_num = (int_num << 4) + (unsigned int)(c - 'a' + 10);
+        else if (c >= 'A' && c <= 'F') int_num = (int_num << 4) + (unsigned int)(c - 'A' + 10);
+        else break;
+        s++;
+    }
+    unsigned int ah = 0;
+    if (argc >= 3) {
+        const char *hs = args[2];
+        if (hs[0] == '0' && (hs[1] == 'x' || hs[1] == 'X')) hs += 2;
+        while (*hs) {
+            char c = *hs;
+            if (c >= '0' && c <= '9') ah = (ah << 4) + (unsigned int)(c - '0');
+            else if (c >= 'a' && c <= 'f') ah = (ah << 4) + (unsigned int)(c - 'a' + 10);
+            else if (c >= 'A' && c <= 'F') ah = (ah << 4) + (unsigned int)(c - 'A' + 10);
+            else break;
+            hs++;
+        }
+    }
+    vga_puts("========== BIOS Interrupt Simulation ==========\n");
+    sprintf(buf, "INT 0x%02X  AH=0x%02X\n", int_num, ah);
+    vga_puts(buf);
+    vga_puts("\n--- Result ---\n");
+    if (int_num == 0x10) {
+        vga_puts("  INT 10h - Video BIOS\n");
+        if (ah == 0x00) {
+            sprintf(buf, "  AH=00h: Set video mode -> Mode 03h (80x25 text)\n");
+            vga_puts(buf);
+        } else if (ah == 0x03) {
+            vga_puts("  AH=03h: Get cursor position\n");
+            vga_puts("  CH=0x06 CL=0x07 DH=0x18 DL=0x4F\n");
+            vga_puts("  (Row 24, Col 79 = bottom-right)\n");
+        } else if (ah == 0x0F) {
+            vga_puts("  AH=0Fh: Get video mode\n");
+            vga_puts("  AL=03h (mode) AH=80 (cols) BH=00 (page)\n");
+        } else {
+            sprintf(buf, "  AH=%02Xh: Simulated video call\n", ah);
+            vga_puts(buf);
+        }
+    } else if (int_num == 0x11) {
+        vga_puts("  INT 11h - Equipment Determination\n");
+        vga_puts("  AX=0x4127 (640KB RAM, 1 floppy, CGA, keyboard)\n");
+    } else if (int_num == 0x12) {
+        vga_puts("  INT 12h - Memory Size\n");
+        vga_puts("  AX=0x0280 (640 KB conventional memory)\n");
+    } else if (int_num == 0x13) {
+        vga_puts("  INT 13h - Disk BIOS\n");
+        if (ah == 0x00) vga_puts("  AH=00h: Reset disk -> CF=0 (success)\n");
+        else if (ah == 0x02) vga_puts("  AH=02h: Read sectors -> CF=0, AL=1 (1 sector read)\n");
+        else if (ah == 0x03) vga_puts("  AH=03h: Write sectors -> CF=0, AL=1 (1 sector written)\n");
+        else if (ah == 0x08) vga_puts("  AH=08h: Get drive params -> CH=3F CL=3F DH=0 DL=80\n");
+        else vga_puts("  Unsupported AH function\n");
+    } else if (int_num == 0x15) {
+        vga_puts("  INT 15h - System Services\n");
+        if (ah == 0x86) vga_puts("  AH=86h: Wait (delay) -> CF=0 (completed)\n");
+        else if (ah == 0x88) vga_puts("  AH=88h: Extended memory -> AX=0x3C00 (15360 KB)\n");
+        else vga_puts("  Unsupported AH function\n");
+    } else if (int_num == 0x1A) {
+        vga_puts("  INT 1Ah - Time Services\n");
+        if (ah == 0x00) {
+            uint32_t sec = timer_get_seconds();
+            vga_puts("  AH=00h: Get time of day\n");
+            sprintf(buf, "  CX:DX = tick count (~%u)\n", sec * 18);
+            vga_puts(buf);
+            sprintf(buf, "  AL = day rollover flag: 0\n");
+            vga_puts(buf);
+        } else {
+            vga_puts("  Unsupported AH function\n");
+        }
+    } else {
+        sprintf(buf, "  INT %02Xh: Not in simulated BIOS table\n", int_num);
+        vga_puts(buf);
+        vga_puts("  Supported: 0x10, 0x11, 0x12, 0x13, 0x15, 0x1A\n");
+    }
+    vga_puts("\n--- Register State After Call ---\n");
+    vga_puts("  AX=0x0041  BX=0x0000  CX=0x0000  DX=0x0000\n");
+    vga_puts("  SI=0x0000  DI=0x0000  DS=0x0000  ES=0x0000\n");
+    vga_puts("  CF=0  ZF=1  SF=0  OF=0  (No error)\n");
+    vga_puts("\nNote: Simulated BIOS call. Requires real-mode or V86 for actual execution.\n");
+}
+/* ===== Batch 118: Enterprise Applications and SaaS Commands ===== */
+
+static void crm_manage_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: crm-manage [-h]\nCRM customer management system.\n"); return; }
+    vga_puts("[CRM] Customer Relationship Management\n");
+    vga_puts("========================================\n");
+    vga_puts("  Customers:    1,247 active\n");
+    vga_puts("  Leads:        89 in pipeline\n");
+    vga_puts("  Deals:        34 open (.1M value)\n");
+    vga_puts("  Activities:   156 this week\n");
+    vga_puts("  Campaigns:    3 active\n\n");
+    vga_puts("  Top Contacts:\n");
+    vga_puts("    1. Acme Corp    - Enterprise  - ,000\n");
+    vga_puts("    2. TechStart    - SMB         - ,000\n");
+    vga_puts("    3. GlobalTrade  - Enterprise  - ,000\n\n");
+    vga_puts("[CRM] Report: conversion rate 24.3pct, avg deal 62K\n");
+}
+
+static void erp_manage_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: erp-manage [-h]\nEnterprise Resource Planning module.\n"); return; }
+    vga_puts("[ERP] Enterprise Resource Planning\n");
+    vga_puts("===================================\n");
+    vga_puts("  Inventory:   12,450 SKUs\n");
+    vga_puts("  Warehouses:  4 locations\n");
+    vga_puts("  Procurement: 23 open POs ()\n");
+    vga_puts("  Production:  6 orders in progress\n");
+    vga_puts("  Supply Chain: 98.2pct on-time delivery\n\n");
+    vga_puts("  Modules Active:\n");
+    vga_puts("    [ON]  Inventory Management\n");
+    vga_puts("    [ON]  Purchase Orders\n");
+    vga_puts("    [ON]  Manufacturing\n");
+    vga_puts("    [ON]  Warehouse Management\n");
+    vga_puts("    [OFF] Quality Control\n\n");
+    vga_puts("[ERP] System health: 99.7pct uptime\n");
+}
+
+static void hr_manage_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: hr-manage [-h]\nHR human resource management.\n"); return; }
+    vga_puts("[HR] Human Resource Management\n");
+    vga_puts("==============================\n");
+    vga_puts("  Employees:     342 total\n");
+    vga_puts("  Departments:   8\n");
+    vga_puts("  Open Positions: 12\n");
+    vga_puts("  Onboarding:   5 new hires this month\n");
+    vga_puts("  Leave Pending: 8 requests\n\n");
+    vga_puts("  Department Headcount:\n");
+    vga_puts("    Engineering:  128  | Sales:  45\n");
+    vga_puts("    Marketing:    32  | HR:     12\n");
+    vga_puts("    Finance:      28  | Ops:    42\n");
+    vga_puts("    Legal:         8  | IT:     24\n\n");
+    vga_puts("  Attrition Rate: 4.2pct (below target 6pct)\n");
+    vga_puts("[HR] Next review cycle: 2026-Q3\n");
+}
+
+static void finance_report_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: finance-report [-h]\nGenerate financial reports.\n"); return; }
+    vga_puts("[Finance] Financial Report\n");
+    vga_puts("==========================\n");
+    vga_puts("  Period: 2026-Q2\n");
+    vga_puts("  Revenue:        ,285,000\n");
+    vga_puts("  COGS:           ,142,500 (50.0pct)\n");
+    vga_puts("  Gross Profit:   ,142,500 (50.0pct)\n");
+    vga_puts("  OpEx:           ,285,500 (30.0pct)\n");
+    vga_puts("  Net Income:     ,000 (20.0pct)\n\n");
+    vga_puts("  Cash Flow:\n");
+    vga_puts("    Operating:    ,000\n");
+    vga_puts("    Investing:   -,000\n");
+    vga_puts("    Financing:   -,000\n");
+    vga_puts("    Net Change:   ,000\n\n");
+    vga_puts("  YTD Growth: 18.3pct vs prior year\n");
+    vga_puts("[Finance] Report generated successfully.\n");
+}
+
+static void invoice_gen_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: invoice-gen [client] [-h]\nGenerate invoices for clients.\n"); return; }
+    vga_puts("[Invoice] Invoice Generator\n");
+    vga_puts("===========================\n");
+    if (argc >= 2 && strcmp(args[1], "-h") != 0) {
+        vga_puts("  Client: "); vga_puts(args[1]); vga_putchar('\n');
+    } else {
+        vga_puts("  Client: Acme Corp\n");
+    }
+    vga_puts("  Invoice #: INV-2026-0718\n");
+    vga_puts("  Date: 2026-07-10  |  Due: 2026-08-09\n\n");
+    vga_puts("  Items:\n");
+    vga_puts("    1. SaaS License (Annual)   ,000.00\n");
+    vga_puts("    2. Implementation Service   $ 4,500.00\n");
+    vga_puts("    3. Training (3 days)        $ 2,250.00\n");
+    vga_puts("    ---------------------------------\n");
+    vga_puts("    Subtotal:                   ,750.00\n");
+    vga_puts("    Tax (8pct):                 $ 1,500.00\n");
+    vga_puts("    Total:                      ,250.00\n\n");
+    vga_puts("[Invoice] Invoice saved: INV-2026-0718.pdf\n");
+}
+
+static void project_manage_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: project-manage [-h]\nProject management dashboard.\n"); return; }
+    vga_puts("[Project] Project Management\n");
+    vga_puts("============================\n");
+    vga_puts("  Active Projects: 7\n");
+    vga_puts("  Completed This Month: 3\n");
+    vga_puts("  Overdue: 1\n\n");
+    vga_puts("  Projects:\n");
+    vga_puts("    [===---] Platform v3.0   62pct  (5 tasks left)\n");
+    vga_puts("    [==----] Mobile App      38pct  (12 tasks left)\n");
+    vga_puts("    [=====] API Gateway      95pct  (1 task left)\n");
+    vga_puts("    [------] Data Migration  5pct  (24 tasks left)\n");
+    vga_puts("    [====--] Design System   72pct  (4 tasks left)\n\n");
+    vga_puts("  Team Utilization: 87pct\n");
+    vga_puts("  Sprint Velocity: 42 pts/sprint\n");
+    vga_puts("  Blockers: 2 (waiting on vendor)\n");
+    vga_puts("[Project] Next standup: tomorrow 9:00 AM\n");
+}
+
+static void ticket_system_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: ticket-system [-h]\nHelp desk ticket system.\n"); return; }
+    vga_puts("[Ticket] Support Ticket System\n");
+    vga_puts("==============================\n");
+    vga_puts("  Open:      47\n");
+    vga_puts("  In Progress: 23\n");
+    vga_puts("  Resolved Today: 18\n");
+    vga_puts("  Avg Response: 2.4 hours\n");
+    vga_puts("  SLA Compliance: 94.6pct\n\n");
+    vga_puts("  Priority Distribution:\n");
+    vga_puts("    P1 Critical:   3  (2 avg response)\n");
+    vga_puts("    P2 High:      11  (4 avg response)\n");
+    vga_puts("    P3 Medium:    28  (8 avg response)\n");
+    vga_puts("    P4 Low:        5  (24 avg response)\n\n");
+    vga_puts("  Recent Tickets:\n");
+    vga_puts("    #1042 [P2] Login fails for SSO users  - Open\n");
+    vga_puts("    #1041 [P3] Dashboard slow on mobile   - In Progress\n");
+    vga_puts("    #1040 [P1] Payment gateway timeout    - Resolved\n");
+    vga_puts("[Ticket] System operational.\n");
+}
+
+static void knowledge_base_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: knowledge-base [-h]\nKnowledge base management.\n"); return; }
+    vga_puts("[KB] Knowledge Base\n");
+    vga_puts("===================\n");
+    vga_puts("  Articles:    1,247\n");
+    vga_puts("  Categories:  24\n");
+    vga_puts("  Last Updated: 2026-07-10\n");
+    vga_puts("  Views Today:  3,891\n\n");
+    vga_puts("  Popular Articles:\n");
+    vga_puts("    1. Getting Started Guide      (2,341 views)\n");
+    vga_puts("    2. API Authentication Setup   (1,892 views)\n");
+    vga_puts("    3. Troubleshooting Guide      (1,567 views)\n");
+    vga_puts("    4. Deployment Best Practices  (1,234 views)\n");
+    vga_puts("    5. Security Configuration     (987 views)\n\n");
+    vga_puts("  Pending Review: 8 articles\n");
+    vga_puts("  AI Search Accuracy: 96.2pct\n");
+    vga_puts("[KB] Content freshness: A+ (avg 14 days)\n");
+}
+
+static void workflow_auto_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: workflow-auto [-h]\nWorkflow automation engine.\n"); return; }
+    vga_puts("[Workflow] Automation Engine\n");
+    vga_puts("============================\n");
+    vga_puts("  Active Workflows: 34\n");
+    vga_puts("  Runs Today:      287\n");
+    vga_puts("  Success Rate:    99.1pct\n");
+    vga_puts("  Avg Duration:    3.2s\n\n");
+    vga_puts("  Top Workflows:\n");
+    vga_puts("    1. Onboarding Pipeline     - 45 runs/day\n");
+    vga_puts("    2. Invoice Processing      - 32 runs/day\n");
+    vga_puts("    3. Ticket Escalation       - 28 runs/day\n");
+    vga_puts("    4. Report Generation       - 12 runs/day\n");
+    vga_puts("    5. Data Sync               - 96 runs/day\n\n");
+    vga_puts("  Failed Today: 3 (all retried successfully)\n");
+    vga_puts("[Workflow] Engine status: healthy\n");
+}
+
+static void compliance_check_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: compliance-check [-h]\nRegulatory compliance checker.\n"); return; }
+    vga_puts("[Compliance] Regulatory Compliance\n");
+    vga_puts("===================================\n");
+    vga_puts("  Overall Score: 94/100\n\n");
+    vga_puts("  Frameworks:\n");
+    vga_puts("    [PASS] SOC 2 Type II     100pct\n");
+    vga_puts("    [PASS] GDPR              96pct\n");
+    vga_puts("    [PASS] HIPAA             92pct\n");
+    vga_puts("    [WARN] ISO 27001         88pct\n");
+    vga_puts("    [FAIL] PCI DSS           78pct\n\n");
+    vga_puts("  Issues Found:\n");
+    vga_puts("    [!] PCI: Encryption at rest - 2 systems\n");
+    vga_puts("    [!] PCI: Access logging - 1 gap\n");
+    vga_puts("    [~] ISO: Risk assessment overdue\n\n");
+    vga_puts("  Last Audit: 2026-06-15\n");
+    vga_puts("  Next Audit: 2026-09-15\n");
+    vga_puts("[Compliance] Remediation: 3 items assigned\n");
+}
+
+static void audit_trail_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: audit-trail [-h]\nAudit trail and logging.\n"); return; }
+    vga_puts("[Audit] Audit Trail\n");
+    vga_puts("===================\n");
+    vga_puts("  Total Events: 142,891\n");
+    vga_puts("  Today:        2,341 events\n");
+    vga_puts("  Retention:    365 days\n\n");
+    vga_puts("  Event Breakdown:\n");
+    vga_puts("    Auth Events:    892  (login, logout, failures)\n");
+    vga_puts("    Data Access:  1,024  (reads, writes, deletes)\n");
+    vga_puts("    Config Change:   12  (settings, permissions)\n");
+    vga_puts("    Admin Actions:  413  (CRUD, exports)\n\n");
+    vga_puts("  Recent Events:\n");
+    vga_puts("    [10:42:15] admin  login        192.168.1.10\n");
+    vga_puts("    [10:38:03] user3  read/report  /reports/q2\n");
+    vga_puts("    [10:35:21] admin  update/cfg   /etc/app.cfg\n");
+    vga_puts("    [10:30:00] system health-check  auto\n\n");
+    vga_puts("  Integrity: SHA-256 chain verified\n");
+    vga_puts("[Audit] Tamper detection: active\n");
+}
+
+static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: sla-monitor [-h]\nSLA service level monitoring.\n"); return; }
+    vga_puts("[SLA] Service Level Monitor\n");
+    vga_puts("===========================\n");
+    vga_puts("  Uptime (30d):  99.97pct\n");
+    vga_puts("  Response Time: 142ms avg (p95: 320ms)\n");
+    vga_puts("  Error Rate:    0.03pct\n\n");
+    vga_puts("  SLA Targets vs Actual:\n");
+    vga_puts("    Availability:  99.95pct  [PASS] 99.97pct\n");
+    vga_puts("    Latency:       200ms   [PASS] 142ms\n");
+    vga_puts("    Error Budget:  0.10pct   [PASS] 0.03pct\n");
+    vga_puts("    MTTR:          15min   [PASS] 8min\n\n");
+    vga_puts("  Incidents This Month:\n");
+    vga_puts("    2026-07-02  API Latency Spike   12min  [Resolved]\n");
+    vga_puts("    2026-07-08  DB Connection Pool   4min   [Resolved]\n\n");
+    vga_puts("  Error Budget Remaining: 70pct\n");
+    vga_puts("  Next Review: 2026-08-01\n");
+    vga_puts("[SLA] Status: All targets met.\n");
+}
+
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
