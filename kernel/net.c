@@ -554,3 +554,9 @@ void net_poll(void) {
 
 
 
+
+/* Get TCP connection info for netstat */
+int net_get_tcp_conn_count(void) { int c = 0; for (int i = 0; i < 4; i++) { if (tcp_connections[i].state != TCP_CLOSED) c++; } return c; }
+
+void net_get_tcp_conn_info(int idx, uint16_t *lport, uint16_t *rport, uint32_t *rip, int *state) { if (idx < 0 || idx >= 4) return; *lport = tcp_connections[idx].local_port; *rport = tcp_connections[idx].remote_port; *rip = tcp_connections[idx].remote_ip; *state = (int)tcp_connections[idx].state; }
+

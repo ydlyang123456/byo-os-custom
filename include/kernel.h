@@ -211,6 +211,8 @@ void net_poll(void);
 void net_get_ip_str(char* buf);
 uint32_t net_get_ip(void);
 uint8_t* net_get_mac(void);
+int net_get_tcp_conn_count(void);
+void net_get_tcp_conn_info(int idx, uint16_t *lport, uint16_t *rport, uint32_t *rip, int *state);
 
 /* ===== User Permissions ===== */
 typedef enum { USER_GUEST=0, USER_USER=1, USER_ADMIN=2, USER_ROOT=3 } user_level_t;

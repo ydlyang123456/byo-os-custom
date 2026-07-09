@@ -15,6 +15,9 @@
 #define FILE_BUF_SIZE 8192
 #define INPUT_BUF_SIZE 256
 
+/* Working directory */
+static char cwd[256] = "/";
+
 /* ===== Global State ===== */
 static int serial_mode = 0;
 static char history[MAX_HISTORY][CMD_MAX_LEN];
@@ -109,10 +112,42 @@ static void cmd_clear(int argc, char args[][CMD_MAX_LEN]) {
     vga_clear();
 }
 
+static void resolve_env_var(const char *name, char *out, int outsize) {
+    for (int i = 0; i < env_count; i++) {
+        if (strcmp(env_names[i], name) == 0) {
+            strncpy(out, env_vals[i], outsize - 1);
+            out[outsize - 1] = 0;
+            return;
+        }
+    }
+    out[0] = 0;
+}
+
 static void cmd_echo(int argc, char args[][CMD_MAX_LEN]) {
     for (int i = 1; i < argc; i++) {
         if (i > 1) vga_putchar(' ');
-        vga_puts(args[i]);
+        const char *arg = args[i];
+        while (*arg) {
+            if (*arg == '$') {
+                arg++;
+                char vname[64];
+                int vi = 0;
+                if (*arg == '{') {
+                    arg++;
+                    while (*arg && *arg != '}' && vi < 63) vname[vi++] = *arg++;
+                    if (*arg == '}') arg++;
+                } else {
+                    while (*arg && *arg != ' ' && *arg != '\n' && vi < 63) vname[vi++] = *arg++;
+                }
+                vname[vi] = 0;
+                char vval[256];
+                resolve_env_var(vname, vval, 256);
+                vga_puts(vval);
+            } else {
+                vga_putchar(*arg);
+                arg++;
+            }
+        }
     }
     vga_putchar('\n');
 }
@@ -1131,6 +1166,23 @@ static void cmd_tr_fn(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("' to '"); vga_putchar(args[2][0]); vga_puts("'\n");
     vga_puts("(pipe input required)\n");
 }
+static void cmd_cd(int argc, char args[][CMD_MAX_LEN]) {
+    const char *target = "/";
+    if (argc > 1) target = args[1];
+    if (strcmp(target, "~") == 0) {
+        char home[256];
+        resolve_env_var("HOME", home, 256);
+        if (home[0]) target = home;
+    }
+    strncpy(cwd, target, 255);
+    cwd[255] = 0;
+}
+
+static void cmd_pwd(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts(cwd); vga_putchar('\n');
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -1274,7 +1326,34 @@ static void cmd_taskset(int argc, char args[][CMD_MAX_LEN]){vga_puts("affinity: 
 
 static void cmd_netstat(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Proto Recv-Q Send-Q Local Address           Foreign Address         State\n");
-    vga_puts("tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN\n");
+    /* Show listening port */
+    char ip[32]; net_get_ip_str(ip);
+    vga_puts("tcp        0      0 "); vga_puts(ip); vga_puts(":80              0.0.0.0:*               LISTEN\n");
+    /* Show real TCP connections */
+    int nc = net_get_tcp_conn_count();
+    for (int i = 0; i < nc; i++) {
+        uint16_t lp, rp; uint32_t rip; int st;
+        net_get_tcp_conn_info(i, &lp, &rp, &rip, &st);
+        char lip[32], rip_s[32], lp_s[8], rp_s[8];
+        net_get_ip_str(lip);
+        /* Convert remote IP to string */
+        itoa((rip >> 24) & 0xFF, rip_s, 10); strcat(rip_s, ".");
+        char t[8];
+        itoa((rip >> 16) & 0xFF, t, 10); strcat(rip_s, t); strcat(rip_s, ".");
+        itoa((rip >> 8) & 0xFF, t, 10); strcat(rip_s, t); strcat(rip_s, ".");
+        itoa(rip & 0xFF, t, 10); strcat(rip_s, t);
+        itoa(lp, lp_s, 10); itoa(rp, rp_s, 10);
+        vga_puts("tcp        0      0 "); vga_puts(lip); vga_puts(":"); vga_puts(lp_s);
+        vga_puts("    "); vga_puts(rip_s); vga_puts(":"); vga_puts(rp_s);
+        const char *state = "ESTABLISHED";
+        if (st == 1) state = "SYN_SENT";
+        else if (st == 2) state = "SYN_RECV";
+        else if (st == 3) state = "ESTABLISHED";
+        else if (st == 4) state = "FIN_WAIT";
+        else if (st == 5) state = "CLOSE_WAIT";
+        vga_puts("    "); vga_puts(state); vga_putchar('\n');
+    }
+    /* Show listening on serial port */
     vga_puts("tcp        0      0 0.0.0.0:4321            0.0.0.0:*               LISTEN\n");
 }
 
@@ -5664,7 +5743,7 @@ static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
     {"uptime", cmd_uptime}, {"mem", cmd_mem}, {"version", cmd_version},
-    {"about", cmd_about},
+    {"about", cmd_about}, {"cd", cmd_cd}, {"pwd", cmd_pwd},
     /* File */
     {"ls", cmd_ls}, {"cat", cmd_cat}, {"touch", cmd_touch}, {"write", cmd_write},
     {"rm", cmd_rm}, {"mkdir", cmd_mkdir}, {"cp", cmd_cp}, {"mv", cmd_mv},
