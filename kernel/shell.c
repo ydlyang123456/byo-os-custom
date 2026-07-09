@@ -1834,6 +1834,255 @@ static void cmd_b40_dstat2(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("  0   1  99   0   0   0|   0     0 |   0     0 |  0     0\n");
 }
 
+
+/* ===== Batch 41: Network/Security/Container Commands ===== */
+
+static void cmd_b41_ssh2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ssh USER@HOST\n"); return; }
+    vga_puts("ssh: connecting to "); vga_puts(args[1]); vga_puts("...\n");
+    vga_puts("The authenticity of host can't be established.\n");
+    vga_puts("Are you sure you want to continue? (yes/no): yes\n");
+    vga_puts("Connection established.\n");
+}
+
+static void cmd_b41_scp2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: scp SRC DEST\n"); return; }
+    vga_puts("scp: transferring "); vga_puts(args[1]); vga_puts(" to "); vga_puts(args[2]); vga_puts("\n");
+    vga_puts("100%  1234  1234.0KB/s  00:00\n");
+}
+
+static void cmd_b41_nginx2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nginx [-t|-s|-v]\n"); return; }
+    if (strcmp(args[1], "-t") == 0) { vga_puts("nginx: configuration file test successful\n"); }
+    else if (strcmp(args[1], "-v") == 0) { vga_puts("nginx version: nginx/1.24.0\n"); }
+    else if (strcmp(args[1], "-s") == 0) { vga_puts("nginx: signal sent\n"); }
+    else { vga_puts("nginx: started\n"); }
+}
+
+static void cmd_b41_apache2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apache2 [start|stop|status|configtest]\n"); return; }
+    if (strcmp(args[1], "configtest") == 0) { vga_puts("Syntax OK\n"); }
+    else if (strcmp(args[1], "status") == 0) { vga_puts("apache2 is running\n"); }
+    else { vga_puts("apache2: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_haproxy2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: haproxy [-f|-c|-v]\n"); return; }
+    if (strcmp(args[1], "-c") == 0) { vga_puts("Configuration file is valid\n"); }
+    else if (strcmp(args[1], "-v") == 0) { vga_puts("HA-Proxy version 2.8.0\n"); }
+    else { vga_puts("haproxy: started\n"); }
+}
+
+static void cmd_b41_caddy2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: caddy [start|stop|reload]\n"); return; }
+    vga_puts("caddy: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b41_docker2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker [ps|images|run|stop|rm|pull]\n"); return; }
+    if (strcmp(args[1], "ps") == 0) {
+        vga_puts("CONTAINER ID  IMAGE          STATUS        NAMES\n");
+        vga_puts("a1b2c3d4e5f6  nginx:latest   Up 2 hours    web\n");
+    } else if (strcmp(args[1], "images") == 0) {
+        vga_puts("REPOSITORY   TAG     IMAGE ID       SIZE\n");
+        vga_puts("nginx        latest  a1b2c3d4e5f6   187MB\n");
+        vga_puts("ubuntu       22.04   f5a6e5c4d3b2   77.8MB\n");
+    } else if (strcmp(args[1], "run") == 0) {
+        vga_puts("docker: container started\n");
+    } else if (strcmp(args[1], "pull") == 0 && argc > 2) {
+        vga_puts("docker: pulling "); vga_puts(args[2]); vga_puts("\n");
+        vga_puts("Status: Downloaded newer image\n");
+    } else { vga_puts("docker: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_kubectl2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kubectl [get|create|delete|describe] RESOURCE\n"); return; }
+    if (strcmp(args[1], "get") == 0) {
+        vga_puts("NAME                 STATUS   AGE\n");
+        vga_puts("pod/nginx-abc123     Running  5m\nservice/web-svc     Active   10m\n");
+    } else { vga_puts("kubectl: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_helm2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: helm [install|list|status|delete] CHART\n"); return; }
+    if (strcmp(args[1], "list") == 0) {
+        vga_puts("NAME    NAMESPACE  REVISION  STATUS\n");
+        vga_puts("my-web  default    1         deployed\n");
+    } else { vga_puts("helm: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_vault2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: vault [status|read|write] PATH\n"); return; }
+    vga_puts("vault: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b41_consul2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: consul [members|status|kv]\n"); return; }
+    if (strcmp(args[1], "members") == 0) {
+        vga_puts("Node    Address        Status\n");
+        vga_puts("server1 10.0.0.1:8301  alive\n");
+    } else { vga_puts("consul: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_nomad2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nomad [status|job]\n"); return; }
+    vga_puts("nomad: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b41_terraform2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: terraform [init|plan|apply|destroy]\n"); return; }
+    if (strcmp(args[1], "init") == 0) { vga_puts("Terraform initialized successfully\n"); }
+    else if (strcmp(args[1], "plan") == 0) { vga_puts("No changes. Infrastructure is up-to-date.\n"); }
+    else if (strcmp(args[1], "apply") == 0) { vga_puts("Apply complete! Resources: 0 added, 0 changed.\n"); }
+    else { vga_puts("terraform: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_ansible2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ansible [ping|playbook] TARGET\n"); return; }
+    if (strcmp(args[1], "ping") == 0) {
+        vga_puts("10.0.0.1 | SUCCESS => {\n    \"ping\": \"pong\"\n}\n");
+    } else { vga_puts("ansible: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_wireguard2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wg [show|set|quick]\n"); return; }
+    if (strcmp(args[1], "show") == 0) {
+        vga_puts("interface: wg0\n  public key: abc123...\n  listening port: 51820\n");
+    } else { vga_puts("wg: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_openvpn2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: openvpn [--config FILE]\n"); return; }
+    vga_puts("openvpn: tunnel established\n");
+}
+
+static void cmd_b41_tailscale2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tailscale [status|up|down]\n"); return; }
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("100.x.x.x  user@byo-os  linux   -\n");
+    } else { vga_puts("tailscale: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_mariadb2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Welcome to MariaDB 10.11.\nType 'help' for help.\nMariaDB [(none)]>\n");
+}
+
+static void cmd_b41_psql2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("psql (15.4)\nType \"help\" for help.\npostgres=#\n");
+}
+
+static void cmd_b41_sqlite3_2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SQLite version 3.42.0\nEnter \".help\" for help.\n");
+}
+
+static void cmd_b41_redis2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("redis-cli 7.0.0\n127.0.0.1:6379>\n");
+}
+
+static void cmd_b41_mongosh2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MongoDB shell version v6.0.0\nConnected to: mongodb://127.0.0.1\n");
+}
+
+static void cmd_b41_elasticsearch2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("{\"name\":\"byo-os\",\"cluster_name\":\"elasticsearch\",\"version\":{\"number\":\"8.10.0\"}}\n");
+}
+
+static void cmd_b41_prometheus2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: prometheus [--config.file]\n"); return; }
+    vga_puts("prometheus: listening on :9090\n");
+}
+
+static void cmd_b41_grafana2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("grafana-server 10.0.0 (version: 10.0.0, commit: abc123)\n");
+    vga_puts("listening on :3000\n");
+}
+
+static void cmd_b41_zabbix2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zabbix_server (Zabbix) 6.4.0\n");
+}
+
+static void cmd_b41_nagios2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nagios Core 4.4.6\nNagios is running\n");
+}
+
+static void cmd_b41_fail2ban2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fail2ban [status|start|stop]\n"); return; }
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Status for the jail: sshd\n|- Filter\n|  |- Currently failed: 3\n|  |- Total failed: 15\n");
+    } else { vga_puts("fail2ban: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_clamav2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: clamscan FILE\n"); return; }
+    vga_puts("Scanning...\n");
+    vga_puts(args[1]); vga_puts(": OK\n\n----------- SCAN SUMMARY -----------\n");
+    vga_puts("Known viruses: 8651234\nEngine version: 1.0.0\n");
+}
+
+static void cmd_b41_rkhunter2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rkhunter 1.4.6\n[OK] Rootkit checks: no rootkits found\n");
+}
+
+static void cmd_b41_aide2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("AIDE 0.18\nAIDE database initialized\n");
+}
+
+static void cmd_b41_lynis2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: lynis audit system\n"); return; }
+    vga_puts("[+] Boot and services\n[+] Kernel\n[+] Memory and Processes\n");
+    vga_puts("[+] Users, Groups and Authentication\n[+] Shells\n");
+    vga_puts("Hardening index : 67 [#############     ]\n");
+}
+
+static void cmd_b41_trivy2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: trivy image IMAGE\n"); return; }
+    vga_puts("2024-01-01T00:00:00Z  INFO  Vulnerability scanning...\n");
+    vga_puts("2024-01-01T00:00:01Z  INFO  Total: 0 (UNKNOWN: 0, LOW: 0, MEDIUM: 0, HIGH: 0, CRITICAL: 0)\n");
+}
+
+static void cmd_b41_sonarqube2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SonarQube 10.0.0 (build 12345)\nHTTP server started on port 9000\n");
+}
+
+static void cmd_b41_podman2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: podman [ps|images|run|pull]\n"); return; }
+    if (strcmp(args[1], "ps") == 0) {
+        vga_puts("CONTAINER ID  IMAGE          STATUS        NAMES\n");
+    } else { vga_puts("podman: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b41_buildah2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("buildah: container image builder\n");
+}
+
+static void cmd_b41_skopeo2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("skopeo: container image transport tool\n");
+}
+
+static void cmd_b41_rsync2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: rsync SRC DEST\n"); return; }
+    vga_puts("sending incremental file list\n");
+    vga_puts("sent 123 bytes  received 45 bytes  336.00 bytes/sec\n");
+}
+
+static void cmd_b41_cron2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cron [start|stop|status]\n"); return; }
+    vga_puts("cron: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b41_crond2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: crond [start|stop]\n"); return; }
+    vga_puts("crond: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b41_ntp2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NTP client: synced to pool.ntp.org\n");
+}
+
+static void cmd_b41_chrony2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("chrony (chronyc) 4.3\n^* pool.ntp.org 0.000  0.001  0.001\n");
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -9987,6 +10236,50 @@ static const cmd_entry commands[] = {
 
     /* Batch 38 */
     {"jaeger", cmd_jaeger},
+    /* Batch 41 */
+    {"ssh2", cmd_b41_ssh2},
+    {"scp2", cmd_b41_scp2},
+    {"nginx2", cmd_b41_nginx2},
+    {"apache2", cmd_b41_apache2},
+    {"haproxy2", cmd_b41_haproxy2},
+    {"caddy2", cmd_b41_caddy2},
+    {"docker2", cmd_b41_docker2},
+    {"kubectl2", cmd_b41_kubectl2},
+    {"helm2", cmd_b41_helm2},
+    {"vault2", cmd_b41_vault2},
+    {"consul2", cmd_b41_consul2},
+    {"nomad2", cmd_b41_nomad2},
+    {"terraform2", cmd_b41_terraform2},
+    {"ansible2", cmd_b41_ansible2},
+    {"wireguard2", cmd_b41_wireguard2},
+    {"openvpn2", cmd_b41_openvpn2},
+    {"tailscale2", cmd_b41_tailscale2},
+    {"mariadb2", cmd_b41_mariadb2},
+    {"psql2", cmd_b41_psql2},
+    {"sqlite3_2", cmd_b41_sqlite3_2},
+    {"redis2", cmd_b41_redis2},
+    {"mongosh2", cmd_b41_mongosh2},
+    {"elasticsearch2", cmd_b41_elasticsearch2},
+    {"prometheus2", cmd_b41_prometheus2},
+    {"grafana2", cmd_b41_grafana2},
+    {"zabbix2", cmd_b41_zabbix2},
+    {"nagios2", cmd_b41_nagios2},
+    {"fail2ban2", cmd_b41_fail2ban2},
+    {"clamav2", cmd_b41_clamav2},
+    {"rkhunter2", cmd_b41_rkhunter2},
+    {"aide2", cmd_b41_aide2},
+    {"lynis2", cmd_b41_lynis2},
+    {"trivy2", cmd_b41_trivy2},
+    {"sonarqube2", cmd_b41_sonarqube2},
+    {"podman2", cmd_b41_podman2},
+    {"buildah2", cmd_b41_buildah2},
+    {"skopeo2", cmd_b41_skopeo2},
+    {"rsync2", cmd_b41_rsync2},
+    {"cron2", cmd_b41_cron2},
+    {"crond2", cmd_b41_crond2},
+    {"ntp2", cmd_b41_ntp2},
+    {"chrony2", cmd_b41_chrony2},
+    
     /* Batch 40 */
     {"tree2", cmd_b40_tree2},
     {"du2", cmd_b40_du2},
