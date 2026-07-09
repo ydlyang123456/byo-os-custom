@@ -4672,8 +4672,31 @@ static void cmd_comm(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("comm: compare sorted files\n");
 }
 
+
 static void cmd_diff(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("diff: compare files\n");
+    if (argc < 3) { vga_puts("Usage: diff <file1> <file2>\n"); return; }
+    char buf1[4096], buf2[4096];
+    int r1 = fs_read_file(args[1], buf1, 4095);
+    int r2 = fs_read_file(args[2], buf2, 4095);
+    if (r1 < 0) { vga_puts("diff: "); vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    if (r2 < 0) { vga_puts("diff: "); vga_puts(args[2]); vga_puts(": No such file\n"); return; }
+    buf1[r1] = 0; buf2[r2] = 0;
+    if (r1 == r2 && memcmp(buf1, buf2, r1) == 0) { vga_puts("Files are identical\n"); return; }
+    char lines1[128][256], lines2[128][256];
+    int n1 = 0, n2 = 0;
+    char *p = buf1;
+    while (*p && n1 < 128) { int j = 0; while (*p && *p != '\n') lines1[n1][j++] = *p++; lines1[n1][j] = 0; if (*p == '\n') p++; n1++; }
+    p = buf2;
+    while (*p && n2 < 128) { int j = 0; while (*p && *p != '\n') lines2[n2][j++] = *p++; lines2[n2][j] = 0; if (*p == '\n') p++; n2++; }
+    int max = n1 > n2 ? n1 : n2;
+    for (int i = 0; i < max; i++) {
+        char *l1 = i < n1 ? lines1[i] : "";
+        char *l2 = i < n2 ? lines2[i] : "";
+        if (strcmp(l1, l2) != 0) {
+            if (i < n1) { vga_puts("- "); vga_puts(l1); vga_putchar('\n'); }
+            if (i < n2) { vga_puts("+ "); vga_puts(l2); vga_putchar('\n'); }
+        }
+    }
 }
 
 static void cmd_colordiff(int argc, char args[][CMD_MAX_LEN]) {
