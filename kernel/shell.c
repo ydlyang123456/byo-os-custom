@@ -678,21 +678,25 @@ static void cmd_unalias(int argc, char args[][CMD_MAX_LEN]) {
 /* ===== Text Commands ===== */
 static void cmd_grep(int argc, char args[][CMD_MAX_LEN]) {
     int ci = 0, inv = 0, ln = 0, cnt = 0, fonly = 0;
-    char *pat = 0;
-    char *fn = 0;
+    char pat[128] = {0};
+    const char *fn = 0;
     for (int i = 1; i < argc; i++) {
-        if (args[i][0] == 45) {
+        if (args[i][0] == '-') {
             for (int j = 1; args[i][j]; j++) {
-                if (args[i][j] == 105) ci = 1;
-                else if (args[i][j] == 118) inv = 1;
-                else if (args[i][j] == 110) ln = 1;
-                else if (args[i][j] == 99) cnt = 1;
-                else if (args[i][j] == 108) fonly = 1;
+                char c = args[i][j];
+                if (c == 'i') ci = 1;
+                else if (c == 'v') inv = 1;
+                else if (c == 'n') ln = 1;
+                else if (c == 'c') cnt = 1;
+                else if (c == 'l') fonly = 1;
             }
-        } else if (!pat) { pat = args[i]; }
-        else { fn = args[i]; }
+        } else if (pat[0] == 0) {
+            strncpy(pat, args[i], 127);
+        } else {
+            fn = args[i];
+        }
     }
-    if (!pat) { vga_puts("Usage: grep [-ivncl] <pat> [file]\n"); return; }
+    if (pat[0] == 0) { vga_puts("Usage: grep [-ivncl] <pattern> [file]\n"); return; }
     if (fn) {
         memset(file_buf, 0, FILE_BUF_SIZE);
         int r = fs_read_file(fn, file_buf, FILE_BUF_SIZE - 1);
