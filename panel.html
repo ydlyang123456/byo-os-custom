@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -53,11 +53,13 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 .cmd-table th,.cmd-table td{text-align:left;padding:8px 12px;border-bottom:1px solid #1e293b;font-size:12px}
 .cmd-table th{color:#64748b;text-transform:uppercase;font-size:10px;letter-spacing:.5px}
 .cmd-table tr:hover{background:#1e293b}
+.pg{display:none}
+.pg.on{display:block}
 </style>
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v11</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v12</p></div>
   <nav id="sidebar">
     <div class="sep">Main</div>
     <a data-page="dashboard" class="on">&#128202; Dashboard</a>
@@ -75,97 +77,79 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
     <a data-page="logs">&#128220; Logs</a>
     <a data-page="settings">&#9881; Settings</a>
   </nav>
-  <div class="ft">BYO-OS v1.22 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
+  <div class="ft">BYO-OS v1.49 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
 </div>
 
 <div id="mn">
   <!-- Dashboard -->
-  <div id="pg-dashboard" class="pg" style="display:block">
-    <h2>Dashboard</h2>
+  <div id="pg-dashboard" class="pg on">
+    <h2>&#128202; Dashboard</h2>
     <div class="grid">
-      <div class="card">
-        <h3>System</h3>
+      <div class="card"><h3>System</h3>
         <div class="big" id="d-os">Loading...</div>
         <div class="row"><span class="lbl">Platform</span><span class="val" id="d-plat">-</span></div>
-        <div class="row"><span class="lbl">Architecture</span><span class="val" id="d-arch">-</span></div>
+        <div class="row"><span class="lbl">Arch</span><span class="val" id="d-arch">-</span></div>
         <div class="row"><span class="lbl">User</span><span class="val" id="d-user">-</span></div>
-        <div class="row"><span class="lbl">Serial</span><span class="val" id="d-ser"><span class="status st-off"></span>Checking...</span></div>
       </div>
-      <div class="card">
-        <h3>Memory</h3>
-        <div class="big" id="d-mem">- MB / - MB</div>
+      <div class="card"><h3>Memory</h3>
+        <div class="big" id="d-mem">0 MB</div>
         <div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div>
-        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">- MB</span></div>
-        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">- MB</span></div>
-        <div class="row"><span class="lbl">Heap Used</span><span class="val" id="d-heap">- bytes</span></div>
+        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">0 MB</span></div>
+        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">0 MB</span></div>
+        <div class="row"><span class="lbl">Heap</span><span class="val" id="d-heap">0 bytes</span></div>
       </div>
-      <div class="card">
-        <h3>Runtime</h3>
-        <div class="big" id="d-upt">-</div>
-        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">0 tasks</span></div>
-        <div class="row"><span class="lbl">Load Avg</span><span class="val" id="d-load">-</span></div>
-        <div class="row"><span class="lbl">IP Address</span><span class="val" id="d-ip">-</span></div>
+      <div class="card"><h3>Status</h3>
+        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">0</span></div>
+        <div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">0s</span></div>
+        <div class="row"><span class="lbl">Load</span><span class="val" id="d-load">-</span></div>
+        <div class="row"><span class="lbl">IP</span><span class="val" id="d-ip">-</span></div>
+        <div class="row"><span class="lbl">Serial</span><span class="val" id="d-ser">Checking...</span></div>
       </div>
     </div>
-    <div style="display:flex;gap:8px;margin-bottom:16px">
-      <button class="btn btn-primary" onclick="refreshDash()">Refresh</button>
-      <button class="btn btn-outline" onclick="reconnect()">Reconnect Serial</button>
-      <button class="btn btn-outline" onclick="nav('terminal')">Open Terminal</button>
-    </div>
-    <div class="card">
-      <h3>Quick Commands</h3>
-      <div style="display:flex;gap:8px;flex-wrap:wrap">
-        <button class="btn btn-outline" onclick="quickCmd('help')">help</button>
-        <button class="btn btn-outline" onclick="quickCmd('sysinfo')">sysinfo</button>
-        <button class="btn btn-outline" onclick="quickCmd('uname -a')">uname</button>
-        <button class="btn btn-outline" onclick="quickCmd('free')">free</button>
-        <button class="btn btn-outline" onclick="quickCmd('df')">df</button>
-        <button class="btn btn-outline" onclick="quickCmd('ps')">ps</button>
-        <button class="btn btn-outline" onclick="quickCmd('ifconfig')">ifconfig</button>
-        <button class="btn btn-outline" onclick="quickCmd('uptime')">uptime</button>
-        <button class="btn btn-outline" onclick="quickCmd('dmesg')">dmesg</button>
-      </div>
+    <div style="margin-top:12px">
+      <button class="btn btn-primary" onclick="reconnect()">&#128260; Reconnect</button>
+      <button class="btn btn-outline" onclick="refreshDash()">&#128251; Refresh</button>
     </div>
   </div>
 
   <!-- Terminal -->
   <div id="pg-terminal" class="pg">
-    <h2>Terminal</h2>
-    <div class="input-group">
-      <button class="btn btn-outline" onclick="termClear()">Clear</button>
-      <button class="btn btn-outline" onclick="termHistory(-1)">&#9664; Prev</button>
-      <button class="btn btn-outline" onclick="termHistory(1)">Next &#9654;</button>
-    </div>
+    <h2>&#128187; Terminal</h2>
     <div id="term">BYO-OS> </div>
-    <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off" spellcheck="false">
+    <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off">
+    <div style="margin-top:8px">
+      <button class="btn btn-outline" onclick="termClear()">Clear</button>
+      <button class="btn btn-outline" onclick="termHistory(-1)">Up</button>
+      <button class="btn btn-outline" onclick="termHistory(1)">Down</button>
+    </div>
   </div>
 
   <!-- System Info -->
   <div id="pg-sysinfo" class="pg">
-    <h2>System Information</h2>
+    <h2>&#9432; System Info</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('si-out','sysinfo')">sysinfo</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','uname -a')">uname -a</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','neofetch')">neofetch</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','help')">help</button>
     </div>
-    <div id="si-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="si-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Processes -->
   <div id="pg-processes" class="pg">
-    <h2>Processes</h2>
+    <h2>&#128203; Processes</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pr-out','ps')">ps</button>
       <button class="btn btn-outline" onclick="loadPage('pr-out','top')">top</button>
       <button class="btn btn-outline" onclick="loadPage('pr-out','free')">free</button>
     </div>
-    <div id="pr-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="pr-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Network -->
   <div id="pg-network" class="pg">
-    <h2>Network</h2>
+    <h2>&#127760; Network</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('nw-out','ifconfig')">ifconfig</button>
       <button class="btn btn-outline" onclick="loadPage('nw-out','net status')">net status</button>
@@ -173,92 +157,85 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
       <button class="btn btn-outline" onclick="loadPage('nw-out','ping 10.0.2.2')">Ping Gateway</button>
       <button class="btn btn-outline" onclick="loadPage('nw-out','netstat')">netstat</button>
     </div>
-    <div id="nw-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="nw-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Files -->
   <div id="pg-files" class="pg">
-    <h2>Files</h2>
+    <h2>&#128193; Files</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('fl-out','ls /')">ls /</button>
       <button class="btn btn-outline" onclick="loadPage('fl-out','df')">df</button>
       <button class="btn btn-outline" onclick="loadPage('fl-out','mount')">mount</button>
     </div>
-    <div id="fl-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="fl-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Users -->
   <div id="pg-users" class="pg">
-    <h2>Users</h2>
+    <h2>&#128100; Users</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('us-out','whoami')">whoami</button>
       <button class="btn btn-outline" onclick="loadPage('us-out','users')">users</button>
       <button class="btn btn-outline" onclick="loadPage('us-out','id')">id</button>
     </div>
-    <div id="us-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="us-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Services -->
   <div id="pg-services" class="pg">
-    <h2>Services</h2>
+    <h2>&#9881; Services</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('sv-out','service list')">service list</button>
       <button class="btn btn-outline" onclick="loadPage('sv-out','cron status')">cron status</button>
       <button class="btn btn-outline" onclick="loadPage('sv-out','net status')">net status</button>
     </div>
-    <div id="sv-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="sv-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Packages -->
   <div id="pg-packages" class="pg">
-    <h2>Packages</h2>
+    <h2>&#128230; Packages</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pk-out','dpkg -l')">dpkg -l</button>
       <button class="btn btn-outline" onclick="loadPage('pk-out','apt list')">apt list</button>
     </div>
-    <div id="pk-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="pk-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Commands -->
   <div id="pg-commands" class="pg">
-    <h2>Commands</h2>
+    <h2>&#128295; Commands</h2>
     <div class="input-group">
       <input id="cmd-search" type="text" placeholder="Search commands..." oninput="filterCmds()">
       <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">Load All</button>
     </div>
-    <div id="cmd-out" class="output-box"><span class="empty">Click Load All to see available commands</span></div>
+    <div id="cmd-out" class="output-box">Click 'Load All' to list commands...</div>
   </div>
 
   <!-- Logs -->
   <div id="pg-logs" class="pg">
-    <h2>Logs</h2>
+    <h2>&#128220; Logs</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('lg-out','journal')">journal</button>
       <button class="btn btn-outline" onclick="loadPage('lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
+      <button class="btn btn-outline" onclick="toggleAutoRefresh()" id="ar-btn">Auto-refresh: OFF</button>
     </div>
-    <div id="lg-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+    <div id="lg-out" class="output-box">Click a button to load logs...</div>
   </div>
 
   <!-- Settings -->
   <div id="pg-settings" class="pg">
-    <h2>Settings</h2>
-    <div class="card" style="max-width:600px">
-      <h3>Serial Connection</h3>
-      <div class="row"><span class="lbl">Status</span><span class="val" id="set-ser"><span class="status st-off"></span>Checking...</span></div>
+    <h2>&#9881; Settings</h2>
+    <div class="card">
+      <h3>Connection</h3>
+      <div class="row"><span class="lbl">Serial Status</span><span class="val" id="set-ser">Checking...</span></div>
       <div style="margin-top:12px">
-        <button class="btn btn-primary" onclick="reconnect()">Reconnect</button>
-        <button class="btn btn-outline" onclick="loadDebug()" style="margin-left:8px">Show Debug</button>
+        <button class="btn btn-primary" onclick="reconnect()">&#128260; Reconnect Serial</button>
+        <button class="btn btn-outline" onclick="loadDebug()">Show Debug Info</button>
       </div>
-      <div id="set-debug" style="display:none;margin-top:12px" class="output-box"></div>
     </div>
-    <div class="card" style="max-width:600px;margin-top:14px">
-      <h3>About</h3>
-      <div class="row"><span class="lbl">OS Version</span><span class="val">BYO-OS v1.22.0</span></div>
-      <div class="row"><span class="lbl">Panel Version</span><span class="val">v10</span></div>
-      <div class="row"><span class="lbl">Architecture</span><span class="val">x86 (i686)</span></div>
-      <div class="row"><span class="lbl">Commands</span><span class="val">800+</span></div>
-    </div>
+    <div id="set-debug" class="output-box" style="display:none;margin-top:16px"></div>
   </div>
 </div>
 
@@ -332,7 +309,12 @@ function loadPage(elId, cmd) {
     if (d.error) {
       el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
     } else {
-      el.textContent = d.output || '(no output)';
+      var out = d.output || '(no output)';
+      if (out.indexOf('ERROR:') === 0) {
+        el.innerHTML = '<span class="err">' + out.replace(/</g,'&lt;') + '</span>';
+      } else {
+        el.textContent = out;
+      }
     }
   }).catch(function(e) {
     el.innerHTML = '<span class="err">Network error: ' + e + '</span>';
@@ -488,7 +470,7 @@ function refreshConn() {
 
 /* ===== Auto-refresh ===== */
 function toggleAutoRefresh() {
-  var btn = event.target;
+  var btn = document.getElementById('ar-btn');
   if (autoRefreshTimer) {
     clearInterval(autoRefreshTimer);
     autoRefreshTimer = null;

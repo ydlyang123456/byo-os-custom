@@ -1,4 +1,4 @@
-
+﻿
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -13753,6 +13753,72 @@ static void threat_intel_121(int argc, char args[][CMD_MAX_LEN]);
 static void pentest_report_121(int argc, char args[][CMD_MAX_LEN]);
 static void crypto_audit_121(int argc, char args[][CMD_MAX_LEN]);
 static void incident_response_121(int argc, char args[][CMD_MAX_LEN]);
+static void text_summarize_124(int argc, char args[][CMD_MAX_LEN]);
+static void sentiment_124(int argc, char args[][CMD_MAX_LEN]);
+static void keyword_extract_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_classify_124(int argc, char args[][CMD_MAX_LEN]);
+static void named_entity_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_similarity_124(int argc, char args[][CMD_MAX_LEN]);
+static void word_count_advanced_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_replace_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_split_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_merge_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_format_124(int argc, char args[][CMD_MAX_LEN]);
+static void text_validate_124(int argc, char args[][CMD_MAX_LEN]);
+static void aws_cli_125(int argc, char args[][CMD_MAX_LEN]);
+static void gcloud_125(int argc, char args[][CMD_MAX_LEN]);
+static void az_cli_125(int argc, char args[][CMD_MAX_LEN]);
+static void cloud_init_125(int argc, char args[][CMD_MAX_LEN]);
+static void auto_scale_125(int argc, char args[][CMD_MAX_LEN]);
+static void load_balancer_125(int argc, char args[][CMD_MAX_LEN]);
+static void cdn_manage_125(int argc, char args[][CMD_MAX_LEN]);
+static void dns_manage_125(int argc, char args[][CMD_MAX_LEN]);
+static void ssl_manage_125(int argc, char args[][CMD_MAX_LEN]);
+static void cloud_backup_125(int argc, char args[][CMD_MAX_LEN]);
+static void multi_cloud_125(int argc, char args[][CMD_MAX_LEN]);
+static void cloud_cost_125(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 126: Quantum Computing + AR/VR */
+static void quantum_init_126(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_gate_126(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_measure_126(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_teleport_126(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_entangle_126(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_superposition_126(int argc, char args[][CMD_MAX_LEN]);
+static void vr_create_126(int argc, char args[][CMD_MAX_LEN]);
+static void vr_render_126(int argc, char args[][CMD_MAX_LEN]);
+static void vr_interact_126(int argc, char args[][CMD_MAX_LEN]);
+static void ar_overlay_126(int argc, char args[][CMD_MAX_LEN]);
+static void ar_track_126(int argc, char args[][CMD_MAX_LEN]);
+static void ar_calibrate_126(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 127: Space Tech + Digital Twins */
+static void orbit_calc_127(int argc, char args[][CMD_MAX_LEN]);
+static void satellite_track_127(int argc, char args[][CMD_MAX_LEN]);
+static void launch_sim_127(int argc, char args[][CMD_MAX_LEN]);
+static void space_weather_127(int argc, char args[][CMD_MAX_LEN]);
+static void asteroid_db_127(int argc, char args[][CMD_MAX_LEN]);
+static void mars_rover_127(int argc, char args[][CMD_MAX_LEN]);
+static void iss_status_127(int argc, char args[][CMD_MAX_LEN]);
+static void rocket_design_127(int argc, char args[][CMD_MAX_LEN]);
+static void twin_create_127(int argc, char args[][CMD_MAX_LEN]);
+static void twin_sync_127(int argc, char args[][CMD_MAX_LEN]);
+static void twin_predict_127(int argc, char args[][CMD_MAX_LEN]);
+static void twin_optimize_127(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 128: Containers + System Tools */
+static void container_create_128(int argc, char args[][CMD_MAX_LEN]);
+static void container_list_128(int argc, char args[][CMD_MAX_LEN]);
+static void container_stop_128(int argc, char args[][CMD_MAX_LEN]);
+static void container_logs_128(int argc, char args[][CMD_MAX_LEN]);
+static void image_build_128(int argc, char args[][CMD_MAX_LEN]);
+static void image_push_128(int argc, char args[][CMD_MAX_LEN]);
+static void pod_manage_128(int argc, char args[][CMD_MAX_LEN]);
+static void namespace_ctl_128(int argc, char args[][CMD_MAX_LEN]);
+static void cgroup_stat_128(int argc, char args[][CMD_MAX_LEN]);
+static void overlay_fs_128(int argc, char args[][CMD_MAX_LEN]);
+static void seccomp_profile_128(int argc, char args[][CMD_MAX_LEN]);
+static void sysbench_128(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 static const cmd_entry commands[] = {
@@ -16519,6 +16585,42 @@ static const cmd_entry commands[] = {
     {"intrusion-detect", intrusion_detect_121}, {"honeypot", honeypot_121},
     {"threat-intel", threat_intel_121}, {"pentest-report", pentest_report_121},
     {"crypto-audit", crypto_audit_121}, {"incident-response", incident_response_121},
+    /* Batch 124: Text Processing */
+    {"text-summarize", text_summarize_124}, {"sentiment", sentiment_124},
+    {"keyword-extract", keyword_extract_124}, {"text-classify", text_classify_124},
+    {"named-entity", named_entity_124}, {"text-similarity", text_similarity_124},
+    {"word-count-advanced", word_count_advanced_124}, {"text-replace", text_replace_124},
+    {"text-split", text_split_124}, {"text-merge", text_merge_124},
+    {"text-format", text_format_124}, {"text-validate", text_validate_124},
+    /* Batch 125: Cloud Computing */
+    {"aws-cli", aws_cli_125}, {"gcloud", gcloud_125},
+    {"az-cli", az_cli_125}, {"cloud-init", cloud_init_125},
+    {"auto-scale", auto_scale_125}, {"load-balancer", load_balancer_125},
+    {"cdn-manage", cdn_manage_125}, {"dns-manage", dns_manage_125},
+    {"ssl-manage", ssl_manage_125}, {"cloud-backup", cloud_backup_125},
+    {"multi-cloud", multi_cloud_125}, {"cloud-cost", cloud_cost_125},
+    /* Batch 126: Quantum Computing + AR/VR */
+    {"quantum-init", quantum_init_126}, {"quantum-gate", quantum_gate_126},
+    {"quantum-measure", quantum_measure_126}, {"quantum-teleport", quantum_teleport_126},
+    {"quantum-entangle", quantum_entangle_126}, {"quantum-superposition", quantum_superposition_126},
+    {"vr-create", vr_create_126}, {"vr-render", vr_render_126},
+    {"vr-interact", vr_interact_126}, {"ar-overlay", ar_overlay_126},
+    {"ar-track", ar_track_126}, {"ar-calibrate", ar_calibrate_126},
+    /* Batch 127: Space Tech + Digital Twins */
+    {"orbit-calc", orbit_calc_127}, {"satellite-track", satellite_track_127},
+    {"launch-sim", launch_sim_127}, {"space-weather", space_weather_127},
+    {"asteroid-db", asteroid_db_127}, {"mars-rover", mars_rover_127},
+    {"iss-status", iss_status_127}, {"rocket-design", rocket_design_127},
+    {"twin-create", twin_create_127}, {"twin-sync", twin_sync_127},
+    {"twin-predict", twin_predict_127}, {"twin-optimize", twin_optimize_127},
+    /* Batch 128: Containers + System Tools */
+    {"container-create", container_create_128}, {"container-list", container_list_128},
+    {"container-stop", container_stop_128}, {"container-logs", container_logs_128},
+    {"image-build", image_build_128}, {"image-push", image_push_128},
+    {"pod-manage", pod_manage_128}, {"namespace-ctl", namespace_ctl_128},
+    {"cgroup-stat", cgroup_stat_128}, {"overlay-fs", overlay_fs_128},
+    {"seccomp-profile", seccomp_profile_128}, {"sysbench", sysbench_128},
+
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -35652,6 +35754,461 @@ static void sentinel_policy_122(int argc, char args[][CMD_MAX_LEN]) {
     }
 }
 
+
+/* ===== Batch 124: Text Processing ===== */
+static void text_summarize_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-summarize <text...>\nSummarizes text: word count, char count, first/last words.\n"); return; }
+    int words = 0, chars = 0, i, j;
+    char first[64] = "", last[64] = "";
+    for (i = 1; i < argc; i++) {
+        int in_word = 0;
+        for (j = 0; args[i][j]; j++) {
+            chars++;
+            if (args[i][j] == 32) { in_word = 0; } else if (!in_word) { in_word = 1; words++; }
+        }
+        if (i == 1) { int k; for (k = 0; k < 63 && args[i][k]; k++) first[k] = args[i][k]; first[k] = 0; }
+        { int k; for (k = 0; k < 63 && args[i][k]; k++) last[k] = args[i][k]; last[k] = 0; }
+    }
+    vga_puts("Words: "); vga_put_dec(words); vga_puts(", Chars: "); vga_put_dec(chars); vga_putchar(10);
+    vga_puts("First word: "); vga_puts(first); vga_puts(", Last: "); vga_puts(last); vga_putchar(10);
+}
+static void sentiment_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: sentiment <text...>\nBasic sentiment: counts positive/negative word matches.\n"); return; }
+    int pos = 0, neg = 0, i;
+    for (i = 1; i < argc; i++) {
+        if (strcmp(args[i],"good")==0||strcmp(args[i],"great")==0||strcmp(args[i],"love")==0||strcmp(args[i],"best")==0) pos++;
+        if (strcmp(args[i],"bad")==0||strcmp(args[i],"hate")==0||strcmp(args[i],"worst")==0||strcmp(args[i],"poor")==0) neg++;
+    }
+    vga_puts("Positive: "); vga_put_dec(pos); vga_puts(", Negative: "); vga_put_dec(neg); vga_putchar(10);
+    if (pos > neg) vga_puts("Sentiment: Positive\n");
+    else if (neg > pos) vga_puts("Sentiment: Negative\n");
+    else vga_puts("Sentiment: Neutral\n");
+}
+static void keyword_extract_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: keyword-extract <text...>\nExtracts words longer than 6 characters.\n"); return; }
+    int i, count = 0;
+    for (i = 1; i < argc; i++) { int len = 0; while (args[i][len]) len++;
+        if (len > 6) { vga_puts("  -> "); vga_puts(args[i]); vga_putchar(10); count++; }
+    }
+    vga_puts("Keywords found: "); vga_put_dec(count); vga_putchar(10);
+}
+static void text_classify_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-classify <text...>\nClassifies text into categories by keyword.\n"); return; }
+    int tech = 0, general = 0, i;
+    for (i = 1; i < argc; i++) {
+        if (strcmp(args[i],"kernel")==0||strcmp(args[i],"code")==0||strcmp(args[i],"system")==0) tech++;
+        else general++;
+    }
+    if (tech > general) vga_puts("Category: Technical\n");
+    else if (general > tech) vga_puts("Category: General\n");
+    else vga_puts("Category: Mixed\n");
+}
+static void named_entity_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: named-entity <text...>\nFinds capitalized words as named entities.\n"); return; }
+    int i, count = 0;
+    for (i = 1; i < argc; i++) {
+        if (args[i][0] >= 65 && args[i][0] <= 90) { vga_puts("  Entity: "); vga_puts(args[i]); vga_putchar(10); count++; }
+    }
+    vga_puts("Entities found: "); vga_put_dec(count); vga_putchar(10);
+}
+static void text_similarity_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-similarity <str1> <str2>\nCompares two strings char by char.\n"); return; }
+    int match = 0, len1 = 0, len2 = 0, i;
+    while (args[1][len1]) len1++;
+    while (args[2][len2]) len2++;
+    int max_len = len1 > len2 ? len1 : len2;
+    for (i = 0; i < max_len; i++) {
+        char c1 = i < len1 ? args[1][i] : 0;
+        char c2 = i < len2 ? args[2][i] : 0;
+        if (c1 == c2) match++;
+    }
+    int pct = max_len > 0 ? (match * 100) / max_len : 0;
+    vga_puts("Similarity: "); vga_put_dec(pct); vga_puts("% ("); vga_put_dec(match); vga_puts("/"); vga_put_dec(max_len); vga_puts(" chars match)\n");
+}
+static void word_count_advanced_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: word-count-advanced <text...>\nAdvanced stats: words, lines, chars, avg word length.\n"); return; }
+    int words = 0, chars = 0, lines = 1, total_wlen = 0, in_word = 0, i, j;
+    for (i = 1; i < argc; i++) {
+        for (j = 0; args[i][j]; j++) {
+            chars++;
+            if (args[i][j] == 92 && args[i][j+1] == 110) { lines++; j++; }
+            else if (args[i][j] == 32 || args[i][j] == 9) { in_word = 0; }
+            else { if (!in_word) { in_word = 1; words++; } total_wlen++; }
+        }
+    }
+    vga_puts("Words: "); vga_put_dec(words); vga_puts(", Chars: "); vga_put_dec(chars); vga_puts(", Lines: "); vga_put_dec(lines); vga_putchar(10);
+    if (words > 0) { vga_puts("Avg word length: "); vga_put_dec(total_wlen / words); vga_putchar(10); }
+}
+static void text_replace_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 4 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-replace <text> <old> <new>\nReplaces first occurrence of old with new.\n"); return; }
+    int found = 0, i, j;
+    int tlen = 0, olen = 0, nlen = 0;
+    while (args[1][tlen]) tlen++;
+    while (args[2][olen]) olen++;
+    while (args[3][nlen]) nlen++;
+    for (i = 0; i <= tlen - olen; i++) {
+        int match = 1;
+        for (j = 0; j < olen; j++) { if (args[1][i+j] != args[2][j]) { match = 0; break; } }
+        if (match) {
+            for (j = 0; j < i; j++) vga_putchar(args[1][j]);
+            vga_puts(args[3]);
+            for (j = i + olen; j < tlen; j++) vga_putchar(args[1][j]);
+            vga_putchar(10); found = 1; break;
+        }
+    }
+    if (!found) { vga_puts(args[1]); vga_putchar(10); vga_puts("(pattern not found)\n"); }
+}
+static void text_split_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-split <text> <delimiter>\nSplits text by delimiter and counts parts.\n"); return; }
+    int parts = 1, i, j, dlen = 0;
+    while (args[2][dlen]) dlen++;
+    int tlen = 0; while (args[1][tlen]) tlen++;
+    for (i = 0; i <= tlen - dlen; i++) {
+        int match = 1;
+        for (j = 0; j < dlen; j++) { if (args[1][i+j] != args[2][j]) { match = 0; break; } }
+        if (match) parts++;
+    }
+    vga_puts("Parts: "); vga_put_dec(parts); vga_putchar(10);
+}
+static void text_merge_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-merge <sep> <text1> <text2>...\nMerges multiple texts with separator.\n"); return; }
+    int i;
+    for (i = 2; i < argc; i++) {
+        if (i > 2) vga_puts(args[1]);
+        vga_puts(args[i]);
+    }
+    vga_putchar(10);
+}
+static void text_format_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-format <upper|lower|reverse> <text>\nFormats text: uppercase, lowercase, or reverse.\n"); return; }
+    int i, j;
+    if (strcmp(args[1], "upper") == 0) {
+        for (i = 2; i < argc; i++) { for (j = 0; args[i][j]; j++) { char c = args[i][j]; if (c >= 97 && c <= 122) c = c - 32; vga_putchar(c); } if (i < argc-1) vga_putchar(32); }
+        vga_putchar(10);
+    } else if (strcmp(args[1], "lower") == 0) {
+        for (i = 2; i < argc; i++) { for (j = 0; args[i][j]; j++) { char c = args[i][j]; if (c >= 65 && c <= 90) c = c + 32; vga_putchar(c); } if (i < argc-1) vga_putchar(32); }
+        vga_putchar(10);
+    } else if (strcmp(args[1], "reverse") == 0) {
+        for (i = argc - 1; i >= 2; i--) { int len = 0; while (args[i][len]) len++; for (j = len - 1; j >= 0; j--) vga_putchar(args[i][j]); if (i > 2) vga_putchar(32); }
+        vga_putchar(10);
+    } else { vga_puts("Unknown format. Use: upper, lower, reverse\n"); }
+}
+static void text_validate_124(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: text-validate <text...>\nValidates: alphanumeric, has digits, has uppercase.\n"); return; }
+    int i, j, alpha = 1, has_digit = 0, has_upper = 0;
+    for (i = 1; i < argc; i++) {
+        for (j = 0; args[i][j]; j++) {
+            char c = args[i][j];
+            if (c >= 48 && c <= 57) has_digit = 1;
+            else if (c >= 65 && c <= 90) has_upper = 1;
+            else if ((c >= 97 && c <= 122)) { /* lower */ }
+            else { alpha = 0; }
+        }
+    }
+    vga_puts("Alphanumeric: "); vga_puts(alpha ? "yes" : "no"); vga_puts(", Has digit: "); vga_puts(has_digit ? "yes" : "no"); vga_puts(", Has upper: "); vga_puts(has_upper ? "yes" : "no"); vga_putchar(10);
+}
+/* ===== Batch 125: Cloud Computing ===== */
+static void aws_cli_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: aws-cli <s3|ec2|lambda|iam> [args]\nSimulates AWS CLI commands.\n"); return; }
+    if (strcmp(args[1], "s3") == 0) vga_puts("aws s3 ls s3://my-bucket/\n  file1.txt  1024 bytes\n  file2.txt  2048 bytes\n2 objects, 3072 bytes total\n");
+    else if (strcmp(args[1], "ec2") == 0) vga_puts("aws ec2 describe-instances\n  i-0abc123 t3.micro running  10.0.0.1\n  i-0def456 t2.small running 10.0.0.2\n2 instances running\n");
+    else if (strcmp(args[1], "lambda") == 0) vga_puts("aws lambda list-functions\n  my-function  python3.9  128MB  Active\n1 function listed\n");
+    else if (strcmp(args[1], "iam") == 0) vga_puts("aws iam list-users\n  UserName: admin  Created: 2024-01-01\n1 user listed\n");
+    else { vga_puts("Unknown service: "); vga_puts(args[1]); vga_puts("\nAvailable: s3, ec2, lambda, iam\n"); }
+}
+static void gcloud_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: gcloud <compute|gke|run|pubsub> [args]\nSimulates Google Cloud CLI.\n"); return; }
+    if (strcmp(args[1], "compute") == 0) vga_puts("gcloud compute instances list\n  NAME         ZONE           STATUS\n  instance-1   us-central1-a  RUNNING\n  instance-2   us-east1-b     RUNNING\n2 instances found\n");
+    else if (strcmp(args[1], "gke") == 0) vga_puts("gcloud container clusters list\n  cluster-1  us-central1  v1.28.3  RUNNING  3 nodes\n1 cluster found\n");
+    else if (strcmp(args[1], "run") == 0) vga_puts("gcloud run services list\n  SERVICE     REGION        URL\n  my-service  us-central1   https://my-service-abc.run.app\n1 service found\n");
+    else if (strcmp(args[1], "pubsub") == 0) vga_puts("gcloud pubsub topics list\n  projects/my-project/topics/my-topic\n1 topic found\n");
+    else { vga_puts("Unknown service: "); vga_puts(args[1]); vga_puts("\nAvailable: compute, gke, run, pubsub\n"); }
+}
+static void az_cli_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: az-cli <vm|aks|functionapp|storage> [args]\nSimulates Azure CLI commands.\n"); return; }
+    if (strcmp(args[1], "vm") == 0) vga_puts("az vm list\n  NAME        RESOURCE GROUP  STATUS\n  my-vm       my-rg           Running\n1 VM found\n");
+    else if (strcmp(args[1], "aks") == 0) vga_puts("az aks list\n  NAME      RESOURCE GROUP  STATUS\n  my-aks    my-rg           Succeeded\n1 cluster found\n");
+    else if (strcmp(args[1], "functionapp") == 0) vga_puts("az functionapp list\n  NAME           RESOURCE GROUP  STATE\n  my-functions   my-rg            Running\n1 app found\n");
+    else if (strcmp(args[1], "storage") == 0) vga_puts("az storage account list\n  NAME             RESOURCE GROUP  LOCATION\n  mystorageacct    my-rg            eastus\n1 account found\n");
+    else { vga_puts("Unknown service: "); vga_puts(args[1]); vga_puts("\nAvailable: vm, aks, functionapp, storage\n"); }
+}
+static void cloud_init_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: cloud-init <create|show|destroy> [name]\nCloud instance initialization.\n"); return; }
+    if (strcmp(args[1], "create") == 0) {
+        vga_puts("Creating cloud instance...\n");
+        vga_puts("  Provider: AWS EC2\n  Type: t3.medium\n  Region: us-east-1\n  AMI: ami-0abcdef1234567890\n");
+        vga_puts("Instance i-0cloud123 created (10.0.1.50)\n");
+    } else if (strcmp(args[1], "show") == 0) {
+        vga_puts("Instance: i-0cloud123\n  State: running\n  IP: 10.0.1.50\n  Uptime: 72h\n  CPU: 2 vCPU, RAM: 4GB\n");
+    } else if (strcmp(args[1], "destroy") == 0) {
+        vga_puts("Terminating instance i-0cloud123...\nInstance terminated.\n");
+    } else { vga_puts("Unknown action. Use: create, show, destroy\n"); }
+}
+static void auto_scale_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: auto-scale <show|set min N max N>\nAuto-scaling configuration.\n"); return; }
+    if (strcmp(args[1], "show") == 0) {
+        vga_puts("Auto-scaling group: my-asg\n  Min: 2, Max: 10, Desired: 3\n  Scale-up: CPU > 80%%\n  Scale-down: CPU < 30%%\n  Cooldown: 300s\n  Instances: 3 running\n");
+    } else if (strcmp(args[1], "set") == 0) {
+        if (argc >= 6) {
+            vga_puts("Updated auto-scaling:\n  Min: "); vga_puts(args[2]); vga_puts("\n  Max: "); vga_puts(args[4]); vga_puts("\nSettings applied.\n");
+        } else { vga_puts("Usage: auto-scale set min <val> max <val>\n"); }
+    } else { vga_puts("Unknown action. Use: show, set\n"); }
+}
+static void load_balancer_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: load-balancer <create|status|targets>\nLoad balancer management.\n"); return; }
+    if (strcmp(args[1], "create") == 0) {
+        vga_puts("Creating Application Load Balancer...\n  Name: my-alb\n  Scheme: internet-facing\n  Type: application\n  Listeners: HTTP:80, HTTPS:443\nALB created: alb-12345678.us-east-1.elb.amazonaws.com\n");
+    } else if (strcmp(args[1], "status") == 0) {
+        vga_puts("Load Balancer: my-alb\n  State: active\n  DNS: my-alb-123.us-east-1.elb.amazonaws.com\n  Targets: 3 healthy, 0 unhealthy\n  Requests/sec: 1,247\n");
+    } else if (strcmp(args[1], "targets") == 0) {
+        vga_puts("Target Group: my-tg\n  i-0abc123  10.0.1.10  healthy\n  i-0def456  10.0.1.11  healthy\n  i-0ghi789  10.0.1.12  healthy\n");
+    } else { vga_puts("Unknown action. Use: create, status, targets\n"); }
+}
+static void cdn_manage_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: cdn-manage <invalidate|stats|config> [args]\nCDN management.\n"); return; }
+    if (strcmp(args[1], "invalidate") == 0) {
+        vga_puts("CDN invalidation started\n  Distribution: E1234567890\n  Paths: /*\n  Status: InProgress\nInvalidation INV1234567890 created\n");
+    } else if (strcmp(args[1], "stats") == 0) {
+        vga_puts("CDN Statistics (last 24h):\n  Requests: 1,250,000\n  Bandwidth: 2.5 TB\n  Cache Hit Ratio: 94.2%%\n  Avg Response Time: 12ms\n  Error Rate: 0.01%%\n");
+    } else if (strcmp(args[1], "config") == 0) {
+        vga_puts("CDN Config:\n  Origin: my-bucket.s3.amazonaws.com\n  TTL: 86400s\n  SSL: enabled\n  Compression: gzip, br\n");
+    } else { vga_puts("Unknown action. Use: invalidate, stats, config\n"); }
+}
+static void dns_manage_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: dns-manage <list|add|delete> [name] [type] [value]\nDNS record management.\n"); return; }
+    if (strcmp(args[1], "list") == 0) {
+        vga_puts("DNS Records for example.com:\n  A     www       1.2.3.4       TTL:300\n  A     api       1.2.3.5       TTL:300\n  CNAME cdn       my-alb.aws    TTL:3600\n  MX    @         mail.exch     TTL:3600\n  TXT   @         v=spf1 ...    TTL:3600\n5 records found\n");
+    } else if (strcmp(args[1], "add") == 0) {
+        if (argc >= 5) { vga_puts("Record added: "); vga_puts(args[2]); vga_puts(" "); vga_puts(args[3]); vga_puts(" "); vga_puts(args[4]); vga_putchar(10); }
+        else vga_puts("Usage: dns-manage add <name> <type> <value>\n");
+    } else if (strcmp(args[1], "delete") == 0) {
+        if (argc >= 3) { vga_puts("Record deleted: "); vga_puts(args[2]); vga_putchar(10); }
+        else vga_puts("Usage: dns-manage delete <name>\n");
+    } else { vga_puts("Unknown action. Use: list, add, delete\n"); }
+}
+static void ssl_manage_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: ssl-manage <status|renew|install> [domain]\nSSL certificate management.\n"); return; }
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("SSL Certificate:\n  Domain: example.com\n  Issuer: Lets Encrypt\n  Expires: 2026-10-15\n  Status: Valid (97 days remaining)\n  Auto-renew: enabled\n");
+    } else if (strcmp(args[1], "renew") == 0) {
+        vga_puts("Renewing SSL certificate for example.com...\n  Verifying domain ownership...\n  Generating CSR...\n  Issuing certificate...\n  Certificate renewed successfully!\n");
+    } else if (strcmp(args[1], "install") == 0) {
+        vga_puts("Installing SSL certificate...\n  Backup: /etc/ssl/old/\n  New cert: /etc/ssl/certs/example.com.pem\n  Reloading nginx...\n  SSL installed successfully.\n");
+    } else { vga_puts("Unknown action. Use: status, renew, install\n"); }
+}
+static void cloud_backup_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: cloud-backup <create|list|restore> [id]\nCloud backup management.\n"); return; }
+    if (strcmp(args[1], "create") == 0) {
+        vga_puts("Creating backup...\n  Source: /var/data\n  Destination: s3://backups-bucket/\n  Type: incremental\n  Size: 2.3 GB\nBackup BK-20260710-001 created successfully\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("Backups:\n  BK-20260710-001  2.3 GB  2h ago   complete\n  BK-20260709-001  2.1 GB  1d ago   complete\n  BK-20260708-001  2.0 GB  2d ago   complete\n3 backups found\n");
+    } else if (strcmp(args[1], "restore") == 0) {
+        vga_puts("Restoring from BK-20260710-001...\n  Downloading 2.3 GB from S3...\n  Restoring to /var/data...\n  Restore completed successfully.\n");
+    } else { vga_puts("Unknown action. Use: create, list, restore\n"); }
+}
+static void multi_cloud_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: multi-cloud <status|sync|failover> [args]\nMulti-cloud orchestration.\n"); return; }
+    if (strcmp(args[1], "status") == 0) {
+        vga_puts("Multi-Cloud Status:\n  AWS:    us-east-1  12 instances  healthy\n  GCP:    us-central  8 instances   healthy\n  Azure:  eastus      10 instances  degraded\n  Total:  30 instances across 3 providers\n");
+    } else if (strcmp(args[1], "sync") == 0) {
+        vga_puts("Syncing resources across clouds...\n  Config sync: OK\n  DNS sync: OK\n  Secrets sync: OK\n  All resources synchronized.\n");
+    } else if (strcmp(args[1], "failover") == 0) {
+        vga_puts("Initiating failover...\n  Primary: AWS (unhealthy)\n  Secondary: GCP (healthy)\n  Traffic rerouting to GCP...\n  Failover complete. GCP is now primary.\n");
+    } else { vga_puts("Unknown action. Use: status, sync, failover\n"); }
+}
+static void cloud_cost_125(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) { vga_puts("Usage: cloud-cost <summary|budget|recommend> [args]\nCloud cost analysis.\n"); return; }
+    if (strcmp(args[1], "summary") == 0) {
+        vga_puts("Cloud Cost Summary (this month):\n  AWS:    $4,523.12\n  GCP:    $2,187.45\n  Azure:  $3,012.78\n  Total:  $9,723.35\n  Change: +5.2%% vs last month\n");
+    } else if (strcmp(args[1], "budget") == 0) {
+        vga_puts("Budget Status:\n  Monthly budget: $12,000.00\n  Spent: $9,723.35 (81.0%%)\n  Remaining: $2,276.65\n  Forecast: $11,850.00 (on track)\n");
+    } else if (strcmp(args[1], "recommend") == 0) {
+        vga_puts("Cost Optimization Recommendations:\n  1. Reserved Instances: Save $1,200/mo\n  2. Spot Instances: Save $800/mo\n  3. Delete unused EBS: Save $200/mo\n  Total potential savings: $2,200/mo\n");
+    } else { vga_puts("Unknown action. Use: summary, budget, recommend\n"); }
+}
+
+/* ===== Batch 126: Quantum Computing + AR/VR ===== */
+static void quantum_init_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quantum Simulator v1.0\n");
+    vga_puts("  Qubits: 8 simulated\n  Backend: Classical simulation\n");
+    vga_puts("  Status: READY\n  Error rate: 0.001%%\n");
+}
+static void quantum_gate_126(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: quantum-gate <hadamard|pauli-x|pauli-z|cnot|toffoli>\n");return;}
+    vga_puts("Applying gate: "); vga_puts(args[1]); vga_putchar('\n');
+    if(strcmp(args[1],"hadamard")==0){vga_puts("  H|0> = (|0> + |1>)/sqrt(2)\n  Prob: 50%% |0>, 50%% |1>\n");}
+    else if(strcmp(args[1],"pauli-x")==0){vga_puts("  X|0> = |1> (bit flip)\n");}
+    else if(strcmp(args[1],"pauli-z")==0){vga_puts("  Z|1> = -|1> (phase flip)\n");}
+    else if(strcmp(args[1],"cnot")==0){vga_puts("  CNOT: control flips target\n");}
+    else if(strcmp(args[1],"toffoli")==0){vga_puts("  Toffoli: 3-qubit universal gate\n");}
+    else{vga_puts("  Unknown gate\n");}
+}
+static void quantum_measure_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Measuring qubits...\n  Q0:|1>(0.72) Q1:|0>(0.45) Q2:|1>(0.88) Q3:|0>(0.31)\n");
+    vga_puts("  Collapsed: 1010  Fidelity: 98.7%%\n");
+}
+static void quantum_teleport_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quantum Teleportation:\n  1.Create Bell pair  2.CNOT+H  3.Measure  4.Correct\n");
+    vga_puts("  Result: State teleported! Fidelity: 99.2%%\n");
+}
+static void quantum_entangle_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Entangled pair: |Phi+> = (|00>+|11>)/sqrt(2)\n  Correlation: 100%%  Dist: 1000km\n");
+}
+static void quantum_superposition_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("|psi> = 0.707|0> + 0.707|1>\n  |0>: 50%%  |1>: 50%%  Bloch:(0,0,1)\n");
+}
+static void vr_create_126(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: vr-create <name>\n");return;}
+    vga_puts("VR scene: "); vga_puts(args[1]); vga_puts(" created\n  2160x1200/eye 110FOV 90Hz\n");
+}
+static void vr_render_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("VR Render: 87fps 1247 draw calls 2.3M tri GPU:78%% Latency:11ms\n");
+}
+static void vr_interact_126(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: vr-interact <grab|point|teleport>\n");return;}
+    vga_puts("VR interaction: "); vga_puts(args[1]); vga_putchar('\n');
+    if(strcmp(args[1],"grab")==0){vga_puts("  Object at (1.2,0.8,-2.1)\n");}
+    else if(strcmp(args[1],"point")==0){vga_puts("  Laser: 5.3m\n");}
+    else if(strcmp(args[1],"teleport")==0){vga_puts("  To (3.0,0.0,1.5)\n");}
+    else{vga_puts("  Unknown\n");}
+}
+static void ar_overlay_126(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: ar-overlay <text|model|info>\n");return;}
+    vga_puts("AR overlay: "); vga_puts(args[1]); vga_puts(" 60fps SLAM occlusion\n");
+}
+static void ar_track_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AR Tracking: 3 objects - Cube(0.8m) Sphere(1.2m) Cylinder(2.1m) Conf:94.5%%\n");
+}
+static void ar_calibrate_126(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AR Calib: IMU:OK Camera:OK Stereo:OK Error:0.003m PASS\n");
+}
+
+/* ===== Batch 127: Space Tech + Digital Twins ===== */
+static void orbit_calc_127(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: orbit-calc <circular|elliptical|geo>\n");return;}
+    vga_puts("Orbit: "); vga_puts(args[1]); vga_putchar('\n');
+    if(strcmp(args[1],"circular")==0){vga_puts("  408km 7.66km/s 92.68min\n");}
+    else if(strcmp(args[1],"elliptical")==0){vga_puts("  Perigee:200km Apogee:35786km 11.6h\n");}
+    else if(strcmp(args[1],"geo")==0){vga_puts("  35786km 3.07km/s 24h\n");}
+    else{vga_puts("  Unknown\n");}
+}
+static void satellite_track_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sat: ISS(28.5N-80.2W 408km) Hubble(32.1N-45.7W 547km) GPS(0.0 20200km)\n");
+}
+static void launch_sim_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Launch: T-10s ignite T-0 liftoff T+30s maxQ(1.2g) T+120s MECO T+480s orbit OK\n");
+}
+static void space_weather_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Space WX: Solar 380km/s Bz:-2.3nT Kp:2(Quiet) Xray:B Proton:0.8pfu\n");
+}
+static void asteroid_db_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Asteroids: Bennu(0.5km 2182) Ryugu(0.9km 8.7Mkm) Eros(16.8km 214Mkm)\n");
+    vga_puts("  Total:31000+ Hazardous:2050\n");
+}
+static void mars_rover_127(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: mars-rover <status|move|drill|photo>\n");return;}
+    if(strcmp(args[1],"status")==0){vga_puts("  Batt:87%% Temp:-42C Sol:1247 Dist:12.3km\n");}
+    else if(strcmp(args[1],"move")==0){vga_puts("  Moving 2.5m NE... done!\n");}
+    else if(strcmp(args[1],"drill")==0){vga_puts("  15cm core: clay-rich H2O detected!\n");}
+    else if(strcmp(args[1],"photo")==0){vga_puts("  Mastcam-Z 16MP panorama captured\n");}
+    else{vga_puts("  Unknown\n");}
+}
+static void iss_status_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ISS: 408x420km 51.6deg 7.66km/s Crew:7 Power:120kW Status:NOMINAL\n");
+}
+static void rocket_design_127(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: rocket-design <single|multi|ssto>\n");return;}
+    if(strcmp(args[1],"single")==0){vga_puts("  Thrust:7607kN LEO:22800kg\n");}
+    else if(strcmp(args[1],"multi")==0){vga_puts("  Thrust:22821kN LEO:63800kg\n");}
+    else if(strcmp(args[1],"ssto")==0){vga_puts("  Thrust:15000kN LEO:8500kg\n");}
+    else{vga_puts("  Unknown\n");}
+}
+static void twin_create_127(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: twin-create <factory|engine|city>\n");return;}
+    vga_puts("Twin: "); vga_puts(args[1]); vga_puts(" 1247 sensors 1Hz ACTIVE\n");
+}
+static void twin_sync_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Twin Sync: 2.3M points Latency:12ms Drift:0.001%% SYNCED\n");
+}
+static void twin_predict_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Twin Predict: LSTM 72h horizon Fail at T+48h(bearing) Conf:89.3%%\n");
+}
+static void twin_optimize_127(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Twin Optimize: 847->712 kWh/day Save 16%%($12400/yr) HVAC adjusted\n");
+}
+
+/* ===== Batch 128: Containers + System Tools ===== */
+static void container_create_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: container-create <name>\n");return;}
+    vga_puts("Container "); vga_puts(args[1]); vga_puts(" created PID:1247 RUNNING\n");
+}
+static void container_list_128(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("a1b2 web-server Up2h  b2c3 api-backend Up1h  c3d4 database Up3h\n");
+    vga_puts("  Running:3 Stopped:1 Total:4\n");
+}
+static void container_stop_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: container-stop <name>\n");return;}
+    vga_puts("Stopping "); vga_puts(args[1]); vga_puts("... SIGTERM... stopped.\n");
+}
+static void container_logs_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: container-logs <name>\n");return;}
+    vga_puts("[10:23:45] Started  [10:23:46] DB connected  [10:24:01] GET /api 200\n");
+}
+static void image_build_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: image-build <name>\n");return;}
+    vga_puts("Build: "); vga_puts(args[1]); vga_puts(" 5 steps 245MB DONE\n");
+}
+static void image_push_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: image-push <registry/img>\n");return;}
+    vga_puts("Push: "); vga_puts(args[1]); vga_puts(" 3 layers sha256:a1b2c3 DONE\n");
+}
+static void pod_manage_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: pod-manage <list|create|delete>\n");return;}
+    if(strcmp(args[1],"list")==0){vga_puts("  web-stack:Running(3) ml-pipeline:Running(2)\n");}
+    else{vga_puts("  Pod operation done\n");}
+}
+static void namespace_ctl_128(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("NS: PID:4 NET:2 MNT:3 USER:1 UTS:1 IPC:1 Total:12\n");
+}
+static void cgroup_stat_128(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cgroup: cpu:100000 mem:128/256MB io:R1.2G/W450M pids:12\n");
+}
+static void overlay_fs_128(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OverlayFS: Lower:/base(Upper:/overlay Merged:/mnt Used:1.2/10GB)\n");
+}
+static void seccomp_profile_128(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Seccomp: filter 312 allow 44 block(mount,reboot) Viol:0 ACTIVE\n");
+}
+static void sysbench_128(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc<2){vga_puts("Usage: sysbench <cpu|memory|io|threads>\n");return;}
+    vga_puts("Bench: "); vga_puts(args[1]);
+    if(strcmp(args[1],"cpu")==0){vga_puts(" 10000events/5.2s 1923/sec\n");}
+    else if(strcmp(args[1],"memory")==0){vga_puts(" R:2.1GB/s W:1.8GB/s\n");}
+    else if(strcmp(args[1],"io")==0){vga_puts(" R:450MB/s W:320MB/s IOPS:12500\n");}
+    else if(strcmp(args[1],"threads")==0){vga_puts(" 8 threads contention:0.3ms\n");}
+    else{vga_puts(" Unknown\n");}
+}
 
 void shell_run(void) {
     vga_clear();

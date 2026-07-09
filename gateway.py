@@ -1,5 +1,5 @@
-#!/usr/bin/env python3
-"""BYO-OS Web Management Panel v11 - Enhanced sysinfo + navigation fix."""
+﻿#!/usr/bin/env python3
+"""BYO-OS Web Management Panel v12 - Fixed serial comms + robust UI."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -18,6 +18,7 @@ class SerialBridge:
         self._connecting = False
         self._send_count = 0
         self._recv_count = 0
+        self._prompt_seen = False
 
     def _log(self, msg):
         ts = time.strftime("%H:%M:%S")
@@ -50,8 +51,8 @@ class SerialBridge:
                         self.sock.connect(("127.0.0.1", SERIAL_PORT))
                         self.sock.settimeout(None)
                         self.ok = True
-                        time.sleep(1.0)
-                        self._drain()
+                        time.sleep(0.5)
+                        self._flush_buffer()
                         self._log("Serial CONNECTED OK")
                         return True
                     except Exception as e:
@@ -63,11 +64,12 @@ class SerialBridge:
         finally:
             self._connecting = False
 
-    def _drain(self):
+    def _flush_buffer(self):
+        """Quick non-blocking flush of any pending data."""
         if not self.sock:
             return
         try:
-            self.sock.settimeout(0.1)
+            self.sock.settimeout(0.2)
             while True:
                 d = self.sock.recv(4096)
                 if not d:
@@ -114,11 +116,11 @@ class SerialBridge:
 
     def send_command(self, cmd, timeout=10.0):
         if not self._ensure_connected():
-            return "ERROR: Serial not connected.\nStart QEMU with: qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait"
+            return "ERROR: Serial not connected.\nStart QEMU with serial: -serial tcp::4321,server,nowait"
 
         with self.lock:
             try:
-                self._drain()
+                # Do NOT drain before sending - the drain could eat the response
                 self._log(f"SEND: {cmd}")
                 self._send_count += 1
 
@@ -128,29 +130,41 @@ class SerialBridge:
 
                 resp = b""
                 end_time = time.time() + timeout
-                self.sock.settimeout(0.5)
-                idle = 0
+                self.sock.settimeout(0.3)
+                empty_reads = 0
+
                 while time.time() < end_time:
                     try:
                         d = self._safe_recv(4096)
                         if d:
                             resp += d
-                            idle = 0
+                            empty_reads = 0
                             self._recv_count += 1
                             text = resp.decode("utf-8", errors="ignore")
                             # Stop when we see the shell prompt
                             if "BYO-OS>" in text or "BYO-OS $" in text:
-                                break
-                            # Also stop on common error patterns
-                            if text.endswith("BYO-OS> ") or text.endswith("BYO-OS>"):
+                                # Small delay to catch any trailing output
+                                time.sleep(0.05)
+                                try:
+                                    self.sock.settimeout(0.1)
+                                    extra = self._safe_recv(4096)
+                                    if extra:
+                                        resp += extra
+                                except:
+                                    pass
                                 break
                         else:
-                            idle += 1
-                            if idle > 20:
+                            empty_reads += 1
+                            # If we got data before and now it's quiet, we're done
+                            if resp and empty_reads >= 3:
+                                break
+                            if empty_reads >= 40:
                                 break
                     except socket.timeout:
-                        idle += 1
-                        if idle > 20:
+                        empty_reads += 1
+                        if resp and empty_reads >= 3:
+                            break
+                        if empty_reads >= 40:
                             break
                     except Exception as e:
                         self._log(f"Recv error: {e}")
@@ -314,7 +328,7 @@ def serial_retry_thread():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v11")
+    print("  BYO-OS Web Management Panel v12")
     print("=" * 60)
     print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")

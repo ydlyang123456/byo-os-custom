@@ -1,0 +1,20 @@
+﻿*** Begin Patch
+*** Update File: kernel/shell.c
+@@ static void cmd_diff108 @@
+ static void cmd_diff108(int argc, char args[][CMD_MAX_LEN]);
++
++/* Batch 110: Virtualization and Container Enhancement Commands */
++static void cmd_qemu_manage110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_docker_build110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_docker_compose110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_kubectl_apply110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_helm_install110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_vagrant_up110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_ansible_play110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_terraform_plan110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_packer_build110(int argc, char args[][CMD_MAX_LEN]);
++static void cmd_vsphere_manage110(int argc, char args[][CMD_MAX_LEN]);
+
+
+ static const cmd_entry commands[] = {
+*** End Patch

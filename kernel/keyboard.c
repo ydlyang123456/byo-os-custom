@@ -1,4 +1,4 @@
-/* BYO-OS - PS/2 Keyboard Driver */
+﻿/* BYO-OS - PS/2 Keyboard Driver (v2 - Enhanced QEMU SDL support) */
 #include <kernel.h>
 
 /* Buffer size (must be power of 2 for fast modulo) */
@@ -39,8 +39,11 @@ static int caps_lock = 0;
 /* E0 extended scancode prefix state */
 static int e0_prefix = 0;
 
+/* Debug: last scancode seen */
+static volatile uint8_t last_scancode = 0;
+
 /*
- * Scancode set 1 — normal (unshifted) ASCII mapping.
+ * Scancode set 1 - normal (unshifted) ASCII mapping.
  * Index = scancode, value = ASCII character (0 = unprintable / no mapping).
  */
 static const char scancode_ascii[] = {
@@ -59,7 +62,7 @@ static const char scancode_ascii[] = {
 };
 
 /*
- * Scancode set 1 — shifted ASCII mapping.
+ * Scancode set 1 - shifted ASCII mapping.
  * Index = scancode, value = shifted character (0 = unprintable).
  */
 static const char scancode_shift[] = {
@@ -92,6 +95,7 @@ static int e0_scancode_map(uint8_t sc) {
     case 0x52: return KEY_INSERT;
     case 0x53: return KEY_DELETE;
     case 0x1C: return '\r';  /* Keypad Enter */
+    case 0x35: return '/';   /* Keypad / */
     default:   return 0;
     }
 }
@@ -110,6 +114,7 @@ void keyboard_handler(registers_t *regs) {
     (void)regs;
 
     uint8_t scancode = inb(0x60);
+    last_scancode = scancode;
 
     /* --- E0 prefix handling --- */
     if (e0_prefix) {
@@ -126,7 +131,7 @@ void keyboard_handler(registers_t *regs) {
         return;
     }
 
-    /* Detect E0 prefix byte — the real scancode follows next IRQ. */
+    /* Detect E0 prefix byte - the real scancode follows next IRQ. */
     if (scancode == 0xE0) {
         e0_prefix = 1;
         return;
@@ -185,6 +190,7 @@ void keyboard_init(void) {
     alt_pressed = 0;
     caps_lock = 0;
     e0_prefix = 0;
+    last_scancode = 0;
     isr_register_handler(33, keyboard_handler);
 }
 

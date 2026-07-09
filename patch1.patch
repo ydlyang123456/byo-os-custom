@@ -1,0 +1,20 @@
+*** Begin Patch
+*** Update File: kernel/shell.c
+@@ static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]);
+ static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]);
++/* Batch 120: Life Services and Daily Tools Commands */
++static void weather_120(int argc, char args[][CMD_MAX_LEN]);
++static void news_120(int argc, char args[][CMD_MAX_LEN]);
++static void todo_120(int argc, char args[][CMD_MAX_LEN]);
++static void habit_tracker_120(int argc, char args[][CMD_MAX_LEN]);
++static void meal_planner_120(int argc, char args[][CMD_MAX_LEN]);
++static void workout_120(int argc, char args[][CMD_MAX_LEN]);
++static void budget_120(int argc, char args[][CMD_MAX_LEN]);
++static void shopping_list_120(int argc, char args[][CMD_MAX_LEN]);
++static void recipe_120(int argc, char args[][CMD_MAX_LEN]);
++static void plant_care_120(int argc, char args[][CMD_MAX_LEN]);
++static void pet_care_120(int argc, char args[][CMD_MAX_LEN]);
++static void home_automation_120(int argc, char args[][CMD_MAX_LEN]);
+ 
+ static const cmd_entry commands[] = {
+*** End Patch
