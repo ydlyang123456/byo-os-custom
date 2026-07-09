@@ -7585,7 +7585,6 @@ void shell_run(void) {
                 input_buf[0] = 0;
                 break;
             }
-            }
             char c = keyboard_getchar();
             if (!c) continue;
 
@@ -7615,3 +7614,4 @@ void shell_run(void) {
             }
         }
     }
+}
