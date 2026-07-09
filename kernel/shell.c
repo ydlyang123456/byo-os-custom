@@ -14907,6 +14907,64 @@ static void cmd_hardhat210(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_truffle210(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_foundry210(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* Batch 211: Mobile Development */
+static void cmd_android211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ios211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_flutter211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_react211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kotlin211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_swift211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dart211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xcode211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gradle211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cocoa211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fastlane211(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_appcelerator211(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 212: Game Development */
+static void cmd_unity212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unreal212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_godot212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gamemaker212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_defold212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_love212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_phaser212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pixi212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_three212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_babylon212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cocos212(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_libgdx212(int argc, char args[][CMD_MAX_LEN]);
+
+
+/* Batch 213: Office & Productivity */
+static void cmd_libreoffice213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nextcloud213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_owncloud213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_onlyoffice213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_collabora213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zim213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_joplin213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_obsidian213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_logseq213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_notion213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_coda213(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_airtable213(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 214: Creative & Design */
+static void cmd_figma214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sketch214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_adobe214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_canva214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_envato214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_shutterstock214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unsplash214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pexels214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dribbble214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_behance214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_artstation214(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_deviantart214(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -17880,6 +17938,32 @@ static const cmd_entry commands[] = {
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
     {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 213: Office & Productivity */
+    {"libreoffice11", cmd_libreoffice213}, {"nextcloud11", cmd_nextcloud213}, {"owncloud11", cmd_owncloud213},
+    {"onlyoffice11", cmd_onlyoffice213}, {"collabora11", cmd_collabora213}, {"zim11", cmd_zim213},
+    {"joplin11", cmd_joplin213}, {"obsidian11", cmd_obsidian213}, {"logseq11", cmd_logseq213},
+    {"notion11", cmd_notion213}, {"coda11", cmd_coda213}, {"airtable11", cmd_airtable213},
+
+    /* Batch 214: Creative & Design */
+    {"figma12", cmd_figma214}, {"sketch12", cmd_sketch214}, {"adobe12", cmd_adobe214},
+    {"canva12", cmd_canva214}, {"envato12", cmd_envato214}, {"shutterstock12", cmd_shutterstock214},
+    {"unsplash12", cmd_unsplash214}, {"pexels12", cmd_pexels214}, {"dribbble12", cmd_dribbble214},
+    {"behance12", cmd_behance214}, {"artstation12", cmd_artstation214}, {"deviantart12", cmd_deviantart214},
+
+
+    /* Batch 211: Mobile Development */
+    {"android9", cmd_android211}, {"ios9", cmd_ios211}, {"flutter9", cmd_flutter211},
+    {"react9", cmd_react211}, {"kotlin9", cmd_kotlin211}, {"swift9", cmd_swift211},
+    {"dart9", cmd_dart211}, {"xcode9", cmd_xcode211}, {"gradle9", cmd_gradle211},
+    {"cocoa9", cmd_cocoa211}, {"fastlane9", cmd_fastlane211}, {"appcelerator9", cmd_appcelerator211},
+
+    /* Batch 212: Game Development */
+    {"unity10", cmd_unity212}, {"unreal10", cmd_unreal212}, {"godot10", cmd_godot212},
+    {"gamemaker10", cmd_gamemaker212}, {"defold10", cmd_defold212}, {"love10", cmd_love212},
+    {"phaser10", cmd_phaser212}, {"pixi10", cmd_pixi212}, {"three10", cmd_three212},
+    {"babylon10", cmd_babylon212}, {"cocos10", cmd_cocos212}, {"libgdx10", cmd_libgdx212},
+
 
     /* Batch 209: IoT & Embedded */
     {"mqtt7", cmd_mqtt209}, {"coap7", cmd_coap209}, {"zigbee7", cmd_zigbee209},
@@ -42508,6 +42592,452 @@ static void cmd_foundry210(int argc, char args[][CMD_MAX_LEN]) {
         vga_puts("foundry8 v1.0.0\n");
     } else {
         vga_puts("foundry8: executing\n");
+    }
+}
+
+
+
+/* ===== Batch 211: Mobile Development ===== */
+
+static void cmd_android211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: android9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("android9 v1.0.0\n");
+    } else {
+        vga_puts("android9: executing\n");
+    }
+}
+
+static void cmd_ios211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ios9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("ios9 v1.0.0\n");
+    } else {
+        vga_puts("ios9: executing\n");
+    }
+}
+
+static void cmd_flutter211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: flutter9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("flutter9 v1.0.0\n");
+    } else {
+        vga_puts("flutter9: executing\n");
+    }
+}
+
+static void cmd_react211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: react9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("react9 v1.0.0\n");
+    } else {
+        vga_puts("react9: executing\n");
+    }
+}
+
+static void cmd_kotlin211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kotlin9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("kotlin9 v1.0.0\n");
+    } else {
+        vga_puts("kotlin9: executing\n");
+    }
+}
+
+static void cmd_swift211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: swift9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("swift9 v1.0.0\n");
+    } else {
+        vga_puts("swift9: executing\n");
+    }
+}
+
+static void cmd_dart211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dart9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("dart9 v1.0.0\n");
+    } else {
+        vga_puts("dart9: executing\n");
+    }
+}
+
+static void cmd_xcode211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: xcode9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("xcode9 v1.0.0\n");
+    } else {
+        vga_puts("xcode9: executing\n");
+    }
+}
+
+static void cmd_gradle211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gradle9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("gradle9 v1.0.0\n");
+    } else {
+        vga_puts("gradle9: executing\n");
+    }
+}
+
+static void cmd_cocoa211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cocoa9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("cocoa9 v1.0.0\n");
+    } else {
+        vga_puts("cocoa9: executing\n");
+    }
+}
+
+static void cmd_fastlane211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fastlane9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("fastlane9 v1.0.0\n");
+    } else {
+        vga_puts("fastlane9: executing\n");
+    }
+}
+
+static void cmd_appcelerator211(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: appcelerator9 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("appcelerator9 v1.0.0\n");
+    } else {
+        vga_puts("appcelerator9: executing\n");
+    }
+}
+
+
+/* ===== Batch 212: Game Development ===== */
+
+static void cmd_unity212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unity10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("unity10 v1.0.0\n");
+    } else {
+        vga_puts("unity10: executing\n");
+    }
+}
+
+static void cmd_unreal212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unreal10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("unreal10 v1.0.0\n");
+    } else {
+        vga_puts("unreal10: executing\n");
+    }
+}
+
+static void cmd_godot212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: godot10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("godot10 v1.0.0\n");
+    } else {
+        vga_puts("godot10: executing\n");
+    }
+}
+
+static void cmd_gamemaker212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gamemaker10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("gamemaker10 v1.0.0\n");
+    } else {
+        vga_puts("gamemaker10: executing\n");
+    }
+}
+
+static void cmd_defold212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: defold10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("defold10 v1.0.0\n");
+    } else {
+        vga_puts("defold10: executing\n");
+    }
+}
+
+static void cmd_love212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: love10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("love10 v1.0.0\n");
+    } else {
+        vga_puts("love10: executing\n");
+    }
+}
+
+static void cmd_phaser212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: phaser10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("phaser10 v1.0.0\n");
+    } else {
+        vga_puts("phaser10: executing\n");
+    }
+}
+
+static void cmd_pixi212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pixi10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("pixi10 v1.0.0\n");
+    } else {
+        vga_puts("pixi10: executing\n");
+    }
+}
+
+static void cmd_three212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: three10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("three10 v1.0.0\n");
+    } else {
+        vga_puts("three10: executing\n");
+    }
+}
+
+static void cmd_babylon212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: babylon10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("babylon10 v1.0.0\n");
+    } else {
+        vga_puts("babylon10: executing\n");
+    }
+}
+
+static void cmd_cocos212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cocos10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("cocos10 v1.0.0\n");
+    } else {
+        vga_puts("cocos10: executing\n");
+    }
+}
+
+static void cmd_libgdx212(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: libgdx10 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("libgdx10 v1.0.0\n");
+    } else {
+        vga_puts("libgdx10: executing\n");
+    }
+}
+
+
+
+/* ===== Batch 213: Office & Productivity ===== */
+
+static void cmd_libreoffice213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: libreoffice11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("libreoffice11 v1.0.0\n");
+    } else {
+        vga_puts("libreoffice11: executing\n");
+    }
+}
+
+static void cmd_nextcloud213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nextcloud11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("nextcloud11 v1.0.0\n");
+    } else {
+        vga_puts("nextcloud11: executing\n");
+    }
+}
+
+static void cmd_owncloud213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: owncloud11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("owncloud11 v1.0.0\n");
+    } else {
+        vga_puts("owncloud11: executing\n");
+    }
+}
+
+static void cmd_onlyoffice213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: onlyoffice11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("onlyoffice11 v1.0.0\n");
+    } else {
+        vga_puts("onlyoffice11: executing\n");
+    }
+}
+
+static void cmd_collabora213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: collabora11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("collabora11 v1.0.0\n");
+    } else {
+        vga_puts("collabora11: executing\n");
+    }
+}
+
+static void cmd_zim213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: zim11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("zim11 v1.0.0\n");
+    } else {
+        vga_puts("zim11: executing\n");
+    }
+}
+
+static void cmd_joplin213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: joplin11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("joplin11 v1.0.0\n");
+    } else {
+        vga_puts("joplin11: executing\n");
+    }
+}
+
+static void cmd_obsidian213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: obsidian11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("obsidian11 v1.0.0\n");
+    } else {
+        vga_puts("obsidian11: executing\n");
+    }
+}
+
+static void cmd_logseq213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: logseq11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("logseq11 v1.0.0\n");
+    } else {
+        vga_puts("logseq11: executing\n");
+    }
+}
+
+static void cmd_notion213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: notion11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("notion11 v1.0.0\n");
+    } else {
+        vga_puts("notion11: executing\n");
+    }
+}
+
+static void cmd_coda213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: coda11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("coda11 v1.0.0\n");
+    } else {
+        vga_puts("coda11: executing\n");
+    }
+}
+
+static void cmd_airtable213(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: airtable11 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("airtable11 v1.0.0\n");
+    } else {
+        vga_puts("airtable11: executing\n");
+    }
+}
+
+
+/* ===== Batch 214: Creative & Design ===== */
+
+static void cmd_figma214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: figma12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("figma12 v1.0.0\n");
+    } else {
+        vga_puts("figma12: executing\n");
+    }
+}
+
+static void cmd_sketch214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sketch12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("sketch12 v1.0.0\n");
+    } else {
+        vga_puts("sketch12: executing\n");
+    }
+}
+
+static void cmd_adobe214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: adobe12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("adobe12 v1.0.0\n");
+    } else {
+        vga_puts("adobe12: executing\n");
+    }
+}
+
+static void cmd_canva214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: canva12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("canva12 v1.0.0\n");
+    } else {
+        vga_puts("canva12: executing\n");
+    }
+}
+
+static void cmd_envato214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: envato12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("envato12 v1.0.0\n");
+    } else {
+        vga_puts("envato12: executing\n");
+    }
+}
+
+static void cmd_shutterstock214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: shutterstock12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("shutterstock12 v1.0.0\n");
+    } else {
+        vga_puts("shutterstock12: executing\n");
+    }
+}
+
+static void cmd_unsplash214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unsplash12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("unsplash12 v1.0.0\n");
+    } else {
+        vga_puts("unsplash12: executing\n");
+    }
+}
+
+static void cmd_pexels214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pexels12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("pexels12 v1.0.0\n");
+    } else {
+        vga_puts("pexels12: executing\n");
+    }
+}
+
+static void cmd_dribbble214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dribbble12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("dribbble12 v1.0.0\n");
+    } else {
+        vga_puts("dribbble12: executing\n");
+    }
+}
+
+static void cmd_behance214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: behance12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("behance12 v1.0.0\n");
+    } else {
+        vga_puts("behance12: executing\n");
+    }
+}
+
+static void cmd_artstation214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: artstation12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("artstation12 v1.0.0\n");
+    } else {
+        vga_puts("artstation12: executing\n");
+    }
+}
+
+static void cmd_deviantart214(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: deviantart12 [command]\n"); return; }
+    if (strcmp(args[1], "version") == 0) {
+        vga_puts("deviantart12 v1.0.0\n");
+    } else {
+        vga_puts("deviantart12: executing\n");
     }
 }
 
