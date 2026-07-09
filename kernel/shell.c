@@ -4758,12 +4758,46 @@ static void cmd_od(int argc, char args[][CMD_MAX_LEN]) {
 
 
 static void cmd_base32(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("base32: base32 encode/decode\n");
+    if (argc < 2) { vga_puts("Usage: base32 <file>\n"); return; }
+    char buf[4096];
+    int r = fs_read_file(args[1], buf, 4095);
+    if (r < 0) { vga_puts("base32: "); vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+    int bits = 0, val = 0;
+    for (int i = 0; i < r; i++) {
+        val = (val << 8) | ((unsigned char)buf[i]);
+        bits += 8;
+        while (bits >= 5) {
+            bits -= 5;
+            vga_putchar(alphabet[(val >> bits) & 0x1F]);
+        }
+    }
+    if (bits > 0) {
+        vga_putchar(alphabet[(val << (5 - bits)) & 0x1F]);
+    }
+    vga_putchar('\n');
 }
 
+
 static void cmd_basenc(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("basenc: base encoding\n");
+    if (argc < 2) { vga_puts("Usage: basenc <file>\n"); return; }
+    char buf[4096];
+    int r = fs_read_file(args[1], buf, 4095);
+    if (r < 0) { vga_puts("basenc: "); vga_puts(args[1]); vga_puts(": No such file\n"); return; }
+    /* Base64 encode */
+    char b64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    for (int i = 0; i < r; i += 3) {
+        unsigned int n = ((unsigned char)buf[i]) << 16;
+        if (i + 1 < r) n |= ((unsigned char)buf[i+1]) << 8;
+        if (i + 2 < r) n |= ((unsigned char)buf[i+2]);
+        vga_putchar(b64[(n >> 18) & 0x3F]);
+        vga_putchar(b64[(n >> 12) & 0x3F]);
+        vga_putchar((i + 1 < r) ? b64[(n >> 6) & 0x3F] : '=');
+        vga_putchar((i + 2 < r) ? b64[n & 0x3F] : '=');
+    }
+    vga_putchar('\n');
 }
+
 
 static void cmd_mkfifo(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: mkfifo <name>\n"); return; }
