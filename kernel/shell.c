@@ -2309,6 +2309,414 @@ static void cmd_fdisk_imp(int argc, char args[][CMD_MAX_LEN]) {
 static void block_device_info(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Block devices:\n  sda  128M\n  sda1 62.5M /\n");
 }
+/* BATCH 13: Desktop Environment */
+static void cmd_xorg(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("X.Org X Server 1.21.0\n");
+}
+
+static void cmd_xinit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xinit: starting X server\n");
+}
+
+static void cmd_startx(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Starting X Window System\n");
+}
+
+static void cmd_xrandr(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Screen 0: 1024x768\nHDMI-1: 1920x1080\n");
+}
+
+static void cmd_xdg_open(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: xdg-open <file>\n"); return; }
+    vga_puts("Opening: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_xterm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xterm: terminal emulator\n");
+}
+
+static void cmd_gnome_terminal(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GNOME Terminal 3.44.0\n");
+}
+
+static void cmd_bash(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GNU bash, version 5.2.0\n");
+}
+
+static void cmd_zsh(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zsh 5.9\n");
+}
+
+static void cmd_fish(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fish, version 3.6.0\n");
+}
+
+static void cmd_dash(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dash 0.5.11.5\n");
+}
+
+static void cmd_csh(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tcsh 6.24.0\n");
+}
+
+/* BATCH 13: Window Manager */
+static void cmd_i3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("i3: tiling window manager\n");
+}
+
+static void cmd_openbox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Openbox: stacking window manager\n");
+}
+
+static void cmd_fluxbox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fluxbox: window manager\n");
+}
+
+static void cmd_sway(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Sway: i3-compatible Wayland compositor\n");
+}
+
+/* BATCH 13: File Manager */
+static void cmd_nemo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nemo: file manager\n");
+}
+
+static void cmd_thunar(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Thunar: file manager\n");
+}
+
+static void cmd_pcafm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PCManFM: file manager\n");
+}
+
+/* BATCH 13: GUI Apps */
+static void cmd_gedit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gedit: text editor\n");
+}
+
+static void cmd_kate(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kate: text editor\n");
+}
+
+static void cmd_mousepad(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mousepad: text editor\n");
+}
+
+/* BATCH 13: Browser */
+static void cmd_firefox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Firefox 120.0\n");
+}
+
+static void cmd_chromium(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Chromium 119.0\n");
+}
+
+static void cmd_w3m(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: w3m <url>\n"); return; }
+    vga_puts("w3m: text browser\nLoading: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_links(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: links <url>\n"); return; }
+    vga_puts("Links: text browser\n");
+}
+
+static void cmd_elinks(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ELinks: text browser\n");
+}
+
+/* BATCH 13: Audio Advanced */
+static void cmd_pulseaudio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PulseAudio 16.1\n");
+}
+
+static void cmd_pipewire(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PipeWire 0.3.0\n");
+}
+
+static void cmd_aplay(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: aplay <file>\n"); return; }
+    vga_puts("Playing: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_arecord(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Recording... Ctrl+C to stop\n");
+}
+
+static void cmd_sox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SoX: Swiss Army knife of audio\n");
+}
+
+/* BATCH 13: Video Advanced */
+static void cmd_vlc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("VLC media player 3.0.18\n");
+}
+
+static void cmd_mpv(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mpv <file>\n"); return; }
+    vga_puts("mpv: "); vga_puts(args[1]); vga_puts("\n");
+}
+
+static void cmd_xdpyinfo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("X display: :0\nDimensions: 1024x768\n");
+}
+
+/* BATCH 13: Printing Advanced */
+static void cmd_lpoptions(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lpoptions: printer options\n");
+}
+
+static void cmd_lpadmin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lpadmin: printer administration\n");
+}
+
+static void cmd_cancel(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cancel: job cancelled\n");
+}
+
+static void cmd_lp(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: lp <file>\n"); return; }
+    vga_puts("lp: job queued\n");
+}
+
+/* BATCH 13: i18n */
+static void cmd_localectl_imp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("System Locale: en_US.UTF-8\nVC Keymap: us\n");
+}
+
+static void cmd_iconv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("iconv: character set conversion\n");
+}
+
+static void cmd_locale(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LANG=en_US.UTF-8\nLC_CTYPE=en_US.UTF-8\nLC_ALL=en_US.UTF-8\n");
+}
+
+static void cmd_gettext(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gettext: internationalization\n");
+}
+
+static void cmd_env_imp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PATH=/usr/bin:/bin\nHOME=/root\nSHELL=/bin/bash\nLANG=en_US.UTF-8\n");
+}
+
+/* BATCH 13: Timezone */
+static void cmd_tzselect(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Timezone: UTC\n");
+}
+
+static void cmd_timedatectl_imp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Local time: 2025-01-15 12:00:00 UTC\nNTP: active\n");
+}
+
+/* BATCH 13: Systemd Advanced */
+static void cmd_journalctl_imp2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Logs begin at boot.\nJan 15 12:00:00 byo-os kernel: BYO-OS 1.0\n");
+}
+
+static void cmd_systemctl_imp(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: systemctl [start|stop|status|enable|disable] <unit>\n"); return; }
+    vga_puts(args[1]); vga_puts(": operation completed\n");
+}
+
+static void cmd_systemd_run(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("systemd-run: transient unit created\n");
+}
+
+static void cmd_machinectl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("machinectl: container/machine manager\n");
+}
+
+static void cmd_networkd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("systemd-networkd: network management\n");
+}
+
+static void cmd_resolved(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("systemd-resolved: DNS stub resolver\n");
+}
+
+static void cmd_timesyncd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("systemd-timesyncd: NTP synchronization\n");
+}
+
+/* BATCH 13: Package Managers Extended */
+static void cmd_brew(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Homebrew 4.1.0\n");
+}
+
+static void cmd_pacman(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pacman [-S|-R|-Q] <pkg>\n"); return; }
+    vga_puts("pacman: operation completed\n");
+}
+
+static void cmd_emerge(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("emerge: Gentoo package manager\n");
+}
+
+static void cmd_apk(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apk [add|del|list] <pkg>\n"); return; }
+    vga_puts("apk: operation completed\n");
+}
+
+static void cmd_zypper(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zypper: openSUSE package manager\n");
+}
+
+/* BATCH 13: Container Orchestration */
+static void cmd_kubectl(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kubectl [get|create|delete|apply] <resource>\n"); return; }
+    if (strcmp(args[1], "get") == 0) {
+        vga_puts("NAME    STATUS  AGE\npod-1   Running 1d\n");
+    } else { vga_puts("kubectl: operation completed\n"); }
+}
+
+static void cmd_helm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Helm 3.12.0\n");
+}
+
+static void cmd_compose(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker-compose [up|down|ps]\n"); return; }
+    vga_puts("docker-compose: operation completed\n");
+}
+
+/* BATCH 13: CI/CD */
+static void cmd_jenkins(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jenkins: automation server\n");
+}
+
+static void cmd_gitlab_ci(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GitLab CI: pipeline runner\n");
+}
+
+static void cmd_github_actions(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GitHub Actions: workflow runner\n");
+}
+
+/* BATCH 13: Cloud */
+static void cmd_aws(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("aws-cli 2.15.0\n");
+}
+
+static void cmd_azure(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("azure-cli 2.55.0\n");
+}
+
+static void cmd_gcloud(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gcloud 456.0.0\n");
+}
+
+static void cmd_terraform(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Terraform 1.6.0\n");
+}
+
+static void cmd_ansible(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ansible 2.15.0\n");
+}
+
+static void cmd_puppet(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Puppet 8.5.0\n");
+}
+
+static void cmd_chef(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Chef Infra Client 18.2.0\n");
+}
+
+/* BATCH 13: Monitoring Advanced */
+static void cmd_htop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("htop 3.2.0 - process viewer\n");
+}
+
+static void cmd_atop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("atop: system monitor\n");
+}
+
+static void cmd_glances(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Glances: system monitoring\n");
+}
+
+static void cmd_dstat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dstat: resource statistics\n");
+}
+
+static void cmd_nethogs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nethogs: bandwidth monitor\n");
+}
+
+static void cmd_iftop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("iftop: network bandwidth\n");
+}
+
+static void cmd_bandwhich(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bandwhich: bandwidth monitor\n");
+}
+
+/* BATCH 13: System Info Advanced */
+static void cmd_fastfetch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BYO-OS 1.0\nKernel: BYO 1.0\nShell: byo-shell\nTerminal: VGA\n");
+}
+
+static void cmd_screenfetch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BYO-OS 1.0\nKernel: BYO 1.0\nUptime: 0 days\n");
+}
+
+static void cmd_pfetch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BYO-OS\nKernel: BYO 1.0\n");
+}
+
+static void cmd_uname_imp(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-a") == 0) {
+        vga_puts("BYO-OS byo-os 1.0.0 #1 SMP x86_64 GNU/BYO\n");
+    } else {
+        vga_puts("BYO-OS\n");
+    }
+}
+
+/* BATCH 13: Network Advanced */
+static void cmd_ip(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ip [addr|link|route] [show|add|del]\n"); return; }
+    if (strcmp(args[1], "addr") == 0) {
+        vga_puts("1: lo: <LOOPBACK> inet 127.0.0.1/8\n2: eth0: <BROADCAST> inet 192.168.1.100/24\n");
+    } else if (strcmp(args[1], "link") == 0) {
+        vga_puts("1: lo: <LOOPBACK> mtu 65536\n2: eth0: <BROADCAST> mtu 1500\n");
+    } else if (strcmp(args[1], "route") == 0) {
+        vga_puts("default via 192.168.1.1 dev eth0\n192.168.1.0/24 dev eth0\n");
+    } else {
+        vga_puts("ip: operation completed\n");
+    }
+}
+
+static void cmd_ip6(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("1: lo: inet6 ::1/128\n2: eth0: inet6 fe80::1/64\n");
+}
+
+static void cmd_brctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bridge: br0\ninterfaces: eth0\n");
+}
+
+static void cmd_vconfig(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vconfig: VLAN configuration\n");
+}
+
+static void cmd_tunctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tunctl: TUN/TAP configuration\n");
+}
+
+static void cmd_socat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("socat: bidirectional data relay\n");
+}
+
+static void cmd_ncat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ncat: netcat reimplementation\n");
+}
+
+static void cmd_netcat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("netcat: TCP/UDP connections\n");
+}
+
+static void cmd_whois(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: whois <domain>\n"); return; }
+    vga_puts(args[1]); vga_puts(": domain info\nRegistrar: BYO\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -2467,6 +2875,43 @@ static const cmd_entry commands[] = {
     {"poweroff", cmd_poweroff}, {"init", cmd_init_cmd}, {"runlevel", cmd_runlevel},
     {"hwclock", cmd_hwclock}, {"losetup", cmd_losetup}, {"dmsetup", cmd_dmsetup},
     {"parted", cmd_parted}, {"gdisk", cmd_gdisk}, {"lsblk_adv", block_device_info},
+    /* Batch 13: Desktop */
+    {"xorg", cmd_xorg}, {"xinit", cmd_xinit}, {"startx", cmd_startx}, {"xrandr", cmd_xrandr},
+    {"xdg-open", cmd_xdg_open}, {"xterm", cmd_xterm}, {"gnome-terminal", cmd_gnome_terminal},
+    {"bash", cmd_bash}, {"zsh", cmd_zsh}, {"fish", cmd_fish}, {"dash", cmd_dash}, {"csh", cmd_csh},
+    {"i3", cmd_i3}, {"openbox", cmd_openbox}, {"sway", cmd_sway},
+    {"firefox", cmd_firefox}, {"chromium", cmd_chromium}, {"w3m", cmd_w3m}, {"links", cmd_links}, {"elinks", cmd_elinks},
+    {"gedit", cmd_gedit}, {"kate", cmd_kate}, {"mousepad", cmd_mousepad},
+    {"nemo", cmd_nemo}, {"thunar", cmd_thunar}, {"pcmanfm", cmd_pcafm},
+    {"xdpyinfo", cmd_xdpyinfo},
+    /* Batch 13: Audio/Video */
+    {"pulseaudio", cmd_pulseaudio}, {"pipewire", cmd_pipewire},
+    {"aplay", cmd_aplay}, {"arecord", cmd_arecord}, {"sox", cmd_sox},
+    {"vlc", cmd_vlc}, {"mpv", cmd_mpv},
+    /* Batch 13: Print */
+    {"lpoptions", cmd_lpoptions}, {"lpadmin", cmd_lpadmin}, {"cancel", cmd_cancel}, {"lp", cmd_lp},
+    /* Batch 13: i18n */
+    {"locale", cmd_locale}, {"iconv", cmd_iconv}, {"gettext", cmd_gettext}, {"tzselect", cmd_tzselect},
+    /* Batch 13: Systemd */
+    {"systemd-run", cmd_systemd_run}, {"machinectl", cmd_machinectl},
+    {"networkd", cmd_networkd}, {"resolved", cmd_resolved}, {"timesyncd", cmd_timesyncd},
+    /* Batch 13: Package Extended */
+    {"brew", cmd_brew}, {"pacman", cmd_pacman}, {"emerge", cmd_emerge}, {"apk", cmd_apk}, {"zypper", cmd_zypper},
+    /* Batch 13: Containers Orch */
+    {"kubectl", cmd_kubectl}, {"helm", cmd_helm}, {"docker-compose", cmd_compose},
+    /* Batch 13: CI/CD */
+    {"jenkins", cmd_jenkins}, {"gitlab-ci", cmd_gitlab_ci}, {"github-actions", cmd_github_actions},
+    /* Batch 13: Cloud */
+    {"aws", cmd_aws}, {"az", cmd_azure}, {"gcloud", cmd_gcloud},
+    {"terraform", cmd_terraform}, {"ansible", cmd_ansible}, {"puppet", cmd_puppet}, {"chef", cmd_chef},
+    /* Batch 13: Monitor */
+    {"htop", cmd_htop}, {"atop", cmd_atop}, {"glances", cmd_glances}, {"dstat", cmd_dstat},
+    {"nethogs", cmd_nethogs}, {"iftop", cmd_iftop}, {"bandwhich", cmd_bandwhich},
+    /* Batch 13: System Info */
+    {"fastfetch", cmd_fastfetch}, {"screenfetch", cmd_screenfetch}, {"pfetch", cmd_pfetch},
+    /* Batch 13: Network Advanced */
+    {"ip", cmd_ip}, {"ip6", cmd_ip6}, {"brctl", cmd_brctl},
+    {"socat", cmd_socat}, {"ncat", cmd_ncat}, {"netcat", cmd_netcat}, {"whois", cmd_whois},
     {0, 0}
 };
 
