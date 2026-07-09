@@ -13702,6 +13702,33 @@ static void workflow_auto_118(int argc, char args[][CMD_MAX_LEN]);
 static void compliance_check_118(int argc, char args[][CMD_MAX_LEN]);
 static void audit_trail_118(int argc, char args[][CMD_MAX_LEN]);
 static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 119: Education and Learning Platform Commands */
+static void learn_python_119(int argc, char args[][CMD_MAX_LEN]);
+static void learn_c_119(int argc, char args[][CMD_MAX_LEN]);
+static void learn_shell_119(int argc, char args[][CMD_MAX_LEN]);
+static void quiz_engine_119(int argc, char args[][CMD_MAX_LEN]);
+static void flashcard_119(int argc, char args[][CMD_MAX_LEN]);
+static void pomodoro_119(int argc, char args[][CMD_MAX_LEN]);
+static void note_taker_119(int argc, char args[][CMD_MAX_LEN]);
+static void flashcard_deck_119(int argc, char args[][CMD_MAX_LEN]);
+static void study_plan_119(int argc, char args[][CMD_MAX_LEN]);
+static void progress_tracker_119(int argc, char args[][CMD_MAX_LEN]);
+static void code_playground_119(int argc, char args[][CMD_MAX_LEN]);
+static void dict_lookup_119(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 120: Life Services and Daily Tools Commands */
+static void weather_120(int argc, char args[][CMD_MAX_LEN]);
+static void news_120(int argc, char args[][CMD_MAX_LEN]);
+static void todo_120(int argc, char args[][CMD_MAX_LEN]);
+static void habit_tracker_120(int argc, char args[][CMD_MAX_LEN]);
+static void meal_planner_120(int argc, char args[][CMD_MAX_LEN]);
+static void workout_120(int argc, char args[][CMD_MAX_LEN]);
+static void budget_120(int argc, char args[][CMD_MAX_LEN]);
+static void shopping_list_120(int argc, char args[][CMD_MAX_LEN]);
+static void recipe_120(int argc, char args[][CMD_MAX_LEN]);
+static void plant_care_120(int argc, char args[][CMD_MAX_LEN]);
+static void pet_care_120(int argc, char args[][CMD_MAX_LEN]);
+static void home_automation_120(int argc, char args[][CMD_MAX_LEN]);
+
 
 static const cmd_entry commands[] = {
 
@@ -16441,6 +16468,20 @@ static const cmd_entry commands[] = {
     {"workflow-auto", workflow_auto_118}, {"compliance-check", compliance_check_118},
     {"audit-trail", audit_trail_118}, {"sla-monitor", sla_monitor_118},
     
+
+    /* Batch 119: Education and Learning Platform */
+    {"learn-python", learn_python_119}, {"learn-c", learn_c_119},
+    {"learn-shell", learn_shell_119}, {"quiz-engine", quiz_engine_119},
+    {"flashcard", flashcard_119}, {"pomodoro", pomodoro_119},
+    {"note-taker", note_taker_119}, {"flashcard-deck", flashcard_deck_119},
+    {"study-plan", study_plan_119}, {"progress-tracker", progress_tracker_119},
+    {"code-playground", code_playground_119}, {"dict-lookup", dict_lookup_119},
+
+    /* Batch 120: Life Services and Daily Tools */
+    {"weather", weather_120}, {"news", news_120}, {"todo", todo_120},
+    {"habit-tracker", habit_tracker_120}, {"meal-planner", meal_planner_120}, {"workout", workout_120},
+    {"budget", budget_120}, {"shopping-list", shopping_list_120}, {"recipe", recipe_120},
+    {"plant-care", plant_care_120}, {"pet-care", pet_care_120}, {"home-automation", home_automation_120},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -34113,6 +34154,747 @@ static void sla_monitor_118(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("  Error Budget Remaining: 70pct\n");
     vga_puts("  Next Review: 2026-08-01\n");
     vga_puts("[SLA] Status: All targets met.\n");
+}
+
+
+/* ===== Batch 120: Life Services and Daily Tools Commands ===== */
+
+static void weather_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: weather [-h] [city]\nQuery weather information.\n"); return; }
+    vga_puts("[Weather] Weather Information\n");
+    vga_puts("============================\n");
+    if (argc >= 2) {
+        vga_puts("City: "); vga_puts(args[1]); vga_puts("\n");
+        vga_puts("Temperature: 22C (72F)\n");
+        vga_puts("Condition:   Partly Cloudy\n");
+        vga_puts("Humidity:    65pct\n");
+        vga_puts("Wind:        12 km/h NW\n");
+        vga_puts("UV Index:    4 (Moderate)\n");
+        vga_puts("Forecast:    Sunny tomorrow\n");
+    } else {
+        vga_puts("Current: Beijing\n");
+        vga_puts("Temperature: 28C (82F)\n");
+        vga_puts("Condition:   Clear Sky\n");
+        vga_puts("Humidity:    45pct\n");
+        vga_puts("Wind:        8 km/h E\n");
+        vga_puts("UV Index:    7 (High)\n");
+        vga_puts("Air Quality: 52 (Moderate)\n");
+        vga_puts("Sunrise:     05:32  Sunset: 19:48\n");
+    }
+    vga_puts("[Weather] Data updated at 14:30 UTC\n");
+}
+
+static void news_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: news [-h] [category]\nAggregate news headlines.\n"); return; }
+    vga_puts("[News] News Aggregator\n");
+    vga_puts("======================\n");
+    if (argc >= 2) {
+        vga_puts("Category: "); vga_puts(args[1]); vga_puts("\n\n");
+    } else {
+        vga_puts("All Categories:\n\n");
+    }
+    vga_puts("  [Tech]    BYO-OS v1.0 Released - Kernel Modular Design\n");
+    vga_puts("  [World]   Global Energy Summit Reaches Agreement\n");
+    vga_puts("  [Science] New Exoplanet Discovered in Habitable Zone\n");
+    vga_puts("  [Health]  Breakthrough in mRNA Vaccine Research\n");
+    vga_puts("  [Business] AI Startup Raises Series C Funding\n");
+    vga_puts("  [Sports]  Olympics Preparation Update\n");
+    vga_puts("  [Entertain] Award Season Kicks Off Early\n\n");
+    vga_puts("Showing top 7 headlines. Use -h for filter options.\n");
+}
+
+static void todo_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: todo [-h] [add|done|list|clear] [task]\nManage your to-do list.\n"); return; }
+    vga_puts("[Todo] To-Do List Manager\n");
+    vga_puts("========================\n");
+    if (argc >= 2 && strcmp(args[1], "list") == 0) {
+        vga_puts("  [ ] Update BYO-OS kernel modules\n");
+        vga_puts("  [x] Write batch 120 commands\n");
+        vga_puts("  [ ] Add unit tests\n");
+        vga_puts("  [ ] Update documentation\n");
+        vga_puts("\nTotal: 4 tasks | Done: 1 | Pending: 3\n");
+    } else if (argc >= 2 && strcmp(args[1], "add") == 0) {
+        vga_puts("Added: ");
+        vga_puts(argc >= 3 ? args[2] : "(empty task)");
+        vga_puts("\n[Todo] Task added successfully.\n");
+    } else if (argc >= 2 && strcmp(args[1], "done") == 0) {
+        vga_puts("Marked task ");
+        vga_puts(argc >= 3 ? args[2] : "1");
+        vga_puts(" as complete.\n[Todo] Task completed.\n");
+    } else if (argc >= 2 && strcmp(args[1], "clear") == 0) {
+        vga_puts("[Todo] All completed tasks cleared.\n");
+    } else {
+        vga_puts("  Pending tasks:\n");
+        vga_puts("    1. Update BYO-OS kernel modules\n");
+        vga_puts("    2. Add unit tests\n");
+        vga_puts("    3. Update documentation\n");
+    }
+}
+
+static void habit_tracker_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: habit-tracker [-h] [add|check|stats|list]\nTrack daily habits.\n"); return; }
+    vga_puts("[Habit] Habit Tracker\n");
+    vga_puts("====================\n");
+    vga_puts("  Streak Overview:\n");
+    vga_puts("    [Morning Run]     14 days  |===...==...==.. |\n");
+    vga_puts("    [Read 30 min]     21 days  |====.===.===.===|\n");
+    vga_puts("    [No Sugar]         7 days  |===.==.          |\n");
+    vga_puts("    [Meditate]        10 days  |====.==          |\n");
+    vga_puts("\n  Today's Progress: 3/4 habits completed\n");
+    vga_puts("  Weekly Score: 85pct | Monthly: 78pct\n");
+    vga_puts("  Longest Streak: 21 days (Reading)\n");
+    vga_puts("[Habit] Keep going! You are on a roll.\n");
+}
+
+static void meal_planner_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: meal-planner [-h] [day|week|recipe]\nPlan your meals.\n"); return; }
+    vga_puts("[Meal] Weekly Meal Planner\n");
+    vga_puts("==========================\n");
+    vga_puts("  Monday:\n");
+        vga_puts("    Breakfast: Oatmeal with berries\n");
+        vga_puts("    Lunch:     Grilled chicken salad\n");
+        vga_puts("    Dinner:    Salmon with vegetables\n");
+    vga_puts("  Tuesday:\n");
+        vga_puts("    Breakfast: Eggs and toast\n");
+        vga_puts("    Lunch:     Vegetable stir-fry\n");
+        vga_puts("    Dinner:    Pasta with pesto\n");
+    vga_puts("  Wednesday:\n");
+        vga_puts("    Breakfast: Smoothie bowl\n");
+        vga_puts("    Lunch:     Quinoa bowl\n");
+        vga_puts("    Dinner:    Grilled steak\n");
+    vga_puts("\n  Weekly Stats: 21 meals planned | Budget: 450 CNY\n");
+    vga_puts("[Meal] Nutritional balance: Good\n");
+}
+
+static void workout_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: workout [-h] [type|log|stats]\nFitness planning and tracking.\n"); return; }
+    vga_puts("[Workout] Fitness Plan\n");
+    vga_puts("======================\n");
+    vga_puts("  Today: Upper Body Strength\n");
+    vga_puts("  Duration: 45 min | Target: Chest, Shoulders, Triceps\n\n");
+    vga_puts("  Exercises:\n");
+    vga_puts("    1. Bench Press      4x8 @ 80kg\n");
+    vga_puts("    2. Overhead Press   3x10 @ 50kg\n");
+    vga_puts("    3. Incline Dumbbell 3x12 @ 20kg\n");
+    vga_puts("    4. Tricep Dips      3x15 @ bodyweight\n");
+    vga_puts("    5. Lateral Raises   3x12 @ 10kg\n\n");
+    vga_puts("  Weekly Summary:\n");
+    vga_puts("    Sessions: 4/5 | Calories: 2,400 kcal\n");
+    vga_puts("    PRs This Week: Bench Press +2.5kg\n");
+    vga_puts("[Workout] Form check: Remember to warm up!\n");
+}
+
+static void budget_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: budget [-h] [add|report|summary]\nPersonal budget management.\n"); return; }
+    vga_puts("[Budget] Monthly Budget Report\n");
+    vga_puts("==============================\n");
+    vga_puts("  Income:        15,000 CNY\n");
+    vga_puts("  Expenses:       9,850 CNY\n");
+    vga_puts("  Savings:        5,150 CNY (34.3pct)\n\n");
+    vga_puts("  Breakdown:\n");
+    vga_puts("    Housing:     4,000 CNY  (26.7pct)\n");
+    vga_puts("    Food:        2,500 CNY  (16.7pct)\n");
+    vga_puts("    Transport:   1,200 CNY  ( 8.0pct)\n");
+    vga_puts("    Utilities:     800 CNY  ( 5.3pct)\n");
+    vga_puts("    Entertainment: 650 CNY  ( 4.3pct)\n");
+    vga_puts("    Savings:     2,700 CNY  (18.0pct)\n\n");
+    vga_puts("  vs Last Month: -3.2pct expenses\n");
+    vga_puts("[Budget] Status: On track this month.\n");
+}
+
+static void shopping_list_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: shopping-list [-h] [add|remove|list|clear]\nManage shopping lists.\n"); return; }
+    vga_puts("[Shop] Shopping List\n");
+    vga_puts("===================\n");
+    if (argc >= 2 && strcmp(args[1], "add") == 0) {
+        vga_puts("Added: "); vga_puts(argc >= 3 ? args[2] : "(empty)");
+        vga_puts("\n[Shop] Item added.\n");
+    } else {
+        vga_puts("  [ ] Eggs (1 dozen)         ~8 CNY\n");
+        vga_puts("  [ ] Milk (1L)              ~12 CNY\n");
+        vga_puts("  [x] Bread (whole wheat)    ~15 CNY\n");
+        vga_puts("  [ ] Chicken breast (500g)  ~25 CNY\n");
+        vga_puts("  [ ] Broccoli (1 bunch)     ~8 CNY\n");
+        vga_puts("  [ ] Rice (2kg)             ~18 CNY\n");
+        vga_puts("  [ ] Olive Oil (500ml)      ~45 CNY\n\n");
+        vga_puts("  Total: ~131 CNY | Items: 7 (1 done)\n");
+        vga_puts("[Shop] Tip: Buy in bulk for savings.\n");
+    }
+}
+
+static void recipe_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: recipe [-h] [name]\nSearch for recipes.\n"); return; }
+    vga_puts("[Recipe] Recipe Search\n");
+    vga_puts("=====================\n");
+    if (argc >= 2) {
+        vga_puts("Recipe: "); vga_puts(args[1]); vga_puts("\n\n");
+    }
+    vga_puts("  Popular Recipes:\n");
+    vga_puts("    1. Kung Pao Chicken   | 30 min | Med   | 380 kcal\n");
+    vga_puts("    2. Mapo Tofu          | 20 min | Easy  | 220 kcal\n");
+    vga_puts("    3. Fried Rice         | 15 min | Easy  | 350 kcal\n");
+    vga_puts("    4. Steamed Fish       | 25 min | Med   | 280 kcal\n");
+    vga_puts("    5. Tomato Egg Stir    | 10 min | Easy  | 190 kcal\n");
+    vga_puts("    6. Dumplings          | 60 min | Hard  | 320 kcal\n\n");
+    vga_puts("  Ingredients available: Rice, Eggs, Tofu, Chicken\n");
+    vga_puts("[Recipe] Select a recipe number for details.\n");
+}
+
+static void plant_care_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: plant-care [-h] [add|water|status]\nPlant care reminders.\n"); return; }
+    vga_puts("[Plant] Plant Care Dashboard\n");
+    vga_puts("===========================\n");
+    vga_puts("  Your Plants:\n");
+    vga_puts("    [Snake Plant]  | Water: every 14 days | Next: Jul 15\n");
+    vga_puts("    [Pothos]       | Water: every 7 days  | Next: Jul 12\n");
+    vga_puts("    [Succulent]    | Water: every 21 days | Next: Jul 20\n");
+    vga_puts("    [Basil]        | Water: every 3 days  | Next: Jul 11\n");
+    vga_puts("    [Peace Lily]   | Water: every 5 days  | Next: Jul 13\n\n");
+    vga_puts("  Alerts:\n");
+    vga_puts("    [!] Basil needs watering tomorrow!\n");
+    vga_puts("    [i] Pothos getting yellow leaves - check light\n");
+    vga_puts("    [i] All plants fertilized last month\n\n");
+    vga_puts("  Total Plants: 5 | Healthy: 4 | Needs Attention: 1\n");
+    vga_puts("[Plant] Tip: Group humidity-loving plants together.\n");
+}
+
+static void pet_care_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: pet-care [-h] [feed|walk|health|schedule]\nPet care management.\n"); return; }
+    vga_puts("[Pet] Pet Care Manager\n");
+    vga_puts("======================\n");
+    vga_puts("  Pet: Buddy (Golden Retriever)\n");
+    vga_puts("  Age: 3 years | Weight: 28kg\n\n");
+    vga_puts("  Today's Schedule:\n");
+    vga_puts("    07:00 - Morning walk        [Done]\n");
+    vga_puts("    08:00 - Breakfast            [Done]\n");
+    vga_puts("    12:00 - Lunch                [Done]\n");
+    vga_puts("    17:00 - Evening walk         [Pending]\n");
+    vga_puts("    18:00 - Dinner               [Pending]\n");
+    vga_puts("    20:00 - Playtime             [Pending]\n\n");
+    vga_puts("  Health:\n");
+    vga_puts("    Last vet visit:  2026-06-15\n");
+    vga_puts("    Next vet visit:  2026-12-15\n");
+    vga_puts("    Vaccinations:    Up to date\n");
+    vga_puts("    Flea treatment:  Due Jul 15\n\n");
+    vga_puts("  Weekly Exercise: 18/20 km (target)\n");
+    vga_puts("[Pet] Reminder: Evening walk in 2 hours!\n");
+}
+
+static void home_automation_120(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: home-automation [-h] [device|scene|schedule|status]\nSmart home control.\n"); return; }
+    vga_puts("[Home] Smart Home Automation\n");
+    vga_puts("===========================\n");
+    vga_puts("  Devices:\n");
+    vga_puts("    [ON]  Living Room Light   | Brightness: 80pct\n");
+    vga_puts("    [OFF] Bedroom Light       | Status: off\n");
+    vga_puts("    [ON]  Air Conditioner     | Temp: 24C | Mode: Cool\n");
+    vga_puts("    [ON]  Smart TV            | Input: HDMI1\n");
+    vga_puts("    [OFF] Robot Vacuum        | Battery: 85pct\n");
+    vga_puts("    [ON]  Smart Speaker       | Volume: 30pct\n");
+    vga_puts("    [OFF] Garage Door         | Status: closed\n");
+    vga_puts("    [ON]  Security Camera     | Recording: ON\n\n");
+    vga_puts("  Scenes:\n");
+    vga_puts("    Morning: Lights ON, Coffee Maker ON\n");
+    vga_puts("    Night:   All lights OFF, Doors Locked\n");
+    vga_puts("    Away:    Cameras ON, Lights Random\n\n");
+    vga_puts("  Energy Today: 12.4 kWh | Cost: 7.44 CNY\n");
+    vga_puts("[Home] All devices responding normally.\n");
+}
+
+
+/* ===== Batch 119: Education and Learning Platform Commands ===== */
+static void learn_python_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: learn-python [lesson|list|help]\nPython interactive tutorial with lessons.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("[Python Tutorial] Available Lessons:\n");
+        vga_puts("  1. Hello World & print()\n");
+        vga_puts("  2. Variables & Data Types\n");
+        vga_puts("  3. Control Flow (if/else)\n");
+        vga_puts("  4. Loops (for, while)\n");
+        vga_puts("  5. Functions (def)\n");
+        vga_puts("  6. Lists & Dictionaries\n");
+        vga_puts("  7. File I/O\n");
+        vga_puts("  8. Error Handling (try/except)\n");
+        vga_puts("  Use: learn-python [lesson-num]\n");
+        return;
+    }
+    int lesson = 0;
+    for (int k = 0; args[1][k]; k++) {
+        if (args[1][k] >= '0' && args[1][k] <= '9') lesson = lesson * 10 + (args[1][k] - '0');
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    if (lesson == 1) {
+        vga_puts("=== Lesson 1: Hello World ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Python uses print() to output text:\n\n");
+        vga_puts("  print('Hello, World!')\n");
+        vga_puts("  print('Welcome to BYO-OS')\n\n");
+        vga_puts("Variables store data:\n");
+        vga_puts("  name = 'Alice'\n");
+        vga_puts("  age = 25\n");
+        vga_puts("  print(name, age)\n\n");
+        vga_puts("[Tip] No semicolons needed in Python!\n");
+    } else if (lesson == 2) {
+        vga_puts("=== Lesson 2: Variables & Types ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Python types: int, float, str, bool\n\n");
+        vga_puts("  x = 42        # int\n");
+        vga_puts("  pi = 3.14     # float\n");
+        vga_puts("  msg = 'hi'    # str\n");
+        vga_puts("  flag = True   # bool\n\n");
+        vga_puts("Type checking:\n");
+        vga_puts("  type(x)  ->  <class 'int'>\n");
+    } else if (lesson == 3) {
+        vga_puts("=== Lesson 3: Control Flow ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("if/elif/else for conditions:\n\n");
+        vga_puts("  if score >= 90:\n");
+        vga_puts("      grade = 'A'\n");
+        vga_puts("  elif score >= 80:\n");
+        vga_puts("      grade = 'B'\n");
+        vga_puts("  else:\n");
+        vga_puts("      grade = 'C'\n\n");
+        vga_puts("Comparison: ==, !=, <, >, <=, >=\n");
+        vga_puts("Logical: and, or, not\n");
+    } else if (lesson == 4) {
+        vga_puts("=== Lesson 4: Loops ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("for loop iterates over sequences:\n\n");
+        vga_puts("  for i in range(5):\n");
+        vga_puts("      print(i)  # 0,1,2,3,4\n\n");
+        vga_puts("while loop repeats while True:\n\n");
+        vga_puts("  while count > 0:\n");
+        vga_puts("      count -= 1\n\n");
+        vga_puts("break exits, continue skips\n");
+    } else if (lesson == 5) {
+        vga_puts("=== Lesson 5: Functions ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("def defines a function:\n\n");
+        vga_puts("  def greet(name):\n");
+        vga_puts("      return f'Hello {name}!'\n\n");
+        vga_puts("  greet('World')\n");
+        vga_puts("  # -> Hello World!\n\n");
+        vga_puts("Default params:\n");
+        vga_puts("  def add(a, b=0):\n");
+        vga_puts("      return a + b\n");
+    } else if (lesson == 6) {
+        vga_puts("=== Lesson 6: Lists & Dicts ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Lists are ordered:\n\n");
+        vga_puts("  items = [1, 2, 3]\n");
+        vga_puts("  items.append(4)\n");
+        vga_puts("  items[0]  # 1\n\n");
+        vga_puts("Dicts are key-value pairs:\n\n");
+        vga_puts("  user = {'name': 'Bob', 'age': 30}\n");
+        vga_puts("  user['name']  # 'Bob'\n");
+    } else if (lesson == 7) {
+        vga_puts("=== Lesson 7: File I/O ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Open, read, write files:\n\n");
+        vga_puts("  with open('data.txt') as f:\n");
+        vga_puts("      content = f.read()\n\n");
+        vga_puts("  with open('out.txt', 'w') as f:\n");
+        vga_puts("      f.write('Hello')\n");
+    } else if (lesson == 8) {
+        vga_puts("=== Lesson 8: Error Handling ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("try/except catches errors:\n\n");
+        vga_puts("  try:\n");
+        vga_puts("      result = 10 / 0\n");
+        vga_puts("  except ZeroDivisionError:\n");
+        vga_puts("      print('Cannot divide by zero')\n");
+        vga_puts("  finally:\n");
+        vga_puts("      print('Always runs')\n");
+    } else {
+        vga_puts("Unknown lesson. Use: learn-python list\n");
+    }
+}
+
+static void learn_c_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: learn-c [lesson|list|help]\nC language interactive tutorial.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("[C Tutorial] Available Lessons:\n");
+        vga_puts("  1. Hello World & printf\n");
+        vga_puts("  2. Variables & Types\n");
+        vga_puts("  3. Pointers & References\n");
+        vga_puts("  4. Arrays & Strings\n");
+        vga_puts("  5. Functions & Scope\n");
+        vga_puts("  6. Structs & Unions\n");
+        vga_puts("  7. Memory Management\n");
+        vga_puts("  8. Preprocessor & Macros\n");
+        vga_puts("  Use: learn-c [lesson-num]\n");
+        return;
+    }
+    int lesson = 0;
+    for (int k = 0; args[1][k]; k++) {
+        if (args[1][k] >= '0' && args[1][k] <= '9') lesson = lesson * 10 + (args[1][k] - '0');
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    if (lesson == 1) {
+        vga_puts("=== Lesson 1: Hello World ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("#include <stdio.h>\n\n");
+        vga_puts("int main(void) {\n");
+        vga_puts("    printf(\"Hello, World!\\n\");\n");
+        vga_puts("    return 0;\n");
+        vga_puts("}\n\n");
+        vga_puts("[Tip] Compile: gcc -o hello hello.c\n");
+    } else if (lesson == 2) {
+        vga_puts("=== Lesson 2: Variables & Types ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("C types: int, float, double, char\n\n");
+        vga_puts("  int x = 42;\n");
+        vga_puts("  float pi = 3.14f;\n");
+        vga_puts("  char c = 'A';\n\n");
+        vga_puts("Sizeof operator:\n");
+        vga_puts("  sizeof(int)   -> 4 bytes\n");
+        vga_puts("  sizeof(char)  -> 1 byte\n");
+    } else if (lesson == 3) {
+        vga_puts("=== Lesson 3: Pointers ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Pointers store memory addresses:\n\n");
+        vga_puts("  int x = 10;\n");
+        vga_puts("  int *p = &x;  // address of x\n");
+        vga_puts("  *p = 20;      // dereference\n\n");
+        vga_puts("Pointer arithmetic:\n");
+        vga_puts("  p++;  // moves to next int\n");
+    } else if (lesson == 4) {
+        vga_puts("=== Lesson 4: Arrays & Strings ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Arrays are contiguous memory:\n\n");
+        vga_puts("  int arr[5] = {1, 2, 3, 4, 5};\n");
+        vga_puts("  arr[0]  // first element\n\n");
+        vga_puts("Strings are char arrays:\n");
+        vga_puts("  char s[] = \"hello\";\n");
+        vga_puts("  strlen(s)  // 5\n");
+    } else if (lesson == 5) {
+        vga_puts("=== Lesson 5: Functions ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  int add(int a, int b) {\n");
+        vga_puts("      return a + b;\n");
+        vga_puts("  }\n\n");
+        vga_puts("Pass by value vs pointer:\n");
+        vga_puts("  void swap(int *a, int *b) {\n");
+        vga_puts("      int t = *a; *a = *b; *b = t;\n");
+        vga_puts("  }\n");
+    } else if (lesson == 6) {
+        vga_puts("=== Lesson 6: Structs ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  struct Point {\n");
+        vga_puts("      int x, y;\n");
+        vga_puts("  };\n\n");
+        vga_puts("  struct Point p = {10, 20};\n");
+        vga_puts("  p.x  // 10\n");
+    } else if (lesson == 7) {
+        vga_puts("=== Lesson 7: Memory Management ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("malloc/free for dynamic memory:\n\n");
+        vga_puts("  int *p = malloc(sizeof(int) * 10);\n");
+        vga_puts("  if (p == NULL) { /* handle error */ }\n");
+        vga_puts("  free(p);  // always free!\n\n");
+        vga_puts("[Warning] Always check malloc return!\n");
+    } else if (lesson == 8) {
+        vga_puts("=== Lesson 8: Preprocessor ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  #define MAX 100\n");
+        vga_puts("  #define SQUARE(x) ((x)*(x))\n\n");
+        vga_puts("  #ifdef DEBUG\n");
+        vga_puts("      printf(\"debug mode\\n\");\n");
+        vga_puts("  #endif\n");
+    } else {
+        vga_puts("Unknown lesson. Use: learn-c list\n");
+    }
+}
+
+static void learn_shell_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: learn-shell [lesson|list|help]\nShell scripting tutorial.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("[Shell Tutorial] Available Lessons:\n");
+        vga_puts("  1. Basic Commands & Pipes\n");
+        vga_puts("  2. Variables & Environment\n");
+        vga_puts("  3. Conditionals (if/else)\n");
+        vga_puts("  4. Loops (for, while)\n");
+        vga_puts("  5. Functions & Scripts\n");
+        vga_puts("  6. String Manipulation\n");
+        vga_puts("  7. Process Management\n");
+        vga_puts("  8. Advanced Pipes & Redirects\n");
+        vga_puts("  Use: learn-shell [lesson-num]\n");
+        return;
+    }
+    int lesson = 0;
+    for (int k = 0; args[1][k]; k++) {
+        if (args[1][k] >= '0' && args[1][k] <= '9') lesson = lesson * 10 + (args[1][k] - '0');
+    }
+    vga_set_color(VGA_LIGHT_CYAN, VGA_BLACK);
+    if (lesson == 1) {
+        vga_puts("=== Lesson 1: Commands & Pipes ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("Basic commands:\n");
+        vga_puts("  ls -la          # list files\n");
+        vga_puts("  cat file.txt    # show content\n");
+        vga_puts("  grep pattern f  # search\n\n");
+        vga_puts("Pipes connect commands:\n");
+        vga_puts("  ls | grep .c | wc -l\n");
+        vga_puts("  # counts .c files\n");
+    } else if (lesson == 2) {
+        vga_puts("=== Lesson 2: Variables ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  NAME=\"BYO-OS\"\n");
+        vga_puts("  echo $NAME\n");
+        vga_puts("  export PATH=$PATH:/new\n\n");
+        vga_puts("Special variables:\n");
+        vga_puts("  $0 $1 $@ $# $$\n");
+        vga_puts("  script  arg  all  num  pid\n");
+    } else if (lesson == 3) {
+        vga_puts("=== Lesson 3: Conditionals ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  if [ \"$var\" = \"yes\" ]; then\n");
+        vga_puts("      echo OK\n");
+        vga_puts("  elif [ -f \"$file\" ]; then\n");
+        vga_puts("      echo Found\n");
+        vga_puts("  else\n");
+        vga_puts("      echo None\n");
+        vga_puts("  fi\n");
+    } else if (lesson == 4) {
+        vga_puts("=== Lesson 4: Loops ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  for f in *.txt; do\n");
+        vga_puts("      echo $f\n");
+        vga_puts("  done\n\n");
+        vga_puts("  while read line; do\n");
+        vga_puts("      echo $line\n");
+        vga_puts("  done < file.txt\n");
+    } else if (lesson == 5) {
+        vga_puts("=== Lesson 5: Functions ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  greet() {\n");
+        vga_puts("      echo \"Hello, $1!\"\n");
+        vga_puts("  }\n");
+        vga_puts("  greet World\n");
+        vga_puts("  # -> Hello, World!\n");
+    } else if (lesson == 6) {
+        vga_puts("=== Lesson 6: String Ops ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  s=\"hello world\"\n");
+        vga_puts("  echo ${s:0:5}    # hello\n");
+        vga_puts("  echo ${s^^}      # HELLO WORLD\n");
+        vga_puts("  echo ${#s}       # 11\n");
+    } else if (lesson == 7) {
+        vga_puts("=== Lesson 7: Process Mgmt ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  cmd &           # background\n");
+        vga_puts("  jobs            # list jobs\n");
+        vga_puts("  fg %1           # foreground\n");
+        vga_puts("  kill -9 PID     # force kill\n");
+    } else if (lesson == 8) {
+        vga_puts("=== Lesson 8: Advanced Pipes ===\n");
+        vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+        vga_puts("  cmd > file      # redirect stdout\n");
+        vga_puts("  cmd 2>&1        # merge stderr\n");
+        vga_puts("  cmd1 | cmd2     # pipe\n");
+        vga_puts("  <(cmd)          # process sub\n");
+    } else {
+        vga_puts("Unknown lesson. Use: learn-shell list\n");
+    }
+}
+static void quiz_engine_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: quiz-engine [start|score|help]\nKnowledge quiz engine for learning.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "start") == 0) {
+        vga_puts("[Quiz Engine] Programming Quiz\n");
+        vga_puts("============================\n");
+        vga_puts("Q1: What does printf() do in C?\n");
+        vga_puts("  a) Read input  b) Print output\n");
+        vga_puts("  c) Allocate memory  d) Close file\n\n");
+        vga_puts("Q2: Keyword for function in Python?\n");
+        vga_puts("  a) func  b) function  c) def  d) sub\n\n");
+        vga_puts("Q3: Output of: echo $((5+3*2))?\n");
+        vga_puts("  a) 16  b) 11  c) 13  d) 10\n\n");
+        vga_puts("Q4: Which command lists files in Linux?\n");
+        vga_puts("  a) dir  b) ls  c) list  d) show\n\n");
+        vga_puts("Q5: What does malloc() return on fail?\n");
+        vga_puts("  a) 0  b) -1  c) NULL  d) error\n\n");
+        vga_puts("Answers: 1=b 2=c 3=b 4=b 5=c\n");
+    } else if (strcmp(args[1], "score") == 0) {
+        vga_puts("[Quiz Engine] Scoring\n");
+        vga_puts("Correct: b c b b c\n");
+        vga_puts("Each correct = +20 points\n");
+    } else {
+        vga_puts("Unknown option. Use: quiz-engine start\n");
+    }
+}
+
+static void flashcard_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: flashcard [review|add|help]\nFlashcard memory tool.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "review") == 0) {
+        vga_puts("[Flashcard] Review Session\n");
+        vga_puts("=========================\n");
+        vga_puts("Card 1/5: What is a pointer?\n");
+        vga_puts("  A: A variable storing a memory address\n\n");
+        vga_puts("Card 2/5: What does #include do?\n");
+        vga_puts("  A: Includes a header file\n\n");
+        vga_puts("Card 3/5: Define: stack overflow\n");
+        vga_puts("  A: Stack runs out of memory\n\n");
+        vga_puts("Card 4/5: What is a segfault?\n");
+        vga_puts("  A: Accessing invalid memory\n\n");
+        vga_puts("Card 5/5: What is recursion?\n");
+        vga_puts("  A: A function that calls itself\n\n");
+        vga_puts("Rate: [1]Again [2]Hard [3]Good [4]Easy\n");
+    } else if (strcmp(args[1], "add") == 0) {
+        vga_puts("[Flashcard] Add Card\n");
+        vga_puts("Format: flashcard add \"front\" \"back\"\n");
+    } else {
+        vga_puts("Unknown option. Use: flashcard review\n");
+    }
+}
+
+static void pomodoro_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: pomodoro [start|status|help]\nPomodoro timer: 25min work, 5min break.\n"); return; }
+    unsigned int sec = timer_get_seconds();
+    int elapsed = (int)(sec % 1500);
+    int mins = elapsed / 60;
+    int secs = elapsed % 60;
+    char buf[16];
+    vga_puts("[Pomodoro] Focus Timer\n");
+    vga_puts("======================\n");
+    if (argc >= 2 && strcmp(args[1], "start") == 0) {
+        vga_puts("Timer started: 25:00 work session\n");
+    }
+    vga_puts("Status: ");
+    itoa(mins, buf, 10); vga_puts(buf);
+    vga_putchar(':');
+    if (secs < 10) vga_putchar('0');
+    itoa(secs, buf, 10); vga_puts(buf);
+    vga_puts(" remaining\n");
+    vga_puts("Sessions today: 3 | Focus: 75 min\n");
+}
+
+static void note_taker_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: note-taker [list|add|show|help]\nNote management for study notes.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("[Notes] Study Notes\n");
+        vga_puts("==================\n");
+        vga_puts("  1. Python basics - variables, loops\n");
+        vga_puts("  2. C pointers - dereference, malloc\n");
+        vga_puts("  3. Shell scripting - pipes, redirects\n");
+        vga_puts("  4. Data structures - arrays, lists\n");
+        vga_puts("  5. Algorithms - sorting, searching\n");
+        vga_puts("Total: 5 notes\n");
+    } else if (strcmp(args[1], "add") == 0) {
+        vga_puts("Format: note-taker add \"title\" \"content\"\n");
+    } else if (strcmp(args[1], "show") == 0) {
+        vga_puts("Note #1: Python basics\n");
+        vga_puts("Variables: x = 42\n");
+    } else {
+        vga_puts("Unknown option. Use: note-taker list\n");
+    }
+}
+
+static void flashcard_deck_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: flashcard-deck [list|create|study|help]\nFlashcard deck management.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("[Decks] Available Decks\n");
+        vga_puts("=======================\n");
+        vga_puts("  1. C Fundamentals      15 cards\n");
+        vga_puts("  2. Python Basics       12 cards\n");
+        vga_puts("  3. Shell Commands      10 cards\n");
+        vga_puts("  4. Data Structures      8 cards\n");
+        vga_puts("  5. Git Commands         7 cards\n");
+        vga_puts("Total: 5 decks, 52 cards\n");
+    } else if (strcmp(args[1], "create") == 0) {
+        vga_puts("Format: flashcard-deck create \"name\"\n");
+    } else if (strcmp(args[1], "study") == 0) {
+        vga_puts("Starting: C Fundamentals (5 cards)\n");
+    } else {
+        vga_puts("Unknown option. Use: flashcard-deck list\n");
+    }
+}
+
+static void study_plan_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: study-plan [generate|show|help]\nStudy plan generator.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "generate") == 0) {
+        vga_puts("[Study Plan] Weekly Learning Plan\n");
+        vga_puts("=================================\n");
+        vga_puts("Mon: Python basics (2h)\n");
+        vga_puts("Tue: C pointers (1.5h)\n");
+        vga_puts("Wed: Shell scripting (1h)\n");
+        vga_puts("Thu: Data structures (2h)\n");
+        vga_puts("Fri: Practice problems (1.5h)\n");
+        vga_puts("Sat: Review & flashcards (1h)\n");
+        vga_puts("Sun: Rest / light review\n\n");
+        vga_puts("Weekly target: 9 hours\n");
+    } else if (strcmp(args[1], "show") == 0) {
+        vga_puts("Track: Full-Stack Developer\n");
+        vga_puts("Week 3 of 8 | Progress: 37pct\n");
+    } else {
+        vga_puts("Unknown option. Use: study-plan generate\n");
+    }
+}
+
+static void progress_tracker_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: progress-tracker [stats|update|help]\nLearning progress tracker.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "stats") == 0) {
+        vga_puts("[Progress] Learning Statistics\n");
+        vga_puts("=============================\n");
+        vga_puts("  Courses:      3 active\n");
+        vga_puts("  Lessons done: 18 / 45\n");
+        vga_puts("  Quizzes: 7 | Avg: 82pct\n");
+        vga_puts("  Flashcards reviewed: 52\n");
+        vga_puts("  Study hours:   12.5h\n");
+        vga_puts("  Streak:       5 days\n\n");
+        vga_puts("  Python:    60pct\n");
+        vga_puts("  C Lang:    40pct\n");
+        vga_puts("  Shell:     25pct\n");
+    } else if (strcmp(args[1], "update") == 0) {
+        vga_puts("[Progress] Updated!\n");
+    } else {
+        vga_puts("Unknown option. Use: progress-tracker stats\n");
+    }
+}
+
+static void code_playground_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: code-playground [run|examples|help]\nCode practice area.\n"); return; }
+    if (argc < 2 || strcmp(args[1], "examples") == 0) {
+        vga_puts("[Code Playground] Examples\n");
+        vga_puts("=========================\n");
+        vga_puts("  1. hello.c - Hello World\n");
+        vga_puts("  2. factorial.c - Recursion\n");
+        vga_puts("  3. sort.c - Bubble sort\n");
+        vga_puts("  4. string.c - String ops\n");
+        vga_puts("  5. fileio.c - File reading\n");
+    } else if (strcmp(args[1], "run") == 0 && argc >= 3) {
+        vga_puts("[Playground] Running: "); vga_puts(args[2]); vga_putchar('\n');
+        if (strcmp(args[2], "hello.c") == 0) vga_puts("Output: Hello, World!\n");
+        else if (strcmp(args[2], "factorial.c") == 0) vga_puts("Output: factorial(5) = 120\n");
+        else if (strcmp(args[2], "sort.c") == 0) vga_puts("Output: [1, 2, 3, 4, 5]\n");
+        else vga_puts("Unknown example.\n");
+    } else {
+        vga_puts("Unknown option. Use: code-playground examples\n");
+    }
+}
+
+static void dict_lookup_119(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: dict-lookup <word>|-h\nDictionary lookup for programming terms.\n"); return; }
+    if (argc < 2) { vga_puts("Usage: dict-lookup <word>\n"); return; }
+    vga_puts("[Dictionary] "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("====================\n");
+    if (strcmp(args[1], "pointer") == 0) {
+        vga_puts("noun: A variable storing a memory address.\n");
+        vga_puts("Used in C/C++ to reference heap memory.\n");
+    } else if (strcmp(args[1], "recursion") == 0) {
+        vga_puts("noun: A function that calls itself.\n");
+        vga_puts("Requires base case to prevent infinite calls.\n");
+    } else if (strcmp(args[1], "malloc") == 0) {
+        vga_puts("verb: Allocate memory on the heap.\n");
+        vga_puts("Prototype: void *malloc(size_t size)\n");
+        vga_puts("Returns NULL on failure; free() to release.\n");
+    } else if (strcmp(args[1], "pipeline") == 0) {
+        vga_puts("noun: A series of connected processes.\n");
+        vga_puts("In shell: cmd1 | cmd2 | cmd3\n");
+        vga_puts("stdout of one becomes stdin of next.\n");
+    } else {
+        vga_puts("Definition not found: "); vga_puts(args[1]); vga_putchar('\n');
+        vga_puts("Try: pointer, recursion, malloc, pipeline\n");
+    }
 }
 
 void shell_run(void) {
