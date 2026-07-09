@@ -14105,6 +14105,48 @@ static void video_color_149(int argc, char args[][CMD_MAX_LEN]);
 static void video_stabilize_149(int argc, char args[][CMD_MAX_LEN]);
 static void video_enhance_149(int argc, char args[][CMD_MAX_LEN]);
 static void video_export_149(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 150: Blockchain Advanced */
+static void chain_deploy_150(int argc, char args[][CMD_MAX_LEN]);
+static void token_deploy_150(int argc, char args[][CMD_MAX_LEN]);
+static void nft_create_150(int argc, char args[][CMD_MAX_LEN]);
+static void defi_lend_150(int argc, char args[][CMD_MAX_LEN]);
+static void defi_borrow_150(int argc, char args[][CMD_MAX_LEN]);
+static void swap_tokens_150(int argc, char args[][CMD_MAX_LEN]);
+static void bridge_assets_150(int argc, char args[][CMD_MAX_LEN]);
+static void dao_govern_150(int argc, char args[][CMD_MAX_LEN]);
+static void multisig_create_150(int argc, char args[][CMD_MAX_LEN]);
+static void oracle_query_150(int argc, char args[][CMD_MAX_LEN]);
+static void layer2_bridge_150(int argc, char args[][CMD_MAX_LEN]);
+static void gas_optimize_150(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 151: AR/VR Advanced */
+static void xr_scene_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_spawn_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_physics_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_shader_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_audio_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_haptic_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_gesture_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_eye_track_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_hand_track_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_body_track_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_space_map_151(int argc, char args[][CMD_MAX_LEN]);
+static void xr_collab_151(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 152: Robotics Advanced */
+static void ros_init_152(int argc, char args[][CMD_MAX_LEN]);
+static void ros_topic_152(int argc, char args[][CMD_MAX_LEN]);
+static void ros_service_152(int argc, char args[][CMD_MAX_LEN]);
+static void ros_param_152(int argc, char args[][CMD_MAX_LEN]);
+static void motor_pid_152(int argc, char args[][CMD_MAX_LEN]);
+static void servo_sweep_152(int argc, char args[][CMD_MAX_LEN]);
+static void imu_calibrate_152(int argc, char args[][CMD_MAX_LEN]);
+static void lidar_slam_152(int argc, char args[][CMD_MAX_LEN]);
+static void nav_goal_152(int argc, char args[][CMD_MAX_LEN]);
+static void grasp_plan_152(int argc, char args[][CMD_MAX_LEN]);
+static void force_control_152(int argc, char args[][CMD_MAX_LEN]);
+static void vision_detect_152(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16970,7 +17012,14 @@ static const cmd_entry commands[] = {
     /* Batch 148: NLP + Speech */
     {"nlp-tokenize", nlp_tokenize_148},     {"nlp-pos", nlp_pos_148},     {"nlp-ner", nlp_ner_148},     {"nlp-sentiment", nlp_sentiment_148},     {"nlp-translate", nlp_translate_148},     {"nlp-summarize", nlp_summarize_148},     {"nlp问答", nlp问答_148},     {"nlp-classify", nlp_classify_148},     {"speech-to-text", speech_to_text_148},     {"text-to-speech", text_to_speech_148},     {"voice-clone", voice_clone_148},     {"language-detect", language_detect_148}, 
     /* Batch 149: Video + Animation */
-    {"video-encode", video_encode_149},     {"video-decode", video_decode_149},     {"video-edit", video_edit_149},     {"video-composite", video_composite_149},     {"video-animate", video_animate_149},     {"video-particle", video_particle_149},     {"video-transition", video_transition_149},     {"video-subtitle", video_subtitle_149},     {"video-color", video_color_149},     {"video-stabilize", video_stabilize_149},     {"video-enhance", video_enhance_149},     {"video-export", video_export_149}, 
+    {"video-encode", video_encode_149},     {"video-decode", video_decode_149},     {"video-edit", video_edit_149},     {"video-composite", video_composite_149},     {"video-animate", video_animate_149},     {"video-particle", video_particle_149},     {"video-transition", video_transition_149},     {"video-subtitle", video_subtitle_149},     {"video-color", video_color_149},     {"video-stabilize", video_stabilize_149},     {"video-enhance", video_enhance_149},     {"video-export", video_export_149},
+    /* Batch 150: Blockchain Advanced */
+    {"chain-deploy", chain_deploy_150},     {"token-deploy", token_deploy_150},     {"nft-create", nft_create_150},     {"defi-lend", defi_lend_150},     {"defi-borrow", defi_borrow_150},     {"swap-tokens", swap_tokens_150},     {"bridge-assets", bridge_assets_150},     {"dao-govern", dao_govern_150},     {"multisig-create", multisig_create_150},     {"oracle-query", oracle_query_150},     {"layer2-bridge", layer2_bridge_150},     {"gas-optimize", gas_optimize_150}, 
+    /* Batch 151: AR/VR Advanced */
+    {"xr-scene", xr_scene_151},     {"xr-spawn", xr_spawn_151},     {"xr-physics", xr_physics_151},     {"xr-shader", xr_shader_151},     {"xr-audio", xr_audio_151},     {"xr-haptic", xr_haptic_151},     {"xr-gesture", xr_gesture_151},     {"xr-eye-track", xr_eye_track_151},     {"xr-hand-track", xr_hand_track_151},     {"xr-body-track", xr_body_track_151},     {"xr-space-map", xr_space_map_151},     {"xr-collab", xr_collab_151}, 
+    /* Batch 152: Robotics Advanced */
+    {"ros-init", ros_init_152},     {"ros-topic", ros_topic_152},     {"ros-service", ros_service_152},     {"ros-param", ros_param_152},     {"motor-pid", motor_pid_152},     {"servo-sweep", servo_sweep_152},     {"imu-calibrate", imu_calibrate_152},     {"lidar-slam", lidar_slam_152},     {"nav-goal", nav_goal_152},     {"grasp-plan", grasp_plan_152},     {"force-control", force_control_152},     {"vision-detect", vision_detect_152}, 
+ 
  
  
  
@@ -37629,6 +37678,157 @@ static void video_enhance_149(int argc, char args[][CMD_MAX_LEN]) {
 static void video_export_149(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Export: MOV ProRes 422 HQ 4K 30fps Size:2.3GB\n");
+}
+
+
+/* ===== Batch 150: Blockchain Advanced ===== */
+static void chain_deploy_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chain: Deploy ERC-721 Contract:0x1234 Gas:2.1M Cost:$42\n");
+}
+static void token_deploy_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Token: ERC-20 BYO Name:BYO Supply:1M Decimals:18\n");
+}
+static void nft_create_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("NFT: #12848 Metadata:Qm... Owner:0x5678 Listed:false\n");
+}
+static void defi_lend_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lend: 1000 USDC APY:8.2%% Pool:Aave Status:deposited\n");
+}
+static void defi_borrow_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Borrow: 500 ETH Collateral:2000 USDC Health:185%%\n");
+}
+static void swap_tokens_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Swap: 100 USDC -> 0.047 ETH Price:2127 Slippage:0.1%%\n");
+}
+static void bridge_assets_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bridge: 100 USDC ETH->Polygon Time:~15min Fee:$2.30\n");
+}
+static void dao_govern_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DAO: Proposal #47 Quorum:65%% For:78%% Against:22%%\n");
+}
+static void multisig_create_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Multisig: 3/5 signers Created Balance:12.5 ETH\n");
+}
+static void oracle_query_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Oracle: ETH/USD:2127.45 Source:Chainlink Confirmed:12 blocks\n");
+}
+static void layer2_bridge_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("L2: Bridge to Optimism 100 USDC Time:~2min Fee:$0.50\n");
+}
+static void gas_optimize_150(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Gas: Current:25 gwei Optimal:18 gwei Savings:28%%\n");
+}
+
+/* ===== Batch 151: AR/VR Advanced ===== */
+static void xr_scene_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Scene: 128 objects Lighting:PBR Resolution:4K/eye Refresh:90Hz\n");
+}
+static void xr_spawn_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Spawn: Object placed at (1.2,0.8,-2.1) Scale:1.0 Rot:0,0,0\n");
+}
+static void xr_physics_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Physics: Mass:1.0 Friction:0.5 Restitution:0.3 Gravity:9.81\n");
+}
+static void xr_shader_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Shader: PBR Metallic:0.8 Roughness:0.2 Albedo:#FF5733\n");
+}
+static void xr_audio_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Audio: Spatial audio 3D position (1.2,0.8,-2.1) Volume:0.8\n");
+}
+static void xr_haptic_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Haptic: Pattern:pulse Intensity:0.7 Duration:200ms\n");
+}
+static void xr_gesture_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Gesture: Pinch detected Confidence:94%% Action:grab\n");
+}
+static void xr_eye_track_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Eye: Gaze point (0.3,0.4) Pupil:4.2mm Blink:false\n");
+}
+static void xr_hand_track_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Hand: 21 joints Palm:(0.1,0.2,-0.3) Gesture:open\n");
+}
+static void xr_body_track_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Body: 18 joints Head:(0,1.6,0) Hands:tracking\n");
+}
+static void xr_space_map_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Map: Room 5x4x3m Mesh:12,847 vertices Planes:6\n");
+}
+static void xr_collab_151(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("XR Collab: 3 users Synced Latency:12ms Avatars:active\n");
+}
+
+/* ===== Batch 152: Robotics Advanced ===== */
+static void ros_init_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ROS2: Node:byo_control Namespace:/ Msgs:12 Srvs:3 Active:true\n");
+}
+static void ros_topic_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Topic: /cmd_vel Hz:50 Type:geometry_msgs/Twist Subscribers:3\n");
+}
+static void ros_service_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Service: /get_pose Type:geometry_msgs/Pose Latency:2ms\n");
+}
+static void ros_param_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Param: /robot/max_speed=1.5 /robot/robot_radius=0.2\n");
+}
+static void motor_pid_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Motor PID: Kp=2.5 Ki=0.8 Kd=0.3 Error:0.02 Output:54.3%%\n");
+}
+static void servo_sweep_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Servo Sweep: Min:0 Max:180 Step:1 Speed:60deg/s\n");
+}
+static void imu_calibrate_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("IMU Calib: Accel:offset(0.01,-0.02,0.03) Gyro:bias(0.5,-0.3,0.1)\n");
+}
+static void lidar_slam_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SLAM: Map:128x128 Robot:pos(5.2,3.1) Pose:x=5.2 y=3.1 theta=1.57\n");
+}
+static void nav_goal_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Nav: Goal(8.0,5.0) Path:12.3m ETA:15.2s Obstacles:4 Status:navigating\n");
+}
+static void grasp_plan_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grasp: Object:cube Approach:top Force:5N Grip:parallel Points:4\n");
+}
+static void force_control_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Force: Fx:2.3N Fy:-1.1N Fz:8.7N Torque:0.5Nm Mode:impedance\n");
+}
+static void vision_detect_152(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vision: Objects:3 Class:box(cyl,plate) Conf:94%% Pose:(0.5,0.3,0.2)\n");
 }
 
 void shell_run(void) {
