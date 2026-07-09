@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BYO-OS Web Management Panel v10 - Fixed serial bridge + robust API."""
+"""BYO-OS Web Management Panel v11 - Enhanced sysinfo + navigation fix."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -67,7 +67,7 @@ class SerialBridge:
         if not self.sock:
             return
         try:
-            self.sock.settimeout(0.3)
+            self.sock.settimeout(0.1)
             while True:
                 d = self.sock.recv(4096)
                 if not d:
@@ -146,11 +146,11 @@ class SerialBridge:
                                 break
                         else:
                             idle += 1
-                            if idle > 30:
+                            if idle > 20:
                                 break
                     except socket.timeout:
                         idle += 1
-                        if idle > 30:
+                        if idle > 20:
                             break
                     except Exception as e:
                         self._log(f"Recv error: {e}")
@@ -314,7 +314,7 @@ def serial_retry_thread():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v10")
+    print("  BYO-OS Web Management Panel v11")
     print("=" * 60)
     print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")

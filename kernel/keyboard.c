@@ -91,6 +91,7 @@ static int e0_scancode_map(uint8_t sc) {
     case 0x4F: return KEY_END;
     case 0x52: return KEY_INSERT;
     case 0x53: return KEY_DELETE;
+    case 0x1C: return '\r';  /* Keypad Enter */
     default:   return 0;
     }
 }

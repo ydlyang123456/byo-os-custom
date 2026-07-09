@@ -534,13 +534,17 @@ static void cmd_sysinfo(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     char buf[32];
     vga_puts("System Information:\n");
-    vga_puts("  OS:      BYO-OS v1.0.0\n");
+    vga_puts("  OS:      BYO-OS v1.39.0\n");
     vga_puts("  Arch:    x86\n");
     vga_puts("  User:    "); vga_puts(user_get_name()); vga_putchar('\n');
     vga_puts("  Free:    "); itoa(pmm_get_free_pages(), buf, 10); vga_puts(buf); vga_puts(" pages\n");
     vga_puts("  Total:   "); itoa(pmm_get_total_pages(), buf, 10); vga_puts(buf); vga_puts(" pages\n");
     vga_puts("  Heap:    "); itoa(heap_get_used(), buf, 10); vga_puts(buf); vga_puts(" bytes\n");
     vga_puts("  Uptime:  "); itoa(timer_get_seconds(), buf, 10); vga_puts(buf); vga_puts("s\n");
+    vga_puts("  Tasks:   "); itoa(task_get_count(), buf, 10); vga_puts(buf); vga_puts(" active\n");
+    vga_puts("  Load:    0.00\n");
+    char ip_buf[32]; net_get_ip_str(ip_buf);
+    vga_puts("  IP:      "); vga_puts(ip_buf); vga_putchar('\n');
 }
 
 static void cmd_halt(int argc, char args[][CMD_MAX_LEN]) {
