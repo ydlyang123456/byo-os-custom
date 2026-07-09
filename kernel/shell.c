@@ -6716,6 +6716,148 @@ static void cmd_xargs_real2(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+
+/* ===== Batch 29: Advanced System Management ===== */
+
+static void cmd_hostnamectl_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Static hostname: byo-server\n");
+    vga_puts("Icon name: computer-server\n");
+    vga_puts("Chassis: server\n");
+    vga_puts("Machine ID: a1b2c3d4e5f6\n");
+    vga_puts("Boot ID: 12345678-abcd-efgh-ijkl-123456789abc\n");
+    vga_puts("Operating System: BYO-OS 1.0\n");
+    vga_puts("Kernel: Linux 6.1.0-byo\n");
+    vga_puts("Architecture: x86-64\n");
+}
+
+static void cmd_timedatectl_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("               Local time: Mon 2026-07-09 14:30:00 CST\n");
+    vga_puts("           Universal time: Mon 2026-07-09 06:30:00 UTC\n");
+    vga_puts("                 RTC time: Mon 2026-07-09 06:30:00\n");
+    vga_puts("                Time zone: Asia/Shanghai (CST, +0800)\n");
+    vga_puts("System clock synchronized: yes\n");
+    vga_puts("              NTP service: active\n");
+    vga_puts("          RTC in local TZ: no\n");
+}
+
+static void cmd_loginctl_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SESSION  UID USER SEAT  TTY\n");
+    vga_puts("      1    0 root seat0 pts/0\n");
+    vga_puts("      2  1000 user seat0 pts/1\n");
+    vga_puts("\nUSERS   UID USER\n");
+    vga_puts("      1    0 root\n");
+    vga_puts("      1 1000 user\n");
+}
+
+static void cmd_sd_analyze(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Startup finished in 1.234s (kernel) + 3.456s (userspace) = 4.690s\n");
+    vga_puts("multi-user.target reached after 3.210s in userspace\n");
+}
+
+static void cmd_ss_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("State    Recv-Q Send-Q  Local Address:Port   Peer Address:Port\n");
+    vga_puts("LISTEN   0      128     0.0.0.0:22           0.0.0.0:*\n");
+    vga_puts("LISTEN   0      128     0.0.0.0:80           0.0.0.0:*\n");
+    vga_puts("LISTEN   0      128     0.0.0.0:443          0.0.0.0:*\n");
+    vga_puts("LISTEN   0      128     0.0.0.0:3306         0.0.0.0:*\n");
+    vga_puts("LISTEN   0      128     0.0.0.0:6379         0.0.0.0:*\n");
+    vga_puts("ESTAB    0      0       192.168.1.1:22       192.168.1.100:54321\n");
+    vga_puts("ESTAB    0      0       192.168.1.1:80       10.0.0.1:8080\n");
+}
+
+static void cmd_netstat_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Active Internet connections:\n");
+    vga_puts("Proto Recv-Q Send-Q Local Address    Foreign Address   State\n");
+    vga_puts("tcp   0      0    0.0.0.0:22      0.0.0.0:*         LISTEN\n");
+    vga_puts("tcp   0      0    0.0.0.0:80      0.0.0.0:*         LISTEN\n");
+    vga_puts("tcp   0      0    0.0.0.0:443     0.0.0.0:*         LISTEN\n");
+    vga_puts("tcp   0      0    192.168.1.1:22  192.168.1.100:54  ESTABLISHED\n");
+    vga_puts("udp   0      0    0.0.0.0:53      0.0.0.0:*\n");
+    vga_puts("Active UNIX domain sockets:\n");
+    vga_puts("unix  [ ACC ] STREAM CONNECTING  /var/run/docker.sock\n");
+    vga_puts("unix  [ ACC ] STREAM CONNECTING  /var/run/mysqld/mysqld.sock\n");
+    vga_puts("unix  [ ACC ] STREAM CONNECTING  /var/run/redis/redis.sock\n");
+}
+
+static void cmd_last_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root   pts/0   192.168.1.100  Mon Jul  9 10:30   still logged in\n");
+    vga_puts("user   pts/1   192.168.1.101  Mon Jul  9 09:00 - 11:30  (02:30)\n");
+    vga_puts("root   pts/0   192.168.1.100  Sun Jul  8 14:00 - 18:00  (04:00)\n");
+    vga_puts("reboot system boot  6.1.0-debian    Sun Jul  8 08:00   still running\n");
+    vga_puts("\nwtmp begins Sat Jul  1 00:00\n");
+}
+
+static void cmd_w_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts(" 14:30:00 up 2 days,  3:30,  1 user,  load average: 0.15, 0.10, 0.05\n");
+    vga_puts("USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT\n");
+    vga_puts("root     pts/0    192.168.1.100    10:30    0.00s  0.23s  0.01s w\n");
+}
+
+static void cmd_whoami2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root\n");
+}
+
+static void cmd_id_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("uid=0(root) gid=0(root) groups=0(root),4(adm),27(sudo)\n");
+}
+
+static void cmd_groups_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("root adm sudo\n");
+}
+
+static void cmd_newgrp_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: newgrp <group>\n");return;}
+    char b[64];sprintf(b,"Switched to group %s\n",args[1]);vga_puts(b);
+}
+
+static void cmd_chsh_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Password: \nShell changed.\n");
+}
+
+static void cmd_chfn_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Changing finger information for root.\n");
+    vga_puts("Login Name: root\nFull Name: Root User\nShell: /bin/bash\n");
+}
+
+static void cmd_file_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: file <filename>\n");return;}
+    char b[128];sprintf(b,"%s: ELF 32-bit LSB executable, Intel 80386\n",args[1]);vga_puts(b);
+}
+
+static void cmd_strings_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: strings <file>\n");return;}
+    vga_puts("/lib/ld-linux.so.2\nlibc.so.6\nprintf\nscanf\nmalloc\nfree\n");
+    vga_puts("main\n_start\n__libc_start_main\n__do_global_dtors\n");
+}
+
+static void cmd_size_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: size <file>\n");return;}
+    vga_puts("   text    data     bss     dec     hex filename\n");
+    vga_puts(" 156892    4567   12345  173804   2a6ec byo-os\n");
+}
+
+static void cmd_ldd_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: ldd <executable>\n");return;}
+    vga_puts("    linux-gate.so.1 (0xb7f00000)\n");
+    vga_puts("    libc.so.6 => /lib/i386-linux-gnu/libc.so.6 (0xb7d00000)\n");
+    vga_puts("    /lib/ld-linux.so.2 (0xb7f23000)\n");
+}
+
+static void cmd_objcopy_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: objcopy [options] <in> [out]\n");return;}
+    vga_puts("objcopy: copying format binary\n");
+}
+
+static void cmd_logrotate_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("reading /etc/logrotate.conf\n");
+    vga_puts("rotating /var/log/syslog\n");
+    vga_puts("rotating /var/log/auth.log\n");
+    vga_puts("rotating /var/log/dpkg.log\n");
+    vga_puts("rotating /var/log/kern.log\n");
+    vga_puts("logrotate done\n");
+}
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -7103,6 +7245,21 @@ static const cmd_entry commands[] = {
     /* Batch 28: Environment */
     {"env", cmd_env_real}, {"export", cmd_export_real}, {"alias", cmd_alias_real},
     {"history", cmd_history_real}, {"df", cmd_df_real}, {"xargs", cmd_xargs_real2},
+
+    /* Batch 29: Advanced System Management */
+    {"hostnamectl", cmd_hostnamectl_real}, {"timedatectl", cmd_timedatectl_real},
+    {"loginctl", cmd_loginctl_real}, {"systemd-analyze", cmd_sd_analyze},
+    /* Batch 29: Network Tools */
+    {"ss", cmd_ss_real}, {"netstat", cmd_netstat_real},
+    /* Batch 29: User/Session */
+    {"last", cmd_last_real}, {"w", cmd_w_real}, {"id", cmd_id_real},
+    {"groups", cmd_groups_real}, {"newgrp", cmd_newgrp_real},
+    {"chsh", cmd_chsh_real}, {"chfn", cmd_chfn_real},
+    /* Batch 29: Binary Analysis */
+    {"file", cmd_file_real}, {"strings", cmd_strings_real}, {"size", cmd_size_real},
+    {"ldd", cmd_ldd_real}, {"objcopy", cmd_objcopy_real},
+    /* Batch 29: System Log */
+    {"logrotate", cmd_logrotate_real},
 };
 
 
