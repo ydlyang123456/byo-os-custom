@@ -1,8 +1,8 @@
 @echo off
 chcp 65001 >nul
-title BYO-OS Launch v8
+title BYO-OS Launch v9
 echo ============================================
-echo    BYO-OS - One-Click Launch v8
+echo    BYO-OS - One-Click Launch v9
 echo ============================================
 echo.
 
@@ -34,19 +34,22 @@ for /f "tokens=5" %%a in ('netstat -ano ^| findstr ":4321 " ^| findstr "LISTENIN
 )
 timeout /t 2 /nobreak >nul
 
-echo [1/3] Starting QEMU (GTK display for better keyboard)...
+echo [1/3] Starting QEMU...
 echo        ISO: %~dp0byo-os.iso
-echo        Display: GTK (default, better keyboard)
-echo        Serial: TCP 4321
+echo        Display: SDL
+echo        Serial: TCP 4321 (for web panel)
+echo        Network: NE2000 + port forward 8888-^>80
 echo.
 start "" "D:\qemu\qemu-system-i386.exe" ^
     -cdrom "%~dp0byo-os.iso" ^
     -m 128 ^
     -serial tcp::4321,server,nowait ^
-    -display gtk
+    -display sdl ^
+    -netdev user,id=net0,hostfwd=tcp::8888-:80 ^
+    -device ne2k_pci,netdev=net0
 
-echo [2/3] Waiting for QEMU to initialize (10 seconds)...
-timeout /t 10 /nobreak >nul
+echo [2/3] Waiting for QEMU to initialize (8 seconds)...
+timeout /t 8 /nobreak >nul
 
 netstat -ano | findstr ":4321" | findstr "LISTENING" >nul 2>&1
 if %errorlevel% equ 0 (
@@ -61,17 +64,16 @@ echo ============================================
 echo    BYO-OS is starting!
 echo ============================================
 echo.
-echo    QEMU Display:  GTK window (OS visible)
-echo    Web Panel:     http://localhost:7777
+echo    QEMU Window:  SDL display (use this to type)
+echo    Web Panel:    http://localhost:7777
+echo    HTTP Port:    8888 (mapped to OS port 80)
 echo.
-echo    IMPORTANT: Click inside QEMU window first,
-echo    then type commands. Enter key should work
-echo    with GTK display.
-echo.
-echo    Open browser: http://localhost:7777
+echo    TIP: Click inside QEMU window, then type.
+echo         Enter key should work with SDL display.
+echo         Web panel connects via TCP serial port 4321.
 echo ============================================
 echo.
 
-python "%~dp%gateway.py"
+python "%~dp0gateway.py"
 
 pause

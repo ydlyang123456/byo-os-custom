@@ -1,5 +1,5 @@
 ﻿#!/usr/bin/env python3
-"""BYO-OS Web Management Panel v8 - Full rewrite with robust serial bridge."""
+"""BYO-OS Web Management Panel v9 - Robust serial bridge with persistent connection."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -15,6 +15,7 @@ class SerialBridge:
         self._last_attempt = 0.0
         self._debug_log = []
         self._last_response = ""
+        self._connecting = False
 
     def _log(self, msg):
         ts = time.strftime("%H:%M:%S")
@@ -25,34 +26,40 @@ class SerialBridge:
         print(entry, flush=True)
 
     def connect(self, retries=5):
-        with self.lock:
-            for attempt in range(retries):
-                try:
-                    if self.sock:
-                        try: self.sock.close()
-                        except: pass
-                except: pass
-                self.sock = None
-                self.ok = False
-                self._last_attempt = time.time()
-                try:
-                    self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                    self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
-                    self.sock.settimeout(5)
-                    self._log(f"Connecting to serial 127.0.0.1:{SERIAL_PORT} (attempt {attempt+1}/{retries})...")
-                    self.sock.connect(("127.0.0.1", SERIAL_PORT))
-                    self.sock.settimeout(None)
-                    self.ok = True
-                    time.sleep(1.5)
-                    self._drain()
-                    self._log("Serial CONNECTED OK")
-                    return True
-                except Exception as e:
-                    self._log(f"Connect attempt {attempt+1} failed: {e}")
-                    self.ok = False
-                    time.sleep(1.0)
-            self._log("All connect attempts failed - QEMU serial not available")
+        if self._connecting:
             return False
+        self._connecting = True
+        try:
+            with self.lock:
+                for attempt in range(retries):
+                    try:
+                        if self.sock:
+                            try: self.sock.close()
+                            except: pass
+                    except: pass
+                    self.sock = None
+                    self.ok = False
+                    self._last_attempt = time.time()
+                    try:
+                        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                        self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                        self.sock.settimeout(5)
+                        self._log(f"Connecting to serial 127.0.0.1:{SERIAL_PORT} (attempt {attempt+1}/{retries})...")
+                        self.sock.connect(("127.0.0.1", SERIAL_PORT))
+                        self.sock.settimeout(None)
+                        self.ok = True
+                        time.sleep(1.5)
+                        self._drain()
+                        self._log("Serial CONNECTED OK")
+                        return True
+                    except Exception as e:
+                        self._log(f"Connect attempt {attempt+1} failed: {e}")
+                        self.ok = False
+                        time.sleep(1.0)
+                self._log("All connect attempts failed - QEMU serial not available")
+                return False
+        finally:
+            self._connecting = False
 
     def _drain(self):
         if not self.sock:
@@ -74,20 +81,46 @@ class SerialBridge:
     def _ensure_connected(self):
         if self.ok:
             return True
+        if self._connecting:
+            return False
         if time.time() - self._last_attempt < 3.0:
             return False
         return self.connect()
 
+    def _safe_send(self, data):
+        try:
+            self.sock.sendall(data)
+            return True
+        except (BrokenPipeError, ConnectionResetError, OSError) as e:
+            self._log(f"Send failed: {e}")
+            self.ok = False
+            try: self.sock.close()
+            except: pass
+            self.sock = None
+            return False
+
+    def _safe_recv(self, size=4096):
+        try:
+            return self.sock.recv(size)
+        except (ConnectionResetError, OSError) as e:
+            self._log(f"Recv failed: {e}")
+            self.ok = False
+            try: self.sock.close()
+            except: pass
+            self.sock = None
+            return b""
+
     def send_command(self, cmd, timeout=10.0):
         if not self._ensure_connected():
-            return "ERROR: Serial not connected. Start QEMU with: qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait"
+            return "ERROR: Serial not connected. Start QEMU with:\n  qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait"
 
         with self.lock:
             try:
                 self._drain()
                 self._log(f"SEND: {cmd}")
                 self.sock.settimeout(3)
-                self.sock.sendall((cmd + "\r\n").encode())
+                if not self._safe_send((cmd + "\r\n").encode()):
+                    return "ERROR: Send failed"
 
                 resp = b""
                 end_time = time.time() + timeout
@@ -95,7 +128,7 @@ class SerialBridge:
                 idle = 0
                 while time.time() < end_time:
                     try:
-                        d = self.sock.recv(4096)
+                        d = self._safe_recv(4096)
                         if d:
                             resp += d
                             idle = 0
@@ -119,7 +152,6 @@ class SerialBridge:
                 self._last_response = result
                 self._log(f"RECV ({len(result)} bytes): {result[:300]}")
 
-                # Clean up prompt lines
                 clean_lines = []
                 for line in result.split("\n"):
                     ls = line.strip()
@@ -155,11 +187,11 @@ except Exception as e:
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
         p = urllib.parse.urlparse(self.path).path
-        q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
 
-        if p == "/" or p == "/index.html":
+        if p == "/" or p == "/index.html" or p == "/panel.html":
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Cache-Control", "no-cache")
             self.end_headers()
             self.wfile.write(HTML.encode("utf-8"))
         elif p == "/api/sysinfo":
@@ -208,18 +240,6 @@ class H(BaseHTTPRequestHandler):
                     try: info["ip"] = l.split("IP:")[1].strip()
                     except: pass
             self._json(info)
-        elif p == "/api/tasks":
-            raw = br.send_command("ps", 3.0)
-            self._json({"output": raw})
-        elif p == "/api/files":
-            raw = br.send_command("ls /", 3.0)
-            self._json({"output": raw})
-        elif p == "/api/network":
-            raw = br.send_command("ifconfig", 3.0)
-            self._json({"output": raw})
-        elif p == "/api/logs":
-            raw = br.send_command("journal", 3.0)
-            self._json({"output": raw})
         elif p == "/api/ping":
             self._json({"ok": True, "serial": br.ok})
         elif p == "/api/reconnect":
@@ -275,7 +295,6 @@ class H(BaseHTTPRequestHandler):
 
 
 def serial_retry_thread():
-    """Background thread that retries serial connection every 5 seconds."""
     while True:
         time.sleep(5)
         if not br.ok:
@@ -285,14 +304,13 @@ def serial_retry_thread():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v8")
+    print("  BYO-OS Web Management Panel v9")
     print("=" * 60)
     print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
     br.connect(retries=5)
     print(f"Serial: {'CONNECTED' if br.ok else 'OFFLINE (start QEMU first)'}")
 
-    # Start background reconnection thread
     t = threading.Thread(target=serial_retry_thread, daemon=True)
     t.start()
 

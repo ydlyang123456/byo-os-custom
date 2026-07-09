@@ -32,41 +32,51 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 .btn{display:inline-block;padding:7px 16px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
 .btn-primary{background:#38bdf8;color:#0a0e1a}.btn-primary:hover{background:#7dd3fc}
 .btn-outline{background:transparent;border:1px solid #334155;color:#94a3b8}.btn-outline:hover{background:#1e293b}
+.btn-danger{background:#ef4444;color:#fff}.btn-danger:hover{background:#f87171}
 #term{background:#000;border-radius:8px;padding:14px;font-family:Consolas,monospace;font-size:13px;height:500px;overflow-y:auto;white-space:pre-wrap;word-wrap:break-word;line-height:1.5}
 #tinp{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:9px 14px;color:#e2e8f0;font-family:monospace;font-size:13px;width:100%;margin-top:10px;outline:none}
 #tinp:focus{border-color:#38bdf8}
 .status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
 .st-on{background:#22c55e}.st-off{background:#ef4444}
 .output-box{background:#0f172a;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:12px;max-height:400px;overflow:auto;white-space:pre-wrap;line-height:1.4;margin-top:12px;border:1px solid #1e293b}
-.input-group{display:flex;gap:8px;margin-bottom:12px}
-.input-group input{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:7px 12px;color:#e2e8f0;font-size:12px;outline:none;flex:1}
+.input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
+.input-group input{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:7px 12px;color:#e2e8f0;font-size:12px;outline:none;flex:1;min-width:200px}
 .input-group input:focus{border-color:#38bdf8}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-top-color:#38bdf8;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{color:#475569;font-style:italic;padding:20px;text-align:center}
 .err{color:#ef4444;padding:20px;text-align:center}
+.toast{position:fixed;top:20px;right:20px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:12px 20px;font-size:13px;z-index:999;transition:all .3s;opacity:0;transform:translateY(-10px)}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.ok{border-color:#22c55e;color:#22c55e}
+.toast.err{border-color:#ef4444;color:#ef4444}
+.cmd-table{width:100%;border-collapse:collapse;margin-top:12px}
+.cmd-table th,.cmd-table td{text-align:left;padding:8px 12px;border-bottom:1px solid #1e293b;font-size:12px}
+.cmd-table th{color:#64748b;text-transform:uppercase;font-size:10px;letter-spacing:.5px}
+.cmd-table tr:hover{background:#1e293b}
 </style>
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v8</p></div>
-  <nav>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v9</p></div>
+  <nav id="sidebar">
     <div class="sep">Main</div>
-    <a data-page="dashboard" class="on">&#128202; Dashboard</a>
-    <a data-page="terminal">&#128187; Terminal</a>
-    <a data-page="sysinfo">&#9432; System Info</a>
+    <a href="#" data-page="dashboard" class="on">&#128202; Dashboard</a>
+    <a href="#" data-page="terminal">&#128187; Terminal</a>
+    <a href="#" data-page="sysinfo">&#9432; System Info</a>
     <div class="sep">Management</div>
-    <a data-page="processes">&#128203; Processes</a>
-    <a data-page="network">&#127760; Network</a>
-    <a data-page="files">&#128193; Files</a>
-    <a data-page="users">&#128100; Users</a>
-    <a data-page="services">&#9881; Services</a>
+    <a href="#" data-page="processes">&#128203; Processes</a>
+    <a href="#" data-page="network">&#127760; Network</a>
+    <a href="#" data-page="files">&#128193; Files</a>
+    <a href="#" data-page="users">&#128100; Users</a>
+    <a href="#" data-page="services">&#9881; Services</a>
     <div class="sep">Tools</div>
-    <a data-page="packages">&#128230; Packages</a>
-    <a data-page="logs">&#128220; Logs</a>
-    <a data-page="settings">&#9881; Settings</a>
+    <a href="#" data-page="packages">&#128230; Packages</a>
+    <a href="#" data-page="commands">&#128295; Commands</a>
+    <a href="#" data-page="logs">&#128220; Logs</a>
+    <a href="#" data-page="settings">&#9881; Settings</a>
   </nav>
-  <div class="ft">BYO-OS v1.8 | <span id="connst"><span class="status st-off"></span>Connecting...</span></div>
+  <div class="ft">BYO-OS v1.14 | <span id="connst"><span class="status st-off"></span>Connecting...</span></div>
 </div>
 
 <div id="mn">
@@ -98,31 +108,48 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
         <div class="row"><span class="lbl">IP Address</span><span class="val" id="d-ip">-</span></div>
       </div>
     </div>
-    <div class="card">
-      <h3>Quick Actions</h3>
-      <button class="btn btn-primary" onclick="refreshDash()" style="margin-right:8px">Refresh</button>
-      <button class="btn btn-outline" onclick="reconnect()" style="margin-right:8px">Reconnect Serial</button>
+    <div style="display:flex;gap:8px;margin-bottom:16px">
+      <button class="btn btn-primary" onclick="refreshDash()">Refresh</button>
+      <button class="btn btn-outline" onclick="reconnect()">Reconnect Serial</button>
       <button class="btn btn-outline" onclick="nav('terminal')">Open Terminal</button>
+    </div>
+    <div class="card">
+      <h3>Quick Commands</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-outline" onclick="quickCmd('help')">help</button>
+        <button class="btn btn-outline" onclick="quickCmd('sysinfo')">sysinfo</button>
+        <button class="btn btn-outline" onclick="quickCmd('uname -a')">uname</button>
+        <button class="btn btn-outline" onclick="quickCmd('free')">free</button>
+        <button class="btn btn-outline" onclick="quickCmd('df')">df</button>
+        <button class="btn btn-outline" onclick="quickCmd('ps')">ps</button>
+        <button class="btn btn-outline" onclick="quickCmd('ifconfig')">ifconfig</button>
+        <button class="btn btn-outline" onclick="quickCmd('uptime')">uptime</button>
+        <button class="btn btn-outline" onclick="quickCmd('dmesg')">dmesg</button>
+        <button class="btn btn-outline" onclick="quickCmd('neofetch')">neofetch</button>
+      </div>
     </div>
   </div>
 
   <!-- Terminal -->
   <div id="pg-terminal" class="pg">
     <h2>Terminal</h2>
-    <div id="term">BYO-OS Terminal v1.0
-Type commands below.
-
-</div>
-    <input id="tinp" type="text" placeholder="Enter command..." autocomplete="off" spellcheck="false">
+    <div class="input-group">
+      <button class="btn btn-outline" onclick="termClear()">Clear</button>
+      <button class="btn btn-outline" onclick="termHistory(-1)">&#9664; History</button>
+    </div>
+    <div id="term">BYO-OS> </div>
+    <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off" spellcheck="false">
   </div>
 
   <!-- System Info -->
   <div id="pg-sysinfo" class="pg">
-    <h2>System Info</h2>
+    <h2>System Information</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('sysinfo','si-out','sysinfo')">Load sysinfo</button>
+      <button class="btn btn-primary" onclick="loadPage('sysinfo','si-out','sysinfo')">sysinfo</button>
       <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','uname -a')">uname -a</button>
       <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','neofetch')">neofetch</button>
+      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','cat /proc/cpuinfo')">cpuinfo</button>
+      <button class="btn btn-outline" onclick="loadPage('sysinfo','si-out','lscpu')">lscpu</button>
     </div>
     <div id="si-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -131,9 +158,11 @@ Type commands below.
   <div id="pg-processes" class="pg">
     <h2>Processes</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('processes','pr-out','ps')">Load processes</button>
+      <button class="btn btn-primary" onclick="loadPage('processes','pr-out','ps')">ps</button>
       <button class="btn btn-outline" onclick="loadPage('processes','pr-out','top')">top</button>
       <button class="btn btn-outline" onclick="loadPage('processes','pr-out','free')">free</button>
+      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','ps aux')">ps aux</button>
+      <button class="btn btn-outline" onclick="loadPage('processes','pr-out','lsmem')">lsmem</button>
     </div>
     <div id="pr-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -142,46 +171,56 @@ Type commands below.
   <div id="pg-network" class="pg">
     <h2>Network</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('network','nw-out','ifconfig')">Load ifconfig</button>
-      <button class="btn btn-outline" onclick="loadPage('network','nw-out','ping 10.0.2.2')">Ping Gateway</button>
+      <button class="btn btn-primary" onclick="loadPage('network','nw-out','ifconfig')">ifconfig</button>
       <button class="btn btn-outline" onclick="loadPage('network','nw-out','net')">net status</button>
+      <button class="btn btn-outline" onclick="loadPage('network','nw-out','arp')">arp</button>
+      <button class="btn btn-outline" onclick="loadPage('network','nw-out','route')">route</button>
+      <button class="btn btn-outline" onclick="loadPage('network','nw-out','ping 10.0.2.2')">Ping Gateway</button>
+      <button class="btn btn-outline" onclick="loadPage('network','nw-out','netstat')">netstat</button>
     </div>
     <div id="nw-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Files -->
   <div id="pg-files" class="pg">
-    <h2>Files</h2>
+    <h2>File System</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('files','fl-out','ls /')">ls /</button>
+      <input id="fl-path" type="text" placeholder="Path (e.g. / or /home)" value="/">
+      <button class="btn btn-primary" onclick="loadPage('files','fl-out','ls '+document.getElementById('fl-path').value)">Go</button>
+      <button class="btn btn-outline" onclick="loadPage('files','fl-out','ls /')">ls /</button>
       <button class="btn btn-outline" onclick="loadPage('files','fl-out','df')">df</button>
       <button class="btn btn-outline" onclick="loadPage('files','fl-out','du /')">du /</button>
-    </div>
-    <div class="input-group">
-      <input id="fl-path" type="text" placeholder="Path (e.g. /home)" value="/">
-      <button class="btn btn-primary" onclick="var p=document.getElementById('fl-path').value;loadPage('files','fl-out','ls '+p)">Go</button>
+      <button class="btn btn-outline" onclick="loadPage('files','fl-out','mount')">mount</button>
+      <button class="btn btn-outline" onclick="loadPage('files','fl-out','lsblk')">lsblk</button>
     </div>
     <div id="fl-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Users -->
   <div id="pg-users" class="pg">
-    <h2>Users</h2>
+    <h2>Users & Groups</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('users','us-out','whoami')">whoami</button>
       <button class="btn btn-outline" onclick="loadPage('users','us-out','users')">users</button>
       <button class="btn btn-outline" onclick="loadPage('users','us-out','id')">id</button>
       <button class="btn btn-outline" onclick="loadPage('users','us-out','groups')">groups</button>
+      <button class="btn btn-outline" onclick="loadPage('users','us-out','cat /etc/passwd')">passwd</button>
     </div>
     <div id="us-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
 
   <!-- Services -->
   <div id="pg-services" class="pg">
-    <h2>Services</h2>
+    <h2>Services & Cron</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('services','sv-out','service list')">List services</button>
-      <button class="btn btn-outline" onclick="loadPage('services','sv-out','crontab')">crontab</button>
+      <button class="btn btn-primary" onclick="loadPage('services','sv-out','service2 list')">service list</button>
+      <button class="btn btn-outline" onclick="loadPage('services','sv-out','systemctl2 list-units')">systemctl list</button>
+      <button class="btn btn-outline" onclick="loadPage('services','sv-out','crontab2 status')">cron status</button>
+      <button class="btn btn-outline" onclick="loadPage('services','sv-out','jobs2')">jobs</button>
+    </div>
+    <div class="input-group">
+      <input id="sv-input" type="text" placeholder="Service command (e.g. service2 httpd start)">
+      <button class="btn btn-primary" onclick="loadPage('services','sv-out',document.getElementById('sv-input').value)">Run</button>
     </div>
     <div id="sv-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -190,20 +229,35 @@ Type commands below.
   <div id="pg-packages" class="pg">
     <h2>Packages</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('packages','pk-out','dpkg -l')">dpkg -l</button>
-      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','which python')">which python</button>
-      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','which gcc')">which gcc</button>
+      <button class="btn btn-primary" onclick="loadPage('packages','pk-out','dpkg2 -l')">dpkg list</button>
+      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','apt2 list')">apt list</button>
+      <button class="btn btn-outline" onclick="loadPage('packages','pk-out','apt2 update')">apt update</button>
+    </div>
+    <div class="input-group">
+      <input id="pk-input" type="text" placeholder="Package command (e.g. apt2 install vim)">
+      <button class="btn btn-primary" onclick="loadPage('packages','pk-out',document.getElementById('pk-input').value)">Run</button>
     </div>
     <div id="pk-out" class="output-box"><span class="empty">Click a button to load data</span></div>
+  </div>
+
+  <!-- Commands Reference -->
+  <div id="pg-commands" class="pg">
+    <h2>Command Reference</h2>
+    <div class="input-group">
+      <input id="cmd-search" type="text" placeholder="Search commands..." oninput="filterCmds()">
+      <button class="btn btn-primary" onclick="loadPage('commands','cmd-out','help')">Load All</button>
+    </div>
+    <div id="cmd-out" class="output-box"><span class="empty">Click "Load All" or search above</span></div>
   </div>
 
   <!-- Logs -->
   <div id="pg-logs" class="pg">
     <h2>Logs</h2>
     <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('logs','lg-out','journal')">Load journal</button>
+      <button class="btn btn-primary" onclick="loadPage('logs','lg-out','journal')">journal</button>
       <button class="btn btn-outline" onclick="loadPage('logs','lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" onclick="refreshLogs()">Auto-refresh</button>
+      <button class="btn btn-outline" onclick="loadPage('logs','lg-out','cat /var/log/syslog')">syslog</button>
+      <button class="btn btn-outline" id="autoRefreshBtn" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
     </div>
     <div id="lg-out" class="output-box"><span class="empty">Click a button to load data</span></div>
   </div>
@@ -216,6 +270,7 @@ Type commands below.
       <div class="row"><span class="lbl">Status</span><span class="val" id="set-ser"><span class="status st-off"></span>Checking...</span></div>
       <div class="row"><span class="lbl">Port</span><span class="val">TCP 127.0.0.1:4321</span></div>
       <div class="row"><span class="lbl">Panel</span><span class="val">http://localhost:7777</span></div>
+      <div class="row"><span class="lbl">Version</span><span class="val">v9</span></div>
       <div style="margin-top:12px">
         <button class="btn btn-primary" onclick="reconnect()">Reconnect</button>
         <button class="btn btn-outline" onclick="loadDebug()">Debug Info</button>
@@ -225,40 +280,60 @@ Type commands below.
   </div>
 </div>
 
+<div id="toast" class="toast"></div>
+
 <script>
 var cur = 'dashboard';
+var termHist = [];
+var termHistIdx = -1;
+var autoRefreshTimer = null;
 
+/* ===== Navigation ===== */
 function nav(p) {
-  document.querySelectorAll('.pg').forEach(function(e){ e.classList.remove('on'); });
+  // Hide all pages
+  var pages = document.querySelectorAll('.pg');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('on');
+  // Show target page
   var el = document.getElementById('pg-' + p);
   if (el) el.classList.add('on');
-  document.querySelectorAll('#sb nav a').forEach(function(e){
-    e.classList.remove('on');
-    if (e.getAttribute('data-page') === p) e.classList.add('on');
-  });
+  // Update sidebar
+  var links = document.querySelectorAll('#sidebar a');
+  for (var i = 0; i < links.length; i++) {
+    links[i].classList.remove('on');
+    if (links[i].getAttribute('data-page') === p) links[i].classList.add('on');
+  }
   cur = p;
-  // Auto-load data for the page
+  // Auto-load data
   if (p === 'dashboard') refreshDash();
-  if (p === 'terminal') setTimeout(function(){ document.getElementById('tinp').focus(); }, 100);
+  if (p === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
   if (p === 'sysinfo') loadPage('sysinfo','si-out','sysinfo');
   if (p === 'processes') loadPage('processes','pr-out','ps');
   if (p === 'network') loadPage('network','nw-out','ifconfig');
   if (p === 'files') loadPage('files','fl-out','ls /');
   if (p === 'users') loadPage('users','us-out','whoami');
-  if (p === 'services') loadPage('services','sv-out','service list');
+  if (p === 'services') loadPage('services','sv-out','service2 list');
+  if (p === 'packages') loadPage('packages','pk-out','dpkg2 -l');
   if (p === 'logs') loadPage('logs','lg-out','journal');
   if (p === 'settings') refreshSettings();
+  if (p === 'commands') loadPage('commands','cmd-out','help');
+  // Prevent default anchor behavior
+  return false;
 }
 
-document.querySelectorAll('#sb nav a[data-page]').forEach(function(a) {
-  a.addEventListener('click', function(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    var page = this.getAttribute('data-page');
-    if (page) nav(page);
-  });
-});
+// Bind sidebar clicks
+(function(){
+  var links = document.querySelectorAll('#sidebar a[data-page]');
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var page = this.getAttribute('data-page');
+      if (page) nav(page);
+    });
+  }
+})();
 
+/* ===== API ===== */
 function api(url, body) {
   var opts = { method: 'GET' };
   if (body) {
@@ -271,39 +346,85 @@ function api(url, body) {
 
 function loadPage(page, elId, cmd) {
   var el = document.getElementById(elId);
-  if (el) el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
+  if (!el) return;
+  el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
   api('/api/exec', {cmd: cmd}).then(function(d) {
-    if (el) {
-      if (d.error) el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
-      else el.textContent = d.output || 'No output';
+    if (d.error) {
+      el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
+    } else {
+      el.textContent = d.output || '(no output)';
     }
+  }).catch(function(e) {
+    el.innerHTML = '<span class="err">Network error: ' + e + '</span>';
   });
 }
 
+function quickCmd(cmd) {
+  nav('terminal');
+  setTimeout(function() {
+    var inp = document.getElementById('tinp');
+    inp.value = cmd;
+    sendTerm();
+  }, 200);
+}
+
+/* ===== Terminal ===== */
 function sendTerm() {
   var inp = document.getElementById('tinp');
   var term = document.getElementById('term');
   var cmd = inp.value.trim();
   if (!cmd) return;
-  term.textContent += '\nBYO-OS> ' + cmd + '\n';
+  if (termHist.length === 0 || termHist[termHist.length-1] !== cmd) termHist.push(cmd);
+  termHistIdx = termHist.length;
+  term.textContent += cmd + '\n';
   inp.value = '';
+  term.textContent += 'Loading...\n';
+  term.scrollTop = term.scrollHeight;
   api('/api/exec', {cmd: cmd}).then(function(d) {
-    term.textContent += (d.output || d.error || '') + '\n';
+    // Remove "Loading..." line
+    var lines = term.textContent.split('\n');
+    lines.pop(); // remove "Loading..."
+    lines.pop(); // remove empty trailing
+    term.textContent = lines.join('\n') + '\n';
+    term.textContent += (d.output || d.error || '(no output)') + '\n';
     term.textContent += 'BYO-OS> ';
     term.scrollTop = term.scrollHeight;
   }).catch(function(e) {
+    var lines = term.textContent.split('\n');
+    lines.pop();
+    lines.pop();
+    term.textContent = lines.join('\n') + '\n';
     term.textContent += 'Error: ' + e + '\n';
     term.textContent += 'BYO-OS> ';
     term.scrollTop = term.scrollHeight;
   });
 }
 
+function termClear() {
+  document.getElementById('term').textContent = 'BYO-OS> ';
+}
+
+function termHistory(dir) {
+  if (termHist.length === 0) return;
+  termHistIdx += dir;
+  if (termHistIdx < 0) termHistIdx = 0;
+  if (termHistIdx >= termHist.length) termHistIdx = termHist.length - 1;
+  document.getElementById('tinp').value = termHist[termHistIdx] || '';
+}
+
+document.getElementById('tinp').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') { e.preventDefault(); sendTerm(); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); termHistory(-1); }
+  if (e.key === 'ArrowDown') { e.preventDefault(); termHistory(1); }
+});
+
+/* ===== Dashboard ===== */
 function refreshDash() {
   document.getElementById('d-os').textContent = 'Loading...';
   api('/api/sysinfo').then(function(d) {
     if (d.error) {
-      document.getElementById('d-os').textContent = 'Error';
-      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Error';
+      document.getElementById('d-os').textContent = 'Connection Error';
+      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Offline';
       return;
     }
     document.getElementById('d-os').textContent = d.os || 'BYO-OS';
@@ -326,11 +447,12 @@ function refreshDash() {
       '<span class="status st-on"></span>Connected' :
       '<span class="status st-off"></span>Offline';
   }).catch(function(e) {
-    document.getElementById('d-os').textContent = 'Connection Error';
-    document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Gateway offline';
+    document.getElementById('d-os').textContent = 'Gateway Offline';
+    document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Gateway down';
   });
 }
 
+/* ===== Settings ===== */
 function refreshSettings() {
   api('/api/ping').then(function(d) {
     var e2 = document.getElementById('set-ser');
@@ -355,6 +477,7 @@ function loadDebug() {
   });
 }
 
+/* ===== Connection ===== */
 function refreshConn() {
   api('/api/ping').then(function(d) {
     var e1 = document.getElementById('connst');
@@ -370,22 +493,53 @@ function refreshConn() {
 }
 
 function reconnect() {
+  toast('Reconnecting...', '');
   api('/api/reconnect').then(function(d) {
     refreshConn();
     if (cur === 'dashboard') refreshDash();
     if (cur === 'settings') refreshSettings();
+    toast(d.serial ? 'Connected!' : 'Failed', d.serial ? 'ok' : 'err');
+  }).catch(function(e) {
+    toast('Reconnect failed: ' + e, 'err');
   });
 }
 
-function refreshLogs() {
-  loadPage('logs','lg-out','journal');
-  setTimeout(refreshLogs, 10000);
+/* ===== Auto-refresh ===== */
+function toggleAutoRefresh() {
+  var btn = document.getElementById('autoRefreshBtn');
+  if (autoRefreshTimer) {
+    clearInterval(autoRefreshTimer);
+    autoRefreshTimer = null;
+    btn.textContent = 'Auto-refresh: OFF';
+  } else {
+    autoRefreshTimer = setInterval(function(){ loadPage('logs','lg-out','journal'); }, 5000);
+    btn.textContent = 'Auto-refresh: ON';
+  }
 }
 
-document.getElementById('tinp').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { e.preventDefault(); sendTerm(); }
-});
+/* ===== Toast ===== */
+function toast(msg, type) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + (type || '');
+  setTimeout(function(){ t.className = 'toast'; }, 3000);
+}
 
+/* ===== Commands filter ===== */
+function filterCmds() {
+  var q = document.getElementById('cmd-search').value.toLowerCase();
+  if (!q) return;
+  var el = document.getElementById('cmd-out');
+  el.innerHTML = '<span class="spinner"></span> Searching...';
+  api('/api/exec', {cmd: 'help'}).then(function(d) {
+    if (d.error) { el.innerHTML = '<span class="err">' + d.error + '</span>'; return; }
+    var lines = (d.output || '').split('\n');
+    var filtered = lines.filter(function(l){ return l.toLowerCase().indexOf(q) !== -1; });
+    el.textContent = filtered.length ? filtered.join('\n') : 'No commands match: ' + q;
+  });
+}
+
+/* ===== Init ===== */
 refreshDash();
 refreshConn();
 setInterval(refreshConn, 15000);
