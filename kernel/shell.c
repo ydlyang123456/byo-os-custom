@@ -8596,9 +8596,23 @@ static void cmd_last_real(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_w_real(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts(" 14:30:00 up 2 days,  3:30,  1 user,  load average: 0.15, 0.10, 0.05\n");
-    vga_puts("USER     TTY      FROM             LOGIN@   IDLE   JCPU   PCPU WHAT\n");
-    vga_puts("root     pts/0    192.168.1.100    10:30    0.00s  0.23s  0.01s w\n");
+    unsigned int sec = timer_get_seconds();
+    unsigned int hrs = (sec % 86400) / 3600;
+    unsigned int mins = (sec % 3600) / 60;
+    unsigned int days = sec / 86400;
+    char buf[32];
+    vga_puts(" ");
+    if (hrs < 10) vga_putchar(48);
+    itoa(hrs, buf, 10); vga_puts(buf); vga_putchar(58);
+    if (mins < 10) vga_putchar(48);
+    itoa(mins, buf, 10); vga_puts(buf); vga_putchar(58);
+    vga_puts("00 up ");
+    itoa(days, buf, 10); vga_puts(buf); vga_puts(" day(s)\n");
+    vga_puts("USER     TTY      FROM             LOGIN@   IDLE\n");
+    vga_puts(user_get_name());
+    int pad = 9 - strlen(user_get_name());
+    while (pad-- > 0) vga_putchar(32);
+    vga_puts("tty1     :0               10:00    0.00s\n");
 }
 
 static void cmd_whoami2(int argc, char args[][CMD_MAX_LEN]) {
@@ -8606,7 +8620,13 @@ static void cmd_whoami2(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_id_real(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("uid=0(root) gid=0(root) groups=0(root),4(adm),27(sudo)\n");
+    char buf[32];
+    vga_puts("uid="); itoa(user_get_uid(), buf, 10); vga_puts(buf);
+    vga_puts("("); vga_puts(user_get_name()); vga_puts(") gid=");
+    itoa(user_get_uid(), buf, 10); vga_puts(buf);
+    vga_puts("("); vga_puts(user_get_name()); vga_puts(") groups=");
+    itoa(user_get_uid(), buf, 10); vga_puts(buf);
+    vga_puts("("); vga_puts(user_get_name()); vga_puts(")\n");
 }
 
 static void cmd_groups_real(int argc, char args[][CMD_MAX_LEN]) {
