@@ -15080,6 +15080,63 @@ static void cmd_chatglm222(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_deepseek222(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_qwen222b(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* Batch 223 */
+static void cmd_cnc223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cam223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cad223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bim223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gis223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_satellite223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_drone223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lidar223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pointcloud223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_geoserver223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_qgis223(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_arcgis223(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 224 */
+static void cmd_kubernetes224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_podman224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_containerd224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_crio224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_runc224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_buildah224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_skopeo224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_crane224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_regctl224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_harbor224(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_quay224(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 225 */
+static void cmd_prometheus225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_alertmanager225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_thanos225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cortex225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_loki225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tempo225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mimir225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pyroscope225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_phlare225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_eBPF225(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_grafana225b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_opentelemetry225(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 226 */
+static void cmd_terraform226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pulumi226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_crossplane226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cdk226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bicep226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_arm226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cloudform226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_opentofu226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_terragrunt226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_atlantis226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_spacelift226(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_env0226(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -18053,6 +18110,31 @@ static const cmd_entry commands[] = {
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
     {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 223 */
+    {"cnc21", cmd_cnc223}, {"cam21", cmd_cam223}, {"cad21", cmd_cad223},
+    {"bim21", cmd_bim223}, {"gis21", cmd_gis223}, {"satellite21", cmd_satellite223},
+    {"drone21", cmd_drone223}, {"lidar21", cmd_lidar223}, {"pointcloud21", cmd_pointcloud223},
+    {"geoserver21", cmd_geoserver223}, {"qgis21", cmd_qgis223}, {"arcgis21", cmd_arcgis223},
+
+    /* Batch 224 */
+    {"kubernetes22", cmd_kubernetes224}, {"docker22", cmd_docker224}, {"podman22", cmd_podman224},
+    {"containerd22", cmd_containerd224}, {"crio22", cmd_crio224}, {"runc22", cmd_runc224},
+    {"buildah22", cmd_buildah224}, {"skopeo22", cmd_skopeo224}, {"crane22", cmd_crane224},
+    {"regctl22", cmd_regctl224}, {"harbor22", cmd_harbor224}, {"quay22", cmd_quay224},
+
+    /* Batch 225 */
+    {"prometheus23", cmd_prometheus225}, {"alertmanager23", cmd_alertmanager225}, {"thanos23", cmd_thanos225},
+    {"cortex23", cmd_cortex225}, {"loki23", cmd_loki225}, {"tempo23", cmd_tempo225},
+    {"mimir23", cmd_mimir225}, {"pyroscope23", cmd_pyroscope225}, {"phlare23", cmd_phlare225},
+    {"ebpf23", cmd_eBPF225}, {"grafana23", cmd_grafana225b}, {"opentelemetry23", cmd_opentelemetry225},
+
+    /* Batch 226 */
+    {"terraform24", cmd_terraform226}, {"pulumi24", cmd_pulumi226}, {"crossplane24", cmd_crossplane226},
+    {"cdk24", cmd_cdk226}, {"bicep24", cmd_bicep226}, {"arm24", cmd_arm226},
+    {"cloudform24", cmd_cloudform226}, {"opentofu24", cmd_opentofu226}, {"terragrunt24", cmd_terragrunt226},
+    {"atlantis24", cmd_atlantis226}, {"spacelift24", cmd_spacelift226}, {"env024", cmd_env0226},
+
 
     /* Batch 219 */
     {"rust17", cmd_rust219}, {"go17", cmd_go219}, {"zig17", cmd_zig219},
@@ -43952,6 +44034,307 @@ static void cmd_qwen222b(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: qwen20b [cmd]\n"); return; }
     if (strcmp(args[1], "version") == 0) vga_puts("qwen20b v1.0.0\n");
     else vga_puts("qwen20b: running\n");
+}
+
+
+
+/* Batch 223 */
+
+static void cmd_cnc223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cnc21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cnc21 v1.0.0\n");
+    else vga_puts("cnc21: running\n");
+}
+
+static void cmd_cam223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cam21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cam21 v1.0.0\n");
+    else vga_puts("cam21: running\n");
+}
+
+static void cmd_cad223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cad21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cad21 v1.0.0\n");
+    else vga_puts("cad21: running\n");
+}
+
+static void cmd_bim223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bim21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("bim21 v1.0.0\n");
+    else vga_puts("bim21: running\n");
+}
+
+static void cmd_gis223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gis21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("gis21 v1.0.0\n");
+    else vga_puts("gis21: running\n");
+}
+
+static void cmd_satellite223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: satellite21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("satellite21 v1.0.0\n");
+    else vga_puts("satellite21: running\n");
+}
+
+static void cmd_drone223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: drone21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("drone21 v1.0.0\n");
+    else vga_puts("drone21: running\n");
+}
+
+static void cmd_lidar223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: lidar21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("lidar21 v1.0.0\n");
+    else vga_puts("lidar21: running\n");
+}
+
+static void cmd_pointcloud223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pointcloud21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("pointcloud21 v1.0.0\n");
+    else vga_puts("pointcloud21: running\n");
+}
+
+static void cmd_geoserver223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: geoserver21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("geoserver21 v1.0.0\n");
+    else vga_puts("geoserver21: running\n");
+}
+
+static void cmd_qgis223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: qgis21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("qgis21 v1.0.0\n");
+    else vga_puts("qgis21: running\n");
+}
+
+static void cmd_arcgis223(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: arcgis21 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("arcgis21 v1.0.0\n");
+    else vga_puts("arcgis21: running\n");
+}
+
+
+/* Batch 224 */
+
+static void cmd_kubernetes224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kubernetes22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("kubernetes22 v1.0.0\n");
+    else vga_puts("kubernetes22: running\n");
+}
+
+static void cmd_docker224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("docker22 v1.0.0\n");
+    else vga_puts("docker22: running\n");
+}
+
+static void cmd_podman224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: podman22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("podman22 v1.0.0\n");
+    else vga_puts("podman22: running\n");
+}
+
+static void cmd_containerd224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: containerd22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("containerd22 v1.0.0\n");
+    else vga_puts("containerd22: running\n");
+}
+
+static void cmd_crio224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: crio22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("crio22 v1.0.0\n");
+    else vga_puts("crio22: running\n");
+}
+
+static void cmd_runc224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: runc22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("runc22 v1.0.0\n");
+    else vga_puts("runc22: running\n");
+}
+
+static void cmd_buildah224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: buildah22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("buildah22 v1.0.0\n");
+    else vga_puts("buildah22: running\n");
+}
+
+static void cmd_skopeo224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: skopeo22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("skopeo22 v1.0.0\n");
+    else vga_puts("skopeo22: running\n");
+}
+
+static void cmd_crane224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: crane22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("crane22 v1.0.0\n");
+    else vga_puts("crane22: running\n");
+}
+
+static void cmd_regctl224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: regctl22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("regctl22 v1.0.0\n");
+    else vga_puts("regctl22: running\n");
+}
+
+static void cmd_harbor224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: harbor22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("harbor22 v1.0.0\n");
+    else vga_puts("harbor22: running\n");
+}
+
+static void cmd_quay224(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: quay22 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("quay22 v1.0.0\n");
+    else vga_puts("quay22: running\n");
+}
+
+
+/* Batch 225 */
+
+static void cmd_prometheus225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: prometheus23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("prometheus23 v1.0.0\n");
+    else vga_puts("prometheus23: running\n");
+}
+
+static void cmd_alertmanager225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: alertmanager23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("alertmanager23 v1.0.0\n");
+    else vga_puts("alertmanager23: running\n");
+}
+
+static void cmd_thanos225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: thanos23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("thanos23 v1.0.0\n");
+    else vga_puts("thanos23: running\n");
+}
+
+static void cmd_cortex225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cortex23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cortex23 v1.0.0\n");
+    else vga_puts("cortex23: running\n");
+}
+
+static void cmd_loki225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: loki23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("loki23 v1.0.0\n");
+    else vga_puts("loki23: running\n");
+}
+
+static void cmd_tempo225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tempo23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("tempo23 v1.0.0\n");
+    else vga_puts("tempo23: running\n");
+}
+
+static void cmd_mimir225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mimir23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("mimir23 v1.0.0\n");
+    else vga_puts("mimir23: running\n");
+}
+
+static void cmd_pyroscope225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pyroscope23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("pyroscope23 v1.0.0\n");
+    else vga_puts("pyroscope23: running\n");
+}
+
+static void cmd_phlare225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: phlare23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("phlare23 v1.0.0\n");
+    else vga_puts("phlare23: running\n");
+}
+
+static void cmd_eBPF225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ebpf23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("ebpf23 v1.0.0\n");
+    else vga_puts("ebpf23: running\n");
+}
+
+static void cmd_grafana225b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: grafana23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("grafana23 v1.0.0\n");
+    else vga_puts("grafana23: running\n");
+}
+
+static void cmd_opentelemetry225(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: opentelemetry23 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("opentelemetry23 v1.0.0\n");
+    else vga_puts("opentelemetry23: running\n");
+}
+
+
+/* Batch 226 */
+
+static void cmd_terraform226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: terraform24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("terraform24 v1.0.0\n");
+    else vga_puts("terraform24: running\n");
+}
+
+static void cmd_pulumi226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pulumi24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("pulumi24 v1.0.0\n");
+    else vga_puts("pulumi24: running\n");
+}
+
+static void cmd_crossplane226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: crossplane24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("crossplane24 v1.0.0\n");
+    else vga_puts("crossplane24: running\n");
+}
+
+static void cmd_cdk226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cdk24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cdk24 v1.0.0\n");
+    else vga_puts("cdk24: running\n");
+}
+
+static void cmd_bicep226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bicep24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("bicep24 v1.0.0\n");
+    else vga_puts("bicep24: running\n");
+}
+
+static void cmd_arm226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: arm24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("arm24 v1.0.0\n");
+    else vga_puts("arm24: running\n");
+}
+
+static void cmd_cloudform226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cloudform24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cloudform24 v1.0.0\n");
+    else vga_puts("cloudform24: running\n");
+}
+
+static void cmd_opentofu226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: opentofu24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("opentofu24 v1.0.0\n");
+    else vga_puts("opentofu24: running\n");
+}
+
+static void cmd_terragrunt226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: terragrunt24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("terragrunt24 v1.0.0\n");
+    else vga_puts("terragrunt24: running\n");
+}
+
+static void cmd_atlantis226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: atlantis24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("atlantis24 v1.0.0\n");
+    else vga_puts("atlantis24: running\n");
+}
+
+static void cmd_spacelift226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: spacelift24 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("spacelift24 v1.0.0\n");
+    else vga_puts("spacelift24: running\n");
+}
+
+static void cmd_env0226(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: env024 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("env024 v1.0.0\n");
+    else vga_puts("env024: running\n");
 }
 
 
