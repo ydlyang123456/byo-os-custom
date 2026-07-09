@@ -3503,6 +3503,346 @@ static void cmd_buildkit(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_kaniko_cli(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Kaniko CLI\n");
 }
+/* BATCH 16: Game/Entertainment */
+static void cmd_steam(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Steam: gaming platform\n");
+}
+
+static void cmd_wine(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Wine: Windows compatibility\n");
+}
+
+static void cmd_proton(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Proton: Steam Play\n");
+}
+
+static void cmd_lutris(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Lutris: game manager\n");
+}
+
+static void cmd_dosbox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("DOSBox: DOS emulator\n");
+}
+
+static void cmd_retroarch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("RetroArch: retro gaming\n");
+}
+
+/* BATCH 16: Graphics */
+static void cmd_gimp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GIMP 2.10: image editor\n");
+}
+
+static void cmd_inkscape(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Inkscape 1.3: vector graphics\n");
+}
+
+static void cmd_blender(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Blender 4.0: 3D creation\n");
+}
+
+static void cmd_imagemagick(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ImageMagick 7.1\n");
+}
+
+static void cmd_darktable(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("darktable: photo workflow\n");
+}
+
+static void cmd_rawtherapee(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("RawTherapee: raw photo editor\n");
+}
+
+static void cmd_krita(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Krita: digital painting\n");
+}
+
+static void cmd_scribus(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Scribus: desktop publishing\n");
+}
+
+/* BATCH 16: Office */
+static void cmd_libreoffice(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LibreOffice 7.6\n");
+}
+
+static void cmd_pandoc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Pandoc 3.0: document converter\n");
+}
+
+static void cmd_tesseract(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tesseract: OCR engine\n");
+}
+
+static void cmd_poppler(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Poppler: PDF utilities\n");
+}
+
+static void cmd_ghostscript(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ghostscript: PostScript interpreter\n");
+}
+
+static void cmd_wkhtmltopdf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("wkhtmltopdf: HTML to PDF\n");
+}
+
+/* BATCH 16: Communication */
+static void cmd_element(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Element: Matrix client\n");
+}
+
+static void cmd_signal(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Signal: encrypted messenger\n");
+}
+
+static void cmd_telegram(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Telegram: messaging\n");
+}
+
+static void cmd_discord(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Discord: voice/text chat\n");
+}
+
+static void cmd_slack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Slack: team messaging\n");
+}
+
+static void cmd_teams(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Microsoft Teams\n");
+}
+
+static void cmd_zoom(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zoom: video conferencing\n");
+}
+
+static void cmd_mattermost(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mattermost: team messaging\n");
+}
+
+static void cmd_rocket_chat(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Rocket.Chat: team messaging\n");
+}
+
+static void cmd_zulip(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zulip: team messaging\n");
+}
+
+/* BATCH 16: VPN/Proxy */
+static void cmd_wireguard(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("WireGuard: modern VPN\n");
+}
+
+static void cmd_ipsec(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("IPSec: VPN protocol\n");
+}
+
+static void cmd_l2tp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("L2TP: Layer 2 tunneling\n");
+}
+
+static void cmd_pptp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PPTP: Point-to-Point tunneling\n");
+}
+
+static void cmd_shadowsocks(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ShadowSocks: proxy\n");
+}
+
+static void cmd_v2ray(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("V2Ray: proxy platform\n");
+}
+
+static void cmd_xray(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Xray: proxy platform\n");
+}
+
+static void cmd_trojan(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Trojan: proxy protocol\n");
+}
+
+static void cmd_hysteria(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Hysteria: proxy protocol\n");
+}
+
+/* BATCH 16: DNS Extended */
+static void cmd_powerdns(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PowerDNS: authoritative DNS\n");
+}
+
+static void cmd_coredns(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CoreDNS: DNS server\n");
+}
+
+static void cmd_blocky(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Blocky: DNS proxy/blocker\n");
+}
+
+static void cmd_pihole(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Pi-hole: DNS sinkhole\n");
+}
+
+/* BATCH 16: IoT/Edge */
+static void cmd_mosquitto(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mosquitto: MQTT broker\n");
+}
+
+static void cmd_emqx(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("EMQX: MQTT broker\n");
+}
+
+static void cmd_homeassistant(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Home Assistant: home automation\n");
+}
+
+static void cmd_node_red(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Node-RED: flow automation\n");
+}
+
+static void cmd_grafana_on(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Grafana OnCall: incident management\n");
+}
+
+/* BATCH 16: Database Extended */
+static void cmd_timescaledb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("TimescaleDB: time-series\n");
+}
+
+static void cmd_yugabytedb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("YugabyteDB: distributed SQL\n");
+}
+
+static void cmd_cockroachdb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CockroachDB: distributed SQL\n");
+}
+
+static void cmd_planetscale(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PlanetScale: serverless MySQL\n");
+}
+
+static void cmd_supabase(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Supabase: open source Firebase\n");
+}
+
+static void cmd_appwrite(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Appwrite: backend server\n");
+}
+
+static void cmd_pocketbase(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PocketBase: backend in 1 file\n");
+}
+
+static void cmd_nhost(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nhost: open source Firebase\n");
+}
+
+/* BATCH 16: Misc Extended */
+static void cmd_openzfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenZFS: filesystem\n");
+}
+
+static void cmd_btrfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Btrfs: filesystem\n");
+}
+
+static void cmd_zfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ZFS: filesystem\n");
+}
+
+static void cmd_xfs(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("XFS: filesystem\n");
+}
+
+static void cmd_bcache(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bcache: block cache\n");
+}
+
+static void cmd_dracut(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dracut: initramfs generator\n");
+}
+
+static void cmd_mkinitcpio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mkinitcpio: initramfs generator\n");
+}
+
+static void cmd_grub(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GRUB: bootloader\n");
+}
+
+static void cmd_systemd_boot(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("systemd-boot: bootloader\n");
+}
+
+static void cmd_refind(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rEFInd: bootloader\n");
+}
+
+static void cmd_limine(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Limine: bootloader\n");
+}
+
+static void cmd_memtest86(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Memtest86: memory test\n");
+}
+
+static void cmd_stress(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("stress: system stress test\n");
+}
+
+static void cmd_sysbench(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("sysbench: system benchmark\n");
+}
+
+static void cmd_fio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fio: flexible I/O tester\n");
+}
+
+static void cmd_iozone(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("iozone: filesystem benchmark\n");
+}
+
+static void cmd_hdparm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hdparm: disk parameter\n");
+}
+
+static void cmd_smartctl(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("smartctl: SMART monitoring\n");
+}
+
+static void cmd_nvme(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nvme: NVMe management\n");
+}
+
+static void cmd_megacli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MegaCLI: RAID controller\n");
+}
+
+static void cmd_ssacli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ssacli: Smart Storage Administrator\n");
+}
+
+static void cmd_ipmitool(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ipmitool: BMC management\n");
+}
+
+static void cmd_dmidecode(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dmidecode: DMI table decoder\n");
+}
+
+static void cmd_lldpd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lldpd: LLDP daemon\n");
+}
+
+static void cmd_bird(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BIRD: routing daemon\n");
+}
+
+static void cmd_frrouting(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("FRRouting: routing suite\n");
+}
+
+static void cmd_quagga(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Quagga: routing daemon\n");
+}
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -3773,6 +4113,43 @@ static const cmd_entry commands[] = {
     /* Batch 15: Container Runtime */
     {"containerd", cmd_containerruntime}, {"cri-o", cmd_cri_o}, {"runc", cmd_runc},
     {"crictl", cmd_crictl}, {"buildah", cmd_buildah}, {"skopeo", cmd_skopeo}, {"buildkit", cmd_buildkit},
+    /* Batch 16: Game */
+    {"steam", cmd_steam}, {"wine", cmd_wine}, {"proton", cmd_proton}, {"lutris", cmd_lutris},
+    {"dosbox", cmd_dosbox}, {"retroarch", cmd_retroarch},
+    /* Batch 16: Graphics */
+    {"gimp", cmd_gimp}, {"inkscape", cmd_inkscape}, {"blender", cmd_blender},
+    {"imagemagick", cmd_imagemagick}, {"darktable", cmd_darktable}, {"krita", cmd_krita}, {"scribus", cmd_scribus},
+    /* Batch 16: Office */
+    {"libreoffice", cmd_libreoffice}, {"pandoc", cmd_pandoc}, {"tesseract", cmd_tesseract},
+    {"poppler", cmd_poppler}, {"ghostscript", cmd_ghostscript}, {"wkhtmltopdf", cmd_wkhtmltopdf},
+    /* Batch 16: Communication */
+    {"element", cmd_element}, {"signal", cmd_signal}, {"discord", cmd_discord},
+    {"slack", cmd_slack}, {"teams", cmd_teams}, {"zoom", cmd_zoom},
+    {"mattermost", cmd_mattermost}, {"rocketchat", cmd_rocket_chat}, {"zulip", cmd_zulip},
+    /* Batch 16: VPN */
+    {"wireguard", cmd_wireguard}, {"ipsec", cmd_ipsec}, {"shadowsocks", cmd_shadowsocks},
+    {"v2ray", cmd_v2ray}, {"xray", cmd_xray}, {"trojan", cmd_trojan}, {"hysteria", cmd_hysteria},
+    /* Batch 16: DNS Extended */
+    {"powerdns", cmd_powerdns}, {"coredns", cmd_coredns}, {"pihole", cmd_pihole}, {"blocky", cmd_blocky},
+    /* Batch 16: IoT */
+    {"mosquitto", cmd_mosquitto}, {"emqx", cmd_emqx},
+    {"homeassistant", cmd_homeassistant}, {"node-red", cmd_node_red},
+    /* Batch 16: Database Extended */
+    {"timescaledb", cmd_timescaledb}, {"cockroachdb", cmd_cockroachdb},
+    {"supabase", cmd_supabase}, {"appwrite", cmd_appwrite}, {"pocketbase", cmd_pocketbase},
+    /* Batch 16: Filesystem */
+    {"openzfs", cmd_openzfs}, {"btrfs", cmd_btrfs}, {"zfs", cmd_zfs}, {"xfs", cmd_xfs},
+    /* Batch 16: Boot */
+    {"grub", cmd_grub}, {"systemd-boot", cmd_systemd_boot}, {"refind", cmd_refind}, {"limine", cmd_limine},
+    {"dracut", cmd_dracut}, {"mkinitcpio", cmd_mkinitcpio},
+    /* Batch 16: Benchmark */
+    {"memtest86", cmd_memtest86}, {"stress", cmd_stress}, {"sysbench", cmd_sysbench},
+    {"fio", cmd_fio}, {"iozone", cmd_iozone},
+    /* Batch 16: Hardware */
+    {"hdparm", cmd_hdparm}, {"smartctl", cmd_smartctl}, {"nvme", cmd_nvme},
+    {"dmidecode", cmd_dmidecode}, {"ipmitool", cmd_ipmitool},
+    /* Batch 16: Routing */
+    {"lldpd", cmd_lldpd}, {"bird", cmd_bird}, {"frr", cmd_frrouting}, {"quagga", cmd_quagga},
     {0, 0}
 };
 
