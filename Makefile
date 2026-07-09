@@ -6,7 +6,7 @@ CFLAGS = -m32 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs \
          -fno-builtin -fno-stack-protector -fno-exceptions \
          -Wall -Wextra -Iinclude -c
 NASMFLAGS = -f elf32
-LDFLAGS = -m elf_i386 -T kernel/linker.ld -nostdlib
+LDFLAGS = -m elf_i386 -T kernel/linker.ld -nostdlib -lgcc
 
 ASM_SOURCES = kernel/boot_entry.asm kernel/isr.asm kernel/gdt_asm.asm
 C_SOURCES = kernel/string.c kernel/vga.c kernel/gdt.c kernel/idt.c \

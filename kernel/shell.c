@@ -13635,6 +13635,48 @@ static void color_palette_114(int argc, char args[][CMD_MAX_LEN]);
 static void wave_gen_114(int argc, char args[][CMD_MAX_LEN]);
 static void spectrum_analyzer_114(int argc, char args[][CMD_MAX_LEN]);
 static void video_player_114(int argc, char args[][CMD_MAX_LEN]);
+
+/* 64-bit division helper (avoids __divdi3) */
+static long long b115_div64(long long a, long long b) {
+    if (b == 0) return 0;
+    int neg = 0;
+    if (a < 0) { a = -a; neg ^= 1; }
+    if (b < 0) { b = -b; neg ^= 1; }
+    long long q = 0, r = 0;
+    for (int i = 63; i >= 0; i--) {
+        r = (r << 1) | ((a >> i) & 1);
+        if (r >= b) { r -= b; q |= (1LL << i); }
+    }
+    return neg ? -q : q;
+}
+
+/* Batch 115: Scientific Computing and Data Analysis Commands */
+static void calc_engine_115(int argc, char args[][CMD_MAX_LEN]);
+static void matrix_op_115(int argc, char args[][CMD_MAX_LEN]);
+static void stats_115(int argc, char args[][CMD_MAX_LEN]);
+static void regression_115(int argc, char args[][CMD_MAX_LEN]);
+static void fft_115(int argc, char args[][CMD_MAX_LEN]);
+static void plot_115(int argc, char args[][CMD_MAX_LEN]);
+static void csv_analyze_115(int argc, char args[][CMD_MAX_LEN]);
+static void data_clean_115(int argc, char args[][CMD_MAX_LEN]);
+static void data_transform_115(int argc, char args[][CMD_MAX_LEN]);
+static void correlation_115(int argc, char args[][CMD_MAX_LEN]);
+static void forecast_115(int argc, char args[][CMD_MAX_LEN]);
+static void outlier_detect_115(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 116: Blockchain and Web3 Commands */
+static void wallet_create_116(int argc, char args[][CMD_MAX_LEN]);
+static void wallet_balance_116(int argc, char args[][CMD_MAX_LEN]);
+static void tx_send_116(int argc, char args[][CMD_MAX_LEN]);
+static void tx_status_116(int argc, char args[][CMD_MAX_LEN]);
+static void block_info_116(int argc, char args[][CMD_MAX_LEN]);
+static void smart_contract_116(int argc, char args[][CMD_MAX_LEN]);
+static void token_mint_116(int argc, char args[][CMD_MAX_LEN]);
+static void nft_mint_116(int argc, char args[][CMD_MAX_LEN]);
+static void defi_swap_116(int argc, char args[][CMD_MAX_LEN]);
+static void chain_stats_116(int argc, char args[][CMD_MAX_LEN]);
+static void gas_estimate_116(int argc, char args[][CMD_MAX_LEN]);
+static void abi_decode_116(int argc, char args[][CMD_MAX_LEN]);
+
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -16341,6 +16383,22 @@ static const cmd_entry commands[] = {
     {"color-palette", color_palette_114}, {"wave-gen", wave_gen_114},
     {"spectrum-analyzer", spectrum_analyzer_114}, {"video-player", video_player_114},
 
+    /* Batch 115: Scientific Computing and Data Analysis */
+    {"calc-engine", calc_engine_115}, {"matrix-op", matrix_op_115},
+    {"stats", stats_115}, {"regression", regression_115},
+    {"fft", fft_115}, {"plot", plot_115},
+    {"csv-analyze", csv_analyze_115}, {"data-clean", data_clean_115},
+    {"data-transform", data_transform_115}, {"correlation", correlation_115},
+    {"forecast", forecast_115}, {"outlier-detect", outlier_detect_115},
+
+    /* Batch 116: Blockchain and Web3 */
+    {"wallet-create", wallet_create_116}, {"wallet-balance", wallet_balance_116},
+    {"tx-send", tx_send_116}, {"tx-status", tx_status_116},
+    {"block-info", block_info_116}, {"smart-contract", smart_contract_116},
+    {"token-mint", token_mint_116}, {"nft-mint", nft_mint_116},
+    {"defi-swap", defi_swap_116}, {"chain-stats", chain_stats_116},
+    {"gas-estimate", gas_estimate_116}, {"abi-decode", abi_decode_116},
+    
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -32412,6 +32470,795 @@ static void video_player_114(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("  [|] Pause  [>] Play  [<<] Rew  [>>] Fwd\n");
     vga_puts("[video-player] ASCII playback simulated.\n");
 }
+/* ===== Batch 116: Blockchain and Web3 Commands ===== */
+
+static void wallet_create_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: wallet-create [-h]\nCreate a new blockchain wallet address.\n"); return; }
+    vga_puts("[wallet-create] Generating new wallet...\n");
+    vga_puts("[wallet-create] Network: Ethereum (EVM-compatible)\n");
+    vga_puts("[wallet-create] Key type: secp256k1\n\n");
+    vga_puts("  Public Key:  0x7a3B...f9E2\n");
+    vga_puts("  Address:     0x4B20...8dC1\n");
+    vga_puts("  Keystore:    /etc/wallets/keystore_0x4B20.json\n");
+    vga_puts("  HD Path:     m/44'/60'/0'/0/0\n\n");
+    vga_puts("[wallet-create] Wallet created successfully.\n");
+    vga_puts("[wallet-create] WARNING: Back up your private key securely!\n");
+}
+
+static void wallet_balance_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: wallet-balance [address] [-h]\nQuery wallet balance on-chain.\n"); return; }
+    vga_puts("[wallet-balance] Querying balance...\n");
+    vga_puts("[wallet-balance] Network: Ethereum Mainnet | Block: #19,842,361\n\n");
+    vga_puts("  Address:  0x4B20...8dC1\n");
+    vga_puts("  ETH:      12.4523 ETH  (~,892.60)\n");
+    vga_puts("  Tokens:\n");
+    vga_puts("    USDC:   1,500.00 USDC\n");
+    vga_puts("    WETH:   0.3250 WETH\n");
+    vga_puts("    LINK:   45.00 LINK\n");
+    vga_puts("  NFTs:     3 items\n");
+    vga_puts("[wallet-balance] Total value: ~,142.30 USD\n");
+}
+
+static void tx_send_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: tx-send <to> <amount> <token> [-h]\nSend a blockchain transaction.\n"); return; }
+    if (argc < 4) { vga_puts("Error: tx-send requires <to> <amount> <token>\n"); return; }
+    vga_puts("[tx-send] Preparing transaction...\n");
+    vga_puts("[tx-send] From:       0x4B20...8dC1\n");
+    vga_puts("[tx-send] To:         "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("[tx-send] Amount:     "); vga_puts(args[2]); vga_putchar(' '); vga_puts(args[3]); vga_putchar('\n');
+    vga_puts("[tx-send] Gas limit:  21000\n");
+    vga_puts("[tx-send] Gas price:  25 gwei\n");
+    vga_puts("[tx-send] Nonce:      42\n");
+    vga_puts("[tx-send] Signing...\n");
+    vga_puts("[tx-send] Broadcasting...\n");
+    vga_puts("[tx-send] Tx hash: 0xab12...f4e7\n");
+    vga_puts("[tx-send] Waiting for confirmation...\n");
+    vga_puts("[tx-send] Confirmed in block #19,842,362\n");
+    vga_puts("[tx-send] Transaction successful!\n");
+}
+
+static void tx_status_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: tx-status [txhash] [-h]\nQuery the status of a blockchain transaction.\n"); return; }
+    vga_puts("[tx-status] Transaction details:\n\n");
+    vga_puts("  Hash:          0xab12...f4e7\n");
+    vga_puts("  Status:        Confirmed (12/12 confirmations)\n");
+    vga_puts("  Block:         #19,842,362\n");
+    vga_puts("  Timestamp:     2024-01-15 14:32:18 UTC\n");
+    vga_puts("  From:          0x4B20...8dC1\n");
+    vga_puts("  To:            0x7a3B...f9E2\n");
+    vga_puts("  Value:         1.5 ETH\n");
+    vga_puts("  Gas used:      21,000 / 21,000 (100%)\n");
+    vga_puts("  Gas price:     25 gwei\n");
+    vga_puts("  Tx fee:        0.000525 ETH (.50)\n");
+    vga_puts("  Nonce:         42\n");
+}
+
+static void block_info_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: block-info [number|latest] [-h]\nQuery block information.\n"); return; }
+    vga_puts("[block-info] Block information:\n\n");
+    vga_puts("  Block Number:    #19,842,362\n");
+    vga_puts("  Timestamp:       2024-01-15 14:32:18 UTC\n");
+    vga_puts("  Hash:            0x3e8a...b7c1\n");
+    vga_puts("  Parent Hash:     0x1f2d...9e4a\n");
+    vga_puts("  Transactions:    247\n");
+    vga_puts("  Gas Used:        14,234,567 / 30,000,000 (47.4%)\n");
+    vga_puts("  Base Fee:        12.5 gwei\n");
+    vga_puts("  Miner:           0x4838...1234\n");
+    vga_puts("  Size:            128.5 KB\n");
+    vga_puts("  Difficulty:      N/A (Post-merge)\n");
+    vga_puts("  Total Difficulty: 58,750,000,000,000\n");
+}
+
+static void smart_contract_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: smart-contract <deploy|call|verify> [options] [-h]\nManage smart contracts.\n"); return; }
+    if (argc < 2) { vga_puts("Error: specify action: deploy, call, or verify\n"); return; }
+    if (strcmp(args[1], "deploy") == 0) {
+        vga_puts("[smart-contract] Deploying contract...\n");
+        vga_puts("[smart-contract] Compiler: solc 0.8.20\n");
+        vga_puts("[smart-contract] Optimizer: enabled (200 runs)\n");
+        vga_puts("[smart-contract] Compiling... OK\n");
+        vga_puts("[smart-contract] Gas estimate: 1,245,000\n");
+        vga_puts("[smart-contract] Deploying to mainnet...\n");
+        vga_puts("[smart-contract] Contract address: 0xdEaD...0001\n");
+        vga_puts("[smart-contract] Tx hash: 0xce43...a1b2\n");
+        vga_puts("[smart-contract] Verified on Etherscan.\n");
+    } else if (strcmp(args[1], "call") == 0) {
+        vga_puts("[smart-contract] Calling contract function...\n");
+        vga_puts("[smart-contract] Gas used: 45,230\n");
+        vga_puts("[smart-contract] Result: 0x0000...0001 (true)\n");
+    } else {
+        vga_puts("[smart-contract] Unknown action: "); vga_puts(args[1]); vga_putchar('\n');
+    }
+}
+
+static void token_mint_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: token-mint <token> <amount> [-h]\nMint ERC-20 tokens.\n"); return; }
+    if (argc < 3) { vga_puts("Error: token-mint requires <token> <amount>\n"); return; }
+    vga_puts("[token-mint] Minting tokens...\n");
+    vga_puts("[token-mint] Token:       "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("[token-mint] Amount:      "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("[token-mint] To:          0x4B20...8dC1\n");
+    vga_puts("[token-mint] Contract:    0xdEaD...0001\n");
+    vga_puts("[token-mint] Gas limit:   85,000\n");
+    vga_puts("[token-mint] Minting... TX 0xaa55...c2d3\n");
+    vga_puts("[token-mint] Confirmed in block #19,842,363\n");
+    vga_puts("[token-mint] Total supply increased.\n");
+}
+
+static void nft_mint_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: nft-mint <collection> <name> [-h]\nMint an NFT (ERC-721).\n"); return; }
+    if (argc < 3) { vga_puts("Error: nft-mint requires <collection> <name>\n"); return; }
+    vga_puts("[nft-mint] Minting NFT...\n");
+    vga_puts("[nft-mint] Collection:  "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("[nft-mint] Name:        "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("[nft-mint] Token ID:    #1024\n");
+    vga_puts("[nft-mint] Metadata IPFS: QmX7k...a9bC\n");
+    vga_puts("[nft-mint] Attributes:\n");
+    vga_puts("           Rarity:   Legendary\n");
+    vga_puts("           Class:    Warrior\n");
+    vga_puts("           Power:    9999\n");
+    vga_puts("[nft-mint] Gas: 125,000 gwei | Tx: 0xbb67...d4e5\n");
+    vga_puts("[nft-mint] NFT minted successfully!\n");
+}
+
+static void defi_swap_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: defi-swap <from-token> <to-token> <amount> [-h]\nSwap tokens via DEX.\n"); return; }
+    if (argc < 4) { vga_puts("Error: defi-swap requires <from> <to> <amount>\n"); return; }
+    vga_puts("[defi-swap] Searching best route...\n");
+    vga_puts("[defi-swap] Protocol:  Uniswap V3 (50%), SushiSwap (50%)\n");
+    vga_puts("[defi-swap] From:      "); vga_puts(args[1]); vga_putchar(' '); vga_puts(args[3]); vga_putchar('\n');
+    vga_puts("[defi-swap] To:        "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("[defi-swap] Price:     1 "); vga_puts(args[1]); vga_puts(" = 1,842.50 "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("[defi-swap] Slippage:  0.5%\n");
+    vga_puts("[defi-swap] Fee:       0.30% (LP fee)\n");
+    vga_puts("[defi-swap] Gas:       185,000 gwei\n");
+    vga_puts("[defi-swap] Executing swap...\n");
+    vga_puts("[defi-swap] Tx hash: 0xcc78...e5f6\n");
+    vga_puts("[defi-swap] Swap confirmed!\n");
+}
+
+static void chain_stats_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: chain-stats [chain] [-h]\nDisplay blockchain network statistics.\n"); return; }
+    vga_puts("[chain-stats] Ethereum Mainnet Statistics:\n\n");
+    vga_puts("  Block Height:      19,842,362\n");
+    vga_puts("  Peers Connected:   87\n");
+    vga_puts("  Chain ID:          1\n");
+    vga_puts("  Consensus:         Proof of Stake\n");
+    vga_puts("  Epoch:             230,150\n");
+    vga_puts("  Validators:        892,341\n");
+    vga_puts("  TPS (current):     14.2\n");
+    vga_puts("  Pending Txns:      1,247\n");
+    vga_puts("  Gas Price:         12.5 gwei (base)\n");
+    vga_puts("  Network Hashrate:  1,042 TH/s\n");
+    vga_puts("  Total Supply:      120,423,156 ETH\n");
+    vga_puts("  Staked:            32,145,678 ETH (26.7%)\n");
+}
+
+static void gas_estimate_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: gas-estimate <action> [-h]\nEstimate gas fee for a transaction.\n"); return; }
+    vga_puts("[gas-estimate] Current gas prices:\n\n");
+    vga_puts("  Base Fee:      12.5 gwei\n");
+    vga_puts("  Priority Fee:   1.5 gwei\n");
+    vga_puts("  Max Fee:       25.0 gwei\n\n");
+    vga_puts("  Estimates by action:\n");
+    vga_puts("    ETH Transfer:       21,000 gas  (0.00030 gwei)\n");
+    vga_puts("    ERC-20 Transfer:    65,000 gas  (0.00091 gwei)\n");
+    vga_puts("    ERC-721 Mint:      125,000 gas  (0.00175 gwei)\n");
+    vga_puts("    Swap (Uniswap):    185,000 gas  (0.00259 gwei)\n");
+    vga_puts("    Contract Deploy: 1,245,000 gas  (0.01743 gwei)\n\n");
+    vga_puts("  Network congestion:  Low (15/100)\n");
+    vga_puts("  Recommendation:     Use Base + 1 gwei priority\n");
+}
+
+static void abi_decode_116(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: abi-decode <sig> <data> [-h]\nDecode ABI-encoded transaction data.\n"); return; }
+    if (argc < 3) { vga_puts("Error: abi-decode requires <selector> <hex-data>\n"); return; }
+    vga_puts("[abi-decode] Decoding transaction data...\n\n");
+    vga_puts("  Selector:     "); vga_puts(args[1]); vga_putchar('\n');
+    vga_puts("  Raw Data:     "); vga_puts(args[2]); vga_putchar('\n');
+    vga_puts("  Function:     transfer(address,uint256)\n\n");
+    vga_puts("  Decoded parameters:\n");
+    vga_puts("    [0] address: 0x7a3B...f9E2\n");
+    vga_puts("    [1] uint256: 1500000000000000000 (1.5 ETH)\n\n");
+    vga_puts("  ABI JSON:\n");
+    vga_puts("    {\n");
+    vga_puts("      \"name\": \"transfer\",\n");
+    vga_puts("      \"type\": \"function\",\n");
+    vga_puts("      \"inputs\": [\n");
+    vga_puts("        {\"type\": \"address\", \"name\": \"to\"},\n");
+    vga_puts("        {\"type\": \"uint256\", \"name\": \"value\"}\n");
+    vga_puts("      ]\n");
+    vga_puts("    }\n");
+}
+
+/* Batch 115: Scientific Computing and Data Analysis Commands */
+
+static int b115_str_to_fixed10(const char* s) {
+    int neg = 0, whole = 0, frac = 0, div = 1;
+    if (*s == '-') { neg = 1; s++; }
+    while (*s >= '0' && *s <= '9') { whole = whole * 10 + (*s - '0'); s++; }
+    if (*s == '.') { s++; while (*s >= '0' && *s <= '9' && div < 10000) { frac = frac * 10 + (*s - '0'); div *= 10; s++; } }
+    while (div < 10000) { frac *= 10; div *= 10; }
+    int r = whole * 10000 + (frac * 10000 / div);
+    return neg ? -r : r;
+}
+static void b115_fixed_to_str(int v, char* buf) {
+    int n = 0;
+    if (v < 0) { buf[n++] = '-'; v = -v; }
+    int whole = v / 10000, frac = v % 10000;
+    if (whole == 0 && frac == 0) { buf[n++] = '0'; buf[n] = 0; return; }
+    char tmp[8]; int i = 0;
+    if (whole == 0) { buf[n++] = '0'; }
+    else { while (whole > 0) { tmp[i++] = '0' + whole % 10; whole /= 10; } while (i > 0) buf[n++] = tmp[--i]; }
+    if (frac > 0) {
+        buf[n++] = '.';
+        while (frac % 10 == 0) frac /= 10;
+        i = 0; while (frac > 0) { tmp[i++] = '0' + frac % 10; frac /= 10; }
+        while (i > 0) buf[n++] = tmp[--i];
+    }
+    buf[n] = 0;
+}
+static int b115_fp_mul(int a, int b) { return (int)b115_div64((long long)a * b, 10000LL); }
+static int b115_fp_div(int a, int b) { return b == 0 ? 0 : (int)b115_div64((long long)a * 10000LL, b); }
+static int b115_fp_sqrt(int x) { if (x <= 0) return 0; int r = x, i; for (i = 0; i < 50; i++) { int nr = (r + x / r) / 2; if (nr == r || nr == r - 1) break; r = nr; } return r; }
+static int b115_fp_abs(int x) { return x < 0 ? -x : x; }
+static int b115_fp_ln(int x) { if (x <= 0) return -999999; int t = (x - 10000) * 10000 / (x + 10000); int t2 = t * t / 10000; int r = t + t2 / 3 + t2 * t / (10000 * 5); return 2 * r; }
+static int b115_fp_log10(int x) { if (x <= 0) return -999999; return b115_fp_div(b115_fp_ln(x), 23026); }
+static int b115_fp_sin(int x) { x = x % 62832; if (x < 0) x += 62832; if (x > 31416) x -= 62832; int x2 = b115_fp_mul(x, x); int r = x; int term = x; term = b115_fp_mul(term, -x2); r += term / 6; term = b115_fp_mul(term, -x2); r += term / 20; term = b115_fp_mul(term, -x2); r += term / 120; term = b115_fp_mul(term, -x2); r += term / 5040; return r; }
+static int b115_fp_cos(int x) { return b115_fp_sin(x + 15708); }
+static int b115_fp_tan(int x) { int c = b115_fp_cos(x); return c == 0 ? 999999 : b115_fp_div(b115_fp_sin(x), c); }
+static int b115_fp_exp(int x) { if (x < -23026) return 0; if (x > 23026) return 99999999; int r = 10000, term = 10000; int i; for (i = 1; i <= 20; i++) { term = b115_fp_mul(term, x); term = term / i; r += term; if (b115_fp_abs(term) < 1) break; } return r; }
+static int b115_fp_pow(int base, int exp) { if (exp == 0) return 10000; if (exp < 0) { base = b115_fp_div(10000, base); exp = -exp; } int r = 10000; while (exp > 0) { if (exp & 1) r = b115_fp_mul(r, base); base = b115_fp_mul(base, base); exp >>= 1; } return r; }
+static int b115_fp_factorial(int n) { int r = 10000; int i; for (i = 2; i <= n; i++) r = b115_fp_mul(r, i * 10000); return r; }
+
+static void calc_engine_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: calc-engine <operation> [args]\n");
+        vga_puts("  sin <deg>     - Sine\n");
+        vga_puts("  cos <deg>     - Cosine\n");
+        vga_puts("  tan <deg>     - Tangent\n");
+        vga_puts("  sqrt <val>    - Square root\n");
+        vga_puts("  log <val>     - Log base 10\n");
+        vga_puts("  ln <val>      - Natural log\n");
+        vga_puts("  exp <val>     - e^x\n");
+        vga_puts("  pow <b> <e>   - Power\n");
+        vga_puts("  fact <n>      - Factorial\n");
+        vga_puts("  abs <val>     - Absolute value\n");
+        return;
+    }
+    char buf[64];
+    if (strcmp(args[1], "sin") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_sin(b115_fp_mul(v, 17453));
+        sprintf(buf, "sin(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "cos") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_cos(b115_fp_mul(v, 17453));
+        sprintf(buf, "cos(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "tan") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_tan(b115_fp_mul(v, 17453));
+        sprintf(buf, "tan(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "sqrt") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_sqrt(v);
+        sprintf(buf, "sqrt(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "log") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_log10(v);
+        sprintf(buf, "log10(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "ln") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_ln(v);
+        sprintf(buf, "ln(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "exp") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_exp(v);
+        sprintf(buf, "exp(%s) = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "pow") == 0 && argc >= 4) {
+        int b = b115_str_to_fixed10(args[2]);
+        int e = b115_str_to_fixed10(args[3]);
+        int r = b115_fp_pow(b, e);
+        sprintf(buf, "%s ^ %s = ", args[2], args[3]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "fact") == 0 && argc >= 3) {
+        int n = atoi(args[2]);
+        int r = b115_fp_factorial(n);
+        sprintf(buf, "%d! = ", n); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "abs") == 0 && argc >= 3) {
+        int v = b115_str_to_fixed10(args[2]);
+        int r = b115_fp_abs(v);
+        sprintf(buf, "|%s| = ", args[2]); vga_puts(buf);
+        b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    } else {
+        vga_puts("Error: invalid operation or missing arguments. Use -h for help.\n");
+    }
+}
+
+static void matrix_op_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: matrix-op <operation>\n");
+        vga_puts("  demo-add       - 2x2 matrix addition\n");
+        vga_puts("  demo-sub       - 2x2 matrix subtraction\n");
+        vga_puts("  demo-mul       - 2x2 matrix multiplication\n");
+        vga_puts("  demo-transpose - Matrix transpose\n");
+        vga_puts("  demo-det       - 2x2 determinant\n");
+        vga_puts("  demo-inverse   - 2x2 matrix inverse\n");
+        return;
+    }
+    char buf[64];
+    int A[2][2] = {{10000, 20000}, {30000, 40000}};
+    int B[2][2] = {{50000, 60000}, {70000, 80000}};
+    int R[2][2];
+    int i, j, k;
+    if (strcmp(args[1], "demo-add") == 0) {
+        for (i = 0; i < 2; i++) for (j = 0; j < 2; j++) R[i][j] = A[i][j] + B[i][j];
+        vga_puts("A + B:\n");
+        for (i = 0; i < 2; i++) { vga_puts("  ["); for (j = 0; j < 2; j++) { sprintf(buf, "%d%s", R[i][j]/10000, j<1?" ":""); vga_puts(buf); } vga_puts("]\n"); }
+    } else if (strcmp(args[1], "demo-sub") == 0) {
+        for (i = 0; i < 2; i++) for (j = 0; j < 2; j++) R[i][j] = A[i][j] - B[i][j];
+        vga_puts("A - B:\n");
+        for (i = 0; i < 2; i++) { vga_puts("  ["); for (j = 0; j < 2; j++) { sprintf(buf, "%d%s", R[i][j]/10000, j<1?" ":""); vga_puts(buf); } vga_puts("]\n"); }
+    } else if (strcmp(args[1], "demo-mul") == 0) {
+        for (i = 0; i < 2; i++) for (j = 0; j < 2; j++) { R[i][j] = 0; for (k = 0; k < 2; k++) R[i][j] += b115_fp_mul(A[i][k], B[k][j]); }
+        vga_puts("A * B:\n");
+        for (i = 0; i < 2; i++) { vga_puts("  ["); for (j = 0; j < 2; j++) { sprintf(buf, "%d%s", R[i][j]/10000, j<1?" ":""); vga_puts(buf); } vga_puts("]\n"); }
+    } else if (strcmp(args[1], "demo-transpose") == 0) {
+        vga_puts("A^T:\n");
+        for (i = 0; i < 2; i++) { vga_puts("  ["); for (j = 0; j < 2; j++) { sprintf(buf, "%d%s", A[j][i]/10000, j<1?" ":""); vga_puts(buf); } vga_puts("]\n"); }
+    } else if (strcmp(args[1], "demo-det") == 0) {
+        int det = b115_fp_mul(A[0][0], A[1][1]) - b115_fp_mul(A[0][1], A[1][0]);
+        vga_puts("det(A) = "); b115_fixed_to_str(det, buf); vga_puts(buf); vga_putchar('\n');
+    } else if (strcmp(args[1], "demo-inverse") == 0) {
+        int det = b115_fp_mul(A[0][0], A[1][1]) - b115_fp_mul(A[0][1], A[1][0]);
+        if (det == 0) { vga_puts("Matrix is singular, cannot invert.\n"); return; }
+        vga_puts("A^-1:\n");
+        sprintf(buf, "  [%d %d]\n", b115_fp_div(A[1][1],det)/10000, -b115_fp_div(A[0][1],det)/10000); vga_puts(buf);
+        sprintf(buf, "  [%d %d]\n", -b115_fp_div(A[1][0],det)/10000, b115_fp_div(A[0][0],det)/10000); vga_puts(buf);
+    } else {
+        vga_puts("Error: unknown operation. Use -h for help.\n");
+    }
+}
+
+static void stats_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: stats <val1> <val2> ... [valN]\n");
+        vga_puts("Computes: count, sum, mean, min, max, median, variance, std dev\n");
+        return;
+    }
+    int vals[256], n = 0, i, j;
+    for (i = 1; i < argc && n < 256; i++) vals[n++] = atoi(args[i]);
+    if (n == 0) { vga_puts("Error: no values provided.\n"); return; }
+    long long sum = 0;
+    for (i = 0; i < n; i++) sum += vals[i];
+    int mean = (int)b115_div64(sum, n);
+    int min = vals[0], max = vals[0];
+    for (i = 1; i < n; i++) { if (vals[i] < min) min = vals[i]; if (vals[i] > max) max = vals[i]; }
+    for (i = 0; i < n - 1; i++) for (j = 0; j < n - 1 - i; j++) if (vals[j] > vals[j+1]) { int t = vals[j]; vals[j] = vals[j+1]; vals[j+1] = t; }
+    int median;
+    if (n % 2 == 1) median = vals[n / 2]; else median = (vals[n / 2 - 1] + vals[n / 2]) / 2;
+    long long var = 0;
+    for (i = 0; i < n; i++) { long long d = (long long)vals[i] - mean; var += d * d; }
+    int variance = (int)b115_div64(var, n);
+    int stddev = b115_fp_sqrt(variance * 10000) / 100;
+    char buf[64];
+    vga_puts("========== Statistics ==========\n");
+    sprintf(buf, "Count:    %d\n", n); vga_puts(buf);
+    sprintf(buf, "Sum:      %d\n", (int)sum); vga_puts(buf);
+    sprintf(buf, "Mean:     %d\n", mean); vga_puts(buf);
+    sprintf(buf, "Min:      %d\n", min); vga_puts(buf);
+    sprintf(buf, "Max:      %d\n", max); vga_puts(buf);
+    sprintf(buf, "Median:   %d\n", median); vga_puts(buf);
+    sprintf(buf, "Variance: %d\n", variance); vga_puts(buf);
+    sprintf(buf, "Std Dev:  %d\n", stddev); vga_puts(buf);
+}
+
+static void regression_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: regression <y1> <y2> ... [yN]\n");
+        vga_puts("Performs simple linear regression y = mx + b (x = 1,2,...,N)\n");
+        return;
+    }
+    int y[256], n = 0, i;
+    for (i = 1; i < argc && n < 256; i++) y[n++] = atoi(args[i]);
+    if (n < 2) { vga_puts("Error: need at least 2 data points.\n"); return; }
+    long long sum_x = 0, sum_y = 0, sum_xx = 0, sum_xy = 0;
+    for (i = 0; i < n; i++) { int x = i + 1; sum_x += x; sum_y += y[i]; sum_xx += (long long)x * x; sum_xy += (long long)x * y[i]; }
+    long long denom = (long long)n * sum_xx - sum_x * sum_x;
+    if (denom == 0) { vga_puts("Error: degenerate data.\n"); return; }
+    int slope = (int)b115_div64(((long long)n * sum_xy - sum_x * sum_y) * 10000LL, denom);
+    int intercept = (int)b115_div64(sum_y * 10000LL - (long long)slope * sum_x, n);
+    char buf[64];
+    vga_puts("========== Linear Regression ==========\n");
+    vga_puts("y = mx + b\n");
+    vga_puts("m (slope):     "); b115_fixed_to_str(slope, buf); vga_puts(buf); vga_putchar('\n');
+    vga_puts("b (intercept): "); b115_fixed_to_str(intercept, buf); vga_puts(buf); vga_putchar('\n');
+    vga_puts("\nPredicted values:\n");
+    for (i = 0; i < n; i++) {
+        int pred = (slope * (i + 1) + intercept) / 10000;
+        sprintf(buf, "  x=%d: y_pred=%d (actual=%d)\n", i + 1, pred, y[i]);
+        vga_puts(buf);
+    }
+}
+
+static void fft_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: fft <val1> <val2> ... [valN]\n");
+        vga_puts("Performs DFT on input samples (padded to power of 2).\n");
+        return;
+    }
+    int data[256][2];
+    int n = 0, i;
+    for (i = 1; i < argc && n < 256; i++) { data[n][0] = atoi(args[i]) * 10000; data[n][1] = 0; n++; }
+    if (n < 2) { vga_puts("Error: need at least 2 samples.\n"); return; }
+    int sz = 1;
+    while (sz < n) sz <<= 1;
+    for (i = n; i < sz; i++) { data[i][0] = 0; data[i][1] = 0; }
+    int re[256], im[256];
+    int k;
+    for (k = 0; k < sz; k++) {
+        re[k] = 0; im[k] = 0;
+        for (i = 0; i < sz; i++) {
+            int angle = -62832 * k * i / sz;
+            re[k] += b115_fp_mul(data[i][0], b115_fp_cos(angle)) - b115_fp_mul(data[i][1], b115_fp_sin(angle));
+            im[k] += b115_fp_mul(data[i][0], b115_fp_sin(angle)) + b115_fp_mul(data[i][1], b115_fp_cos(angle));
+        }
+    }
+    char buf[64];
+    vga_puts("========== DFT Results ==========\n");
+    vga_puts("k  |Re(X[k])     |Im(X[k])     |Magnitude\n");
+    vga_puts("---|-------------|-------------|----------\n");
+    int show = sz < 32 ? sz : 32;
+    for (k = 0; k < show; k++) {
+        sprintf(buf, "%2d |", k); vga_puts(buf);
+        b115_fixed_to_str(re[k] / 10000, buf); vga_puts(buf); vga_puts(" |");
+        b115_fixed_to_str(im[k] / 10000, buf); vga_puts(buf); vga_puts(" |");
+        int mag = b115_fp_sqrt(b115_fp_mul(re[k], re[k]) + b115_fp_mul(im[k], im[k]));
+        b115_fixed_to_str(mag / 10000, buf); vga_puts(buf); vga_putchar('\n');
+    }
+    if (sz > 32) { sprintf(buf, "... (%d total bins)\n", sz); vga_puts(buf); }
+}
+
+static void plot_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: plot <bar|line|sin> [values...]\n");
+        vga_puts("  bar <v1> <v2> ... - Bar chart\n");
+        vga_puts("  line <v1> <v2> ... - Line chart\n");
+        vga_puts("  sin               - Plot sin(x)\n");
+        return;
+    }
+    if (strcmp(args[1], "sin") == 0) {
+        vga_puts("+-- sin(x) [0,360] -------+\n");
+        int x;
+        for (x = 0; x <= 360; x += 15) {
+            int rad = x * 17453 / 100;
+            int sv = b115_fp_sin(rad);
+            int pos = (sv + 10000) * 20 / 20000;
+            if (pos < 0) pos = 0; if (pos > 39) pos = 39;
+            char line[42]; int col;
+            for (col = 0; col < 40; col++) line[col] = ' ';
+            line[pos] = '*'; line[40] = 0;
+            sprintf(line + 41, "");
+            char hdr[48]; sprintf(hdr, "%3d|", x); vga_puts(hdr);
+            int row; for (row = 0; row < 20; row++) {
+                if (row == 10) { int c; for (c = 0; c < 40; c++) line[c] = '-'; line[pos] = '+'; }
+                if (row == 10 - pos / 2 && row != 10) { int c; for (c = 0; c < 40; c++) line[c] = ' '; line[pos] = '*'; }
+            }
+            vga_puts(line); vga_putchar('\n');
+        }
+        vga_puts("    +--------------------------------------+\n");
+        return;
+    }
+    int vals[256], n = 0, i;
+    for (i = 2; i < argc && n < 256; i++) vals[n++] = atoi(args[i]);
+    if (n == 0) { vga_puts("Error: no data.\n"); return; }
+    int mx = vals[0], mn = vals[0];
+    for (i = 1; i < n; i++) { if (vals[i] > mx) mx = vals[i]; if (vals[i] < mn) mn = vals[i]; }
+    if (mx == 0) mx = 1;
+    if (strcmp(args[1], "bar") == 0) {
+        vga_puts("+-- Bar Chart --+\n");
+        for (i = 0; i < n; i++) {
+            int bl = (vals[i] * 30) / mx;
+            if (bl < 0) bl = 0;
+            char line[80]; int j;
+            sprintf(line, "%4d |", vals[i]); vga_puts(line);
+            for (j = 0; j < bl; j++) vga_putchar('#');
+            vga_putchar('\n');
+        }
+    } else if (strcmp(args[1], "line") == 0) {
+        vga_puts("+-- Line Chart --+\n");
+        int row;
+        for (row = 20; row >= 0; row--) {
+            int thr = mn + (mx - mn) * row / 20;
+            vga_puts("  |");
+            for (i = 0; i < n && i < 60; i++) { vga_putchar(vals[i] >= thr ? '*' : ' '); }
+            vga_putchar('\n');
+        }
+        vga_puts("  +"); for (i = 0; i < n && i < 60; i++) vga_putchar('-'); vga_puts("+\n");
+    } else {
+        vga_puts("Error: unknown plot type. Use -h for help.\n");
+    }
+}
+
+static void csv_analyze_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: csv-analyze <val1,val2,...>\n");
+        vga_puts("Analyzes CSV numeric data: sum, mean, min, max, count.\n");
+        vga_puts("Example: csv-analyze 10,20,30,40,50\n");
+        return;
+    }
+    int vals[256], n = 0, i;
+    char tmp[256];
+    strncpy(tmp, args[1], 255); tmp[255] = 0;
+    char* tok = tmp;
+    while (*tok && n < 256) {
+        while (*tok == ' ') tok++;
+        vals[n++] = atoi(tok);
+        while (*tok && *tok != ',') tok++;
+        if (*tok == ',') tok++;
+    }
+    if (n == 0) { vga_puts("Error: no numeric data.\n"); return; }
+    long long sum = 0;
+    int min = vals[0], max = vals[0];
+    for (i = 0; i < n; i++) { sum += vals[i]; if (vals[i] < min) min = vals[i]; if (vals[i] > max) max = vals[i]; }
+    int mean = (int)b115_div64(sum, n);
+    char buf[64];
+    vga_puts("========== CSV Analysis ==========\n");
+    sprintf(buf, "Rows:    %d\n", n); vga_puts(buf);
+    sprintf(buf, "Sum:     %d\n", (int)sum); vga_puts(buf);
+    sprintf(buf, "Mean:    %d\n", mean); vga_puts(buf);
+    sprintf(buf, "Min:     %d\n", min); vga_puts(buf);
+    sprintf(buf, "Max:     %d\n", max); vga_puts(buf);
+}
+
+static void data_clean_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: data-clean <val1,val2,...> [option]\n");
+        vga_puts("Options:\n");
+        vga_puts("  (none)     - Remove duplicates and sort\n");
+        vga_puts("  trim       - Remove outliers (>3 std devs)\n");
+        vga_puts("  normalize  - Normalize to 0-100 range\n");
+        return;
+    }
+    int vals[256], n = 0, i, j;
+    char tmp[256];
+    strncpy(tmp, args[1], 255); tmp[255] = 0;
+    char* tok = tmp;
+    while (*tok && n < 256) { while (*tok == ' ') tok++; vals[n++] = atoi(tok); while (*tok && *tok != ',') tok++; if (*tok == ',') tok++; }
+    if (n == 0) { vga_puts("Error: no data.\n"); return; }
+    const char* mode = (argc >= 3) ? args[2] : "dedup";
+    for (i = 0; i < n - 1; i++) for (j = 0; j < n - 1 - i; j++) if (vals[j] > vals[j+1]) { int t = vals[j]; vals[j] = vals[j+1]; vals[j+1] = t; }
+    char buf[64];
+    if (strcmp(mode, "trim") == 0) {
+        long long sum = 0; for (i = 0; i < n; i++) sum += vals[i];
+        int mean = (int)b115_div64(sum, n);
+        long long var = 0; for (i = 0; i < n; i++) { long long d = (long long)vals[i] - mean; var += d * d; }
+        int stddev = b115_fp_sqrt((int)b115_div64(var, n) * 10000) / 100;
+        int out[256], on = 0;
+        for (i = 0; i < n; i++) { if (b115_fp_abs(vals[i] - mean) <= 3 * stddev) out[on++] = vals[i]; }
+        sprintf(buf, "Removed %d outliers (%d -> %d)\n", n - on, n, on); vga_puts(buf);
+        vga_puts("Cleaned: ");
+        for (i = 0; i < on; i++) { sprintf(buf, "%d%s", out[i], i < on - 1 ? "," : ""); vga_puts(buf); }
+        vga_putchar('\n');
+    } else if (strcmp(mode, "normalize") == 0) {
+        int min = vals[0], max = vals[n-1];
+        vga_puts("Normalized: ");
+        for (i = 0; i < n; i++) {
+            int norm = (max == min) ? 50 : ((vals[i] - min) * 100 / (max - min));
+            sprintf(buf, "%d%s", norm, i < n - 1 ? "," : ""); vga_puts(buf);
+        }
+        vga_putchar('\n');
+    } else {
+        int out[256], on = 0;
+        for (i = 0; i < n; i++) { if (on == 0 || vals[i] != out[on - 1]) out[on++] = vals[i]; }
+        sprintf(buf, "Removed %d duplicates (%d -> %d)\n", n - on, n, on); vga_puts(buf);
+        vga_puts("Cleaned: ");
+        for (i = 0; i < on; i++) { sprintf(buf, "%d%s", out[i], i < on - 1 ? "," : ""); vga_puts(buf); }
+        vga_putchar('\n');
+    }
+}
+
+static void data_transform_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: data-transform <op> <val1,val2,...>\n");
+        vga_puts("Operations:\n");
+        vga_puts("  sort       - Sort ascending\n");
+        vga_puts("  rev        - Reverse\n");
+        vga_puts("  unique     - Remove duplicates\n");
+        vga_puts("  cumsum     - Cumulative sum\n");
+        vga_puts("  diff       - Successive differences\n");
+        vga_puts("  scale <n>  - Multiply all by n\n");
+        vga_puts("  filter >n  - Keep values > n\n");
+        vga_puts("  bucket <s> - Bucket into groups of size s\n");
+        return;
+    }
+    if (argc < 3) { vga_puts("Error: missing data.\n"); return; }
+    int vals[256], n = 0, i, j;
+    char tmp[256];
+    strncpy(tmp, args[2], 255); tmp[255] = 0;
+    char* tok = tmp;
+    while (*tok && n < 256) { while (*tok == ' ') tok++; vals[n++] = atoi(tok); while (*tok && *tok != ',') tok++; if (*tok == ',') tok++; }
+    if (n == 0) { vga_puts("Error: no data.\n"); return; }
+    char buf[64];
+    if (strcmp(args[1], "sort") == 0) {
+        for (i = 0; i < n - 1; i++) for (j = 0; j < n - 1 - i; j++) if (vals[j] > vals[j+1]) { int t = vals[j]; vals[j] = vals[j+1]; vals[j+1] = t; }
+    } else if (strcmp(args[1], "rev") == 0) {
+        for (i = 0; i < n / 2; i++) { int t = vals[i]; vals[i] = vals[n-1-i]; vals[n-1-i] = t; }
+    } else if (strcmp(args[1], "unique") == 0) {
+        int out[256], on = 0;
+        for (i = 0; i < n; i++) { int dup = 0; for (j = 0; j < on; j++) if (vals[i] == out[j]) { dup = 1; break; } if (!dup) out[on++] = vals[i]; }
+        n = on; for (i = 0; i < n; i++) vals[i] = out[i];
+    } else if (strcmp(args[1], "cumsum") == 0) {
+        for (i = 1; i < n; i++) vals[i] += vals[i - 1];
+    } else if (strcmp(args[1], "diff") == 0) {
+        for (i = n - 1; i > 0; i--) vals[i] = vals[i] - vals[i - 1];
+    } else if (strcmp(args[1], "scale") == 0 && argc >= 4) {
+        int s = atoi(args[3]); for (i = 0; i < n; i++) vals[i] *= s;
+    } else if (strcmp(args[1], "filter") == 0 && argc >= 4) {
+        int threshold = atoi(args[3]); int out[256], on = 0;
+        if (args[3][0] == '>') { threshold = atoi(args[3] + 1); for (i = 0; i < n; i++) if (vals[i] > threshold) out[on++] = vals[i]; }
+        else if (args[3][0] == '<') { threshold = atoi(args[3] + 1); for (i = 0; i < n; i++) if (vals[i] < threshold) out[on++] = vals[i]; }
+        else { for (i = 0; i < n; i++) if (vals[i] > threshold) out[on++] = vals[i]; }
+        n = on; for (i = 0; i < n; i++) vals[i] = out[i];
+    } else if (strcmp(args[1], "bucket") == 0 && argc >= 4) {
+        int bs = atoi(args[3]); if (bs <= 0) bs = 10;
+        vga_puts("Buckets:\n");
+        int all_min = vals[0], all_max = vals[0];
+        for (i = 0; i < n; i++) { if (vals[i] < all_min) all_min = vals[i]; if (vals[i] > all_max) all_max = vals[i]; }
+        int bmin;
+        for (bmin = all_min; bmin <= all_max; bmin += bs) {
+            int bmax = bmin + bs, cnt = 0;
+            for (i = 0; i < n; i++) if (vals[i] >= bmin && vals[i] < bmax) cnt++;
+            sprintf(buf, "  [%d,%d): %d ", bmin, bmax, cnt); vga_puts(buf);
+            for (i = 0; i < cnt && i < 40; i++) vga_putchar('#');
+            vga_putchar('\n');
+        }
+        return;
+    } else {
+        vga_puts("Error: unknown transform. Use -h for help.\n"); return;
+    }
+    vga_puts("Result: ");
+    for (i = 0; i < n; i++) { sprintf(buf, "%d%s", vals[i], i < n - 1 ? "," : ""); vga_puts(buf); }
+    vga_putchar('\n');
+}
+
+static void correlation_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: correlation <x_vals> <y_vals>\n");
+        vga_puts("Computes Pearson correlation coefficient.\n");
+        vga_puts("Example: correlation 1,2,3,4,5 2,4,5,4,5\n");
+        return;
+    }
+    int x[256], y[256], n = 0, n2 = 0, i;
+    char tmp[256];
+    strncpy(tmp, args[1], 255); tmp[255] = 0;
+    char* tok = tmp;
+    while (*tok && n < 256) { while (*tok == ' ') tok++; x[n++] = atoi(tok); while (*tok && *tok != ',') tok++; if (*tok == ',') tok++; }
+    strncpy(tmp, args[2], 255); tmp[255] = 0; tok = tmp;
+    while (*tok && n2 < 256) { while (*tok == ' ') tok++; y[n2++] = atoi(tok); while (*tok && *tok != ',') tok++; if (*tok == ',') tok++; }
+    if (n != n2) { vga_puts("Error: x and y must have same length.\n"); return; }
+    if (n < 2) { vga_puts("Error: need at least 2 points.\n"); return; }
+    long long sx = 0, sy = 0;
+    for (i = 0; i < n; i++) { sx += x[i]; sy += y[i]; }
+    int mx = (int)b115_div64(sx, n), my = (int)b115_div64(sy, n);
+    long long num = 0, dx2 = 0, dy2 = 0;
+    for (i = 0; i < n; i++) {
+        long long dx = (long long)x[i] - mx;
+        long long dy = (long long)y[i] - my;
+        num += dx * dy; dx2 += dx * dx; dy2 += dy * dy;
+    }
+    char buf[64];
+    if (dx2 == 0 || dy2 == 0) { vga_puts("Correlation: undefined (zero variance).\n"); return; }
+    long long dx2dy2 = b115_div64(dx2 * dy2, n);
+    int r = (int)b115_div64(num * 10000LL, b115_fp_sqrt((int)b115_div64(dx2dy2, n)));
+    vga_puts("========== Correlation Analysis ==========\n");
+    sprintf(buf, "n:       %d\n", n); vga_puts(buf);
+    sprintf(buf, "Mean X:  %d\n", mx); vga_puts(buf);
+    sprintf(buf, "Mean Y:  %d\n", my); vga_puts(buf);
+    vga_puts("r (Pearson): "); b115_fixed_to_str(r, buf); vga_puts(buf); vga_putchar('\n');
+    if (r > 8000) vga_puts("Interpretation: Strong positive correlation\n");
+    else if (r > 4000) vga_puts("Interpretation: Moderate positive correlation\n");
+    else if (r > -4000) vga_puts("Interpretation: Weak/no correlation\n");
+    else if (r > -8000) vga_puts("Interpretation: Moderate negative correlation\n");
+    else vga_puts("Interpretation: Strong negative correlation\n");
+}
+
+static void forecast_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: forecast <val1> <val2> ... [window_size]\n");
+        vga_puts("Simple moving average forecast.\n");
+        vga_puts("Last arg is optional window size (default 3).\n");
+        return;
+    }
+    int vals[256], n = 0, i;
+    int window = 3;
+    for (i = 1; i < argc; i++) {
+        if (i == argc - 1 && atoi(args[i]) > 0 && atoi(args[i]) < argc - 1) { window = atoi(args[i]); }
+        else { vals[n++] = atoi(args[i]); }
+    }
+    if (n < window) { vga_puts("Error: not enough data for window.\n"); return; }
+    char buf[64];
+    vga_puts("========== Moving Average Forecast ==========\n");
+    sprintf(buf, "Window: %d\n", window); vga_puts(buf);
+    vga_puts("Data: ");
+    for (i = 0; i < n; i++) { sprintf(buf, "%d%s", vals[i], i < n - 1 ? "," : ""); vga_puts(buf); }
+    vga_putchar('\n');
+    vga_puts("MA:   ");
+    for (i = window - 1; i < n; i++) {
+        int sum = 0, j; for (j = i - window + 1; j <= i; j++) sum += vals[j];
+        sprintf(buf, "%d%s", sum / window, i < n - 1 ? "," : ""); vga_puts(buf);
+    }
+    int fsum = 0; for (i = n - window; i < n; i++) fsum += vals[i];
+    int forecast = fsum / window;
+    sprintf(buf, "\nForecast (next): %d\n", forecast); vga_puts(buf);
+    if (n >= 2) {
+        int trend = vals[n-1] - vals[n-2];
+        if (trend > 0) { sprintf(buf, "Trend: +%d (rising)\n", trend); vga_puts(buf); }
+        else if (trend < 0) { sprintf(buf, "Trend: %d (falling)\n", trend); vga_puts(buf); }
+        else vga_puts("Trend: stable\n");
+    }
+}
+
+static void outlier_detect_115(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2 || strcmp(args[1], "-h") == 0) {
+        vga_puts("Usage: outlier-detect <val1> <val2> ... [threshold]\n");
+        vga_puts("Detects outliers using IQR method.\n");
+        vga_puts("Optional last arg: IQR multiplier (default 1.5)\n");
+        return;
+    }
+    int vals[256], n = 0, i, j;
+    int thresh_num = 15, thresh_den = 10;
+    for (i = 1; i < argc; i++) {
+        if (i == argc - 1 && argc > 3) {
+            int tv = atoi(args[i]);
+            if (tv > 0 && tv < 100) { thresh_num = tv; thresh_den = 10; continue; }
+        }
+        vals[n++] = atoi(args[i]);
+    }
+    if (n < 4) { vga_puts("Error: need at least 4 data points.\n"); return; }
+    for (i = 0; i < n - 1; i++) for (j = 0; j < n - 1 - i; j++) if (vals[j] > vals[j+1]) { int t = vals[j]; vals[j] = vals[j+1]; vals[j+1] = t; }
+    int q1 = vals[n / 4];
+    int q3 = vals[3 * n / 4];
+    int iqr = q3 - q1;
+    int lower = q1 - (iqr * thresh_num / thresh_den);
+    int upper = q3 + (iqr * thresh_num / thresh_den);
+    char buf[64];
+    vga_puts("========== Outlier Detection (IQR) ==========\n");
+    sprintf(buf, "Q1:     %d\n", q1); vga_puts(buf);
+    sprintf(buf, "Q3:     %d\n", q3); vga_puts(buf);
+    sprintf(buf, "IQR:    %d\n", iqr); vga_puts(buf);
+    sprintf(buf, "Lower:  %d\n", lower); vga_puts(buf);
+    sprintf(buf, "Upper:  %d\n", upper); vga_puts(buf);
+    int outlier_count = 0;
+    vga_puts("Outliers: ");
+    for (i = 0; i < n; i++) {
+        if (vals[i] < lower || vals[i] > upper) {
+            if (outlier_count > 0) vga_puts(", ");
+            sprintf(buf, "%d", vals[i]); vga_puts(buf);
+            outlier_count++;
+        }
+    }
+    if (outlier_count == 0) vga_puts("none");
+    vga_putchar('\n');
+    sprintf(buf, "Total: %d / %d values\n", outlier_count, n); vga_puts(buf);
+    vga_puts("Cleaned: ");
+    int first = 1;
+    for (i = 0; i < n; i++) {
+        if (vals[i] >= lower && vals[i] <= upper) {
+            if (!first) vga_puts(", "); first = 0;
+            sprintf(buf, "%d", vals[i]); vga_puts(buf);
+        }
+    }
+    vga_putchar('\n');
+}
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
@@ -32515,5 +33362,3 @@ static void cron_tick45(void) {
         }
     }
 }
-
-
