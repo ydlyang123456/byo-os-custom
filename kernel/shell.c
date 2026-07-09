@@ -14269,6 +14269,48 @@ static void food_process_161(int argc, char args[][CMD_MAX_LEN]);
 static void food_safety_161(int argc, char args[][CMD_MAX_LEN]);
 static void food_packaging_161(int argc, char args[][CMD_MAX_LEN]);
 static void supply_optimize_161(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 162: Energy + Power */
+static void solar_manage_162(int argc, char args[][CMD_MAX_LEN]);
+static void wind_manage_162(int argc, char args[][CMD_MAX_LEN]);
+static void battery_manage_162(int argc, char args[][CMD_MAX_LEN]);
+static void grid_balance_162(int argc, char args[][CMD_MAX_LEN]);
+static void energy_audit_162(int argc, char args[][CMD_MAX_LEN]);
+static void power_monitor_162(int argc, char args[][CMD_MAX_LEN]);
+static void inverter_ctrl_162(int argc, char args[][CMD_MAX_LEN]);
+static void charger_ctrl_162(int argc, char args[][CMD_MAX_LEN]);
+static void microgrid_162(int argc, char args[][CMD_MAX_LEN]);
+static void smart_grid_162(int argc, char args[][CMD_MAX_LEN]);
+static void energy_storage_162(int argc, char args[][CMD_MAX_LEN]);
+static void demand_response_162(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 163: Transportation */
+static void route_plan_163(int argc, char args[][CMD_MAX_LEN]);
+static void traffic_predict_163(int argc, char args[][CMD_MAX_LEN]);
+static void fleet_manage_163(int argc, char args[][CMD_MAX_LEN]);
+static void vehicle_diag_163(int argc, char args[][CMD_MAX_LEN]);
+static void fuel_monitor_163(int argc, char args[][CMD_MAX_LEN]);
+static void emission_track_163(int argc, char args[][CMD_MAX_LEN]);
+static void parking_manage_163(int argc, char args[][CMD_MAX_LEN]);
+static void toll_calc_163(int argc, char args[][CMD_MAX_LEN]);
+static void ride_share_163(int argc, char args[][CMD_MAX_LEN]);
+static void delivery_opt_163(int argc, char args[][CMD_MAX_LEN]);
+static void public_trans_163(int argc, char args[][CMD_MAX_LEN]);
+static void autonomous_drive_163(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 164: Construction + Architecture */
+static void bim_model_164(int argc, char args[][CMD_MAX_LEN]);
+static void bim_clash_164(int argc, char args[][CMD_MAX_LEN]);
+static void bim_quantify_164(int argc, char args[][CMD_MAX_LEN]);
+static void structural_calc_164(int argc, char args[][CMD_MAX_LEN]);
+static void hvac_design_164(int argc, char args[][CMD_MAX_LEN]);
+static void electrical_plan_164(int argc, char args[][CMD_MAX_LEN]);
+static void plumbing_plan_164(int argc, char args[][CMD_MAX_LEN]);
+static void fire_safety_164(int argc, char args[][CMD_MAX_LEN]);
+static void cost_estimate_164(int argc, char args[][CMD_MAX_LEN]);
+static void schedule_plan_164(int argc, char args[][CMD_MAX_LEN]);
+static void quality_check_164(int argc, char args[][CMD_MAX_LEN]);
+static void permit_apply_164(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17162,7 +17204,14 @@ static const cmd_entry commands[] = {
     /* Batch 160: Textiles + Fashion */
     {"fabric-design", fabric_design_160},     {"fabric-weave", fabric_weave_160},     {"fabric-knit", fabric_knit_160},     {"fabric-dye", fabric_dye_160},     {"fabric-print", fabric_print_160},     {"pattern-make", pattern_make_160},     {"pattern-grade", pattern_grade_160},     {"pattern-nest", pattern_nest_160},     {"garment-construct", garment_construct_160},     {"garment-fit", garment_fit_160},     {"garment-cost", garment_cost_160},     {"garment-sustain", garment_sustain_160}, 
     /* Batch 161: Agriculture + Food */
-    {"crop-monitor", crop_monitor_161},     {"crop-irrigate", crop_irrigate_161},     {"crop-fertilize", crop_fertilize_161},     {"crop-harvest", crop_harvest_161},     {"soil-analyze", soil_analyze_161},     {"pest-detect", pest_detect_161},     {"livestock-track", livestock_track_161},     {"dairy-monitor", dairy_monitor_161},     {"food-process", food_process_161},     {"food-safety", food_safety_161},     {"food-packaging", food_packaging_161},     {"supply-optimize", supply_optimize_161}, 
+    {"crop-monitor", crop_monitor_161},     {"crop-irrigate", crop_irrigate_161},     {"crop-fertilize", crop_fertilize_161},     {"crop-harvest", crop_harvest_161},     {"soil-analyze", soil_analyze_161},     {"pest-detect", pest_detect_161},     {"livestock-track", livestock_track_161},     {"dairy-monitor", dairy_monitor_161},     {"food-process", food_process_161},     {"food-safety", food_safety_161},     {"food-packaging", food_packaging_161},     {"supply-optimize", supply_optimize_161},
+    /* Batch 162: Energy + Power */
+    {"solar-manage", solar_manage_162},     {"wind-manage", wind_manage_162},     {"battery-manage", battery_manage_162},     {"grid-balance", grid_balance_162},     {"energy-audit", energy_audit_162},     {"power-monitor", power_monitor_162},     {"inverter-ctrl", inverter_ctrl_162},     {"charger-ctrl", charger_ctrl_162},     {"microgrid", microgrid_162},     {"smart-grid", smart_grid_162},     {"energy-storage", energy_storage_162},     {"demand-response", demand_response_162}, 
+    /* Batch 163: Transportation */
+    {"route-plan", route_plan_163},     {"traffic-predict", traffic_predict_163},     {"fleet-manage", fleet_manage_163},     {"vehicle-diag", vehicle_diag_163},     {"fuel-monitor", fuel_monitor_163},     {"emission-track", emission_track_163},     {"parking-manage", parking_manage_163},     {"toll-calc", toll_calc_163},     {"ride-share", ride_share_163},     {"delivery-opt", delivery_opt_163},     {"public-trans", public_trans_163},     {"autonomous-drive", autonomous_drive_163}, 
+    /* Batch 164: Construction + Architecture */
+    {"bim-model", bim_model_164},     {"bim-clash", bim_clash_164},     {"bim-quantify", bim_quantify_164},     {"structural-calc", structural_calc_164},     {"hvac-design", hvac_design_164},     {"electrical-plan", electrical_plan_164},     {"plumbing-plan", plumbing_plan_164},     {"fire-safety", fire_safety_164},     {"cost-estimate", cost_estimate_164},     {"schedule-plan", schedule_plan_164},     {"quality-check", quality_check_164},     {"permit-apply", permit_apply_164}, 
+ 
  
  
  
@@ -38429,6 +38478,157 @@ static void food_packaging_161(int argc, char args[][CMD_MAX_LEN]) {
 static void supply_optimize_161(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Supply: Routes:12 Trucks:8 Capacity:85%% Cost:$12,400/week\n");
+}
+
+
+/* ===== Batch 162: Energy + Power ===== */
+static void solar_manage_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Solar: 12kW system Output:8.4kW Efficiency:22%% Today:42kWh\n");
+}
+static void wind_manage_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wind: 3 turbines Output:4.5MW Speed:12m/s Availability:97%%\n");
+}
+static void battery_manage_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Battery: 85%% SOC 48V 200Ah Charge:12A Discharge:45A\n");
+}
+static void grid_balance_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grid: Import:2.3kW Export:1.2kW Net:1.1kW surplus\n");
+}
+static void energy_audit_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Audit: Building:125kWh/day Solar:42kWh Grid:67kWh Battery:16kWh\n");
+}
+static void power_monitor_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Power: Total:8.4kW Solar:6.2kW Grid:2.2kW Factor:0.95\n");
+}
+static void inverter_ctrl_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Inverter: 5kW Output:230V 50Hz Efficiency:96%% Status:normal\n");
+}
+static void charger_ctrl_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Charger: EV 7.4kW SOC:67%% ETA:1h23m Cost:$4.50\n");
+}
+static void microgrid_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Microgrid: 3 DERs Load:45kW Generation:52kW Storage:200kWh\n");
+}
+static void smart_grid_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SmartGrid: Demand:125kW Supply:128kW Frequency:50.01Hz\n");
+}
+static void energy_storage_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Storage: Battery:200kWh Pumped:50MWh Compressed:12MWh\n");
+}
+static void demand_response_162(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DR: Event:peak-shaving Reduction:15%% Duration:2h Incentive:$45\n");
+}
+
+/* ===== Batch 163: Transportation ===== */
+static void route_plan_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Route: 12.3km ETA:18min Fuel:0.8L Cost:$1.20 Traffic:moderate\n");
+}
+static void traffic_predict_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Predict: 14:00 Congestion:high Speed:25km/h Delay:+12min\n");
+}
+static void fleet_manage_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fleet: 12 vehicles Active:8 Idle:2 Maintenance:1 Off:1\n");
+}
+static void vehicle_diag_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Diag: Engine:OK Transmission:OK Brakes:85%% Tires:OK Battery:92%%\n");
+}
+static void fuel_monitor_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fuel: Level:67%% Rate:8.2L/100km Range:487km Cost:$45.20\n");
+}
+static void emission_track_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Emission: CO2:125g/km NOx:0.02g/km PM:0.001g/km Euro:6d\n");
+}
+static void parking_manage_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Parking: Available:127/500 Nearest:50m Rate:$2/hr\n");
+}
+static void toll_calc_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Toll: Route cost:$3.50 Highway:$2.80 Bridge:$0.70\n");
+}
+static void ride_share_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ride: Driver:5min away ETA:12min Cost:$12.50 Pool:2/4\n");
+}
+static void delivery_opt_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Delivery: 12 stops Route:optimized Time:2h30m Cost:$45\n");
+}
+static void public_trans_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bus: Route:42 Next:3min Stops:24 Frequency:15min\n");
+}
+static void autonomous_drive_163(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Auto: Level:4 Speed:60km/h Objects:12 Confidence:99.2%%\n");
+}
+
+/* ===== Batch 164: Construction + Architecture ===== */
+static void bim_model_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("BIM: Model:12-story building Elements:45,000 LOD:400 Format:IFC\n");
+}
+static void bim_clash_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Clash: 23 conflicts MEP-Struct:12 MEP-Arch:8 Structural:3\n");
+}
+static void bim_quantify_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quantify: Concrete:1,245m3 Steel:234t Brick:45,000 blocks\n");
+}
+static void structural_calc_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Struct: Beam:W24x68 Load:45kN Deflection:L/360 OK\n");
+}
+static void hvac_design_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("HVAC: Load:125kW Heating:85kW Cooling:40kW Zones:12\n");
+}
+static void electrical_plan_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Electrical: Panel:200A Circuits:24 Load:156kW Demand:125kW\n");
+}
+static void plumbing_plan_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Plumbing: Fixtures:48 Hot:2.3L/min Cold:3.1L/min Drain:OK\n");
+}
+static void fire_safety_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fire: Sprinklers:128 Extinguishers:24 Egress:4 exits Alarm:OK\n");
+}
+static void cost_estimate_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cost: Total:$2.3M Structure:$890k MEP:$450k Finish:$340k\n");
+}
+static void schedule_plan_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Schedule: Duration:18months Critical:12 tasks Float:45 days\n");
+}
+static void quality_check_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quality: Concrete:pass Steel:pass MEP:pass Inspection:87%%\n");
+}
+static void permit_apply_164(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Permit: Building:#12848 Status:approved Valid:24months Fee:$12,400\n");
 }
 
 void shell_run(void) {
