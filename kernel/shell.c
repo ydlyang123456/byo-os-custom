@@ -13728,6 +13728,31 @@ static void recipe_120(int argc, char args[][CMD_MAX_LEN]);
 static void plant_care_120(int argc, char args[][CMD_MAX_LEN]);
 static void pet_care_120(int argc, char args[][CMD_MAX_LEN]);
 static void home_automation_120(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 122: DevOps Toolchain Enhancement Commands */
+static void argocd_sync_122(int argc, char args[][CMD_MAX_LEN]);
+static void tekton_pipeline_122(int argc, char args[][CMD_MAX_LEN]);
+static void flux_deploy_122(int argc, char args[][CMD_MAX_LEN]);
+static void crossplane_manage_122(int argc, char args[][CMD_MAX_LEN]);
+static void opa_evaluate_122(int argc, char args[][CMD_MAX_LEN]);
+static void vault_manage_122(int argc, char args[][CMD_MAX_LEN]);
+static void consul_service_122(int argc, char args[][CMD_MAX_LEN]);
+static void nomad_job_122(int argc, char args[][CMD_MAX_LEN]);
+static void boundary_access_122(int argc, char args[][CMD_MAX_LEN]);
+static void waypoint_deploy_122(int argc, char args[][CMD_MAX_LEN]);
+static void packer_image_122(int argc, char args[][CMD_MAX_LEN]);
+static void sentinel_policy_122(int argc, char args[][CMD_MAX_LEN]);
+static void vuln_scan_121(int argc, char args[][CMD_MAX_LEN]);
+static void exploit_db_121(int argc, char args[][CMD_MAX_LEN]);
+static void payload_gen_121(int argc, char args[][CMD_MAX_LEN]);
+static void reverse_shell_121(int argc, char args[][CMD_MAX_LEN]);
+static void phishing_detect_121(int argc, char args[][CMD_MAX_LEN]);
+static void malware_scan_121(int argc, char args[][CMD_MAX_LEN]);
+static void intrusion_detect_121(int argc, char args[][CMD_MAX_LEN]);
+static void honeypot_121(int argc, char args[][CMD_MAX_LEN]);
+static void threat_intel_121(int argc, char args[][CMD_MAX_LEN]);
+static void pentest_report_121(int argc, char args[][CMD_MAX_LEN]);
+static void crypto_audit_121(int argc, char args[][CMD_MAX_LEN]);
+static void incident_response_121(int argc, char args[][CMD_MAX_LEN]);
 
 
 static const cmd_entry commands[] = {
@@ -16482,6 +16507,18 @@ static const cmd_entry commands[] = {
     {"habit-tracker", habit_tracker_120}, {"meal-planner", meal_planner_120}, {"workout", workout_120},
     {"budget", budget_120}, {"shopping-list", shopping_list_120}, {"recipe", recipe_120},
     {"plant-care", plant_care_120}, {"pet-care", pet_care_120}, {"home-automation", home_automation_120},
+    /* Batch 122: DevOps Toolchain Enhancement */
+    {"argocd-sync", argocd_sync_122}, {"tekton-pipeline", tekton_pipeline_122}, {"flux-deploy", flux_deploy_122},
+    {"crossplane-manage", crossplane_manage_122}, {"opa-evaluate", opa_evaluate_122}, {"vault-manage", vault_manage_122},
+    {"consul-service", consul_service_122}, {"nomad-job", nomad_job_122}, {"boundary-access", boundary_access_122},
+    {"waypoint-deploy", waypoint_deploy_122}, {"packer-image", packer_image_122}, {"sentinel-policy", sentinel_policy_122},
+    /* Batch 121: Cybersecurity and Penetration Testing */
+    {"vuln-scan", vuln_scan_121}, {"exploit-db", exploit_db_121},
+    {"payload-gen", payload_gen_121}, {"reverse-shell", reverse_shell_121},
+    {"phishing-detect", phishing_detect_121}, {"malware-scan", malware_scan_121},
+    {"intrusion-detect", intrusion_detect_121}, {"honeypot", honeypot_121},
+    {"threat-intel", threat_intel_121}, {"pentest-report", pentest_report_121},
+    {"crypto-audit", crypto_audit_121}, {"incident-response", incident_response_121},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -34896,6 +34933,725 @@ static void dict_lookup_119(int argc, char args[][CMD_MAX_LEN]) {
         vga_puts("Try: pointer, recursion, malloc, pipeline\n");
     }
 }
+
+static void vuln_scan_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: vuln-scan [-h] [target]\nScan system for known vulnerabilities.\n"); return; }
+    vga_puts("[Vuln-Scan] Vulnerability Scanner\n");
+    vga_puts("==================================\n");
+    if (argc >= 2) { vga_puts("Target: "); vga_puts(args[1]); vga_puts("\n"); }
+    else { vga_puts("Target: 127.0.0.1 (localhost)\n"); }
+    vga_puts("Scanning ports 1-1024...\n");
+    vga_puts("  [CRITICAL] Port 8080/tcp Tomcat 9.0.76 CVE-2023-44487\n");
+    vga_puts("  [HIGH]     Port 3306/tcp MySQL 8.0.33 Weak Auth\n");
+    vga_puts("  [MEDIUM]   Port 80/tcp  Apache 2.4.54 Info Leak\n");
+    vga_puts("  [LOW]      Port 22/tcp  OpenSSH 8.9p1 Outdated\n");
+    vga_puts("  [INFO]     Port 443/tcp nginx 1.24.0 Up to date\n");
+    vga_puts("\nSummary: 1 Critical, 1 High, 1 Medium, 1 Low, 1 Info\n");
+    vga_puts("Scan complete. 5 vulnerabilities found.\n");
+}
+
+static void exploit_db_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: exploit-db [-h] [keyword]\nQuery exploit database.\n"); return; }
+    vga_puts("[Exploit-DB] Exploit Database Query\n");
+    vga_puts("====================================\n");
+    if (argc >= 2) {
+        vga_puts("Search: "); vga_puts(args[1]); vga_puts("\n\n");
+        vga_puts("  ID    | Platform  | Type    | Title\n");
+        vga_puts("  ------|-----------|---------|----------------------\n");
+        vga_puts("  48952 | Linux x86 | Remote  | Log4j RCE\n");
+        vga_puts("  47887 | Windows   | Local   | Win32k Priv Esc\n");
+        vga_puts("  46584 | Multi     | Web App | SQL Injection\n");
+        vga_puts("\n3 exploits found.\n");
+    } else {
+        vga_puts("Database: 48,291 exploits indexed\n");
+        vga_puts("Last updated: 2024-01-15\n");
+        vga_puts("Use: exploit-db [keyword] to search\n");
+    }
+}
+
+static void payload_gen_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: payload-gen [-h] [type]\nGenerate attack payloads.\n"); return; }
+    vga_puts("[Payload-Gen] Payload Generator\n");
+    vga_puts("=================================\n");
+    if (argc >= 2) {
+        vga_puts("Type: "); vga_puts(args[1]); vga_puts("\n\n");
+        vga_puts("Generated payload:\n");
+        vga_puts("  Length:   287 bytes\n");
+        vga_puts("  Encoder:  shikata_ga_nai\n");
+        vga_puts("  Badchars: 0x00, 0x0a, 0x0d\n");
+        vga_puts("  Platform: linux/x86/meterpreter\n");
+        vga_puts("  NOPS:     16 bytes\n");
+        vga_puts("\n[Simulation only]\n");
+    } else {
+        vga_puts("Available types:\n");
+        vga_puts("  reverse-tcp  - Reverse TCP shell\n");
+        vga_puts("  bind-tcp     - Bind TCP shell\n");
+        vga_puts("  meterpreter  - Meterpreter session\n");
+        vga_puts("  shellcode    - Raw shellcode\n");
+        vga_puts("  stager       - Staged payload\n");
+    }
+}
+
+static void reverse_shell_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: reverse-shell [-h]\nSimulate reverse shell.\n"); return; }
+    vga_puts("[Reverse-Shell] Reverse Shell Simulator\n");
+    vga_puts("========================================\n");
+    vga_puts("Listener: 0.0.0.0:4444\n");
+    vga_puts("Target:   192.168.1.100:4444\n");
+    vga_puts("Protocol: TCP\n");
+    vga_puts("Status:   Listening...\n\n");
+    vga_puts("Connection from 192.168.1.100:52843\n");
+    vga_puts("Shell session1 opened\n");
+    vga_puts("  (192.168.1.1:4444 -> 192.168.1.100:52843)\n\n");
+    vga_puts("uid=33(www-data) gid=33(www-data)\n");
+    vga_puts("Linux target 5.15.0-generic x86_64\n");
+    vga_puts("[Simulation only - no real connection]\n");
+}
+
+static void phishing_detect_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: phishing-detect [-h] [file]\nAnalyze email for phishing.\n"); return; }
+    vga_puts("[Phishing-Detect] Phishing Email Analyzer\n");
+    vga_puts("==========================================\n");
+    if (argc >= 2) {
+        vga_puts("Analyzing: "); vga_puts(args[1]); vga_puts("\n\n");
+        vga_puts("Indicators Found:\n");
+        vga_puts("  [!] Urgent: Act now or account suspended\n");
+        vga_puts("  [!] Mismatched sender: paypa1.com\n");
+        vga_puts("  [!] Suspicious URL: http://192.168.1.50/paypal\n");
+        vga_puts("  [!] Attachment: invoice.pdf.exe\n");
+        vga_puts("  [!] SPF check: FAIL\n");
+        vga_puts("\nRisk Score: 92/100 (HIGH)\n");
+        vga_puts("Verdict: PHISHING detected.\n");
+    } else {
+        vga_puts("Provide an email file to analyze.\n");
+        vga_puts("Checks: sender, URLs, attachments, SPF\n");
+    }
+}
+
+static void malware_scan_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: malware-scan [-h] [path]\nScan for malware.\n"); return; }
+    vga_puts("[Malware-Scan] Malware Scanner\n");
+    vga_puts("================================\n");
+    if (argc >= 2) { vga_puts("Path: "); vga_puts(args[1]); vga_puts("\n\n"); }
+    else { vga_puts("Path: /usr/bin/\n\n"); }
+    vga_puts("Scanning...\n");
+    vga_puts("  checked: 1,247 files  elapsed: 3.2s\n\n");
+    vga_puts("Results:\n");
+    vga_puts("  [CLEAN]  /usr/bin/ls\n");
+    vga_puts("  [CLEAN]  /usr/bin/cat\n");
+    vga_puts("  [CLEAN]  /usr/bin/grep\n");
+    vga_puts("  [THREAT] /tmp/.hidden/updater\n");
+    vga_puts("           -> Trojan.Linux.Backdoor.A\n");
+    vga_puts("  [THREAT] /dev/shm/.cache/helper\n");
+    vga_puts("           -> Rootkit.Generic.Kernel\n");
+    vga_puts("\nSummary: 1245 clean, 2 threats found\n");
+}
+
+static void intrusion_detect_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: intrusion-detect [-h]\nMonitor for intrusions.\n"); return; }
+    vga_puts("[Intrusion-Detect] IDS Monitor\n");
+    vga_puts("================================\n");
+    vga_puts("Engine: Signature + Anomaly\n");
+    vga_puts("Rules loaded: 12,847\n");
+    vga_puts("Interfaces: eth0, wlan0\n\n");
+    vga_puts("Recent Alerts:\n");
+    vga_puts("  [ALERT] SSH brute force 10.0.0.55\n");
+    vga_puts("          (12 attempts in 60s)\n");
+    vga_puts("  [WARN]  Port scan from 10.0.0.33\n");
+    vga_puts("  [ALERT] SQL injection on port 8080\n");
+    vga_puts("  [INFO]  New host: 10.0.0.99\n");
+    vga_puts("  [WARN]  DNS tunneling pattern\n");
+    vga_puts("\nTotal: 47 (12 crit, 23 warn, 12 info)\n");
+}
+
+static void honeypot_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: honeypot [-h] [start|stop|status]\nManage honeypots.\n"); return; }
+    vga_puts("[Honeypot] Honeypot Manager\n");
+    vga_puts("=============================\n");
+    if (argc >= 2 && strcmp(args[1], "status") == 0) {
+        vga_puts("Service Status:\n");
+        vga_puts("  SSH   : Running (2222) 34 hits\n");
+        vga_puts("  HTTP  : Running (8080) 127 hits\n");
+        vga_puts("  FTP   : Running (2121) 18 hits\n");
+        vga_puts("  MySQL : Stopped\n");
+        vga_puts("\nCaptured: 179 sessions, 23 unique IPs\n");
+    } else if (argc >= 2 && strcmp(args[1], "start") == 0) {
+        vga_puts("Starting honeypot services...\n");
+        vga_puts("  SSH   : port 2222 started\n");
+        vga_puts("  HTTP  : port 8080 started\n");
+        vga_puts("  FTP   : port 2121 started\n");
+        vga_puts("  MySQL : port 3307 started\n");
+        vga_puts("All 4 honeypots active.\n");
+    } else {
+        vga_puts("Commands: start, stop, status\n");
+        vga_puts("Active: 3/4  Captured: 179\n");
+    }
+}
+
+static void threat_intel_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: threat-intel [-h] [ioc]\nQuery threat intel.\n"); return; }
+    vga_puts("[Threat-Intel] Threat Intelligence\n");
+    vga_puts("====================================\n");
+    if (argc >= 2) {
+        vga_puts("IOC: "); vga_puts(args[1]); vga_puts("\n\n");
+        vga_puts("Lookup Result:\n");
+        vga_puts("  Type:       IPv4 Address\n");
+        vga_puts("  Reputation: Malicious (95pct)\n");
+        vga_puts("  Tags:       C2, Malware Distribution\n");
+        vga_puts("  First seen: 2023-06-15\n");
+        vga_puts("  Last seen:  2024-01-10\n");
+        vga_puts("  Reports:    847\n");
+        vga_puts("  Sources:    OTX, VirusTotal, AbuseIPDB\n");
+    } else {
+        vga_puts("Active threat feeds:\n");
+        vga_puts("  AlienVault OTX  : 1.2M IOCs\n");
+        vga_puts("  VirusTotal      : 890K IOCs\n");
+        vga_puts("  AbuseIPDB       : 3.1M IOCs\n");
+        vga_puts("  Emerging Threats: 2.4M sigs\n");
+    }
+}
+
+static void pentest_report_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: pentest-report [-h]\nGenerate pentest report.\n"); return; }
+    vga_puts("[Pentest-Report] Penetration Test Report\n");
+    vga_puts("==========================================\n");
+    vga_puts("Target:    example.com (192.168.1.0/24)\n");
+    vga_puts("Date:      2024-01-15\n");
+    vga_puts("Tester:    Admin\n");
+    vga_puts("Method:    OWASP Testing Guide v4\n\n");
+    vga_puts("Summary: 8 vulnerabilities\n");
+    vga_puts("  Critical: 2  High: 3  Medium: 2  Low: 1\n\n");
+    vga_puts("Key Findings:\n");
+    vga_puts("  1. [CRIT] Unauthenticated RCE\n");
+    vga_puts("  2. [CRIT] SQL injection in login\n");
+    vga_puts("  3. [HIGH] Broken access control\n");
+    vga_puts("  4. [HIGH] Hardcoded credentials\n");
+    vga_puts("  5. [HIGH] Outdated SSL/TLS\n");
+    vga_puts("  6. [MED]  XSS (reflected)\n");
+    vga_puts("  7. [MED]  Missing security headers\n");
+    vga_puts("  8. [LOW]  Info disclosure in errors\n");
+    vga_puts("\nRecommendation: Patch critical first.\n");
+}
+
+static void crypto_audit_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: crypto-audit [-h]\nAudit crypto configs.\n"); return; }
+    vga_puts("[Crypto-Audit] Cryptographic Audit\n");
+    vga_puts("====================================\n");
+    vga_puts("TLS Configuration:\n");
+    vga_puts("  Protocol:     TLS 1.3 (GOOD)\n");
+    vga_puts("  Cert type:    RSA 2048-bit (OK)\n");
+    vga_puts("  Key exchange: ECDHE-P256 (GOOD)\n");
+    vga_puts("  Cipher suite: AES-256-GCM (GOOD)\n\n");
+    vga_puts("Weaknesses:\n");
+    vga_puts("  [WARN] RSA key should be >= 4096-bit\n");
+    vga_puts("  [WARN] Certificate expires in 23 days\n");
+    vga_puts("  [INFO] HSTS max-age=31536000\n");
+    vga_puts("  [INFO] Certificate Transparency OK\n\n");
+    vga_puts("Hash Algorithms:\n");
+    vga_puts("  MD5:    3 files [INSECURE]\n");
+    vga_puts("  SHA-1:  7 files [WEAK]\n");
+    vga_puts("  SHA-256: 142 files [OK]\n\n");
+    vga_puts("Rating: B+ (Good, minor fixes needed)\n");
+}
+
+static void incident_response_121(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: incident-response [-h]\nSecurity incident response.\n"); return; }
+    vga_puts("[Incident-Response] Incident Response\n");
+    vga_puts("=======================================\n");
+    if (argc >= 2) {
+        vga_puts("Phase: "); vga_puts(args[1]); vga_puts("\n\n");
+        vga_puts("Current Incident:\n");
+        vga_puts("  ID:       INC-2024-0115\n");
+        vga_puts("  Status:   Containment\n");
+        vga_puts("  Severity: High\n");
+        vga_puts("  Detected: 2024-01-15 08:23 UTC\n");
+        vga_puts("  Handler:  Admin\n\n");
+        vga_puts("Timeline:\n");
+        vga_puts("  [DONE] Detection and Analysis\n");
+        vga_puts("  [DONE] Containment (short-term)\n");
+        vga_puts("  [....] Eradication\n");
+        vga_puts("  [    ] Recovery\n");
+        vga_puts("  [    ] Post-Incident Activity\n");
+    } else {
+        vga_puts("IR Playbooks:\n");
+        vga_puts("  1. Malware Outbreak\n");
+        vga_puts("  2. Data Breach\n");
+        vga_puts("  3. DDoS Attack\n");
+        vga_puts("  4. Insider Threat\n");
+        vga_puts("  5. Ransomware\n");
+        vga_puts("  6. Phishing Campaign\n");
+        vga_puts("\nActive: 2  Resolved today: 5\n");
+    }
+}
+
+/* ===== Batch 122: DevOps Toolchain Enhancement Commands ===== */
+
+static void argocd_sync_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: argocd-sync [-h] [app-name] [sync|diff|status]\nSync ArgoCD applications with Git repository.\n"); return; }
+    vga_puts("[ArgoCD] Application Sync\n");
+    vga_puts("========================\n");
+    if (argc < 2) {
+        vga_puts("Applications:\n");
+        vga_puts("  [Synced]   web-frontend    | rev: main@abc1234 | healthy\n");
+        vga_puts("  [Synced]   api-backend     | rev: main@def5678 | healthy\n");
+        vga_puts("  [OutOfSync] worker-service | rev: main@ghe9012 | degraded\n");
+        vga_puts("  [Synced]   monitoring      | rev: main@ijl3456 | healthy\n\n");
+        vga_puts("Total: 4 apps | Synced: 3 | OutOfSync: 1\n");
+    } else if (argc >= 3 && strcmp(args[2], "sync") == 0) {
+        vga_puts("Syncing app: "); vga_puts(args[1]); vga_puts("...\n");
+        vga_puts("Sync started. Waiting for reconciliation...\n");
+        vga_puts("Status: Synced successfully | Health: Healthy\n");
+    } else if (argc >= 3 && strcmp(args[2], "diff") == 0) {
+        vga_puts("Diff for app: "); vga_puts(args[1]); vga_putchar('\n');
+        vga_puts("  resource Deployment/web: desired 3, live 2 replicas\n");
+        vga_puts("  resource Service/web: no changes\n");
+    } else if (argc >= 3 && strcmp(args[2], "status") == 0) {
+        vga_puts("App: "); vga_puts(args[1]); vga_putchar('\n');
+        vga_puts("  Project:   default\n");
+        vga_puts("  Server:    https://k8s.local:6443\n");
+        vga_puts("  Namespace: production\n");
+        vga_puts("  Sync:      Synced\n");
+        vga_puts("  Health:    Healthy\n");
+    } else {
+        vga_puts("App: "); vga_puts(args[1]); vga_puts(" | Status: Synced | Health: Healthy\n");
+    }
+}
+
+static void tekton_pipeline_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: tekton-pipeline [-h] [list|run|logs|cancel] [name]\nManage Tekton CI/CD pipelines.\n"); return; }
+    vga_puts("[Tekton] Pipeline Manager\n");
+    vga_puts("=========================\n");
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("Pipelines:\n");
+        vga_puts("  build-test-deploy  | Last: Success | Duration: 142s\n");
+        vga_puts("  security-scan      | Last: Success | Duration: 87s\n");
+        vga_puts("  integration-test   | Last: Failed  | Duration: 203s\n");
+        vga_puts("  release-publish    | Last: Success | Duration: 65s\n\n");
+        vga_puts("PipelineRuns (recent):\n");
+        vga_puts("  run-20240710-001  | build-test-deploy | Running  | 45s elapsed\n");
+        vga_puts("  run-20240710-002  | security-scan     | Pending  |\n");
+        vga_puts("  run-20240710-003  | release-publish   | Complete | 65s\n");
+    } else if (strcmp(args[1], "run") == 0) {
+        vga_puts("Triggering pipeline: "); vga_puts(argc >= 3 ? args[2] : "build-test-deploy");
+        vga_puts("\nPipelineRun created: run-20240710-new\nStatus: Started\n");
+        vga_puts("  Task git-clone:        Succeeded\n");
+        vga_puts("  Task build-image:      Running...\n");
+        vga_puts("  Task run-tests:        Pending\n");
+        vga_puts("  Task deploy-staging:   Pending\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Logs for: "); vga_puts(argc >= 3 ? args[2] : "run-20240710-001"); vga_putchar('\n');
+        vga_puts("[git-clone] Cloning https://github.com/org/repo...\n");
+        vga_puts("[build]     Building image sha256:a1b2c3...\n");
+        vga_puts("[test]      Running 128 tests... 126 passed, 2 skipped\n");
+    } else if (strcmp(args[1], "cancel") == 0) {
+        vga_puts("Cancelling run: "); vga_puts(argc >= 3 ? args[2] : "run-20240710-001");
+        vga_puts("\nPipelineRun cancelled successfully.\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: tekton-pipeline [list|run|logs|cancel]\n");
+    }
+}
+
+static void flux_deploy_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: flux-deploy [-h] [get|reconcile|diff|suspend|resume] [resource]\nFlux CD GitOps deployment management.\n"); return; }
+    vga_puts("[Flux] GitOps Deployment\n");
+    vga_puts("========================\n");
+    if (argc < 2 || strcmp(args[1], "get") == 0) {
+        vga_puts("GitRepository sources:\n");
+        vga_puts("  flux-system    | main  | Ready: true  | Rev: main/abc1234\n");
+        vga_puts("  app-manifests  | main  | Ready: true  | Rev: main/def5678\n\n");
+        vga_puts("Kustomization:\n");
+        vga_puts("  flux-system    | Ready: true  | Health: healthy | Age: 45d\n");
+        vga_puts("  production     | Ready: true  | Health: healthy | Age: 30d\n");
+        vga_puts("  staging        | Ready: false | Health: degraded | Age: 12d\n\n");
+        vga_puts("HelmRelease:\n");
+        vga_puts("  nginx-ingress  | Ready: true  | Rev: 4.8.3 | 21d\n");
+        vga_puts("  cert-manager   | Ready: true  | Rev: 1.14.0 | 30d\n");
+        vga_puts("  prometheus     | Ready: true  | Rev: 2.51.0 | 15d\n");
+    } else if (strcmp(args[1], "reconcile") == 0) {
+        vga_puts("Reconciling: "); vga_puts(argc >= 3 ? args[2] : "flux-system"); vga_putchar('\n');
+        vga_puts("GitRepository/flux-system reconciled\n");
+        vga_puts("Kustomization/flux-system reconciled\n");
+        vga_puts("Applied revision: main/abc1234\n");
+    } else if (strcmp(args[1], "diff") == 0) {
+        vga_puts("Server-side diff for: "); vga_puts(argc >= 3 ? args[2] : "production"); vga_putchar('\n');
+        vga_puts("  deployment/nginx-ingress-controller: replicas 3 -> 4\n");
+        vga_puts("  service/nginx-ingress: no changes\n");
+        vga_puts("  configmap/app-config: 2 fields changed\n");
+    } else if (strcmp(args[1], "suspend") == 0) {
+        vga_puts("Suspended: "); vga_puts(argc >= 3 ? args[2] : "production"); vga_puts("\nReconciliation paused.\n");
+    } else if (strcmp(args[1], "resume") == 0) {
+        vga_puts("Resumed: "); vga_puts(argc >= 3 ? args[2] : "production"); vga_puts("\nReconciliation active.\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: flux-deploy [get|reconcile|diff|suspend|resume]\n");
+    }
+}
+
+static void crossplane_manage_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: crossplane-manage [-h] [list|claim|delete|status] [resource]\nCrossplane cloud resource management.\n"); return; }
+    vga_puts("[Crossplane] Cloud Resource Manager\n");
+    vga_puts("====================================\n");
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("Compositions:\n");
+        vga_puts("  xdatabase    | aws  | Ready | PostgreSQL 15 + RDS\n");
+        vga_puts("  xnetwork     | aws  | Ready | VPC + Subnets + IGW\n");
+        vga_puts("  xkubernetes  | gke  | Ready | GKE Cluster\n\n");
+        vga_puts("Claims:\n");
+        vga_puts("  prod-db      | xdatabase  | Ready   | Endpoint: rds.xxx.rds.amazonaws.com\n");
+        vga_puts("  staging-db   | xdatabase  | Ready   | Endpoint: rds-stg.xxx.rds.amazonaws.com\n");
+        vga_puts("  prod-vpc     | xnetwork   | Ready   | CIDR: 10.0.0.0/16\n");
+        vga_puts("  dev-cluster  | xkubernetes| Pending | Provisioning GKE...\n");
+    } else if (strcmp(args[1], "claim") == 0) {
+        vga_puts("Creating claim: "); vga_puts(argc >= 3 ? args[2] : "new-db"); vga_putchar('\n');
+        vga_puts("Composition: xdatabase\n");
+        vga_puts("Parameters: engine=postgres, size=small, encrypted=true\n");
+        vga_puts("Status: Claim created, provisioning...\n");
+    } else if (strcmp(args[1], "delete") == 0) {
+        vga_puts("Deleting claim: "); vga_puts(argc >= 3 ? args[2] : "staging-db"); vga_putchar('\n');
+        vga_puts("External resource cleanup scheduled\n");
+        vga_puts("Status: Deleting (finalizers pending)\n");
+    } else if (strcmp(args[1], "status") == 0) {
+        vga_puts("Resource: "); vga_puts(argc >= 3 ? args[2] : "prod-db"); vga_putchar('\n');
+        vga_puts("  Type:        PostgreSQL RDS\n");
+        vga_puts("  Region:      us-west-2\n");
+        vga_puts("  Instance:    db.r5.large\n");
+        vga_puts("  Storage:     100GB gp3\n");
+        vga_puts("  Encrypted:   true (KMS: alias/prod)\n");
+        vga_puts("  Backups:     Daily at 03:00 UTC\n");
+        vga_puts("  Ready:       true\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: crossplane-manage [list|claim|delete|status]\n");
+    }
+}
+
+static void opa_evaluate_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: opa-evaluate [-h] [eval|test|policy|data] [policy-name]\nOpen Policy Agent policy evaluation.\n"); return; }
+    vga_puts("[OPA] Policy Evaluation Engine\n");
+    vga_puts("==============================\n");
+    if (argc < 2 || strcmp(args[1], "policy") == 0) {
+        vga_puts("Loaded Policies:\n");
+        vga_puts("  k8s-admission     | Rules: 12 | Hits: 1547 | Status: Active\n");
+        vga_puts("  terraform-plan    | Rules: 8  | Hits: 234  | Status: Active\n");
+        vga_puts("  api-authz         | Rules: 5  | Hits: 8901 | Status: Active\n");
+        vga_puts("  data-compliance   | Rules: 15 | Hits: 567  | Status: Active\n");
+        vga_puts("  iam-binding       | Rules: 6  | Hits: 123  | Status: Active\n\n");
+        vga_puts("Total: 5 policies | 46 rules | 11372 evaluations\n");
+    } else if (strcmp(args[1], "eval") == 0) {
+        vga_puts("Evaluating: "); vga_puts(argc >= 3 ? args[2] : "k8s-admission"); vga_putchar('\n');
+        vga_puts("Input: {kind: Deployment, name: nginx, replicas: 3}\n");
+        vga_puts("Result: ALLOW (all 12 rules passed)\n");
+        vga_puts("  allow_replicas:     PASS (3 <= 10)\n");
+        vga_puts("  require_labels:     PASS (app label present)\n");
+        vga_puts("  resource_limits:    PASS (limits defined)\n");
+        vga_puts("  security_context:   PASS (non-root)\n");
+    } else if (strcmp(args[1], "test") == 0) {
+        vga_puts("Running OPA tests...\n");
+        vga_puts("  test_k8s_allow_valid_deployment:     PASS\n");
+        vga_puts("  test_k8s_deny_no_limits:            PASS\n");
+        vga_puts("  test_k8s_deny_privileged:           PASS\n");
+        vga_puts("  test_api_authz_admin_allowed:        PASS\n");
+        vga_puts("  test_api_authz_anon_denied:          PASS\n");
+        vga_puts("  test_terraform_deny_public_s3:       PASS\n");
+        vga_puts("Results: 6 passed, 0 failed\n");
+    } else if (strcmp(args[1], "data") == 0) {
+        vga_puts("Data store contents:\n");
+        vga_puts("  config.max_replicas: 10\n");
+        vga_puts("  config.allowed_registries: [docker.io, gcr.io]\n");
+        vga_puts("  config.blocked_namespaces: [kube-system, kube-public]\n");
+        vga_puts("  config.admin_groups: [platform-admin, sre]\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: opa-evaluate [eval|test|policy|data]\n");
+    }
+}
+
+static void vault_manage_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: vault-manage [-h] [list|read|write|seal|unseal|status] [path]\nHashiCorp Vault secret management.\n"); return; }
+    vga_puts("[Vault] Secret Management\n");
+    vga_puts("=========================\n");
+    if (argc < 2 || strcmp(args[1], "status") == 0) {
+        vga_puts("Vault Status:\n");
+        vga_puts("  Sealed:    false (unsealed)\n");
+        vga_puts("  Version:   1.15.4\n");
+        vga_puts("  Cluster:   vault-cluster-01\n");
+        vga_puts("  HA Mode:   true (3 nodes)\n");
+        vga_puts("  Leader:    vault-0 (10.0.1.10:8200)\n");
+        vga_puts("  Auth:      AppRole, Kubernetes, OIDC\n");
+        vga_puts("  Engines:   kv-v2(3), pki(2), transit(1)\n\n");
+        vga_puts("Secret Engines:\n");
+        vga_puts("  secret/data/prod   | kv-v2 | 24 secrets\n");
+        vga_puts("  secret/data/stage  | kv-v2 | 18 secrets\n");
+        vga_puts("  pki/               | pki   | 2 roles\n");
+        vga_puts("  transit/           | transit | 3 keys\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("Secrets in: "); vga_puts(argc >= 3 ? args[2] : "secret/data/prod"); vga_putchar('\n');
+        vga_puts("  database/password     | Updated: 2024-07-01 | v3\n");
+        vga_puts("  api/stripe-key        | Updated: 2024-06-15 | v2\n");
+        vga_puts("  tls/wildcard-cert     | Updated: 2024-07-10 | v1\n");
+        vga_puts("  smtp/credentials      | Updated: 2024-05-20 | v4\n");
+    } else if (strcmp(args[1], "read") == 0) {
+        vga_puts("Reading: "); vga_puts(argc >= 3 ? args[2] : "secret/data/prod/database/password"); vga_putchar('\n');
+        vga_puts("  ====== DATA ======\n");
+        vga_puts("  password: ***REDACTED***\n");
+        vga_puts("  username: app_user\n");
+        vga_puts("  host:     db.prod.internal:5432\n");
+        vga_puts("  ====== METADATA ======\n");
+        vga_puts("  version:   3\n");
+        vga_puts("  created:   2024-07-01T10:30:00Z\n");
+        vga_puts("  deletion:  2025-07-01T00:00:00Z\n");
+    } else if (strcmp(args[1], "write") == 0) {
+        vga_puts("Writing to: "); vga_puts(argc >= 3 ? args[2] : "secret/data/prod/new-secret"); vga_putchar('\n');
+        vga_puts("Version: 1 created\n");
+        vga_puts("Success: data written\n");
+    } else if (strcmp(args[1], "seal") == 0) {
+        vga_puts("Vault sealed successfully.\nAll secrets are now encrypted.\n");
+    } else if (strcmp(args[1], "unseal") == 0) {
+        vga_puts("Unseal progress: 2/3 key shares provided\n");
+        vga_puts("Vault still sealed. Provide 1 more key share.\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: vault-manage [list|read|write|seal|unseal|status]\n");
+    }
+}
+
+static void consul_service_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: consul-service [-h] [services|nodes|health|kv|intentions] [name]\nConsul service discovery and mesh.\n"); return; }
+    vga_puts("[Consul] Service Discovery & Mesh\n");
+    vga_puts("=================================\n");
+    if (argc < 2 || strcmp(args[1], "services") == 0) {
+        vga_puts("Registered Services:\n");
+        vga_puts("  web-frontend  | 3 instances | healthy | dc: dc1\n");
+        vga_puts("  api-gateway   | 2 instances | healthy | dc: dc1\n");
+        vga_puts("  user-service  | 3 instances | healthy | dc: dc1\n");
+        vga_puts("  order-service | 2 instances | degraded| dc: dc1\n");
+        vga_puts("  payment-svc   | 2 instances | healthy | dc: dc2\n");
+        vga_puts("  redis-cache   | 3 instances | healthy | dc: dc1\n\n");
+        vga_puts("Total: 6 services | 15 instances | Healthy: 14 | Degraded: 1\n");
+    } else if (strcmp(args[1], "nodes") == 0) {
+        vga_puts("Consul Nodes:\n");
+        vga_puts("  consul-server-1 | 10.0.1.10 | Leader  | dc: dc1 | alive\n");
+        vga_puts("  consul-server-2 | 10.0.1.11 | Follower| dc: dc1 | alive\n");
+        vga_puts("  consul-server-3 | 10.0.1.12 | Follower| dc: dc1 | alive\n");
+        vga_puts("  worker-node-1   | 10.0.2.10 | Client  | dc: dc1 | alive\n");
+        vga_puts("  worker-node-2   | 10.0.2.11 | Client  | dc: dc1 | alive\n");
+        vga_puts("  worker-node-3   | 10.0.3.10 | Client  | dc: dc2 | alive\n");
+    } else if (strcmp(args[1], "health") == 0) {
+        vga_puts("Health checks for: "); vga_puts(argc >= 3 ? args[2] : "order-service"); vga_putchar('\n');
+        vga_puts("  [passing] HTTP GET /health  | Node: worker-1 | 200 OK\n");
+        vga_puts("  [passing] TCP 8080           | Node: worker-2 | Connected\n");
+        vga_puts("  [critical] HTTP GET /ready  | Node: worker-1 | 503 Unavailable\n");
+    } else if (strcmp(args[1], "kv") == 0) {
+        vga_puts("KV Store:\n");
+        vga_puts("  config/db/host         = db.prod.internal\n");
+        vga_puts("  config/db/port         = 5432\n");
+        vga_puts("  config/feature-flags/  = (3 keys)\n");
+        vga_puts("  lock/deploy-lock       = worker-1 (TTL: 30s)\n");
+    } else if (strcmp(args[1], "intentions") == 0) {
+        vga_puts("Service Intentions (L7):\n");
+        vga_puts("  web-frontend -> api-gateway:    ALLOW\n");
+        vga_puts("  api-gateway -> user-service:    ALLOW\n");
+        vga_puts("  api-gateway -> order-service:   ALLOW\n");
+        vga_puts("  user-service -> redis-cache:    ALLOW\n");
+        vga_puts("  order-service -> payment-svc:   ALLOW (via mesh gateway)\n");
+        vga_puts("  payment-svc -> *:               DENY (default)\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: consul-service [services|nodes|health|kv|intentions]\n");
+    }
+}
+
+static void nomad_job_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: nomad-job [-h] [run|status|stop|allocs|logs] [job-name]\nHashiCorp Nomad job scheduling.\n"); return; }
+    vga_puts("[Nomad] Job Scheduler\n");
+    vga_puts("=====================\n");
+    if (argc < 2 || strcmp(args[1], "status") == 0) {
+        vga_puts("Jobs:\n");
+        vga_puts("  web-app      | Type: service | Status: running | 3/3 allocs | 10d\n");
+        vga_puts("  api-server   | Type: service | Status: running | 5/5 allocs | 30d\n");
+        vga_puts("  batch-etl    | Type: batch   | Status: dead    | 1/1 allocs | 2d ago\n");
+        vga_puts("  cron-backup  | Type: system  | Status: running | 2/2 allocs | 60d\n");
+        vga_puts("  cron-cleanup | Type: system  | Status: running | 2/2 allocs | 60d\n\n");
+        vga_puts("Summary: 5 jobs | Running: 4 | Dead: 1\n");
+    } else if (strcmp(args[1], "run") == 0) {
+        vga_puts("Registering job: "); vga_puts(argc >= 3 ? args[2] : "web-app"); vga_putchar('\n');
+        vga_puts("Job registered successfully\n");
+        vga_puts("Allocation: abc1234 placed on worker-1\n");
+        vga_puts("Allocation: def5678 placed on worker-2\n");
+        vga_puts("Allocation: ghi9012 placed on worker-3\n");
+        vga_puts("Evaluation: eval-001 complete\n");
+    } else if (strcmp(args[1], "stop") == 0) {
+        vga_puts("Stopping job: "); vga_puts(argc >= 3 ? args[2] : "batch-etl"); vga_putchar('\n');
+        vga_puts("Job stopped. Allocations draining...\n");
+        vga_puts("Evaluation: eval-stop created\n");
+    } else if (strcmp(args[1], "allocs") == 0) {
+        vga_puts("Allocations for: "); vga_puts(argc >= 3 ? args[2] : "web-app"); vga_putchar('\n');
+        vga_puts("  abc1234 | web-app  | running | worker-1 | 10.0.2.10 | CPU: 45pct | Mem: 128MB\n");
+        vga_puts("  def5678 | web-app  | running | worker-2 | 10.0.2.11 | CPU: 52pct | Mem: 134MB\n");
+        vga_puts("  ghi9012 | web-app  | running | worker-3 | 10.0.3.10 | CPU: 38pct | Mem: 120MB\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Logs for: "); vga_puts(argc >= 3 ? args[2] : "abc1234"); vga_putchar('\n');
+        vga_puts("[2024-07-10 10:30:01] Server listening on :8080\n");
+        vga_puts("[2024-07-10 10:30:05] GET /api/health 200 1ms\n");
+        vga_puts("[2024-07-10 10:30:12] POST /api/orders 201 45ms\n");
+        vga_puts("[2024-07-10 10:30:15] GET /api/users 200 8ms\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: nomad-job [run|status|stop|allocs|logs]\n");
+    }
+}
+
+static void boundary_access_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: boundary-access [-h] [targets|connect|sessions|scopes]\nHashiCorp Boundary remote access management.\n"); return; }
+    vga_puts("[Boundary] Remote Access\n");
+    vga_puts("========================\n");
+    if (argc < 2 || strcmp(args[1], "targets") == 0) {
+        vga_puts("Accessible Targets:\n");
+        vga_puts("  prod-postgres    | Type: ssh   | Host: db.prod:22   | Scope: production\n");
+        vga_puts("  prod-redis       | Type: ssh   | Host: cache:6379   | Scope: production\n");
+        vga_puts("  staging-k8s      | Type: ssh   | Host: k8s.stg:22  | Scope: staging\n");
+        vga_puts("  prod-mysql       | Type: db    | Host: mysql:3306  | Scope: production\n");
+        vga_puts("  prod-vault       | Type: ssh   | Host: vault:8200  | Scope: production\n\n");
+        vga_puts("Total: 5 targets across 2 scopes\n");
+    } else if (strcmp(args[1], "connect") == 0) {
+        vga_puts("Connecting to: "); vga_puts(argc >= 3 ? args[2] : "prod-postgres"); vga_putchar('\n');
+        vga_puts("Authenticating with OIDC...\n");
+        vga_puts("Authorized. Session established.\n");
+        vga_puts("Session ID: sess-abc1234567\n");
+        vga_puts("Host: db.prod.internal:22\n");
+        vga_puts("Protocol: SSH | Type: tcp\n");
+        vga_puts("TTL: 8h | Connection limit: unlimited\n");
+    } else if (strcmp(args[1], "sessions") == 0) {
+        vga_puts("Active Sessions:\n");
+        vga_puts("  sess-abc123 | prod-postgres  | user: admin  | Connected | 2h 15m\n");
+        vga_puts("  sess-def456 | staging-k8s    | user: deploy | Connected | 45m\n");
+        vga_puts("  sess-ghi789 | prod-vault     | user: admin  | Connected | 10m\n");
+        vga_puts("\nTotal: 3 active sessions\n");
+    } else if (strcmp(args[1], "scopes") == 0) {
+        vga_puts("Scopes:\n");
+        vga_puts("  global          | Children: 2 | Targets: 0\n");
+        vga_puts("    production    | Children: 0 | Targets: 4\n");
+        vga_puts("    staging       | Children: 0 | Targets: 1\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: boundary-access [targets|connect|sessions|scopes]\n");
+    }
+}
+
+static void waypoint_deploy_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: waypoint-deploy [-h] [up|status|destroy|logs|release] [app-name]\nWaypoint application deployment pipeline.\n"); return; }
+    vga_puts("[Waypoint] Application Deployment\n");
+    vga_puts("==================================\n");
+    if (argc < 2 || strcmp(args[1], "status") == 0) {
+        vga_puts("Applications:\n");
+        vga_puts("  web-app     | Platform: k8s | Status: deployed | URL: web.example.com\n");
+        vga_puts("  api-service | Platform: k8s | Status: deployed | URL: api.example.com\n");
+        vga_puts("  worker      | Platform: nomad| Status: deployed | N/A\n");
+        vga_puts("  static-site | Platform: netlify| Status: deployed | URL: site.example.com\n\n");
+        vga_puts("Recent Deployments:\n");
+        vga_puts("  web-app     | v24 | 10m ago | Success | 45s | Build->Deploy->Release\n");
+        vga_puts("  api-service | v31 | 2h ago  | Success | 120s| Build->Deploy->Release\n");
+        vga_puts("  worker      | v12 | 1d ago  | Success | 30s | Build->Deploy\n");
+    } else if (strcmp(args[1], "up") == 0) {
+        vga_puts("Deploying: "); vga_puts(argc >= 3 ? args[2] : "web-app"); vga_putchar('\n');
+        vga_puts("  [build]  Buildpack detected: nodejs\n");
+        vga_puts("  [build]  Source: ./app | Buildpack: heroku/nodejs\n");
+        vga_puts("  [build]  Image built: waypoint/web-app:v25\n");
+        vga_puts("  [deploy] Pushing to registry...\n");
+        vga_puts("  [deploy] K8s deployment updated (rollout in progress)\n");
+        vga_puts("  [release] Traffic routed to new version\n");
+        vga_puts("Deploy complete! URL: https://web.example.com\n");
+    } else if (strcmp(args[1], "destroy") == 0) {
+        vga_puts("Destroying: "); vga_puts(argc >= 3 ? args[2] : "web-app"); vga_putchar('\n');
+        vga_puts("  Deployment removed\n");
+        vga_puts("  Service removed\n");
+        vga_puts("  Ingress removed\n");
+        vga_puts("Application destroyed successfully.\n");
+    } else if (strcmp(args[1], "logs") == 0) {
+        vga_puts("Logs for: "); vga_puts(argc >= 3 ? args[2] : "web-app"); vga_putchar('\n');
+        vga_puts("[deploy] Creating deployment web-app in namespace production\n");
+        vga_puts("[deploy] Pod web-app-abc123 Running\n");
+        vga_puts("[release] Service web-app created on port 80\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: waypoint-deploy [up|status|destroy|logs|release]\n");
+    }
+}
+
+static void packer_image_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: packer-image [-h] [build|validate|inspect|push] [template.pkr.hcl]\nHashiCorp Packer machine image builder.\n"); return; }
+    vga_puts("[Packer] Image Builder\n");
+    vga_puts("======================\n");
+    if (argc < 2 || strcmp(args[1], "inspect") == 0) {
+        vga_puts("Available Templates:\n");
+        vga_puts("  ubuntu-base.pkr.hcl    | Builders: 2 (aws, docker) | Provis: 5\n");
+        vga_puts("  centos-hardened.pkr.hcl| Builders: 1 (aws)       | Provis: 8\n");
+        vga_puts("  windows-server.pkr.hcl| Builders: 2 (aws, azure) | Provis: 6\n");
+        vga_puts("  base-docker.pkr.hcl   | Builders: 1 (docker)     | Provis: 3\n\n");
+        vga_puts("Last Build Results:\n");
+        vga_puts("  ubuntu-base    | ami-abc123 (us-west-2) | Completed | 5m 23s\n");
+        vga_puts("  centos-hardened| ami-def456 (us-west-2) | Completed | 8m 10s\n");
+    } else if (strcmp(args[1], "build") == 0) {
+        vga_puts("Building: "); vga_puts(argc >= 3 ? args[2] : "ubuntu-base.pkr.hcl"); vga_putchar('\n');
+        vga_puts("  [aws-ebs] Preparing build...\n");
+        vga_puts("  [aws-ebs] Launching instance: i-abc123\n");
+        vga_puts("  [aws-ebs] Waiting for SSH...\n");
+        vga_puts("  [shell]   Provisioning step 1/5: apt-get update\n");
+        vga_puts("  [shell]   Provisioning step 2/5: install packages\n");
+        vga_puts("  [shell]   Provisioning step 3/5: configure system\n");
+        vga_puts("  [shell]   Provisioning step 4/5: security hardening\n");
+        vga_puts("  [shell]   Provisioning step 5/5: cleanup\n");
+        vga_puts("  [aws-ebs] Creating AMI: ami-new789\n");
+        vga_puts("Build 'aws-ebs' completed.\n");
+        vga_puts("  ami: ami-new789\n");
+        vga_puts("  region: us-west-2\n");
+        vga_puts("  size: 15.2 GB\n");
+    } else if (strcmp(args[1], "validate") == 0) {
+        vga_puts("Validating: "); vga_puts(argc >= 3 ? args[2] : "ubuntu-base.pkr.hcl"); vga_putchar('\n');
+        vga_puts("  Template valid.\n");
+        vga_puts("  2 builders, 0 errors, 0 warnings\n");
+    } else if (strcmp(args[1], "push") == 0) {
+        vga_puts("Pushing image to registry...\n");
+        vga_puts("  Uploading: ami-abc123 -> HCP Packer\n");
+        vga_puts("  Bucket: my-images | Version: v24\n");
+        vga_puts("  Push complete.\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: packer-image [build|validate|inspect|push]\n");
+    }
+}
+
+static void sentinel_policy_122(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc >= 2 && strcmp(args[1], "-h") == 0) { vga_puts("Usage: sentinel-policy [-h] [list|test|apply|enforce] [policy-name]\nSentinel policy as code enforcement.\n"); return; }
+    vga_puts("[Sentinel] Policy Enforcement\n");
+    vga_puts("=============================\n");
+    if (argc < 2 || strcmp(args[1], "list") == 0) {
+        vga_puts("Active Policies:\n");
+        vga_puts("  require-mfa           | Scope: all     | Enforcement: hard-mandatory | Hits: 4521\n");
+        vga_puts("  restrict-public-s3   | Scope: aws     | Enforcement: hard-mandatory | Hits: 89\n");
+        vga_puts("  require-cost-estimate| Scope: terraform| Enforcement: advisory       | Hits: 34\n");
+        vga_puts("  tag-enforcement      | Scope: all     | Enforcement: soft-mandatory | Hits: 1203\n");
+        vga_puts("  allowed-regions      | Scope: aws     | Enforcement: hard-mandatory | Hits: 567\n");
+        vga_puts("  no-privilege-escalation| Scope: iam   | Enforcement: hard-mandatory | Hits: 12\n\n");
+        vga_puts("Summary: 6 policies | Total evaluations: 6102\n");
+    } else if (strcmp(args[1], "test") == 0) {
+        vga_puts("Testing policy: "); vga_puts(argc >= 3 ? args[2] : "require-mfa"); vga_putchar('\n');
+        vga_puts("Test cases:\n");
+        vga_puts("  test_admin_with_mfa:        PASS (expected PASS)\n");
+        vga_puts("  test_admin_without_mfa:     PASS (expected FAIL)\n");
+        vga_puts("  test_read_only_no_mfa:      PASS (expected PASS)\n");
+        vga_puts("  test_write_with_mfa:        PASS (expected PASS)\n");
+        vga_puts("Results: 4 passed, 0 failed, 4 total\n");
+    } else if (strcmp(args[1], "apply") == 0) {
+        vga_puts("Applying policy: "); vga_puts(argc >= 3 ? args[2] : "restrict-public-s3"); vga_putchar('\n');
+        vga_puts("Evaluating against current state...\n");
+        vga_puts("  Resources checked: 156\n");
+        vga_puts("  Violations found: 2\n");
+        vga_puts("    - aws_s3_bucket.public_logs: No public ACL allowed\n");
+        vga_puts("    - aws_s3_bucket_policy.anon_read: Deny anonymous access\n");
+        vga_puts("Policy applied. 2 resources flagged for remediation.\n");
+    } else if (strcmp(args[1], "enforce") == 0) {
+        vga_puts("Enforcement mode:\n");
+        vga_puts("  hard-mandatory: Policy MUST pass or operation is rejected\n");
+        vga_puts("  soft-mandatory: Policy MUST pass unless override is approved\n");
+        vga_puts("  advisory:       Policy is evaluated, results are logged only\n");
+        vga_puts("Current enforcement: hard-mandatory (no overrides possible)\n");
+    } else {
+        vga_puts("Unknown subcommand. Use: sentinel-policy [list|test|apply|enforce]\n");
+    }
+}
+
 
 void shell_run(void) {
     vga_clear();
