@@ -8671,6 +8671,104 @@ static void cmd_consul(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* npm_v2 - Node.js package manager (enhanced) */
+static void cmd_npm_v2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) {
+        vga_puts("npm 10.2.3\n");
+        vga_puts("Usage: npm [install|init|start|test|run|update|ls|outdated|publish|version]\n");
+        return;
+    }
+    if (strcmp(args[1], "install") == 0 && argc > 2) {
+        vga_puts("added 1 package in 2s\n");
+        vga_puts("\n1 package is looking for funding\n");
+        vga_puts("  run `npm fund` for details\n");
+    } else if (strcmp(args[1], "ls") == 0) {
+        vga_puts("myproject@1.0.0\n");
+        vga_puts("+-- express@4.18.2\n");
+        vga_puts("+-- lodash@4.17.21\n");
+        vga_puts("+-- axios@1.6.2\n");
+        vga_puts("+-- react@18.2.0\n");
+    } else if (strcmp(args[1], "outdated") == 0) {
+        vga_puts("Package     Current  Wanted  Latest  Location\n");
+        vga_puts("express      4.18.2   4.18.2   4.19.0  myproject\n");
+        vga_puts("react       18.2.0   18.2.0   18.3.0  myproject\n");
+    } else if (strcmp(args[1], "init") == 0) {
+        vga_puts("Wrote to /package.json\n");
+    } else if (strcmp(args[1], "start") == 0) {
+        vga_puts("> myproject@1.0.0 start\n");
+        vga_puts("> node index.js\n");
+        vga_puts("Server running on port 3000\n");
+    } else if (strcmp(args[1], "test") == 0) {
+        vga_puts("> myproject@1.0.0 test\n");
+        vga_puts("> jest\n");
+        vga_puts("PASS  tests/app.test.js\n");
+        vga_puts("Test Suites: 1 passed, 1 total\n");
+    } else if (strcmp(args[1], "publish") == 0) {
+        vga_puts("npm notice Publishing to https://registry.npmjs.org/\n");
+        vga_puts("+ myproject@1.0.0\n");
+    } else if (strcmp(args[1], "version") == 0) {
+        vga_puts("npm 10.2.3\n");
+        vga_puts("node v20.10.0\n");
+    } else {
+        vga_puts("npm ERR! Unknown command: "); vga_puts(args[1]); vga_puts("\n");
+    }
+}
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -9217,6 +9315,9 @@ static const cmd_entry commands[] = {
     {"minio", cmd_minio},
     {"vault", cmd_vault},
     {"consul", cmd_consul},
+
+    /* Batch 37 */
+    {"npm-v2", cmd_npm_v2},
 };
 
 
