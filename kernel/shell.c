@@ -3992,6 +3992,509 @@ static void cmd_mautrix_sig(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_renovate(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("Renovate: dependency updater\n");
 }
+/* BATCH 18: Streaming */
+static void cmd_jellyfin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jellyfin: media server\n");
+}
+
+static void cmd_plex(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Plex: media server\n");
+}
+
+static void cmd_emby(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Emby: media server\n");
+}
+
+static void cmd_kodi(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kodi: media center\n");
+}
+
+static void cmd_navidrome(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Navidrome: music server\n");
+}
+
+static void cmd_funkwhale(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Funkwhale: music sharing\n");
+}
+
+static void cmd_peertube(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PeerTube: video platform\n");
+}
+
+static void cmd_invidious(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Invidious: YouTube frontend\n");
+}
+
+static void cmd_piped(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Piped: YouTube frontend\n");
+}
+
+static void cmd_gotosocial(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GoToSocial: ActivityPub server\n");
+}
+
+static void cmd_mastodon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mastodon: federated social\n");
+}
+
+static void cmd_misskey(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Misskey: federated social\n");
+}
+
+static void cmd_akko(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Akkoma: federated social\n");
+}
+
+static void cmd_lemmy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Lemmy: link aggregation\n");
+}
+
+static void cmd_kbin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kbin: content aggregator\n");
+}
+
+static void cmd_pixelfed(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Pixelfed: federated photos\n");
+}
+
+/* BATCH 18: CRM/ERP */
+static void cmd_odoo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Odoo: open source ERP\n");
+}
+
+static void cmd_dolibarr(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dolibarr: ERP/CRM\n");
+}
+
+static void cmd_frappe(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Frappe: web framework + ERPNext\n");
+}
+
+static void cmd_erpnext(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ERPNext: business suite\n");
+}
+
+static void cmd_suitecrm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SuiteCRM: CRM\n");
+}
+
+static void cmd_vtiger(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Vtiger: CRM\n");
+}
+
+/* BATCH 18: Wiki/CMS */
+static void cmd_mediawiki(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("MediaWiki: wiki software\n");
+}
+
+static void cmd_dokuwiki(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("DokuWiki: wiki\n");
+}
+
+static void cmd_bookstack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BookStack: documentation\n");
+}
+
+static void cmd_outline(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Outline: team wiki\n");
+}
+
+static void cmd_docusaurus(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Docusaurus: documentation\n");
+}
+
+static void cmd_gitbook(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GitBook: documentation\n");
+}
+
+static void cmd_wordpress(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("WordPress: CMS\n");
+}
+
+static void cmd_drupal(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Drupal: CMS\n");
+}
+
+static void cmd_joomla(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Joomla: CMS\n");
+}
+
+static void cmd_hugo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Hugo: static site generator\n");
+}
+
+static void cmd_jekyll(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jekyll: static site generator\n");
+}
+
+static void cmd_eleventy(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("11ty: static site generator\n");
+}
+
+/* BATCH 18: E-commerce */
+static void cmd_woocommerce(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("WooCommerce: e-commerce\n");
+}
+
+static void cmd_opencart(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenCart: e-commerce\n");
+}
+
+static void cmd_magento(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Magento: e-commerce\n");
+}
+
+static void cmd_prestashop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PrestaShop: e-commerce\n");
+}
+
+static void cmd_medusa(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Medusa: commerce platform\n");
+}
+
+static void cmd_saleor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Saleor: headless commerce\n");
+}
+
+/* BATCH 18: Project Management */
+static void cmd_gitlab_pm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GitLab: project management\n");
+}
+
+static void cmd_gitea_pm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Gitea: self-hosted Git\n");
+}
+
+static void cmd_redmine(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Redmine: project management\n");
+}
+
+static void cmd_taiga(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Taiga: agile project management\n");
+}
+
+static void cmd_openproject(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenProject: project management\n");
+}
+
+static void cmd_leantime(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Leantime: project management\n");
+}
+
+static void cmd_plane(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Plane: project tracking\n");
+}
+
+/* BATCH 18: Forms */
+static void cmd_formbricks(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Formbricks: forms\n");
+}
+
+static void cmd_tally(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Tally: forms\n");
+}
+
+static void cmd_limesurvey(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LimeSurvey: survey software\n");
+}
+
+/* BATCH 18: Automation */
+static void cmd_n8n(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("n8n: workflow automation\n");
+}
+
+static void cmd_huginn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Huginn: automation\n");
+}
+
+static void cmd_automatisch(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Automatisch: automation\n");
+}
+
+static void cmd_activepieces(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Activepieces: automation\n");
+}
+
+static void cmd_windmill(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Windmill: automation\n");
+}
+
+/* BATCH 18: Chat/AI */
+static void cmd_openwebui(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Open WebUI: ChatGPT interface\n");
+}
+
+static void cmd_localai(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LocalAI: local AI\n");
+}
+
+static void cmd_llamacpp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("llama.cpp: LLM inference\n");
+}
+
+static void cmd_textgen(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("text-generation-webui\n");
+}
+
+static void cmd_lmstudio(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LM Studio: local LLM\n");
+}
+
+static void cmd_whisper(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Whisper: speech recognition\n");
+}
+
+static void cmd_stable_diffusion(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Stable Diffusion: image generation\n");
+}
+
+static void cmd_comfyui(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ComfyUI: image generation\n");
+}
+
+static void cmd_automatic1111(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("AUTOMATIC1111: Stable Diffusion\n");
+}
+
+/* BATCH 18: Photo */
+static void cmd_immich(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Immich: photo backup\n");
+}
+
+static void cmd_photoprism(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PhotoPrism: photo management\n");
+}
+
+static void cmd_lychee(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Lychee: photo management\n");
+}
+
+static void cmd_piwigo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Piwigo: photo gallery\n");
+}
+
+static void cmd_florgon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Florgon: photo management\n");
+}
+
+/* BATCH 18: Maps */
+static void cmd_osm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenStreetMap\n");
+}
+
+static void cmd_nomatin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nominatim: geocoder\n");
+}
+
+static void cmd_tileserver(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("TileServer: map tiles\n");
+}
+
+static void cmd_graphhopper(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("GraphHopper: routing engine\n");
+}
+
+static void cmd_valhalla(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Valhalla: routing engine\n");
+}
+
+static void cmd_pelias(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Pelias: geocoder\n");
+}
+
+/* BATCH 18: Database Extra */
+static void cmd_questdb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("QuestDB: time-series database\n");
+}
+
+static void cmd_tdengine(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("TDengine: time-series database\n");
+}
+
+static void cmd_dragonflydb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("DragonflyDB: Redis replacement\n");
+}
+
+static void cmd_dgraph(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Dgraph: graph database\n");
+}
+
+static void cmd_arangodb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ArangoDB: multi-model database\n");
+}
+
+static void cmd_surrealdb(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SurrealDB: multi-model database\n");
+}
+
+static void cmd_edgeDB(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("EdgeDB: next-gen database\n");
+}
+
+static void cmd_babashka(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Babashka: Clojure scripting\n");
+}
+
+/* BATCH 18: Backup Extra */
+static void cmd_kopia(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kopia: backup/restore\n");
+}
+
+static void cmd_urbackup(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("UrBackup: client-server backup\n");
+}
+
+static void cmd_backuppc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BackupPC: backup system\n");
+}
+
+/* BATCH 18: Monitoring Extra */
+static void cmd_falco(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Falco: runtime security\n");
+}
+
+static void cmd_sysdig(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Sysdig: system visibility\n");
+}
+
+static void cmd_stern(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Stern: multi-pod log tailing\n");
+}
+
+static void cmd_kubetail(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubetail: log tailing\n");
+}
+
+static void cmd_k9s(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k9s: Kubernetes CLI\n");
+}
+
+static void cmd_kubectx(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubectx: context switcher\n");
+}
+
+static void cmd_kubens(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubens: namespace switcher\n");
+}
+
+static void cmd_kustomize(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kustomize: Kubernetes config\n");
+}
+
+static void cmd_helmfile(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Helmfile: Helm releases\n");
+}
+
+static void cmd_argocd_cli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ArgoCD CLI\n");
+}
+
+static void cmd_flux_cli(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Flux CLI\n");
+}
+
+/* BATCH 18: Git Extra */
+static void cmd_gitui(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gitui: Git TUI\n");
+}
+
+static void cmd_lazygit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lazygit: Git TUI\n");
+}
+
+static void cmd_delta(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("delta: Git diff viewer\n");
+}
+
+static void cmd_difftastic(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("difftastic: diff tool\n");
+}
+
+static void cmd_typos(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("typos: spell checker\n");
+}
+
+/* BATCH 18: Misc Extra */
+static void cmd_just(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("just: command runner\n");
+}
+
+static void cmd_task(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("task: task runner\n");
+}
+
+static void cmd_mise(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mise: dev tool manager\n");
+}
+
+static void cmd_direnv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("direnv: environment switcher\n");
+}
+
+static void cmd_asdf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("asdf: version manager\n");
+}
+
+static void cmd_nvm(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nvm: Node version manager\n");
+}
+
+static void cmd_pyenv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pyenv: Python version manager\n");
+}
+
+static void cmd_rbenv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rbenv: Ruby version manager\n");
+}
+
+static void cmd_jenv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("jenv: Java version manager\n");
+}
+
+static void cmd_goenv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("goenv: Go version manager\n");
+}
+
+static void cmd_starship(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("starship: cross-shell prompt\n");
+}
+
+static void cmd_atuin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("atuin: shell history\n");
+}
+
+static void cmd_zoxide(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zoxide: smart cd\n");
+}
+
+static void cmd_broot(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("broot: file explorer\n");
+}
+
+static void cmd_ranger(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ranger: file manager TUI\n");
+}
+
+static void cmd_mc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mc: Midnight Commander\n");
+}
+
+static void cmd_midnight(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Midnight Commander\n");
+}
+
+static void cmd_nnn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nnn: terminal file manager\n");
+}
+
+static void cmd_lf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lf: terminal file manager\n");
+}
+
+static void cmd_yazi(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("yazi: terminal file manager\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -4330,6 +4833,48 @@ static const cmd_entry commands[] = {
     /* Batch 17: Messaging Extended */
     /* Batch 17: Observability */
     /* Batch 17: Container Runtime */
+    /* Batch 18: Streaming */
+    {"jellyfin", cmd_jellyfin}, {"plex", cmd_plex}, {"emby", cmd_emby}, {"kodi", cmd_kodi},
+    {"navidrome", cmd_navidrome}, {"peertube", cmd_peertube}, {"invidious", cmd_invidious},
+    {"mastodon", cmd_mastodon}, {"misskey", cmd_misskey}, {"lemmy", cmd_lemmy}, {"pixelfed", cmd_pixelfed},
+    /* Batch 18: CRM/ERP */
+    {"odoo", cmd_odoo}, {"dolibarr", cmd_dolibarr}, {"erpnext", cmd_erpnext}, {"suitecrm", cmd_suitecrm},
+    /* Batch 18: Wiki/CMS */
+    {"mediawiki", cmd_mediawiki}, {"dokuwiki", cmd_dokuwiki}, {"bookstack", cmd_bookstack}, {"outline", cmd_outline},
+    {"wordpress", cmd_wordpress}, {"drupal", cmd_drupal}, {"joomla", cmd_joomla},
+    {"hugo", cmd_hugo}, {"jekyll", cmd_jekyll}, {"11ty", cmd_eleventy},
+    /* Batch 18: E-commerce */
+    {"woocommerce", cmd_woocommerce}, {"opencart", cmd_opencart}, {"magento", cmd_magento},
+    {"prestashop", cmd_prestashop}, {"medusa", cmd_medusa}, {"saleor", cmd_saleor},
+    /* Batch 18: Project Mgmt */
+    {"redmine", cmd_redmine}, {"taiga", cmd_taiga}, {"openproject", cmd_openproject}, {"plane", cmd_plane},
+    /* Batch 18: Forms */
+    {"formbricks", cmd_formbricks}, {"limesurvey", cmd_limesurvey},
+    /* Batch 18: Automation */
+    {"n8n", cmd_n8n}, {"huginn", cmd_huginn}, {"automatisch", cmd_automatisch},
+    {"activepieces", cmd_activepieces}, {"windmill", cmd_windmill},
+    /* Batch 18: AI/ML Extra */
+    {"open-webui", cmd_openwebui}, {"localai", cmd_localai}, {"llama-cpp", cmd_llamacpp},
+    {"whisper", cmd_whisper}, {"stable-diffusion", cmd_stable_diffusion}, {"comfyui", cmd_comfyui},
+    /* Batch 18: Photo */
+    {"immich", cmd_immich}, {"photoprism", cmd_photoprism}, {"lychee", cmd_lychee}, {"piwigo", cmd_piwigo},
+    /* Batch 18: Maps */
+    {"nominatim", cmd_nomatin}, {"graphhopper", cmd_graphhopper}, {"valhalla", cmd_valhalla}, {"pelias", cmd_pelias},
+    /* Batch 18: DB Extra */
+    {"questdb", cmd_questdb}, {"tdengine", cmd_tdengine}, {"dgraph", cmd_dgraph},
+    {"arangodb", cmd_arangodb}, {"surrealdb", cmd_surrealdb}, {"edgedb", cmd_edgeDB},
+    /* Batch 18: Backup Extra */
+    {"kopia", cmd_kopia}, {"urbackup", cmd_urbackup}, {"backuppc", cmd_backuppc},
+    /* Batch 18: Monitoring Extra */
+    {"falco", cmd_falco}, {"sysdig", cmd_sysdig}, {"k9s", cmd_k9s},
+    {"kubectx", cmd_kubectx}, {"kubens", cmd_kubens}, {"kustomize", cmd_kustomize}, {"helmfile", cmd_helmfile},
+    /* Batch 18: Git Extra */
+    {"lazygit", cmd_lazygit}, {"delta", cmd_delta}, {"difftastic", cmd_difftastic}, {"typos", cmd_typos},
+    /* Batch 18: Dev Tools Extra */
+    {"just", cmd_just}, {"mise", cmd_mise}, {"asdf", cmd_asdf},
+    {"nvm", cmd_nvm}, {"pyenv", cmd_pyenv}, {"rbenv", cmd_rbenv}, {"goenv", cmd_goenv},
+    {"starship", cmd_starship}, {"atuin", cmd_atuin}, {"zoxide", cmd_zoxide},
+    {"ranger", cmd_ranger}, {"mc", cmd_mc}, {"nnn", cmd_nnn}, {"yazi", cmd_yazi}, {"lf", cmd_lf},
     {0, 0}
 };
 
