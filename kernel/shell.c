@@ -14597,6 +14597,48 @@ static void behavior_model_185(int argc, char args[][CMD_MAX_LEN]);
 static void neuro_stim_185(int argc, char args[][CMD_MAX_LEN]);
 static void brain_map_185(int argc, char args[][CMD_MAX_LEN]);
 static void consciousness_185(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 186: Quantum Computing */
+static void qubit_create_186(int argc, char args[][CMD_MAX_LEN]);
+static void qubit_entangle_186(int argc, char args[][CMD_MAX_LEN]);
+static void qubit_measure_186(int argc, char args[][CMD_MAX_LEN]);
+static void circuit_design_186(int argc, char args[][CMD_MAX_LEN]);
+static void error_correct_186(int argc, char args[][CMD_MAX_LEN]);
+static void grover_search_186(int argc, char args[][CMD_MAX_LEN]);
+static void shor_factor_186(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_sim_186(int argc, char args[][CMD_MAX_LEN]);
+static void variational_186(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_ml_186(int argc, char args[][CMD_MAX_LEN]);
+static void topo_qubit_186(int argc, char args[][CMD_MAX_LEN]);
+static void quantum_net_186(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 187: Climate + Sustainability */
+static void carbon_track_187(int argc, char args[][CMD_MAX_LEN]);
+static void carbon_offset_187(int argc, char args[][CMD_MAX_LEN]);
+static void lca_assess_187(int argc, char args[][CMD_MAX_LEN]);
+static void green_build_187(int argc, char args[][CMD_MAX_LEN]);
+static void renewable_int_187(int argc, char args[][CMD_MAX_LEN]);
+static void circular_econ_187(int argc, char args[][CMD_MAX_LEN]);
+static void waste_zero_187(int argc, char args[][CMD_MAX_LEN]);
+static void water_footprint_187(int argc, char args[][CMD_MAX_LEN]);
+static void biodiversity_187(int argc, char args[][CMD_MAX_LEN]);
+static void deforestation_187(int argc, char args[][CMD_MAX_LEN]);
+static void ocean_health_187(int argc, char args[][CMD_MAX_LEN]);
+static void climate_model_187(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 188: Social Impact */
+static void ngo_track_188(int argc, char args[][CMD_MAX_LEN]);
+static void donor_manage_188(int argc, char args[][CMD_MAX_LEN]);
+static void volunteer_coord_188(int argc, char args[][CMD_MAX_LEN]);
+static void grant_manage_188(int argc, char args[][CMD_MAX_LEN]);
+static void impact_measure_188(int argc, char args[][CMD_MAX_LEN]);
+static void community_engage_188(int argc, char args[][CMD_MAX_LEN]);
+static void education_outreach_188(int argc, char args[][CMD_MAX_LEN]);
+static void health_program_188(int argc, char args[][CMD_MAX_LEN]);
+static void poverty_reduce_188(int argc, char args[][CMD_MAX_LEN]);
+static void equality_index_188(int argc, char args[][CMD_MAX_LEN]);
+static void sustainability_score_188(int argc, char args[][CMD_MAX_LEN]);
+static void social_enterprise_188(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17546,7 +17588,14 @@ static const cmd_entry commands[] = {
     /* Batch 184: Biology + Genetics */
     {"genome-seq", genome_seq_184},     {"gene-edit", gene_edit_184},     {"protein-synth", protein_synth_184},     {"cell-sim", cell_sim_184},     {"crispr-design", crispr_design_184},     {"microbiome", microbiome_184},     {"stem-cell", stem_cell_184},     {"cloning", cloning_184},     {"biotech-ferment", biotech_ferment_184},     {"dna-storage", dna_storage_184},     {"synthetic-bio", synthetic_bio_184},     {"bioethics", bioethics_184}, 
     /* Batch 185: Psychology + Neuroscience */
-    {"eeg-read", eeg_read_185},     {"fmri-analyze", fmri_analyze_185},     {"neural-decode", neural_decode_185},     {"brain-computer", brain_computer_185},     {"cognitive-test", cognitive_test_185},     {"memory-train", memory_train_185},     {"attention-test", attention_test_185},     {"emotion-rec", emotion_rec_185},     {"behavior-model", behavior_model_185},     {"neuro-stim", neuro_stim_185},     {"brain-map", brain_map_185},     {"consciousness", consciousness_185}, 
+    {"eeg-read", eeg_read_185},     {"fmri-analyze", fmri_analyze_185},     {"neural-decode", neural_decode_185},     {"brain-computer", brain_computer_185},     {"cognitive-test", cognitive_test_185},     {"memory-train", memory_train_185},     {"attention-test", attention_test_185},     {"emotion-rec", emotion_rec_185},     {"behavior-model", behavior_model_185},     {"neuro-stim", neuro_stim_185},     {"brain-map", brain_map_185},     {"consciousness", consciousness_185},
+    /* Batch 186: Quantum Computing */
+    {"qubit-create", qubit_create_186},     {"qubit-entangle", qubit_entangle_186},     {"qubit-measure", qubit_measure_186},     {"circuit-design", circuit_design_186},     {"error-correct", error_correct_186},     {"grover-search", grover_search_186},     {"shor-factor", shor_factor_186},     {"quantum-sim", quantum_sim_186},     {"variational", variational_186},     {"quantum-ml", quantum_ml_186},     {"topo-qubit", topo_qubit_186},     {"quantum-net", quantum_net_186}, 
+    /* Batch 187: Climate + Sustainability */
+    {"carbon-track", carbon_track_187},     {"carbon-offset", carbon_offset_187},     {"lca-assess", lca_assess_187},     {"green-build", green_build_187},     {"renewable-int", renewable_int_187},     {"circular-econ", circular_econ_187},     {"waste-zero", waste_zero_187},     {"water-footprint", water_footprint_187},     {"biodiversity", biodiversity_187},     {"deforestation", deforestation_187},     {"ocean-health", ocean_health_187},     {"climate-model", climate_model_187}, 
+    /* Batch 188: Social Impact */
+    {"ngo-track", ngo_track_188},     {"donor-manage", donor_manage_188},     {"volunteer-coord", volunteer_coord_188},     {"grant-manage", grant_manage_188},     {"impact-measure", impact_measure_188},     {"community-engage", community_engage_188},     {"education-outreach", education_outreach_188},     {"health-program", health_program_188},     {"poverty-reduce", poverty_reduce_188},     {"equality-index", equality_index_188},     {"sustainability-score", sustainability_score_188},     {"social-enterprise", social_enterprise_188}, 
+ 
  
  
  
@@ -40029,6 +40078,157 @@ static void brain_map_185(int argc, char args[][CMD_MAX_LEN]) {
 static void consciousness_185(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Consciousness: Theory:IIT Phi:4.7 Integrated:high Awareness:67%%\n");
+}
+
+
+/* ===== Batch 186: Quantum Computing ===== */
+static void qubit_create_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Qubit: Initialized |0> Fidelity:99.7%% T1:50us T2:70us\n");
+}
+static void qubit_entangle_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Entangle: Bell pair |Phi+> Fidelity:99.2%% Distance:100km\n");
+}
+static void qubit_measure_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Measure: Q0:|1>(0.72) Q1:|0>(0.45) Collapsed:10\n");
+}
+static void circuit_design_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Circuit: 8 qubits 12 gates Depth:5 CNOT:4 Classical:8\n");
+}
+static void error_correct_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Error Correction: Surface code d=5 Logical error:1e-6\n");
+}
+static void grover_search_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grover: N=1,024 Found:iteration 23 Confidence:99.8%%\n");
+}
+static void shor_factor_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Shor: Factoring 15 = 3 x 5 Qubits:8 Depth:12\n");
+}
+static void quantum_sim_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sim: 20 qubits State:2^20=1M amplitudes Time:2.3s\n");
+}
+static void variational_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("VQE: Ansatz:UCCSD Parameters:47 Converged:iteration 89 Energy:-7.6Ha\n");
+}
+static void quantum_ml_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("QML: QSVM Accuracy:94.7%% Features:8 Qubits:6\n");
+}
+static void topo_qubit_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Topo: Majorana braided T=50mK Non-Abelian:confirmed\n");
+}
+static void quantum_net_186(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("QNet: QKD:BB84 Key rate:1kbps Distance:100km Error:1.2%%\n");
+}
+
+/* ===== Batch 187: Climate + Sustainability ===== */
+static void carbon_track_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Carbon: Scope1:125t Scope2:340t Scope3:2,340t Total:2,805t\n");
+}
+static void carbon_offset_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Offset: Credits:500t Cost:$12/t Trees:12,000 Renewable:45%%\n");
+}
+static void lca_assess_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("LCA: Product:12kg CO2e Hotspot:manufacturing(67%%) Use:23%%\n");
+}
+static void green_build_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Green: LEED:Gold Energy:-35%% Water:-40%% Materials:recycled\n");
+}
+static void renewable_int_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Renewable: Solar:42%% Wind:23%% Hydro:12%% Total:77%%\n");
+}
+static void circular_econ_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Circular: Recycled:45%% Reused:23%% Composted:12%% Landfill:20%%\n");
+}
+static void waste_zero_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Zero Waste: Achieved:92%% Diverted:11.5t Landfill:1t/month\n");
+}
+static void water_footprint_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Water: Blue:125gal Green:234gal Grey:45gal Total:404gal\n");
+}
+static void biodiversity_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Biodiversity: Index:0.78 Species:124 Endangered:3 Protected:67%%\n");
+}
+static void deforestation_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Forest: Coverage:67%% Loss:0.3%%/yr Protected:45%% Reforest:12ha\n");
+}
+static void ocean_health_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ocean: pH:8.1 Temp:+0.5C Coral:bleaching Plastic:reducing\n");
+}
+static void climate_model_187(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Climate: RCP:4.5 Temp:+2.1C by 2100 Sea level:+0.5m\n");
+}
+
+/* ===== Batch 188: Social Impact ===== */
+static void ngo_track_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("NGO: Programs:12 Beneficiaries:45,678 Budget:$2.3M Efficiency:92%%\n");
+}
+static void donor_manage_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Donors: 1,247 Active:892 Revenue:$1.2M Retention:78%%\n");
+}
+static void volunteer_coord_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Volunteers: 234 Active:189 Hours:12,847 Impact:high\n");
+}
+static void grant_manage_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grants: 12 active 3 pending Awarded:$4.5M Spent:67%%\n");
+}
+static void impact_measure_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Impact: SDG:5 goals aligned M&E:quarterly Report:published\n");
+}
+static void community_engage_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Community: Events:24 Participants:1,247 Feedback:4.5/5\n");
+}
+static void education_outreach_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Education: Students:2,347 Teachers:12 Schools:8\n");
+}
+static void health_program_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Health: Patients:4,567 Clinics:3 Surgeries:124\n");
+}
+static void poverty_reduce_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Poverty: Households:234 Income:+45%% Self-sustaining:78%%\n");
+}
+static void equality_index_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Equality: GGI:0.78 PGI:0.65 Pay gap:-12%% Diversity:42%%\n");
+}
+static void sustainability_score_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SDG: Score:78/100 Goals:8 aligned Projects:24\n");
+}
+static void social_enterprise_188(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Enterprise: Revenue:$450K Impact:1,247 lives Profit:12%%\n");
 }
 
 void shell_run(void) {
