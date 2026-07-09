@@ -13941,6 +13941,48 @@ static void bass_line_137(int argc, char args[][CMD_MAX_LEN]);
 static void drum_pattern_137(int argc, char args[][CMD_MAX_LEN]);
 static void vocal_process_137(int argc, char args[][CMD_MAX_LEN]);
 static void audio_fft_137(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 138: Education + Learning */
+static void learn_math_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_physics_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_chemistry_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_biology_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_economics_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_psychology_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_philosophy_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_art_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_history_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_geography_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_literature_138(int argc, char args[][CMD_MAX_LEN]);
+static void learn_music_theory_138(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 139: Weather + Environment */
+static void weather_now_139(int argc, char args[][CMD_MAX_LEN]);
+static void weather_forecast_139(int argc, char args[][CMD_MAX_LEN]);
+static void weather_alert_139(int argc, char args[][CMD_MAX_LEN]);
+static void air_quality_139(int argc, char args[][CMD_MAX_LEN]);
+static void uv_index_139(int argc, char args[][CMD_MAX_LEN]);
+static void solar_irradiance_139(int argc, char args[][CMD_MAX_LEN]);
+static void wind_forecast_139(int argc, char args[][CMD_MAX_LEN]);
+static void rain_prediction_139(int argc, char args[][CMD_MAX_LEN]);
+static void humidity_level_139(int argc, char args[][CMD_MAX_LEN]);
+static void barometric_pressure_139(int argc, char args[][CMD_MAX_LEN]);
+static void fog_detection_139(int argc, char args[][CMD_MAX_LEN]);
+static void storm_track_139(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 140: Social + Communication */
+static void email_send_140(int argc, char args[][CMD_MAX_LEN]);
+static void email_recv_140(int argc, char args[][CMD_MAX_LEN]);
+static void sms_send_140(int argc, char args[][CMD_MAX_LEN]);
+static void calendar_event_140(int argc, char args[][CMD_MAX_LEN]);
+static void contact_add_140(int argc, char args[][CMD_MAX_LEN]);
+static void social_post_140(int argc, char args[][CMD_MAX_LEN]);
+static void social_feed_140(int argc, char args[][CMD_MAX_LEN]);
+static void chat_group_140(int argc, char args[][CMD_MAX_LEN]);
+static void notification_push_140(int argc, char args[][CMD_MAX_LEN]);
+static void status_update_140(int argc, char args[][CMD_MAX_LEN]);
+static void file_share_140(int argc, char args[][CMD_MAX_LEN]);
+static void meeting_schedule_140(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16778,7 +16820,14 @@ static const cmd_entry commands[] = {
     /* Batch 136: Automotive + Robotics */
     {"obd-read", obd_read_136},     {"obd-clear", obd_clear_136},     {"can-bus", can_bus_136},     {"motor-control", motor_control_136},     {"servo-pos", servo_pos_136},     {"pid-tune", pid_tune_136},     {"imu-read", imu_read_136},     {"lidar-scan", lidar_scan_136},     {"camera-detect", camera_detect_136},     {"arm-inverse", arm_inverse_136},     {"path-plan", path_plan_136},     {"collision-avoid", collision_avoid_136}, 
     /* Batch 137: Music + Audio */
-    {"music-compose", music_compose_137},     {"music-play", music_play_137},     {"music-mix", music_mix_137},     {"music-eq", music_eq_137},     {"music-record", music_record_137},     {"beat-make", beat_make_137},     {"chord-gen", chord_gen_137},     {"melody-gen", melody_gen_137},     {"bass-line", bass_line_137},     {"drum-pattern", drum_pattern_137},     {"vocal-process", vocal_process_137},     {"audio-fft", audio_fft_137}, 
+    {"music-compose", music_compose_137},     {"music-play", music_play_137},     {"music-mix", music_mix_137},     {"music-eq", music_eq_137},     {"music-record", music_record_137},     {"beat-make", beat_make_137},     {"chord-gen", chord_gen_137},     {"melody-gen", melody_gen_137},     {"bass-line", bass_line_137},     {"drum-pattern", drum_pattern_137},     {"vocal-process", vocal_process_137},     {"audio-fft", audio_fft_137},
+    /* Batch 138: Education + Learning */
+    {"learn-math", learn_math_138},     {"learn-physics", learn_physics_138},     {"learn-chemistry", learn_chemistry_138},     {"learn-biology", learn_biology_138},     {"learn-economics", learn_economics_138},     {"learn-psychology", learn_psychology_138},     {"learn-philosophy", learn_philosophy_138},     {"learn-art", learn_art_138},     {"learn-history", learn_history_138},     {"learn-geography", learn_geography_138},     {"learn-literature", learn_literature_138},     {"learn-music-theory", learn_music_theory_138}, 
+    /* Batch 139: Weather + Environment */
+    {"weather-now", weather_now_139},     {"weather-forecast", weather_forecast_139},     {"weather-alert", weather_alert_139},     {"air-quality", air_quality_139},     {"uv-index", uv_index_139},     {"solar-irradiance", solar_irradiance_139},     {"wind-forecast", wind_forecast_139},     {"rain-prediction", rain_prediction_139},     {"humidity-level", humidity_level_139},     {"barometric-pressure", barometric_pressure_139},     {"fog-detection", fog_detection_139},     {"storm-track", storm_track_139}, 
+    /* Batch 140: Social + Communication */
+    {"email-send", email_send_140},     {"email-recv", email_recv_140},     {"sms-send", sms_send_140},     {"calendar-event", calendar_event_140},     {"contact-add", contact_add_140},     {"social-post", social_post_140},     {"social-feed", social_feed_140},     {"chat-group", chat_group_140},     {"notification-push", notification_push_140},     {"status-update", status_update_140},     {"file-share", file_share_140},     {"meeting-schedule", meeting_schedule_140}, 
+ 
  
 
 
@@ -36829,6 +36878,157 @@ static void vocal_process_137(int argc, char args[][CMD_MAX_LEN]) {
 static void audio_fft_137(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("FFT: 44100Hz Peaks:250Hz(-12dB) 1kHz(-6dB) 4kHz(-3dB) 8kHz(-8dB)\n");
+}
+
+
+/* ===== Batch 138: Education + Learning ===== */
+static void learn_math_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Math: Calculus Limits 2/4 Derivatives 1/4 Integrals 0/4 Progress:12.5%%\n");
+}
+static void learn_physics_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Physics: Mechanics 3/5 Electromagnetism 1/5 Optics 0/5 Progress:26.7%%\n");
+}
+static void learn_chemistry_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chemistry: Organic 2/4 Inorganic 1/4 Physical 0/4 Progress:16.7%%\n");
+}
+static void learn_biology_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Biology: Cell Bio 4/4 Genetics 3/4 Ecology 2/4 Progress:66.7%%\n");
+}
+static void learn_economics_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Economics: Micro 2/3 Macro 1/3 Econometrics 0/3 Progress:33.3%%\n");
+}
+static void learn_psychology_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Psychology: Cognitive 3/4 Social 2/4 Development 1/4 Progress:41.7%%\n");
+}
+static void learn_philosophy_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Philosophy: Ethics 2/3 Logic 3/3 Metaphysics 1/3 Progress:55.6%%\n");
+}
+static void learn_art_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Art: Drawing 2/4 Painting 1/4 Sculpture 0/4 Progress:16.7%%\n");
+}
+static void learn_history_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("History: Ancient 4/4 Medieval 3/4 Modern 2/4 Progress:66.7%%\n");
+}
+static void learn_geography_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Geography: Physical 2/3 Human 1/3 GIS 0/3 Progress:33.3%%\n");
+}
+static void learn_literature_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Literature: Classic 3/4 Modern 2/4 Poetry 1/4 Progress:41.7%%\n");
+}
+static void learn_music_theory_138(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Music Theory: Scales 3/3 Chords 2/3 Harmony 1/3 Progress:55.6%%\n");
+}
+
+/* ===== Batch 139: Weather + Environment ===== */
+static void weather_now_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Now: 24C Partly Cloudy Humidity:65%% Wind:12km/h NE\n");
+}
+static void weather_forecast_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Forecast: Mon:26C Sun Tue:22C Rain Wed:20C Cloudy\n");
+}
+static void weather_alert_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Alert: HEAT WAVE WARNING 35C+ until Thursday 6PM\n");
+}
+static void air_quality_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("AQI: 42 (Good) PM2.5:12ug O3:35ppb NO2:18ppb\n");
+}
+static void uv_index_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("UV: 7 (High) Peak:12:30-14:30 Protection: SPF30+ needed\n");
+}
+static void solar_irradiance_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Solar: 850W/m2 Clear sky Efficiency:22%% Output:1.2kW\n");
+}
+static void wind_forecast_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wind: Now:12km/hNE Gusts:25km/h Forecast:15km/hNW\n");
+}
+static void rain_prediction_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Rain: Probability:75%% Start:14:00 Duration:3h Amount:12mm\n");
+}
+static void humidity_level_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Humidity: Indoor:45%% Outdoor:65%% Dew point:17C\n");
+}
+static void barometric_pressure_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Pressure: 1013.25hPa Steady Trend:rising slightly\n");
+}
+static void fog_detection_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fog: Visibility:200m Type:Radiation Duration:until 9AM\n");
+}
+static void storm_track_139(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Storm: TD-15 Category:TS Speed:25km/h NW Path:36h\n");
+}
+
+/* ===== Batch 140: Social + Communication ===== */
+static void email_send_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Email: To:user@host Subject:Report Sent OK Message-ID:abc123\n");
+}
+static void email_recv_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Inbox: 12 unread 3 flagged Latest:Meeting notes 10:23\n");
+}
+static void sms_send_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SMS: To:+1234567890 Sent Delivered 14:23 Cost:$0.01\n");
+}
+static void calendar_event_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Event: Team Standup Recurring:Daily Time:09:00 Duration:15min\n");
+}
+static void contact_add_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Contact: John Doe Added Email:john@co Phone:+1234567890\n");
+}
+static void social_post_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Posted: Hello world! Likes:0 Comments:0 Time:14:23\n");
+}
+static void social_feed_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Feed: 47 new posts 12 photos 3 videos Trending:#tech\n");
+}
+static void chat_group_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Group: Dev Team Members:12 Messages today:89\n");
+}
+static void notification_push_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Push: 5 unread 2 urgent Latest:Deployment complete\n");
+}
+static void status_update_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Status: Online Status text:Working on BYO-OS\n");
+}
+static void file_share_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Shared: report.pdf Size:2.3MB Recipients:3 Expiry:7d\n");
+}
+static void meeting_schedule_140(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Meeting: Sprint Review Tomorrow 14:00 Duration:1h Attendees:8\n");
 }
 
 void shell_run(void) {
