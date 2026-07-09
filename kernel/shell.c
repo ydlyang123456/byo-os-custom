@@ -763,15 +763,18 @@ static void cmd_sort(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_uniq(int argc, char args[][CMD_MAX_LEN]) {
+    int count_mode = 0;
     const char *fname = 0;
     for (int i = 1; i < argc; i++) {
-        if (args[i][0] != '-') fname = args[i];
+        if (args[i][0] == '-' && args[i][1] == 'c') count_mode = 1;
+        else fname = args[i];
     }
-    if (!fname) { vga_puts("Usage: uniq <file>\n"); return; }
+    if (!fname) { vga_puts("Usage: uniq [-c] <file>\n"); return; }
     memset(file_buf, 0, FILE_BUF_SIZE);
     int r = fs_read_file(fname, file_buf, FILE_BUF_SIZE - 1);
     if (r <= 0) { vga_puts("uniq: "); vga_puts(fname); vga_puts(": No such file\n"); return; }
     char prev[256] = "";
+    int prev_count = 0;
     char line[256];
     char *p = file_buf;
     while (*p) {
@@ -779,10 +782,26 @@ static void cmd_uniq(int argc, char args[][CMD_MAX_LEN]) {
         while (*p && *p != '\n') { line[j++] = *p++; }
         line[j] = 0;
         if (*p == '\n') p++;
-        if (strcmp(line, prev) != 0) {
-            vga_puts(line); vga_putchar('\n');
+        if (strcmp(line, prev) == 0) {
+            prev_count++;
+        } else {
+            if (prev[0]) {
+                if (count_mode) {
+                    char buf[16]; itoa(prev_count, buf, 10);
+                    vga_puts(buf); vga_putchar(' ');
+                }
+                vga_puts(prev); vga_putchar('\n');
+            }
             strcpy(prev, line);
+            prev_count = 1;
         }
+    }
+    if (prev[0]) {
+        if (count_mode) {
+            char buf[16]; itoa(prev_count, buf, 10);
+            vga_puts(buf); vga_putchar(' ');
+        }
+        vga_puts(prev); vga_putchar('\n');
     }
 }
 
