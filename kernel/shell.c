@@ -1012,8 +1012,36 @@ static void cmd_tee(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_tr(int argc, char args[][CMD_MAX_LEN]) {
-    if (argc < 3) { vga_puts("Usage: tr <from> <to>\n"); return; }
-    vga_puts("tr: interactive input not supported\n");
+    if (argc < 3) { vga_puts("Usage: tr <from> <to> [file]\n"); return; }
+    const char *from = args[1];
+    const char *to = args[2];
+    if (argc >= 4) {
+        /* Read from file */
+        char buf[4096];
+        int r = fs_read_file(args[3], buf, 4095);
+        if (r < 0) { vga_puts("tr: "); vga_puts(args[3]); vga_puts(": No such file\n"); return; }
+        buf[r] = 0;
+        for (int i = 0; i < r; i++) {
+            char c = buf[i];
+            for (int j = 0; from[j]; j++) {
+                if (c == from[j]) { c = to[j]; break; }
+            }
+            vga_putchar(c);
+        }
+    } else {
+        /* Translate args from 3 onwards */
+        for (int a = 3; a < argc; a++) {
+            for (int i = 0; args[a][i]; i++) {
+                char c = args[a][i];
+                for (int j = 0; from[j]; j++) {
+                    if (c == from[j]) { c = to[j]; break; }
+                }
+                vga_putchar(c);
+            }
+            if (a < argc - 1) vga_putchar(' ');
+        }
+    }
+    vga_putchar('\n');
 }
 
 /* ===== Misc Commands ===== */
