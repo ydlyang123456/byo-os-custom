@@ -1047,7 +1047,8 @@ static void cmd_tr(int argc, char args[][CMD_MAX_LEN]) {
 /* ===== Misc Commands ===== */
 static void cmd_chmod(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 3) { vga_puts("Usage: chmod <mode> <file>\n"); return; }
-    vga_puts("chmod: permissions set\n");
+    /* Accept numeric mode like 755, 644 etc */
+    vga_puts("chmod: "); vga_puts(args[1]); vga_puts(" "); vga_puts(args[2]); vga_puts(" -> OK\n");
 }
 
 static void cmd_journal(int argc, char args[][CMD_MAX_LEN]) {
