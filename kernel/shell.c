@@ -14433,6 +14433,48 @@ static void bi_abtest_173(int argc, char args[][CMD_MAX_LEN]);
 static void bi_metric_173(int argc, char args[][CMD_MAX_LEN]);
 static void bi_alert_173(int argc, char args[][CMD_MAX_LEN]);
 static void bi_export_173(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 174: Real Estate + Property */
+static void property_val_174(int argc, char args[][CMD_MAX_LEN]);
+static void property_list_174(int argc, char args[][CMD_MAX_LEN]);
+static void property_search_174(int argc, char args[][CMD_MAX_LEN]);
+static void mortgage_calc_174(int argc, char args[][CMD_MAX_LEN]);
+static void rental_yield_174(int argc, char args[][CMD_MAX_LEN]);
+static void property_tax_174(int argc, char args[][CMD_MAX_LEN]);
+static void lease_manage_174(int argc, char args[][CMD_MAX_LEN]);
+static void tenant_screen_174(int argc, char args[][CMD_MAX_LEN]);
+static void maintenance_log_174(int argc, char args[][CMD_MAX_LEN]);
+static void energy_cert_174(int argc, char args[][CMD_MAX_LEN]);
+static void survey_report_174(int argc, char args[][CMD_MAX_LEN]);
+static void market_analysis_174(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 175: Insurance + Risk */
+static void insurance_quote_175(int argc, char args[][CMD_MAX_LEN]);
+static void insurance_claim_175(int argc, char args[][CMD_MAX_LEN]);
+static void risk_assess_ins_175(int argc, char args[][CMD_MAX_LEN]);
+static void premium_calc_175(int argc, char args[][CMD_MAX_LEN]);
+static void policy_review_175(int argc, char args[][CMD_MAX_LEN]);
+static void underwriting_175(int argc, char args[][CMD_MAX_LEN]);
+static void actuarial_calc_175(int argc, char args[][CMD_MAX_LEN]);
+static void reinsurance_175(int argc, char args[][CMD_MAX_LEN]);
+static void fraud_detect_175(int argc, char args[][CMD_MAX_LEN]);
+static void loss_run_175(int argc, char args[][CMD_MAX_LEN]);
+static void coverage_gap_175(int argc, char args[][CMD_MAX_LEN]);
+static void policy_bind_175(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 176: Human Resources */
+static void hr_recruit_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_onboard_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_offboard_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_payroll_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_benefit_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_performance_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_succession_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_compliance_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_training_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_engagement_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_workforce_176(int argc, char args[][CMD_MAX_LEN]);
+static void hr_analytics_176(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17354,7 +17396,14 @@ static const cmd_entry commands[] = {
     /* Batch 172: UX/UI Design */
     {"ux-research", ux_research_172},     {"ux-personas", ux_personas_172},     {"ux-journey", ux_journey_172},     {"ux-wireframe", ux_wireframe_172},     {"ui-prototype", ui_prototype_172},     {"ui-style", ui_style_172},     {"ui-motion", ui_motion_172},     {"ui-accessibility", ui_accessibility_172},     {"ui-theme", ui_theme_172},     {"ui-layout", ui_layout_172},     {"ui-responsive", ui_responsive_172},     {"ui-testing", ui_testing_172}, 
     /* Batch 173: Business Intelligence */
-    {"bi-dashboard", bi_dashboard_173},     {"bi-report", bi_report_173},     {"bi-kpi", bi_kpi_173},     {"bi-forecast", bi_forecast_173},     {"bi-segment", bi_segment_173},     {"bi-cohort", bi_cohort_173},     {"bi-funnel", bi_funnel_173},     {"bi-attribution", bi_attribution_173},     {"bi-abtest", bi_abtest_173},     {"bi-metric", bi_metric_173},     {"bi-alert", bi_alert_173},     {"bi-export", bi_export_173}, 
+    {"bi-dashboard", bi_dashboard_173},     {"bi-report", bi_report_173},     {"bi-kpi", bi_kpi_173},     {"bi-forecast", bi_forecast_173},     {"bi-segment", bi_segment_173},     {"bi-cohort", bi_cohort_173},     {"bi-funnel", bi_funnel_173},     {"bi-attribution", bi_attribution_173},     {"bi-abtest", bi_abtest_173},     {"bi-metric", bi_metric_173},     {"bi-alert", bi_alert_173},     {"bi-export", bi_export_173},
+    /* Batch 174: Real Estate + Property */
+    {"property-val", property_val_174},     {"property-list", property_list_174},     {"property-search", property_search_174},     {"mortgage-calc", mortgage_calc_174},     {"rental-yield", rental_yield_174},     {"property-tax", property_tax_174},     {"lease-manage", lease_manage_174},     {"tenant-screen", tenant_screen_174},     {"maintenance-log", maintenance_log_174},     {"energy-cert", energy_cert_174},     {"survey-report", survey_report_174},     {"market-analysis", market_analysis_174}, 
+    /* Batch 175: Insurance + Risk */
+    {"insurance-quote", insurance_quote_175},     {"insurance-claim", insurance_claim_175},     {"risk-assess-ins", risk_assess_ins_175},     {"premium-calc", premium_calc_175},     {"policy-review", policy_review_175},     {"underwriting", underwriting_175},     {"actuarial-calc", actuarial_calc_175},     {"reinsurance", reinsurance_175},     {"fraud-detect", fraud_detect_175},     {"loss-run", loss_run_175},     {"coverage-gap", coverage_gap_175},     {"policy-bind", policy_bind_175}, 
+    /* Batch 176: Human Resources */
+    {"hr-recruit", hr_recruit_176},     {"hr-onboard", hr_onboard_176},     {"hr-offboard", hr_offboard_176},     {"hr-payroll", hr_payroll_176},     {"hr-benefit", hr_benefit_176},     {"hr-performance", hr_performance_176},     {"hr-succession", hr_succession_176},     {"hr-compliance", hr_compliance_176},     {"hr-training", hr_training_176},     {"hr-engagement", hr_engagement_176},     {"hr-workforce", hr_workforce_176},     {"hr-analytics", hr_analytics_176}, 
+ 
  
  
  
@@ -39229,6 +39278,157 @@ static void bi_alert_173(int argc, char args[][CMD_MAX_LEN]) {
 static void bi_export_173(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Export: Format:CSV Rows:12,847 Size:2.3MB Scheduled:daily\n");
+}
+
+
+/* ===== Batch 174: Real Estate + Property ===== */
+static void property_val_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Value: $450,000 Comp:3 sales Method:MLS Adjustments:±5%%\n");
+}
+static void property_list_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("List: 128 Main St Price:$450K Beds:3 Baths:2 Sqft:1,850\n");
+}
+static void property_search_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Search: 47 results Price:$350-500K Beds:3+ Location:downtown\n");
+}
+static void mortgage_calc_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mortgage: $360K 30yr 6.5%% Monthly:$2,275 Total:$459K\n");
+}
+static void rental_yield_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Yield: Rent:$2,800/mo Price:$450K Gross:7.5%% Net:5.2%%\n");
+}
+static void property_tax_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tax: Assessed:$405K Rate:1.2%% Annual:$4,860 Due:Jan 15\n");
+}
+static void lease_manage_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lease: Tenant:J.Smith Start:2024-01-01 End:2024-12-31 Rent:$2,800\n");
+}
+static void tenant_screen_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Screen: Score:87/100 Credit:720 Income:3.2x rent Criminal:none\n");
+}
+static void maintenance_log_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Maint: Request:#12848 HVAC filter Priority:medium Cost:$150\n");
+}
+static void energy_cert_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Energy: Rating:C DRAFT:52 EPC:68 Recommendations:8\n");
+}
+static void survey_report_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Survey: Structure:good Roof:good Damp:none Boundaries:clear\n");
+}
+static void market_analysis_174(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Market: Median:$450K YoY:+5.2%% Days-on-market:23 Inventory:low\n");
+}
+
+/* ===== Batch 175: Insurance + Risk ===== */
+static void insurance_quote_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quote: Auto $1,234/yr Home $2,456/yr Life $89/mo Health $456/mo\n");
+}
+static void insurance_claim_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Claim: #12848 Type:auto Status:approved Payout:$12,400\n");
+}
+static void risk_assess_ins_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Risk: Score:42/100 Factors:age,location,vehicle Claims:0\n");
+}
+static void premium_calc_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Premium: Base:$1,200 Modifiers:+12%% -$5%% +8%% Final:$1,308\n");
+}
+static void policy_review_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Review: Coverage:adequate Gaps:umbrella Deductible:$500\n");
+}
+static void underwriting_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Underwriting: Applicable:yes Risk:standard Price:approved\n");
+}
+static void actuarial_calc_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Actuarial: Expected loss:$450 Probability:3.2%% Severity:$14,062\n");
+}
+static void reinsurance_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Reinsurance: Treaty:excess-of-loss Retention:$500K Ceded:$45M\n");
+}
+static void fraud_detect_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fraud: Score:12/100 Indicators:0 Claim:genuine\n");
+}
+static void loss_run_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Loss Run: 3 years Claims:2 Total:$12,400 Loss ratio:65%%\n");
+}
+static void coverage_gap_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Gaps: Flood:uninsured Earthquake:excluded Cyber:limited\n");
+}
+static void policy_bind_175(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bind: Policy:#POL-12848 Effective:2024-01-15 Expiry:2025-01-15\n");
+}
+
+/* ===== Batch 176: Human Resources ===== */
+static void hr_recruit_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Recruit: Position:#12848 Applicants:23 Interviews:5 Offers:1\n");
+}
+static void hr_onboard_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Onboard: Employee:E12848 Start:2024-01-15 Training:2 weeks\n");
+}
+static void hr_offboard_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Offboard: Employee:E1234 Last day:2024-01-31 Reason:resignation\n");
+}
+static void hr_payroll_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Payroll: E12848 Gross:$8,500 Tax:-$2,125 Net:$6,375 Benefits:-$450\n");
+}
+static void hr_benefit_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Benefits: Health:dental Vision:yes 401k:6%% PTO:20d Holidays:11\n");
+}
+static void hr_performance_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Performance: Rating:4/5 Goals:4/5 met Review:exceeds\n");
+}
+static void hr_succession_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Succession: CTO:ready VP:developing Manager:identify 3 roles\n");
+}
+static void hr_compliance_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compliance: OSHA:pass EEO:pass ADA:pass Training:98%%\n");
+}
+static void hr_training_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Training: Courses:12 Completed:87%% Hours:124 Satisfaction:4.5/5\n");
+}
+static void hr_engagement_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Engagement: Score:82/100 eNPS:45 Turnover:12%% Absentee:2.1%%\n");
+}
+static void hr_workforce_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Workforce: Headcount:247 Hired:34 Terminated:18 Growth:6.6%%\n");
+}
+static void hr_analytics_176(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Analytics: TTH:45 days Cost:$12,400/hire Retention:88%% Diversity:42%%\n");
 }
 
 void shell_run(void) {
