@@ -13,3 +13,4 @@ start*.bat
 p*.c
 isodir/
 __pycache__/
+release35.sh
