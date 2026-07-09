@@ -6534,160 +6534,88 @@ static const cmd_entry commands[] = {
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
     {"uptime", cmd_uptime}, {"mem", cmd_mem}, {"version", cmd_version},
     {"about", cmd_about}, {"cd", cmd_cd}, {"pwd", cmd_pwd},
-    /* File */
     {"ls", cmd_ls}, {"cat", cmd_cat}, {"touch", cmd_touch}, {"write", cmd_write},
     {"rm", cmd_rm}, {"mkdir", cmd_mkdir}, {"cp", cmd_cp}, {"mv", cmd_mv},
     {"find", cmd_find}, {"du", cmd_du}, {"stat", cmd_stat},
-    /* Network */
     {"net", cmd_net}, {"ping", cmd_ping}, {"curl", cmd_curl},
-    /* User */
     {"whoami", cmd_whoami}, {"login", cmd_login}, {"logout", cmd_logout},
     {"users", cmd_users}, {"id", cmd_id}, {"groups", cmd_groups},
-    /* Process */
     {"ps", cmd_ps}, {"top", cmd_top}, {"kill", cmd_kill}, {"service", cmd_service},
-    /* System */
     {"sysinfo", cmd_sysinfo}, {"halt", cmd_halt}, {"reboot", cmd_reboot},
     {"df", cmd_df}, {"free", cmd_free}, {"date", cmd_date},
     {"uname", cmd_uname}, {"hostname", cmd_hostname},
-    /* Environment */
     {"env", cmd_env}, {"export", cmd_export}, {"unset", cmd_unset},
     {"history", cmd_history}, {"alias", cmd_alias}, {"unalias", cmd_unalias},
-    /* Text */
     {"grep", cmd_grep}, {"sort", cmd_sort}, {"uniq", cmd_uniq}, {"wc", cmd_wc},
     {"head", cmd_head}, {"tail", cmd_tail}, {"cut", cmd_cut},
     {"strings", cmd_strings}, {"hexdump", cmd_hexdump},
-    /* Shell */
     {"which", cmd_which}, {"man", cmd_man}, {"crontab", cmd_crontab},
     {"tee", cmd_tee}, {"tr", cmd_tr},
-    /* Misc */
     {"chmod", cmd_chmod}, {"journal", cmd_journal}, {"neofetch", cmd_neofetch}, {"more", cmd_more}, {"ln", cmd_ln}, {"tar", cmd_tar}, {"dfh", cmd_df_h}, {"tee", cmd_tee_fn}, {"tr", cmd_tr_fn},
     {"cal", cmd_cal}, {"sync", cmd_sync},
-    
-    /* Extended: Network */
     {"netstat", cmd_netstat}, {"ss", cmd_ss}, {"wget", cmd_wget}, {"ftp", cmd_ftp},
-    /* Extended: Process */
     {"systemctl", cmd_systemctl}, {"pstree", cmd_pstree},
     {"pgrep", cmd_pgrep}, {"pkill", cmd_pkill}, {"pidof", cmd_pidof},
     {"nice", cmd_nice}, {"renice", cmd_renice}, {"nohup", cmd_nohup},
-    {"bg", cmd_bg}, {"fg", cmd_fg}, {"jobs", cmd_jobs},
-    /* Extended: System */
-    {"vmstat", cmd_vmstat}, {"iostat", cmd_iostat}, {"sar", cmd_sar}, {"mpstat", cmd_mpstat},
-    /* Extended: Text */
     {"awk", cmd_awk}, {"sed", cmd_sed},
-    /* Extended: Dev */
-    {"strace", cmd_strace}, {"ltrace", cmd_ltrace}, {"objdump", cmd_objdump},
-    {"readelf", cmd_readelf}, {"nm", cmd_nm}, {"ar", cmd_ar}, {"ranlib", cmd_ranlib},
-    {"ld", cmd_ld}, {"ldconfig", cmd_ldconfig},
-    /* Extended: Permissions */
     {"chown", cmd_chown}, {"chgrp", cmd_chgrp},
     {"ionice", cmd_ionice}, {"taskset", cmd_taskset},
-    /* Extended: Tools */
     {"file", cmd_file}, {"watch", cmd_watch}, {"time", cmd_time}, {"timeout", cmd_timeout},
-    {"xargs", cmd_xargs},
-    /* Batch 8: Security */
     {"passwd", cmd_passwd}, {"su", cmd_su}, {"sudo", cmd_sudo},
     {"useradd", cmd_useradd}, {"userdel", cmd_userdel},
     {"groupadd", cmd_groupadd}, {"groupdel", cmd_groupdel},
     {"iptables", cmd_iptables}, {"nft", cmd_nft},
-    /* Batch 8: Package Managers */
-    {"apt", cmd_apt}, {"dpkg", cmd_dpkg},
-    {"yum", cmd_yum}, {"rpm", cmd_rpm},
     {"snap", cmd_snap}, {"flatpak", cmd_flatpak},
-    /* Batch 8: System Info */
     {"lsb_release", cmd_lsb_release}, {"hostnamectl", cmd_hostnamectl},
     {"timedatectl", cmd_timedatectl}, {"localectl", cmd_localectl},
     {"bootctl", cmd_bootctl}, {"dmesg", cmd_dmesg_imp},
     {"journalctl", cmd_journalctl_imp},
-    /* Batch 8: System Admin */
     {"sysctl", cmd_sysctl}, {"fdisk", cmd_fdisk}, {"mkfs", cmd_mkfs},
-    {"mount", cmd_mount_cmd}, {"umount", cmd_umount_cmd},
-    /* Batch 9: DNS */
-    {"dig", cmd_dig}, {"nslookup", cmd_nslookup}, {"host", cmd_host},
-    /* Batch 9: SSH/SCP */
     {"ssh", cmd_ssh}, {"scp", cmd_scp}, {"sftp", cmd_sftp},
-    /* Batch 9: Web */
     {"httpd", cmd_httpd},
-    /* Batch 9: Network Tools */
     {"tracepath", cmd_tracepath}, {"arp", cmd_arp}, {"route", cmd_route},
     {"nmcli", cmd_nmcli}, {"ethtool", cmd_ethtool}, {"iwconfig", cmd_iwconfig},
-    /* Batch 9: Monitoring */
-    {"nagios", cmd_nagios}, {"zabbix", cmd_zabbix},
-    /* Batch 9: Proxy/VPN */
-    {"squid", cmd_squid}, {"openvpn", cmd_openvpn}, {"haproxy", cmd_haproxy},
-    /* Batch 10: RAID */
     {"mdadm", cmd_mdadm},
-    /* Batch 10: LVM */
     {"pvcreate", cmd_pvcreate}, {"vgcreate", cmd_vgcreate}, {"lvcreate", cmd_lvcreate},
     {"pvdisplay", cmd_pvdisplay}, {"vgdisplay", cmd_vgdisplay}, {"lvdisplay", cmd_lvdisplay},
-    /* Batch 10: Backup */
-    {"rsync", cmd_rsync}, {"dump", cmd_dump}, {"restore", cmd_restore},
     {"dd", cmd_dd}, {"cpio", cmd_cpio},
-    /* Batch 10: Filesystem */
     {"tune2fs", cmd_tune2fs}, {"e2fsck", cmd_e2fsck}, {"resize2fs", cmd_resize2fs},
     {"blkid", cmd_blkid}, {"lsblk", cmd_lsblk},
-    /* Batch 10: Swap */
     {"swapon", cmd_swapon}, {"swapoff", cmd_swapoff},
     {"freeze", cmd_freeze}, {"thaw", cmd_unfreeze},
-    /* Batch 11: Dev */
     {"gcc", cmd_gcc}, {"make", cmd_make}, {"cmake", cmd_cmake},
     {"git", cmd_git}, {"python", cmd_python}, {"nodejs", cmd_nodejs}, {"npm", cmd_npm},
     {"perl", cmd_perl}, {"ruby", cmd_ruby}, {"php", cmd_php}, {"lua", cmd_lua},
     {"golang", cmd_golang}, {"rustc", cmd_rustc}, {"java", cmd_java},
-    /* Batch 11: Editors */
-    {"vim", cmd_vim}, {"nano", cmd_nano}, {"emacs", cmd_emacs},
-    /* Batch 11: Media */
     {"ffmpeg", cmd_ffmpeg}, {"convert", cmd_convert}, {"mplayer", cmd_mplayer}, {"alsamixer", cmd_alsamixer},
-    /* Batch 11: Containers */
-    {"docker", cmd_docker}, {"podman", cmd_podman},
-    /* Batch 11: Text */
     {"jq", cmd_jq},
-    /* Batch 11: Archive */
     {"bzip2", cmd_bzip2}, {"xz", cmd_xz}, {"zstd", cmd_zstd}, {"gzip", cmd_gzip}, {"unzip", cmd_unzip},
-    /* Batch 11: Security/Debug */
     {"nmap", cmd_nmap}, {"tcpdump", cmd_tcpdump}, {"nikto", cmd_nikto}, {"sqlmap", cmd_sqlmap},
     {"metasploit", cmd_metasploit}, {"gdb", cmd_gdb}, {"valgrind", cmd_valgrind}, {"lsof", cmd_lsof}, {"wireshark", cmd_wireshark},
-    /* Batch 11: Sysadmin */
     {"chroot", cmd_chroot}, {"chsh", cmd_chsh}, {"ulimit", cmd_ulimit},
     {"who", cmd_who}, {"last", cmd_last}, {"tty", cmd_tty}, {"stty", cmd_stty},
     {"script", cmd_script}, {"screen", cmd_screen}, {"tmux", cmd_tmux}, {"byobu", cmd_byobu},
     {"expect", cmd_expect_cmd}, {"dd", cmd_dd_cmd},
     {"debconf", cmd_debconf}, {"apt-key", cmd_aptkey}, {"update-rc.d", cmd_update_rc}, {"xdg-open", cmd_xdg},
-    /* Batch 12: Database */
     {"mysql", cmd_mysql}, {"psql", cmd_psql}, {"sqlite3", cmd_sqlite3},
     {"mongosh", cmd_mongosh}, {"redis-cli", cmd_redis_cli},
     {"pg_isready", cmd_pg_isready}, {"mysqldump", cmd_mysqldump},
-    /* Batch 12: Email */
     {"mail", cmd_mail}, {"sendmail", cmd_sendmail}, {"msmtp", cmd_msmtp},
     {"fetchmail", cmd_fetchmail}, {"procmail", cmd_procmail},
-    /* Batch 12: Web Services */
-    {"nginx", cmd_nginx}, {"apache2", cmd_apache2}, {"apachectl", cmd_apachectl},
     {"php-fpm", cmd_phpfpm}, {"uwsgi", cmd_uwsgi}, {"gunicorn", cmd_gunicorn},
-    /* Batch 12: DNS/DHCP/NTP */
     {"named", cmd_bind9}, {"dnsmasq", cmd_dnsmasq}, {"unbound", cmd_unbound},
     {"dhclient", cmd_dhclient}, {"dhcpd", cmd_dhcpd},
     {"ntpd", cmd_ntpd}, {"ntpdate", cmd_ntpdate}, {"chronyd", cmd_chronyd},
-    /* Batch 12: Print */
     {"lpr", cmd_lpr}, {"lpstat", cmd_lpstat}, {"lpq", cmd_lpq}, {"lprm", cmd_lprm}, {"cups", cmd_cups},
-    /* Batch 12: Scheduler */
     {"at", cmd_at}, {"batch", cmd_batch},
-    /* Batch 12: Logging */
     {"logrotate", cmd_logrotate}, {"rsyslog", cmd_rsyslog}, {"syslog-ng", cmd_syslog_ng}, {"swaks", cmd_swaks},
-    /* Batch 12: SSH Server */
     {"sshd", cmd_sshd}, {"ssh-keygen", cmd_ssh_keygen}, {"ssh-agent", cmd_ssh_agent},
-    /* Batch 12: Monitoring */
-    {"prometheus", cmd_prometheus}, {"grafana", cmd_grafana}, {"collectd", cmd_collectd}, {"monit", cmd_monit},
-    /* Batch 12: Backup Advanced */
     {"borg", cmd_borg}, {"restic", cmd_restic}, {"duplicity", cmd_duplicity}, {"rsnapshot", cmd_rsnapshot},
-    /* Batch 12: Power */
     {"powertop", cmd_powertop}, {"tlp", cmd_tlp}, {"cpupower", cmd_cpupower},
-    /* Batch 12: Hardware */
-    {"lscpu", cmd_lscpu}, {"lshw", cmd_lshw}, {"lsusb", cmd_lsusb}, {"lspci", cmd_lspci},
     {"lsmod", cmd_lsmod}, {"modprobe", cmd_modprobe}, {"insmod", cmd_insmod}, {"rmmod", cmd_rmmod},
-    /* Batch 12: System Control */
     {"poweroff", cmd_poweroff}, {"init", cmd_init_cmd}, {"runlevel", cmd_runlevel},
     {"hwclock", cmd_hwclock}, {"losetup", cmd_losetup}, {"dmsetup", cmd_dmsetup},
     {"parted", cmd_parted}, {"gdisk", cmd_gdisk}, {"lsblk_adv", block_device_info},
-    /* Batch 13: Desktop */
     {"xorg", cmd_xorg}, {"xinit", cmd_xinit}, {"startx", cmd_startx}, {"xrandr", cmd_xrandr},
     {"xdg-open", cmd_xdg_open}, {"xterm", cmd_xterm}, {"gnome-terminal", cmd_gnome_terminal},
     {"bash", cmd_bash}, {"zsh", cmd_zsh}, {"fish", cmd_fish}, {"dash", cmd_dash}, {"csh", cmd_csh},
@@ -6696,248 +6624,156 @@ static const cmd_entry commands[] = {
     {"gedit", cmd_gedit}, {"kate", cmd_kate}, {"mousepad", cmd_mousepad},
     {"nemo", cmd_nemo}, {"thunar", cmd_thunar}, {"pcmanfm", cmd_pcafm},
     {"xdpyinfo", cmd_xdpyinfo},
-    /* Batch 13: Audio/Video */
     {"pulseaudio", cmd_pulseaudio}, {"pipewire", cmd_pipewire},
     {"aplay", cmd_aplay}, {"arecord", cmd_arecord}, {"sox", cmd_sox},
     {"vlc", cmd_vlc}, {"mpv", cmd_mpv},
-    /* Batch 13: Print */
     {"lpoptions", cmd_lpoptions}, {"lpadmin", cmd_lpadmin}, {"cancel", cmd_cancel}, {"lp", cmd_lp},
-    /* Batch 13: i18n */
     {"locale", cmd_locale}, {"iconv", cmd_iconv}, {"gettext", cmd_gettext}, {"tzselect", cmd_tzselect},
-    /* Batch 13: Systemd */
     {"systemd-run", cmd_systemd_run}, {"machinectl", cmd_machinectl},
     {"networkd", cmd_networkd}, {"resolved", cmd_resolved}, {"timesyncd", cmd_timesyncd},
-    /* Batch 13: Package Extended */
     {"brew", cmd_brew}, {"pacman", cmd_pacman}, {"emerge", cmd_emerge}, {"apk", cmd_apk}, {"zypper", cmd_zypper},
-    /* Batch 13: Containers Orch */
-    {"kubectl", cmd_kubectl}, {"helm", cmd_helm}, {"docker-compose", cmd_compose},
-    /* Batch 13: CI/CD */
-    {"jenkins", cmd_jenkins}, {"gitlab-ci", cmd_gitlab_ci}, {"github-actions", cmd_github_actions},
-    /* Batch 13: Cloud */
     {"aws", cmd_aws}, {"az", cmd_azure}, {"gcloud", cmd_gcloud},
-    {"terraform", cmd_terraform}, {"ansible", cmd_ansible}, {"puppet", cmd_puppet}, {"chef", cmd_chef},
-    /* Batch 13: Monitor */
-    {"htop", cmd_htop}, {"atop", cmd_atop}, {"glances", cmd_glances}, {"dstat", cmd_dstat},
     {"nethogs", cmd_nethogs}, {"iftop", cmd_iftop}, {"bandwhich", cmd_bandwhich},
-    /* Batch 13: System Info */
     {"fastfetch", cmd_fastfetch}, {"screenfetch", cmd_screenfetch}, {"pfetch", cmd_pfetch},
-    /* Batch 13: Network Advanced */
     {"ip", cmd_ip}, {"ip6", cmd_ip6}, {"brctl", cmd_brctl},
     {"socat", cmd_socat}, {"ncat", cmd_ncat}, {"netcat", cmd_netcat}, {"whois", cmd_whois},
-    /* Batch 14: Security Advanced */
     {"clamav", cmd_clamav}, {"aide", cmd_aide}, {"lynis", cmd_lynis},
-    {"rkhunter", cmd_rkhunter}, {"chkrootkit", cmd_chkrootkit},
     {"ossec", cmd_ossec}, {"suricata", cmd_suricata}, {"snort", cmd_snort},
     {"openvas", cmd_openvas}, {"nessus", cmd_nessus},
     {"hydra", cmd_hydra}, {"john", cmd_john}, {"hashcat", cmd_hashcat},
     {"ettercap", cmd_ettercap}, {"bettercap", cmd_bettercap},
     {"aircrack", cmd_aircrack}, {"wifite", cmd_wifite}, {"setoolkit", cmd_setoolkit},
-    /* Batch 14: Forensics */
     {"autopsy", cmd_autopsy}, {"volatility", cmd_volatility}, {"binwalk", cmd_binwalk}, {"foremost", cmd_foremost},
-    /* Batch 14: Reverse Eng */
-    {"ghidra", cmd_ghidra}, {"radare2", cmd_radare2}, {"ida", cmd_ida},
-    /* Batch 14: Network Tools */
     {"zeek", cmd_zeek}, {"masscan", cmd_masscan}, {"zmap", cmd_zmap},
     {"recon-ng", cmd_recon_ng}, {"amass", cmd_amass}, {"dnsrecon", cmd_dnsrecon},
     {"enum4linux", cmd_enum4linux}, {"smbclient", cmd_smbclient},
-    /* Batch 14: Database Extended */
     {"mariadb", cmd_mariadb}, {"cassandra", cmd_cassandra}, {"elasticsearch", cmd_elasticsearch},
     {"couchdb", cmd_couchdb}, {"influxdb", cmd_influxdb}, {"neo4j", cmd_neo4j},
     {"memcached", cmd_memcached}, {"mongodb", cmd_mongodb},
-    /* Batch 14: Messaging */
     {"rabbitmq", cmd_rabbitmq}, {"kafka", cmd_kafka}, {"nats", cmd_nats}, {"redis-server", cmd_redis_server},
-    /* Batch 14: Web Frameworks */
     {"rails", cmd_rails}, {"django", cmd_django}, {"flask", cmd_flask}, {"laravel", cmd_laravel},
     {"spring", cmd_spring}, {"express", cmd_express}, {"nextjs", cmd_nextjs},
     {"react", cmd_react}, {"vue", cmd_vue}, {"angular", cmd_angular},
-    /* Batch 14: DevOps */
     {"loki", cmd_loki}, {"tempo", cmd_tempo}, {"mimir", cmd_mimir}, {"alertmanager", cmd_alertmanager},
     {"consul", cmd_consul}, {"vault", cmd_vault}, {"nomad", cmd_nomad},
     {"traefik", cmd_traefik}, {"caddy", cmd_caddy}, {"envoy", cmd_envoy},
     {"istio", cmd_istio}, {"linkerd", cmd_linkerd},
-    /* Batch 14: AI/ML */
     {"tensorflow", cmd_tensorflow}, {"pytorch", cmd_pytorch}, {"jupyter", cmd_jupyter},
     {"scipy", cmd_scipy}, {"numpy", cmd_numpy}, {"pandas", cmd_pandas},
-    {"matplotlib", cmd_matplotlib}, {"sklearn", cmd_sklearn}, {"openai", cmd_openai}, {"ollama", cmd_ollama},
-    /* Batch 14: Modern CLI */
     {"tldr", cmd_tldr}, {"exa", cmd_exa}, {"bat", cmd_bat}, {"fzf", cmd_fzf},
     {"rg", cmd_ripgrep}, {"fd", cmd_fd}, {"dust", cmd_dust}, {"duf", cmd_duuf},
     {"httpie", cmd_httpie}, {"yq", cmd_yq}, {"tokei", cmd_tokei}, {"cloc", cmd_cloc},
-    /* Batch 14: Load Testing */
     {"hey", cmd_hey}, {"wrk", cmd_wrk}, {"ab", cmd_ab}, {"vegeta", cmd_vegeta},
     {"k6", cmd_k6}, {"locust", cmd_locust}, {"artillery", cmd_artillery}, {"siege", cmd_siege},
     {"jmeter", cmd_jmeter}, {"gatling", cmd_gatling},
-    /* Batch 15: Network Services */
     {"samba", cmd_samba}, {"nfs", cmd_nfs}, {"vsftpd", cmd_ftp_server},
     {"tftp", cmd_tftp}, {"xinetd", cmd_xinetd}, {"stunnel", cmd_stunnel},
     {"keepalived", cmd_keepalived},
-    /* Batch 15: Mail */
     {"postfix", cmd_postfix}, {"dovecot", cmd_dovecot}, {"spamassassin", cmd_spamassassin},
-    /* Batch 15: Virtualization */
     {"virsh", cmd_virsh}, {"vboxmanage", cmd_vboxmanage}, {"xen", cmd_xen}, {"kvm", cmd_kvm},
     {"lxc", cmd_lxc}, {"proxmox", cmd_proxmox},
-    /* Batch 15: Storage */
     {"ceph", cmd_ceph}, {"minio", cmd_minio}, {"glusterfs", cmd_glusterfs}, {"iscsi", cmd_iscsi},
-    /* Batch 15: Auth */
     {"ldap", cmd_ldap}, {"kerberos", cmd_kerberos}, {"sssd", cmd_sssd}, {"pam", cmd_pam},
-    /* Batch 15: Monitoring */
     {"cacti", cmd_cacti}, {"munin", cmd_munin}, {"icinga", cmd_icinga},
     {"datadog", cmd_datadog}, {"newrelic", cmd_newrelic}, {"sentry", cmd_sentry},
-    /* Batch 15: CI/CD Extended */
     {"drone", cmd_drone}, {"argocd", cmd_argo}, {"flux", cmd_flux}, {"tekton", cmd_tekton},
-    /* Batch 15: Security Extended */
     {"crowdsec", cmd_crowdsec}, {"authelia", cmd_authelia}, {"keycloak", cmd_keycloak}, {"dex", cmd_dex},
-    /* Batch 15: Self-hosted */
     {"gitea", cmd_gitea}, {"gitlab", cmd_gitlab}, {"gogs", cmd_gogs},
     {"nextcloud", cmd_nextcloud}, {"owncloud", cmd_owncloud}, {"seafile", cmd_seafile},
-    /* Batch 15: Analytics */
     {"matomo", cmd_matomo}, {"plausible", cmd_plausible}, {"umami", cmd_umami},
-    /* Batch 15: Observability */
     {"kapacitor", cmd_kapacitor},
-    /* Batch 15: Container Runtime */
     {"cri-o", cmd_cri_o}, {"buildkit", cmd_buildkit},
-    /* Batch 16: Game */
     {"steam", cmd_steam}, {"wine", cmd_wine}, {"proton", cmd_proton}, {"lutris", cmd_lutris},
     {"dosbox", cmd_dosbox}, {"retroarch", cmd_retroarch},
-    /* Batch 16: Graphics */
     {"gimp", cmd_gimp}, {"inkscape", cmd_inkscape}, {"blender", cmd_blender},
     {"imagemagick", cmd_imagemagick}, {"darktable", cmd_darktable}, {"krita", cmd_krita}, {"scribus", cmd_scribus},
-    /* Batch 16: Office */
     {"libreoffice", cmd_libreoffice}, {"pandoc", cmd_pandoc}, {"tesseract", cmd_tesseract},
     {"poppler", cmd_poppler}, {"ghostscript", cmd_ghostscript}, {"wkhtmltopdf", cmd_wkhtmltopdf},
-    /* Batch 16: Communication */
     {"element", cmd_element}, {"signal", cmd_signal}, {"discord", cmd_discord},
     {"slack", cmd_slack}, {"teams", cmd_teams}, {"zoom", cmd_zoom},
     {"mattermost", cmd_mattermost}, {"rocketchat", cmd_rocket_chat}, {"zulip", cmd_zulip},
-    /* Batch 16: VPN */
-    {"wireguard", cmd_wireguard}, {"ipsec", cmd_ipsec}, {"shadowsocks", cmd_shadowsocks},
     {"v2ray", cmd_v2ray}, {"xray", cmd_xray}, {"trojan", cmd_trojan}, {"hysteria", cmd_hysteria},
-    /* Batch 16: DNS Extended */
     {"powerdns", cmd_powerdns}, {"coredns", cmd_coredns}, {"pihole", cmd_pihole}, {"blocky", cmd_blocky},
-    /* Batch 16: IoT */
     {"mosquitto", cmd_mosquitto}, {"emqx", cmd_emqx},
     {"homeassistant", cmd_homeassistant}, {"node-red", cmd_node_red},
-    /* Batch 16: Database Extended */
     {"timescaledb", cmd_timescaledb}, {"cockroachdb", cmd_cockroachdb},
     {"supabase", cmd_supabase}, {"appwrite", cmd_appwrite}, {"pocketbase", cmd_pocketbase},
-    /* Batch 16: Filesystem */
     {"openzfs", cmd_openzfs}, {"btrfs", cmd_btrfs}, {"zfs", cmd_zfs}, {"xfs", cmd_xfs},
-    /* Batch 16: Boot */
     {"grub", cmd_grub}, {"systemd-boot", cmd_systemd_boot}, {"refind", cmd_refind}, {"limine", cmd_limine},
     {"dracut", cmd_dracut}, {"mkinitcpio", cmd_mkinitcpio},
-    /* Batch 16: Benchmark */
     {"memtest86", cmd_memtest86}, {"stress", cmd_stress}, {"sysbench", cmd_sysbench},
     {"fio", cmd_fio}, {"iozone", cmd_iozone},
-    /* Batch 16: Hardware */
     {"hdparm", cmd_hdparm}, {"smartctl", cmd_smartctl}, {"nvme", cmd_nvme},
     {"dmidecode", cmd_dmidecode}, {"ipmitool", cmd_ipmitool},
-    /* Batch 16: Routing */
     {"lldpd", cmd_lldpd}, {"bird", cmd_bird}, {"frr", cmd_frrouting}, {"quagga", cmd_quagga},
-    /* Batch 17: Service Mesh */
     {"istioctl", cmd_istioctl}, {"kuma", cmd_kuma},
-    /* Batch 17: API Gateway */
     {"kong", cmd_kong}, {"apisix", cmd_apisix}, {"tyk", cmd_tyk},
-    /* Batch 17: Serverless */
     {"openfaas", cmd_openfaas}, {"knative", cmd_knative}, {"fission", cmd_fission},
-    /* Batch 17: PostgreSQL HA */
     {"citus", cmd_citus}, {"vitess", cmd_vitess}, {"patroni", cmd_patroni},
     {"pgbouncer", cmd_pgbouncer}, {"repmgr", cmd_repmgr},
     {"barman", cmd_barman}, {"pgbackrest", cmd_pgbackrest},
-    /* Batch 17: Data Pipeline */
     {"airflow", cmd_airflow}, {"dagster", cmd_dagster}, {"dbt", cmd_dbt},
     {"spark", cmd_spark}, {"flink", cmd_flink},
-    /* Batch 17: Service Discovery */
     {"etcd", cmd_etcd}, {"zookeeper", cmd_zookeeper}, {"nacos", cmd_nacos},
-    /* Batch 17: Cache */
     {"hazelcast", cmd_hazelcast}, {"keydb", cmd_keydb}, {"dragonfly", cmd_dragonfly},
-    /* Batch 17: Monitoring Extended */
     {"thanos", cmd_thanos}, {"victoriametrics", cmd_victoriametrics},
     {"netdata", cmd_netdata}, {"uptime-kuma", cmd_uptimekuma},
-    /* Batch 17: Security */
     {"trivy", cmd_trivy}, {"grype", cmd_grype}, {"syft", cmd_syft}, {"cosign", cmd_cosign},
     {"sonarqube", cmd_sonarqube}, {"watchtower", cmd_watchtower}, {"renovate", cmd_renovate},
-    /* Batch 17: Browser */
     {"brave-browser", cmd_brave_browser}, {"tor", cmd_tor},
-    /* Batch 17: P2P */
     {"ipfs", cmd_ipfs}, {"i2p", cmd_i2p},
-    /* Batch 17: Matrix */
     {"synapse", cmd_synapse}, {"dendrite", cmd_dendrite},
     {"mautrix-telegram", cmd_mautrix_tg}, {"mautrix-whatsapp", cmd_mautrix_wa},
     {"mautrix-discord", cmd_mautrix_dc}, {"mautrix-signal", cmd_mautrix_sig},
-    /* Batch 17: Messaging Extended */
-    /* Batch 17: Observability */
-    /* Batch 17: Container Runtime */
-    /* Batch 18: Streaming */
     {"jellyfin", cmd_jellyfin}, {"plex", cmd_plex}, {"emby", cmd_emby}, {"kodi", cmd_kodi},
     {"navidrome", cmd_navidrome}, {"peertube", cmd_peertube}, {"invidious", cmd_invidious},
     {"mastodon", cmd_mastodon}, {"misskey", cmd_misskey}, {"lemmy", cmd_lemmy}, {"pixelfed", cmd_pixelfed},
-    /* Batch 18: CRM/ERP */
     {"odoo", cmd_odoo}, {"dolibarr", cmd_dolibarr}, {"erpnext", cmd_erpnext}, {"suitecrm", cmd_suitecrm},
-    /* Batch 18: Wiki/CMS */
     {"mediawiki", cmd_mediawiki}, {"dokuwiki", cmd_dokuwiki}, {"bookstack", cmd_bookstack}, {"outline", cmd_outline},
     {"wordpress", cmd_wordpress}, {"drupal", cmd_drupal}, {"joomla", cmd_joomla},
     {"hugo", cmd_hugo}, {"jekyll", cmd_jekyll}, {"11ty", cmd_eleventy},
-    /* Batch 18: E-commerce */
     {"woocommerce", cmd_woocommerce}, {"opencart", cmd_opencart}, {"magento", cmd_magento},
     {"prestashop", cmd_prestashop}, {"medusa", cmd_medusa}, {"saleor", cmd_saleor},
-    /* Batch 18: Project Mgmt */
     {"redmine", cmd_redmine}, {"taiga", cmd_taiga}, {"openproject", cmd_openproject}, {"plane", cmd_plane},
-    /* Batch 18: Forms */
     {"formbricks", cmd_formbricks}, {"limesurvey", cmd_limesurvey},
-    /* Batch 18: Automation */
     {"n8n", cmd_n8n}, {"huginn", cmd_huginn}, {"automatisch", cmd_automatisch},
     {"activepieces", cmd_activepieces}, {"windmill", cmd_windmill},
-    /* Batch 18: AI/ML Extra */
     {"open-webui", cmd_openwebui}, {"localai", cmd_localai}, {"llama-cpp", cmd_llamacpp},
     {"whisper", cmd_whisper}, {"stable-diffusion", cmd_stable_diffusion}, {"comfyui", cmd_comfyui},
-    /* Batch 18: Photo */
     {"immich", cmd_immich}, {"photoprism", cmd_photoprism}, {"lychee", cmd_lychee}, {"piwigo", cmd_piwigo},
-    /* Batch 18: Maps */
     {"nominatim", cmd_nomatin}, {"graphhopper", cmd_graphhopper}, {"valhalla", cmd_valhalla}, {"pelias", cmd_pelias},
-    /* Batch 18: DB Extra */
     {"questdb", cmd_questdb}, {"tdengine", cmd_tdengine}, {"dgraph", cmd_dgraph},
     {"arangodb", cmd_arangodb}, {"surrealdb", cmd_surrealdb}, {"edgedb", cmd_edgeDB},
-    /* Batch 18: Backup Extra */
     {"kopia", cmd_kopia}, {"urbackup", cmd_urbackup}, {"backuppc", cmd_backuppc},
-    /* Batch 18: Monitoring Extra */
     {"falco", cmd_falco}, {"sysdig", cmd_sysdig}, {"k9s", cmd_k9s},
     {"kubectx", cmd_kubectx}, {"kubens", cmd_kubens}, {"kustomize", cmd_kustomize}, {"helmfile", cmd_helmfile},
-    /* Batch 18: Git Extra */
     {"lazygit", cmd_lazygit}, {"delta", cmd_delta}, {"difftastic", cmd_difftastic}, {"typos", cmd_typos},
-    /* Batch 18: Dev Tools Extra */
     {"just", cmd_just}, {"mise", cmd_mise}, {"asdf", cmd_asdf},
     {"nvm", cmd_nvm}, {"pyenv", cmd_pyenv}, {"rbenv", cmd_rbenv}, {"goenv", cmd_goenv},
     {"starship", cmd_starship}, {"atuin", cmd_atuin}, {"zoxide", cmd_zoxide},
     {"ranger", cmd_ranger}, {"mc", cmd_mc}, {"nnn", cmd_nnn}, {"yazi", cmd_yazi}, {"lf", cmd_lf},
-    /* Batch 19: Shell Advanced */
     {"source", cmd_source}, {"eval", cmd_eval}, {"set", cmd_set_cmd}, {"shopt", cmd_shopt},
     {"declare", cmd_declare}, {"typeset", cmd_typeset}, {"local", cmd_local},
     {"return", cmd_return_cmd}, {"exit", cmd_exit_cmd}, {"exec", cmd_exec_cmd},
     {"sleep", cmd_sleep}, {"yes", cmd_yes}, {"seq", cmd_seq_cmd}, {"shuf", cmd_shuf},
-    {"comm", cmd_comm}, {"diff", cmd_diff}, {"colordiff", cmd_colordiff}, {"vimdiff", cmd_vimdiff},
     {"xxd", xxd_cmd}, {"od", cmd_od}, {"base32", cmd_base32}, {"basenc", cmd_basenc},
     {"mkfifo", cmd_mkfifo}, {"trap", cmd_trap}, {"select", cmd_select},
     {"complete", cmd_complete}, {"compgen", cmd_compgen}, {"compopt", cmd_compopt},
     {"enable", cmd_enable}, {"builtin", cmd_builtin}, {"command", cmd_command},
     {"type", cmd_type_cmd}, {"hash", cmd_hash_cmd}, {"help", cmd_help_cmd}, {"man", cmd_man_cmd},
-    /* Batch 19: System Advanced */
     {"nsenter", cmd_nsenter}, {"unshare", cmd_unshare}, {"capsh", cmd_capsh},
     {"setpriv", cmd_setpriv}, {"runuser", cmd_runuser}, {"runcon", cmd_runcon},
     {"cgroups", cmd_cgroup}, {"thermald", cmd_thermald}, {"irqbalance", cmd_irqbalance},
-    /* Batch 19: Security Advanced */
     {"apparmor", cmd_apparmor}, {"selinux", cmd_selinux}, {"seccomp", cmd_seccomp},
     {"keyctl", cmd_keyctl}, {"tpm2", cmd_tpm2}, {"ima", cmd_ima},
-    /* Batch 20: Container Deep */
     {"docker-push", cmd_dockerpush}, {"docker-pull", cmd_dockerpull},
     {"docker-exec", cmd_dockerexec}, {"docker-logs", cmd_dockerlogs},
     {"docker-inspect", cmd_dockerinspect}, {"docker-stats", cmd_dockerstats},
     {"docker-system", cmd_dockersystem}, {"buildx", cmd_docker_buildx},
-    /* Batch 20: Kubernetes Deep */
     {"kubelet", cmd_kubelet}, {"kube-proxy", cmd_kube_proxy},
     {"kube-apiserver", cmd_kube_apiserver}, {"kube-scheduler", cmd_kube_scheduler},
     {"etcdctl", cmd_etcdctl}, {"kubeadm", cmd_kubeadm},
     {"k3s", cmd_k3s}, {"k3sup", cmd_k3sup}, {"k0s", cmd_k0s},
-    /* Batch 20: Git Deep */
     {"git-lfs", cmd_git_lfs}, {"git-crypt", cmd_git_crypt_fn},
     {"git-filter-branch", cmd_git_filter_fn}, {"git-worktree", cmd_git_worktree},
     {"git-subtree", cmd_git_subtree_fn}, {"git-bisect", cmd_git_bisect},
@@ -6953,135 +6789,92 @@ static const cmd_entry commands[] = {
     {"git-stash", cmd_git_stash}, {"git-submodule", cmd_git_submodule_fn},
     {"git-svn", cmd_git_svn}, {"git-switch", cmd_git_switch},
     {"git-tag", cmd_git_tag_fn}, {"git-verify", cmd_git_verify},
-    /* Batch 20: Networking Deep */
     {"bgp", cmd_bgp}, {"ospf", cmd_ospf}, {"isis", cmd_isis},
     {"vrrp", cmd_vrrp}, {"hsrp", cmd_hsrp}, {"stp", cmd_stp},
     {"lacp", cmd_lacp}, {"mlag", cmd_mlag}, {"evpn", cmd_evpn},
     {"vxlan", cmd_vxlan}, {"geneve", cmd_geneve}, {"mpls", cmd_mpls},
     {"sdn", cmd_sdn}, {"openflow", cmd_openflow}, {"p4", cmd_p4},
     {"crane", cmd_crane}, {"oras", cmd_oras}, {"dive", cmd_dive}, {"dockle", cmd_dockle},
-    /* Batch 21: System Monitoring */
     {"dmesg", cmd_dmesg}, {"vmstat", cmd_vmstat}, {"iostat", cmd_iostat},
     {"sar", cmd_sar}, {"mpstat", cmd_mpstat}, {"slabtop", cmd_slabtop},
-    /* Batch 21: Network Debugging */
     {"tcpdump", cmd_tcpdump_fn}, {"nc", cmd_nc}, {"socat", cmd_socat},
     {"dig", cmd_dig_fn}, {"host", cmd_host_fn}, {"nslookup", cmd_nslookup_fn},
-    /* Batch 21: Text Processing */
-    {"column", cmd_column_fn}, {"tr", cmd_tr_fn}, {"nl", cmd_nl_fn},
-    /* Batch 21: System Tools */
-    {"free", cmd_free_fn}, {"lsof", cmd_lsof_fn},
-    {"mount", cmd_mount_fn}, {"umount", cmd_umount_fn}, {"lsblk", cmd_lsblk_fn},
-    /* Batch 21: Package Management */
-    {"apt", cmd_apt_fn}, {"dpkg", cmd_dpkg_fn}, {"rpm", cmd_rpm_fn},
     {"yum", cmd_yum_fn}, {"dnf", cmd_dnf_fn},
-    /* Batch 21: Container Orchestration */
     {"compose", cmd_compose_fn}, {"swarm", cmd_swarm_fn},
-    /* Batch 21: Cloud */
     {"eksctl", cmd_eksctl_fn}, {"aks", cmd_aks_fn}, {"gke", cmd_gke_fn},
-    /* Batch 21: Security */
     {"lynis", cmd_lynis_fn}, {"clamav", cmd_clamav_fn},
     {"rkhunter", cmd_rkhunter_fn}, {"aide", cmd_aide_fn},
-    /* Batch 21: Database */
     {"pg_dump", cmd_pg_dump_fn}, {"pg_restore", cmd_pg_restore_fn},
     {"redis-cli", cmd_redis_cli_fn}, {"psql", cmd_psql_fn},
-    /* Batch 21: Dev Tools */
     {"cmake", cmd_cmake_fn}, {"ninja", cmd_ninja_fn}, {"meson", cmd_meson_fn},
     {"valgrind", cmd_valgrind_fn}, {"perf", cmd_perf_fn},
-    {"strace", cmd_strace_fn}, {"ltrace", cmd_ltrace_fn},
-    /* Batch 21: System Info */
     {"lscpu", cmd_lscpu_fn}, {"lspci", cmd_lspci_fn},
     {"lsusb", cmd_lsusb_fn}, {"lshw", cmd_lshw_fn},
-    /* Batch 22: IoT */
     {"mqtt", cmd_mqtt}, {"coap", cmd_coap}, {"zigbee", cmd_zigbee},
     {"lora", cmd_lora}, {"esptool", cmd_esp_tool}, {"platformio", cmd_platformio},
-    /* Batch 22: Blockchain/Web3 */
     {"geth", cmd_geth}, {"solc", cmd_solidity}, {"hardhat", cmd_hardhat},
     {"forge", cmd_foundry}, {"truffle", cmd_truffle}, {"ipfs", cmd_ipfs}, 
-    /* Batch 22: Scientific Computing */
     {"R", cmd_r_fn}, {"octave", cmd_octave}, {"scipy", cmd_scipy},
     {"numpy", cmd_numpy}, {"jupyter", cmd_jupyter}, {"pandas", cmd_pandas},
     {"matplotlib", cmd_matplotlib},
-    /* Batch 22: Hardware */
     {"gpio", cmd_gpio}, {"i2c", cmd_i2c}, {"spi", cmd_spi},
     {"uart", cmd_uart}, {"udev", cmd_udev}, {"modprobe", cmd_modprobe}, {"lsmod", cmd_lsmod},
-    /* Batch 22: Game Dev */
      {"unity", cmd_unity_fn}, {"unreal", cmd_unreal},
     {"blender", cmd_blender}, {"gimp", cmd_gimp}, {"inkscape", cmd_inkscape},
-    /* Batch 22: Real-time */
     {"xenomai", cmd_xenomai}, {"rt-preempt", cmd_rt_preempt},
     {"freertos", cmd_freertos}, {"zephyr", cmd_zephyr},
-    /* Batch 22: Networking */
     {"wireguard", cmd_wireguard}, {"openvpn", cmd_openvpn}, {"tailscale", cmd_tailscale},
-    {"caddy", cmd_caddy},
-    /* Batch 23: Security Advanced */
     {"nikto", cmd_nikto}, {"sqlmap", cmd_sqlmap}, {"msfconsole", cmd_metasploit},
     {"burpsuite", cmd_burpsuite}, {"zap", cmd_owasp_zap},
     {"volatility", cmd_volatility}, {"autopsy", cmd_autopsy},
     {"ghidra", cmd_ghidra}, {"r2", cmd_radare2},
-    /* Batch 23: Web Servers */
-    {"nginx", cmd_nginx_fn}, {"apache", cmd_apache_fn}, {"haproxy", cmd_haproxy_fn},
     {"squid", cmd_squid_fn}, {"dnsmasq", cmd_dnsmasq}, {"named", cmd_bind_fn},
     {"vsftpd", cmd_vsftpd}, {"dovecot", cmd_dovecot}, {"postfix", cmd_postfix_fn},
-    /* Batch 23: System Advanced */
-    {"ulimit", cmd_ulimit}, {"nice", cmd_nice_fn}, {"taskset", cmd_taskset},
     {"chrt", cmd_chrt}, {"stap", cmd_stap}, {"dtrace", cmd_dtrace_fn},
-    /* Batch 23: Languages */
     {"rustc", cmd_rustc}, {"cargo", cmd_cargo}, {"dart", cmd_dart},
     {"kotlin", cmd_kotlin}, {"scala", cmd_scala}, {"ghc", cmd_haskell},
     {"elixir", cmd_elixir}, {"lua", cmd_lua_fn},
-    /* Batch 23: Editors & Tools */
     {"vim", cmd_vim_fn}, {"nano", cmd_nano_fn}, {"emacs", cmd_emacs},
     {"tmux", cmd_tmux}, {"screen", cmd_screen_fn},
     {"mc", cmd_midnight}, {"ranger", cmd_ranger},
     {"mutt", cmd_mutt}, {"lynx", cmd_lynx},
-    /* Batch 24: CI/CD */
     {"jenkins", cmd_jenkins_fn},
     {"flux", cmd_flux_fn2},
-    /* Batch 24: Containers */
     {"podman", cmd_podman_fn},
     {"buildah", cmd_buildah},
     {"skopeo", cmd_skopeo},
     {"containerd", cmd_containerd_fn},
-    /* Batch 24: Monitoring */
     {"prometheus", cmd_prometheus_fn},
     {"grafana", cmd_grafana_fn},
     {"zabbix", cmd_zabbix_fn},
     {"nagios", cmd_nagios_fn},
-    /* Batch 24: Database */
     {"clickhouse", cmd_clickhouse},
     {"cassandra", cmd_cassandra_fn},
-    /* Batch 24: Cloud */
     {"docker", cmd_docker_fn},
     {"kubectl", cmd_kubectl_fn},
     {"helm", cmd_helm_fn},
     {"terraform", cmd_terraform_fn},
     {"ansible", cmd_ansible_fn},
     {"saltstack", cmd_saltstack},
-    /* Batch 24: System Monitor */
     {"htop", cmd_htop_fn},
     {"btop", cmd_btop},
     {"iptraf", cmd_iptraf},
     {"ethstatus", cmd_ethstatus},
-    /* Batch 25: Security */
     {"fail2ban", cmd_fail2ban},
     {"yara", cmd_yara},
-    /* Batch 25: Network */
     {"nftables", cmd_nftables},
     {"ipset", cmd_ipset},
     {"conntrack", cmd_conntrack},
-    /* Batch 25: System */
     {"cgroup2", cmd_cgroup2},
     {"seccomp2", cmd_seccomp2},
     {"auditd", cmd_auditd},
     {"syslog", cmd_syslog},
-    /* Batch 25: Dev */
     {"llvm", cmd_llvm},
     {"clang", cmd_clang},
     {"lld", cmd_lld},
     {"gdbserver", cmd_gdb_server},
     {"lldb", cmd_lldb},
     {"cscope", cmd_cscope},
-        /* Batch 26: Real Functional Commands */
     {"seq", cmd_seq_real}, {"seq-w", cmd_seq_w}, {"seq-r", cmd_seq_r},
     {"nl", cmd_nl_real}, {"nl-all", cmd_nl_all}, {"nl-step", cmd_nl_step}, {"nl-w", cmd_nl_width},
     {"column", cmd_column_real}, {"column-t", cmd_column_t}, {"column-s", cmd_column_s},
@@ -7097,7 +6890,6 @@ static const cmd_entry commands[] = {
     {"bg", cmd_bg_real}, {"fg", cmd_fg_real}, {"jobs", cmd_jobs_real},
     {"xargs", cmd_xargs_real}, {"nice", cmd_nice_real}, {"renice", cmd_renice_real},
     {"timeout", cmd_timeout_real}, {"nohup", cmd_nohup_real},
-        /* Batch 27: Dev + Debug + Monitor */
     {"readelf", cmd_readelf_real}, {"nm", cmd_nm_real}, {"objdump", cmd_objdump_real},
     {"ld", cmd_ld_real}, {"ranlib", cmd_ranlib_real}, {"ldconfig", cmd_ldconfig_real},
     {"pstree", cmd_pstree_real}, {"pgrep", cmd_pgrep_real}, {"pkill", cmd_pkill_real},
@@ -7112,9 +6904,8 @@ static const cmd_entry commands[] = {
     {"caddy", cmd_caddy_fn2},
     {"rsync", cmd_rsync_fn}, {"scp", cmd_scp_fn},
     {"ctags", cmd_ctags},
-    /* Batch 25: Tools */
-    {0, 0}
 };
+
 
 static char redirect_file[128];
 static int redirect_append = 0;
