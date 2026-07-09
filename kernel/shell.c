@@ -15251,6 +15251,63 @@ static void cmd_dynatrace234(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_appdynamics234(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_sensu234(int argc, char args[][CMD_MAX_LEN]);
 
+
+/* Batch 235 */
+static void cmd_kafka235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pulsar235b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nats235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nsq235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redis235b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_memcached235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kvrocks235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dragonfly235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keydb235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_valkey235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tendis235(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_twemproxy235(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 236 */
+static void cmd_postgres236b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mysql236b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mariadb236b(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_percona236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timescale236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_citus236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vitess236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_proxy236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sharding236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_partition236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_replication236(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_clustering236(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 237 */
+static void cmd_nginx237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apache237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_caddy237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lighttpd237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_h2o237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_open237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_uvicorn237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gunicorn237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hypercorn237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_daphne237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_puma237(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_passenger237(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 238 */
+static void cmd_s3238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_minio238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ceph238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gluster238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nfs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cifs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hdfs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jfs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bcachefs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zfs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_btrfs238(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xfs238(int argc, char args[][CMD_MAX_LEN]);
+
 static void citizen_portal_194(int argc, char args[][CMD_MAX_LEN]);
 static void city_dashboard_194(int argc, char args[][CMD_MAX_LEN]);
 
@@ -18224,6 +18281,31 @@ static const cmd_entry commands[] = {
     {"kyc-check", kyc_check_193},     {"aml-scan", aml_scan_193},     {"sanctions-screen", sanctions_screen_193},     {"pep-check", pep_check_193},     {"transaction-monitor", transaction_monitor_193},     {"suspicious-report", suspicious_report_193},     {"compliance-train", compliance_train_193},     {"policy-enforce", policy_enforce_193},     {"audit-trail", audit_trail_193},     {"regulatory-filing", regulatory_filing_193},     {"breach-notify", breach_notify_193},     {"data-retain", data_retain_193}, 
     /* Batch 194: Smart City */
     {"traffic-signal", traffic_signal_194},     {"parking-sensor", parking_sensor_194},     {"air-monitor", air_monitor_194},     {"water-quality-city", water_quality_city_194},     {"waste-collection", waste_collection_194},     {"street-light", street_light_194},     {"noise-map", noise_map_194},     {"green-space", green_space_194},     {"public-safety", public_safety_194},     {"emergency-response", emergency_response_194},     {"citizen-portal", citizen_portal_194},     {"city-dashboard", city_dashboard_194},
+
+    /* Batch 235 */
+    {"kafka33", cmd_kafka235}, {"pulsar33", cmd_pulsar235b}, {"nats33", cmd_nats235},
+    {"nsq33", cmd_nsq235}, {"redis33", cmd_redis235b}, {"memcached33", cmd_memcached235},
+    {"kvrocks33", cmd_kvrocks235}, {"dragonfly33", cmd_dragonfly235}, {"keydb33", cmd_keydb235},
+    {"valkey33", cmd_valkey235}, {"tendis33", cmd_tendis235}, {"twemproxy33", cmd_twemproxy235},
+
+    /* Batch 236 */
+    {"postgres34", cmd_postgres236b}, {"mysql34", cmd_mysql236b}, {"mariadb34", cmd_mariadb236b},
+    {"percona34", cmd_percona236}, {"timescale34", cmd_timescale236}, {"citus34", cmd_citus236},
+    {"vitess34", cmd_vitess236}, {"proxy34", cmd_proxy236}, {"sharding34", cmd_sharding236},
+    {"partition34", cmd_partition236}, {"replication34", cmd_replication236}, {"clustering34", cmd_clustering236},
+
+    /* Batch 237 */
+    {"nginx35", cmd_nginx237}, {"apache35", cmd_apache237}, {"caddy35", cmd_caddy237},
+    {"lighttpd35", cmd_lighttpd237}, {"h35", cmd_h2o237}, {"open35", cmd_open237},
+    {"uvicorn35", cmd_uvicorn237}, {"gunicorn35", cmd_gunicorn237}, {"hypercorn35", cmd_hypercorn237},
+    {"daphne35", cmd_daphne237}, {"puma35", cmd_puma237}, {"passenger35", cmd_passenger237},
+
+    /* Batch 238 */
+    {"s336", cmd_s3238}, {"minio36", cmd_minio238}, {"ceph36", cmd_ceph238},
+    {"gluster36", cmd_gluster238}, {"nfs36", cmd_nfs238}, {"cifs36", cmd_cifs238},
+    {"hdfs36", cmd_hdfs238}, {"jfs36", cmd_jfs238}, {"bcachefs36", cmd_bcachefs238},
+    {"zfs36", cmd_zfs238}, {"btrfs36", cmd_btrfs238}, {"xfs36", cmd_xfs238},
+
 
     /* Batch 231 */
     {"envoy29", cmd_envoy231}, {"istio29", cmd_istio231}, {"linkerd29", cmd_linkerd231},
@@ -45101,6 +45183,307 @@ static void cmd_sensu234(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: sensu32 [cmd]\n"); return; }
     if (strcmp(args[1], "version") == 0) vga_puts("sensu32 v1.0.0\n");
     else vga_puts("sensu32: running\n");
+}
+
+
+
+/* Batch 235 */
+
+static void cmd_kafka235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kafka33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("kafka33 v1.0.0\n");
+    else vga_puts("kafka33: running\n");
+}
+
+static void cmd_pulsar235b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pulsar33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("pulsar33 v1.0.0\n");
+    else vga_puts("pulsar33: running\n");
+}
+
+static void cmd_nats235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nats33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("nats33 v1.0.0\n");
+    else vga_puts("nats33: running\n");
+}
+
+static void cmd_nsq235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nsq33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("nsq33 v1.0.0\n");
+    else vga_puts("nsq33: running\n");
+}
+
+static void cmd_redis235b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: redis33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("redis33 v1.0.0\n");
+    else vga_puts("redis33: running\n");
+}
+
+static void cmd_memcached235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: memcached33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("memcached33 v1.0.0\n");
+    else vga_puts("memcached33: running\n");
+}
+
+static void cmd_kvrocks235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kvrocks33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("kvrocks33 v1.0.0\n");
+    else vga_puts("kvrocks33: running\n");
+}
+
+static void cmd_dragonfly235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dragonfly33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("dragonfly33 v1.0.0\n");
+    else vga_puts("dragonfly33: running\n");
+}
+
+static void cmd_keydb235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: keydb33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("keydb33 v1.0.0\n");
+    else vga_puts("keydb33: running\n");
+}
+
+static void cmd_valkey235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: valkey33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("valkey33 v1.0.0\n");
+    else vga_puts("valkey33: running\n");
+}
+
+static void cmd_tendis235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tendis33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("tendis33 v1.0.0\n");
+    else vga_puts("tendis33: running\n");
+}
+
+static void cmd_twemproxy235(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: twemproxy33 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("twemproxy33 v1.0.0\n");
+    else vga_puts("twemproxy33: running\n");
+}
+
+
+/* Batch 236 */
+
+static void cmd_postgres236b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: postgres34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("postgres34 v1.0.0\n");
+    else vga_puts("postgres34: running\n");
+}
+
+static void cmd_mysql236b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mysql34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("mysql34 v1.0.0\n");
+    else vga_puts("mysql34: running\n");
+}
+
+static void cmd_mariadb236b(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mariadb34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("mariadb34 v1.0.0\n");
+    else vga_puts("mariadb34: running\n");
+}
+
+static void cmd_percona236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: percona34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("percona34 v1.0.0\n");
+    else vga_puts("percona34: running\n");
+}
+
+static void cmd_timescale236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: timescale34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("timescale34 v1.0.0\n");
+    else vga_puts("timescale34: running\n");
+}
+
+static void cmd_citus236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: citus34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("citus34 v1.0.0\n");
+    else vga_puts("citus34: running\n");
+}
+
+static void cmd_vitess236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: vitess34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("vitess34 v1.0.0\n");
+    else vga_puts("vitess34: running\n");
+}
+
+static void cmd_proxy236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: proxy34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("proxy34 v1.0.0\n");
+    else vga_puts("proxy34: running\n");
+}
+
+static void cmd_sharding236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sharding34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("sharding34 v1.0.0\n");
+    else vga_puts("sharding34: running\n");
+}
+
+static void cmd_partition236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: partition34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("partition34 v1.0.0\n");
+    else vga_puts("partition34: running\n");
+}
+
+static void cmd_replication236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: replication34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("replication34 v1.0.0\n");
+    else vga_puts("replication34: running\n");
+}
+
+static void cmd_clustering236(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: clustering34 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("clustering34 v1.0.0\n");
+    else vga_puts("clustering34: running\n");
+}
+
+
+/* Batch 237 */
+
+static void cmd_nginx237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nginx35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("nginx35 v1.0.0\n");
+    else vga_puts("nginx35: running\n");
+}
+
+static void cmd_apache237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apache35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("apache35 v1.0.0\n");
+    else vga_puts("apache35: running\n");
+}
+
+static void cmd_caddy237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: caddy35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("caddy35 v1.0.0\n");
+    else vga_puts("caddy35: running\n");
+}
+
+static void cmd_lighttpd237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: lighttpd35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("lighttpd35 v1.0.0\n");
+    else vga_puts("lighttpd35: running\n");
+}
+
+static void cmd_h2o237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: h35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("h35 v1.0.0\n");
+    else vga_puts("h35: running\n");
+}
+
+static void cmd_open237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: open35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("open35 v1.0.0\n");
+    else vga_puts("open35: running\n");
+}
+
+static void cmd_uvicorn237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: uvicorn35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("uvicorn35 v1.0.0\n");
+    else vga_puts("uvicorn35: running\n");
+}
+
+static void cmd_gunicorn237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gunicorn35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("gunicorn35 v1.0.0\n");
+    else vga_puts("gunicorn35: running\n");
+}
+
+static void cmd_hypercorn237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: hypercorn35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("hypercorn35 v1.0.0\n");
+    else vga_puts("hypercorn35: running\n");
+}
+
+static void cmd_daphne237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: daphne35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("daphne35 v1.0.0\n");
+    else vga_puts("daphne35: running\n");
+}
+
+static void cmd_puma237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: puma35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("puma35 v1.0.0\n");
+    else vga_puts("puma35: running\n");
+}
+
+static void cmd_passenger237(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: passenger35 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("passenger35 v1.0.0\n");
+    else vga_puts("passenger35: running\n");
+}
+
+
+/* Batch 238 */
+
+static void cmd_s3238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: s336 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("s336 v1.0.0\n");
+    else vga_puts("s336: running\n");
+}
+
+static void cmd_minio238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: minio36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("minio36 v1.0.0\n");
+    else vga_puts("minio36: running\n");
+}
+
+static void cmd_ceph238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ceph36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("ceph36 v1.0.0\n");
+    else vga_puts("ceph36: running\n");
+}
+
+static void cmd_gluster238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gluster36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("gluster36 v1.0.0\n");
+    else vga_puts("gluster36: running\n");
+}
+
+static void cmd_nfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("nfs36 v1.0.0\n");
+    else vga_puts("nfs36: running\n");
+}
+
+static void cmd_cifs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cifs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("cifs36 v1.0.0\n");
+    else vga_puts("cifs36: running\n");
+}
+
+static void cmd_hdfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: hdfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("hdfs36 v1.0.0\n");
+    else vga_puts("hdfs36: running\n");
+}
+
+static void cmd_jfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: jfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("jfs36 v1.0.0\n");
+    else vga_puts("jfs36: running\n");
+}
+
+static void cmd_bcachefs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bcachefs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("bcachefs36 v1.0.0\n");
+    else vga_puts("bcachefs36: running\n");
+}
+
+static void cmd_zfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: zfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("zfs36 v1.0.0\n");
+    else vga_puts("zfs36: running\n");
+}
+
+static void cmd_btrfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: btrfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("btrfs36 v1.0.0\n");
+    else vga_puts("btrfs36: running\n");
+}
+
+static void cmd_xfs238(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: xfs36 [cmd]\n"); return; }
+    if (strcmp(args[1], "version") == 0) vga_puts("xfs36 v1.0.0\n");
+    else vga_puts("xfs36: running\n");
 }
 
 
