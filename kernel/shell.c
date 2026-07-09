@@ -14023,6 +14023,48 @@ static void spreadsheet_calc_143(int argc, char args[][CMD_MAX_LEN]);
 static void chart_create_143(int argc, char args[][CMD_MAX_LEN]);
 static void slide_build_143(int argc, char args[][CMD_MAX_LEN]);
 static void barcode_gen_143(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 144: Cloud Infrastructure */
+static void k8s_deploy_144(int argc, char args[][CMD_MAX_LEN]);
+static void k8s_scale_144(int argc, char args[][CMD_MAX_LEN]);
+static void k8s_rollout_144(int argc, char args[][CMD_MAX_LEN]);
+static void k8s_logs_144(int argc, char args[][CMD_MAX_LEN]);
+static void helm_install_144(int argc, char args[][CMD_MAX_LEN]);
+static void helm_upgrade_144(int argc, char args[][CMD_MAX_LEN]);
+static void istio_mesh_144(int argc, char args[][CMD_MAX_LEN]);
+static void cert_manager_144(int argc, char args[][CMD_MAX_LEN]);
+static void argocd_sync_144(int argc, char args[][CMD_MAX_LEN]);
+static void tekton_run_144(int argc, char args[][CMD_MAX_LEN]);
+static void crossplane_provision_144(int argc, char args[][CMD_MAX_LEN]);
+static void external_dns_144(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 145: Simulation + Modeling */
+static void sim_fluid_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_structural_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_thermal_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_electromagnetic_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_traffic_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_ecosystem_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_economic_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_epidemic_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_climate_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_urban_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_supply_chain_145(int argc, char args[][CMD_MAX_LEN]);
+static void sim_wargame_145(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 146: Image Processing */
+static void img_resize_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_crop_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_filter_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_enhance_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_segment_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_recognize_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_generate_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_compress_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_convert_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_watermark_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_color_grade_146(int argc, char args[][CMD_MAX_LEN]);
+static void img_stitch_146(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -16874,7 +16916,14 @@ static const cmd_entry commands[] = {
     /* Batch 142: Database Operations */
     {"db-connect", db_connect_142},     {"db-query", db_query_142},     {"db-insert", db_insert_142},     {"db-update", db_update_142},     {"db-delete", db_delete_142},     {"db-backup", db_backup_142},     {"db-restore", db_restore_142},     {"db-migrate", db_migrate_142},     {"db-optimize", db_optimize_142},     {"db-analyze", db_analyze_142},     {"db-replicate", db_replicate_142},     {"db-cluster", db_cluster_142}, 
     /* Batch 143: Print + Document */
-    {"pdf-generate", pdf_generate_143},     {"pdf-merge", pdf_merge_143},     {"pdf-split", pdf_split_143},     {"pdf-watermark", pdf_watermark_143},     {"doc-convert", doc_convert_143},     {"doc-template", doc_template_143},     {"doc-sign", doc_sign_143},     {"doc-encrypt", doc_encrypt_143},     {"spreadsheet-calc", spreadsheet_calc_143},     {"chart-create", chart_create_143},     {"slide-build", slide_build_143},     {"barcode-gen", barcode_gen_143}, 
+    {"pdf-generate", pdf_generate_143},     {"pdf-merge", pdf_merge_143},     {"pdf-split", pdf_split_143},     {"pdf-watermark", pdf_watermark_143},     {"doc-convert", doc_convert_143},     {"doc-template", doc_template_143},     {"doc-sign", doc_sign_143},     {"doc-encrypt", doc_encrypt_143},     {"spreadsheet-calc", spreadsheet_calc_143},     {"chart-create", chart_create_143},     {"slide-build", slide_build_143},     {"barcode-gen", barcode_gen_143},
+    /* Batch 144: Cloud Infrastructure */
+    {"k8s-deploy", k8s_deploy_144},     {"k8s-scale", k8s_scale_144},     {"k8s-rollout", k8s_rollout_144},     {"k8s-logs", k8s_logs_144},     {"helm-install", helm_install_144},     {"helm-upgrade", helm_upgrade_144},     {"istio-mesh", istio_mesh_144},     {"cert-manager", cert_manager_144},     {"argocd-sync", argocd_sync_144},     {"tekton-run", tekton_run_144},     {"crossplane-provision", crossplane_provision_144},     {"external-dns", external_dns_144}, 
+    /* Batch 145: Simulation + Modeling */
+    {"sim-fluid", sim_fluid_145},     {"sim-structural", sim_structural_145},     {"sim-thermal", sim_thermal_145},     {"sim-electromagnetic", sim_electromagnetic_145},     {"sim-traffic", sim_traffic_145},     {"sim-ecosystem", sim_ecosystem_145},     {"sim-economic", sim_economic_145},     {"sim-epidemic", sim_epidemic_145},     {"sim-climate", sim_climate_145},     {"sim-urban", sim_urban_145},     {"sim-supply-chain", sim_supply_chain_145},     {"sim-wargame", sim_wargame_145}, 
+    /* Batch 146: Image Processing */
+    {"img-resize", img_resize_146},     {"img-crop", img_crop_146},     {"img-filter", img_filter_146},     {"img-enhance", img_enhance_146},     {"img-segment", img_segment_146},     {"img-recognize", img_recognize_146},     {"img-generate", img_generate_146},     {"img-compress", img_compress_146},     {"img-convert", img_convert_146},     {"img-watermark", img_watermark_146},     {"img-color-grade", img_color_grade_146},     {"img-stitch", img_stitch_146}, 
+ 
  
  
  
@@ -37229,6 +37278,157 @@ static void slide_build_143(int argc, char args[][CMD_MAX_LEN]) {
 static void barcode_gen_143(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Barcode: EAN-13 1234567890128 Generated PNG 300dpi\n");
+}
+
+
+/* ===== Batch 144: Cloud Infrastructure ===== */
+static void k8s_deploy_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("K8s: Deploy api-server:3 replicas:3 ready:3/3 CPU:45%%\n");
+}
+static void k8s_scale_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("K8s: Scale api-server 3->5 pods Pending:2 Running:3\n");
+}
+static void k8s_rollout_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("K8s: Rollout api-server Revision:5 Status:Healthy\n");
+}
+static void k8s_logs_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("K8s Logs: api-server-abc123 Started:14:23 Requests:1,247/min\n");
+}
+static void helm_install_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Helm: Install prometheus Version:2.45.0 NS:monitoring\n");
+}
+static void helm_upgrade_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Helm: Upgrade grafana 10.0->10.1 Status:pending-upgrade\n");
+}
+static void istio_mesh_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Istio: Mesh healthy 12 services 47 pods mTLS:strict\n");
+}
+static void cert_manager_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cert-Manager: Certs:12 Issued:10 Expiring:2 Renewing:1\n");
+}
+static void argocd_sync_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ArgoCD: App api-server Synced Health:Healthy 14 apps\n");
+}
+static void tekton_run_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tekton: Pipeline run #128 Status:Succeeded Duration:2m34s\n");
+}
+static void crossplane_provision_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Crossplane: Provision RDS PostgreSQL Status:available\n");
+}
+static void external_dns_144(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ExternalDNS: 12 records synced Provider:AWS Route53\n");
+}
+
+/* ===== Batch 145: Simulation + Modeling ===== */
+static void sim_fluid_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CFD: Navier-Stokes Grid:64x64 Reynolds:1000 Converged:150iter\n");
+}
+static void sim_structural_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("FEA: Beam deflection:2.3mm Stress:145MPa Safety:2.1x\n");
+}
+static void sim_thermal_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Thermal: Max:89C Min:22C Gradient:67C Heat sink:OK\n");
+}
+static void sim_electromagnetic_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("EM: FDTD 3D cells:100x100x100 Freq:2.4GHz S11:-15dB\n");
+}
+static void sim_traffic_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Traffic: 1200 vehicles/hr Avg speed:45km/h Queue:12 vehicles\n");
+}
+static void sim_ecosystem_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ecosystem: Species:12 Predators:3 Prey:5 Stability:0.87\n");
+}
+static void sim_economic_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Economic: GDP:+2.3%% Inflation:3.1%% Unemployment:4.2%%\n");
+}
+static void sim_epidemic_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Epidemic: R0:1.2 Infected:1,247 Recovered:892 Day:45\n");
+}
+static void sim_climate_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Climate: CO2:420ppm Temp:+1.2C Sea level:+3.2mm/yr\n");
+}
+static void sim_urban_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Urban: Population:1.2M Density:5,200/km2 Growth:1.8%%/yr\n");
+}
+static void sim_supply_chain_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Supply: 47 suppliers Lead time:12d Buffer:15%% Risk:low\n");
+}
+static void sim_wargame_145(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wargame: 500 units Terrain:10x10km Turns:24 Score:87/100\n");
+}
+
+/* ===== Batch 146: Image Processing ===== */
+static void img_resize_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Resize: 4032x3024 -> 800x600 Bilinear Quality:95%% Size:145KB\n");
+}
+static void img_crop_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Crop: 100,50 400x300 from 1920x1080 Output:400x300\n");
+}
+static void img_filter_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Filter: Gaussian blur sigma:2.0 Applied in 12ms\n");
+}
+static void img_enhance_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Enhance: Brightness:+15%% Contrast:+10%% Sharpness:+20%%\n");
+}
+static void img_segment_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Segment: Objects:5 Foreground:3 Background:1 Sky:1\n");
+}
+static void img_recognize_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Recognize: Person:94%% Car:87%% Building:91%%\n");
+}
+static void img_generate_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Generate: Diffusion 512x512 Steps:20 CFG:7.5 Seed:42\n");
+}
+static void img_compress_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compress: JPEG 2.3MB->145KB Quality:85%% Ratio:16:1\n");
+}
+static void img_convert_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Convert: PNG->WebP Lossless Size:2.3MB->1.8MB\n");
+}
+static void img_watermark_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Watermark: Text:'BYO-OS' Position:bottom-right Opacity:50%%\n");
+}
+static void img_color_grade_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Color: Cinematic LUT applied Shadows:+5 Highlights:-3\n");
+}
+static void img_stitch_146(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stitch: 4 images -> panorama 7680x2160 Blending:seamless\n");
 }
 
 void shell_run(void) {
