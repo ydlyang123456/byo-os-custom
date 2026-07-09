@@ -14351,6 +14351,48 @@ static void film_storyboard_167(int argc, char args[][CMD_MAX_LEN]);
 static void film_shotlist_167(int argc, char args[][CMD_MAX_LEN]);
 static void film_lighting_167(int argc, char args[][CMD_MAX_LEN]);
 static void film_grading_167(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 168: Manufacturing */
+static void cnc_program_168(int argc, char args[][CMD_MAX_LEN]);
+static void cnc_monitor_168(int argc, char args[][CMD_MAX_LEN]);
+static void threed_print_168(int argc, char args[][CMD_MAX_LEN]);
+static void laser_cut_168(int argc, char args[][CMD_MAX_LEN]);
+static void weld_control_168(int argc, char args[][CMD_MAX_LEN]);
+static void quality_inspect_168(int argc, char args[][CMD_MAX_LEN]);
+static void assembly_plan_168(int argc, char args[][CMD_MAX_LEN]);
+static void supply_chain_168(int argc, char args[][CMD_MAX_LEN]);
+static void inventory_mgmt_168(int argc, char args[][CMD_MAX_LEN]);
+static void production_plan_168(int argc, char args[][CMD_MAX_LEN]);
+static void maintenance_sched_168(int argc, char args[][CMD_MAX_LEN]);
+static void lean_manage_168(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 169: Logistics + Supply */
+static void warehouse_manage_169(int argc, char args[][CMD_MAX_LEN]);
+static void route_optimize_169(int argc, char args[][CMD_MAX_LEN]);
+static void load_plan_169(int argc, char args[][CMD_MAX_LEN]);
+static void track_shipment_169(int argc, char args[][CMD_MAX_LEN]);
+static void customs_clear_169(int argc, char args[][CMD_MAX_LEN]);
+static void freight_calc_169(int argc, char args[][CMD_MAX_LEN]);
+static void last_mile_169(int argc, char args[][CMD_MAX_LEN]);
+static void reverse_logistics_169(int argc, char args[][CMD_MAX_LEN]);
+static void cold_chain_169(int argc, char args[][CMD_MAX_LEN]);
+static void hazmat_manage_169(int argc, char args[][CMD_MAX_LEN]);
+static void cross_dock_169(int argc, char args[][CMD_MAX_LEN]);
+static void yard_manage_169(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 170: Media + Publishing */
+static void news_write_170(int argc, char args[][CMD_MAX_LEN]);
+static void news_publish_170(int argc, char args[][CMD_MAX_LEN]);
+static void news_analyze_170(int argc, char args[][CMD_MAX_LEN]);
+static void news_aggregate_170(int argc, char args[][CMD_MAX_LEN]);
+static void blog_create_170(int argc, char args[][CMD_MAX_LEN]);
+static void blog_seo_170(int argc, char args[][CMD_MAX_LEN]);
+static void podcast_record_170(int argc, char args[][CMD_MAX_LEN]);
+static void podcast_edit_170(int argc, char args[][CMD_MAX_LEN]);
+static void podcast_distribute_170(int argc, char args[][CMD_MAX_LEN]);
+static void video_stream_170(int argc, char args[][CMD_MAX_LEN]);
+static void video_archive_170(int argc, char args[][CMD_MAX_LEN]);
+static void content_manage_170(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17258,7 +17300,14 @@ static const cmd_entry commands[] = {
     /* Batch 166: Sports + Fitness */
     {"workout-plan", workout_plan_166},     {"heart-rate", heart_rate_166},     {"step-count", step_count_166},     {"calorie-burn", calorie_burn_166},     {"sleep-track", sleep_track_166},     {"stress-monitor", stress_monitor_166},     {"hydration-track", hydration_track_166},     {"nutrition-plan", nutrition_plan_166},     {"body-measure", body_measure_166},     {"performance-test", performance_test_166},     {"recovery-track", recovery_track_166},     {"training-cycle", training_cycle_166}, 
     /* Batch 167: Photography + Cinematography */
-    {"photo-capture", photo_capture_167},     {"photo-edit", photo_edit_167},     {"photo-hdr", photo_hdr_167},     {"photo-panorama", photo_panorama_167},     {"photo-bokeh", photo_bokeh_167},     {"photo-longexp", photo_longexp_167},     {"photo-macro", photo_macro_167},     {"photo-tether", photo_tether_167},     {"film-storyboard", film_storyboard_167},     {"film-shotlist", film_shotlist_167},     {"film-lighting", film_lighting_167},     {"film-grading", film_grading_167}, 
+    {"photo-capture", photo_capture_167},     {"photo-edit", photo_edit_167},     {"photo-hdr", photo_hdr_167},     {"photo-panorama", photo_panorama_167},     {"photo-bokeh", photo_bokeh_167},     {"photo-longexp", photo_longexp_167},     {"photo-macro", photo_macro_167},     {"photo-tether", photo_tether_167},     {"film-storyboard", film_storyboard_167},     {"film-shotlist", film_shotlist_167},     {"film-lighting", film_lighting_167},     {"film-grading", film_grading_167},
+    /* Batch 168: Manufacturing */
+    {"cnc-program", cnc_program_168},     {"cnc-monitor", cnc_monitor_168},     {"3d-print", threed_print_168},     {"laser-cut", laser_cut_168},     {"weld-control", weld_control_168},     {"quality-inspect", quality_inspect_168},     {"assembly-plan", assembly_plan_168},     {"supply-chain", supply_chain_168},     {"inventory-mgmt", inventory_mgmt_168},     {"production-plan", production_plan_168},     {"maintenance-sched", maintenance_sched_168},     {"lean-manage", lean_manage_168}, 
+    /* Batch 169: Logistics + Supply */
+    {"warehouse-manage", warehouse_manage_169},     {"route-optimize", route_optimize_169},     {"load-plan", load_plan_169},     {"track-shipment", track_shipment_169},     {"customs-clear", customs_clear_169},     {"freight-calc", freight_calc_169},     {"last-mile", last_mile_169},     {"reverse-logistics", reverse_logistics_169},     {"cold-chain", cold_chain_169},     {"hazmat-manage", hazmat_manage_169},     {"cross-dock", cross_dock_169},     {"yard-manage", yard_manage_169}, 
+    /* Batch 170: Media + Publishing */
+    {"news-write", news_write_170},     {"news-publish", news_publish_170},     {"news-analyze", news_analyze_170},     {"news-aggregate", news_aggregate_170},     {"blog-create", blog_create_170},     {"blog-seo", blog_seo_170},     {"podcast-record", podcast_record_170},     {"podcast-edit", podcast_edit_170},     {"podcast-distribute", podcast_distribute_170},     {"video-stream", video_stream_170},     {"video-archive", video_archive_170},     {"content-manage", content_manage_170}, 
+ 
  
  
  
@@ -38829,6 +38878,157 @@ static void film_lighting_167(int argc, char args[][CMD_MAX_LEN]) {
 static void film_grading_167(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Grading: Lift:0.02 Gamma:1.02 Gain:0.98 Sat:1.1 Teal+Orange\n");
+}
+
+
+/* ===== Batch 168: Manufacturing ===== */
+static void cnc_program_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CNC: G-code 2,847 lines Feed:1200mm/min Spindle:8000RPM\n");
+}
+static void cnc_monitor_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CNC Monitor: Tool:3 Wear:12%% Temp:45C Vibration:0.8mm/s\n");
+}
+static void threed_print_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("3D Print: PLA Layer:0.2mm Speed:60mm/s ETA:4h32m 89%%done\n");
+}
+static void laser_cut_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Laser: CO2 80W Speed:15mm/s Power:65%% Material:acrylic 3mm\n");
+}
+static void weld_control_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Weld: MIG 180A Wire:1.0mm Gas:Ar/CO2 Shield:OK\n");
+}
+static void quality_inspect_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("QA: CMM measured 23 features 21 in-tol 2 out-of-tol\n");
+}
+static void assembly_plan_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Assembly: Station:4 Parts:12 Time:45s/operator OK\n");
+}
+static void supply_chain_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Supply: Lead:12d Buffer:15%% Suppliers:23 Risk:low\n");
+}
+static void inventory_mgmt_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Inventory: Items:1,247 Value:$234K Turnover:8.2x\n");
+}
+static void production_plan_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Production: Batch:#12848 Qty:500 Rate:50/hr ETA:10h\n");
+}
+static void maintenance_sched_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Maint: Next:48h MTBF:720h MTTR:2h PM:monthly\n");
+}
+static void lean_manage_168(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lean: Waste:7 types OEE:87%% Kaizen:12 this month\n");
+}
+
+/* ===== Batch 169: Logistics + Supply ===== */
+static void warehouse_manage_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Warehouse: SKUs:12,847 Locations:4,567 Utilization:78%%\n");
+}
+static void route_optimize_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Route: 12 stops Distance:145km Time:6h Fuel:$23 Savings:18%%\n");
+}
+static void load_plan_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Load: Truck:20ft Cargo:12 pallets Weight:18t Util:87%%\n");
+}
+static void track_shipment_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Track: #12848 Location:Shanghai ETA:2024-01-20 Status:in-transit\n");
+}
+static void customs_clear_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Customs: HS:84713000 Duty:0%% VAT:13%% Status:cleared\n");
+}
+static void freight_calc_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Freight: LCL $45/CBM FCL $2,800/20ft Air $4.50/kg\n");
+}
+static void last_mile_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Last Mile: 47 deliveries Route:optimized Time:4h Success:96%%\n");
+}
+static void reverse_logistics_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Returns: 12 items/day Rate:2.3%% Refund:$1,247 Restock:8\n");
+}
+static void cold_chain_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cold: Temp:-18C±2 Humidity:45%% Monitor:real-time Alert:none\n");
+}
+static void hazmat_manage_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Hazmat: Class:3 UN:1263 Labels:flammable PPE:required\n");
+}
+static void cross_dock_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cross-dock: In:12 pallets Out:8 pallets Dwell:2h Efficiency:94%%\n");
+}
+static void yard_manage_169(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Yard: 47 trucks In:23 Out:18 Waiting:6 Docks:8 available\n");
+}
+
+/* ===== Batch 170: Media + Publishing ===== */
+static void news_write_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("News: Article draft 1,247 words Headline:BYO-OS Released\n");
+}
+static void news_publish_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Publish: CMS:WordPress Status:live Views:1,247 Shares:23\n");
+}
+static void news_analyze_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Analytics: Views:12,847 Unique:8,923 Bounce:34%% Avg:2:34\n");
+}
+static void news_aggregate_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Aggregate: Sources:24 Topics:12 Sentiment:72%% positive\n");
+}
+static void blog_create_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Blog: Post:'Getting Started' Words:2,347 Tags:5 SEO:92/100\n");
+}
+static void blog_seo_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SEO: Score:92/100 Keywords:12 Meta:optimized Backlinks:23\n");
+}
+static void podcast_record_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Record: Episode:#47 Duration:45min Audio:48kHz/24bit\n");
+}
+static void podcast_edit_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edit: Cuts:23 Music:2 Ads:0 Transitions:fade Duration:42min\n");
+}
+static void podcast_distribute_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Distribute: Platforms:5 Spotify:OK Apple:OK RSS:updated\n");
+}
+static void video_stream_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stream: Resolution:1080p Bitrate:6Mbps Viewers:128 Latency:2s\n");
+}
+static void video_archive_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Archive: 128 episodes Size:45GB Format:H.265 Indexed:yes\n");
+}
+static void content_manage_170(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CMS: Articles:234 Drafts:12 Scheduled:8 Published:214\n");
 }
 
 void shell_run(void) {
