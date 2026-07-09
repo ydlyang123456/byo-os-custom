@@ -178,15 +178,26 @@ static void cmd_mem(int argc, char args[][CMD_MAX_LEN]) {
 
 static void cmd_version(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("BYO-OS v1.0.0\n");
+    vga_puts("BYO-OS v1.7.0\n");
+    vga_puts("Kernel: x86 bare-metal\n");
+    vga_puts("Shell: BYO-OS Shell\n");
+    vga_puts("Features: VGA, Serial, VFS, TCP/IP, Process Mgmt\n");
 }
 
 static void cmd_about(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("BYO-OS: Build Your Own OS\n");
-    vga_puts("A x86 bare-metal operating system with a Debian-style shell.\n");
-    vga_puts("Features: VGA output, serial I/O, virtual filesystem, process management,\n");
-    vga_puts("          networking stack, user management, and 50+ commands.\n");
+    vga_puts("BYO-OS: Build Your Own Operating System\n");
+    vga_puts("========================================\n");
+    vga_puts("A x86 bare-metal operating system with a Debian-style shell.\n\n");
+    vga_puts("Architecture:  x86 (i386)\n");
+    vga_puts("Memory:        Physical + Heap allocator\n");
+    vga_puts("Filesystem:    RAM-based virtual filesystem\n");
+    vga_puts("Networking:    NE2000 NIC + TCP/IP stack\n");
+    vga_puts("Processes:     Round-robin scheduler\n");
+    vga_puts("Shell:         1294+ commands (Debian-compatible)\n");
+    vga_puts("Display:       VGA text mode + Serial\n");
+    vga_puts("Web Panel:     Python gateway + HTML SPA\n\n");
+    vga_puts("GitHub: github.com/ydlyang123456/byo-os-custom\n");
 }
 
 
