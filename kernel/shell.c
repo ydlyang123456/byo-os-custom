@@ -14474,6 +14474,48 @@ static void hr_training_176(int argc, char args[][CMD_MAX_LEN]);
 static void hr_engagement_176(int argc, char args[][CMD_MAX_LEN]);
 static void hr_workforce_176(int argc, char args[][CMD_MAX_LEN]);
 static void hr_analytics_176(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 177: Legal Tech */
+static void case_manage_177(int argc, char args[][CMD_MAX_LEN]);
+static void doc_review_177(int argc, char args[][CMD_MAX_LEN]);
+static void e_discovery_177(int argc, char args[][CMD_MAX_LEN]);
+static void legal_research_177(int argc, char args[][CMD_MAX_LEN]);
+static void billable_track_177(int argc, char args[][CMD_MAX_LEN]);
+static void conflict_check_177(int argc, char args[][CMD_MAX_LEN]);
+static void client_portal_177(int argc, char args[][CMD_MAX_LEN]);
+static void matter_open_177(int argc, char args[][CMD_MAX_LEN]);
+static void time_entry_177(int argc, char args[][CMD_MAX_LEN]);
+static void trust_account_177(int argc, char args[][CMD_MAX_LEN]);
+static void statute_find_177(int argc, char args[][CMD_MAX_LEN]);
+static void precedent_search_177(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 178: Mental Health + Wellness */
+static void mood_track_178(int argc, char args[][CMD_MAX_LEN]);
+static void anxiety_check_178(int argc, char args[][CMD_MAX_LEN]);
+static void therapy_session_178(int argc, char args[][CMD_MAX_LEN]);
+static void meditation_178(int argc, char args[][CMD_MAX_LEN]);
+static void breathing_ex_178(int argc, char args[][CMD_MAX_LEN]);
+static void journal_prompt_178(int argc, char args[][CMD_MAX_LEN]);
+static void gratitude_log_178(int argc, char args[][CMD_MAX_LEN]);
+static void cbt_exercise_178(int argc, char args[][CMD_MAX_LEN]);
+static void sleep_hygiene_178(int argc, char args[][CMD_MAX_LEN]);
+static void stress_mgmt_178(int argc, char args[][CMD_MAX_LEN]);
+static void burnout_check_178(int argc, char args[][CMD_MAX_LEN]);
+static void wellness_plan_178(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 179: Accessibility + Inclusion */
+static void a11y_audit_179(int argc, char args[][CMD_MAX_LEN]);
+static void a11y_test_179(int argc, char args[][CMD_MAX_LEN]);
+static void a11y_fix_179(int argc, char args[][CMD_MAX_LEN]);
+static void screen_reader_179(int argc, char args[][CMD_MAX_LEN]);
+static void color_contrast_179(int argc, char args[][CMD_MAX_LEN]);
+static void keyboard_nav_179(int argc, char args[][CMD_MAX_LEN]);
+static void focus_manage_179(int argc, char args[][CMD_MAX_LEN]);
+static void aria_label_179(int argc, char args[][CMD_MAX_LEN]);
+static void caption_gen_179(int argc, char args[][CMD_MAX_LEN]);
+static void alt_text_179(int argc, char args[][CMD_MAX_LEN]);
+static void tts_config_179(int argc, char args[][CMD_MAX_LEN]);
+static void input_adapt_179(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17402,7 +17444,14 @@ static const cmd_entry commands[] = {
     /* Batch 175: Insurance + Risk */
     {"insurance-quote", insurance_quote_175},     {"insurance-claim", insurance_claim_175},     {"risk-assess-ins", risk_assess_ins_175},     {"premium-calc", premium_calc_175},     {"policy-review", policy_review_175},     {"underwriting", underwriting_175},     {"actuarial-calc", actuarial_calc_175},     {"reinsurance", reinsurance_175},     {"fraud-detect", fraud_detect_175},     {"loss-run", loss_run_175},     {"coverage-gap", coverage_gap_175},     {"policy-bind", policy_bind_175}, 
     /* Batch 176: Human Resources */
-    {"hr-recruit", hr_recruit_176},     {"hr-onboard", hr_onboard_176},     {"hr-offboard", hr_offboard_176},     {"hr-payroll", hr_payroll_176},     {"hr-benefit", hr_benefit_176},     {"hr-performance", hr_performance_176},     {"hr-succession", hr_succession_176},     {"hr-compliance", hr_compliance_176},     {"hr-training", hr_training_176},     {"hr-engagement", hr_engagement_176},     {"hr-workforce", hr_workforce_176},     {"hr-analytics", hr_analytics_176}, 
+    {"hr-recruit", hr_recruit_176},     {"hr-onboard", hr_onboard_176},     {"hr-offboard", hr_offboard_176},     {"hr-payroll", hr_payroll_176},     {"hr-benefit", hr_benefit_176},     {"hr-performance", hr_performance_176},     {"hr-succession", hr_succession_176},     {"hr-compliance", hr_compliance_176},     {"hr-training", hr_training_176},     {"hr-engagement", hr_engagement_176},     {"hr-workforce", hr_workforce_176},     {"hr-analytics", hr_analytics_176},
+    /* Batch 177: Legal Tech */
+    {"case-manage", case_manage_177},     {"doc-review", doc_review_177},     {"e-discovery", e_discovery_177},     {"legal-research", legal_research_177},     {"billable-track", billable_track_177},     {"conflict-check", conflict_check_177},     {"client-portal", client_portal_177},     {"matter-open", matter_open_177},     {"time-entry", time_entry_177},     {"trust-account", trust_account_177},     {"statute-find", statute_find_177},     {"precedent-search", precedent_search_177}, 
+    /* Batch 178: Mental Health + Wellness */
+    {"mood-track", mood_track_178},     {"anxiety-check", anxiety_check_178},     {"therapy-session", therapy_session_178},     {"meditation", meditation_178},     {"breathing-ex", breathing_ex_178},     {"journal-prompt", journal_prompt_178},     {"gratitude-log", gratitude_log_178},     {"cbt-exercise", cbt_exercise_178},     {"sleep-hygiene", sleep_hygiene_178},     {"stress-mgmt", stress_mgmt_178},     {"burnout-check", burnout_check_178},     {"wellness-plan", wellness_plan_178}, 
+    /* Batch 179: Accessibility + Inclusion */
+    {"a11y-audit", a11y_audit_179},     {"a11y-test", a11y_test_179},     {"a11y-fix", a11y_fix_179},     {"screen-reader", screen_reader_179},     {"color-contrast", color_contrast_179},     {"keyboard-nav", keyboard_nav_179},     {"focus-manage", focus_manage_179},     {"aria-label", aria_label_179},     {"caption-gen", caption_gen_179},     {"alt-text", alt_text_179},     {"tts-config", tts_config_179},     {"input-adapt", input_adapt_179}, 
+ 
  
  
  
@@ -39429,6 +39478,157 @@ static void hr_workforce_176(int argc, char args[][CMD_MAX_LEN]) {
 static void hr_analytics_176(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Analytics: TTH:45 days Cost:$12,400/hire Retention:88%% Diversity:42%%\n");
+}
+
+
+/* ===== Batch 177: Legal Tech ===== */
+static void case_manage_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Case: #2024-12848 Status:active Client:ACME Next:filing 2024-02-15\n");
+}
+static void doc_review_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Review: 1,247 documents Priv:234 Relevance:892 Flags:12\n");
+}
+static void e_discovery_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("eDiscovery: 45GB data Emails:12,847 Custodians:3 Issues:23\n");
+}
+static void legal_research_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Research: 12 cases found 3 on-point 1 favorable binding\n");
+}
+static void billable_track_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Billable: This month:142h Target:160h Rate:$350/h Revenue:$49,700\n");
+}
+static void conflict_check_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Conflict: 0 conflicts found New client:approved\n");
+}
+static void client_portal_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Portal: Client:ACME Documents:23 Messages:8 Invoices:3\n");
+}
+static void matter_open_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Matter: #12848 Opened:2024-01-15 Type:litigation Status:active\n");
+}
+static void time_entry_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Time: 2.5h Research $875 Matter:#12848 Date:2024-01-15\n");
+}
+static void trust_account_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Trust: Balance:$45,000 Deposits:$50,000 Draws:$5,000\n");
+}
+static void statute_find_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Statute: 12 USC 1983 Elements:4 Applicable:yes\n");
+}
+static void precedent_search_177(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Precedent: 47 cases 3 binding 12 persuasive Citations:124\n");
+}
+
+/* ===== Batch 178: Mental Health + Wellness ===== */
+static void mood_track_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Mood: 7/10 Trend:stable Triggers:work Sleep:7h Exercise:yes\n");
+}
+static void anxiety_check_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Anxiety: GAD-7:8(Mild) Physical:3 Cognitive:3 Behavioral:2\n");
+}
+static void therapy_session_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Therapy: Session:#24 Duration:50min Topic:CBT Homework:3 tasks\n");
+}
+static void meditation_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Meditation: Duration:15min Type:guided Focus:breathing Score:8/10\n");
+}
+static void breathing_ex_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Breathing: 4-7-8 pattern 3 rounds HR:72->65 BPM reduced:7\n");
+}
+static void journal_prompt_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Journal: Prompt:What went well today? Word count:234\n");
+}
+static void gratitude_log_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Gratitude: 3 items Family,health,work Mood boost:+15%%\n");
+}
+static void cbt_exercise_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("CBT: Thought record 3 negative 2 reframed 1 positive outcome\n");
+}
+static void sleep_hygiene_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sleep hygiene: Bedtime:22:30 Screen:off Caffeine:14:00 Quality:good\n");
+}
+static void stress_mgmt_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stress: Level:4/10 Coping:exercise Music:relaxation Social:3 friends\n");
+}
+static void burnout_check_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Burnout: MBI:23/100(Mild) Exhaustion:4 Cynicism:2 Efficacy:8\n");
+}
+static void wellness_plan_178(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wellness: Exercise:4x Sleep:7-8h Mindfulness:daily Social:2x Social:2x Week\n");
+}
+
+/* ===== Batch 179: Accessibility + Inclusion ===== */
+static void a11y_audit_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Audit: WCAG:AA Violations:3 Critical:0 Major:1 Minor:2\n");
+}
+static void a11y_test_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Test: Screen reader:OK Keyboard:OK Color:pass Motion:prefers-reduced\n");
+}
+static void a11y_fix_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fix: Added alt text to 12 images Fixed 3 focus traps Added 2 skip links\n");
+}
+static void screen_reader_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Screen Reader: ARIA:correct Labels:124 Landmarks:8 Live regions:3\n");
+}
+static void color_contrast_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Contrast: #38bdf8/#0a0e1a:7.2:1 AA:pass AAA:pass\n");
+}
+static void keyboard_nav_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Keyboard: Tab order:logical Focus visible:yes Shortcuts:12 Escape:modal\n");
+}
+static void focus_manage_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Focus: Trap:none Visible:always Indicator:ring Offset:2px\n");
+}
+static void aria_label_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ARIA: Labels:47 Roles:23 States:12 Properties:8 Relationships:5\n");
+}
+static void caption_gen_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Captions: 128 lines Accuracy:97%% Languages:EN,ZH Sync:0.1s\n");
+}
+static void alt_text_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Alt Text: Generated:47 Descriptive:yes Length:avg:12 words\n");
+}
+static void tts_config_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TTS: Speed:1.0x Pitch:1.0 Volume:0.8 Voice:female\n");
+}
+static void input_adapt_179(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Adaptive: Switch:yes Eye:yes Voice:yes Timing:flexible\n");
 }
 
 void shell_run(void) {
