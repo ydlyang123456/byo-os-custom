@@ -5354,6 +5354,120 @@ static void cmd_zephyr(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_caddy_fn(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("caddy: reverse proxy\n");
 }
+static void cmd_nmap_adv(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nmap: advanced port scanner\n");
+}
+
+
+
+
+
+
+
+
+
+
+static void cmd_nginx_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nginx: web server\n");
+}
+
+static void cmd_apache_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("apache: httpd web server\n");
+}
+
+static void cmd_haproxy_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("haproxy: load balancer\n");
+}
+
+static void cmd_squid_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("squid: caching proxy\n");
+}
+
+
+static void cmd_bind_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("named: BIND DNS server\n");
+}
+
+static void cmd_vsftpd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vsftpd: FTP server\n");
+}
+
+
+static void cmd_postfix_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("postfix: mail server\n");
+}
+
+
+static void cmd_nice_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nice: run with modified priority\n");
+}
+
+
+static void cmd_chrt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("chrt: real-time scheduling\n");
+}
+
+static void cmd_stap(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("stap: SystemTap\n");
+}
+
+static void cmd_dtrace_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dtrace: DTrace tracing\n");
+}
+
+
+static void cmd_cargo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cargo: Rust package manager\n");
+}
+
+static void cmd_dart(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dart: Dart SDK\n");
+}
+
+static void cmd_kotlin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kotlin: Kotlin compiler\n");
+}
+
+static void cmd_scala(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("scala: Scala compiler\n");
+}
+
+static void cmd_haskell(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ghc: Haskell compiler\n");
+}
+
+static void cmd_elixir(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("elixir: Elixir runtime\n");
+}
+
+static void cmd_lua_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lua: Lua interpreter\n");
+}
+
+static void cmd_vim_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("vim: text editor\n");
+}
+
+static void cmd_nano_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nano: text editor\n");
+}
+
+
+
+static void cmd_screen_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("screen: terminal manager\n");
+}
+
+
+
+static void cmd_mutt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("mutt: email client\n");
+}
+
+static void cmd_lynx(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lynx: text browser\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -5838,6 +5952,27 @@ static const cmd_entry commands[] = {
     /* Batch 22: Networking */
     {"wireguard", cmd_wireguard}, {"openvpn", cmd_openvpn}, {"tailscale", cmd_tailscale},
     {"caddy", cmd_caddy},
+    /* Batch 23: Security Advanced */
+    {"nikto", cmd_nikto}, {"sqlmap", cmd_sqlmap}, {"msfconsole", cmd_metasploit},
+    {"burpsuite", cmd_burpsuite}, {"zap", cmd_owasp_zap},
+    {"volatility", cmd_volatility}, {"autopsy", cmd_autopsy},
+    {"ghidra", cmd_ghidra}, {"r2", cmd_radare2},
+    /* Batch 23: Web Servers */
+    {"nginx", cmd_nginx_fn}, {"apache", cmd_apache_fn}, {"haproxy", cmd_haproxy_fn},
+    {"squid", cmd_squid_fn}, {"dnsmasq", cmd_dnsmasq}, {"named", cmd_bind_fn},
+    {"vsftpd", cmd_vsftpd}, {"dovecot", cmd_dovecot}, {"postfix", cmd_postfix_fn},
+    /* Batch 23: System Advanced */
+    {"ulimit", cmd_ulimit}, {"nice", cmd_nice_fn}, {"taskset", cmd_taskset},
+    {"chrt", cmd_chrt}, {"stap", cmd_stap}, {"dtrace", cmd_dtrace_fn},
+    /* Batch 23: Languages */
+    {"rustc", cmd_rustc}, {"cargo", cmd_cargo}, {"dart", cmd_dart},
+    {"kotlin", cmd_kotlin}, {"scala", cmd_scala}, {"ghc", cmd_haskell},
+    {"elixir", cmd_elixir}, {"lua", cmd_lua_fn},
+    /* Batch 23: Editors & Tools */
+    {"vim", cmd_vim_fn}, {"nano", cmd_nano_fn}, {"emacs", cmd_emacs},
+    {"tmux", cmd_tmux}, {"screen", cmd_screen_fn},
+    {"mc", cmd_midnight}, {"ranger", cmd_ranger},
+    {"mutt", cmd_mutt}, {"lynx", cmd_lynx},
     {0, 0}
 };
 
