@@ -5,3 +5,10 @@
 *.iso
 *.kernel
 ~
+*.py
+build.bat
+start*.bat
+*.js
+*.html
+p*.c
+isodir/
