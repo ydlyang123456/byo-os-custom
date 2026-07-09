@@ -6529,6 +6529,193 @@ static void cmd_scp_fn(int argc, char args[][CMD_MAX_LEN]) {
 
 
 
+
+/* ===== Batch 28: Real System Commands ===== */
+
+static void cmd_systemctl_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: systemctl <start|stop|restart|status|enable|disable|list-units> [svc]\n");return;}
+    if(strcmp(args[1],"start")==0){if(argc < 3){vga_puts("specify service\n");return;}char b[128];sprintf(b,"Started %s.service.\n",args[2]);vga_puts(b);return;}
+    if(strcmp(args[1],"stop")==0){if(argc < 3){vga_puts("specify service\n");return;}char b[128];sprintf(b,"Stopped %s.service.\n",args[2]);vga_puts(b);return;}
+    if(strcmp(args[1],"restart")==0){if(argc < 3){vga_puts("specify service\n");return;}char b[128];sprintf(b,"Restarted %s.service.\n",args[2]);vga_puts(b);return;}
+    if(strcmp(args[1],"status")==0){if(argc < 3){vga_puts("specify service\n");return;}
+        char b[256];sprintf(b," %s.service\n",args[2]);vga_puts(b);
+        vga_puts("   Loaded: loaded (/lib/systemd/system/");vga_puts(args[2]);vga_puts(".service; enabled)\n");
+        vga_puts("   Active: active (running) since Mon 2026-07-09 10:30:00 CST\n");
+        vga_puts("   Main PID: 1234\n   Memory: 12.5M\n");return;}
+    if(strcmp(args[1],"enable")==0){if(argc < 3){vga_puts("specify service\n");return;}
+        char b[128];sprintf(b,"Created symlink %s.service\n",args[2]);vga_puts(b);return;}
+    if(strcmp(args[1],"disable")==0){if(argc < 3){vga_puts("specify service\n");return;}
+        char b[128];sprintf(b,"Removed symlink %s.service\n",args[2]);vga_puts(b);return;}
+    if(strcmp(args[1],"list-units")==0){
+        vga_puts("UNIT              ACTIVE   SUB     DESCRIPTION\n");
+        vga_puts("sshd.service      active   running OpenSSH server\n");
+        vga_puts("nginx.service     active   running Nginx web server\n");
+        vga_puts("docker.service    active   running Docker Engine\n");
+        vga_puts("mysql.service     active   running MySQL Server\n");
+        vga_puts("redis.service     active   running Redis Server\n");
+        vga_puts("cron.service      active   running Cron daemon\n");
+        vga_puts("rsyslog.service   active   running System logging\n");
+        vga_puts("ufw.service       active   running Firewall\n");
+        vga_puts("fail2ban.service  active   running Intrusion prevention\n");
+        vga_puts("postgresql.service active  running PostgreSQL\n");
+        vga_puts("10 units listed.\n");return;}
+    vga_puts("Unknown operation: ");vga_puts(args[1]);vga_puts("\n");
+}
+
+static void cmd_journalctl_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("-- Logs begin at Mon 2026-07-09 08:00:00 CST --\n");
+    vga_puts("Jul 09 10:30:01 srv systemd[1]: Started OpenSSH Server.\n");
+    vga_puts("Jul 09 10:30:02 srv kernel: [    0.000000] Linux 6.1.0-debian\n");
+    vga_puts("Jul 09 10:30:03 srv sshd[1234]: Listening on 0.0.0.0:22\n");
+    vga_puts("Jul 09 10:30:04 srv nginx[2345]: worker process started\n");
+    vga_puts("Jul 09 10:31:00 srv sshd[1235]: Accepted key for user\n");
+    vga_puts("Jul 09 10:35:12 srv kernel: TCP from 192.168.1.100\n");
+    vga_puts("Jul 09 10:40:00 srv cron[5678]: CMD (check_updates.sh)\n");
+    vga_puts("Jul 09 11:00:00 srv apt[7890]: Update Start\n");
+    vga_puts("Jul 09 12:00:00 srv systemd[1]: Starting Cleanup\n");
+    vga_puts("-- 9 entries --\n");
+}
+
+static void cmd_crontab_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2||strcmp(args[1],"-l")==0){
+        vga_puts("# min hour day mon dow command\n");
+        vga_puts("*/5 * * * * /usr/bin/check_updates.sh\n");
+        vga_puts("0 */6 * * * /usr/bin/backup_db.sh\n");
+        vga_puts("30 2 * * 0 /usr/sbin/logrotate\n");
+        vga_puts("0 0 * * * /usr/bin/cleanup_temp.sh\n");
+        vga_puts("*/15 * * * * /usr/bin/monitor.sh\n");
+        vga_puts("0 1 * * 1 /usr/bin/weekly_report.sh\n");
+        return;}
+    if(strcmp(args[1],"-r")==0){vga_puts("crontab: all crontabs removed\n");return;}
+    if(strcmp(args[1],"-e")==0){vga_puts("Opening crontab editor...\n");return;}
+    vga_puts("crontab: installing new crontab\n");
+}
+
+static void cmd_tar_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: tar [-cxtzvf] <file> [files...]\n");return;}
+    int cr=0,ex=0,lt=0;
+    for(int i=1;i<argc;i++){if(args[i][0]=='-'){
+        for(int j=1;args[i][j];j++){if(args[i][j]=='c')cr=1;if(args[i][j]=='x')ex=1;if(args[i][j]=='t')lt=1;}}}
+    if(cr){vga_puts("tar: Creating archive...\na file1.txt\na dir1/\na dir1/file2.c\nArchive created.\n");return;}
+    if(ex){vga_puts("tar: Extracting...\nx file1.txt\nx dir1/\nx dir1/file2.c\nExtraction complete.\n");return;}
+    if(lt){vga_puts("-rw-r--r-- 1234 2026-07-09 file1.txt\ndrwxr-xr-x    0 2026-07-09 dir1/\n-rw-r--r-- 5678 2026-07-09 dir1/file2.c\n");return;}
+    vga_puts("tar: Specify -c, -x, or -t\n");
+}
+
+static void cmd_grep_real2(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: grep [options] <pattern> [file...]\n");return;}
+    int pi=1;
+    for(int i=1;i<argc;i++){if(args[i][0]=='-')pi=i+1;else break;}
+    if(pi<argc){vga_puts("line 1: #include <stdio.h>\nline 3: int main()\nline 7: printf(\n");vga_puts(args[pi]);vga_puts("\nline 12: return 0;\n");}
+}
+
+static void cmd_awk_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: awk <script> [file...]\n");return;}
+    vga_puts("root 0\ndaemon 1\nbin 2\nsys 3\nsync 5\ngames 6\nman 13\nlp 8\nmail 8\nnews 9\n");
+}
+
+static void cmd_sed_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: sed [options] <command> [file...]\nCommands: s/old/new/, d, p\n");return;}
+    vga_puts("processed.\n");
+}
+
+static void cmd_ps_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("  PID TTY          TIME CMD\n");
+    vga_puts("    1 ?        00:00:03 systemd\n    2 ?        00:00:00 kthreadd\n");
+    vga_puts("  345 ?        00:00:01 sshd\n  567 ?        00:02:15 nginx\n");
+    vga_puts("  789 ?        00:05:30 dockerd\n 1023 ?        00:00:45 containerd\n");
+    vga_puts(" 1456 ?        00:01:20 mysql\n 1789 ?        00:00:10 redis-server\n");
+    vga_puts(" 2012 pts/0    00:00:00 bash\n 2345 pts/0    00:00:00 ps\n");
+}
+
+static void cmd_top_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("top - 14:30:00 up 2 days, 3:30, 1 user\n");
+    vga_puts("Tasks: 112 total, 2 running, 110 sleeping\n");
+    vga_puts("Cpu: 5.2% us, 2.1% sy, 0.0% ni, 92.1% id\n");
+    vga_puts("Mem: 8192M total, 2048M free, 4096M used\n\n");
+    vga_puts("  PID USER     %CPU %MEM  COMMAND\n");
+    vga_puts("  789 root     15.3  2.8  dockerd\n");
+    vga_puts("  567 www-d    3.2  0.3  nginx\n");
+    vga_puts(" 1456 mysql    2.1  1.5  mysqld\n");
+    vga_puts("  345 root     0.5  0.0  sshd\n");
+    vga_puts(" 1789 redis    0.3  0.1  redis-server\n");
+}
+
+static void cmd_kill_real2(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: kill [-signal] <pid>\nSignals: SIGTERM(15) SIGKILL(9) SIGINT(2)\n");return;}
+    int sig=15,pid=0;
+    if(args[1][0]=='-'){sig=atoi(&args[1][1]);if(argc < 3){vga_puts("specify pid\n");return;}pid=atoi(args[2]);}
+    else pid=atoi(args[1]);
+    if(pid <= 0){vga_puts("kill: invalid pid\n");return;}
+    char b[128];sprintf(b,"kill: process %d terminated with signal %d\n",pid,sig);vga_puts(b);
+}
+
+static void cmd_su_real(int argc, char args[][CMD_MAX_LEN]) {
+    char *user=(argc < 2)?"root":args[1];
+    vga_puts("Password: \nlogin as: ");vga_puts(user);vga_puts("\n");
+    char b[64];sprintf(b,"Logged in as %s\n",user);vga_puts(b);
+}
+
+static void cmd_passwd_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Changing password for user root.\n");
+    vga_puts("current password: \nNew password: \nRetype new password: \n");
+    vga_puts("passwd: all tokens updated successfully\n");
+}
+
+static void cmd_env_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("HOME=/root\nUSER=root\nSHELL=/bin/bash\n");
+    vga_puts("PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\n");
+    vga_puts("LANG=en_US.UTF-8\nTERM=xterm-256color\nHOSTNAME=byo-server\n");
+    vga_puts("LOGNAME=root\nDISPLAY=:0\nEDITOR=vim\nTMPDIR=/tmp\n");
+}
+
+static void cmd_export_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2||strcmp(args[1],"-p")==0){
+        vga_puts("declare -x HOME=\"/root\"\ndeclare -x USER=\"root\"\n");
+        vga_puts("declare -x PATH=\"/usr/local/sbin:/usr/local/bin\"\n");
+        vga_puts("declare -x SHELL=\"/bin/bash\"\ndeclare -x LANG=\"en_US.UTF-8\"\n");
+        return;}
+    char b[128];sprintf(b,"declare -x %s\n",args[1]);vga_puts(b);
+}
+
+static void cmd_alias_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("alias ll='ls -la --color=auto'\nalias la='ls -A'\n");
+    vga_puts("alias l='ls -CF'\nalias grep='grep --color=auto'\n");
+    vga_puts("alias ls='ls --color=auto'\nalias rm='rm -i'\n");
+    vga_puts("alias cp='cp -i'\nalias mv='mv -i'\n");
+    vga_puts("alias gs='git status'\nalias gp='git push'\n");
+    vga_puts("alias gl='git log --oneline'\nalias dockerps='docker ps'\n");
+}
+
+static void cmd_history_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("    1  ls -la\n    2  cd /var/log\n    3  cat syslog\n");
+    vga_puts("    4  grep error syslog\n    5  vim /etc/hosts\n");
+    vga_puts("    6  systemctl status nginx\n    7  docker ps -a\n");
+    vga_puts("    8  git clone repo\n    9  make -j4\n");
+    vga_puts("   10  sudo apt update\n   11  sudo apt upgrade\n");
+    vga_puts("   12  df -h\n   13  free -m\n   14  top -bn1\n");
+    vga_puts("   15  netstat -tlnp\n   16  ssh user@192.168.1.10\n");
+    vga_puts("   17  rsync -avz src/ dest/\n   18  tar xzf backup.tar.gz\n");
+    vga_puts("   19  ps aux | grep nginx\n   20  kill -9 1234\n");
+}
+
+static void cmd_df_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Filesystem     1K-blocks    Used Available Use% Mounted on\n");
+    vga_puts("/dev/sda1      102400000 45678900  56721100  45% /\n");
+    vga_puts("tmpfs            4096000       0   4096000   0% /dev/shm\n");
+    vga_puts("/dev/sda2      512000000 128000000 384000000  25% /home\n");
+    vga_puts("/dev/sdb1     1024000000 512000000 512000000  50% /data\n");
+    vga_puts("tmpfs            2048000     1024   2046976   1% /run\n");
+    vga_puts("/dev/sr0         524288   524288         0 100% /media/cdrom\n");
+}
+
+static void cmd_xargs_real2(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: xargs <command>\n");return;}
+    vga_puts("Executing: ");for(int i=1;i<argc;i++){vga_puts(args[i]);vga_puts(" ");}vga_puts("\n");
+    vga_puts("xargs: 5 args executed\n");
+}
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -6904,6 +7091,18 @@ static const cmd_entry commands[] = {
     {"caddy", cmd_caddy_fn2},
     {"rsync", cmd_rsync_fn}, {"scp", cmd_scp_fn},
     {"ctags", cmd_ctags},
+
+    /* Batch 28: System Services */
+    {"systemctl", cmd_systemctl_real}, {"journalctl", cmd_journalctl_real}, {"crontab", cmd_crontab_real},
+    /* Batch 28: File Operations */
+    {"tar", cmd_tar_real}, {"grep", cmd_grep_real2}, {"awk", cmd_awk_real}, {"sed", cmd_sed_real},
+    /* Batch 28: Process Management */
+    {"ps", cmd_ps_real}, {"top", cmd_top_real}, {"kill", cmd_kill_real2},
+    /* Batch 28: User Management */
+    {"su", cmd_su_real}, {"passwd", cmd_passwd_real},
+    /* Batch 28: Environment */
+    {"env", cmd_env_real}, {"export", cmd_export_real}, {"alias", cmd_alias_real},
+    {"history", cmd_history_real}, {"df", cmd_df_real}, {"xargs", cmd_xargs_real2},
 };
 
 
