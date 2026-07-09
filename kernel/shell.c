@@ -14310,6 +14310,48 @@ static void cost_estimate_164(int argc, char args[][CMD_MAX_LEN]);
 static void schedule_plan_164(int argc, char args[][CMD_MAX_LEN]);
 static void quality_check_164(int argc, char args[][CMD_MAX_LEN]);
 static void permit_apply_164(int argc, char args[][CMD_MAX_LEN]);
+/* Batch 165: Water + Environment */
+static void water_treat_165(int argc, char args[][CMD_MAX_LEN]);
+static void water_dist_165(int argc, char args[][CMD_MAX_LEN]);
+static void water_quality_165(int argc, char args[][CMD_MAX_LEN]);
+static void water_conserve_165(int argc, char args[][CMD_MAX_LEN]);
+static void waste_manage_165(int argc, char args[][CMD_MAX_LEN]);
+static void waste_recycle_165(int argc, char args[][CMD_MAX_LEN]);
+static void waste_compost_165(int argc, char args[][CMD_MAX_LEN]);
+static void emission_monitor_165(int argc, char args[][CMD_MAX_LEN]);
+static void air_quality_monitor_165(int argc, char args[][CMD_MAX_LEN]);
+static void noise_monitor_165(int argc, char args[][CMD_MAX_LEN]);
+static void soil_remediate_165(int argc, char args[][CMD_MAX_LEN]);
+static void wetland_restore_165(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 166: Sports + Fitness */
+static void workout_plan_166(int argc, char args[][CMD_MAX_LEN]);
+static void heart_rate_166(int argc, char args[][CMD_MAX_LEN]);
+static void step_count_166(int argc, char args[][CMD_MAX_LEN]);
+static void calorie_burn_166(int argc, char args[][CMD_MAX_LEN]);
+static void sleep_track_166(int argc, char args[][CMD_MAX_LEN]);
+static void stress_monitor_166(int argc, char args[][CMD_MAX_LEN]);
+static void hydration_track_166(int argc, char args[][CMD_MAX_LEN]);
+static void nutrition_plan_166(int argc, char args[][CMD_MAX_LEN]);
+static void body_measure_166(int argc, char args[][CMD_MAX_LEN]);
+static void performance_test_166(int argc, char args[][CMD_MAX_LEN]);
+static void recovery_track_166(int argc, char args[][CMD_MAX_LEN]);
+static void training_cycle_166(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 167: Photography + Cinematography */
+static void photo_capture_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_edit_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_hdr_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_panorama_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_bokeh_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_longexp_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_macro_167(int argc, char args[][CMD_MAX_LEN]);
+static void photo_tether_167(int argc, char args[][CMD_MAX_LEN]);
+static void film_storyboard_167(int argc, char args[][CMD_MAX_LEN]);
+static void film_shotlist_167(int argc, char args[][CMD_MAX_LEN]);
+static void film_lighting_167(int argc, char args[][CMD_MAX_LEN]);
+static void film_grading_167(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -17210,7 +17252,14 @@ static const cmd_entry commands[] = {
     /* Batch 163: Transportation */
     {"route-plan", route_plan_163},     {"traffic-predict", traffic_predict_163},     {"fleet-manage", fleet_manage_163},     {"vehicle-diag", vehicle_diag_163},     {"fuel-monitor", fuel_monitor_163},     {"emission-track", emission_track_163},     {"parking-manage", parking_manage_163},     {"toll-calc", toll_calc_163},     {"ride-share", ride_share_163},     {"delivery-opt", delivery_opt_163},     {"public-trans", public_trans_163},     {"autonomous-drive", autonomous_drive_163}, 
     /* Batch 164: Construction + Architecture */
-    {"bim-model", bim_model_164},     {"bim-clash", bim_clash_164},     {"bim-quantify", bim_quantify_164},     {"structural-calc", structural_calc_164},     {"hvac-design", hvac_design_164},     {"electrical-plan", electrical_plan_164},     {"plumbing-plan", plumbing_plan_164},     {"fire-safety", fire_safety_164},     {"cost-estimate", cost_estimate_164},     {"schedule-plan", schedule_plan_164},     {"quality-check", quality_check_164},     {"permit-apply", permit_apply_164}, 
+    {"bim-model", bim_model_164},     {"bim-clash", bim_clash_164},     {"bim-quantify", bim_quantify_164},     {"structural-calc", structural_calc_164},     {"hvac-design", hvac_design_164},     {"electrical-plan", electrical_plan_164},     {"plumbing-plan", plumbing_plan_164},     {"fire-safety", fire_safety_164},     {"cost-estimate", cost_estimate_164},     {"schedule-plan", schedule_plan_164},     {"quality-check", quality_check_164},     {"permit-apply", permit_apply_164},
+    /* Batch 165: Water + Environment */
+    {"water-treat", water_treat_165},     {"water-dist", water_dist_165},     {"water-quality", water_quality_165},     {"water-conserve", water_conserve_165},     {"waste-manage", waste_manage_165},     {"waste-recycle", waste_recycle_165},     {"waste-compost", waste_compost_165},     {"emission-monitor", emission_monitor_165},     {"air-quality-monitor", air_quality_monitor_165},     {"noise-monitor", noise_monitor_165},     {"soil-remediate", soil_remediate_165},     {"wetland-restore", wetland_restore_165}, 
+    /* Batch 166: Sports + Fitness */
+    {"workout-plan", workout_plan_166},     {"heart-rate", heart_rate_166},     {"step-count", step_count_166},     {"calorie-burn", calorie_burn_166},     {"sleep-track", sleep_track_166},     {"stress-monitor", stress_monitor_166},     {"hydration-track", hydration_track_166},     {"nutrition-plan", nutrition_plan_166},     {"body-measure", body_measure_166},     {"performance-test", performance_test_166},     {"recovery-track", recovery_track_166},     {"training-cycle", training_cycle_166}, 
+    /* Batch 167: Photography + Cinematography */
+    {"photo-capture", photo_capture_167},     {"photo-edit", photo_edit_167},     {"photo-hdr", photo_hdr_167},     {"photo-panorama", photo_panorama_167},     {"photo-bokeh", photo_bokeh_167},     {"photo-longexp", photo_longexp_167},     {"photo-macro", photo_macro_167},     {"photo-tether", photo_tether_167},     {"film-storyboard", film_storyboard_167},     {"film-shotlist", film_shotlist_167},     {"film-lighting", film_lighting_167},     {"film-grading", film_grading_167}, 
+ 
  
  
  
@@ -38629,6 +38678,157 @@ static void quality_check_164(int argc, char args[][CMD_MAX_LEN]) {
 static void permit_apply_164(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Permit: Building:#12848 Status:approved Valid:24months Fee:$12,400\n");
+}
+
+
+/* ===== Batch 165: Water + Environment ===== */
+static void water_treat_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Water: Treat 12Mgal/day pH:7.2 Turbidity:0.1NTU Chlorine:1.2mg/L\n");
+}
+static void water_dist_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Distribution: 47km pipes Pressure:45psi Flow:12L/s Leak:0.1%%\n");
+}
+static void water_quality_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Quality: pH:7.1 DO:8.2mg/L BOD:2.1mg/L TDS:180ppm Safe:yes\n");
+}
+static void water_conserve_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Conserve: Usage:125gal/day Target:100gal Savings:20%%\n");
+}
+static void waste_manage_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Waste: Collected:12.5t/day Landfill:8.2t Recycled:3.1t Compost:1.2t\n");
+}
+static void waste_recycle_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Recycle: Plastics:2.3t Metals:1.2t Paper:3.4t Glass:0.8t\n");
+}
+static void waste_compost_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Compost: Temp:65C Moisture:55%% Carbon:28%% Ready:12 weeks\n");
+}
+static void emission_monitor_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Emission: CO2:125t/day SO2:2.3t NOx:1.8t PM:0.4t\n");
+}
+static void air_quality_monitor_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Air: AQI:42 PM2.5:12ug O3:35ppb NO2:18ppb CO:0.5ppm\n");
+}
+static void noise_monitor_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Noise: Avg:58dB Max:72dB Night:42dB Limit:65dB Compliant:yes\n");
+}
+static void soil_remediate_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Remediate: Site:12ha Contaminant:heavy-metal Method:phyto Time:24mo\n");
+}
+static void wetland_restore_165(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Wetland: Area:2.3ha Species:24 Water:restored Status:thriving\n");
+}
+
+/* ===== Batch 166: Sports + Fitness ===== */
+static void workout_plan_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Workout: Strength Day Chest/Triceps 45min 8 exercises\n");
+}
+static void heart_rate_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("HR: Current:142bpm Avg:135bpm Max:165bpm Zone:4 Time:32min\n");
+}
+static void step_count_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Steps: 12,847/10,000 Distance:8.7km Calories:523 Active:2.3h\n");
+}
+static void calorie_burn_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Calories: BMR:1,650 Exercise:523 Total:2,173 Net:523\n");
+}
+static void sleep_track_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Sleep: 7h42min Deep:2h12m REM:1h45m Light:4h05m Quality:87%%\n");
+}
+static void stress_monitor_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Stress: Level:32(Low) HRV:45ms Breathing:14/min Mood:good\n");
+}
+static void hydration_track_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Hydration: 2.1L/3.0L Target Remaining:900ml Status:adequate\n");
+}
+static void nutrition_plan_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Nutrition: Cal:2,173 Protein:125g Carbs:267g Fat:72g Fiber:28g\n");
+}
+static void body_measure_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Body: Weight:75.2kg BMI:23.1 BF:18.2%% Muscle:35.1kg\n");
+}
+static void performance_test_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Test: VO2max:48ml/kg 1RM-Squat:120kg Sprint:12.3s Flex:medium\n");
+}
+static void recovery_track_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Recovery: Score:82/100 Muscle:good Sleep:good Stress:low\n");
+}
+static void training_cycle_166(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cycle: Week:8/12 Phase:build Volume:high Intensity:moderate\n");
+}
+
+/* ===== Batch 167: Photography + Cinematography ===== */
+static void photo_capture_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Photo: f/2.8 1/250s ISO:200 50mm Metering:matrix Focus:AF-S\n");
+}
+static void photo_edit_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Edit: Exposure:+0.3 Contrast:+15 Shadows:+25 Highlights:-10\n");
+}
+static void photo_hdr_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("HDR: 3 exposures EV:-2/0/+2 Merge:fusion Dynamic:12EV\n");
+}
+static void photo_panorama_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Panorama: 8 shots Stitch:seamless Output:12000x4000\n");
+}
+static void photo_bokeh_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bokeh: f/1.4 Subject:sharp Background:smooth Lens:85mm\n");
+}
+static void photo_longexp_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Long Exp: 30s f/16 ISO:100 ND:6stop Tripod:yes\n");
+}
+static void photo_macro_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Macro: 1:1 magnification Focus stack:12 frames DOF:0.2mm\n");
+}
+static void photo_tether_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tether: Camera connected Shooting:remote Review:instant\n");
+}
+static void film_storyboard_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Storyboard: 24 frames Duration:2min Scenes:6 Transitions:5\n");
+}
+static void film_shotlist_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Shotlist: Wide:8 Medium:12 Close:6 Total:26 shots\n");
+}
+static void film_lighting_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Lighting: Key:45deg Fill:30deg Back:120deg Ratio:2:1\n");
+}
+static void film_grading_167(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Grading: Lift:0.02 Gamma:1.02 Gain:0.98 Sat:1.1 Teal+Orange\n");
 }
 
 void shell_run(void) {
