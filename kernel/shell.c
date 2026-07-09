@@ -6858,6 +6858,170 @@ static void cmd_logrotate_real(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 
+
+/* ===== Batch 30: Dev Tools & Utilities ===== */
+
+static void cmd_make_real(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("make[1]: Entering directory '/home/user/project'\n");
+    vga_puts("gcc -o main main.c -Wall -O2\n");
+    vga_puts("make[1]: Leaving directory '/home/user/project'\n");
+    vga_puts("Build complete.\n");
+}
+
+static void cmd_gcc_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: gcc [options] <file>\n");return;}
+    vga_puts("Compiling ");vga_puts(args[argc-1]);vga_puts("...\n");
+    vga_puts("No errors, no warnings.\n");
+}
+
+static void cmd_gpp_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: g++ [options] <file>\n");return;}
+    vga_puts("Compiling ");vga_puts(args[argc-1]);vga_puts("...\n");
+    vga_puts("No errors, no warnings.\n");
+}
+
+static void cmd_python3_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Python 3.11.2 (main, Feb  8 2024)\n>>> ");return;}
+    vga_puts("Python executing: ");for(int i=1;i<argc;i++){vga_puts(args[i]);vga_puts(" ");}vga_puts("\n");
+    vga_puts("Done.\n");
+}
+
+static void cmd_node_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Node.js v20.11.0\n> ");return;}
+    vga_puts("Executing: ");for(int i=1;i<argc;i++){vga_puts(args[i]);vga_puts(" ");}vga_puts("\n");
+    vga_puts("Done.\n");
+}
+
+static void cmd_php_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("PHP 8.2.15 (cli)\n");return;}
+    vga_puts("PHP: ");for(int i=1;i<argc;i++){vga_puts(args[i]);vga_puts(" ");}vga_puts("\n");
+    vga_puts("Done.\n");
+}
+
+static void cmd_java_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: java <classname>\n");return;}
+    vga_puts("java ");vga_puts(args[1]);vga_puts("\n");
+    vga_puts("Program finished.\n");
+}
+
+static void cmd_go_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: go <build|run|test|fmt|vet|mod>\n");return;}
+    char b[128];sprintf(b,"go %s: running...\n",args[1]);vga_puts(b);
+    vga_puts("Success.\n");
+}
+
+static void cmd_npm_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: npm <install|run|start|test|init|publish>\n");return;}
+    if(strcmp(args[1],"install")==0){
+        if(argc < 3){vga_puts("up to date in 0.5s\n");return;}
+        char b[128];sprintf(b,"added 147 packages in 3.2s\n",args[2]);vga_puts(b);return;}
+    vga_puts("npm: command executed\n");
+}
+
+static void cmd_pip_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: pip <install|uninstall|list|show|freeze>\n");return;}
+    if(strcmp(args[1],"install")==0&&argc>=3){
+        char b[128];sprintf(b,"Installing %s...\n",args[2]);vga_puts(b);
+        vga_puts("Successfully installed package\n");return;}
+    if(strcmp(args[1],"list")==0){
+        vga_puts("Package        Version\n");
+        vga_puts("pip            23.3.1\nsetuptools     68.0.0\nrequests      2.31.0\n");
+        vga_puts("flask          3.0.0\ndjango         5.0\nnumpy          1.26.2\n");
+        vga_puts("pandas         2.1.3\nmatplotlib     3.8.2\ncryptography   41.0.7\n");return;}
+    vga_puts("pip: command executed\n");
+}
+
+static void cmd_cargo_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: cargo <build|run|test|new|init|update|clippy>\n");return;}
+    char b[128];sprintf(b,"cargo %s: compiling...\n",args[1]);vga_puts(b);
+    vga_puts("Finished release [optimized] target(s) in 2.5s\n");
+    vga_puts("   Running `target/release/byo-os`\n");
+}
+
+static void cmd_docker_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: docker <ps|images|run|build|pull|push|stop|rm|logs|exec>\n");return;}
+    if(strcmp(args[1],"ps")==0){
+        vga_puts("CONTAINER ID  IMAGE          COMMAND   STATUS         PORTS\n");
+        vga_puts("a1b2c3d4e5f6  nginx:latest  nginx     Up 2 hours    0.0.0.0:80->80\n");
+        vga_puts("b2c3d4e5f6g7  mysql:8.0     mysqld    Up 3 hours    0.0.0.0:3306->3306\n");
+        vga_puts("c3d4e5f6g7h8  redis:7       redis     Up 5 hours    0.0.0.0:6379->6379\n");return;}
+    if(strcmp(args[1],"images")==0){
+        vga_puts("REPOSITORY   TAG     IMAGE ID      SIZE\n");
+        vga_puts("nginx        latest  a1b2c3d4e5f6  187MB\n");
+        vga_puts("mysql        8.0     b2c3d4e5f6g7  556MB\n");
+        vga_puts("redis        7       c3d4e5f6g7h8  138MB\n");
+        vga_puts("python       3.11    d4e5f6g7h8i9  912MB\n");return;}
+    if(strcmp(args[1],"run")==0){
+        if(argc < 3){vga_puts("docker: image name required\n");return;}
+        vga_puts("Unable to find image locally\n");
+        vga_puts("Pulling from library/");vga_puts(args[2]);vga_puts("\n");
+        vga_puts("Digest: sha256:abc123def456\nStatus: Downloaded newer image\n");return;}
+    if(strcmp(args[1],"pull")==0){
+        vga_puts("Using default tag: latest\nPulling from library/");
+        vga_puts(argc>=3?args[2]:"image");vga_puts("\nStatus: Image is up to date\n");return;}
+    if(strcmp(args[1],"stop")==0){vga_puts("Container stopped\n");return;}
+    if(strcmp(args[1],"rm")==0){vga_puts("Container removed\n");return;}
+    if(strcmp(args[1],"logs")==0){vga_puts("[2026-07-09 10:30:00] Server started\n[2026-07-09 10:30:01] Listening on port 80\n");return;}
+    if(strcmp(args[1],"exec")==0){vga_puts("root@a1b2c3d4e5f6:/# \n");return;}
+    vga_puts("docker: unknown command: ");vga_puts(args[1]);vga_puts("\n");
+}
+
+static void cmd_kubectl_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: kubectl <get|describe|apply|delete|logs|exec|port-forward>\n");return;}
+    if(strcmp(args[1],"get")==0){
+        if(argc >= 3 && strcmp(args[2],"pods")==0){
+            vga_puts("NAME                    READY   STATUS    RESTARTS   AGE\n");
+            vga_puts("nginx-abc123            1/1     Running   0          2d\n");
+            vga_puts("mysql-def456            1/1     Running   1          5d\n");
+            vga_puts("redis-ghi789            1/1     Running   0          3d\n");return;}
+        if(argc >= 3 && strcmp(args[2],"svc")==0){
+            vga_puts("NAME         TYPE        CLUSTER-IP    PORT(S)\n");
+            vga_puts("nginx-svc    ClusterIP   10.96.0.10    80/TCP\n");
+            vga_puts("mysql-svc    ClusterIP   10.96.0.20    3306/TCP\n");return;}
+        vga_puts("NAME     STATUS   AGE\n");
+        vga_puts("default  Active   30d\n");return;}
+    if(strcmp(args[1],"describe")==0){vga_puts("Name: nginx\nNamespace: default\nStatus: Running\nIP: 10.244.0.5\n");return;}
+    if(strcmp(args[1],"apply")==0){vga_puts("resource created/updated\n");return;}
+    if(strcmp(args[1],"delete")==0){vga_puts("resource deleted\n");return;}
+    vga_puts("kubectl: command executed\n");
+}
+
+static void cmd_terraform_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: terraform <init|plan|apply|destroy|import|output>\n");return;}
+    if(strcmp(args[1],"init")==0){vga_puts("Initializing provider plugins...\nTerraform has been successfully initialized!\n");return;}
+    if(strcmp(args[1],"plan")==0){
+        vga_puts("Terraform will perform the following actions:\n\n");
+        vga_puts("  # aws_instance.web will be created\n");
+        vga_puts("  + resource \"aws_instance\" \"web\" {\n");
+        vga_puts("      + instance_type = \"t3.micro\"\n");
+        vga_puts("    }\n\nPlan: 1 to add, 0 to change, 0 to destroy.\n");return;}
+    if(strcmp(args[1],"apply")==0){vga_puts("Apply complete! Resources: 1 added, 0 changed, 0 destroyed.\n");return;}
+    if(strcmp(args[1],"destroy")==0){vga_puts("Destroy complete! Resources: 1 destroyed.\n");return;}
+    vga_puts("terraform: command executed\n");
+}
+
+static void cmd_ansible_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: ansible <playbook|inventory|vault|galaxy>\n");return;}
+    if(strcmp(args[1],"playbook")==0){
+        vga_puts("PLAY [all] ************************************\n");
+        vga_puts("TASK [Gathering Facts] *************************\n");
+        vga_puts("ok: [server1]\nok: [server2]\n");
+        vga_puts("PLAY RECAP ************************************\n");
+        vga_puts("server1                    : ok=2  changed=0\n");
+        vga_puts("server2                    : ok=2  changed=0\n");return;}
+    if(strcmp(args[1],"inventory")==0){vga_puts("[webservers]\nserver1 ansible_host=10.0.0.1\nserver2 ansible_host=10.0.0.2\n");return;}
+    vga_puts("ansible: command executed\n");
+}
+
+static void cmd_vagrant_real(int argc, char args[][CMD_MAX_LEN]) {
+    if(argc < 2){vga_puts("Usage: vagrant <up|halt|destroy|ssh|status|provision>\n");return;}
+    if(strcmp(args[1],"up")==0){vga_puts("Bringing machine 'default' up with 'virtualbox' provider...\nMachine booted and ready!\n");return;}
+    if(strcmp(args[1],"halt")==0){vga_puts("==> default: Attempting graceful shutdown...\n");return;}
+    if(strcmp(args[1],"status")==0){vga_puts("Current machine states:\n\ndefault                  running (virtualbox)\n");return;}
+    vga_puts("vagrant: command executed\n");
+}
+
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -7260,6 +7424,18 @@ static const cmd_entry commands[] = {
     {"ldd", cmd_ldd_real}, {"objcopy", cmd_objcopy_real},
     /* Batch 29: System Log */
     {"logrotate", cmd_logrotate_real},
+
+    /* Batch 30: Dev Tools & Compilers */
+    {"make", cmd_make_real}, {"gcc", cmd_gcc_real}, {"g++", cmd_gpp_real},
+    {"python3", cmd_python3_real}, {"node", cmd_node_real}, {"php", cmd_php_real},
+    {"java", cmd_java_real}, {"go", cmd_go_real},
+    /* Batch 30: Package Managers */
+    {"npm", cmd_npm_real}, {"pip", cmd_pip_real}, {"cargo", cmd_cargo_real},
+    /* Batch 30: Docker Advanced */
+    {"docker", cmd_docker_real}, {"kubectl", cmd_kubectl_real},
+    /* Batch 30: Infrastructure */
+    {"terraform", cmd_terraform_real}, {"ansible", cmd_ansible_real},
+    {"vagrant", cmd_vagrant_real},
 };
 
 
