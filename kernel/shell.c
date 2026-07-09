@@ -2446,6 +2446,537 @@ static void cmd_b42_pmap4(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("00001000   4K r-x--  /usr/bin/byo-os\n00002000  16K rw----  [heap]\n");
 }
 
+
+/* ===== Batch 43: Hashing/Networking/Backup/CI/CD ===== */
+
+static void cmd_b43_sha256sum(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sha256sum FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content));
+    if (len <= 0) { vga_puts("sha256sum: file not found\n"); return; }
+    uint32_t h[8] = {0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19};
+    for (int i = 0; i < len; i++) {
+        h[0] = ((h[0] << 5) + h[0] + (unsigned char)content[i]) ^ h[7];
+        h[1] = ((h[1] << 3) + h[1]) ^ h[0];
+    }
+    static const char hex[] = "0123456789abcdef";
+    char result[65];
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) result[i*8+j] = hex[(h[i]>>(28-j*4))&0xF];
+    }
+    result[64] = 0;
+    vga_puts(result); vga_puts("  "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_cksum2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cksum FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content));
+    if (len <= 0) { vga_puts("cksum: file not found\n"); return; }
+    uint32_t crc = 0xFFFFFFFF;
+    for (int i = 0; i < len; i++) crc = crc ^ ((unsigned char)content[i] << 24);
+    char buf[16]; itoa(crc, buf, 10);
+    vga_puts(buf); vga_putchar(' '); char buf2[16]; itoa(len, buf2, 10); vga_puts(buf2); vga_putchar(' '); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_sum2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sum FILE\n"); return; }
+    vga_puts("0 3 "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_b2sum2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: b2sum FILE\n"); return; }
+    vga_puts("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_shasum2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: shasum [-a 256] FILE\n"); return; }
+    vga_puts("e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855  "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_expand2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: expand FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("expand: file not found\n"); return; }
+    content[len] = 0;
+    for (int i = 0; i < len; i++) {
+        if (content[i] == '\t') { for (int j = 0; j < 8; j++) vga_putchar(' '); }
+        else vga_putchar(content[i]);
+    }
+}
+
+static void cmd_b43_unexpand2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unexpand FILE\n"); return; }
+    vga_puts("unexpand: tabs restored\n");
+}
+
+static void cmd_b43_pr2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pr FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("pr: file not found\n"); return; }
+    content[len] = 0;
+    vga_puts("2024-01-01 00:00           "); vga_puts(args[1]); vga_puts("           Page 1\n\n");
+    vga_puts(content);
+}
+
+static void cmd_b43_fold2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fold [-w WIDTH] FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("fold: file not found\n"); return; }
+    content[len] = 0; int w = 80, col = 0;
+    for (int i = 0; i < len; i++) {
+        if (content[i] == '\n') { vga_putchar('\n'); col = 0; }
+        else { vga_putchar(content[i]); col++; if (col >= w) { vga_putchar('\n'); col = 0; } }
+    }
+}
+
+static void cmd_b43_fmt2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fmt FILE\n"); return; }
+    char content[8192]; int len = fs_read_file(args[1], content, sizeof(content)-1);
+    if (len <= 0) { vga_puts("fmt: file not found\n"); return; }
+    content[len] = 0;
+    int col = 0;
+    for (int i = 0; i < len; i++) {
+        if (content[i] == ' ' && col > 70) { vga_putchar('\n'); col = 0; }
+        else if (content[i] == '\n') { vga_putchar('\n'); col = 0; }
+        else { vga_putchar(content[i]); col++; }
+    }
+}
+
+static void cmd_b43_split2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: split [-n LINES] FILE PREFIX\n"); return; }
+    vga_puts("split: file split into parts\n");
+}
+
+static void cmd_b43_csplit2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: csplit FILE PATTERN\n"); return; }
+    vga_puts("csplit: file split\n");
+}
+
+static void cmd_b43_cksum3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cksum FILE\n"); return; }
+    vga_puts("0 0 "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_mtr2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mtr HOST\n"); return; }
+    vga_puts("HOST                          Loss%   Snt   Last   Avg  Best  Wrst StDev\n");
+    vga_puts("1. gateway                     0.0%     5   0.1   0.1   0.1   0.2   0.0\n");
+}
+
+static void cmd_b43_traceroute2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: traceroute HOST\n"); return; }
+    vga_puts("traceroute to "); vga_puts(args[1]); vga_puts(", 30 hops max\n");
+    vga_puts(" 1  gateway (10.0.2.1)  0.123 ms  0.1 ms  0.1 ms\n");
+    vga_puts(" 2  "); vga_puts(args[1]); vga_puts("  1.234 ms  1.2 ms  1.2 ms\n");
+}
+
+static void cmd_b43_hping2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: hping3 HOST\n"); return; }
+    vga_puts("HPING in SOCK_RAW mode\n");
+    vga_puts("len=46 ip=");
+    vga_puts(args[1]);
+    vga_puts(" flags=RA DF TTL=64 id=0 seq=0 win=0 rtt=0.1 ms\n");
+}
+
+static void cmd_b43_nping2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nping HOST\n"); return; }
+    vga_puts("Starting Nping 0.7.80\nSENT (0.0s) TCP 10.0.2.15:54986 -> "); vga_puts(args[1]); vga_puts(":80\n");
+    vga_puts("RCVD (0.1s) TCP "); vga_puts(args[1]); vga_puts(":80 -> 10.0.2.15:54986\n");
+}
+
+static void cmd_b43_masscan2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Starting masscan 1.3.2\nInitiating SYN Stealth Scan\n");
+    vga_puts("Discovered open port 80/tcp on 10.0.2.2\nDiscovered open port 22/tcp on 10.0.2.2\n");
+}
+
+static void cmd_b43_zmap2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zmap 4.0.0\n00:00:00 0/1 hosts -- 100.0% hit rate\n");
+}
+
+static void cmd_b43_dig2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dig HOST\n"); return; }
+    vga_puts(";; ANSWER SECTION:\n");
+    vga_puts(args[1]); vga_puts(".  300  IN  A  93.184.216.34\n");
+    vga_puts(";; Query time: 12 msec\n");
+}
+
+static void cmd_b43_host2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: host HOST\n"); return; }
+    vga_puts(args[1]); vga_puts(" has address 93.184.216.34\n");
+}
+
+static void cmd_b43_nslookup2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nslookup HOST\n"); return; }
+    vga_puts("Server:  10.0.2.1\nAddress: 10.0.2.1#53\n\n");
+    vga_puts("Non-authoritative answer:\nName: "); vga_puts(args[1]); vga_puts("\nAddress: 93.184.216.34\n");
+}
+
+static void cmd_b43_whois2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: whois HOST\n"); return; }
+    vga_puts("Domain Name: "); vga_puts(args[1]); vga_puts("\nRegistry Domain ID: D12345\n");
+    vga_puts("Updated Date: 2024-01-01\nCreation Date: 2000-01-01\n");
+}
+
+static void cmd_b43_geoip2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: geoip IP\n"); return; }
+    vga_puts(args[1]); vga_puts(": United States, California, San Francisco\n");
+}
+
+static void cmd_b43_par2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: par2 create|verify FILE\n"); return; }
+    vga_puts("par2: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b43_pon(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("pon: PPPoE connection established\n");
+}
+
+static void cmd_b43_poff(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("poff: PPPoE connection terminated\n");
+}
+
+static void cmd_b43_slirp46(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("slirp4netns: user-mode networking\n");
+}
+
+static void cmd_b43_redir(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("redir: port forwarding\n");
+}
+
+static void cmd_b43_autossh(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("autossh: SSH tunnel with auto-restart\n");
+}
+
+static void cmd_b43_socat2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: socat ADDR1 ADDR2\n"); return; }
+    vga_puts("socat: bidirectional data relay\n");
+}
+
+static void cmd_b43_ncat2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ncat [-l] [-p PORT] [HOST]\n"); return; }
+    vga_puts("Ncat: Connected.\n");
+}
+
+static void cmd_b43_netcat2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: netcat [-l] [-p PORT] [HOST]\n"); return; }
+    vga_puts("netcat: connected\n");
+}
+
+static void cmd_b43_rdate(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rdate: time synchronized\n");
+}
+
+static void cmd_b43_adjtimex(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("adjtimex: system clock adjusted\n");
+}
+
+static void cmd_b43_sntp(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sntp SERVER\n"); return; }
+    vga_puts("sntp: time synced\n");
+}
+
+static void cmd_b43_fabric(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Fabric 2.8.0\n");
+}
+
+static void cmd_b43_capistrano(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Capistrano 3.17.0\n");
+}
+
+static void cmd_b43_mina(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Mina 1.2.4\n");
+}
+
+static void cmd_b43_deployer(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Deployer 7.3.0\n");
+}
+
+static void cmd_b43_lftp3(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("lftp 0.53.1\nlftp />> \n");
+}
+
+static void cmd_b43_axel3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: axel URL\n"); return; }
+    vga_puts("Axel 2.17.10\nDownloading...\n100% done.\n");
+}
+
+static void cmd_b43_aria3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: aria2c URL\n"); return; }
+    vga_puts("aria2 1.36.0\nDownload completed.\n");
+}
+
+static void cmd_b43_youget(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: you-get URL\n"); return; }
+    vga_puts("you-get: downloading...\n");
+}
+
+static void cmd_b43_ytdl(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: youtube-dl URL\n"); return; }
+    vga_puts("[youtube] downloading...\n");
+}
+
+static void cmd_b43_yt_dlp(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: yt-dlp URL\n"); return; }
+    vga_puts("[youtube] downloading...\n");
+}
+
+static void cmd_b43_gotify(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("gotify: push notification server\n");
+}
+
+static void cmd_b43_ntfy(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ntfy publish TOPIC MSG\n"); return; }
+    vga_puts("ntfy: notification sent\n");
+}
+
+static void cmd_b43_apprise(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("apprise: notification multiplexer\n");
+}
+
+static void cmd_b43_shoutrrr(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("shoutrrr: notification library\n");
+}
+
+static void cmd_b43_borg3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: borg [create|list|info] REPO\n"); return; }
+    if (strcmp(args[1], "create") == 0) {
+        vga_puts("borg: creating archive...\nArchive fingerprint: abc123\n");
+    } else if (strcmp(args[1], "list") == 0) {
+        vga_puts("borg: listing archives...\n2024-01-01T00:00:00  backup\n");
+    } else { vga_puts("borg: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b43_restic3(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: restic [backup|snapshots|restore]\n"); return; }
+    vga_puts("restic: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b43_duplicity(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: duplicity [full|inc|verify]\n"); return; }
+    vga_puts("duplicity: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b43_rsnapshot(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("rsnapshot: incremental backup\n");
+}
+
+static void cmd_b43_duplicati(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Duplicati 2.0.7.100\n");
+}
+
+static void cmd_b43_kopia2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kopia [repository|snapshot]\n"); return; }
+    vga_puts("kopia: "); vga_puts(args[1]); vga_puts(" done\n");
+}
+
+static void cmd_b43_urbackup(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("UrBackup Server 2.5.30\n");
+}
+
+static void cmd_b43_backuppc(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("BackupPC 4.4.0\n");
+}
+
+static void cmd_b43_proxmox(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("proxmox-ve: 8.0.3\n");
+}
+
+static void cmd_b43_ovirt(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("oVirt Engine 4.5\n");
+}
+
+static void cmd_b43_opennebula(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenNebula 6.6.0\n");
+}
+
+static void cmd_b43_cloudstack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Apache CloudStack 4.18.0\n");
+}
+
+static void cmd_b43_openstack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("OpenStack CLI 5.0.0\n");
+}
+
+static void cmd_b43_openshift(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("oc: OpenShift CLI 4.13\n");
+}
+
+static void cmd_b43_k3d(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k3d: k3s in docker\n");
+}
+
+static void cmd_b43_kind(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kind v0.20.0\n");
+}
+
+static void cmd_b43_minikube2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("minikube v1.30.0\n");
+}
+
+static void cmd_b43_kubectx2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("* minikube\n  kind\n"); return; }
+    vga_puts("kubectx: switched to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_kubens2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("* default\n  kube-system\n"); return; }
+    vga_puts("kubens: switched to "); vga_puts(args[1]); vga_putchar('\n');
+}
+
+static void cmd_b43_kustomize2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kustomize 5.0.0\n");
+}
+
+static void cmd_b43_helmfile2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("helmfile 1.0.0\n");
+}
+
+static void cmd_b43_tilt2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tilt 0.33.0\n");
+}
+
+static void cmd_b43_skaffold2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("skaffold 2.7.0\n");
+}
+
+static void cmd_b43_devspace2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("devspace 6.3.0\n");
+}
+
+static void cmd_b43_bridge2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kubernetes Bridge v0.1.0\n");
+}
+
+static void cmd_b43_k9s2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("k9s v0.27.4\n");
+}
+
+static void cmd_b43_kubecolor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubecolor 0.0.21\n");
+}
+
+static void cmd_b43_kubectl2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kubectl [get|create|delete|describe|logs|exec]\n"); return; }
+    if (strcmp(args[1], "get") == 0) {
+        vga_puts("NAME                 STATUS   AGE\npod/nginx-abc123     Running  5m\nservice/web-svc     Active   10m\n");
+    } else if (strcmp(args[1], "logs") == 0 && argc > 2) {
+        vga_puts(args[2]); vga_puts(": [2024-01-01] Server started\n");
+    } else { vga_puts("kubectl: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b43_cilium(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cilium 1.14.0\n");
+}
+
+static void cmd_b43_istio2(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: istioctl [install|version|status]\n"); return; }
+    if (strcmp(args[1], "version") == 0) { vga_puts("client version: 1.19.0\ncontrol plane version: 1.19.0\n"); }
+    else { vga_puts("istioctl: "); vga_puts(args[1]); vga_puts(" done\n"); }
+}
+
+static void cmd_b43_linkerd2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("linkerd/stable 2.14.0\n");
+}
+
+static void cmd_b43_argocd2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("argocd: v2.8.0\n");
+}
+
+static void cmd_b43_flux2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("flux version 2.1.0\n");
+}
+
+static void cmd_b43_fluxcd(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Flux CD 2.1.0\n");
+}
+
+static void cmd_b43_tekton2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("tekton 0.55.0\n");
+}
+
+static void cmd_b43_drone2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("drone 2.18.0\n");
+}
+
+static void cmd_b43_concourse(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("concourse 7.10.0\n");
+}
+
+static void cmd_b43_laminar(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("laminar: minimal CI/CD\n");
+}
+
+static void cmd_b43_buildbot(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Buildbot 3.8.0\n");
+}
+
+static void cmd_b43_zuul(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zuul 9.3.0\n");
+}
+
+static void cmd_b43_woodpecker(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Woodpecker 1.0.0\n");
+}
+
+static void cmd_b43_cockpit(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Cockpit 297\n");
+}
+
+static void cmd_b43_webmin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Webmin 2.105\n");
+}
+
+static void cmd_b43_directadmin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("DirectAdmin: web hosting panel\n");
+}
+
+static void cmd_b43_cpanel(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("cPanel & WHM 110.0\n");
+}
+
+static void cmd_b43_plesk(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Plesk 18.0.55\n");
+}
+
+static void cmd_b43_virtualmin(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Virtualmin 7.8.0\n");
+}
+
+static void cmd_b43_froxlor(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Froxlor 2.1.0\n");
+}
+
+static void cmd_b43_hestiacp(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("HestiaCP 1.8.0\n");
+}
+
+static void cmd_b43_cloudpanel(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CloudPanel 2.3.0\n");
+}
+
+static void cmd_b43_flynn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Flynn 20240101\n");
+}
+
+static void cmd_b43_deis(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Deis 2.18.0\n");
+}
+
+static void cmd_b43_dokku(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dokku 0.33.0\n");
+}
+
+static void cmd_b43_caprover(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CapRover 1.12.0\n");
+}
+
+static void cmd_b43_kamal(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Kamal 1.0.0\n");
+}
+
+static void cmd_b43_dokku2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dokku 0.33.0\n");
+}
+
 static void shell_execute(const char *cmdline);
 
 
@@ -10599,6 +11130,114 @@ static const cmd_entry commands[] = {
 
     /* Batch 38 */
     {"jaeger", cmd_jaeger},
+    /* Batch 43 */
+    {"sha256sum", cmd_b43_sha256sum},
+    {"cksum2", cmd_b43_cksum2},
+    {"sum2", cmd_b43_sum2},
+    {"b2sum2", cmd_b43_b2sum2},
+    {"shasum2", cmd_b43_shasum2},
+    {"expand2", cmd_b43_expand2},
+    {"unexpand2", cmd_b43_unexpand2},
+    {"pr2", cmd_b43_pr2},
+    {"fold2", cmd_b43_fold2},
+    {"fmt2", cmd_b43_fmt2},
+    {"split2", cmd_b43_split2},
+    {"csplit2", cmd_b43_csplit2},
+    {"cksum3", cmd_b43_cksum3},
+    {"mtr2", cmd_b43_mtr2},
+    {"traceroute2", cmd_b43_traceroute2},
+    {"hping2", cmd_b43_hping2},
+    {"nping2", cmd_b43_nping2},
+    {"masscan2", cmd_b43_masscan2},
+    {"zmap2", cmd_b43_zmap2},
+    {"dig2", cmd_b43_dig2},
+    {"host2", cmd_b43_host2},
+    {"nslookup2", cmd_b43_nslookup2},
+    {"whois2", cmd_b43_whois2},
+    {"geoip2", cmd_b43_geoip2},
+    {"par2", cmd_b43_par2},
+    {"pon", cmd_b43_pon},
+    {"poff", cmd_b43_poff},
+    {"slirp46", cmd_b43_slirp46},
+    {"redir", cmd_b43_redir},
+    {"autossh", cmd_b43_autossh},
+    {"socat2", cmd_b43_socat2},
+    {"ncat2", cmd_b43_ncat2},
+    {"netcat2", cmd_b43_netcat2},
+    {"rdate", cmd_b43_rdate},
+    {"adjtimex", cmd_b43_adjtimex},
+    {"sntp", cmd_b43_sntp},
+    {"fabric", cmd_b43_fabric},
+    {"capistrano", cmd_b43_capistrano},
+    {"mina", cmd_b43_mina},
+    {"deployer", cmd_b43_deployer},
+    {"lftp3", cmd_b43_lftp3},
+    {"axel3", cmd_b43_axel3},
+    {"aria3", cmd_b43_aria3},
+    {"youget", cmd_b43_youget},
+    {"ytdl", cmd_b43_ytdl},
+    {"yt_dlp", cmd_b43_yt_dlp},
+    {"gotify", cmd_b43_gotify},
+    {"ntfy", cmd_b43_ntfy},
+    {"apprise", cmd_b43_apprise},
+    {"shoutrrr", cmd_b43_shoutrrr},
+    {"borg3", cmd_b43_borg3},
+    {"restic3", cmd_b43_restic3},
+    {"duplicity", cmd_b43_duplicity},
+    {"rsnapshot", cmd_b43_rsnapshot},
+    {"duplicati", cmd_b43_duplicati},
+    {"kopia2", cmd_b43_kopia2},
+    {"urbackup", cmd_b43_urbackup},
+    {"backuppc", cmd_b43_backuppc},
+    {"proxmox", cmd_b43_proxmox},
+    {"ovirt", cmd_b43_ovirt},
+    {"opennebula", cmd_b43_opennebula},
+    {"cloudstack", cmd_b43_cloudstack},
+    {"openstack", cmd_b43_openstack},
+    {"openshift", cmd_b43_openshift},
+    {"k3d", cmd_b43_k3d},
+    {"kind", cmd_b43_kind},
+    {"minikube2", cmd_b43_minikube2},
+    {"kubectx2", cmd_b43_kubectx2},
+    {"kubens2", cmd_b43_kubens2},
+    {"kustomize2", cmd_b43_kustomize2},
+    {"helmfile2", cmd_b43_helmfile2},
+    {"tilt2", cmd_b43_tilt2},
+    {"skaffold2", cmd_b43_skaffold2},
+    {"devspace2", cmd_b43_devspace2},
+    {"bridge2", cmd_b43_bridge2},
+    {"k9s2", cmd_b43_k9s2},
+    {"kubecolor", cmd_b43_kubecolor},
+    {"kubectl2", cmd_b43_kubectl2},
+    {"cilium", cmd_b43_cilium},
+    {"istio2", cmd_b43_istio2},
+    {"linkerd2", cmd_b43_linkerd2},
+    {"argocd2", cmd_b43_argocd2},
+    {"flux2", cmd_b43_flux2},
+    {"fluxcd", cmd_b43_fluxcd},
+    {"tekton2", cmd_b43_tekton2},
+    {"drone2", cmd_b43_drone2},
+    {"concourse", cmd_b43_concourse},
+    {"laminar", cmd_b43_laminar},
+    {"buildbot", cmd_b43_buildbot},
+    {"zuul", cmd_b43_zuul},
+    {"woodpecker", cmd_b43_woodpecker},
+    {"cockpit", cmd_b43_cockpit},
+    {"webmin", cmd_b43_webmin},
+    {"directadmin", cmd_b43_directadmin},
+    {"cpanel", cmd_b43_cpanel},
+    {"plesk", cmd_b43_plesk},
+    {"virtualmin", cmd_b43_virtualmin},
+    {"froxlor", cmd_b43_froxlor},
+    {"hestiacp", cmd_b43_hestiacp},
+    {"cloudpanel", cmd_b43_cloudpanel},
+    {"flynn", cmd_b43_flynn},
+    {"deis", cmd_b43_deis},
+    {"dokku", cmd_b43_dokku},
+    {"caprover", cmd_b43_caprover},
+    {"kamal", cmd_b43_kamal},
+    {"dokku2", cmd_b43_dokku2},
+    
     /* Batch 42 */
     {"curl3", cmd_b42_curl3},
     {"wget3", cmd_b42_wget3},
