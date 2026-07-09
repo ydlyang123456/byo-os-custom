@@ -5468,6 +5468,98 @@ static void cmd_lynx(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("lynx: text browser\n");
 }
 
+static void cmd_jenkins_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jenkins: automation server\n");
+}
+
+static void cmd_flux_fn2(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("FluxCD: GitOps\n");
+}
+
+static void cmd_podman_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("podman: daemonless container engine\n");
+}
+
+static void cmd_buildah(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("buildah: OCI image builder\n");
+}
+
+static void cmd_skopeo(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("skopeo: container image utility\n");
+}
+
+static void cmd_containernetworking(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CNI: container networking\n");
+}
+
+static void cmd_containerd_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("containerd: container runtime\n");
+}
+
+static void cmd_prometheus_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Prometheus: monitoring\n");
+}
+
+static void cmd_grafana_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Grafana: dashboards\n");
+}
+
+static void cmd_zabbix_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Zabbix: enterprise monitoring\n");
+}
+
+static void cmd_nagios_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Nagios: infrastructure monitoring\n");
+}
+
+static void cmd_clickhouse(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ClickHouse: OLAP database\n");
+}
+
+static void cmd_cassandra_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Cassandra: distributed DB\n");
+}
+
+static void cmd_docker_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Docker: container platform\n");
+}
+
+static void cmd_kubectl_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("kubectl: Kubernetes CLI\n");
+}
+
+static void cmd_helm_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Helm: Kubernetes package manager\n");
+}
+
+static void cmd_terraform_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Terraform: IaC\n");
+}
+
+static void cmd_ansible_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Ansible: automation\n");
+}
+
+static void cmd_saltstack(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("SaltStack: automation\n");
+}
+
+static void cmd_htop_fn(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("htop: interactive process viewer\n");
+}
+
+static void cmd_btop(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("btop: resource monitor\n");
+}
+
+static void cmd_iptraf(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("iptraf: IP traffic monitor\n");
+}
+
+static void cmd_ethstatus(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ethstatus: NIC statistics\n");
+}
+
 static const cmd_entry commands[] = {
     /* Basic */
     {"help", cmd_help}, {"clear", cmd_clear}, {"echo", cmd_echo},
@@ -5973,6 +6065,34 @@ static const cmd_entry commands[] = {
     {"tmux", cmd_tmux}, {"screen", cmd_screen_fn},
     {"mc", cmd_midnight}, {"ranger", cmd_ranger},
     {"mutt", cmd_mutt}, {"lynx", cmd_lynx},
+    /* Batch 24: CI/CD */
+    {"jenkins", cmd_jenkins_fn},
+    {"flux", cmd_flux_fn2},
+    /* Batch 24: Containers */
+    {"podman", cmd_podman_fn},
+    {"buildah", cmd_buildah},
+    {"skopeo", cmd_skopeo},
+    {"containerd", cmd_containerd_fn},
+    /* Batch 24: Monitoring */
+    {"prometheus", cmd_prometheus_fn},
+    {"grafana", cmd_grafana_fn},
+    {"zabbix", cmd_zabbix_fn},
+    {"nagios", cmd_nagios_fn},
+    /* Batch 24: Database */
+    {"clickhouse", cmd_clickhouse},
+    {"cassandra", cmd_cassandra_fn},
+    /* Batch 24: Cloud */
+    {"docker", cmd_docker_fn},
+    {"kubectl", cmd_kubectl_fn},
+    {"helm", cmd_helm_fn},
+    {"terraform", cmd_terraform_fn},
+    {"ansible", cmd_ansible_fn},
+    {"saltstack", cmd_saltstack},
+    /* Batch 24: System Monitor */
+    {"htop", cmd_htop_fn},
+    {"btop", cmd_btop},
+    {"iptraf", cmd_iptraf},
+    {"ethstatus", cmd_ethstatus},
     {0, 0}
 };
 
