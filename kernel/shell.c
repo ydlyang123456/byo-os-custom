@@ -7585,12 +7585,7 @@ void shell_run(void) {
                 input_buf[0] = 0;
                 break;
             }
-
-            if (!serial_has_input()) {
-                timer_sleep(10);
-                continue;
             }
-
             char c = keyboard_getchar();
             if (!c) continue;
 
@@ -7620,5 +7615,3 @@ void shell_run(void) {
             }
         }
     }
-}
-

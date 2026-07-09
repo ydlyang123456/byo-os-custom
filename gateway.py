@@ -840,18 +840,24 @@ class H(BaseHTTPRequestHandler):
             self.wfile.write(HTML.encode('utf-8'))
         elif p == '/api/sysinfo':
             raw = br.send("sysinfo", 2.0)
-            info = None
+            info = {"serial": br.ok, "os": "BYO-OS v1.0.0", "arch": "x86", "user": "root", "free_pages": 0, "total_pages": 0, "heap_used": 0, "uptime": 0}
             for line in raw.split('\n'):
                 l = line.strip()
-                if l.startswith('{') and l.endswith('}'):
-                    try:
-                        info = json.loads(l)
-                    except Exception:
-                        pass
-            if info is None:
-                info = {"error": "no data", "serial": br.ok}
-            else:
-                info["serial"] = br.ok
+                if 'OS:' in l: info["os"] = l.split('OS:')[1].strip()
+                elif 'Arch:' in l: info["arch"] = l.split('Arch:')[1].strip()
+                elif 'User:' in l: info["user"] = l.split('User:')[1].strip()
+                elif 'Free:' in l:
+                    try: info["free_pages"] = int(l.split('Free:')[1].strip().split()[0])
+                    except: pass
+                elif 'Total:' in l:
+                    try: info["total_pages"] = int(l.split('Total:')[1].strip().split()[0])
+                    except: pass
+                elif 'Heap:' in l:
+                    try: info["heap_used"] = int(l.split('Heap:')[1].strip().split()[0])
+                    except: pass
+                elif 'Uptime:' in l:
+                    try: info["uptime"] = int(l.split('Uptime:')[1].strip().replace('s',''))
+                    except: pass
             self.j(info)
         elif p == '/api/ping':
             self.j({"ok": True, "serial": br.ok})
