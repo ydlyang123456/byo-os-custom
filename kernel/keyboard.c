@@ -1,4 +1,4 @@
-﻿/* BYO-OS - PS/2 Keyboard Driver (v2 - Enhanced QEMU SDL support) */
+/* BYO-OS - PS/2 Keyboard Driver (v2 - Enhanced QEMU SDL support) */
 #include <kernel.h>
 
 /* Buffer size (must be power of 2 for fast modulo) */
@@ -95,7 +95,11 @@ static int e0_scancode_map(uint8_t sc) {
     case 0x52: return KEY_INSERT;
     case 0x53: return KEY_DELETE;
     case 0x1C: return '\r';  /* Keypad Enter */
+    case 0x5A: return '\r';  /* PS/2 Set 2 Enter (QEMU SDL) */
     case 0x35: return '/';   /* Keypad / */
+    case 0x4E: return '+';   /* Keypad + */
+    case 0x4A: return '-';   /* Keypad - */
+    case 0x37: return '*';   /* Keypad * */
     default:   return 0;
     }
 }

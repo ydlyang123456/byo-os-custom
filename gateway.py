@@ -1,11 +1,12 @@
 ﻿#!/usr/bin/env python3
-"""BYO-OS Web Management Panel v12 - Fixed serial comms + robust UI."""
+"""BYO-OS Web Management Panel v13 - Robust serial + full API."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SERIAL_PORT = 4321
 HTTP_PORT = 7777
 PANEL_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "panel.html")
+
 
 class SerialBridge:
     def __init__(self):
@@ -18,7 +19,6 @@ class SerialBridge:
         self._connecting = False
         self._send_count = 0
         self._recv_count = 0
-        self._prompt_seen = False
 
     def _log(self, msg):
         ts = time.strftime("%H:%M:%S")
@@ -37,9 +37,12 @@ class SerialBridge:
                 for attempt in range(retries):
                     try:
                         if self.sock:
-                            try: self.sock.close()
-                            except: pass
-                    except: pass
+                            try:
+                                self.sock.close()
+                            except:
+                                pass
+                    except:
+                        pass
                     self.sock = None
                     self.ok = False
                     self._last_attempt = time.time()
@@ -51,7 +54,7 @@ class SerialBridge:
                         self.sock.connect(("127.0.0.1", SERIAL_PORT))
                         self.sock.settimeout(None)
                         self.ok = True
-                        time.sleep(0.5)
+                        time.sleep(0.3)
                         self._flush_buffer()
                         self._log("Serial CONNECTED OK")
                         return True
@@ -65,7 +68,6 @@ class SerialBridge:
             self._connecting = False
 
     def _flush_buffer(self):
-        """Quick non-blocking flush of any pending data."""
         if not self.sock:
             return
         try:
@@ -98,8 +100,10 @@ class SerialBridge:
         except (BrokenPipeError, ConnectionResetError, OSError) as e:
             self._log(f"Send failed: {e}")
             self.ok = False
-            try: self.sock.close()
-            except: pass
+            try:
+                self.sock.close()
+            except:
+                pass
             self.sock = None
             return False
 
@@ -109,18 +113,19 @@ class SerialBridge:
         except (ConnectionResetError, OSError) as e:
             self._log(f"Recv failed: {e}")
             self.ok = False
-            try: self.sock.close()
-            except: pass
+            try:
+                self.sock.close()
+            except:
+                pass
             self.sock = None
             return b""
 
     def send_command(self, cmd, timeout=10.0):
         if not self._ensure_connected():
-            return "ERROR: Serial not connected.\nStart QEMU with serial: -serial tcp::4321,server,nowait"
+            return "ERROR: Serial not connected.\nStart QEMU with: -serial tcp::4321,server,nowait"
 
         with self.lock:
             try:
-                # Do NOT drain before sending - the drain could eat the response
                 self._log(f"SEND: {cmd}")
                 self._send_count += 1
 
@@ -138,69 +143,81 @@ class SerialBridge:
                         d = self._safe_recv(4096)
                         if d:
                             resp += d
-                            empty_reads = 0
                             self._recv_count += 1
+                            empty_reads = 0
+                            # Check if we have a complete response (ends with prompt)
                             text = resp.decode("utf-8", errors="ignore")
-                            # Stop when we see the shell prompt
-                            if "BYO-OS>" in text or "BYO-OS $" in text:
-                                # Small delay to catch any trailing output
-                                time.sleep(0.05)
-                                try:
-                                    self.sock.settimeout(0.1)
-                                    extra = self._safe_recv(4096)
-                                    if extra:
-                                        resp += extra
-                                except:
-                                    pass
+                            if text.rstrip().endswith("BYO-OS>") or text.rstrip().endswith("$"):
+                                break
+                            if "BYO-OS>" in text:
+                                # Extract just the response, not the prompt
                                 break
                         else:
                             empty_reads += 1
-                            # If we got data before and now it's quiet, we're done
-                            if resp and empty_reads >= 3:
-                                break
-                            if empty_reads >= 40:
+                            if empty_reads > 3:
                                 break
                     except socket.timeout:
                         empty_reads += 1
-                        if resp and empty_reads >= 3:
-                            break
-                        if empty_reads >= 40:
+                        if empty_reads > 5:
                             break
                     except Exception as e:
                         self._log(f"Recv error: {e}")
                         break
 
                 self.sock.settimeout(None)
-                result = resp.decode("utf-8", errors="ignore").strip()
-                self._last_response = result
-                self._log(f"RECV ({len(result)} chars): {result[:200]}")
+                text = resp.decode("utf-8", errors="ignore")
+
+                # Clean up the response - remove echo of command and prompt
+                lines = text.split("\n")
+                clean_lines = []
+                for line in lines:
+                    stripped = line.strip()
+                    # Skip the command echo and prompt
+                    if stripped == cmd.strip():
+                        continue
+                    if stripped == "BYO-OS>" or stripped == "BYO-OS> ":
+                        continue
+                    if stripped.startswith("BYO-OS>"):
+                        # Might have output after prompt
+                        after = stripped[7:].strip()
+                        if after:
+                            clean_lines.append(after)
+                        continue
+                    clean_lines.append(line)
+
+                result = "\n".join(clean_lines).strip()
+                self._last_response = result[:500]
+                self._log(f"RECV ({len(result)} bytes): {result[:100]}...")
                 return result
 
             except Exception as e:
-                self._log(f"Command error: {e}")
+                self._log(f"send_command error: {e}")
                 self.ok = False
-                try: self.sock.close()
-                except: pass
+                try:
+                    self.sock.close()
+                except:
+                    pass
                 self.sock = None
                 return f"ERROR: {e}"
 
 
 br = SerialBridge()
 
+
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
         p = urllib.parse.urlparse(self.path).path
-        q = urllib.parse.urlparse(self.path).query
+        q = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query)
 
-        if p == "/" or p == "/index.html" or p == "/panel.html":
+        if p == "/" or p == "/index.html":
             try:
-                with open(PANEL_FILE, "r", encoding="utf-8") as f:
-                    html = f.read()
+                with open(PANEL_FILE, "rb") as f:
+                    data = f.read()
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Cache-Control", "no-cache")
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
-                self.wfile.write(html.encode("utf-8"))
+                self.wfile.write(data)
             except Exception as e:
                 self.send_response(500)
                 self.end_headers()
@@ -218,39 +235,60 @@ class H(BaseHTTPRequestHandler):
             for line in raw.split("\n"):
                 l = line.strip()
                 if l.startswith("OS:"):
-                    try: info["os"] = l.split("OS:",1)[1].strip(); info["platform"] = info["os"]
-                    except: pass
+                    try:
+                        info["os"] = l.split("OS:", 1)[1].strip()
+                        info["platform"] = info["os"]
+                    except:
+                        pass
                 elif l.startswith("Arch:"):
-                    try: info["arch"] = l.split("Arch:",1)[1].strip()
-                    except: pass
+                    try:
+                        info["arch"] = l.split("Arch:", 1)[1].strip()
+                    except:
+                        pass
                 elif l.startswith("User:"):
-                    try: info["user"] = l.split("User:",1)[1].strip()
-                    except: pass
+                    try:
+                        info["user"] = l.split("User:", 1)[1].strip()
+                    except:
+                        pass
                 elif l.startswith("Free:"):
                     try:
-                        fp = int(l.split("Free:",1)[1].strip().split()[0])
-                        info["free_pages"] = fp; info["mem_free"] = fp * 4 // 1024
-                    except: pass
+                        fp = int(l.split("Free:", 1)[1].strip().split()[0])
+                        info["free_pages"] = fp
+                        info["mem_free"] = fp * 4 // 1024
+                    except:
+                        pass
                 elif l.startswith("Total:"):
                     try:
-                        tp = int(l.split("Total:",1)[1].strip().split()[0])
-                        info["total_pages"] = tp; info["mem_total"] = tp * 4 // 1024
-                    except: pass
+                        tp = int(l.split("Total:", 1)[1].strip().split()[0])
+                        info["total_pages"] = tp
+                        info["mem_total"] = tp * 4 // 1024
+                    except:
+                        pass
                 elif l.startswith("Heap:"):
-                    try: info["heap_used"] = int(l.split("Heap:",1)[1].strip().split()[0])
-                    except: pass
+                    try:
+                        info["heap_used"] = int(l.split("Heap:", 1)[1].strip().split()[0])
+                    except:
+                        pass
                 elif l.startswith("Uptime:"):
-                    try: info["uptime"] = int(l.split("Uptime:",1)[1].strip().replace("s","").strip())
-                    except: pass
+                    try:
+                        info["uptime"] = int(l.split("Uptime:", 1)[1].strip().replace("s", "").strip())
+                    except:
+                        pass
                 elif l.startswith("Tasks:"):
-                    try: info["tasks"] = int(l.split("Tasks:",1)[1].strip().split()[0])
-                    except: pass
+                    try:
+                        info["tasks"] = int(l.split("Tasks:", 1)[1].strip().split()[0])
+                    except:
+                        pass
                 elif l.startswith("Load:"):
-                    try: info["load"] = l.split("Load:",1)[1].strip()
-                    except: pass
+                    try:
+                        info["load"] = l.split("Load:", 1)[1].strip()
+                    except:
+                        pass
                 elif l.startswith("IP:"):
-                    try: info["ip"] = l.split("IP:",1)[1].strip()
-                    except: pass
+                    try:
+                        info["ip"] = l.split("IP:", 1)[1].strip()
+                    except:
+                        pass
             self._json(info)
 
         elif p == "/api/ping":
@@ -271,6 +309,10 @@ class H(BaseHTTPRequestHandler):
 
         elif p == "/api/shell":
             raw = br.send_command("help", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/commands":
+            raw = br.send_command("help", 5.0)
             self._json({"output": raw, "serial": br.ok})
 
         else:
@@ -328,7 +370,7 @@ def serial_retry_thread():
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v12")
+    print("  BYO-OS Web Management Panel v13")
     print("=" * 60)
     print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")

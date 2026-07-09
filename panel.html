@@ -53,36 +53,36 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 .cmd-table th,.cmd-table td{text-align:left;padding:8px 12px;border-bottom:1px solid #1e293b;font-size:12px}
 .cmd-table th{color:#64748b;text-transform:uppercase;font-size:10px;letter-spacing:.5px}
 .cmd-table tr:hover{background:#1e293b}
-.pg{display:none}
-.pg.on{display:block}
+.page{display:none}
+.page.active{display:block}
 </style>
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v12</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v13</p></div>
   <nav id="sidebar">
     <div class="sep">Main</div>
-    <a data-page="dashboard" class="on">&#128202; Dashboard</a>
-    <a data-page="terminal">&#128187; Terminal</a>
-    <a data-page="sysinfo">&#9432; System Info</a>
+    <a class="nav-link active" data-page="dashboard">&#128202; Dashboard</a>
+    <a class="nav-link" data-page="terminal">&#128187; Terminal</a>
+    <a class="nav-link" data-page="sysinfo">&#9432; System Info</a>
     <div class="sep">Management</div>
-    <a data-page="processes">&#128203; Processes</a>
-    <a data-page="network">&#127760; Network</a>
-    <a data-page="files">&#128193; Files</a>
-    <a data-page="users">&#128100; Users</a>
-    <a data-page="services">&#9881; Services</a>
+    <a class="nav-link" data-page="processes">&#128203; Processes</a>
+    <a class="nav-link" data-page="network">&#127760; Network</a>
+    <a class="nav-link" data-page="files">&#128193; Files</a>
+    <a class="nav-link" data-page="users">&#128100; Users</a>
+    <a class="nav-link" data-page="services">&#9881; Services</a>
     <div class="sep">Tools</div>
-    <a data-page="packages">&#128230; Packages</a>
-    <a data-page="commands">&#128295; Commands</a>
-    <a data-page="logs">&#128220; Logs</a>
-    <a data-page="settings">&#9881; Settings</a>
+    <a class="nav-link" data-page="packages">&#128230; Packages</a>
+    <a class="nav-link" data-page="commands">&#128295; Commands</a>
+    <a class="nav-link" data-page="logs">&#128220; Logs</a>
+    <a class="nav-link" data-page="settings">&#9881; Settings</a>
   </nav>
-  <div class="ft">BYO-OS v1.49 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
+  <div class="ft">BYO-OS v1.72 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
 </div>
 
 <div id="mn">
   <!-- Dashboard -->
-  <div id="pg-dashboard" class="pg on">
+  <div id="page-dashboard" class="page active">
     <h2>&#128202; Dashboard</h2>
     <div class="grid">
       <div class="card"><h3>System</h3>
@@ -113,9 +113,9 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Terminal -->
-  <div id="pg-terminal" class="pg">
+  <div id="page-terminal" class="page">
     <h2>&#128187; Terminal</h2>
-    <div id="term">BYO-OS> </div>
+    <div id="term">BYO-OS&gt; </div>
     <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off">
     <div style="margin-top:8px">
       <button class="btn btn-outline" onclick="termClear()">Clear</button>
@@ -125,7 +125,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- System Info -->
-  <div id="pg-sysinfo" class="pg">
+  <div id="page-sysinfo" class="page">
     <h2>&#9432; System Info</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('si-out','sysinfo')">sysinfo</button>
@@ -137,7 +137,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Processes -->
-  <div id="pg-processes" class="pg">
+  <div id="page-processes" class="page">
     <h2>&#128203; Processes</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pr-out','ps')">ps</button>
@@ -148,7 +148,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Network -->
-  <div id="pg-network" class="pg">
+  <div id="page-network" class="page">
     <h2>&#127760; Network</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('nw-out','ifconfig')">ifconfig</button>
@@ -161,7 +161,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Files -->
-  <div id="pg-files" class="pg">
+  <div id="page-files" class="page">
     <h2>&#128193; Files</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('fl-out','ls /')">ls /</button>
@@ -172,7 +172,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Users -->
-  <div id="pg-users" class="pg">
+  <div id="page-users" class="page">
     <h2>&#128100; Users</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('us-out','whoami')">whoami</button>
@@ -183,7 +183,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Services -->
-  <div id="pg-services" class="pg">
+  <div id="page-services" class="page">
     <h2>&#9881; Services</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('sv-out','service list')">service list</button>
@@ -194,7 +194,7 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Packages -->
-  <div id="pg-packages" class="pg">
+  <div id="page-packages" class="page">
     <h2>&#128230; Packages</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pk-out','dpkg -l')">dpkg -l</button>
@@ -204,86 +204,92 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
   </div>
 
   <!-- Commands -->
-  <div id="pg-commands" class="pg">
+  <div id="page-commands" class="page">
     <h2>&#128295; Commands</h2>
     <div class="input-group">
-      <input id="cmd-search" type="text" placeholder="Search commands..." oninput="filterCmds()">
-      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">Load All</button>
+      <input type="text" id="cmd-search" placeholder="Search commands..." oninput="filterCmds()">
     </div>
-    <div id="cmd-out" class="output-box">Click 'Load All' to list commands...</div>
+    <div id="cmd-out" class="output-box">Click a button or type to search...</div>
+    <div style="margin-top:8px">
+      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">Show All</button>
+    </div>
   </div>
 
   <!-- Logs -->
-  <div id="pg-logs" class="pg">
+  <div id="page-logs" class="page">
     <h2>&#128220; Logs</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('lg-out','journal')">journal</button>
       <button class="btn btn-outline" onclick="loadPage('lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" onclick="toggleAutoRefresh()" id="ar-btn">Auto-refresh: OFF</button>
+      <button class="btn btn-outline" id="ar-btn" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
     </div>
-    <div id="lg-out" class="output-box">Click a button to load logs...</div>
+    <div id="lg-out" class="output-box">Click a button to load data...</div>
   </div>
 
   <!-- Settings -->
-  <div id="pg-settings" class="pg">
+  <div id="page-settings" class="page">
     <h2>&#9881; Settings</h2>
-    <div class="card">
-      <h3>Connection</h3>
-      <div class="row"><span class="lbl">Serial Status</span><span class="val" id="set-ser">Checking...</span></div>
-      <div style="margin-top:12px">
-        <button class="btn btn-primary" onclick="reconnect()">&#128260; Reconnect Serial</button>
+    <div class="grid">
+      <div class="card"><h3>Connection</h3>
+        <div class="row"><span class="lbl">Serial Status</span><span class="val" id="set-ser">Checking...</span></div>
+        <div class="row"><span class="lbl">Port</span><span class="val">4321</span></div>
+        <div class="row"><span class="lbl">Gateway</span><span class="val">7777</span></div>
+        <div style="margin-top:12px">
+          <button class="btn btn-primary" onclick="reconnect()">Reconnect</button>
+          <button class="btn btn-outline" onclick="refreshSettings()">Refresh</button>
+        </div>
+      </div>
+      <div class="card"><h3>Debug</h3>
         <button class="btn btn-outline" onclick="loadDebug()">Show Debug Info</button>
+        <div id="set-debug" style="display:none;margin-top:12px" class="output-box"></div>
       </div>
     </div>
-    <div id="set-debug" class="output-box" style="display:none;margin-top:16px"></div>
   </div>
 </div>
 
 <div id="toast" class="toast"></div>
 
 <script>
-var cur = 'dashboard';
+var curPage = 'dashboard';
 var termHist = [];
 var termHistIdx = -1;
 var autoRefreshTimer = null;
 
 /* ===== Navigation ===== */
-function nav(p) {
-  var pages = document.querySelectorAll('.pg');
+function nav(page) {
+  var pages = document.querySelectorAll('.page');
   for (var i = 0; i < pages.length; i++) {
-    pages[i].style.display = 'none';
-    pages[i].classList.remove('on');
+    pages[i].classList.remove('active');
   }
-  var el = document.getElementById('pg-' + p);
+  var el = document.getElementById('page-' + page);
   if (el) {
-    el.style.display = 'block';
-    el.classList.add('on');
+    el.classList.add('active');
   }
-  var links = document.querySelectorAll('#sidebar a');
+  var links = document.querySelectorAll('.nav-link');
   for (var i = 0; i < links.length; i++) {
-    links[i].classList.remove('on');
-    if (links[i].getAttribute('data-page') === p) {
-      links[i].classList.add('on');
+    links[i].classList.remove('active');
+    if (links[i].getAttribute('data-page') === page) {
+      links[i].classList.add('active');
     }
   }
-  cur = p;
-  if (p === 'dashboard') refreshDash();
-  if (p === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
-  if (p === 'sysinfo') loadPage('si-out','sysinfo');
-  if (p === 'processes') loadPage('pr-out','ps');
-  if (p === 'network') loadPage('nw-out','ifconfig');
-  if (p === 'files') loadPage('fl-out','ls /');
-  if (p === 'users') loadPage('us-out','whoami');
-  if (p === 'services') loadPage('sv-out','service list');
-  if (p === 'packages') loadPage('pk-out','dpkg -l');
-  if (p === 'logs') loadPage('lg-out','journal');
-  if (p === 'settings') refreshSettings();
-  if (p === 'commands') loadPage('cmd-out','help');
+  curPage = page;
+  if (page === 'dashboard') refreshDash();
+  if (page === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
+  if (page === 'sysinfo') loadPage('si-out','sysinfo');
+  if (page === 'processes') loadPage('pr-out','ps');
+  if (page === 'network') loadPage('nw-out','ifconfig');
+  if (page === 'files') loadPage('fl-out','ls /');
+  if (page === 'users') loadPage('us-out','whoami');
+  if (page === 'services') loadPage('sv-out','service list');
+  if (page === 'packages') loadPage('pk-out','dpkg -l');
+  if (page === 'commands') loadPage('cmd-out','help');
+  if (page === 'logs') loadPage('lg-out','journal');
+  if (page === 'settings') refreshSettings();
 }
 
 /* Bind sidebar clicks */
 document.getElementById('sidebar').addEventListener('click', function(e) {
-  var a = e.target.closest('a[data-page]');
+  var a = e.target.closest('.nav-link');
   if (!a) return;
   e.preventDefault();
   var page = a.getAttribute('data-page');
@@ -321,26 +327,17 @@ function loadPage(elId, cmd) {
   });
 }
 
-function quickCmd(cmd) {
-  nav('terminal');
-  setTimeout(function() {
-    var inp = document.getElementById('tinp');
-    if (inp) { inp.value = cmd; sendTerm(); }
-  }, 200);
-}
-
 /* ===== Terminal ===== */
 function sendTerm() {
   var inp = document.getElementById('tinp');
-  var term = document.getElementById('term');
   var cmd = inp.value.trim();
   if (!cmd) return;
-  if (termHist.length === 0 || termHist[termHist.length-1] !== cmd) termHist.push(cmd);
+  termHist.push(cmd);
   termHistIdx = termHist.length;
+  var term = document.getElementById('term');
   term.textContent += cmd + '\n';
   inp.value = '';
-  term.textContent += 'Loading...\n';
-  term.scrollTop = term.scrollHeight;
+  term.innerHTML += '<span class="spinner"></span>';
   api('/api/exec', {cmd: cmd}).then(function(d) {
     var lines = term.textContent.split('\n');
     lines.pop();
@@ -354,7 +351,8 @@ function sendTerm() {
     lines.pop();
     lines.pop();
     term.textContent = lines.join('\n') + '\n';
-    term.textContent += 'Error: ' + e + '\nBYO-OS> ';
+    term.textContent += 'Error: ' + e + '\n';
+    term.textContent += 'BYO-OS> ';
     term.scrollTop = term.scrollHeight;
   });
 }
@@ -444,8 +442,8 @@ function reconnect() {
   toast('Reconnecting...', '');
   api('/api/reconnect').then(function(d) {
     refreshConn();
-    if (cur === 'dashboard') refreshDash();
-    if (cur === 'settings') refreshSettings();
+    if (curPage === 'dashboard') refreshDash();
+    if (curPage === 'settings') refreshSettings();
     toast(d.serial ? 'Connected!' : 'Failed', d.serial ? 'ok' : 'err');
   }).catch(function(e) {
     toast('Reconnect failed', 'err');
@@ -507,7 +505,7 @@ function filterCmds() {
 refreshDash();
 refreshConn();
 setInterval(refreshConn, 15000);
-setInterval(function(){ if(cur === 'dashboard') refreshDash(); }, 10000);
+setInterval(function(){ if(curPage === 'dashboard') refreshDash(); }, 10000);
 </script>
 </body>
 </html>
