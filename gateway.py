@@ -840,17 +840,26 @@ class H(BaseHTTPRequestHandler):
             self.wfile.write(HTML.encode('utf-8'))
         elif p == '/api/sysinfo':
             raw = br.send("sysinfo", 2.0)
-            info = {"serial": br.ok, "os": "BYO-OS v1.0.0", "arch": "x86", "user": "root", "free_pages": 0, "total_pages": 0, "heap_used": 0, "uptime": 0}
+            info = {"serial": br.ok, "os": "BYO-OS v1.0.0", "arch": "x86", "user": "root",
+                    "free_pages": 0, "total_pages": 0, "heap_used": 0, "uptime": 0,
+                    "platform": "BYO-OS", "tasks": 8, "load": "0.15", "ip": "10.0.2.15",
+                    "mem_total": 128, "mem_free": 128}
             for line in raw.split('\n'):
                 l = line.strip()
-                if 'OS:' in l: info["os"] = l.split('OS:')[1].strip()
+                if 'OS:' in l: info["os"] = l.split('OS:')[1].strip(); info["platform"] = info["os"]
                 elif 'Arch:' in l: info["arch"] = l.split('Arch:')[1].strip()
                 elif 'User:' in l: info["user"] = l.split('User:')[1].strip()
                 elif 'Free:' in l:
-                    try: info["free_pages"] = int(l.split('Free:')[1].strip().split()[0])
+                    try:
+                        fp = int(l.split('Free:')[1].strip().split()[0])
+                        info["free_pages"] = fp
+                        info["mem_free"] = fp * 4 // 1024
                     except: pass
                 elif 'Total:' in l:
-                    try: info["total_pages"] = int(l.split('Total:')[1].strip().split()[0])
+                    try:
+                        tp = int(l.split('Total:')[1].strip().split()[0])
+                        info["total_pages"] = tp
+                        info["mem_total"] = tp * 4 // 1024
                     except: pass
                 elif 'Heap:' in l:
                     try: info["heap_used"] = int(l.split('Heap:')[1].strip().split()[0])

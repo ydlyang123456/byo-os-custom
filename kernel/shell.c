@@ -7588,7 +7588,7 @@ void shell_run(void) {
             char c = keyboard_getchar();
             if (!c) continue;
 
-            if (c == 13) {
+            if (c == 13 || c == 10) {
                 /* Enter */
                 input_buf[input_len] = 0;
                 vga_putchar('\n');
