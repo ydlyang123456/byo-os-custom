@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -44,11 +44,12 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 .spinner{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-top-color:#38bdf8;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .empty{color:#475569;font-style:italic;padding:20px;text-align:center}
+.err{color:#ef4444;padding:20px;text-align:center}
 </style>
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v6</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v7</p></div>
   <nav>
     <div class="sep">Main</div>
     <a data-page="dashboard" class="on">&#128202; Dashboard</a>
@@ -82,115 +83,117 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
       </div>
       <div class="card">
         <h3>Memory</h3>
-        <div class="big" id="d-mem">-</div>
+        <div class="big" id="d-mem">- MB / - MB</div>
         <div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div>
-        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">-</span></div>
-        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">-</span></div>
-        <div class="row"><span class="lbl">Heap Used</span><span class="val" id="d-heap">-</span></div>
+        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">- MB</span></div>
+        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">- MB</span></div>
+        <div class="row"><span class="lbl">Heap Used</span><span class="val" id="d-heap">- bytes</span></div>
       </div>
       <div class="card">
         <h3>Status</h3>
-        <div class="big" id="d-tasks">-</div>
-        <div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">-</span></div>
-        <div class="row"><span class="lbl">Load Avg</span><span class="val" id="d-load">-</span></div>
-        <div class="row"><span class="lbl">IP Address</span><span class="val" id="d-ip">-</span></div>
+        <div class="big" id="d-ser"><span class="status st-off"></span>Connecting...</div>
+        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">- tasks</span></div>
+        <div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">-s</span></div>
+        <div class="row"><span class="lbl">Load</span><span class="val" id="d-load">-</span></div>
+        <div class="row"><span class="lbl">IP</span><span class="val" id="d-ip">-</span></div>
       </div>
-      <div class="card">
-        <h3>Connection</h3>
-        <div class="big" id="d-ser">-</div>
-        <div class="row"><span class="lbl">Serial Port</span><span class="val">4321</span></div>
-        <div class="row"><span class="lbl">Web Panel</span><span class="val" id="d-panel">7777</span></div>
-        <div style="margin-top:10px"><button class="btn btn-primary" onclick="refreshDash()">Refresh</button></div>
-      </div>
+    </div>
+    <div class="card">
+      <h3>Quick Actions</h3>
+      <button class="btn btn-primary" onclick="nav('terminal')" style="margin-right:8px">Open Terminal</button>
+      <button class="btn btn-outline" onclick="refreshDash()" style="margin-right:8px">Refresh</button>
+      <button class="btn btn-outline" onclick="reconnect()">Reconnect</button>
     </div>
   </div>
 
   <!-- Terminal -->
   <div id="pg-terminal" class="pg">
     <h2>Terminal</h2>
-    <div id="term">Welcome to BYO-OS Terminal\nType commands below...</div>
-    <div class="input-group" style="margin-top:10px">
-      <input id="tinp" placeholder="Enter command..." autocomplete="off">
-      <button class="btn btn-primary" onclick="sendTerm()">Send</button>
-    </div>
+    <div id="term">BYO-OS> </div>
+    <input id="tinp" placeholder="Type a command..." autofocus>
   </div>
 
   <!-- System Info -->
   <div id="pg-sysinfo" class="pg">
     <h2>System Information</h2>
-    <button class="btn btn-primary" onclick="loadPage('sysinfo','sysinfo_out','sysinfo')">Load Info</button>
-    <pre id="sysinfo_out" class="output-box"><span class="empty">Click "Load Info" to fetch system information</span></pre>
+    <div class="card">
+      <div class="output-box" id="si-out">Click "Load" to fetch system info</div>
+      <button class="btn btn-primary" onclick="loadPage('sysinfo','si-out','sysinfo')" style="margin-top:10px">Load</button>
+    </div>
   </div>
 
   <!-- Processes -->
   <div id="pg-processes" class="pg">
-    <h2>Running Processes</h2>
-    <button class="btn btn-primary" onclick="loadPage('processes','proc_out','ps')">Refresh</button>
-    <pre id="proc_out" class="output-box"><span class="empty">Click "Refresh" to load processes</span></pre>
+    <h2>Processes</h2>
+    <div class="card">
+      <div class="output-box" id="ps-out">Click "Load" to fetch processes</div>
+      <button class="btn btn-primary" onclick="loadPage('processes','ps-out','ps')" style="margin-top:10px">Load</button>
+    </div>
   </div>
 
   <!-- Network -->
   <div id="pg-network" class="pg">
     <h2>Network</h2>
-    <button class="btn btn-primary" onclick="loadPage('network','net_out','ifconfig')">ifconfig</button>
-    <button class="btn btn-outline" onclick="loadPage('network','net_out','netstat')" style="margin-left:8px">netstat</button>
-    <button class="btn btn-outline" onclick="loadPage('network','net_out','route')" style="margin-left:8px">route</button>
-    <pre id="net_out" class="output-box"><span class="empty">Click a button to load network info</span></pre>
+    <div class="card">
+      <div class="output-box" id="nw-out">Click "Load" to fetch network info</div>
+      <button class="btn btn-primary" onclick="loadPage('network','nw-out','ifconfig')" style="margin-top:10px">Load</button>
+      <div class="input-group" style="margin-top:10px">
+        <input id="nw-ping" placeholder="Ping address (e.g. 10.0.2.2)">
+        <button class="btn btn-outline" onclick="execCmd('nw-ping','nw-out')">Ping</button>
+      </div>
+    </div>
   </div>
 
   <!-- Files -->
   <div id="pg-files" class="pg">
-    <h2>File Manager</h2>
-    <div class="input-group">
-      <input id="fspath" placeholder="Path (e.g. /)" value="/">
-      <button class="btn btn-primary" onclick="loadPage('files','fs_out','ls '+document.getElementById('fspath').value)">Browse</button>
+    <h2>Files</h2>
+    <div class="card">
+      <div class="output-box" id="fl-out">Click "Load" to list files</div>
+      <button class="btn btn-primary" onclick="loadPage('files','fl-out','ls /')" style="margin-top:10px">Load</button>
     </div>
-    <button class="btn btn-outline" onclick="loadPage('files','fs_out','df -h')" style="margin-bottom:8px">Disk Usage</button>
-    <pre id="fs_out" class="output-box"><span class="empty">Enter a path and click Browse</span></pre>
   </div>
 
   <!-- Users -->
   <div id="pg-users" class="pg">
-    <h2>User Management</h2>
-    <button class="btn btn-primary" onclick="loadPage('users','user_out','whoami')">whoami</button>
-    <button class="btn btn-outline" onclick="loadPage('users','user_out','id')" style="margin-left:8px">id</button>
-    <button class="btn btn-outline" onclick="loadPage('users','user_out','users')" style="margin-left:8px">users</button>
-    <pre id="user_out" class="output-box"><span class="empty">Click a button to query users</span></pre>
+    <h2>Users</h2>
+    <div class="card">
+      <div class="output-box" id="us-out">Click "Load" to show users</div>
+      <button class="btn btn-primary" onclick="loadPage('users','us-out','whoami')" style="margin-top:10px">Load</button>
+    </div>
   </div>
 
   <!-- Services -->
   <div id="pg-services" class="pg">
     <h2>Services</h2>
-    <button class="btn btn-primary" onclick="loadPage('services','svc_out','systemctl list')">List Services</button>
-    <pre id="svc_out" class="output-box"><span class="empty">Click "List Services" to load</span></pre>
+    <div class="card">
+      <div class="output-box" id="sv-out">Click "Load" to show services</div>
+      <button class="btn btn-primary" onclick="loadPage('services','sv-out','service list')" style="margin-top:10px">Load</button>
+    </div>
   </div>
 
   <!-- Packages -->
   <div id="pg-packages" class="pg">
     <h2>Packages</h2>
-    <div class="input-group">
-      <input id="pkgcmd" placeholder="Package command...">
-      <button class="btn btn-primary" onclick="execCmd('pkgcmd','pkg_out')">Run</button>
+    <div class="card">
+      <div class="output-box" id="pk-out">Click "Load" to show packages</div>
+      <button class="btn btn-primary" onclick="loadPage('packages','pk-out','pkg list')" style="margin-top:10px">Load</button>
     </div>
-    <button class="btn btn-outline" onclick="loadPage('packages','pkg_out','dpkg -l')" style="margin-bottom:8px">List Packages</button>
-    <pre id="pkg_out" class="output-box"><span class="empty">Enter a command or click "List Packages"</span></pre>
   </div>
 
   <!-- Logs -->
   <div id="pg-logs" class="pg">
-    <h2>System Logs</h2>
-    <button class="btn btn-primary" onclick="loadPage('logs','log_out','journal')">journal</button>
-    <button class="btn btn-outline" onclick="loadPage('logs','log_out','dmesg')" style="margin-left:8px">dmesg</button>
-    <button class="btn btn-outline" onclick="loadPage('logs','log_out','last')" style="margin-left:8px">last</button>
-    <pre id="log_out" class="output-box"><span class="empty">Click a button to load logs</span></pre>
+    <h2>Logs</h2>
+    <div class="card">
+      <div class="output-box" id="lg-out">Click "Load" to show logs</div>
+      <button class="btn btn-primary" onclick="loadPage('logs','lg-out','journal')" style="margin-top:10px">Load</button>
+    </div>
   </div>
 
   <!-- Settings -->
   <div id="pg-settings" class="pg">
     <h2>Settings</h2>
-    <div class="card" style="max-width:500px">
-      <h3>Serial Connection</h3>
-      <div class="row"><span class="lbl">Port</span><span class="val">4321</span></div>
+    <div class="card">
+      <div class="row"><span class="lbl">Serial Port</span><span class="val">4321</span></div>
       <div class="row"><span class="lbl">Status</span><span class="val" id="set-ser">-</span></div>
       <button class="btn btn-primary" onclick="reconnect()" style="margin-top:12px">Reconnect Serial</button>
     </div>
@@ -201,26 +204,22 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 var cur = 'dashboard';
 
 function nav(p) {
-  // Hide all pages
   document.querySelectorAll('.pg').forEach(function(e){ e.classList.remove('on') });
-  // Show target page
   var el = document.getElementById('pg-' + p);
   if (el) el.classList.add('on');
-  // Update sidebar active state
   document.querySelectorAll('#sb nav a').forEach(function(e){
     e.classList.remove('on');
     if (e.getAttribute('data-page') === p) e.classList.add('on');
   });
   cur = p;
-  // Auto-load data for certain pages
   if (p === 'dashboard') refreshDash();
   if (p === 'terminal') setTimeout(function(){ document.getElementById('tinp').focus(); }, 100);
 }
 
-// Sidebar click handler
 document.querySelectorAll('#sb nav a[data-page]').forEach(function(a) {
   a.addEventListener('click', function(e) {
     e.preventDefault();
+    e.stopPropagation();
     var page = this.getAttribute('data-page');
     if (page) nav(page);
   });
@@ -240,7 +239,10 @@ function loadPage(page, elId, cmd) {
   var el = document.getElementById(elId);
   if (el) el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
   api('/api/exec', {cmd: cmd}).then(function(d) {
-    if (el) el.textContent = d.output || d.error || 'No output';
+    if (el) {
+      if (d.error) el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
+      else el.textContent = d.output || 'No output';
+    }
   });
 }
 
@@ -261,6 +263,11 @@ function sendTerm() {
   inp.value = '';
   api('/api/exec', {cmd: cmd}).then(function(d) {
     term.textContent += (d.output || d.error || '') + '\n';
+    term.textContent += 'BYO-OS> ';
+    term.scrollTop = term.scrollHeight;
+  }).catch(function(e) {
+    term.textContent += 'Error: ' + e + '\n';
+    term.textContent += 'BYO-OS> ';
     term.scrollTop = term.scrollHeight;
   });
 }
@@ -292,6 +299,9 @@ function refreshDash() {
     document.getElementById('d-ser').innerHTML = d.serial ?
       '<span class="status st-on"></span>Connected' :
       '<span class="status st-off"></span>Offline';
+  }).catch(function(e) {
+    document.getElementById('d-os').textContent = 'Connection Error';
+    document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Gateway offline';
   });
 }
 
@@ -306,26 +316,24 @@ function refreshConn() {
       if (e1) e1.innerHTML = '<span class="status st-off"></span>Offline';
       if (e2) e2.innerHTML = '<span class="status st-off"></span>Offline';
     }
+  }).catch(function() {
+    var e1 = document.getElementById('connst');
+    if (e1) e1.innerHTML = '<span class="status st-off"></span>Gateway down';
   });
 }
 
 function reconnect() {
-  api('/api/reconnect').then(function(d) { refreshConn(); });
+  api('/api/reconnect').then(function(d) { refreshConn(); refreshDash(); });
 }
 
-// Terminal Enter key
 document.getElementById('tinp').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { sendTerm(); e.preventDefault(); }
+  if (e.key === 'Enter') { e.preventDefault(); sendTerm(); }
 });
 
-// Initial load
 refreshDash();
 refreshConn();
 setInterval(refreshConn, 15000);
-
-// Handle hash navigation on load
-var h = location.hash.replace('#/', '');
-if (h && document.getElementById('pg-' + h)) nav(h);
+setInterval(function(){ if(cur === 'dashboard') refreshDash(); }, 10000);
 </script>
 </body>
 </html>

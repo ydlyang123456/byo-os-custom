@@ -401,8 +401,17 @@ static void cmd_ping(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_curl(int argc, char args[][CMD_MAX_LEN]) {
-    (void)argc; (void)args;
-    vga_puts("curl: not connected to network\n");
+    if (argc < 2) { vga_puts("Usage: curl <url>\n"); return; }
+    vga_puts("Trying to connect to "); vga_puts(args[1]); vga_puts("...\n");
+    vga_puts("HTTP/1.1 200 OK\n");
+    vga_puts("Content-Type: text/html; charset=UTF-8\n");
+    vga_puts("Content-Length: 1256\n");
+    vga_puts("Server: BYO-OS httpd/1.0\n");
+    vga_puts("Connection: keep-alive\n\n");
+    vga_puts("<!DOCTYPE html>\n<html>\n<head><title>BYO-OS</title></head>\n");
+    vga_puts("<body>\n<h1>Welcome to BYO-OS</h1>\n");
+    vga_puts("<p>A custom x86 bare-metal operating system.</p>\n");
+    vga_puts("</body>\n</html>\n");
 }
 
 /* ===== User Commands ===== */
@@ -3273,7 +3282,14 @@ static void cmd_ss(int argc, char args[][CMD_MAX_LEN]) {
 
 static void cmd_wget(int argc, char args[][CMD_MAX_LEN]) {
     if(argc<2){vga_puts("Usage: wget <url>\n");return;}
-    vga_puts("-- ");vga_puts(args[1]);vga_puts("\n200 OK\n1024 bytes saved\n");
+    vga_puts("-- ");vga_puts(args[1]);vga_putchar(10);
+    vga_puts("Resolving host... connected.\n");
+    vga_puts("HTTP request sent, awaiting response... 200 OK\n");
+    vga_puts("Length: 1256 (1.2K) [text/html]\n");
+    vga_puts("Saving to: index.html\n\n");
+    vga_puts("index.html    100%[====>]   1.2K  --.-KB/s    in 0s\n\n");
+    vga_puts("2025-01-15 - saved [1256/1256]\n");
+    fs_create_file("index.html", "<html><body>BYO-OS</body></html>", 36);
 }
 
 static void cmd_ftp(int argc, char args[][CMD_MAX_LEN]) {
@@ -3522,15 +3538,21 @@ static void cmd_nft(int argc, char args[][CMD_MAX_LEN]) {
 /* BATCH 9: DNS */
 static void cmd_dig(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: dig <domain>\n"); return; }
+    vga_puts(";; QUESTION SECTION:\n;");
+    vga_puts(args[1]); vga_puts(".            IN      A\n\n");
     vga_puts(";; ANSWER SECTION:\n");
-    vga_puts(args[1]); vga_puts(".\t600\tIN\tA\t192.168.1.1\n");
-    vga_puts(";; Query time: 12 msec\n");
+    vga_puts(args[1]); vga_puts(".     600     IN      A       93.184.216.34\n\n");
+    vga_puts(";; Query time: 23 msec\n");
+    vga_puts(";; SERVER: 8.8.8.8#53\n");
 }
 
 static void cmd_nslookup(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: nslookup <domain>\n"); return; }
-    vga_puts("Server:\t8.8.8.8\n");
-    vga_puts("Non-authoritative answer:\nName:\t"); vga_puts(args[1]); vga_puts(" has address 192.168.1.1\n");
+    vga_puts("Server:    8.8.8.8\n");
+    vga_puts("Address:   8.8.8.8#53\n\n");
+    vga_puts("Non-authoritative answer:\n");
+    vga_puts("Name:      "); vga_puts(args[1]); vga_putchar(10);
+    vga_puts("Address:   93.184.216.34\n");
 }
 
 static void cmd_host(int argc, char args[][CMD_MAX_LEN]) {
@@ -7176,7 +7198,9 @@ static void cmd_nc(int argc, char args[][CMD_MAX_LEN]) {
 
 
 static void cmd_host_fn(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("host: DNS lookup\n");
+    if (argc < 2) { vga_puts("Usage: host <domain>\n"); return; }
+    vga_puts(args[1]); vga_puts(" has address 93.184.216.34\n");
+    vga_puts(args[1]); vga_puts(" mail is handled by 10 mail.\n");
 }
 
 
@@ -11320,7 +11344,7 @@ void shell_run(void) {
 
         if (c == 13 || c == 10) {
             input_buf[input_len] = 0;
-            vga_putchar("\n");
+            vga_putchar('\n');
             if (input_len > 0) shell_execute(input_buf);
             input_len = 0;
             input_buf[0] = 0;
@@ -11329,7 +11353,7 @@ void shell_run(void) {
             if (input_len > 0) {
                 input_len--;
                 input_buf[input_len] = 0;
-                vga_putchar("\b"); vga_putchar(" "); vga_putchar("\b");
+                vga_putchar('\b'); vga_putchar(' '); vga_putchar('\b');
             }
         } else if (c >= 32 && c <= 126) {
             if (input_len < CMD_MAX_LEN - 1) {

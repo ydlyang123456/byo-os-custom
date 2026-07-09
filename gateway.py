@@ -1,6 +1,6 @@
-﻿#!/usr/bin/env python3
-"""BYO-OS Web Management Panel v6 - Robust serial bridge."""
-import socket, threading, time, json, urllib.parse, os, sys
+#!/usr/bin/env python3
+"""BYO-OS Web Management Panel v7 - Reliable serial bridge with retry."""
+import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
 SERIAL_PORT = 4321
@@ -12,37 +12,51 @@ class SerialBridge:
         self.lock = threading.Lock()
         self.ok = False
         self._last_attempt = 0.0
+        self._debug_log = []
 
-    def connect(self):
+    def _log(self, msg):
+        ts = time.strftime("%H:%M:%S")
+        entry = f"[{ts}] {msg}"
+        self._debug_log.append(entry)
+        if len(self._debug_log) > 200:
+            self._debug_log = self._debug_log[-200:]
+        print(entry)
+
+    def connect(self, retries=3):
         with self.lock:
-            try:
-                if self.sock:
-                    self.sock.close()
-            except:
-                pass
-            self.sock = None
-            self.ok = False
-            self._last_attempt = time.time()
-            try:
-                self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                self.sock.settimeout(5)
-                self.sock.connect(("127.0.0.1", SERIAL_PORT))
-                self.sock.settimeout(None)
-                self.ok = True
-                time.sleep(0.5)
-                self._drain()
-                return True
-            except Exception as e:
-                print(f"[WARN] Serial connect failed: {e}")
+            for attempt in range(retries):
+                try:
+                    if self.sock:
+                        self.sock.close()
+                except:
+                    pass
+                self.sock = None
                 self.ok = False
-                return False
+                self._last_attempt = time.time()
+                try:
+                    self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                    self.sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_NODELAY, 1)
+                    self.sock.settimeout(5)
+                    self._log(f"Connecting to serial 127.0.0.1:{SERIAL_PORT} (attempt {attempt+1}/{retries})...")
+                    self.sock.connect(("127.0.0.1", SERIAL_PORT))
+                    self.sock.settimeout(None)
+                    self.ok = True
+                    time.sleep(1.0)
+                    self._drain()
+                    self._log("Serial CONNECTED")
+                    return True
+                except Exception as e:
+                    self._log(f"Connect attempt {attempt+1} failed: {e}")
+                    self.ok = False
+                    time.sleep(0.5)
+            self._log("All connect attempts failed")
+            return False
 
     def _drain(self):
-        """Drain any pending data from serial buffer."""
         if not self.sock:
             return
         try:
-            self.sock.settimeout(0.3)
+            self.sock.settimeout(0.2)
             while True:
                 d = self.sock.recv(4096)
                 if not d:
@@ -58,25 +72,21 @@ class SerialBridge:
     def _ensure_connected(self):
         if self.ok:
             return True
-        if time.time() - self._last_attempt < 3.0:
+        if time.time() - self._last_attempt < 2.0:
             return False
         return self.connect()
 
     def send_command(self, cmd, timeout=8.0):
-        """Send command to BYO-OS via serial and wait for response."""
         if not self._ensure_connected():
-            return "ERROR: Serial not connected to BYO-OS"
+            return "ERROR: Serial not connected to BYO-OS. Start QEMU first with: qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait -display sdl"
 
         with self.lock:
             try:
-                # Drain stale data first
                 self._drain()
-
-                # Send command
+                self._log(f"SEND: {cmd}")
                 self.sock.settimeout(3)
                 self.sock.sendall((cmd + "\n").encode())
 
-                # Read response until BYO-OS> marker
                 resp = b""
                 end_time = time.time() + timeout
                 self.sock.settimeout(1.0)
@@ -88,23 +98,23 @@ class SerialBridge:
                             resp += d
                             idle = 0
                             text = resp.decode("utf-8", errors="ignore")
-                            # Check for command completion markers
                             if "BYO-OS>" in text or "BYO-OS $" in text:
                                 break
                         else:
                             idle += 1
-                            if idle > 8:
+                            if idle > 10:
                                 break
                     except socket.timeout:
                         idle += 1
-                        if idle > 8:
+                        if idle > 10:
                             break
-                    except Exception:
+                    except Exception as e:
+                        self._log(f"Recv error: {e}")
                         self.ok = False
                         break
 
                 result = resp.decode("utf-8", errors="ignore")
-                # Clean up response: remove markers and prompt echoes
+                self._log(f"RECV ({len(result)} bytes): {result[:200]}")
                 clean_lines = []
                 for line in result.split("\n"):
                     ls = line.strip()
@@ -118,6 +128,7 @@ class SerialBridge:
                 return "\n".join(clean_lines)
 
             except Exception as e:
+                self._log(f"send_command error: {e}")
                 self.ok = False
                 try:
                     self.connect()
@@ -127,10 +138,14 @@ class SerialBridge:
 
 br = SerialBridge()
 
-# Load panel HTML
 _panel_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'panel.html')
-with open(_panel_path, 'r', encoding='utf-8') as _f:
-    HTML = _f.read()
+try:
+    with open(_panel_path, 'r', encoding='utf-8') as _f:
+        HTML = _f.read()
+    print(f"[OK] Loaded panel.html ({len(HTML)} bytes)")
+except Exception as e:
+    HTML = f"<h1>Error loading panel.html: {e}</h1>"
+    print(f"[ERROR] {e}")
 
 class H(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -143,12 +158,11 @@ class H(BaseHTTPRequestHandler):
         elif p == "/api/sysinfo":
             raw = br.send_command("sysinfo", 5.0)
             info = {
-                "serial": br.ok,
-                "os": "BYO-OS", "arch": "x86", "user": "root",
+                "serial": br.ok, "os": "BYO-OS", "arch": "x86", "user": "root",
                 "free_pages": 0, "total_pages": 0, "heap_used": 0,
-                "uptime": 0, "platform": "BYO-OS",
-                "tasks": 0, "load": "0.00", "ip": "10.0.2.15",
-                "mem_total": 0, "mem_free": 0
+                "uptime": 0, "platform": "BYO-OS", "tasks": 0,
+                "load": "0.00", "ip": "10.0.2.15", "mem_total": 0, "mem_free": 0,
+                "raw": raw
             }
             for line in raw.split("\n"):
                 l = line.strip()
@@ -164,14 +178,12 @@ class H(BaseHTTPRequestHandler):
                 elif "Free:" in l:
                     try:
                         fp = int(l.split("Free:")[1].strip().split()[0])
-                        info["free_pages"] = fp
-                        info["mem_free"] = fp * 4 // 1024
+                        info["free_pages"] = fp; info["mem_free"] = fp * 4 // 1024
                     except: pass
                 elif "Total:" in l:
                     try:
                         tp = int(l.split("Total:")[1].strip().split()[0])
-                        info["total_pages"] = tp
-                        info["mem_total"] = tp * 4 // 1024
+                        info["total_pages"] = tp; info["mem_total"] = tp * 4 // 1024
                     except: pass
                 elif "Heap:" in l:
                     try: info["heap_used"] = int(l.split("Heap:")[1].strip().split()[0])
@@ -179,15 +191,6 @@ class H(BaseHTTPRequestHandler):
                 elif "Uptime:" in l:
                     try: info["uptime"] = int(l.split("Uptime:")[1].strip().replace("s", ""))
                     except: pass
-            # Also get task count
-            task_raw = br.send_command("ps", 3.0)
-            task_count = 0
-            for tl in task_raw.split("\n"):
-                tl = tl.strip()
-                if tl and tl[0].isdigit():
-                    task_count += 1
-            if task_count > 0:
-                info["tasks"] = task_count
             self.j(info)
         elif p == "/api/tasks":
             raw = br.send_command("ps", 3.0)
@@ -206,6 +209,8 @@ class H(BaseHTTPRequestHandler):
         elif p == "/api/reconnect":
             ok = br.connect()
             self.j({"ok": ok})
+        elif p == "/api/debug":
+            self.j({"serial": br.ok, "log": br._debug_log[-50:]})
         else:
             self.send_response(404)
             self.end_headers()
@@ -250,15 +255,18 @@ class H(BaseHTTPRequestHandler):
         pass
 
 if __name__ == "__main__":
-    print("=" * 50)
-    print("  BYO-OS Web Management Panel v6")
-    print("=" * 50)
+    print("=" * 60)
+    print("  BYO-OS Web Management Panel v7")
+    print("=" * 60)
+    print(f"Panel file: {_panel_path}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
-    br.connect()
-    print(f"Serial: {'CONNECTED' if br.ok else 'OFFLINE'}")
+    br.connect(retries=5)
+    print(f"Serial: {'CONNECTED' if br.ok else 'OFFLINE (start QEMU first)'}")
     srv = HTTPServer(("0.0.0.0", HTTP_PORT), H)
     print(f"Panel:  http://localhost:{HTTP_PORT}")
-    print("=" * 50)
+    print(f"Debug:  http://localhost:{HTTP_PORT}/api/debug")
+    print("=" * 60)
+    print("Waiting for serial connection...")
     try:
         srv.serve_forever()
     except KeyboardInterrupt:
