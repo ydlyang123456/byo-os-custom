@@ -1,4 +1,4 @@
-﻿/*
+/*
  * heap64.c - 64-bit Kernel Heap Allocator
  *
  * First-fit block allocator built on top of the physical page allocator.
@@ -18,7 +18,7 @@
 extern uint64_t pmm_alloc_page_64(void);
 extern uint64_t pmm_alloc_pages_64(uint64_t count);
 extern void     pmm_free_page_64(void *page);
-extern void     pmm_free_pages_64(void *base, uint64_t count);
+extern uint64_t pmm_alloc_pages_64(uint64_t count);
 
 /* ---- Constants ---- */
 
@@ -233,7 +233,7 @@ void* kmalloc(size_t size)
 {
     return kmalloc_64(size);
 }
-/* 包装函数 - 不带_64后缀 */
+/* ???? - ??_64?? */
 uint64_t heap_get_used(void) { return heap_get_used_64(); }
-/* 包装函数 - kfree (不带_64后缀) */
+/* ???? - kfree (??_64??) */
 void kfree(void* ptr) { kfree_64(ptr); }

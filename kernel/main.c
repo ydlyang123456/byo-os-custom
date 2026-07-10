@@ -105,12 +105,6 @@ void kernel_main(uint32_t magic, void* mbi_ptr) {
 
     /* Initialize ATA disk */
     ata_init();
-
-    /* Initialize PCI bus */
-    pci_init();
-
-    /* Initialize ATA disk */
-    ata_init();
     serial_puts("[BOOT] Initramfs OK (/etc/os-release, /etc/passwd...)\n");
 
     /* Linux syscall compatibility */
