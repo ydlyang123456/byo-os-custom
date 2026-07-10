@@ -15531,6 +15531,62 @@ static void cmd_batch254_actix2(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch254_axum2(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch254_fiber2(int argc, char args[][CMD_MAX_LEN]);
 
+/* Batch 255: Testing and QA */
+static void cmd_batch255_jest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_mocha2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_pytest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_unittest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_cypress2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_playwright2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_selenium2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_puppeteer2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_vitest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_rspec2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_minitest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch255_espresso(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 256: Package Managers */
+static void cmd_batch256_conda2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_pipx2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_poetry2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_pdm2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_uv2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_rye2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_brew2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_port2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_scoop2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_winget2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_chocolatey2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch256_nix2(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 257: Documentation */
+static void cmd_batch257_mkdocs2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_docusaurus2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_gitbook2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_sphinx2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_javadoc2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_doxygen2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_typedoc2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_storybook3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_vuepress2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_hugo2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_jekyll2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch257_gatsby3(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 258: Messaging and Queue */
+static void cmd_batch258_nats2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_pulsar2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_rocketmq2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_activemq2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_nservicebus2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_masstransit2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_easyNetQ2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_rabbitmq3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_redis_streams(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_nats_streaming(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_zeromq2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch258_mqtt3(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -18870,6 +18926,30 @@ static const cmd_entry commands[] = {
     {"nest2", cmd_batch254_nest2}, {"django3", cmd_batch254_django3}, {"flask3", cmd_batch254_flask3}, 
     {"rails3", cmd_batch254_rails3}, {"laravel3", cmd_batch254_laravel3}, {"spring3", cmd_batch254_spring3}, 
     {"actix2", cmd_batch254_actix2}, {"axum2", cmd_batch254_axum2}, {"fiber2", cmd_batch254_fiber2}, 
+
+    /* Batch 255: Testing and QA */
+    {"jest2", cmd_batch255_jest2}, {"mocha2", cmd_batch255_mocha2}, {"pytest2", cmd_batch255_pytest2},
+    {"unittest2", cmd_batch255_unittest2}, {"cypress2", cmd_batch255_cypress2}, {"playwright2", cmd_batch255_playwright2},
+    {"selenium2", cmd_batch255_selenium2}, {"puppeteer2", cmd_batch255_puppeteer2}, {"vitest2", cmd_batch255_vitest2},
+    {"rspec2", cmd_batch255_rspec2}, {"minitest2", cmd_batch255_minitest2}, {"espresso", cmd_batch255_espresso},
+
+    /* Batch 256: Package Managers */
+    {"conda2", cmd_batch256_conda2}, {"pipx2", cmd_batch256_pipx2}, {"poetry2", cmd_batch256_poetry2},
+    {"pdm2", cmd_batch256_pdm2}, {"uv2", cmd_batch256_uv2}, {"rye2", cmd_batch256_rye2},
+    {"brew2", cmd_batch256_brew2}, {"port2", cmd_batch256_port2}, {"scoop2", cmd_batch256_scoop2},
+    {"winget2", cmd_batch256_winget2}, {"chocolatey2", cmd_batch256_chocolatey2}, {"nix2", cmd_batch256_nix2},
+
+    /* Batch 257: Documentation */
+    {"mkdocs2", cmd_batch257_mkdocs2}, {"docusaurus2", cmd_batch257_docusaurus2}, {"gitbook2", cmd_batch257_gitbook2},
+    {"sphinx2", cmd_batch257_sphinx2}, {"javadoc2", cmd_batch257_javadoc2}, {"doxygen2", cmd_batch257_doxygen2},
+    {"typedoc2", cmd_batch257_typedoc2}, {"storybook3", cmd_batch257_storybook3}, {"vuepress2", cmd_batch257_vuepress2},
+    {"hugo2", cmd_batch257_hugo2}, {"jekyll2", cmd_batch257_jekyll2}, {"gatsby3", cmd_batch257_gatsby3},
+
+    /* Batch 258: Messaging and Queue */
+    {"nats2", cmd_batch258_nats2}, {"pulsar2", cmd_batch258_pulsar2}, {"rocketmq2", cmd_batch258_rocketmq2},
+    {"activemq2", cmd_batch258_activemq2}, {"nservicebus2", cmd_batch258_nservicebus2}, {"mass-transit2", cmd_batch258_masstransit2},
+    {"easyNetQ2", cmd_batch258_easyNetQ2}, {"rabbitmq3", cmd_batch258_rabbitmq3}, {"redis-streams", cmd_batch258_redis_streams},
+    {"nats-streaming", cmd_batch258_nats_streaming}, {"zeromq2", cmd_batch258_zeromq2}, {"mqtt3", cmd_batch258_mqtt3},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -46301,6 +46381,61 @@ static void cmd_batch254_spring3(int argc, char args[][CMD_MAX_LEN]) { (void)arg
 static void cmd_batch254_actix2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("actix2: Actix2 Rust actor framework\n"); }
 static void cmd_batch254_axum2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("axum2: Axum2 Rust async runtime\n"); }
 static void cmd_batch254_fiber2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fiber2: Fiber2 Go web framework\n"); }
+/* Batch 255: Testing and QA */
+static void cmd_batch255_jest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("jest2: Jest2 JS testing framework\n"); }
+static void cmd_batch255_mocha2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mocha2: Mocha2 Node.js test runner\n"); }
+static void cmd_batch255_pytest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pytest2: Pytest2 Python testing\n"); }
+static void cmd_batch255_unittest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("unittest2: UnitTest2 Python testing\n"); }
+static void cmd_batch255_cypress2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("cypress2: Cypress2 E2E testing\n"); }
+static void cmd_batch255_playwright2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("playwright2: Playwright2 browser testing\n"); }
+static void cmd_batch255_selenium2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("selenium2: Selenium2 web automation\n"); }
+static void cmd_batch255_puppeteer2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("puppeteer2: Puppeteer2 headless Chrome\n"); }
+static void cmd_batch255_vitest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("vitest2: Vitest2 Vite test runner\n"); }
+static void cmd_batch255_rspec2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("rspec2: RSpec2 Ruby testing\n"); }
+static void cmd_batch255_minitest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("minitest2: MiniTest2 Ruby testing\n"); }
+static void cmd_batch255_espresso(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("espresso: Espresso Android testing\n"); }
+
+/* Batch 256: Package Managers */
+static void cmd_batch256_conda2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("conda2: Conda2 Python packages\n"); }
+static void cmd_batch256_pipx2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pipx2: Pipx2 Python CLI apps\n"); }
+static void cmd_batch256_poetry2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("poetry2: Poetry2 Python dependency mgmt\n"); }
+static void cmd_batch256_pdm2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pdm2: PDM2 Python package manager\n"); }
+static void cmd_batch256_uv2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("uv2: UV2 fast Python packaging\n"); }
+static void cmd_batch256_rye2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("rye2: Rye2 Python project manager\n"); }
+static void cmd_batch256_brew2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("brew2: Homebrew2 macOS packages\n"); }
+static void cmd_batch256_port2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("port2: MacPorts2 macOS packages\n"); }
+static void cmd_batch256_scoop2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("scoop2: Scoop2 Windows CLI packages\n"); }
+static void cmd_batch256_winget2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("winget2: Winget2 Windows packages\n"); }
+static void cmd_batch256_chocolatey2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("chocolatey2: Choco2 Windows packages\n"); }
+static void cmd_batch256_nix2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nix2: Nix2 reproducible packages\n"); }
+
+/* Batch 257: Documentation */
+static void cmd_batch257_mkdocs2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mkdocs2: MkDocs2 Python docs site\n"); }
+static void cmd_batch257_docusaurus2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("docusaurus2: Docusaurus2 React docs\n"); }
+static void cmd_batch257_gitbook2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gitbook2: GitBook2 docs platform\n"); }
+static void cmd_batch257_sphinx2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("sphinx2: Sphinx2 Python docs gen\n"); }
+static void cmd_batch257_javadoc2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("javadoc2: Javadoc2 Java docs gen\n"); }
+static void cmd_batch257_doxygen2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("doxygen2: Doxygen2 C++ docs gen\n"); }
+static void cmd_batch257_typedoc2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("typedoc2: TypeDoc2 TypeScript docs\n"); }
+static void cmd_batch257_storybook3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("storybook3: Storybook3 component docs\n"); }
+static void cmd_batch257_vuepress2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("vuepress2: VuePress2 Vue docs site\n"); }
+static void cmd_batch257_hugo2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("hugo2: Hugo2 static site generator\n"); }
+static void cmd_batch257_jekyll2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("jekyll2: Jekyll2 Ruby static site\n"); }
+static void cmd_batch257_gatsby3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gatsby3: Gatsby3 React static site\n"); }
+
+/* Batch 258: Messaging and Queue */
+static void cmd_batch258_nats2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nats2: NATS2 messaging system\n"); }
+static void cmd_batch258_pulsar2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pulsar2: Pulsar2 distributed messaging\n"); }
+static void cmd_batch258_rocketmq2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("rocketmq2: RocketMQ2 event streaming\n"); }
+static void cmd_batch258_activemq2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("activemq2: ActiveMQ2 message broker\n"); }
+static void cmd_batch258_nservicebus2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nservicebus2: NServiceBus2 .NET messaging\n"); }
+static void cmd_batch258_masstransit2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mass-transit2: MassTransit2 distributed bus\n"); }
+static void cmd_batch258_easyNetQ2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("easyNetQ2: EasyNetQ2 RabbitMQ wrapper\n"); }
+static void cmd_batch258_rabbitmq3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("rabbitmq3: RabbitMQ3 message broker\n"); }
+static void cmd_batch258_redis_streams(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("redis-streams: Redis Streams messaging\n"); }
+static void cmd_batch258_nats_streaming(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nats-streaming: NATS Streaming events\n"); }
+static void cmd_batch258_zeromq2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("zeromq2: ZeroMQ2 messaging library\n"); }
+static void cmd_batch258_mqtt3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mqtt3: MQTT3 IoT messaging protocol\n"); }
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
