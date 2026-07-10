@@ -131,6 +131,9 @@ void kernel_main(uint32_t magic, void* mbi_ptr) {
     serial_puts("[BOOT] User OK\n");
 
     net_init();
+    tcpip_init();
+    sound_init();
+    sound_play_melody();
     journal_append(0, "Network initialized");
     serial_puts("[BOOT] Net OK\n");
 

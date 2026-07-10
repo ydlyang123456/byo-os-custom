@@ -17,7 +17,7 @@ echo "=== Compile x86_64 ==="
 CFLAGS="-m64 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -fno-builtin -fno-stack-protector -fno-exceptions -mcmodel=large -fno-pic -fno-pie -mno-red-zone -Wno-unused-function -Wno-unused-variable -Wno-pointer-sign -Iinclude"
 
 SOURCES=""
-for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c kernel/journal.c kernel/shell.c kernel/ata.c kernel/rtc.c kernel/pci.c kernel/fat32.c; do
+for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c kernel/journal.c kernel/shell.c kernel/ata.c kernel/rtc.c kernel/pci.c kernel/fat32.c kernel/tcpip.c kernel/sound.c kernel/gfx_enhanced.c; do
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 
@@ -25,7 +25,7 @@ for f in kernel/memory64.c kernel/heap64.c kernel/vmm.c kernel/syscall.c kernel/
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 
-for f in kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/main.c; do
+for f in kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/sound.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/main.c; do
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 

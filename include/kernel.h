@@ -115,7 +115,7 @@ int keyboard_has_input(void); void keyboard_flush(void);
 /* ===== Timer ===== */
 void timer_init(uint32_t freq); uint32_t timer_get_ticks(void);
 uint32_t timer_get_seconds(void); void timer_sleep(uint32_t ms);
-
+ 
 /* ===== Physical Memory (64-bit) ===== */
 void pmm_init_64(uint64_t mem_size);
 uint64_t pmm_alloc_page_64(void);
@@ -275,5 +275,37 @@ int fat_is_mounted(void);
 uint32_t fat_get_total_clusters(void);
 uint32_t fat_get_bytes_per_cluster(void);
 void fat_init(void);
+
+/* ===== TCP/IP Protocol Stack ===== */
+void tcpip_init(void);
+int tcpip_handle_packet(uint8_t* data, uint16_t len);
+int tcpip_send_arp_request(uint32_t target_ip);
+int tcpip_send_icmp_echo(uint32_t target_ip);
+int tcpip_send_udp(uint32_t dest_ip, uint16_t dest_port, uint16_t src_port, uint8_t* data, uint16_t len);
+int tcpip_send_tcp_syn(uint32_t dest_ip, uint16_t dest_port, uint16_t src_port);
+void tcpip_get_stats(uint32_t* pkts_in, uint32_t* pkts_out, uint32_t* bytes);
+int tcpip_open_listen(uint16_t port);
+int tcpip_send_response(uint8_t* data, uint16_t len);
+
+/* ===== Sound Driver ===== */
+void sound_init(void);
+void sound_play(uint32_t frequency);
+void sound_stop(void);
+void sound_beep(void);
+void sound_play_melody(void);
+void sound_play_note(int note);
+
+/* ===== Enhanced Graphics ===== */
+void gfx_draw_rect(int x, int y, int w, int h, uint8_t color);
+void gfx_draw_border(int x, int y, int w, int h, uint8_t color);
+void gfx_draw_window(int x, int y, int w, int h, const char* title);
+void gfx_draw_button(int x, int y, int w, int h, const char* text, int pressed);
+void gfx_draw_progress(int x, int y, int w, int pct);
+void gfx_draw_menu(int x, int y, const char** items, int count);
+void gfx_draw_clock(int x, int y);
+void gfx_draw_statusbar(const char* text);
+void gfx_clear_area(int x, int y, int w, int h);
+void gfx_scroll_up(int lines);
+void gfx_demo(void);
 
 #endif

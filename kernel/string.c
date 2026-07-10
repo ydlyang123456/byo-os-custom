@@ -1,4 +1,4 @@
-﻿/* BYO-OS - String Functions (x86_64) */
+/* BYO-OS - String Functions (x86_64) */
 #include <stdint.h>
 #include <stddef.h>
 
@@ -125,7 +125,7 @@ char* strrchr(const char* s, int c) {
     return (char*)last;
 }
 
-/* 简单的snprintf实现 */
+/* ???snprintf?? */
 int snprintf(char* str, size_t size, const char* format, ...) {
     if (!str || size == 0) return 0;
     char* start = str;
@@ -163,7 +163,9 @@ int snprintf(char* str, size_t size, const char* format, ...) {
     return str - start;
 }
 
-/* sprintf - 简单实现 */
+/* sprintf - ???? */
 int sprintf(char* buf, const char* fmt, ...) {
     return snprintf(buf, 0xFFFFFFFF, fmt);
+}uint32_t ntohl(uint32_t v) {
+    return ((v >> 24) & 0xFF) | ((v >> 8) & 0xFF00) | ((v & 0xFF00) << 8) | ((v & 0xFF) << 24);
 }
