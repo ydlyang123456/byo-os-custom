@@ -1,4 +1,4 @@
-﻿
+
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -3313,7 +3313,6 @@ static void cmd_systemctl(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_pstree(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("systemd闂佸啿鍘滈崑鎾绘煃鐠団€冲幋闁衡偓椤ｆ攨twork\n        闂佸疇顫夋竟鏇㈠绩椤ｆ獘ell\n        闂佸疇顫夋竟鏇㈠绩椤ｆmer\n        闂佸疇顫夐弻锟犲绩椤ｆ仜urnal\n");
 }
 
 static void cmd_pgrep(int argc, char args[][CMD_MAX_LEN]) {
@@ -4192,7 +4191,6 @@ static void cmd_tlp(int argc, char args[][CMD_MAX_LEN]) {
 }
 
 static void cmd_cpupower(int argc, char args[][CMD_MAX_LEN]) {
-    vga_puts("cpu0:婵☆偆澧楅崹鐟邦啅?2400MHz  缂備焦绋掗悧婊堝汲? powersave\n");
 }
 
 static void cmd_lscpu(int argc, char args[][CMD_MAX_LEN]) {
@@ -14085,7 +14083,6 @@ static void nlp_ner_148(int argc, char args[][CMD_MAX_LEN]);
 static void nlp_sentiment_148(int argc, char args[][CMD_MAX_LEN]);
 static void nlp_translate_148(int argc, char args[][CMD_MAX_LEN]);
 static void nlp_summarize_148(int argc, char args[][CMD_MAX_LEN]);
-static void nlp问答_148(int argc, char args[][CMD_MAX_LEN]);
 static void nlp_classify_148(int argc, char args[][CMD_MAX_LEN]);
 static void speech_to_text_148(int argc, char args[][CMD_MAX_LEN]);
 static void text_to_speech_148(int argc, char args[][CMD_MAX_LEN]);
@@ -16237,6 +16234,69 @@ static void cmd_pkg2310(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_arch2310(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_suse2310(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_redhat2310(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sed315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_awk315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cut315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_paste315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_column315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fmt315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fold315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_uptime315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_free315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_swapon315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mount315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_umount315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_blkid315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsblk315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsusb315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lspci315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bc315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dc315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_expr315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_seq315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_factor315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_log315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cal315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_date_fmt315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hwclock315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ntpd315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_env315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_printenv315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_export315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unset315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_set_env315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ln315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_stat315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_realpath315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_basename315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dirname315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_readlink315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tar315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zipf315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unzip315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gzip315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gunzip315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fdisk315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_du315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_df315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mkfs315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fsck315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dd315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_losetup315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pgrep315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pkill315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_renice315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timeout315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xargs315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_banner315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_figlet315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_toilet315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_boxes315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cowsay315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fortune315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_matrix315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sl315(int argc, char args[][CMD_MAX_LEN]);
+
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -19090,7 +19150,6 @@ static const cmd_entry commands[] = {
     /* Batch 147: DevOps Advanced */
     {"terraform-plan", terraform_plan_147},     {"terraform-apply", terraform_apply_147},     {"ansible-run", ansible_run_147},     {"puppet-apply", puppet_apply_147},     {"chef-converge", chef_converge_147},     {"vagrant-up", vagrant_up_147},     {"packer-build", packer_build_147},     {"consul-kv", consul_kv_147},     {"vault-read", vault_read_147},     {"vault-write", vault_write_147},     {"boundary-auth", boundary_auth_147},     {"waypoint-deploy", waypoint_deploy_147}, 
     /* Batch 148: NLP + Speech */
-    {"nlp-tokenize", nlp_tokenize_148},     {"nlp-pos", nlp_pos_148},     {"nlp-ner", nlp_ner_148},     {"nlp-sentiment", nlp_sentiment_148},     {"nlp-translate", nlp_translate_148},     {"nlp-summarize", nlp_summarize_148},     {"nlp问答", nlp问答_148},     {"nlp-classify", nlp_classify_148},     {"speech-to-text", speech_to_text_148},     {"text-to-speech", text_to_speech_148},     {"voice-clone", voice_clone_148},     {"language-detect", language_detect_148}, 
     /* Batch 149: Video + Animation */
     {"video-encode", video_encode_149},     {"video-decode", video_decode_149},     {"video-edit", video_edit_149},     {"video-composite", video_composite_149},     {"video-animate", video_animate_149},     {"video-particle", video_particle_149},     {"video-transition", video_transition_149},     {"video-subtitle", video_subtitle_149},     {"video-color", video_color_149},     {"video-stabilize", video_stabilize_149},     {"video-enhance", video_enhance_149},     {"video-export", video_export_149},
     /* Batch 150: Blockchain Advanced */
@@ -19837,7 +19896,68 @@ static const cmd_entry commands[] = {
     {"gcc", cmd_gcc266}, {"make", cmd_make266}, {"gdb", cmd_gdb266},
     {"strace", cmd_strace266}, {"nm", cmd_nm266}, {"objdump", cmd_objdump266},
     {"readelf", cmd_readelf266}, {"ldd", cmd_ldd266}, {"ar", cmd_ar266},
-    {"strip", cmd_strip266}, {"as", cmd_as266}, {"ld", cmd_ld266},
+    {"strip", cmd_strip266}, {"as", cmd_as266}, {"ld", cmd_ld266},    {"sed", cmd_sed315},
+    {"awk", cmd_awk315},
+    {"cut", cmd_cut315},
+    {"paste", cmd_paste315},
+    {"column", cmd_column315},
+    {"fmt", cmd_fmt315},
+    {"fold", cmd_fold315},
+    {"uptime", cmd_uptime315},
+    {"free", cmd_free315},
+    {"swapon", cmd_swapon315},
+    {"mount", cmd_mount315},
+    {"umount", cmd_umount315},
+    {"blkid", cmd_blkid315},
+    {"lsblk", cmd_lsblk315},
+    {"lsusb", cmd_lsusb315},
+    {"lspci", cmd_lspci315},
+    {"bc", cmd_bc315},
+    {"dc", cmd_dc315},
+    {"expr", cmd_expr315},
+    {"seq", cmd_seq315},
+    {"factor", cmd_factor315},
+    {"log", cmd_log315},
+    {"cal", cmd_cal315},
+    {"date_fmt", cmd_date_fmt315},
+    {"hwclock", cmd_hwclock315},
+    {"ntpd", cmd_ntpd315},
+    {"env", cmd_env315},
+    {"printenv", cmd_printenv315},
+    {"export", cmd_export315},
+    {"unset", cmd_unset315},
+    {"set_env", cmd_set_env315},
+    {"ln", cmd_ln315},
+    {"stat", cmd_stat315},
+    {"realpath", cmd_realpath315},
+    {"basename", cmd_basename315},
+    {"dirname", cmd_dirname315},
+    {"readlink", cmd_readlink315},
+    {"tar", cmd_tar315},
+    {"zipf", cmd_zipf315},
+    {"unzip", cmd_unzip315},
+    {"gzip", cmd_gzip315},
+    {"gunzip", cmd_gunzip315},
+    {"fdisk", cmd_fdisk315},
+    {"du", cmd_du315},
+    {"df", cmd_df315},
+    {"mkfs", cmd_mkfs315},
+    {"fsck", cmd_fsck315},
+    {"dd", cmd_dd315},
+    {"losetup", cmd_losetup315},
+    {"pgrep", cmd_pgrep315},
+    {"pkill", cmd_pkill315},
+    {"renice", cmd_renice315},
+    {"timeout", cmd_timeout315},
+    {"xargs", cmd_xargs315},
+    {"banner", cmd_banner315},
+    {"figlet", cmd_figlet315},
+    {"toilet", cmd_toilet315},
+    {"boxes", cmd_boxes315},
+    {"cowsay", cmd_cowsay315},
+    {"fortune", cmd_fortune315},
+    {"matrix", cmd_matrix315},
+    {"sl", cmd_sl315},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -20663,7 +20783,6 @@ static void cmd_tree50(int argc, char args[][CMD_MAX_LEN]) {
 }
 static void cmd_bat50(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: bat <file>\n"); return; }
-    vga_puts("闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋?"); vga_puts(args[1]); vga_puts(" 闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋撻柍鍏夊亾闁冲厜鍋揬n");
     vga_puts("  1   #include <stdio.h>\n");
     vga_puts("  2   int main() {\n");
     vga_puts("  3       printf(\"Hello\\n\");\n");
@@ -39628,7 +39747,6 @@ static void nats_pub_132(int argc, char args[][CMD_MAX_LEN]) {
 }
 static void consul_reg_132(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("Consul: Service 'api' registered健康检查: HTTP /health\n");
 }
 static void raft_consensus_132(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
@@ -40409,15 +40527,10 @@ static void nlp_sentiment_148(int argc, char args[][CMD_MAX_LEN]) {
 }
 static void nlp_translate_148(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("Translate: EN->ZH 'Hello world' -> '你好世界' BLEU:0.87\n");
 }
 static void nlp_summarize_148(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Summarize: 1,247 words -> 128 words Compression:10:1 ROUGE:0.45\n");
-}
-static void nlp问答_148(int argc, char args[][CMD_MAX_LEN]) {
-    (void)argc; (void)args;
-    vga_puts("Q&A: Q:'What is BYO-OS?' A:'Custom x86 OS' Confidence:94%%\n");
 }
 static void nlp_classify_148(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
@@ -41482,7 +41595,6 @@ static void reverse_logistics_169(int argc, char args[][CMD_MAX_LEN]) {
 }
 static void cold_chain_169(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("Cold: Temp:-18C±2 Humidity:45%% Monitor:real-time Alert:none\n");
 }
 static void hazmat_manage_169(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
@@ -41702,7 +41814,6 @@ static void bi_export_173(int argc, char args[][CMD_MAX_LEN]) {
 /* ===== Batch 174: Real Estate + Property ===== */
 static void property_val_174(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
-    vga_puts("Value: $450,000 Comp:3 sales Method:MLS Adjustments:±5%%\n");
 }
 static void property_list_174(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
@@ -47592,7 +47703,6 @@ static void cmd_journalctl265(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_systemctl265(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: systemctl <start|stop|status> <service>\n"); return; }
     if (strcmp(args[1], "status") == 0 && argc >= 3) {
-        vga_printf("● %s.service - %s service\n", args[2], args[2]);
         vga_puts("     Loaded: loaded\n");
         vga_puts("     Active: active (running)\n");
     } else if (strcmp(args[1], "start") == 0 && argc >= 3) {
@@ -48211,11 +48321,6 @@ static void cmd_supervisord274(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_pm2274(int argc, char args[][CMD_MAX_LEN]) {
     if (argc < 2) { vga_puts("Usage: pm2 <list|start|stop>\n"); return; }
     if (strcmp(args[1], "list") == 0) {
-        vga_puts("┌────┬──────┬─────┬────────┬──────┬──────┐\n");
-        vga_puts("│ id │ name │mode │ status │ cpu  │ mem  │\n");
-        vga_puts("├────┼──────┼─────┼────────┼──────┼──────┤\n");
-        vga_puts("│ 0  │ app  │fork │online  │ 0.1% │ 25MB │\n");
-        vga_puts("└────┴──────┴─────┴────────┴──────┴──────┘\n");
     } else vga_printf("pm2: %s\n", args[1]);
 }
 static void cmd_forever274(int argc, char args[][CMD_MAX_LEN]) {
@@ -50258,6 +50363,349 @@ static void cmd_redhat2310(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Red Hat package manager\n");
 }
+
+static void cmd_sed315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: sed 's/old/new/' file\n"); return; }
+    vga_puts("sed: stream editor\n");
+    vga_printf("  Pattern: %s\n", args[1]);
+}
+
+static void cmd_awk315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: awk 'pattern {action}' file\n"); return; }
+    vga_puts("awk: pattern scanning and processing\n");
+    vga_printf("  Expression: %s\n", args[1]);
+}
+
+static void cmd_cut315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: cut -d' ' -f1 file\n"); return; }
+    vga_puts("cut: remove sections from lines\n");
+}
+
+static void cmd_paste315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("paste: merge lines side by side\n");
+}
+
+static void cmd_column315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("column: format input into columns\n");
+}
+
+static void cmd_fmt315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fmt: simple text formatter\n");
+}
+
+static void cmd_fold315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("fold: wrap input lines\n");
+}
+
+static void cmd_uptime315(int argc, char args[][CMD_MAX_LEN]) {
+    unsigned int ticks = timer_get_ticks();
+    unsigned int secs = ticks / 100;
+    unsigned int hrs = secs / 3600;
+    unsigned int mins = (secs % 3600) / 60;
+    unsigned int s = secs % 60;
+    vga_printf("up %02u:%02u:%02u\n", hrs, mins, s);
+    vga_printf("  load average: 0.00, 0.00, 0.00\n");
+}
+
+static void cmd_free315(int argc, char args[][CMD_MAX_LEN]) {
+    unsigned int total = 128;
+    unsigned int used = heap_get_used() / 1024 / 1024;
+    unsigned int free_m = total - used;
+    vga_printf("              total    used    free\n");
+    vga_printf("Mem:      %8u  %8u  %8u MB\n", total, used, free_m);
+}
+
+static void cmd_swapon315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("swapon: no swap devices configured\n");
+}
+
+static void cmd_mount315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Filesystem     Type     Mounted on\n");
+    vga_puts("ramdisk        tmpfs    /\n");
+    vga_puts("proc           proc     /proc\n");
+}
+
+static void cmd_umount315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("umount: cannot unmount root filesystem\n");
+}
+
+static void cmd_blkid315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("blkid: /dev/ram0 UUID=byo-0000-0000 TYPE=tmpfs\n");
+}
+
+static void cmd_lsblk315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("NAME   SIZE TYPE MOUNTPOINTS\n");
+    vga_puts("ram0   128M disk /\n");
+}
+
+static void cmd_lsusb315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Bus 001 Device 001: QEMU Virtual USB\n");
+}
+
+static void cmd_lspci315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("00:00.0 Host bridge: QEMU Host Bridge\n");
+    vga_puts("00:01.0 VGA: Standard VGA\n");
+    vga_puts("00:02.0 Ethernet: NE2000 Network\n");
+}
+
+static void cmd_bc315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bc: interactive calculator\n");
+    vga_puts("  Use 'expr <math>' for calculations\n");
+}
+
+static void cmd_dc315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dc: desk calculator (RPN mode)\n");
+}
+
+static void cmd_expr315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 4) { vga_puts("Usage: expr a + b\n"); return; }
+    int a = atoi(args[1]); int b = atoi(args[3]); char op = args[2][0]; int r = 0;
+    if (op == '+') r = a + b; else if (op == '-') r = a - b;
+    else if (op == '*') r = a * b; else if (op == '/') r = b ? a / b : 0;
+    else if (op == '%') r = b ? a % b : 0;
+    else { vga_puts("Unknown operator\n"); return; }
+    vga_printf("%d\n", r);
+}
+
+static void cmd_seq315(int argc, char args[][CMD_MAX_LEN]) {
+    int end = argc > 1 ? atoi(args[1]) : 10;
+    int start = argc > 2 ? atoi(args[2]) : 1;
+    for (int i = start; i <= end; i++) vga_printf("%d\n", i);
+}
+
+static void cmd_factor315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: factor <number>\n"); return; }
+    int n = atoi(args[1]); vga_printf("%d: ", n);
+    for (int p = 2; p * p <= n; p++) { while (n % p == 0) { vga_printf("%d ", p); n /= p; } }
+    if (n > 1) vga_printf("%d", n); vga_puts("\n");
+}
+
+static void cmd_log315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("log: logarithm calculator\n");
+}
+
+static void cmd_cal315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("     July 2025\n");
+    vga_puts("Su Mo Tu We Th Fr Sa\n");
+    vga_puts("       1  2  3  4  5\n");
+    vga_puts(" 6  7  8  9 10 11 12\n");
+    vga_puts("13 14 15 16 17 18 19\n");
+    vga_puts("20 21 22 23 24 25 26\n");
+    vga_puts("27 28 29 30 31\n");
+}
+
+static void cmd_date_fmt315(int argc, char args[][CMD_MAX_LEN]) {
+    unsigned int t = timer_get_ticks() / 100;
+    unsigned int s = t % 60, m = (t/60)%60, h = (t/3600)%24;
+    vga_printf("2025-07-%02d %02d:%02d:%02d UTC\n", 1+(t/86400)%31, h, m, s);
+}
+
+static void cmd_hwclock315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("hwclock: hardware clock not available\n");
+}
+
+static void cmd_ntpd315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("ntpd: NTP sync not available\n");
+}
+
+static void cmd_env315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PATH=/bin:/usr/bin\n");
+    vga_puts("HOME=/root\n");
+    vga_puts("SHELL=/bin/sh\n");
+    vga_puts("USER=root\n");
+    vga_puts("TERM=linux\n");
+}
+
+static void cmd_printenv315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("PATH=/bin:/usr/bin\nHOME=/root\nSHELL=/bin/sh\n"); return; }
+    vga_printf("%s=value\n", args[1]);
+}
+
+static void cmd_export315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: export VAR=value\n"); return; }
+    vga_printf("Exported: %s\n", args[1]);
+}
+
+static void cmd_unset315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unset VAR\n"); return; }
+    vga_printf("Unset: %s\n", args[1]);
+}
+
+static void cmd_set_env315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: set_env VAR value\n"); return; }
+    vga_printf("Set: %s=%s\n", args[1], args[2]);
+}
+
+static void cmd_ln315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: ln target link_name\n"); return; }
+    vga_printf("Created link: %s -> %s\n", args[2], args[1]);
+}
+
+static void cmd_stat315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: stat <file>\n"); return; }
+    vga_printf("  File: %s\n", args[1]);
+    vga_printf("  Size: 4096  Permissions: -rw-r--r--\n");
+}
+
+static void cmd_realpath315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: realpath <path>\n"); return; }
+    vga_printf("/%s\n", args[1]);
+}
+
+static void cmd_basename315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: basename <path>\n"); return; }
+    char *p = args[1]; char *last = p;
+    while (*p) { if (*p == '/') last = p + 1; p++; }
+    vga_printf("%s\n", last);
+}
+
+static void cmd_dirname315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dirname <path>\n"); return; }
+    static char dbuf[256]; int i = 0;
+    while (args[1][i] && args[1][i] != '/') i++;
+    if (i == 0) { vga_puts(".\n"); return; }
+    int j = 0; while (j < i) { dbuf[j] = args[1][j]; j++; }
+    dbuf[j] = 0; vga_printf("%s\n", dbuf);
+}
+
+static void cmd_readlink315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: readlink <path>\n"); return; }
+    vga_printf("%s -> (not a symlink)\n", args[1]);
+}
+
+static void cmd_tar315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tar cf archive.tar files...\n"); return; }
+    vga_printf("tar: creating archive %s\n", args[2]);
+}
+
+static void cmd_zipf315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: zip archive.zip files...\n"); return; }
+    vga_printf("zip: creating %s\n", args[1]);
+}
+
+static void cmd_unzip315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: unzip archive.zip\n"); return; }
+    vga_printf("unzip: extracting %s\n", args[1]);
+}
+
+static void cmd_gzip315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gzip <file>\n"); return; }
+    vga_printf("gzip: compressing %s\n", args[1]);
+}
+
+static void cmd_gunzip315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gunzip <file.gz>\n"); return; }
+    vga_printf("gunzip: decompressing %s\n", args[1]);
+}
+
+static void cmd_fdisk315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Disk /dev/ram0: 128 MB\n");
+    vga_puts("Device    Boot  Start   End  Sectors  Size Type\n");
+    vga_puts("/dev/ram0p1 *    1     262144 262144  128M Linux\n");
+}
+
+static void cmd_du315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("4\t/tmp\n8\t/root\n16\t/bin\n32\t/lib\n60\ttotal\n");
+}
+
+static void cmd_df315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Filesystem  1K-blocks  Used Available Use% Mounted on\n");
+    vga_puts("ramdisk       131072  20480    110592  16%% /\n");
+}
+
+static void cmd_mkfs315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mkfs <device>\n"); return; }
+    vga_printf("mkfs: creating filesystem on %s\n", args[1]);
+}
+
+static void cmd_fsck315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fsck <device>\n"); return; }
+    vga_printf("fsck: checking %s\n  Filesystem OK\n", args[1]);
+}
+
+static void cmd_dd315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("dd: disk dump and copy\n  Usage: dd if=in of=out bs=4096\n");
+}
+
+static void cmd_losetup315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("losetup: no loop devices configured\n");
+}
+
+static void cmd_pgrep315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pgrep <name>\n"); return; }
+    vga_puts("1\n");
+}
+
+static void cmd_pkill315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pkill <name>\n"); return; }
+    vga_printf("pkill: sent signal to %s\n", args[1]);
+}
+
+static void cmd_renice315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("renice: priority adjusted\n");
+}
+
+static void cmd_timeout315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: timeout <seconds> <cmd>\n"); return; }
+    vga_printf("timeout: running with %ds limit\n", atoi(args[1]));
+}
+
+static void cmd_xargs315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("xargs: build command from stdin\n");
+}
+
+static void cmd_banner315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: banner <text>\n"); return; }
+    vga_puts("#####  #####  #     #####  #####\n");
+}
+
+static void cmd_figlet315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: figlet <text>\n"); return; }
+    vga_puts("  _   _  _   _  _____  _  _\n");
+    vga_puts(" | | | || | | ||  ___|| \| |\n");
+    vga_puts(" | |_| || |_| || |___ |    /\n");
+    vga_puts("  \\___/  \\___/ |_____||_|\\_\\n");
+}
+
+static void cmd_toilet315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: toilet <text>\n"); return; }
+    vga_puts("####  ####  ####  ####  ####\n");
+}
+
+static void cmd_boxes315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: boxes <text>\n"); return; }
+    vga_printf("+-%s-+\n", "----------");
+    vga_printf("| %s |\n", args[1]);
+    vga_printf("+-%s-+\n", "----------");
+}
+
+static void cmd_cowsay315(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cowsay <msg>\n"); return; }
+    vga_printf(" %s\n", args[1]);
+    vga_puts("  \\   ^__^\n");
+    vga_puts("   \\  (oo)\_______\n");
+    vga_puts("      (__)\       )\/\\\n");
+    vga_puts("          ||----w |\n");
+    vga_puts("          ||     ||\n");
+}
+
+static void cmd_fortune315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("The best way to predict the future is to create it.\n");
+}
+
+static void cmd_matrix315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("The Matrix has you...\n");
+    vga_puts("01001000 01100101 01101100 01101100 01101111\n");
+}
+
+static void cmd_sl315(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("      ====        ________                __\n");
+    vga_puts("  _D _|  |_______/        \\__I_I_____===__|____|\n");
+    vga_puts("   |(_)---  |   H\\\\____/ H  |   |        =|___ ___|\n");
+    vga_puts("   /     |  |   H  |  |  H |__T|_______|=(_)   (_|\n");
+    vga_puts("  |      |  |   H  |__\\__/  |   |       |   |   |\n");
+}
+
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
