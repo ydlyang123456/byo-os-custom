@@ -1,8 +1,8 @@
-﻿/* BYO-OS FS - x86_64 RAMDISK */
+/* BYO-OS FS - x86_64 RAMDISK */
 #include <kernel.h>
-#define MAX_FILES 256
+#define MAX_FILES 512
 #define MAX_NAME 64
-#define MAX_SIZE 4096
+#define MAX_SIZE 8192
 typedef struct { char name[MAX_NAME]; uint8_t data[MAX_SIZE]; uint32_t size; int is_dir; int used; } fs_entry_t;
 static fs_entry_t files[MAX_FILES];
 static int file_count = 0;
