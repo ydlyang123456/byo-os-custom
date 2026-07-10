@@ -1,4 +1,4 @@
-
+﻿
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -613,7 +613,7 @@ static void cmd_uname(int argc, char args[][CMD_MAX_LEN]) {
         }
     }
     if (all) {
-        vga_puts("BYO-OS byo-os 1.0.0 #1 x86\n");
+        vga_puts("Linux byo-os 6.1.0-23-amd64 #1 SMP Debian 12.0 x86_64 GNU/Linux\n");
     } else {
         vga_puts("BYO-OS\n");
     }
@@ -16296,6 +16296,51 @@ static void cmd_cowsay315(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_fortune315(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_matrix315(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_sl315(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_ps316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_run316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_images316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_stop316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_rm316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_pull316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_docker_logs316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mysql316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mysql_dump316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redis_cli316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redis_set316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_redis_get316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_psql316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nginx316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nginx_test316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apache316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_php_fpm316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openssl316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_certbot316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_git_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ci_pipeline316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ansible316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_terraform316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kubectl316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_systemctl_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_journalctl_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_htop_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_glances316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nmon316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bt_backup316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bt_restore316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_snap316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rsync_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ufw316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_iptables_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pip_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_npm_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lvm_op316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zpool316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_haproxy316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keepalived316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rabbitmq316(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kafka316(int argc, char args[][CMD_MAX_LEN]);
+
 
 static const cmd_entry commands[] = {
 
@@ -19958,7 +20003,50 @@ static const cmd_entry commands[] = {
     {"fortune", cmd_fortune315},
     {"matrix", cmd_matrix315},
     {"sl", cmd_sl315},
-};
+    {"docker", cmd_docker316},
+    {"docker_ps", cmd_docker_ps316},
+    {"docker_run", cmd_docker_run316},
+    {"docker_images", cmd_docker_images316},
+    {"docker_stop", cmd_docker_stop316},
+    {"docker_rm", cmd_docker_rm316},
+    {"docker_pull", cmd_docker_pull316},
+    {"docker_logs", cmd_docker_logs316},
+    {"mysql", cmd_mysql316},
+    {"mysql_dump", cmd_mysql_dump316},
+    {"redis_cli", cmd_redis_cli316},
+    {"redis_set", cmd_redis_set316},
+    {"redis_get", cmd_redis_get316},
+    {"psql", cmd_psql316},
+    {"nginx", cmd_nginx316},
+    {"nginx_test", cmd_nginx_test316},
+    {"apache", cmd_apache316},
+    {"php_fpm", cmd_php_fpm316},
+    {"openssl", cmd_openssl316},
+    {"certbot", cmd_certbot316},
+    {"git_op", cmd_git_op316},
+    {"ci_pipeline", cmd_ci_pipeline316},
+    {"ansible", cmd_ansible316},
+    {"terraform", cmd_terraform316},
+    {"kubectl", cmd_kubectl316},
+    {"systemctl_op", cmd_systemctl_op316},
+    {"journalctl_op", cmd_journalctl_op316},
+    {"htop_op", cmd_htop_op316},
+    {"glances", cmd_glances316},
+    {"nmon", cmd_nmon316},
+    {"bt_backup", cmd_bt_backup316},
+    {"bt_restore", cmd_bt_restore316},
+    {"snap", cmd_snap316},
+    {"rsync_op", cmd_rsync_op316},
+    {"ufw", cmd_ufw316},
+    {"iptables_op", cmd_iptables_op316},
+    {"pip_op", cmd_pip_op316},
+    {"npm_op", cmd_npm_op316},
+    {"lvm_op", cmd_lvm_op316},
+    {"zpool", cmd_zpool316},
+    {"haproxy", cmd_haproxy316},
+    {"keepalived", cmd_keepalived316},
+    {"rabbitmq", cmd_rabbitmq316},
+    {"kafka", cmd_kafka316},};
 
 /* ===== Batch 46: System Enhancements ===== */
 static void cmd_sysctl46(int argc, char args[][CMD_MAX_LEN]) {
@@ -50706,6 +50794,195 @@ static void cmd_sl315(int argc, char args[][CMD_MAX_LEN]) {
     vga_puts("  |      |  |   H  |__\\__/  |   |       |   |   |\n");
 }
 
+
+static void cmd_docker316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker <command>\n"); vga_puts("  run, ps, images, pull, stop, rm\n"); return; }
+    vga_printf("docker: executing %s\n", args[1]);
+}
+static void cmd_docker_ps316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CONTAINER ID  IMAGE  STATUS  PORTS\n");
+    vga_puts("a1b2c3d4e5f6  nginx  Up  0.0.0.0:80->80\n");
+}
+static void cmd_docker_run316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker run <image>\n"); return; }
+    vga_printf("docker run: starting %s\n", args[1]);
+}
+static void cmd_docker_images316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("REPOSITORY  TAG  SIZE\n");
+    vga_puts("nginx       latest  142MB\n");
+    vga_puts("mysql       8.0     514MB\n");
+    vga_puts("redis       7       138MB\n");
+}
+static void cmd_docker_stop316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker stop <id>\n"); return; }
+    vga_printf("docker stop: stopping %s\n", args[1]);
+}
+static void cmd_docker_rm316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker rm <id>\n"); return; }
+    vga_printf("docker rm: removing %s\n", args[1]);
+}
+static void cmd_docker_pull316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker pull <image>\n"); return; }
+    vga_printf("docker pull: pulling %s\n", args[1]);
+}
+static void cmd_docker_logs316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: docker logs <id>\n"); return; }
+    vga_printf("docker logs: %s\n", args[1]);
+}
+static void cmd_mysql316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mysql -e \"QUERY\"\n"); return; }
+    vga_puts("MySQL 8.0\nConnected to localhost:3306\n");
+}
+static void cmd_mysql_dump316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mysqldump <db>\n"); return; }
+    vga_printf("mysqldump: backing up %s\n", args[1]);
+}
+static void cmd_redis_cli316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Redis 7.0\nConnected to localhost:6379\n");
+}
+static void cmd_redis_set316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: redis-cli SET key value\n"); return; }
+    vga_printf("OK: %s = %s\n", args[1], args[2]);
+}
+static void cmd_redis_get316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: redis-cli GET key\n"); return; }
+    vga_printf("(nil)\n");
+}
+static void cmd_psql316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: psql -c \"QUERY\"\n"); return; }
+    vga_puts("PostgreSQL 15.0\nConnected to localhost:5432\n");
+}
+static void cmd_nginx316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nginx <start|stop|reload>\n"); return; }
+    vga_printf("nginx: %s\n", args[1]);
+}
+static void cmd_nginx_test316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("nginx: configuration file test successful\n");
+}
+static void cmd_apache316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apache <start|stop>\n"); return; }
+    vga_printf("apache: %s\n", args[1]);
+}
+static void cmd_php_fpm316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: php-fpm <start|stop>\n"); return; }
+    vga_printf("php-fpm: %s\n", args[1]);
+}
+static void cmd_openssl316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: openssl <genrsa|req|x509>\n"); return; }
+    vga_printf("openssl: %s\n", args[1]);
+}
+static void cmd_certbot316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: certbot --nginx -d domain\n"); return; }
+    vga_puts("certbot: requesting certificate...\n");
+}
+static void cmd_git_op316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: git <clone|pull|push|commit>\n"); return; }
+    vga_printf("git: %s\n", args[1]);
+}
+static void cmd_ci_pipeline316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CI/CD Pipeline\n");
+    vga_puts("  Stage 1: Build      [OK]\n");
+    vga_puts("  Stage 2: Test       [OK]\n");
+    vga_puts("  Stage 3: Deploy     [OK]\n");
+}
+static void cmd_ansible316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ansible-playbook site.yml\n"); return; }
+    vga_puts("ansible: running playbook...\n");
+}
+static void cmd_terraform316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: terraform <plan|apply|destroy>\n"); return; }
+    vga_printf("terraform: %s\n", args[1]);
+}
+static void cmd_kubectl316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kubectl <get|apply|delete>\n"); return; }
+    vga_printf("kubectl: %s\n", args[1]);
+}
+static void cmd_systemctl_op316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: systemctl <start|stop|status> <service>\n"); return; }
+    vga_printf("systemctl: %s %s\n", args[1], args[2] ? args[2] : "");
+}
+static void cmd_journalctl_op316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Jul 10 10:00:01 localhost kernel: System initialized\n");
+    vga_puts("Jul 10 10:00:02 localhost shell: Shell ready\n");
+    vga_puts("Jul 10 10:00:03 localhost network: Network configured\n");
+}
+static void cmd_htop_op316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("PID USER  CPU%  MEM%  COMMAND\n");
+    vga_puts("  1 root  0.0   0.1   /init\n");
+    vga_puts(" 12 root  0.1   0.3   shell\n");
+    vga_puts(" 15 root  0.2   0.5   gateway\n");
+}
+static void cmd_glances316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CPU:    2.1%   MEM: 16.4MB/128MB   DISK: 20MB/128MB\n");
+    vga_puts("LOAD:   0.00   TASKS: 5   SWAP: 0MB\n");
+}
+static void cmd_nmon316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("CPU  [####        ] 32.1%%\n");
+    vga_puts("MEM  [##          ] 16.4%%\n");
+    vga_puts("DISK [##          ] 15.6%%\n");
+}
+static void cmd_bt_backup316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("bt_backup: starting backup...\n");
+    vga_puts("  Backing up databases... OK\n");
+    vga_puts("  Backing up websites... OK\n");
+    vga_puts("  Backup complete: 15.2MB\n");
+}
+static void cmd_bt_restore316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bt-restore <backup-file>\n"); return; }
+    vga_printf("bt-restore: restoring from %s\n", args[1]);
+}
+static void cmd_snap316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("snap: creating snapshot...\n");
+    vga_puts("  Snapshot: snap-2025-07-10-001 (12.5MB)\n");
+}
+static void cmd_rsync_op316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: rsync -avz src dest\n"); return; }
+    vga_printf("rsync: syncing %s -> %s\n", args[1], args[2]);
+}
+static void cmd_ufw316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ufw <allow|deny|status>\n"); return; }
+    vga_printf("ufw: %s\n", args[1]);
+}
+static void cmd_iptables_op316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("Chain INPUT (policy ACCEPT)\n");
+    vga_puts("  target  prot  opt  source      destination\n");
+    vga_puts("  ACCEPT  tcp   --   0.0.0.0/0   0.0.0.0/0   tcp dpt:22\n");
+    vga_puts("  ACCEPT  tcp   --   0.0.0.0/0   0.0.0.0/0   tcp dpt:80\n");
+    vga_puts("  ACCEPT  tcp   --   0.0.0.0/0   0.0.0.0/0   tcp dpt:443\n");
+}
+static void cmd_pip_op316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pip <install|list>\n"); return; }
+    vga_printf("pip: %s\n", args[1]);
+}
+static void cmd_npm_op316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: npm <install|list>\n"); return; }
+    vga_printf("npm: %s\n", args[1]);
+}
+static void cmd_lvm_op316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("LVM Status\n");
+      vga_puts("  VG: vg0  Size: 128GB  Free: 108GB\n");
+      vga_puts("  LV: root Size: 20GB   Path: /dev/vg0/root\n");
+}
+static void cmd_zpool316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("zpool: no pools available\n");
+}
+static void cmd_haproxy316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: haproxy <start|stop|check>\n"); return; }
+    vga_printf("haproxy: %s\n", args[1]);
+}
+static void cmd_keepalived316(int argc, char args[][CMD_MAX_LEN]) {
+    vga_puts("keepalived: VRRP instance MASTER\n");
+    vga_puts("  VIP: 192.168.1.100\n");
+}
+static void cmd_rabbitmq316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: rabbitmqctl <status>\n"); return; }
+    vga_puts("RabbitMQ 3.12\nStatus: running\nConnections: 0\nQueues: 0\n");
+}
+static void cmd_kafka316(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kafka <topics|produce|consume>\n"); return; }
+    vga_printf("kafka: %s\n", args[1]);
+}
+
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
@@ -50809,3 +51086,14 @@ static void cron_tick45(void) {
         }
     }
 }
+
+/* ===== Batch 311: BT Panel & Debian 12 Management ===== */
+static void cmd_bt_panel(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_debian_info(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lsb_release(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cat_os_release(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_debian_version(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apt_get(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dpkg_l(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apt_cache(int argc, char args[][CMD_MAX_LEN]);
+

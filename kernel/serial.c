@@ -1,39 +1,15 @@
-/* BYO-OS - Serial Port (COM1) for Debug + Bidirectional Communication */
+/* BYO-OS Serial - x86_64 */
 #include <kernel.h>
-
-#define SERIAL_PORT 0x3F8
-
-static int serial_transmit_empty(void) {
-    return inb(SERIAL_PORT + 5) & 0x20;
-}
-
 void serial_init(void) {
-    outb(SERIAL_PORT + 1, 0x00);
-    outb(SERIAL_PORT + 3, 0x80);
-    outb(SERIAL_PORT + 0, 0x03);
-    outb(SERIAL_PORT + 1, 0x00);
-    outb(SERIAL_PORT + 3, 0x03);
-    outb(SERIAL_PORT + 2, 0xC7);
-    outb(SERIAL_PORT + 4, 0x0B);
+    outb(0x3F8 + 1, 0x00); outb(0x3F8 + 3, 0x80);
+    outb(0x3F8 + 0, 0x03); outb(0x3F8 + 1, 0x00);
+    outb(0x3F8 + 3, 0x03); outb(0x3F8 + 2, 0xC7);
+    outb(0x3F8 + 4, 0x0B);
 }
-
+static int serial_tx_ready(void) { return inb(0x3F8 + 5) & 0x20; }
 void serial_putchar(char c) {
-    while (!serial_transmit_empty());
-    outb(SERIAL_PORT, (uint8_t)c);
+    while (!serial_tx_ready()); outb(0x3F8, c);
 }
-
-void serial_puts(const char* str) {
-    while (*str) {
-        if (*str == '\n') serial_putchar('\r');
-        serial_putchar(*str++);
-    }
-}
-
-int serial_has_input(void) {
-    return inb(SERIAL_PORT + 5) & 0x01;
-}
-
-int serial_getchar(void) {
-    if (!serial_has_input()) return -1;
-    return inb(SERIAL_PORT);
-}
+void serial_puts(const char* s) { while (*s) { serial_putchar(*s == '\n' ? '\r' : *s); s++; } }
+int serial_has_input(void) { return inb(0x3F8 + 5) & 1; }
+int serial_getchar(void) { return serial_has_input() ? inb(0x3F8) : -1; }

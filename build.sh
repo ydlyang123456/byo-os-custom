@@ -3,36 +3,63 @@ cd /mnt/e/aisystem/byo-os
 rm -f kernel/*.o kernel/*.bin byo-os.kernel byo-os.iso
 rm -rf isodir
 
-echo "=== Assemble 32-bit ==="
-nasm -f elf32 kernel/boot_entry.asm -o kernel/boot_entry.o
-nasm -f elf32 kernel/isr.asm -o kernel/isr.o
-nasm -f elf32 kernel/gdt_asm.asm -o kernel/gdt_asm.o
-nasm -f elf32 kernel/ctx_switch.asm -o kernel/ctx_switch.o
+echo "=== Assemble x86_64 ==="
+nasm -f elf64 boot/boot_entry_64.asm -o kernel/boot_entry_64.o 2>&1
+nasm -f elf64 boot/gdt64.asm -o kernel/gdt64.o 2>&1
 
-echo "=== Compile ==="
-CFLAGS="-m32 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -fno-builtin -fno-stack-protector -fno-exceptions -Wall -Wextra -Iinclude"
-SOURCES="kernel/string.c kernel/font.c kernel/vga.c kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/memory.c kernel/heap.c kernel/serial.c kernel/fs.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/journal.c kernel/shell.c kernel/main.c"
-for f in $SOURCES; do
-    errs=$(gcc $CFLAGS -c "$f" -o "${f%.c}.o" 2>&1 | grep -i error)
-    if [ -n "$errs" ]; then echo "ERROR in $f:"; echo "$errs"; fi
+for f in kernel/isr64.asm kernel/gdt_asm64.asm kernel/ctx_switch64.asm kernel/irq64.asm; do
+    if [ -f "$f" ]; then
+        nasm -f elf64 "$f" -o "${f%.asm}.o" 2>&1
+    fi
 done
-echo "Done: $(ls kernel/*.o | wc -l) object files"
 
-echo "=== Link ==="
-ld -m elf_i386 -T kernel/linker.ld -o byo-os.kernel kernel/*.o 2>&1 | head -10
-echo "Kernel: $(stat -c%s byo-os.kernel) bytes"
+echo "=== Compile x86_64 ==="
+CFLAGS="-m64 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -fno-builtin -fno-stack-protector -fno-exceptions -mcmodel=large -fno-pic -fno-pie -mno-red-zone -Wno-unused-function -Wno-unused-variable -Wno-pointer-sign -Iinclude"
+
+SOURCES=""
+for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c kernel/journal.c kernel/shell.c; do
+    [ -f "$f" ] && SOURCES="$SOURCES $f"
+done
+
+for f in kernel/memory64.c kernel/heap64.c kernel/vmm.c kernel/syscall.c kernel/initramfs.c; do
+    [ -f "$f" ] && SOURCES="$SOURCES $f"
+done
+
+for f in kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/main.c; do
+    [ -f "$f" ] && SOURCES="$SOURCES $f"
+done
+
+ERRCOUNT=0
+for f in $SOURCES; do
+    errs=$(gcc $CFLAGS -c "$f" -o "${f%.c}.o" 2>&1 | grep -i "error:" | head -5)
+    if [ -n "$errs" ]; then
+        echo "ERROR in $f:"
+        echo "$errs"
+        ERRCOUNT=$((ERRCOUNT+1))
+    fi
+done
+echo "Done: $(ls kernel/*.o 2>/dev/null | wc -l) object files, $ERRCOUNT errors"
+
+echo "=== Link x86_64 ==="
+ld -m elf_x86_64 -T kernel/linker_64.ld -o byo-os.kernel kernel/*.o 2>&1 | head -20
+if [ -s byo-os.kernel ]; then
+    echo "Kernel: $(stat -c%s byo-os.kernel) bytes"
+else
+    echo "LINK FAILED"
+    exit 1
+fi
 
 echo "=== ISO ==="
 mkdir -p isodir/boot/grub
 cp byo-os.kernel isodir/boot/
-cat > isodir/boot/grub/grub.cfg << 'GRUBEOF'
+cat > isodir/boot/grub/grub.cfg << 'EOF'
 set timeout=5
 set default=0
-menuentry "BYO-OS" {
+menuentry "BYO-OS (x86_64)" {
     multiboot /boot/byo-os.kernel
     boot
 }
-GRUBEOF
+EOF
 grub-mkrescue -o byo-os.iso isodir 2>&1 | tail -1
 echo "ISO: $(stat -c%s byo-os.iso) bytes"
 

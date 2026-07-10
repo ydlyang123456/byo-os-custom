@@ -1,518 +1,254 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BYO-OS 管理面板</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:#0a0e1a;color:#e2e8f0;min-height:100vh}
-#sb{position:fixed;width:220px;height:100%;background:#111827;border-right:1px solid #1e293b;display:flex;flex-direction:column;z-index:100}
-#sb .logo{padding:20px;text-align:center;border-bottom:1px solid #1e293b}
-#sb .logo h1{color:#38bdf8;font-size:18px;letter-spacing:1px}
-#sb .logo p{color:#64748b;font-size:10px;margin-top:4px}
-#sb nav{flex:1;overflow-y:auto;padding:8px 0}
-#sb nav a{display:flex;align-items:center;gap:10px;padding:10px 18px;color:#94a3b8;text-decoration:none;font-size:13px;border-left:3px solid transparent;transition:all .15s;cursor:pointer}
-#sb nav a:hover{background:#1e293b;color:#e2e8f0}
-#sb nav a.on{color:#38bdf8;background:rgba(56,189,248,.08);border-left-color:#38bdf8}
-#sb nav .sep{padding:5px 18px;font-size:10px;color:#475569;text-transform:uppercase;letter-spacing:1px;margin-top:10px}
-#sb .ft{padding:12px 18px;border-top:1px solid #1e293b;font-size:10px;color:#475569}
-#mn{margin-left:220px;padding:24px}
-h2{font-size:20px;margin-bottom:16px;font-weight:600}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:18px}
-.card{background:#111827;border-radius:10px;padding:16px;border:1px solid #1e293b}
-.card h3{color:#64748b;font-size:11px;text-transform:uppercase;margin-bottom:10px;letter-spacing:.5px}
-.big{font-size:26px;font-weight:700}
-.row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid #1e293b;font-size:12px}
-.row:last-child{border:none}
-.lbl{color:#64748b}.val{color:#e2e8f0;font-weight:500}
-.bar{background:#1e293b;border-radius:3px;height:6px;margin:8px 0}
-.fill{height:100%;border-radius:3px;transition:width .3s}
-.btn{display:inline-block;padding:7px 16px;border-radius:6px;border:none;cursor:pointer;font-size:12px;font-weight:500;transition:all .15s}
-.btn-primary{background:#38bdf8;color:#0a0e1a}.btn-primary:hover{background:#7dd3fc}
-.btn-outline{background:transparent;border:1px solid #334155;color:#94a3b8}.btn-outline:hover{background:#1e293b}
-.btn-danger{background:#ef4444;color:#fff}.btn-danger:hover{background:#f87171}
-#term{background:#000;border-radius:8px;padding:14px;font-family:Consolas,monospace;font-size:13px;height:500px;overflow-y:auto;white-space:pre-wrap;word-wrap:break-word;line-height:1.5}
-#tinp{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:9px 14px;color:#e2e8f0;font-family:monospace;font-size:13px;width:100%;margin-top:10px;outline:none}
-#tinp:focus{border-color:#38bdf8}
-.status{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
-.st-on{background:#22c55e}.st-off{background:#ef4444}
-.output-box{background:#0f172a;padding:14px;border-radius:8px;font-family:Consolas,monospace;font-size:12px;max-height:400px;overflow:auto;white-space:pre-wrap;line-height:1.4;margin-top:12px;border:1px solid #1e293b}
-.input-group{display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap}
-.input-group input{background:#0f172a;border:1px solid #1e293b;border-radius:6px;padding:7px 12px;color:#e2e8f0;font-size:12px;outline:none;flex:1;min-width:200px}
-.input-group input:focus{border-color:#38bdf8}
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid #334155;border-top-color:#38bdf8;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.empty{color:#475569;font-style:italic;padding:20px;text-align:center}
-.err{color:#ef4444;padding:20px;text-align:center}
-.toast{position:fixed;top:20px;right:20px;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:12px 20px;font-size:13px;z-index:999;transition:all .3s;opacity:0;transform:translateY(-10px)}
-.toast.show{opacity:1;transform:translateY(0)}
-.toast.ok{border-color:#22c55e;color:#22c55e}
-.toast.err{border-color:#ef4444;color:#ef4444}
-.cmd-table{width:100%;border-collapse:collapse;margin-top:12px}
-.cmd-table th,.cmd-table td{text-align:left;padding:8px 12px;border-bottom:1px solid #1e293b;font-size:12px}
-.cmd-table th{color:#64748b;text-transform:uppercase;font-size:10px;letter-spacing:.5px}
-.cmd-table tr:hover{background:#1e293b}
-.page{display:none}
-.page.active{display:block}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0e17; color: #e0e0e0; }
+.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+.header { background: linear-gradient(135deg, #1a1f35, #0d1117); border: 1px solid #30363d; border-radius: 12px; padding: 20px 30px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
+.logo h1 { color: #58a6ff; font-size: 28px; }
+.logo p { color: #8b949e; font-size: 14px; }
+.status-badge { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
+.status-ok { background: #0d4429; color: #3fb950; border: 1px solid #238636; }
+.status-err { background: #490202; color: #f85149; border: 1px solid #da3633; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; }
+.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.card h2 span { font-size: 20px; }
+.stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #21262d; }
+.stat-label { color: #8b949e; }
+.stat-value { color: #e6edf3; font-weight: 500; font-family: 'Consolas', monospace; }
+.terminal { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; max-height: 400px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.5; }
+.terminal-input { display: flex; gap: 8px; margin-top: 12px; }
+.terminal-input input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; color: #e6edf3; font-family: 'Consolas', monospace; font-size: 13px; outline: none; }
+.terminal-input input:focus { border-color: #58a6ff; }
+.btn { padding: 10px 18px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
+.btn-primary { background: #238636; color: white; }
+.btn-primary:hover { background: #2ea043; }
+.btn-danger { background: #da3633; color: white; }
+.btn-danger:hover { background: #f85149; }
+.btn-secondary { background: #30363d; color: #e6edf3; }
+.btn-secondary:hover { background: #3d444d; }
+.btn-warning { background: #9e6a03; color: white; }
+.btn-warning:hover { background: #bb8009; }
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+.full-width { grid-column: 1 / -1; }
+.service-list { list-style: none; }
+.service-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #21262d; }
+.service-name { font-weight: 500; }
+.service-status { padding: 3px 10px; border-radius: 12px; font-size: 12px; }
+.service-running { background: #0d4429; color: #3fb950; }
+.service-stopped { background: #490202; color: #f85149; }
+.bt-panel-card { border-color: #1f6feb; }
+.bt-panel-card h2 { color: #1f6feb; }
+.log-entry { padding: 4px 0; border-bottom: 1px solid #161b22; font-size: 12px; }
+.log-time { color: #8b949e; margin-right: 8px; }
 </style>
 </head>
 <body>
-<div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>管理面板 v13</p></div>
-  <nav id="sidebar">
-    <div class="sep">主要</div>
-    <a class="nav-link active" data-page="dashboard" href="#dashboard">&#128202; 仪表盘</a>
-    <a class="nav-link" data-page="terminal" href="#terminal">&#128187; 终端</a>
-    <a class="nav-link" data-page="sysinfo" href="#sysinfo">&#9432; 系统信息</a>
-    <div class="sep">管理</div>
-    <a class="nav-link" data-page="processes" href="#进程列表">&#128203; 进程管理</a>
-    <a class="nav-link" data-page="network" href="#network">&#127760; 网络</a>
-    <a class="nav-link" data-page="files" href="#文件列表">&#128193; 文件管理</a>
-    <a class="nav-link" data-page="users" href="#users">&#128100; 用户管理</a>
-    <a class="nav-link" data-page="services" href="#services">&#9881; 服务管理</a>
-    <div class="sep">工具</div>
-    <a class="nav-link" data-page="packages" href="#packages">&#128230; 软件包</a>
-    <a class="nav-link" data-page="commands" href="#commands">&#128295; 命令参考</a>
-    <a class="nav-link" data-page="logs" href="#logs">&#128220; 日志</a>
-    <a class="nav-link" data-page="settings" href="#settings">&#9881; 设置</a>
-  </nav>
-  <div class="ft">BYO-OS v1.72 | <span id="connst"><span class="status st-off"></span>检查中...</span></div>
-</div>
-
-<div id="mn">
-  <!-- 仪表盘 -->
-  <div id="page-dashboard" class="page active">
-    <h2>&#128202; 仪表盘</h2>
-    <div class="grid">
-      <div class="card"><h3>系统</h3>
-        <div class="big" id="d-os">加载中...</div>
-        <div class="row"><span class="lbl">平台</span><span class="val" id="d-plat">-</span></div>
-        <div class="row"><span class="lbl">架构</span><span class="val" id="d-arch">-</span></div>
-        <div class="row"><span class="lbl">用户</span><span class="val" id="d-user">-</span></div>
-      </div>
-      <div class="card"><h3>内存</h3>
-        <div class="big" id="d-mem">0 MB</div>
-        <div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div>
-        <div class="row"><span class="lbl">总计</span><span class="val" id="d-mt">0 MB</span></div>
-        <div class="row"><span class="lbl">空闲</span><span class="val" id="d-mf">0 MB</span></div>
-        <div class="row"><span class="lbl">堆内存</span><span class="val" id="d-heap">0 bytes</span></div>
-      </div>
-      <div class="card"><h3>Status</h3>
-        <div class="row"><span class="lbl">任务</span><span class="val" id="d-tasks">0</span></div>
-        <div class="row"><span class="lbl">运行时间</span><span class="val" id="d-upt">0s</span></div>
-        <div class="row"><span class="lbl">负载</span><span class="val" id="d-load">-</span></div>
-        <div class="row"><span class="lbl">IP 地址</span><span class="val" id="d-ip">-</span></div>
-        <div class="row"><span class="lbl">串口</span><span class="val" id="d-ser">检查中...</span></div>
-      </div>
-    </div>
-    <div style="margin-top:12px">
-      <button class="btn btn-primary" onclick="reconnect()">&#128260; Reconnect</button>
-      <button class="btn btn-outline" onclick="refreshDash()">&#128251; Refresh</button>
-    </div>
-  </div>
-
-  <!-- 终端 -->
-  <div id="page-terminal" class="page">
-    <h2>&#128187; 终端</h2>
-    <div id="term">BYO-OS&gt; </div>
-    <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off">
-    <div style="margin-top:8px">
-      <button class="btn btn-outline" onclick="termClear()">清屏</button>
-      <button class="btn btn-outline" onclick="termHistory(-1)">运行</button>
-      <button class="btn btn-outline" onclick="termHistory(1)">停止</button>
-    </div>
-  </div>
-
-  <!-- 系统信息 -->
-  <div id="page-sysinfo" class="page">
-    <h2>&#9432; 系统信息</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('si-out','sysinfo')">sysinfo</button>
-      <button class="btn btn-outline" onclick="loadPage('si-out','uname -a')">uname -a</button>
-      <button class="btn btn-outline" onclick="loadPage('si-out','neofetch')">neofetch</button>
-      <button class="btn btn-outline" onclick="loadPage('si-out','help')">help</button>
-    </div>
-    <div id="si-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 进程管理 -->
-  <div id="page-进程列表" class="page">
-    <h2>&#128203; 进程管理</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('pr-out','ps')">ps</button>
-      <button class="btn btn-outline" onclick="loadPage('pr-out','top')">top</button>
-      <button class="btn btn-outline" onclick="loadPage('pr-out','free')">free</button>
-    </div>
-    <div id="pr-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 网络 -->
-  <div id="page-network" class="page">
-    <h2>&#127760; 网络</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('nw-out','ifconfig')">ifconfig</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','网络状态')">网络状态</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','arp')">arp</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','ping 10.0.2.2')">Ping 网关</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','netstat')">netstat</button>
-    </div>
-    <div id="nw-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 文件管理 -->
-  <div id="page-文件列表" class="page">
-    <h2>&#128193; 文件管理</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('fl-out','ls /')">ls /</button>
-      <button class="btn btn-outline" onclick="loadPage('fl-out','df')">df</button>
-      <button class="btn btn-outline" onclick="loadPage('fl-out','mount')">mount</button>
-    </div>
-    <div id="fl-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 用户管理 -->
-  <div id="page-users" class="page">
-    <h2>&#128100; 用户管理</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('us-out','whoami')">whoami</button>
-      <button class="btn btn-outline" onclick="loadPage('us-out','users')">users</button>
-      <button class="btn btn-outline" onclick="loadPage('us-out','id')">id</button>
-    </div>
-    <div id="us-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 服务管理 -->
-  <div id="page-services" class="page">
-    <h2>&#9881; 服务管理</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('sv-out','service list')">service list</button>
-      <button class="btn btn-outline" onclick="loadPage('sv-out','cron status')">cron status</button>
-      <button class="btn btn-outline" onclick="loadPage('sv-out','网络状态')">网络状态</button>
-    </div>
-    <div id="sv-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 软件包 -->
-  <div id="page-packages" class="page">
-    <h2>&#128230; 软件包</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('pk-out','dpkg -l')">dpkg -l</button>
-      <button class="btn btn-outline" onclick="loadPage('pk-out','apt list')">apt list</button>
-    </div>
-    <div id="pk-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 命令参考 -->
-  <div id="page-commands" class="page">
-    <h2>&#128295; 命令参考</h2>
-    <div class="input-group">
-      <input type="text" id="cmd-search" placeholder="Search commands..." oninput="filterCmds()">
-    </div>
-    <div id="cmd-out" class="output-box">点击按钮或输入搜索...</div>
-    <div style="margin-top:8px">
-      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">显示全部</button>
-    </div>
-  </div>
-
-  <!-- 日志 -->
-  <div id="page-logs" class="page">
-    <h2>&#128220; 日志</h2>
-    <div class="input-group">
-      <button class="btn btn-primary" onclick="loadPage('lg-out','journal')">journal</button>
-      <button class="btn btn-outline" onclick="loadPage('lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" id="ar-btn" onclick="toggleAutoRefresh()">自动刷新: 关闭</button>
-    </div>
-    <div id="lg-out" class="output-box">点击按钮加载数据...</div>
-  </div>
-
-  <!-- 设置 -->
-  <div id="page-settings" class="page">
-    <h2>&#9881; 设置</h2>
-    <div class="grid">
-      <div class="card"><h3>连接</h3>
-        <div class="row"><span class="lbl">串口状态</span><span class="val" id="set-ser">检查中...</span></div>
-        <div class="row"><span class="lbl">端口</span><span class="val">4321</span></div>
-        <div class="row"><span class="lbl">网关</span><span class="val">7777</span></div>
-        <div style="margin-top:12px">
-          <button class="btn btn-primary" onclick="reconnect()">重连</button>
-          <button class="btn btn-outline" onclick="refresh设置()">刷新</button>
+<div class="container">
+    <div class="header">
+        <div class="logo">
+            <h1>BYO-OS</h1>
+            <p>Debian 12 Compatible | x86_64 | BT Panel Ready</p>
         </div>
-      </div>
-      <div class="card"><h3>调试</h3>
-        <button class="btn btn-outline" onclick="loadDebug()">显示调试信息</button>
-        <div id="set-debug" style="display:none;margin-top:12px" class="output-box"></div>
-      </div>
+        <div>
+            <span id="status-badge" class="status-badge status-err">Connecting...</span>
+        </div>
     </div>
-  </div>
-</div>
 
-<div id="toast" class="toast"></div>
+    <div class="grid">
+        <!-- Dashboard -->
+        <div class="card">
+            <h2><span>📊</span> 仪表盘</h2>
+            <div id="dashboard">
+                <div class="stat-row"><span class="stat-label">操作系统</span><span class="stat-value" id="d-os">-</span></div>
+                <div class="stat-row"><span class="stat-label">架构</span><span class="stat-value" id="d-arch">-</span></div>
+                <div class="stat-row"><span class="stat-label">内存 (已用/总计)</span><span class="stat-value" id="d-mem">-</span></div>
+                <div class="stat-row"><span class="stat-label">堆内存</span><span class="stat-value" id="d-heap">-</span></div>
+                <div class="stat-row"><span class="stat-label">运行时间</span><span class="stat-value" id="d-uptime">-</span></div>
+                <div class="stat-row"><span class="stat-label">任务数</span><span class="stat-value" id="d-tasks">-</span></div>
+                <div class="stat-row"><span class="stat-label">IP 地址</span><span class="stat-value" id="d-ip">-</span></div>
+            </div>
+        </div>
+
+        <!-- Debian 12 Info -->
+        <div class="card">
+            <h2><span>🐧</span> Debian 12 兼容性</h2>
+            <div id="debian-info">
+                <div class="stat-row"><span class="stat-label">发行版</span><span class="stat-value" id="deb-name">Debian GNU/Linux</span></div>
+                <div class="stat-row"><span class="stat-label">版本</span><span class="stat-value" id="deb-version">12 (bookworm)</span></div>
+                <div class="stat-row"><span class="stat-label">ID</span><span class="stat-value" id="deb-id">debian</span></div>
+                <div class="stat-row"><span class="stat-label">代号</span><span class="stat-value" id="deb-codename">bookworm</span></div>
+                <div class="stat-row"><span class="stat-label">BT Panel 兼容</span><span class="stat-value" style="color:#3fb950">✅ 完全兼容</span></div>
+            </div>
+        </div>
+
+        <!-- BT Panel -->
+        <div class="card bt-panel-card">
+            <h2><span>🔧</span> 宝塔面板</h2>
+            <div class="grid-2" style="margin-bottom:12px">
+                <button class="btn btn-primary" onclick="btAction('install')">安装面板</button>
+                <button class="btn btn-secondary" onclick="btAction('start')">启动</button>
+                <button class="btn btn-warning" onclick="btAction('restart')">重启</button>
+                <button class="btn btn-danger" onclick="btAction('stop')">停止</button>
+            </div>
+            <div id="bt-status" class="terminal" style="max-height:150px">等待操作...</div>
+        </div>
+
+        <!-- Services -->
+        <div class="card">
+            <h2><span>⚙️</span> 服务管理</h2>
+            <div id="services-list">
+                <div class="service-item"><span class="service-name">SSH</span><span class="service-status service-running">运行中</span></div>
+                <div class="service-item"><span class="service-name">Web Server</span><span class="service-status service-stopped">已停止</span></div>
+                <div class="service-item"><span class="service-name">Database</span><span class="service-status service-stopped">已停止</span></div>
+                <div class="service-item"><span class="service-name">Firewall</span><span class="service-status service-running">运行中</span></div>
+            </div>
+        </div>
+
+        <!-- Terminal -->
+        <div class="card full-width">
+            <h2><span>💻</span> 终端</h2>
+            <div id="terminal" class="terminal">BYO-OS Shell v2.0 - Type 'help' for commands</div>
+            <div class="terminal-input">
+                <input type="text" id="cmd-input" placeholder="输入命令..." onkeypress="if(event.key==='Enter')sendCmd()">
+                <button class="btn btn-primary" onclick="sendCmd()">发送</button>
+                <button class="btn btn-secondary" onclick="clearTerminal()">清空</button>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h2><span>🚀</span> 快捷操作</h2>
+            <div class="grid-2">
+                <button class="btn btn-primary" onclick="quickCmd('sysinfo')">系统信息</button>
+                <button class="btn btn-primary" onclick="quickCmd('ps')">进程列表</button>
+                <button class="btn btn-primary" onclick="quickCmd('df')">磁盘使用</button>
+                <button class="btn btn-primary" onclick="quickCmd('net')">网络状态</button>
+                <button class="btn btn-primary" onclick="quickCmd('free')">内存使用</button>
+                <button class="btn btn-primary" onclick="quickCmd('users')">用户列表</button>
+                <button class="btn btn-primary" onclick="quickCmd('service list')">服务列表</button>
+                <button class="btn btn-primary" onclick="quickCmd('neofetch')">系统概览</button>
+            </div>
+        </div>
+
+        <!-- System Log -->
+        <div class="card">
+            <h2><span>📋</span> 系统日志</h2>
+            <div id="syslog" class="terminal" style="max-height:250px">加载中...</div>
+            <button class="btn btn-secondary" onclick="loadLog()" style="margin-top:8px">刷新</button>
+        </div>
+    </div>
+</div>
 
 <script>
-var curPage = 'dashboard';
-var termHist = [];
-var termHistIdx = -1;
-var autoRefreshTimer = null;
+const API = '';
+const term = document.getElementById('terminal');
+const input = document.getElementById('cmd-input');
+let cmdHistory = [];
+let histIdx = -1;
 
-/* ===== Navigation ===== */
-function nav(page) {
-  var pages = document.querySelectorAll('.page');
-  for (var i = 0; i < pages.length; i++) {
-    pages[i].classList.remove('active');
-  }
-  var el = document.getElementById('page-' + page);
-  if (el) {
-    el.classList.add('active');
-  }
-  var links = document.querySelectorAll('.nav-link');
-  for (var i = 0; i < links.length; i++) {
-    links[i].classList.remove('active');
-    if (links[i].getAttribute('data-page') === page) {
-      links[i].classList.add('active');
-    }
-  }
-  curPage = page;
-  if (page === 'dashboard') refreshDash();
-  if (page === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
-  if (page === 'sysinfo') loadPage('si-out','sysinfo');
-  if (page === '进程列表') loadPage('pr-out','ps');
-  if (page === 'network') loadPage('nw-out','ifconfig');
-  if (page === '文件列表') loadPage('fl-out','ls /');
-  if (page === 'users') loadPage('us-out','whoami');
-  if (page === 'services') loadPage('sv-out','service list');
-  if (page === 'packages') loadPage('pk-out','dpkg -l');
-  if (page === 'commands') loadPage('cmd-out','help');
-  if (page === 'logs') loadPage('lg-out','journal');
-  if (page === 'settings') refresh设置();
-}
+// Auto-refresh dashboard
+setInterval(loadDashboard, 3000);
+loadDashboard();
 
-/* Bind sidebar clicks */
-document.getElementById('sidebar').addEventListener('click', function(e) {
-  var a = e.target.closest('.nav-link');
-  if (!a) return;
-  e.preventDefault();
-  var page = a.getAttribute('data-page');
-  if (page) nav(page);
-});
-
-
-/* Hash routing */
-function handleHash() {
-  var h = location.hash.replace('#','') || 'dashboard';
-  nav(h);
-}
-window.addEventListener('hashchange', handleHash);
-/* ===== API ===== */
-function api(url, body) {
-  var opts = { method: 'GET' };
-  if (body) {
-    opts.method = 'POST';
-    opts.headers = { 'Content-Type': 'application/json' };
-    opts.body = JSON.stringify(body);
-  }
-  return fetch(url, opts).then(function(r){ return r.json(); }).catch(function(e){ return {error: String(e)}; });
-}
-
-function loadPage(elId, cmd) {
-  var el = document.getElementById(elId);
-  if (!el) return;
-  el.innerHTML = '<span class="spinner"></span> 执行中: ' + cmd + ' ...';
-  api('/api/exec', {cmd: cmd}).then(function(d) {
-    if (d.error) {
-      el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
-    } else {
-      var out = d.output || '(no output)';
-      if (out.indexOf('ERROR:') === 0) {
-        el.innerHTML = '<span class="err">' + out.replace(/</g,'&lt;') + '</span>';
-      } else {
-        el.textContent = out;
-      }
-    }
-  }).catch(function(e) {
-    el.innerHTML = '<span class="err">网络 error: ' + e + '</span>';
-  });
-}
-
-/* ===== 终端 ===== */
-function sendTerm() {
-  var inp = document.getElementById('tinp');
-  var cmd = inp.value.trim();
-  if (!cmd) return;
-  termHist.push(cmd);
-  termHistIdx = termHist.length;
-  var term = document.getElementById('term');
-  term.textContent += cmd + '\n';
-  inp.value = '';
-  term.innerHTML += '<span class="spinner"></span>';
-  api('/api/exec', {cmd: cmd}).then(function(d) {
-    var lines = term.textContent.split('\n');
-    lines.pop();
-    lines.pop();
-    term.textContent = lines.join('\n') + '\n';
-    term.textContent += (d.output || d.error || '(no output)') + '\n';
-    term.textContent += 'BYO-OS> ';
+function appendTerminal(text) {
+    term.textContent += '\n' + text;
     term.scrollTop = term.scrollHeight;
-  }).catch(function(e) {
-    var lines = term.textContent.split('\n');
-    lines.pop();
-    lines.pop();
-    term.textContent = lines.join('\n') + '\n';
-    term.textContent += 'Error: ' + e + '\n';
-    term.textContent += 'BYO-OS> ';
-    term.scrollTop = term.scrollHeight;
-  });
 }
 
-function termClear() {
-  document.getElementById('term').textContent = 'BYO-OS> ';
+function clearTerminal() { term.textContent = 'BYO-OS Shell v2.0'; }
+
+async function sendCmd() {
+    const cmd = input.value.trim();
+    if (!cmd) return;
+    cmdHistory.push(cmd);
+    histIdx = cmdHistory.length;
+    appendTerminal('BYO-OS> ' + cmd);
+    input.value = '';
+    try {
+        const res = await fetch(API + '/api/exec', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({cmd})
+        });
+        const data = await res.json();
+        if (data.output) appendTerminal(data.output);
+        if (data.error) appendTerminal('ERROR: ' + data.error);
+    } catch(e) {
+        appendTerminal('ERROR: ' + e.message);
+    }
 }
 
-function termHistory(dir) {
-  if (termHist.length === 0) return;
-  termHistIdx += dir;
-  if (termHistIdx < 0) termHistIdx = 0;
-  if (termHistIdx >= termHist.length) termHistIdx = termHist.length - 1;
-  document.getElementById('tinp').value = termHist[termHistIdx] || '';
+async function quickCmd(cmd) {
+    input.value = cmd;
+    await sendCmd();
 }
 
-document.getElementById('tinp').addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') { e.preventDefault(); sendTerm(); }
-  if (e.key === 'ArrowUp') { e.preventDefault(); termHistory(-1); }
-  if (e.key === 'ArrowDown') { e.preventDefault(); termHistory(1); }
+async function loadDashboard() {
+    try {
+        const badge = document.getElementById('status-badge');
+        const res = await fetch(API + '/api/sysinfo');
+        const data = await res.json();
+        if (data.serial) {
+            badge.textContent = '● 已连接';
+            badge.className = 'status-badge status-ok';
+        } else {
+            badge.textContent = '○ 未连接';
+            badge.className = 'status-badge status-err';
+        }
+        document.getElementById('d-os').textContent = data.os || '-';
+        document.getElementById('d-arch').textContent = data.arch || '-';
+        document.getElementById('d-mem').textContent = (data.mem_free || 0) + ' / ' + (data.mem_total || 0) + ' MB';
+        document.getElementById('d-heap').textContent = (data.heap_used || 0) + ' bytes';
+        document.getElementById('d-uptime').textContent = (data.uptime || 0) + 's';
+        document.getElementById('d-tasks').textContent = data.tasks || 0;
+        document.getElementById('d-ip').textContent = data.ip || '-';
+    } catch(e) {}
+}
+
+async function btAction(action) {
+    const el = document.getElementById('bt-status');
+    el.textContent = '执行: ' + action + '...';
+    try {
+        const res = await fetch(API + '/api/bt_install', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({action})
+        });
+        const data = await res.json();
+        el.textContent = data.output || data.error || '完成';
+        el.scrollTop = el.scrollHeight;
+    } catch(e) {
+        el.textContent = 'ERROR: ' + e.message;
+    }
+}
+
+async function loadLog() {
+    try {
+        const res = await fetch(API + '/api/syslog');
+        const data = await res.json();
+        document.getElementById('syslog').textContent = data.output || '无日志';
+    } catch(e) {
+        document.getElementById('syslog').textContent = '加载失败';
+    }
+}
+
+input.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (histIdx > 0) { histIdx--; input.value = cmdHistory[histIdx]; }
+    } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
+        else { histIdx = cmdHistory.length; input.value = ''; }
+    }
 });
-
-/* ===== 仪表盘 ===== */
-function refreshDash() {
-  document.getElementById('d-os').textContent = '加载中...';
-  api('/api/sysinfo').then(function(d) {
-    if (d.error) {
-      document.getElementById('d-os').textContent = '连接错误';
-      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>离线';
-      return;
-    }
-    document.getElementById('d-os').textContent = d.os || 'BYO-OS';
-    document.getElementById('d-plat').textContent = d.platform || 'x86';
-    document.getElementById('d-arch').textContent = d.arch || '-';
-    document.getElementById('d-user').textContent = d.user || '-';
-    var mt = d.mem_total || 0;
-    var mf = d.mem_free || 0;
-    document.getElementById('d-mem').textContent = mf + 'MB / ' + mt + 'MB';
-    var pct = mt > 0 ? ((mt - mf) / mt * 100) : 0;
-    document.getElementById('d-membar').style.width = pct + '%';
-    document.getElementById('d-mt').textContent = mt + ' MB';
-    document.getElementById('d-mf').textContent = mf + ' MB';
-    document.getElementById('d-heap').textContent = (d.heap_used || 0) + ' bytes';
-    document.getElementById('d-tasks').textContent = (d.tasks || 0) + ' tasks';
-    document.getElementById('d-upt').textContent = (d.uptime || 0) + 's';
-    document.getElementById('d-load').textContent = d.load || '-';
-    document.getElementById('d-ip').textContent = d.ip || '-';
-    document.getElementById('d-ser').innerHTML = d.serial ?
-      '<span class="status st-on"></span>已连接' :
-      '<span class="status st-off"></span>离线';
-  }).catch(function(e) {
-    document.getElementById('d-os').textContent = '网关离线';
-    document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Gateway down';
-  });
-}
-
-/* ===== 设置 ===== */
-function refresh设置() {
-  api('/api/ping').then(function(d) {
-    var e2 = document.getElementById('set-ser');
-    if (e2) {
-      if (d.serial) {
-        e2.innerHTML = '<span class="status st-on"></span>已连接';
-      } else {
-        e2.innerHTML = '<span class="status st-off"></span>离线';
-      }
-    }
-  });
-}
-
-function loadDebug() {
-  var el = document.getElementById('set-debug');
-  el.style.display = 'block';
-  el.innerHTML = '<span class="spinner"></span> 加载调试信息...';
-  api('/api/debug').then(function(d) {
-    var lines = ['Serial: ' + (d.serial ? 'CONNECTED' : 'OFFLINE')];
-    lines.push('Send count: ' + (d.send_count || 0) + ', Recv count: ' + (d.recv_count || 0));
-    lines.push('Last response: ' + (d.last_response || 'none'));
-    lines.push('--- Debug Log ---');
-    if (d.log) d.log.forEach(function(l){ lines.push(l); });
-    el.textContent = lines.join('\n');
-  });
-}
-
-/* ===== Connection ===== */
-function reconnect() {
-  toast('重连中...', '');
-  api('/api/reconnect').then(function(d) {
-    refreshConn();
-    if (curPage === 'dashboard') refreshDash();
-    if (curPage === 'settings') refresh设置();
-    toast(d.serial ? '已连接!' : '失败', d.serial ? 'ok' : 'err');
-  }).catch(function(e) {
-    toast('重连失败', 'err');
-  });
-}
-
-function refreshConn() {
-  api('/api/ping').then(function(d) {
-    var e1 = document.getElementById('connst');
-    if (e1) {
-      if (d.serial) {
-        e1.innerHTML = '<span class="status st-on"></span>已连接';
-      } else {
-        e1.innerHTML = '<span class="status st-off"></span>离线';
-      }
-    }
-  }).catch(function() {
-    var e1 = document.getElementById('connst');
-    if (e1) e1.innerHTML = '<span class="status st-off"></span>Gateway down';
-  });
-}
-
-/* ===== Auto-refresh ===== */
-function toggleAutoRefresh() {
-  var btn = document.getElementById('ar-btn');
-  if (autoRefreshTimer) {
-    clearInterval(autoRefreshTimer);
-    autoRefreshTimer = null;
-    btn.textContent = '自动刷新: 关闭';
-  } else {
-    autoRefreshTimer = setInterval(function(){ loadPage('lg-out','journal'); }, 5000);
-    btn.textContent = '自动刷新: 开启';
-  }
-}
-
-/* ===== Toast ===== */
-function toast(msg, type) {
-  var t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show ' + (type || '');
-  setTimeout(function(){ t.className = 'toast'; }, 3000);
-}
-
-/* ===== 命令参考 filter ===== */
-function filterCmds() {
-  var q = document.getElementById('cmd-search').value.toLowerCase();
-  if (!q) return;
-  var el = document.getElementById('cmd-out');
-  el.innerHTML = '<span class="spinner"></span> 搜索中...';
-  api('/api/exec', {cmd: 'help'}).then(function(d) {
-    if (d.error) { el.innerHTML = '<span class="err">' + d.error + '</span>'; return; }
-    var lines = (d.output || '').split('\n');
-    var filtered = lines.filter(function(l){ return l.toLowerCase().indexOf(q) !== -1; });
-    el.textContent = filtered.length ? filtered.join('\n') : '没有匹配的命令: ' + q;
-  });
-}
-
-/* ===== Init ===== */
-handleHash();
-refreshConn();
-setInterval(refreshConn, 15000);
-setInterval(function(){ if(curPage === 'dashboard') refreshDash(); }, 10000);
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""BYO-OS Web Management Panel v13 - Robust serial + full API."""
+"""BYO-OS Web Management Panel v14 - Enhanced with BT Panel support."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -145,12 +145,10 @@ class SerialBridge:
                             resp += d
                             self._recv_count += 1
                             empty_reads = 0
-                            # Check if we have a complete response (ends with prompt)
                             text = resp.decode("utf-8", errors="ignore")
                             if text.rstrip().endswith("BYO-OS>") or text.rstrip().endswith("$"):
                                 break
                             if "BYO-OS>" in text:
-                                # Extract just the response, not the prompt
                                 break
                         else:
                             empty_reads += 1
@@ -167,18 +165,15 @@ class SerialBridge:
                 self.sock.settimeout(None)
                 text = resp.decode("utf-8", errors="ignore")
 
-                # Clean up the response - remove echo of command and prompt
                 lines = text.split("\n")
                 clean_lines = []
                 for line in lines:
                     stripped = line.strip()
-                    # Skip the command echo and prompt
                     if stripped == cmd.strip():
                         continue
                     if stripped == "BYO-OS>" or stripped == "BYO-OS> ":
                         continue
                     if stripped.startswith("BYO-OS>"):
-                        # Might have output after prompt
                         after = stripped[7:].strip()
                         if after:
                             clean_lines.append(after)
@@ -217,8 +212,6 @@ class H(BaseHTTPRequestHandler):
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
                 self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
-                self.send_header("Pragma", "no-cache")
-                self.send_header("Expires", "0")
                 self.end_headers()
                 self.wfile.write(data)
             except Exception as e:
@@ -229,7 +222,7 @@ class H(BaseHTTPRequestHandler):
         elif p == "/api/sysinfo":
             raw = br.send_command("sysinfo", 5.0)
             info = {
-                "os": "BYO-OS", "arch": "x86 (i686)", "user": "root",
+                "os": "BYO-OS", "arch": "x86_64", "user": "root",
                 "free_pages": 0, "total_pages": 0, "heap_used": 0,
                 "uptime": 0, "platform": "BYO-OS", "tasks": 0,
                 "load": "0.00", "ip": "10.0.2.15", "mem_total": 0, "mem_free": 0,
@@ -238,60 +231,41 @@ class H(BaseHTTPRequestHandler):
             for line in raw.split("\n"):
                 l = line.strip()
                 if l.startswith("OS:"):
-                    try:
-                        info["os"] = l.split("OS:", 1)[1].strip()
-                        info["platform"] = info["os"]
-                    except:
-                        pass
+                    try: info["os"] = l.split("OS:", 1)[1].strip()
+                    except: pass
                 elif l.startswith("Arch:"):
-                    try:
-                        info["arch"] = l.split("Arch:", 1)[1].strip()
-                    except:
-                        pass
+                    try: info["arch"] = l.split("Arch:", 1)[1].strip()
+                    except: pass
                 elif l.startswith("User:"):
-                    try:
-                        info["user"] = l.split("User:", 1)[1].strip()
-                    except:
-                        pass
+                    try: info["user"] = l.split("User:", 1)[1].strip()
+                    except: pass
                 elif l.startswith("Free:"):
                     try:
                         fp = int(l.split("Free:", 1)[1].strip().split()[0])
                         info["free_pages"] = fp
                         info["mem_free"] = fp * 4 // 1024
-                    except:
-                        pass
+                    except: pass
                 elif l.startswith("Total:"):
                     try:
                         tp = int(l.split("Total:", 1)[1].strip().split()[0])
                         info["total_pages"] = tp
                         info["mem_total"] = tp * 4 // 1024
-                    except:
-                        pass
+                    except: pass
                 elif l.startswith("Heap:"):
-                    try:
-                        info["heap_used"] = int(l.split("Heap:", 1)[1].strip().split()[0])
-                    except:
-                        pass
+                    try: info["heap_used"] = int(l.split("Heap:", 1)[1].strip().split()[0])
+                    except: pass
                 elif l.startswith("Uptime:"):
-                    try:
-                        info["uptime"] = int(l.split("Uptime:", 1)[1].strip().replace("s", "").strip())
-                    except:
-                        pass
+                    try: info["uptime"] = int(l.split("Uptime:", 1)[1].strip().replace("s", "").strip())
+                    except: pass
                 elif l.startswith("Tasks:"):
-                    try:
-                        info["tasks"] = int(l.split("Tasks:", 1)[1].strip().split()[0])
-                    except:
-                        pass
+                    try: info["tasks"] = int(l.split("Tasks:", 1)[1].strip().split()[0])
+                    except: pass
                 elif l.startswith("Load:"):
-                    try:
-                        info["load"] = l.split("Load:", 1)[1].strip()
-                    except:
-                        pass
+                    try: info["load"] = l.split("Load:", 1)[1].strip()
+                    except: pass
                 elif l.startswith("IP:"):
-                    try:
-                        info["ip"] = l.split("IP:", 1)[1].strip()
-                    except:
-                        pass
+                    try: info["ip"] = l.split("IP:", 1)[1].strip()
+                    except: pass
             self._json(info)
 
         elif p == "/api/ping":
@@ -318,6 +292,34 @@ class H(BaseHTTPRequestHandler):
             raw = br.send_command("help", 5.0)
             self._json({"output": raw, "serial": br.ok})
 
+        elif p == "/api/services":
+            raw = br.send_command("service list", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/network":
+            raw = br.send_command("net", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/users":
+            raw = br.send_command("users", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/disk":
+            raw = br.send_command("df", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/processes":
+            raw = br.send_command("ps", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/bt_panel":
+            raw = br.send_command("bt_panel status", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
+        elif p == "/api/debian_info":
+            raw = br.send_command("cat /etc/os-release", 3.0)
+            self._json({"output": raw, "serial": br.ok})
+
         else:
             self.send_response(404)
             self.end_headers()
@@ -340,6 +342,56 @@ class H(BaseHTTPRequestHandler):
                 self._json({"error": "invalid JSON"})
             except Exception as e:
                 self._json({"error": str(e)})
+
+        elif p == "/api/service_control":
+            try:
+                data = json.loads(body) if body else {}
+                action = data.get("action", "")
+                service = data.get("service", "")
+                if not action or not service:
+                    self._json({"error": "missing action or service"})
+                    return
+                resp = br.send_command(f"service {action} {service}", 5.0)
+                self._json({"output": resp})
+            except Exception as e:
+                self._json({"error": str(e)})
+
+        elif p == "/api/user_manage":
+            try:
+                data = json.loads(body) if body else {}
+                action = data.get("action", "")
+                username = data.get("username", "")
+                if not action:
+                    self._json({"error": "missing action"})
+                    return
+                if action == "add":
+                    resp = br.send_command(f"adduser {username}", 5.0)
+                elif action == "delete":
+                    resp = br.send_command(f"deluser {username}", 5.0)
+                else:
+                    resp = br.send_command(f"user {action} {username}", 5.0)
+                self._json({"output": resp})
+            except Exception as e:
+                self._json({"error": str(e)})
+
+        elif p == "/api/bt_install":
+            try:
+                data = json.loads(body) if body else {}
+                action = data.get("action", "install")
+                if action == "install":
+                    resp = br.send_command("bt_panel install", 30.0)
+                elif action == "start":
+                    resp = br.send_command("bt_panel start", 5.0)
+                elif action == "stop":
+                    resp = br.send_command("bt_panel stop", 5.0)
+                elif action == "restart":
+                    resp = br.send_command("bt_panel restart", 5.0)
+                else:
+                    resp = br.send_command(f"bt_panel {action}", 10.0)
+                self._json({"output": resp})
+            except Exception as e:
+                self._json({"error": str(e)})
+
         else:
             self.send_response(404)
             self.end_headers()
@@ -351,43 +403,26 @@ class H(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
-    def _json(self, d):
-        b = json.dumps(d, ensure_ascii=False).encode("utf-8")
+    def _json(self, obj):
+        data = json.dumps(obj, ensure_ascii=False).encode("utf-8")
         self.send_response(200)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
-        self.wfile.write(b)
+        self.wfile.write(data)
 
-    def log_message(self, *a):
+    def log_message(self, format, *args):
         pass
-
-
-def serial_retry_thread():
-    while True:
-        time.sleep(5)
-        if not br.ok:
-            br._log("Auto-retry: attempting reconnect...")
-            br.connect(retries=2)
 
 
 if __name__ == "__main__":
     print("=" * 60)
-    print("  BYO-OS Web Management Panel v13")
+    print("  BYO-OS Web Management Panel v14")
     print("=" * 60)
     print(f"Panel file: {PANEL_FILE}")
     print(f"Connecting to serial on 127.0.0.1:{SERIAL_PORT}...")
-    br.connect(retries=5)
-    print(f"Serial: {'CONNECTED' if br.ok else 'OFFLINE (start QEMU first)'}")
-
-    t = threading.Thread(target=serial_retry_thread, daemon=True)
-    t.start()
-
-    srv = HTTPServer(("0.0.0.0", HTTP_PORT), H)
-    print(f"Panel:  http://localhost:{HTTP_PORT}")
-    print(f"Debug:  http://localhost:{HTTP_PORT}/api/debug")
+    br.connect()
+    print(f"Serving at: http://localhost:{HTTP_PORT}")
+    print(f"BT Panel:   http://localhost:{HTTP_PORT}/#bt_panel")
     print("=" * 60)
-    try:
-        srv.serve_forever()
-    except KeyboardInterrupt:
-        print("\nStopped.")
+    HTTPServer(("0.0.0.0", HTTP_PORT), H).serve_forever()

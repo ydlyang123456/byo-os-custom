@@ -1,222 +1,73 @@
-﻿/* BYO-OS - Simple Ramdisk File System */
+﻿/* BYO-OS FS - x86_64 RAMDISK */
 #include <kernel.h>
-
-#define FS_BLOCK_SIZE 512
-#define FS_MAX_FILES 64
-#define FS_MAX_NAME 32
-#define FS_MAX_PATH 128
-#define FS_DATA_START (FS_BLOCK_SIZE * 2)
-#define FS_TOTAL_BLOCKS 8192
-
-typedef enum { FS_FILE, FS_DIR } fs_type_t;
-
-typedef struct {
-    char name[FS_MAX_NAME];
-    fs_type_t type;
-    uint32_t size;
-    uint32_t data_block;
-    uint32_t parent_block;
-    int used;
-} fs_entry_t;
-
-typedef struct {
-    uint32_t total_blocks;
-    uint32_t free_blocks;
-    uint32_t root_block;
-    uint32_t bitmap_blocks;
-} fs_superblock_t;
-
-static uint8_t fs_bitmap[FS_TOTAL_BLOCKS / 8];
-static fs_entry_t fs_entries[FS_MAX_FILES];
-static uint8_t fs_data_area[FS_BLOCK_SIZE * 16];
-static int fs_initialized = 0;
-static int fs_entry_count = 0;
-
-static void bitmap_set(uint32_t block) {
-    fs_bitmap[block / 8] |= (1 << (block % 8));
-}
-
-static void bitmap_clear(uint32_t block) {
-    fs_bitmap[block / 8] &= ~(1 << (block % 8));
-}
-
-static int bitmap_test(uint32_t block) {
-    return fs_bitmap[block / 8] & (1 << (block % 8));
-}
-
-static uint32_t alloc_block(void) {
-    for (uint32_t i = 2; i < FS_TOTAL_BLOCKS; i++) {
-        if (!bitmap_test(i)) {
-            bitmap_set(i);
-            return i;
-        }
-    }
-    return 0;
-}
-
-void fs_init(void) {
-    memset(fs_bitmap, 0, sizeof(fs_bitmap));
-    memset(fs_entries, 0, sizeof(fs_entries));
-    fs_entry_count = 0;
-
-    bitmap_set(0);
-    bitmap_set(1);
-
-    fs_entry_t root;
-    strcpy(root.name, "/");
-    root.type = FS_DIR;
-    root.size = 0;
-    root.data_block = 0;
-    root.parent_block = 0;
-    root.used = 1;
-    fs_entries[0] = root;
-    fs_entry_count = 1;
-
-    fs_initialized = 1;
-    serial_puts("[FS] Ramdisk filesystem initialized\n");
-}
-
+#define MAX_FILES 256
+#define MAX_NAME 64
+#define MAX_SIZE 4096
+typedef struct { char name[MAX_NAME]; uint8_t data[MAX_SIZE]; uint32_t size; int is_dir; int used; } fs_entry_t;
+static fs_entry_t files[MAX_FILES];
+static int file_count = 0;
+void fs_init(void) { file_count = 0; memset(files, 0, sizeof(files)); }
 int fs_create_file(const char* name, const char* content, uint32_t size) {
-    if (fs_entry_count >= FS_MAX_FILES) return -1;
-    if (size > FS_BLOCK_SIZE * 16) return -2;
-
-    uint32_t block = alloc_block();
-    if (!block) return -3;
-
-    fs_entry_t* entry = &fs_entries[fs_entry_count];
-    strncpy(entry->name, name, FS_MAX_NAME - 1);
-    entry->name[FS_MAX_NAME - 1] = '\0';
-    entry->type = FS_FILE;
-    entry->size = size;
-    entry->data_block = block;
-    entry->parent_block = 0;
-    entry->used = 1;
-    fs_entry_count++;
-
-    if (content && size > 0) {
-        memcpy(fs_data_area + block * FS_BLOCK_SIZE, content, size);
-    }
-
-    return 0;
+    if (file_count >= MAX_FILES) return -1;
+    int i = 0; while (name[i] && i < MAX_NAME - 1) { files[file_count].name[i] = name[i]; i++; }
+    files[file_count].name[i] = 0;
+    if (content && size > 0) { uint32_t s = size < MAX_SIZE ? size : MAX_SIZE; memcpy(files[file_count].data, content, s); files[file_count].size = s; }
+    files[file_count].is_dir = 0; files[file_count].used = 1; file_count++; return 0;
 }
-
 int fs_create_dir(const char* name) {
-    if (fs_entry_count >= FS_MAX_FILES) return -1;
-
-    fs_entry_t* entry = &fs_entries[fs_entry_count];
-    strncpy(entry->name, name, FS_MAX_NAME - 1);
-    entry->name[FS_MAX_NAME - 1] = '\0';
-    entry->type = FS_DIR;
-    entry->size = 0;
-    entry->data_block = 0;
-    entry->parent_block = 0;
-    entry->used = 1;
-    fs_entry_count++;
-
-    return 0;
+    if (file_count >= MAX_FILES) return -1;
+    int i = 0; while (name[i] && i < MAX_NAME - 1) { files[file_count].name[i] = name[i]; i++; }
+    files[file_count].name[i] = 0;
+    files[file_count].is_dir = 1; files[file_count].used = 1; files[file_count].size = 0; file_count++; return 0;
 }
-
 int fs_list_dir(const char* path, char* output, uint32_t max_len) {
-    (void)path;
-    if (!fs_initialized) return -1;
-
-    output[0] = '\0';
-    uint32_t pos = 0;
-
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (!fs_entries[i].used) continue;
-        const char* prefix = (fs_entries[i].type == FS_DIR) ? "[DIR]  " : "[FILE] ";
-        uint32_t plen = strlen(prefix);
-        uint32_t nlen = strlen(fs_entries[i].name);
-
-        if (pos + plen + nlen + 2 < max_len) {
-            memcpy(output + pos, prefix, plen);
-            pos += plen;
-            memcpy(output + pos, fs_entries[i].name, nlen);
-            pos += nlen;
-            output[pos++] = '\n';
-        }
+    (void)path; int pos = 0;
+    for (int i = 0; i < file_count && pos < (int)max_len - 32; i++) {
+        if (!files[i].used) continue;
+        if (files[i].is_dir) { output[pos++] = '['; int j = 0; while (files[i].name[j] && pos < (int)max_len - 2) output[pos++] = files[i].name[j++]; output[pos++] = ']'; }
+        else { int j = 0; while (files[i].name[j] && pos < (int)max_len - 2) output[pos++] = files[i].name[j++]; }
+        output[pos++] = '\n';
     }
-    output[pos] = '\0';
-    return 0;
+    output[pos] = 0; return pos;
 }
-
 int fs_read_file(const char* name, char* buf, uint32_t max_len) {
-    if (!fs_initialized) return -1;
-
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && fs_entries[i].type == FS_FILE &&
-            strcmp(fs_entries[i].name, name) == 0) {
-            uint32_t copy_len = fs_entries[i].size;
-            if (copy_len > max_len) copy_len = max_len;
-            memset(buf, 0, max_len);
-            if (copy_len > 0)
-                memcpy(buf, fs_data_area + fs_entries[i].data_block * FS_BLOCK_SIZE, copy_len);
-            return copy_len;
+    for (int i = 0; i < file_count; i++) {
+        if (files[i].used && !files[i].is_dir && strcmp(files[i].name, name) == 0) {
+            uint32_t s = files[i].size < max_len ? files[i].size : max_len;
+            memcpy(buf, files[i].data, s); return s;
         }
     }
     return -1;
 }
-
 int fs_write_file(const char* name, const char* content, uint32_t size) {
-    if (!fs_initialized) return -1;
-
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && fs_entries[i].type == FS_FILE &&
-            strcmp(fs_entries[i].name, name) == 0) {
-            if (size > FS_BLOCK_SIZE * 16) return -2;
-            fs_entries[i].size = size;
-            memcpy(fs_data_area, content, size);
-            return 0;
+    for (int i = 0; i < file_count; i++) {
+        if (files[i].used && strcmp(files[i].name, name) == 0) {
+            uint32_t s = size < MAX_SIZE ? size : MAX_SIZE;
+            memcpy(files[i].data, content, s); files[i].size = s; files[i].is_dir = 0; return 0;
         }
     }
-
     return fs_create_file(name, content, size);
 }
-
 int fs_delete_file(const char* name) {
-    if (!fs_initialized) return -1;
-
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && strcmp(fs_entries[i].name, name) == 0) {
-            if (fs_entries[i].data_block) {
-                bitmap_clear(fs_entries[i].data_block);
-            }
-            fs_entries[i].used = 0;
-            return 0;
-        }
+    for (int i = 0; i < file_count; i++) {
+        if (files[i].used && strcmp(files[i].name, name) == 0) { files[i].used = 0; return 0; }
     }
     return -1;
 }
-
 int fs_file_size(const char* name) {
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && fs_entries[i].type == FS_FILE &&
-            strcmp(fs_entries[i].name, name) == 0) {
-            return fs_entries[i].size;
-        }
+    for (int i = 0; i < file_count; i++) {
+        if (files[i].used && strcmp(files[i].name, name) == 0) return files[i].size;
     }
     return -1;
 }
-
 int fs_file_exists(const char* name) {
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && strcmp(fs_entries[i].name, name) == 0) {
-            return 1;
-        }
+    for (int i = 0; i < file_count; i++) {
+        if (files[i].used && strcmp(files[i].name, name) == 0) return 1;
     }
     return 0;
 }
-
-void fs_get_stats(uint32_t* total_bytes, uint32_t* used_bytes, uint32_t* free_bytes) {
-    uint32_t total = (uint32_t)FS_TOTAL_BLOCKS * FS_BLOCK_SIZE;
-    uint32_t used = 0;
-    for (int i = 0; i < fs_entry_count; i++) {
-        if (fs_entries[i].used && fs_entries[i].type == FS_FILE) {
-            used += fs_entries[i].size;
-        }
-    }
-    *total_bytes = total;
-    *used_bytes = used;
-    *free_bytes = total - used;
+void fs_get_stats(uint32_t* total, uint32_t* used, uint32_t* free_b) {
+    uint32_t t = MAX_FILES * MAX_SIZE, u = 0;
+    for (int i = 0; i < file_count; i++) if (files[i].used) u += files[i].size;
+    if (total) *total = t; if (used) *used = u; if (free_b) *free_b = t - u;
 }
