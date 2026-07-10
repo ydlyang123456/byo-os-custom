@@ -2,91 +2,117 @@
 
 > 纯手写 x86 操作系统，无 Linux/Windows 依赖，可运行在 QEMU 虚拟机中
 
-
 ## 📱 Termux 一键安装（Android 手机）
 
 > 在 Android 手机上通过 Termux 一键运行 BYO-OS
 
-### 一键安装
-`ash
-# 在 Termux 中执行
-pkg install git
+### 一键安装（推荐）
+
+```bash
+pkg install git -y
 git clone https://github.com/ydlyang123456/byo-os-custom.git ~/byo-os
 bash ~/byo-os/install_termux.sh
-`
+```
 
-### 启动
-`ash
-bash ~/byo-os/start_termux.sh
-# 或使用快捷命令 (安装后重启 Termux 生效)
-byo-start
-`
+### 快速命令（安装后）
 
-### 停止 / 卸载
-`ash
-bash ~/byo-os/stop_termux.sh     # 停止
-bash ~/byo-os/uninstall_termux.sh  # 卸载
-`
+```bash
+byo start      # 启动 QEMU + Web 面板
+byo stop       # 停止所有进程
+byo status     # 查看运行状态
+byo update     # 更新源码和 ISO
+byo logs       # 查看日志
+byo panel      # 浏览器打开 Web 面板
+byo build      # 从源码编译
+byo uninstall  # 卸载
 
-### Termux 架构
-`
-手机浏览器 → http://localhost:7777 → Python Gateway → TCP:4321 → QEMU Serial → BYO-OS
-    ↑                                        │
-    └────── Web Panel (Dashboard/Terminal) ←──┘
-`
+# 简写别名
+bs             # = byo start
+bss            # = byo stop
+bst            # = byo status
+bu             # = byo update
+```
 
-**依赖:** qemu-system-x86 python3 git（安装脚本自动处理）
+### 架构
 
-## ?? 快速开始
+```
+Android 终端
+  ├── byo start
+  │   ├── QEMU (headless, serial:4321)
+  │   └── gateway.py (Web:7777)
+  │
+  ├── 手机浏览器 → http://localhost:7777
+  │   ├── Dashboard (系统状态)
+  │   ├── Terminal (命令执行)
+  │   ├── File Manager (文件管理)
+  │   ├── Network (网络配置)
+  │   └── Settings (系统设置)
+  │
+  └── Python Gateway → TCP:4321 → QEMU Serial → BYO-OS
+```
+
+### 特性
+- **智能安装** - 自动检测架构、依赖、端口冲突
+- **一键启动** - `byo start` 一条命令搞定
+- **进程管理** - 自动检测 PID、防重复启动
+- **Web 面板** - 宝塔式管理界面，手机浏览器访问
+- **源码编译** - 安装 nasm/gcc 后可从源码构建 ISO
+
+**依赖:** qemu-system-x86 python3 git nasm gcc（安装脚本自动处理）
+
+## 快速开始
 
 ### 1. 构建 ISO
+
 ```bash
 # 在 WSL 中运行
 cd /mnt/e/aisystem/byo-os
 chmod +x build.sh
 bash build.sh
 ```
-或在 Windows 中双击 `build.bat`
 
-### 2. 启动系统 + Web管理面板
+### 2. 启动系统 + Web 管理面板
+
+```bash
+# 启动 QEMU
+qemu-system-i386 -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait -display sdl
+
+# 启动 Web 面板
+python gateway.py
 ```
-双击 start.bat
-```
-这会自动：
-- 启动 QEMU 虚拟机（显示 OS 界面）
-- 启动 Web 管理面板（http://localhost:7777）
-- 通过串口桥接连接两者
 
 ### 3. 访问 Web 管理面板
+
 浏览器打开 **http://localhost:7777**
 
-## ?? 功能列表
+## 功能列表
 
 ### 内核特性
-- ? GDT / IDT 中断管理
-- ? IRQ / PIC 可编程中断控制器
-- ? 100Hz 系统计时器
-- ? PS/2 键盘驱动
-- ? PS/2 鼠标驱动
-- ? 物理内存管理器 (PMM)
-- ? 内核堆分配器
-- ? 多任务调度器
-- ? RAMDISK 文件系统
-- ? NE2000 网卡驱动（TX）
-- ? TCP/IP 协议栈（ARP/IPv4/TCP）
-- ? HTTP 服务器
-- ? 用户权限系统
-- ? 串口调试输出
+- GDT / IDT 中断管理
+- IRQ / PIC 可编程中断控制器
+- 100Hz 系统计时器
+- PS/2 键盘驱动
+- PS/2 鼠标驱动
+- 物理内存管理器 (PMM)
+- 内核堆分配器
+- 多任务调度器
+- RAMDISK 文件系统
+- NE2000 网卡驱动（TX）
+- TCP/IP 协议栈（ARP/IPv4/TCP）
+- HTTP 服务器
+- 用户权限系统
+- 串口调试输出
 
 ### Web 管理面板（宝塔式）
-- ?? **Dashboard** - 实时系统状态监控
-- ?? **Web Terminal** - 通过浏览器执行 OS 命令
-- ?? **File Manager** - 文件浏览、查看、创建、删除
-- ?? **Network** - 网络配置和协议栈状态
-- ?? **User Management** - 用户列表和权限
-- ?? **Settings** - 系统配置、重启、关机
+- 📊 **Dashboard** - 实时系统状态监控
+- 💻 **Web Terminal** - 通过浏览器执行 OS 命令
+- 📁 **File Manager** - 文件浏览、查看、创建、删除
+- 🌐 **Network** - 网络配置和协议栈状态
+- 👤 **User Management** - 用户列表和权限
+- ⚙️ **Settings** - 系统配置、重启、关机
 
 ### Shell 命令
+
 | 命令 | 说明 |
 |------|------|
 | `help` | 显示帮助 |
@@ -102,7 +128,7 @@ bash build.sh
 | `halt` | 关机 |
 | `reboot` | 重启 |
 
-## ?? 架构
+## 架构
 
 ```
 Browser ──→ http://localhost:7777 ──→ Python Gateway ──→ TCP:4321 ──→ QEMU Serial ──→ BYO-OS Shell
@@ -115,7 +141,7 @@ Browser ──→ http://localhost:7777 ──→ Python Gateway ──→ TCP:4
 - **Python Gateway** → 连接串口，提供 Web 界面
 - **浏览器** → 访问 http://localhost:7777
 
-## ?? 项目结构
+## 项目结构
 
 ```
 byo-os/
@@ -145,38 +171,24 @@ byo-os/
 │   └── linker.ld          # 链接脚本
 ├── include/kernel.h       # 主头文件
 ├── gateway.py             # Web 管理面板
-├── build.sh               # 构建脚本（WSL）
-├── build.bat              # 构建脚本（Windows）
-├── start.bat              # 一键启动
-├── start_web_only.bat     # 仅启动 Web 面板
+├── build.sh               # 构建脚本
+├── install_termux.sh      # Termux 一键安装
+├── byo                    # Termux 统一管理命令
 └── byo-os.iso             # 构建输出
 ```
 
-## ? 启动参数
-
-### QEMU
-```
-qemu-system-i386.exe -cdrom byo-os.iso -m 128 -serial tcp::4321,server,nowait -display sdl
-```
-
-### Web 网关
-```
-python gateway.py
-# → http://localhost:7777
-```
-
-## ?? 已知限制
+## 已知限制
 
 1. **NE2000 RX**: QEMU SLiRP 不向 NE2000 回送数据包，仅 TX 可用
 2. **串口替代网络**: Web 面板通过串口与 OS 通信，非真实网络
 3. **内存限制**: 128MB，tmpfs 文件系统
 
-## ?? 重新构建
+## 重新构建
 
 ```bash
 # WSL
 cd /mnt/e/aisystem/byo-os && bash build.sh
 
-# Windows
-build.bat
+# Termux
+byo build
 ```
