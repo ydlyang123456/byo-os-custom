@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>BYO-OS Management Panel</title>
+<title>BYO-OS 管理面板</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:system-ui,-apple-system,sans-serif;background:#0a0e1a;color:#e2e8f0;min-height:100vh}
@@ -59,51 +59,51 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
 </head>
 <body>
 <div id="sb">
-  <div class="logo"><h1>BYO-OS</h1><p>Management Panel v13</p></div>
+  <div class="logo"><h1>BYO-OS</h1><p>管理面板 v13</p></div>
   <nav id="sidebar">
-    <div class="sep">Main</div>
-    <a class="nav-link active" data-page="dashboard" href="#dashboard">&#128202; Dashboard</a>
-    <a class="nav-link" data-page="terminal" href="#terminal">&#128187; Terminal</a>
-    <a class="nav-link" data-page="sysinfo" href="#sysinfo">&#9432; System Info</a>
-    <div class="sep">Management</div>
-    <a class="nav-link" data-page="processes" href="#processes">&#128203; Processes</a>
-    <a class="nav-link" data-page="network" href="#network">&#127760; Network</a>
-    <a class="nav-link" data-page="files" href="#files">&#128193; Files</a>
-    <a class="nav-link" data-page="users" href="#users">&#128100; Users</a>
-    <a class="nav-link" data-page="services" href="#services">&#9881; Services</a>
-    <div class="sep">Tools</div>
-    <a class="nav-link" data-page="packages" href="#packages">&#128230; Packages</a>
-    <a class="nav-link" data-page="commands" href="#commands">&#128295; Commands</a>
-    <a class="nav-link" data-page="logs" href="#logs">&#128220; Logs</a>
-    <a class="nav-link" data-page="settings" href="#settings">&#9881; Settings</a>
+    <div class="sep">主要</div>
+    <a class="nav-link active" data-page="dashboard" href="#dashboard">&#128202; 仪表盘</a>
+    <a class="nav-link" data-page="terminal" href="#terminal">&#128187; 终端</a>
+    <a class="nav-link" data-page="sysinfo" href="#sysinfo">&#9432; 系统信息</a>
+    <div class="sep">管理</div>
+    <a class="nav-link" data-page="processes" href="#进程列表">&#128203; 进程管理</a>
+    <a class="nav-link" data-page="network" href="#network">&#127760; 网络</a>
+    <a class="nav-link" data-page="files" href="#文件列表">&#128193; 文件管理</a>
+    <a class="nav-link" data-page="users" href="#users">&#128100; 用户管理</a>
+    <a class="nav-link" data-page="services" href="#services">&#9881; 服务管理</a>
+    <div class="sep">工具</div>
+    <a class="nav-link" data-page="packages" href="#packages">&#128230; 软件包</a>
+    <a class="nav-link" data-page="commands" href="#commands">&#128295; 命令参考</a>
+    <a class="nav-link" data-page="logs" href="#logs">&#128220; 日志</a>
+    <a class="nav-link" data-page="settings" href="#settings">&#9881; 设置</a>
   </nav>
-  <div class="ft">BYO-OS v1.72 | <span id="connst"><span class="status st-off"></span>Checking...</span></div>
+  <div class="ft">BYO-OS v1.72 | <span id="connst"><span class="status st-off"></span>检查中...</span></div>
 </div>
 
 <div id="mn">
-  <!-- Dashboard -->
+  <!-- 仪表盘 -->
   <div id="page-dashboard" class="page active">
-    <h2>&#128202; Dashboard</h2>
+    <h2>&#128202; 仪表盘</h2>
     <div class="grid">
-      <div class="card"><h3>System</h3>
-        <div class="big" id="d-os">Loading...</div>
-        <div class="row"><span class="lbl">Platform</span><span class="val" id="d-plat">-</span></div>
-        <div class="row"><span class="lbl">Arch</span><span class="val" id="d-arch">-</span></div>
-        <div class="row"><span class="lbl">User</span><span class="val" id="d-user">-</span></div>
+      <div class="card"><h3>系统</h3>
+        <div class="big" id="d-os">加载中...</div>
+        <div class="row"><span class="lbl">平台</span><span class="val" id="d-plat">-</span></div>
+        <div class="row"><span class="lbl">架构</span><span class="val" id="d-arch">-</span></div>
+        <div class="row"><span class="lbl">用户</span><span class="val" id="d-user">-</span></div>
       </div>
-      <div class="card"><h3>Memory</h3>
+      <div class="card"><h3>内存</h3>
         <div class="big" id="d-mem">0 MB</div>
         <div class="bar"><div class="fill" id="d-membar" style="width:0%;background:#38bdf8"></div></div>
-        <div class="row"><span class="lbl">Total</span><span class="val" id="d-mt">0 MB</span></div>
-        <div class="row"><span class="lbl">Free</span><span class="val" id="d-mf">0 MB</span></div>
-        <div class="row"><span class="lbl">Heap</span><span class="val" id="d-heap">0 bytes</span></div>
+        <div class="row"><span class="lbl">总计</span><span class="val" id="d-mt">0 MB</span></div>
+        <div class="row"><span class="lbl">空闲</span><span class="val" id="d-mf">0 MB</span></div>
+        <div class="row"><span class="lbl">堆内存</span><span class="val" id="d-heap">0 bytes</span></div>
       </div>
       <div class="card"><h3>Status</h3>
-        <div class="row"><span class="lbl">Tasks</span><span class="val" id="d-tasks">0</span></div>
-        <div class="row"><span class="lbl">Uptime</span><span class="val" id="d-upt">0s</span></div>
-        <div class="row"><span class="lbl">Load</span><span class="val" id="d-load">-</span></div>
-        <div class="row"><span class="lbl">IP</span><span class="val" id="d-ip">-</span></div>
-        <div class="row"><span class="lbl">Serial</span><span class="val" id="d-ser">Checking...</span></div>
+        <div class="row"><span class="lbl">任务</span><span class="val" id="d-tasks">0</span></div>
+        <div class="row"><span class="lbl">运行时间</span><span class="val" id="d-upt">0s</span></div>
+        <div class="row"><span class="lbl">负载</span><span class="val" id="d-load">-</span></div>
+        <div class="row"><span class="lbl">IP 地址</span><span class="val" id="d-ip">-</span></div>
+        <div class="row"><span class="lbl">串口</span><span class="val" id="d-ser">检查中...</span></div>
       </div>
     </div>
     <div style="margin-top:12px">
@@ -112,135 +112,135 @@ h2{font-size:20px;margin-bottom:16px;font-weight:600}
     </div>
   </div>
 
-  <!-- Terminal -->
+  <!-- 终端 -->
   <div id="page-terminal" class="page">
-    <h2>&#128187; Terminal</h2>
+    <h2>&#128187; 终端</h2>
     <div id="term">BYO-OS&gt; </div>
     <input id="tinp" type="text" placeholder="Type command and press Enter..." autocomplete="off">
     <div style="margin-top:8px">
-      <button class="btn btn-outline" onclick="termClear()">Clear</button>
-      <button class="btn btn-outline" onclick="termHistory(-1)">Up</button>
-      <button class="btn btn-outline" onclick="termHistory(1)">Down</button>
+      <button class="btn btn-outline" onclick="termClear()">清屏</button>
+      <button class="btn btn-outline" onclick="termHistory(-1)">运行</button>
+      <button class="btn btn-outline" onclick="termHistory(1)">停止</button>
     </div>
   </div>
 
-  <!-- System Info -->
+  <!-- 系统信息 -->
   <div id="page-sysinfo" class="page">
-    <h2>&#9432; System Info</h2>
+    <h2>&#9432; 系统信息</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('si-out','sysinfo')">sysinfo</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','uname -a')">uname -a</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','neofetch')">neofetch</button>
       <button class="btn btn-outline" onclick="loadPage('si-out','help')">help</button>
     </div>
-    <div id="si-out" class="output-box">Click a button to load data...</div>
+    <div id="si-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Processes -->
-  <div id="page-processes" class="page">
-    <h2>&#128203; Processes</h2>
+  <!-- 进程管理 -->
+  <div id="page-进程列表" class="page">
+    <h2>&#128203; 进程管理</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pr-out','ps')">ps</button>
       <button class="btn btn-outline" onclick="loadPage('pr-out','top')">top</button>
       <button class="btn btn-outline" onclick="loadPage('pr-out','free')">free</button>
     </div>
-    <div id="pr-out" class="output-box">Click a button to load data...</div>
+    <div id="pr-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Network -->
+  <!-- 网络 -->
   <div id="page-network" class="page">
-    <h2>&#127760; Network</h2>
+    <h2>&#127760; 网络</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('nw-out','ifconfig')">ifconfig</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','net status')">net status</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','网络状态')">网络状态</button>
       <button class="btn btn-outline" onclick="loadPage('nw-out','arp')">arp</button>
-      <button class="btn btn-outline" onclick="loadPage('nw-out','ping 10.0.2.2')">Ping Gateway</button>
+      <button class="btn btn-outline" onclick="loadPage('nw-out','ping 10.0.2.2')">Ping 网关</button>
       <button class="btn btn-outline" onclick="loadPage('nw-out','netstat')">netstat</button>
     </div>
-    <div id="nw-out" class="output-box">Click a button to load data...</div>
+    <div id="nw-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Files -->
-  <div id="page-files" class="page">
-    <h2>&#128193; Files</h2>
+  <!-- 文件管理 -->
+  <div id="page-文件列表" class="page">
+    <h2>&#128193; 文件管理</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('fl-out','ls /')">ls /</button>
       <button class="btn btn-outline" onclick="loadPage('fl-out','df')">df</button>
       <button class="btn btn-outline" onclick="loadPage('fl-out','mount')">mount</button>
     </div>
-    <div id="fl-out" class="output-box">Click a button to load data...</div>
+    <div id="fl-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Users -->
+  <!-- 用户管理 -->
   <div id="page-users" class="page">
-    <h2>&#128100; Users</h2>
+    <h2>&#128100; 用户管理</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('us-out','whoami')">whoami</button>
       <button class="btn btn-outline" onclick="loadPage('us-out','users')">users</button>
       <button class="btn btn-outline" onclick="loadPage('us-out','id')">id</button>
     </div>
-    <div id="us-out" class="output-box">Click a button to load data...</div>
+    <div id="us-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Services -->
+  <!-- 服务管理 -->
   <div id="page-services" class="page">
-    <h2>&#9881; Services</h2>
+    <h2>&#9881; 服务管理</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('sv-out','service list')">service list</button>
       <button class="btn btn-outline" onclick="loadPage('sv-out','cron status')">cron status</button>
-      <button class="btn btn-outline" onclick="loadPage('sv-out','net status')">net status</button>
+      <button class="btn btn-outline" onclick="loadPage('sv-out','网络状态')">网络状态</button>
     </div>
-    <div id="sv-out" class="output-box">Click a button to load data...</div>
+    <div id="sv-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Packages -->
+  <!-- 软件包 -->
   <div id="page-packages" class="page">
-    <h2>&#128230; Packages</h2>
+    <h2>&#128230; 软件包</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('pk-out','dpkg -l')">dpkg -l</button>
       <button class="btn btn-outline" onclick="loadPage('pk-out','apt list')">apt list</button>
     </div>
-    <div id="pk-out" class="output-box">Click a button to load data...</div>
+    <div id="pk-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Commands -->
+  <!-- 命令参考 -->
   <div id="page-commands" class="page">
-    <h2>&#128295; Commands</h2>
+    <h2>&#128295; 命令参考</h2>
     <div class="input-group">
       <input type="text" id="cmd-search" placeholder="Search commands..." oninput="filterCmds()">
     </div>
-    <div id="cmd-out" class="output-box">Click a button or type to search...</div>
+    <div id="cmd-out" class="output-box">点击按钮或输入搜索...</div>
     <div style="margin-top:8px">
-      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">Show All</button>
+      <button class="btn btn-primary" onclick="loadPage('cmd-out','help')">显示全部</button>
     </div>
   </div>
 
-  <!-- Logs -->
+  <!-- 日志 -->
   <div id="page-logs" class="page">
-    <h2>&#128220; Logs</h2>
+    <h2>&#128220; 日志</h2>
     <div class="input-group">
       <button class="btn btn-primary" onclick="loadPage('lg-out','journal')">journal</button>
       <button class="btn btn-outline" onclick="loadPage('lg-out','dmesg')">dmesg</button>
-      <button class="btn btn-outline" id="ar-btn" onclick="toggleAutoRefresh()">Auto-refresh: OFF</button>
+      <button class="btn btn-outline" id="ar-btn" onclick="toggleAutoRefresh()">自动刷新: 关闭</button>
     </div>
-    <div id="lg-out" class="output-box">Click a button to load data...</div>
+    <div id="lg-out" class="output-box">点击按钮加载数据...</div>
   </div>
 
-  <!-- Settings -->
+  <!-- 设置 -->
   <div id="page-settings" class="page">
-    <h2>&#9881; Settings</h2>
+    <h2>&#9881; 设置</h2>
     <div class="grid">
-      <div class="card"><h3>Connection</h3>
-        <div class="row"><span class="lbl">Serial Status</span><span class="val" id="set-ser">Checking...</span></div>
-        <div class="row"><span class="lbl">Port</span><span class="val">4321</span></div>
-        <div class="row"><span class="lbl">Gateway</span><span class="val">7777</span></div>
+      <div class="card"><h3>连接</h3>
+        <div class="row"><span class="lbl">串口状态</span><span class="val" id="set-ser">检查中...</span></div>
+        <div class="row"><span class="lbl">端口</span><span class="val">4321</span></div>
+        <div class="row"><span class="lbl">网关</span><span class="val">7777</span></div>
         <div style="margin-top:12px">
-          <button class="btn btn-primary" onclick="reconnect()">Reconnect</button>
-          <button class="btn btn-outline" onclick="refreshSettings()">Refresh</button>
+          <button class="btn btn-primary" onclick="reconnect()">重连</button>
+          <button class="btn btn-outline" onclick="refresh设置()">刷新</button>
         </div>
       </div>
-      <div class="card"><h3>Debug</h3>
-        <button class="btn btn-outline" onclick="loadDebug()">Show Debug Info</button>
+      <div class="card"><h3>调试</h3>
+        <button class="btn btn-outline" onclick="loadDebug()">显示调试信息</button>
         <div id="set-debug" style="display:none;margin-top:12px" class="output-box"></div>
       </div>
     </div>
@@ -276,15 +276,15 @@ function nav(page) {
   if (page === 'dashboard') refreshDash();
   if (page === 'terminal') setTimeout(function(){ var inp = document.getElementById('tinp'); if(inp) inp.focus(); }, 100);
   if (page === 'sysinfo') loadPage('si-out','sysinfo');
-  if (page === 'processes') loadPage('pr-out','ps');
+  if (page === '进程列表') loadPage('pr-out','ps');
   if (page === 'network') loadPage('nw-out','ifconfig');
-  if (page === 'files') loadPage('fl-out','ls /');
+  if (page === '文件列表') loadPage('fl-out','ls /');
   if (page === 'users') loadPage('us-out','whoami');
   if (page === 'services') loadPage('sv-out','service list');
   if (page === 'packages') loadPage('pk-out','dpkg -l');
   if (page === 'commands') loadPage('cmd-out','help');
   if (page === 'logs') loadPage('lg-out','journal');
-  if (page === 'settings') refreshSettings();
+  if (page === 'settings') refresh设置();
 }
 
 /* Bind sidebar clicks */
@@ -317,7 +317,7 @@ function api(url, body) {
 function loadPage(elId, cmd) {
   var el = document.getElementById(elId);
   if (!el) return;
-  el.innerHTML = '<span class="spinner"></span> Running: ' + cmd + ' ...';
+  el.innerHTML = '<span class="spinner"></span> 执行中: ' + cmd + ' ...';
   api('/api/exec', {cmd: cmd}).then(function(d) {
     if (d.error) {
       el.innerHTML = '<span class="err">Error: ' + d.error + '</span>';
@@ -330,11 +330,11 @@ function loadPage(elId, cmd) {
       }
     }
   }).catch(function(e) {
-    el.innerHTML = '<span class="err">Network error: ' + e + '</span>';
+    el.innerHTML = '<span class="err">网络 error: ' + e + '</span>';
   });
 }
 
-/* ===== Terminal ===== */
+/* ===== 终端 ===== */
 function sendTerm() {
   var inp = document.getElementById('tinp');
   var cmd = inp.value.trim();
@@ -382,13 +382,13 @@ document.getElementById('tinp').addEventListener('keydown', function(e) {
   if (e.key === 'ArrowDown') { e.preventDefault(); termHistory(1); }
 });
 
-/* ===== Dashboard ===== */
+/* ===== 仪表盘 ===== */
 function refreshDash() {
-  document.getElementById('d-os').textContent = 'Loading...';
+  document.getElementById('d-os').textContent = '加载中...';
   api('/api/sysinfo').then(function(d) {
     if (d.error) {
-      document.getElementById('d-os').textContent = 'Connection Error';
-      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Offline';
+      document.getElementById('d-os').textContent = '连接错误';
+      document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>离线';
       return;
     }
     document.getElementById('d-os').textContent = d.os || 'BYO-OS';
@@ -408,23 +408,23 @@ function refreshDash() {
     document.getElementById('d-load').textContent = d.load || '-';
     document.getElementById('d-ip').textContent = d.ip || '-';
     document.getElementById('d-ser').innerHTML = d.serial ?
-      '<span class="status st-on"></span>Connected' :
-      '<span class="status st-off"></span>Offline';
+      '<span class="status st-on"></span>已连接' :
+      '<span class="status st-off"></span>离线';
   }).catch(function(e) {
-    document.getElementById('d-os').textContent = 'Gateway Offline';
+    document.getElementById('d-os').textContent = '网关离线';
     document.getElementById('d-ser').innerHTML = '<span class="status st-off"></span>Gateway down';
   });
 }
 
-/* ===== Settings ===== */
-function refreshSettings() {
+/* ===== 设置 ===== */
+function refresh设置() {
   api('/api/ping').then(function(d) {
     var e2 = document.getElementById('set-ser');
     if (e2) {
       if (d.serial) {
-        e2.innerHTML = '<span class="status st-on"></span>Connected';
+        e2.innerHTML = '<span class="status st-on"></span>已连接';
       } else {
-        e2.innerHTML = '<span class="status st-off"></span>Offline';
+        e2.innerHTML = '<span class="status st-off"></span>离线';
       }
     }
   });
@@ -433,7 +433,7 @@ function refreshSettings() {
 function loadDebug() {
   var el = document.getElementById('set-debug');
   el.style.display = 'block';
-  el.innerHTML = '<span class="spinner"></span> Loading debug info...';
+  el.innerHTML = '<span class="spinner"></span> 加载调试信息...';
   api('/api/debug').then(function(d) {
     var lines = ['Serial: ' + (d.serial ? 'CONNECTED' : 'OFFLINE')];
     lines.push('Send count: ' + (d.send_count || 0) + ', Recv count: ' + (d.recv_count || 0));
@@ -446,14 +446,14 @@ function loadDebug() {
 
 /* ===== Connection ===== */
 function reconnect() {
-  toast('Reconnecting...', '');
+  toast('重连中...', '');
   api('/api/reconnect').then(function(d) {
     refreshConn();
     if (curPage === 'dashboard') refreshDash();
-    if (curPage === 'settings') refreshSettings();
-    toast(d.serial ? 'Connected!' : 'Failed', d.serial ? 'ok' : 'err');
+    if (curPage === 'settings') refresh设置();
+    toast(d.serial ? '已连接!' : '失败', d.serial ? 'ok' : 'err');
   }).catch(function(e) {
-    toast('Reconnect failed', 'err');
+    toast('重连失败', 'err');
   });
 }
 
@@ -462,9 +462,9 @@ function refreshConn() {
     var e1 = document.getElementById('connst');
     if (e1) {
       if (d.serial) {
-        e1.innerHTML = '<span class="status st-on"></span>Connected';
+        e1.innerHTML = '<span class="status st-on"></span>已连接';
       } else {
-        e1.innerHTML = '<span class="status st-off"></span>Offline';
+        e1.innerHTML = '<span class="status st-off"></span>离线';
       }
     }
   }).catch(function() {
@@ -479,10 +479,10 @@ function toggleAutoRefresh() {
   if (autoRefreshTimer) {
     clearInterval(autoRefreshTimer);
     autoRefreshTimer = null;
-    btn.textContent = 'Auto-refresh: OFF';
+    btn.textContent = '自动刷新: 关闭';
   } else {
     autoRefreshTimer = setInterval(function(){ loadPage('lg-out','journal'); }, 5000);
-    btn.textContent = 'Auto-refresh: ON';
+    btn.textContent = '自动刷新: 开启';
   }
 }
 
@@ -494,17 +494,17 @@ function toast(msg, type) {
   setTimeout(function(){ t.className = 'toast'; }, 3000);
 }
 
-/* ===== Commands filter ===== */
+/* ===== 命令参考 filter ===== */
 function filterCmds() {
   var q = document.getElementById('cmd-search').value.toLowerCase();
   if (!q) return;
   var el = document.getElementById('cmd-out');
-  el.innerHTML = '<span class="spinner"></span> Searching...';
+  el.innerHTML = '<span class="spinner"></span> 搜索中...';
   api('/api/exec', {cmd: 'help'}).then(function(d) {
     if (d.error) { el.innerHTML = '<span class="err">' + d.error + '</span>'; return; }
     var lines = (d.output || '').split('\n');
     var filtered = lines.filter(function(l){ return l.toLowerCase().indexOf(q) !== -1; });
-    el.textContent = filtered.length ? filtered.join('\n') : 'No commands match: ' + q;
+    el.textContent = filtered.length ? filtered.join('\n') : '没有匹配的命令: ' + q;
   });
 }
 
