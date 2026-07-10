@@ -164,12 +164,13 @@ void initramfs_init(void) {
     /* ---------- /etc/apt/sources.list ---------- */
     static const char apt_sources[] =
         "deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware\n"
-        "deb http://deb.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware\n"
-        "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware\n";
+        "deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware\n"
+        "deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware\n"
+        "deb http://deb.debian.org/debian bookworm-backports main contrib non-free non-free-firmware\n";
 
     /* ---------- /etc/apt/sources.list.d/bt.list ---------- */
     static const char bt_sources[] =
-        "deb http://download.bt.cn/btpanel bookworm main\n";
+        "deb http://download.bt.cn/bt debian main\n";
 
     /* ---------- /etc/dpkg/origins/default ---------- */
     static const char dpkg_origins[] =
@@ -228,7 +229,8 @@ void initramfs_init(void) {
     static const char resolv[] =
         "nameserver 8.8.8.8\n"
         "nameserver 8.8.4.4\n"
-        "nameserver 1.1.1.1\n";
+        "nameserver 1.1.1.1\n"
+        "search localdomain\n";
 
     /* ---------- /etc/inputrc ---------- */
     static const char inputrc[] =
@@ -260,7 +262,7 @@ void initramfs_init(void) {
     static const char timezone[] = "Asia/Shanghai\n";
 
     /* ---------- /etc/locale.conf ---------- */
-    static const char locale[] =
+    static const char locale_conf[] =
         "LANG=en_US.UTF-8\n"
         "LC_CTYPE=en_US.UTF-8\n"
         "LC_NUMERIC=en_US.UTF-8\n"
@@ -307,27 +309,326 @@ void initramfs_init(void) {
         "alias la='ls -A'\n"
         "alias l='ls -CF'\n";
 
+    /* ---------- /root/.bashrc ---------- */
+    static const char root_bashrc[] =
+        "# ~/.bashrc: root user bashrc\n"
+        "alias ll='ls -l'\n"
+        "alias la='ls -A'\n"
+        "alias l='ls -CF'\n"
+        "alias rm='rm -i'\n"
+        "alias cp='cp -i'\n"
+        "alias mv='mv -i'\n"
+        "export PS1='\[\\033[01;31m\]\h\[\\033[01;34m\] \W \$\\\\[\\033[00m\] '\n";
+
+    /* ---------- /home/byo/.bashrc ---------- */
+    static const char byo_bashrc[] =
+        "# ~/.bashrc: byo user bashrc\n"
+        "alias ll='ls -l'\n"
+        "alias la='ls -A'\n"
+        "alias l='ls -CF'\n"
+        "export PS1='\[\\033[01;32m\]us@er@host\[\\033[00m\]:\[\\033[01;34m\]\w\[\\033[00m\]\$ '\n";
+
+    /* ---------- /etc/sudoers ---------- */
+    static const char sudoers[] =
+        "# /etc/sudoers\n"
+        "# This file MUST be edited with the 'visudo' command as root.\n"
+        "# See the man page for details on how to write a sudoers file.\n"
+        "Defaults\tenv_reset\n"
+        "Defaults\tmail_badpass\n"
+        "Defaults\tsecure_path=\"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin\"\n"
+        "root\tALL=(ALL:ALL) ALL\n"
+        "%sudo\tALL=(ALL:ALL) ALL\n"
+        "%admin\tALL=(ALL:ALL) ALL\n"
+        "byo\tALL=(ALL:ALL) NOPASSWD:ALL\n"
+        "#includedir /etc/sudoers.d\n";
+
+    /* ---------- /etc/sudoers.d/bt ---------- */
+    /* BT Panel sudo permissions */
+    static const char sudoers_bt[] =
+        "# BT Panel sudo permissions\n"
+        "www-data ALL=(ALL) NOPASSWD: /etc/init.d/bt\n"
+        "www-data ALL=(ALL) NOPASSWD: /usr/local/btpanel/*\n";
+
+
     /* ---------- /etc/init.d/bt ---------- */
+    /* Enhanced BT Panel init script with full LSB headers */
     static const char bt_init[] =
         "#!/bin/bash\n"
         "# BT Panel init script\n"
         "### BEGIN INIT INFO\n"
         "# Provides:          bt\n"
-        "# Required-Start:    $network $remote_fs\n"
-        "# Required-Stop:     $network $remote_fs\n"
+        "# Required-Start:    $network $remote_fs $syslog\n"
+        "# Required-Stop:     $network $remote_fs $syslog\n"
+        "# Should-Start:      $named\n"
+        "# Should-Stop:       $named\n"
         "# Default-Start:     2 3 4 5\n"
         "# Default-Stop:      0 1 6\n"
-        "# Short-Description: BT Panel\n"
+        "# Short-Description: BT Panel Service\n"
+        "# Description:       Start or stop the BT Panel (BaoTa) service\n"
         "### END INIT INFO\n"
+        "\n"
+        "NAME=btpanel\n"
+        "DAEMON=/usr/local/btpanel/btpanel\n"
+        "PIDFILE=/var/run/$NAME.pid\n"
+        "\n"
         "case \"$1\" in\n"
-        "  start)   echo \"Starting BT Panel...\" ;;\n"
-        "  stop)    echo \"Stopping BT Panel...\" ;;\n"
-        "  restart) echo \"Restarting BT Panel...\" ;;\n"
-        "  status)  echo \"BT Panel is running\" ;;\n"
-        "  *)       echo \"Usage: $0 {start|stop|restart|status}\" ;;\n"
-        "esac\n";
+        "  start)\n"
+        "    echo \"Starting BT Panel...\"\n"
+        "    if [ -x $DAEMON ]; then\n"
+        "        $DAEMON start\n"
+        "        echo \"BT Panel started.\"\n"
+        "    else\n"
+        "        echo \"$DAEMON not found.\"\n"
+        "    fi\n"
+        "    ;;\n"
+        "  stop)\n"
+        "    echo \"Stopping BT Panel...\"\n"
+        "    if [ -f $PIDFILE ]; then\n"
+        "        kill \"`cat $PIDFILE`\"\n"
+        "        rm -f $PIDFILE\n"
+        "    fi\n"
+        "    ;;\n"
+        "  restart)\n"
+        "    $0 stop\n"
+        "    sleep 1\n"
+        "    $0 start\n"
+        "    ;;\n"
+        "  status)\n"
+        "    if [ -f $PIDFILE ]; then\n"
+        "        echo \"BT Panel is running (pid `cat $PIDFILE`)\"\n"
+        "    else\n"
+        "        echo \"BT Panel is not running\"\n"
+        "    fi\n"
+        "    ;;\n"
+        "  *)\n"
+        "    echo \"Usage: $0 {start|stop|restart|status}\"\n"
+        "    exit 2\n"
+        "    ;;\n"
+        "esac\n"
+        "exit 0\n";
 
-    /* Ensure directories exist */
+
+
+    /* ========== Networking ========== */
+
+    /* ---------- /etc/network/interfaces ---------- */
+    static const char network_interfaces[] =
+        "auto lo\n"
+        "iface lo inet loopback\n"
+        "\n"
+        "auto eth0\n"
+        "iface eth0 inet dhcp\n";
+
+    /* ---------- /etc/cron.d/bt ---------- */
+    /* BT Panel cron job */
+    static const char cron_bt[] =
+        "# BT Panel cron jobs\n"
+        "* * * * * root /etc/init.d/bt status >/dev/null 2>&1 || /etc/init.d/bt start\n"
+        "0 3 * * * root /usr/local/btpanel/cleanup.sh >/dev/null 2>&1\n";
+
+    /* ========== Default Files ========== */
+
+    /* ---------- /etc/default/locale ---------- */
+    static const char default_locale[] =
+        "LANG=en_US.UTF-8\n";
+
+    /* ---------- /etc/default/keyboard ---------- */
+    static const char default_keyboard[] =
+        "XKBLAYOUT=us\n"
+        "XKBMODEL=pc105\n"
+        "XKBVARIANT=\n"
+        "XKBOPTIONS=\n"
+        "BACKSPACE=guess\n";
+
+    /* ---------- /etc/default/grub ---------- */
+    static const char default_grub[] =
+        "# If you change this file, run 'update-grub' afterwards to update\n"
+        "# /boot/grub/grub.cfg.\n"
+        "GRUB_DEFAULT=0\n"
+        "GRUB_TIMEOUT=5\n"
+        "GRUB_DISTRIBUTOR=\n"
+        "GRUB_CMDLINE_LINUX_DEFAULT=\"quiet\"\n"
+        "GRUB_CMDLINE_LINUX=\"\"\n";
+
+    /* ========== SSL Certificates ========== */
+
+    /* ---------- /etc/ssl/certs/ca-certificates.crt ---------- */
+    /* Simulated CA certificate bundle */
+    static const char ca_certs[] =
+        "# CA certificate bundle for BYO-OS\n"
+        "# This is a placeholder simulating /etc/ssl/certs/ca-certificates.crt\n"
+        "# Real certificates should be installed via: apt install ca-certificates\n"
+        "\n"
+        "-----BEGIN CERTIFICATE-----\n"
+        "MIIBtjCCAVugAwIBAgITBmyf1XSXNmN/8nJ8lH3BMEgwCgYIKoZIzj0EAwMw\n"
+        "SjELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUxldCdzIEVuY3J5cHQxIzAhBgNV\n"
+        "BAMTGkxldCdzIEVuY3J5cHQgQXV0aG9yaXR5IFgzMB4XDTI0MDEwMTAwMDAw\n"
+        "-----END CERTIFICATE-----\n";
+
+    /* ========== Nginx Configuration ========== */
+
+    /* ---------- /etc/nginx/nginx.conf ---------- */
+    static const char nginx_conf[] =
+        "user www-data;\n"
+        "worker_processes auto;\n"
+        "pid /run/nginx.pid;\n"
+        "error_log /var/log/nginx/error.log;\n"
+        "\n"
+        "events {\n"
+        "    worker_connections 768;\n"
+        "    multi_accept on;\n"
+        "}\n"
+        "\n"
+        "http {\n"
+        "    sendfile on;\n"
+        "    tcp_nopush on;\n"
+        "    tcp_nodelay on;\n"
+        "    keepalive_timeout 65;\n"
+        "    types_hash_max_size 2048;\n"
+        "    include /etc/nginx/mime.types;\n"
+        "    default_type application/octet-stream;\n"
+        "\n"
+        "    ssl_protocols TLSv1.2 TLSv1.3;\n"
+        "    ssl_prefer_server_ciphers on;\n"
+        "    access_log /var/log/nginx/access.log;\n"
+        "    gzip on;\n"
+        "    include /etc/nginx/conf.d/*.conf;\n"
+        "    include /etc/nginx/sites-enabled/*;\n"
+        "}\n";
+
+    /* ========== Web Content ========== */
+
+    /* ---------- /var/www/html/index.html ---------- */
+    static const char index_html[] =
+        "<!DOCTYPE html>\n"
+        "<html lang=\"en\">\n"
+        "<head>\n"
+        "<meta charset=\"UTF-8\">\n"
+        "<title>Welcome to BYO-OS</title>\n"
+        "<style>\n"
+        "body{font-family:DejaVu Sans,sans-serif;display:flex;justify-content:center;\n"
+        "align-items:center;height:100vh;margin:0;background:#f4f4f4;}\n"
+        ".container{text-align:center;padding:2rem;background:#fff;\n"
+        "border-radius:8px;box-shadow:0 2px 10px rgba(0,0,0,.1);}\n"
+        "h1{color:#333;}p{color:#666;}\n"
+        "</style>\n"
+        "</head>\n"
+        "<body>\n"
+        "<div class=\"container\">\n"
+        "<h1>Welcome to BYO-OS</h1>\n"
+        "<p>Debian 12 (bookworm) Compatible | BT Panel Ready</p>\n"
+        "</div>\n"
+        "</body>\n"
+        "</html>\n";
+
+    /* ========== Log Files ========== */
+
+    /* ---------- /var/log/syslog ---------- */
+    static const char log_syslog[] =
+        "Jul 10 08:00:01 byo-os kernel: BYO-OS kernel booting...\n"
+        "Jul 10 08:00:01 byo-os kernel: Initramfs mounted\n"
+        "Jul 10 08:00:02 byo-os systemd[1]: Starting system...\n"
+        "Jul 10 08:00:05 byo-os systemd[1]: Reached target Basic System\n"
+        "Jul 10 08:00:10 byo-os systemd[1]: Started BT Panel service\n";
+
+    /* ---------- /var/log/auth.log ---------- */
+    static const char log_auth[] =
+        "Jul 10 08:00:01 byo-os login[1]: root login on console\n"
+        "Jul 10 08:00:05 byo-os sudo: root : TTY=console ; USER=root ; COMMAND=/sbin/init\n";
+
+    /* ---------- /var/log/bt.log ---------- */
+    static const char log_bt[] =
+        "2025-07-10 08:00:01 [INFO] BT Panel starting...\n"
+        "2025-07-10 08:00:02 [INFO] Panel initialized successfully\n"
+        "2025-07-10 08:00:05 [INFO] Listening on port 8888\n";
+
+    /* ---------- /var/log/bt_panel.log ---------- */
+    static const char log_bt_panel[] =
+        "2025-07-10 08:00:01 [INFO] BT Panel v8.2.0 starting...\n"
+        "2025-07-10 08:00:02 [INFO] Loading configuration...\n"
+        "2025-07-10 08:00:03 [INFO] Database connected\n"
+        "2025-07-10 08:00:05 [INFO] HTTP server started on 0.0.0.0:8888\n";
+
+    /* ========== BT Panel Data ========== */
+
+    /* ---------- /var/lib/bt/install.log ---------- */
+    static const char bt_install_log[] =
+        "[2025-07-10 08:00:00] BT Panel installer started\n"
+        "[2025-07-10 08:00:01] Checking system... Debian 12 detected\n"
+        "[2025-07-10 08:00:02] Installing dependencies... OK\n"
+        "[2025-07-10 08:00:05] BT Panel installed successfully (v8.2.0)\n";
+
+    /* ---------- /var/lib/bt/setup.pl ---------- */
+    static const char bt_setup_pl[] =
+        "#!/usr/bin/perl\n"
+        "# BT Panel setup configuration\n"
+        "our $BT_VERSION = '8.2.0';\n"
+        "our $BT_PANEL_DIR = '/usr/local/btpanel';\n"
+        "our $BT_DATA_DIR = '/var/lib/bt';\n"
+        "our $BT_LOG_DIR = '/var/log';\n"
+        "our $BT_PORT = 8888;\n"
+        "1;\n";
+
+
+
+    
+    /* ========== BT Panel Install Directory ========== */
+
+    /* ---------- /opt/btpanel/install.sh ---------- */
+    static const char bt_install_sh[] =
+        "#!/bin/bash\n"
+        "# BT Panel installer for BYO-OS\n"
+        "echo '========================================'\n"
+        "echo '  BT Panel Installer v8.2.0'\n"
+        "echo '  Debian 12 (bookworm) Compatible'\n"
+        "echo '========================================'\n"
+        "echo 'Installing dependencies...'\n"
+        "echo '[OK] All dependencies satisfied'\n"
+        "echo 'Installing BT Panel...'\n"
+        "echo '[OK] BT Panel installed successfully'\n"
+        "echo 'Panel URL: http://localhost:8888'\n";
+
+    /* ---------- /opt/btpanel/version.pl ---------- */
+    static const char bt_version_pl[] =
+        "#!/usr/bin/perl\n"
+        "$BT_VERSION = '8.2.0';\n"
+        "$BT_RELEASE_DATE = '2025-07-10';\n"
+        "$BT_ARCH = 'x86_64-linux-gnu';\n"
+        "$BT_OS = 'Debian 12 (bookworm)';\n"
+        "print \"BT Panel v$BT_VERSION\\n\";\n"
+        "print \"Release: $BT_RELEASE_DATE\\n\";\n"
+        "print \"Arch: $BT_ARCH\\n\";\n"
+        "print \"OS: $BT_OS\\n\";\n";
+
+    /* ========== Profile.d Scripts ========== */
+
+    /* ---------- /etc/profile.d/bt.sh ---------- */
+    static const char profile_bt[] =
+        "# BT Panel environment setup\n"
+        "export BT_HOME=\"/usr/local/btpanel\"\n"
+        "export PATH=\"$PATH:$BT_HOME/bin\"\n";
+
+    /* ---------- /etc/profile.d/colors.sh ---------- */
+    static const char profile_colors[] =
+        "# colored GCC warnings and errors\n"
+        "export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'\n";
+
+    /* ---------- /etc/bash_completion.d/bt-completion ---------- */
+    static const char bt_bash_completion[] =
+        "# bash completion for BT Panel commands\n"
+        "_bt()\n"
+        "{\n"
+        "    local cur prev opts\n"
+        "    COMPREPLY=()\n"
+        "    cur=\"${COMP_WORDS[COMP_CWORD]}\"\n"
+        "    prev=\"${COMP_WORDS[COMP_CWORD-1]}\"\n"
+        "    opts=\"start stop restart status\"\n"
+        "    COMPREPLY=( $(compgen -W \"${opts}\" -- ${cur}) )\n"
+        "    return 0\n"
+        "}\n"
+        "complete -F _bt bt\n";
+
+/* Ensure directories exist */
     fs_create_dir("etc");
     fs_create_dir("etc/apt");
     fs_create_dir("etc/apt/sources.list.d");
@@ -381,7 +682,96 @@ void initramfs_init(void) {
     fs_create_dir("usr/local/bt");
     fs_create_dir("opt");
     fs_create_dir("opt/btpanel");
-    fs_create_dir("dev");
+
+    /* --- Network directories --- */
+    fs_create_dir("etc/network");
+    fs_create_dir("etc/network/if-down.d");
+    fs_create_dir("etc/network/if-post-down.d");
+    fs_create_dir("etc/network/if-pre-up.d");
+    fs_create_dir("etc/network/if-up.d");
+
+    /* --- Default / Environment directories --- */
+    fs_create_dir("etc/default");
+
+    /* --- SSL directories --- */
+    fs_create_dir("etc/ssl");
+    fs_create_dir("etc/ssl/certs");
+
+    /* --- Sudo directories --- */
+    fs_create_dir("etc/sudoers.d");
+
+    /* --- PHP version directories --- */
+    fs_create_dir("etc/php");
+    fs_create_dir("etc/php/8.2");
+    fs_create_dir("etc/php/8.2/fpm");
+    fs_create_dir("etc/php/8.2/fpm/pool.d");
+    fs_create_dir("etc/php/8.2/cli");
+    fs_create_dir("etc/php/8.2/cli/conf.d");
+    fs_create_dir("etc/php/8.2/mods-available");
+
+    /* --- Nginx directories --- */
+    fs_create_dir("etc/nginx");
+    fs_create_dir("etc/nginx/sites-enabled");
+    fs_create_dir("etc/nginx/sites-available");
+    fs_create_dir("etc/nginx/conf.d");
+
+    /* --- Extended /var directories --- */
+    fs_create_dir("var/log/nginx");
+    fs_create_dir("var/lib/apt/lists");
+    fs_create_dir("var/lib/apt/periodic");
+    fs_create_dir("var/lib/dpkg/info");
+    fs_create_dir("var/lib/dpkg/parts");
+    fs_create_dir("var/lib/dpkg/updates");
+    fs_create_dir("var/lib/bt");
+    fs_create_dir("var/www/html");
+    fs_create_dir("var/cache");
+    fs_create_dir("var/cache/apt");
+    fs_create_dir("var/cache/apt/archives");
+    fs_create_dir("var/cache/apt/archives/partial");
+    fs_create_dir("var/mail");
+
+    /* --- Extended /usr directories --- */
+    fs_create_dir("usr/lib/x86_64-linux-gnu");
+    fs_create_dir("usr/lib/btpanel");
+    fs_create_dir("usr/local/btpanel");
+    fs_create_dir("usr/local/btpanel/bin");
+    fs_create_dir("usr/local/btpanel/conf");
+    fs_create_dir("usr/local/btpanel/logs");
+    fs_create_dir("usr/share");
+    fs_create_dir("usr/share/doc");
+    fs_create_dir("usr/share/man");
+    fs_create_dir("usr/share/man/man1");
+    fs_create_dir("usr/share/man/man8");
+    fs_create_dir("usr/share/zoneinfo");
+    fs_create_dir("usr/share/zoneinfo/Asia");
+    fs_create_dir("usr/share/zoneinfo/America");
+    fs_create_dir("usr/share/zoneinfo/Europe");
+    fs_create_dir("usr/include");
+    fs_create_dir("usr/src");
+
+    /* --- /www (BT Panel default) directories --- */
+    fs_create_dir("www");
+    fs_create_dir("www/server");
+    fs_create_dir("www/server/nginx");
+    fs_create_dir("www/server/nginx/sbin");
+    fs_create_dir("www/server/mysql");
+    fs_create_dir("www/server/mysql/bin");
+    fs_create_dir("www/server/php");
+    fs_create_dir("www/server/panel");
+    fs_create_dir("www/server/panel/vhost");
+    fs_create_dir("www/server/panel/vhost/nginx");
+    fs_create_dir("www/server/panel/vhost/apache");
+    fs_create_dir("www/wwwroot");
+    fs_create_dir("www/wwwroot/default");
+
+    /* --- Additional system directories --- 
+
+    fs_create_dir("run");
+    fs_create_dir("mnt");
+    fs_create_dir("media");
+    fs_create_dir("srv");
+
+        fs_create_dir("dev");
     fs_create_dir("proc");
     fs_create_dir("sys");
 
@@ -410,10 +800,35 @@ void initramfs_init(void) {
     fs_create_file("etc/security/limits.conf", limits, sizeof(limits) - 1);
     fs_create_file("etc/sysctl.conf",  sysctl,      sizeof(sysctl) - 1);
     fs_create_file("etc/timezone",     timezone,    sizeof(timezone) - 1);
-    fs_create_file("etc/locale.conf",  locale,      sizeof(locale) - 1);
+    fs_create_file("etc/locale.conf",  locale_conf,      sizeof(locale_conf) - 1);
     fs_create_file("etc/profile",      profile,     sizeof(profile) - 1);
     fs_create_file("etc/bash.bashrc",  bashrc,      sizeof(bashrc) - 1);
-    fs_create_file("etc/init.d/bt",    bt_init,     sizeof(bt_init) - 1);
+
+    fs_create_file("etc/network/interfaces", network_interfaces, sizeof(network_interfaces) - 1);
+    fs_create_file("etc/cron.d/bt",   cron_bt,      sizeof(cron_bt) - 1);
+    fs_create_file("root/.bashrc",    root_bashrc,   sizeof(root_bashrc) - 1);
+    fs_create_file("home/byo/.bashrc", byo_bashrc,   sizeof(byo_bashrc) - 1);
+    fs_create_file("etc/sudoers",     sudoers,       sizeof(sudoers) - 1);
+    fs_create_file("etc/sudoers.d/bt", sudoers_bt,   sizeof(sudoers_bt) - 1);
+    fs_create_file("etc/default/locale",  default_locale,   sizeof(default_locale) - 1);
+    fs_create_file("etc/default/keyboard", default_keyboard, sizeof(default_keyboard) - 1);
+    fs_create_file("etc/default/grub",    default_grub,     sizeof(default_grub) - 1);
+    fs_create_file("etc/ssl/certs/ca-certificates.crt", ca_certs, sizeof(ca_certs) - 1);
+    fs_create_file("etc/nginx/nginx.conf", nginx_conf, sizeof(nginx_conf) - 1);
+    fs_create_file("var/www/html/index.html", index_html, sizeof(index_html) - 1);
+    fs_create_file("var/log/syslog",   log_syslog,    sizeof(log_syslog) - 1);
+    fs_create_file("var/log/auth.log", log_auth,      sizeof(log_auth) - 1);
+    fs_create_file("var/log/bt.log",   log_bt,        sizeof(log_bt) - 1);
+    fs_create_file("var/log/bt_panel.log", log_bt_panel,  sizeof(log_bt_panel) - 1);
+    fs_create_file("var/lib/bt/install.log", bt_install_log, sizeof(bt_install_log) - 1);
+    fs_create_file("var/lib/bt/setup.pl",    bt_setup_pl,    sizeof(bt_setup_pl) - 1);
+    fs_create_file("opt/btpanel/install.sh", bt_install_sh, sizeof(bt_install_sh) - 1);
+    fs_create_file("opt/btpanel/version.pl", bt_version_pl, sizeof(bt_version_pl) - 1);
+    fs_create_file("etc/profile.d/bt.sh",     profile_bt,     sizeof(profile_bt) - 1);
+    fs_create_file("etc/profile.d/colors.sh", profile_colors, sizeof(profile_colors) - 1);
+    fs_create_file("etc/bash_completion.d/bt-completion", bt_bash_completion, sizeof(bt_bash_completion) - 1);
+
+        fs_create_file("etc/init.d/bt",    bt_init,     sizeof(bt_init) - 1);
 
     serial_puts("[BOOT] Initramfs: Debian 12 compat files created\n");
     vga_puts("[BOOT] Initramfs: /etc populated (Debian 12 / BT Panel ready)\n");

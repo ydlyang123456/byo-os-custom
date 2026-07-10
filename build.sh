@@ -6,6 +6,7 @@ rm -rf isodir
 echo "=== Assemble x86_64 ==="
 nasm -f elf64 boot/boot_entry_64.asm -o kernel/boot_entry_64.o 2>&1
 nasm -f elf64 boot/gdt64.asm -o kernel/gdt64.o 2>&1
+nasm -f bin boot/smp_trampoline.asm -o kernel/smp_tramp.bin 2>&1 || echo 'SMP trampoline binary skipped (optional)'
 
 for f in kernel/isr64.asm kernel/gdt_asm64.asm kernel/ctx_switch64.asm kernel/irq64.asm; do
     if [ -f "$f" ]; then
@@ -21,11 +22,11 @@ for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c 
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 
-for f in kernel/memory64.c kernel/heap64.c kernel/vmm.c kernel/syscall.c kernel/initramfs.c; do
+ for f in kernel/memory64.c kernel/heap64.c kernel/vmm.c kernel/syscall.c kernel/initramfs.c kernel/elf_loader.c; do
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 
-for f in kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/sound.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/main.c; do
+for f in kernel/gdt.c kernel/idt.c kernel/irq.c kernel/keyboard.c kernel/timer.c kernel/sound.c kernel/scheduler.c kernel/mouse.c kernel/net.c kernel/ne2000.c kernel/user.c kernel/vga_modes.c kernel/panel.c kernel/main.c kernel/smp.c kernel/procfs.c; do
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 

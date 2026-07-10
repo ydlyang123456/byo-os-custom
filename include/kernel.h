@@ -333,6 +333,20 @@ uint32_t vbe_get_bpp(void);
 void* vbe_get_framebuffer(void);
 int vbe_is_active(void);
 
+/* ===== SMP Multi-Core ===== */
+void smp_init(void);
+int smp_get_cpu_count(void);
+uint32_t smp_get_apic_id(void);
+void smp_send_ipi(uint32_t apic_id, uint32_t icr);
+int smp_get_current_cpu(void);
+void smp_lock_acquire(volatile int* lock);
+void smp_lock_release(volatile int* lock);
 #endif
 
 
+/* ===== ELF Loader ===== */
+int elf_validate(const char* path);
+int elf_load(const char* path);
+void* elf_get_entry(const char* path);
+int elf_execute(void* entry, int argc, char** argv);
+int elf_execute_file(const char* path, int argc, char** argv);
