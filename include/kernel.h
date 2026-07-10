@@ -239,7 +239,15 @@ uint32_t ata_get_sectors(void);
 const char* ata_get_model(void);
 int ata_get_reads(void);
 int ata_get_writes(void);
-void ata_init(void);
+ void ata_init(void);
+
+/* ===== AHCI SATA Disk Driver ===== */
+int ahci_init(void);
+int ahci_read(int port, uint64_t lba, uint16_t count, void* buf);
+int ahci_write(int port, uint64_t lba, uint16_t count, const void* buf);
+int ahci_is_present(void);
+int ahci_get_port_count(void);
+int ahci_get_sectors(int port);
 
 /* ===== CMOS/RTC Driver ===== */
 void rtc_init(void);
@@ -341,6 +349,13 @@ void smp_send_ipi(uint32_t apic_id, uint32_t icr);
 int smp_get_current_cpu(void);
 void smp_lock_acquire(volatile int* lock);
 void smp_lock_release(volatile int* lock);
+/* ===== ext2 Filesystem ===== */
+int ext2_mount(uint64_t start_lba);
+int ext2_read_file(const char* path, char* buf, uint32_t max_len);
+int ext2_read_dir(const char* path, char* output, uint32_t max_len);
+int ext2_is_mounted(void);
+void ext2_init(void);
+
 #endif
 
 

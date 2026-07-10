@@ -1,4 +1,4 @@
-﻿
+
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -560,6 +560,21 @@ static void cmd_reboot(int argc, char args[][CMD_MAX_LEN]) {
     while(1) { asm volatile("hlt"); }
 }
 
+ static void cmd_shutdown_fn(int argc, char args[][CMD_MAX_LEN]) {
+     (void)argc; (void)args;
+     vga_puts("Shutting down...\n");
+     outb(0x64, 0xFE);
+     while(1) { asm volatile("hlt"); }
+ }
+ 
+ static void cmd_reset(int argc, char args[][CMD_MAX_LEN]) {
+     (void)argc; (void)args;
+     vga_puts("Reset terminal\n");
+     vga_clear();
+     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
+     vga_puts("BYO-OS Shell v1.0 - Terminal reset\n\n");
+ }
+ 
 static void cmd_df(int argc, char args[][CMD_MAX_LEN]) {
     int human = 0;
     for (int i = 1; i < argc; i++) {
@@ -20046,7 +20061,9 @@ static const cmd_entry commands[] = {
     {"haproxy", cmd_haproxy316},
     {"keepalived", cmd_keepalived316},
     {"rabbitmq", cmd_rabbitmq316},
-    {"kafka", cmd_kafka316},};
+    {"kafka", cmd_kafka316},
+    {"reset", cmd_reset},
+    {"shutdown", cmd_shutdown_fn},};
 
 /* ===== Batch 46: System Enhancements ===== */
 static void cmd_sysctl46(int argc, char args[][CMD_MAX_LEN]) {
@@ -20969,6 +20986,28 @@ static void cmd_gradle50(int argc, char args[][CMD_MAX_LEN]) {
 
 static char redirect_file[128];
 static int redirect_append = 0;
+ static char output_capture_buf[8192];
+ static int output_capture_len;
+ static int output_capture_active;
+ 
+ static void out_putchar(char c) {
+     if (output_capture_active && output_capture_len < 8191) {
+         output_capture_buf[output_capture_len++] = c;
+         output_capture_buf[output_capture_len] = 0;
+     }
+     vga_putchar(c);
+ }
+ 
+ static void out_puts(const char *s) {
+     if (output_capture_active && s) {
+         while (*s && output_capture_len < 8191) {
+             output_capture_buf[output_capture_len++] = *s++;
+         }
+         output_capture_buf[output_capture_len] = 0;
+     }
+     vga_puts(s);
+ }
+ 
 static void shell_execute(const char *cmdline) {
     if (!cmdline || cmdline[0] == 0) return;
     if (history_count < MAX_HISTORY) {
@@ -20976,36 +21015,77 @@ static void shell_execute(const char *cmdline) {
         history[history_count][CMD_MAX_LEN - 1] = 0;
         history_count++;
     }
-    /* Pipe support: cmd1 | cmd2 - capture output of cmd1 and pass as input */
-    char *pp = strchr(cmdline, '|');
-    if (pp) {
-        char left_cmd[CMD_MAX_LEN];
-        char right_cmd[CMD_MAX_LEN];
-        int lp = pp - cmdline;
-        if (lp >= CMD_MAX_LEN) lp = CMD_MAX_LEN - 1;
-        memcpy(left_cmd, cmdline, lp);
-        left_cmd[lp] = 0;
-        const char *rp = pp + 1;
-        while (*rp == ' ') rp++;
-        strncpy(right_cmd, rp, CMD_MAX_LEN - 1);
-        right_cmd[CMD_MAX_LEN - 1] = 0;
-        /* Execute left side - output goes to serial/vga as normal */
-        shell_execute(left_cmd);
-        return;
-    }
-    redirect_file[0] = 0; redirect_append = 0;
-    char work[CMD_MAX_LEN]; strncpy(work, cmdline, CMD_MAX_LEN - 1); work[CMD_MAX_LEN-1] = 0;
-    char *rp2 = strstr(work, ">>");
-    if (rp2) { redirect_append = 1; *rp2 = 0; char *fn = rp2+2;
-        while (*fn==' ') fn++; strncpy(redirect_file, fn, 127); redirect_file[127]=0; }
-    else { rp2 = strchr(work, '>');
-        if (rp2) { *rp2 = 0; char *fn = rp2+1;
-            while (*fn==' ') fn++; strncpy(redirect_file, fn, 127); redirect_file[127]=0; } }
-    /* Resolve alias for first word */
-    char resolved[CMD_MAX_LEN];
-    char tmp[CMD_MAX_LEN];
-    strncpy(tmp, cmdline, CMD_MAX_LEN - 1);
-    tmp[CMD_MAX_LEN - 1] = 0;
+     /* Pipe support: capture left output and feed to right via temp file */
+     char *pp = strchr(cmdline, '|');
+     if (pp) {
+         char left_cmd[CMD_MAX_LEN];
+         char right_cmd[CMD_MAX_LEN];
+         int lp = pp - cmdline;
+         if (lp >= CMD_MAX_LEN) lp = CMD_MAX_LEN - 1;
+         memcpy(left_cmd, cmdline, lp);
+         left_cmd[lp] = 0;
+         const char *rp = pp + 1;
+         while (*rp == ' ') rp++;
+         strncpy(right_cmd, rp, CMD_MAX_LEN - 1);
+         right_cmd[CMD_MAX_LEN - 1] = 0;
+         output_capture_active = 1;
+         output_capture_len = 0;
+         shell_execute(left_cmd);
+         output_capture_active = 0;
+         if (output_capture_len > 0) {
+             static int pipe_counter = 0;
+             char pipe_path[32];
+             sprintf(pipe_path, "/tmp/pipe_%d", pipe_counter++);
+             pipe_counter %= 10;
+             fs_create_file(pipe_path, output_capture_buf, output_capture_len);
+             char piped_cmd[CMD_MAX_LEN];
+             sprintf(piped_cmd, "%s < %s", right_cmd, pipe_path);
+             shell_execute(piped_cmd);
+             fs_delete_file(pipe_path);
+         } else {
+             shell_execute(right_cmd);
+         }
+         return;
+     }
+     /* Parse output redirect (> and >>) and input redirect (<) */
+     redirect_file[0] = 0; redirect_append = 0;
+     char work[CMD_MAX_LEN];
+     strncpy(work, cmdline, CMD_MAX_LEN - 1);
+     work[CMD_MAX_LEN - 1] = 0;
+     char *input_redir_file = 0;
+     char *rp2 = strstr(work, ">>");
+     if (rp2) { redirect_append = 1; *rp2 = 0; char *fn = rp2+2;
+         while (*fn==' ') fn++; strncpy(redirect_file, fn, 127); redirect_file[127]=0;
+         int rfl = strlen(redirect_file);
+         while (rfl > 0 && (redirect_file[rfl-1]==' '||redirect_file[rfl-1]=='\n'||redirect_file[rfl-1]=='\r')) redirect_file[--rfl]=0; }
+     else { rp2 = strchr(work, '>');
+         if (rp2) { *rp2 = 0; char *fn = rp2+1;
+             while (*fn==' ') fn++; strncpy(redirect_file, fn, 127); redirect_file[127]=0;
+             int rfl = strlen(redirect_file);
+             while (rfl > 0 && (redirect_file[rfl-1]==' '||redirect_file[rfl-1]=='\n'||redirect_file[rfl-1]=='\r')) redirect_file[--rfl]=0; } }
+     char *input_redir = strchr(work, '<');
+     if (input_redir) { *input_redir = 0; input_redir_file = input_redir + 1;
+         while (*input_redir_file==' ') input_redir_file++;
+         int irl = strlen(input_redir_file);
+         while (irl > 0 && (input_redir_file[irl-1]==' '||input_redir_file[irl-1]=='\n'||input_redir_file[irl-1]=='\r')) input_redir_file[--irl]=0; }
+     if (input_redir_file) {
+         memset(file_buf, 0, FILE_BUF_SIZE);
+         int r = fs_read_file(input_redir_file, file_buf, FILE_BUF_SIZE - 1);
+         if (r <= 0) { out_puts("shell: "); out_puts(input_redir_file); out_puts(": No such file\n"); return; } }
+     /* Resolve alias */
+     char tmp[CMD_MAX_LEN]; int ti = 0; int wi = 0;
+     while (work[wi] && ti < CMD_MAX_LEN - 1) { tmp[ti++] = work[wi++]; }
+     tmp[ti] = 0;
+     if (input_redir_file) {
+         int tlen = strlen(tmp);
+         if (tlen > 0) tmp[tlen++] = ' ';
+         int fi = 0;
+         while (file_buf[fi] && fi < FILE_BUF_SIZE - 1 && tlen < CMD_MAX_LEN - 2) {
+             char c = file_buf[fi];
+             if (c == '\n') { tmp[tlen++] = ' '; } else if (c == '\r') {} else { tmp[tlen++] = c; }
+             fi++;
+         }
+         tmp[tlen] = 0; }
     char first_word[64];
     int fw_len = 0;
     int idx = 0;
@@ -21013,26 +21093,42 @@ static void shell_execute(const char *cmdline) {
         first_word[fw_len++] = tmp[idx++];
     }
     first_word[fw_len] = 0;
-
     resolve_alias(first_word, first_word, 64);
     char new_cmd[CMD_MAX_LEN];
     int pos = 0;
     for (int i = 0; first_word[i]; i++) new_cmd[pos++] = first_word[i];
     while (tmp[idx]) new_cmd[pos++] = tmp[idx++];
     new_cmd[pos] = 0;
-
     char args[MAX_ARGS][CMD_MAX_LEN];
     int argc = arg_parse(new_cmd, args);
     if (argc == 0) return;
-
-    for (int i = 0; commands[i].name; i++) {
-        if (strcmp(args[0], commands[i].name) == 0) {
-            commands[i].func(argc, args);
-            return;
-        }
-    }
-    vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
-    vga_puts(args[0]); vga_puts(": command not found\n");
+     if (redirect_file[0]) { output_capture_active = 1; output_capture_len = 0; }
+     int found = 0;
+     for (int i = 0; commands[i].name; i++) {
+         if (strcmp(args[0], commands[i].name) == 0) {
+             commands[i].func(argc, args);
+             found = 1;
+             break;
+         }
+     }
+     if (!found) {
+         vga_set_color(VGA_LIGHT_GREY, VGA_BLACK);
+         out_puts(args[0]); out_puts(": command not found\n"); }
+     if (output_capture_active) {
+         output_capture_active = 0;
+         if (redirect_append) {
+             char existing[8192]; int exist_len = 0;
+             memset(existing, 0, 8192);
+             int r = fs_read_file(redirect_file, existing, 8191);
+             if (r > 0) exist_len = r;
+             int total_len = exist_len + output_capture_len;
+             if (total_len > 8191) total_len = 8191;
+             char combined[8192]; int ci = 0;
+             for (int i = 0; i < exist_len && ci < 8191; i++) combined[ci++] = existing[i];
+             for (int i = 0; i < output_capture_len && ci < 8191; i++) combined[ci++] = output_capture_buf[i];
+             combined[ci] = 0;
+             fs_create_file(redirect_file, combined, ci);
+         } else { fs_create_file(redirect_file, output_capture_buf, output_capture_len); } }
 }
 
 /* ===== Shell Init ===== */
@@ -51043,6 +51139,30 @@ void shell_run(void) {
                 input_buf[input_len] = 0;
                 vga_putchar('\b'); vga_putchar(' '); vga_putchar('\b');
             }
+         } else if (c == 9) {
+             if (input_len > 0) {
+                 int word_start = input_len;
+                 while (word_start > 0 && input_buf[word_start-1] != ' ') word_start--;
+                 char prefix[64]; int p = 0;
+                 for (int i = word_start; i < input_len && p < 63; i++) prefix[p++] = input_buf[i];
+                 prefix[p] = 0;
+                 char matches[64][64]; int match_count = 0;
+                 for (int i = 0; commands[i].name && match_count < 64; i++) {
+                     if (strncmp(commands[i].name, prefix, strlen(prefix)) == 0) {
+                         strncpy(matches[match_count], commands[i].name, 63);
+                        matches[match_count][63] = 0; match_count++; } }
+                if (match_count == 1) {
+                     const char *completion = matches[0] + (input_len - word_start);
+                     while (*completion && input_len < CMD_MAX_LEN - 1) {
+                         input_buf[input_len++] = *completion;
+                         vga_putchar(*completion); completion++; }
+                     input_buf[input_len] = 0; }
+                else if (match_count > 1) {
+                    vga_putchar('\n');
+                    for (int i = 0; i < match_count; i++) { vga_puts(matches[i]); vga_putchar(' '); }
+                     vga_putchar('\n');
+                     print_prompt();
+                     vga_puts(input_buf); } }
         } else if (c >= 32 && c <= 126) {
             if (input_len < CMD_MAX_LEN - 1) {
                 input_buf[input_len++] = c;

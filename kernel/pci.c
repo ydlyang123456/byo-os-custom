@@ -89,6 +89,13 @@ void pci_print_devices(void) {
         itoa(d->device_id, buf, 16); vga_puts(buf); vga_putchar('\n');
     }
 }
+void pci_enable_irq(int index) {
+    if (index < 0 || index >= pci_device_count) return;
+    pci_device_t* d = &pci_devices[index];
+    outl(0xCF8, 0x80000000 | (d->bus << 16) | (d->slot << 11) | (d->func << 8) | 0x3C);
+    uint32_t orig = inl(0xCFC);
+    outl(0xCFC, orig | 0x100);
+}
 void pci_init(void) {
     int count = pci_scan();
     char buf[16];

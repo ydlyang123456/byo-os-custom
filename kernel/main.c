@@ -103,6 +103,9 @@ void kernel_main(uint32_t magic, void* mbi_ptr) {
     /* Initialize PCI bus */
     pci_init();
 
+    /* Initialize AHCI/SATA */
+    ahci_init();
+
     /* Initialize ATA disk */
     ata_init();
 

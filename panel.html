@@ -6,249 +6,475 @@
 <title>BYO-OS 管理面板</title>
 <style>
 * { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0e17; color: #e0e0e0; }
-.container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-.header { background: linear-gradient(135deg, #1a1f35, #0d1117); border: 1px solid #30363d; border-radius: 12px; padding: 20px 30px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; }
-.logo h1 { color: #58a6ff; font-size: 28px; }
-.logo p { color: #8b949e; font-size: 14px; }
-.status-badge { padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 600; }
-.status-ok { background: #0d4429; color: #3fb950; border: 1px solid #238636; }
-.status-err { background: #490202; color: #f85149; border: 1px solid #da3633; }
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px; }
-.card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; padding: 20px; }
-.card h2 { color: #58a6ff; font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.card h2 span { font-size: 20px; }
-.stat-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #21262d; }
-.stat-label { color: #8b949e; }
-.stat-value { color: #e6edf3; font-weight: 500; font-family: 'Consolas', monospace; }
-.terminal { background: #0d1117; border: 1px solid #30363d; border-radius: 8px; padding: 16px; font-family: 'Consolas', 'Courier New', monospace; font-size: 13px; max-height: 400px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.5; }
-.terminal-input { display: flex; gap: 8px; margin-top: 12px; }
-.terminal-input input { flex: 1; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 10px 14px; color: #e6edf3; font-family: 'Consolas', monospace; font-size: 13px; outline: none; }
-.terminal-input input:focus { border-color: #58a6ff; }
-.btn { padding: 10px 18px; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s; }
-.btn-primary { background: #238636; color: white; }
-.btn-primary:hover { background: #2ea043; }
-.btn-danger { background: #da3633; color: white; }
-.btn-danger:hover { background: #f85149; }
-.btn-secondary { background: #30363d; color: #e6edf3; }
-.btn-secondary:hover { background: #3d444d; }
-.btn-warning { background: #9e6a03; color: white; }
-.btn-warning:hover { background: #bb8009; }
-.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-.full-width { grid-column: 1 / -1; }
-.service-list { list-style: none; }
-.service-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #21262d; }
-.service-name { font-weight: 500; }
-.service-status { padding: 3px 10px; border-radius: 12px; font-size: 12px; }
-.service-running { background: #0d4429; color: #3fb950; }
-.service-stopped { background: #490202; color: #f85149; }
-.bt-panel-card { border-color: #1f6feb; }
-.bt-panel-card h2 { color: #1f6feb; }
-.log-entry { padding: 4px 0; border-bottom: 1px solid #161b22; font-size: 12px; }
-.log-time { color: #8b949e; margin-right: 8px; }
+:root {
+  --sidebar-bg: #1a2332;
+  --sidebar-hover: #1e2a3a;
+  --sidebar-active: #2a3a4e;
+  --sidebar-text: #a0b0c8;
+  --sidebar-active-text: #e8edf5;
+  --accent: #409eff;
+  --accent-hover: #66b1ff;
+  --success: #67c23a;
+  --warning: #e6a23c;
+  --danger: #f56c6c;
+  --text-primary: #303133;
+  --text-regular: #606266;
+  --text-secondary: #909399;
+  --bg-page: #f0f2f5;
+  --bg-card: #ffffff;
+  --border-light: #e4e7ed;
+  --border-lighter: #ebeef5;
+  --card-shadow: 0 2px 12px 0 rgba(0,0,0,0.06);
+}
+body { font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans SC",sans-serif; background: var(--bg-page); color: var(--text-primary); overflow: hidden; height: 100vh; }
+.layout { display: flex; height: 100vh; }
+.sidebar { width: 220px; background: var(--sidebar-bg); display: flex; flex-direction: column; flex-shrink: 0; z-index: 100; }
+.sidebar-header { padding: 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.sidebar-header h1 { color: #e8edf5; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+.sidebar-header .subtitle { color: var(--sidebar-text); font-size: 11px; margin-top: 4px; padding-left: 30px; }
+.sidebar-menu { flex: 1; padding: 8px 0; overflow-y: auto; }
+.menu-item { display: flex; align-items: center; gap: 10px; padding: 11px 20px; color: var(--sidebar-text); cursor: pointer; transition: all 0.2s; font-size: 14px; border-left: 3px solid transparent; }
+.menu-item:hover { background: var(--sidebar-hover); color: var(--sidebar-active-text); }
+.menu-item.active { background: var(--sidebar-active); color: var(--sidebar-active-text); border-left-color: var(--accent); }
+.menu-item svg { width: 18px; height: 18px; flex-shrink: 0; fill: currentColor; }
+.sidebar-footer { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,0.06); font-size: 11px; color: var(--sidebar-text); text-align: center; }
+.main { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+.topbar { background: #fff; border-bottom: 1px solid var(--border-light); padding: 0 24px; height: 56px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+.topbar-left { display: flex; align-items: center; gap: 12px; }
+.topbar-left h2 { font-size: 16px; font-weight: 500; color: var(--text-primary); }
+.status-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.status-dot.online { background: var(--success); box-shadow: 0 0 6px var(--success); }
+.status-dot.offline { background: var(--danger); }
+.content { flex: 1; overflow-y: auto; padding: 20px 24px; }
+.card { background: var(--bg-card); border-radius: 8px; box-shadow: var(--card-shadow); padding: 20px; margin-bottom: 16px; }
+.card-header { font-size: 15px; font-weight: 500; color: var(--text-primary); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; padding-bottom: 12px; border-bottom: 1px solid var(--border-lighter); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 20px; }
+.stat-card { background: var(--bg-card); border-radius: 8px; box-shadow: var(--card-shadow); padding: 20px; text-align: center; }
+.stat-card .stat-icon { font-size: 28px; margin-bottom: 8px; }
+.stat-card .stat-value { font-size: 26px; font-weight: 600; color: var(--text-primary); }
+.stat-card .stat-label { font-size: 13px; color: var(--text-secondary); margin-top: 4px; }
+.progress-bar { height: 8px; background: var(--border-lighter); border-radius: 4px; overflow: hidden; margin: 8px 0; }
+.progress-bar .fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.progress-bar .fill.green { background: var(--success); }
+.progress-bar .fill.blue { background: var(--accent); }
+.progress-bar .fill.orange { background: var(--warning); }
+.progress-bar .fill.red { background: var(--danger); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+table th { background: #f5f7fa; color: var(--text-secondary); font-weight: 500; padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border-lighter); white-space: nowrap; }
+table td { padding: 10px 12px; border-bottom: 1px solid var(--border-lighter); color: var(--text-regular); }
+table tr:hover td { background: #f5f7fa; }
+.btn { display: inline-flex; align-items: center; gap: 4px; padding: 7px 15px; border-radius: 4px; border: 1px solid var(--border-light); background: #fff; color: var(--text-regular); font-size: 13px; cursor: pointer; transition: all 0.2s; font-family: inherit; white-space: nowrap; }
+.btn:hover { color: var(--accent); border-color: var(--accent); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-primary:hover { background: var(--accent-hover); }
+.btn-success { background: var(--success); border-color: var(--success); color: #fff; }
+.btn-warning { background: var(--warning); border-color: var(--warning); color: #fff; }
+.btn-danger { background: var(--danger); border-color: var(--danger); color: #fff; }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.btn-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.form-group { margin-bottom: 14px; }
+.form-group label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 4px; }
+.form-input { width: 100%; padding: 8px 12px; border: 1px solid var(--border-light); border-radius: 4px; font-size: 13px; outline: none; font-family: inherit; color: var(--text-primary); transition: border-color 0.2s; }
+.form-input:focus { border-color: var(--accent); }
+textarea.form-input { min-height: 200px; font-family: "Consolas","Courier New",monospace; font-size: 12px; line-height: 1.5; resize: vertical; }
+.terminal-box { background: #1e1e1e; border-radius: 6px; padding: 16px; font-family: "Consolas","Courier New",monospace; font-size: 13px; color: #d4d4d4; min-height: 300px; max-height: 500px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; line-height: 1.6; }
+.terminal-input-row { display: flex; gap: 8px; margin-top: 10px; }
+.terminal-input-row input { flex: 1; background: #252526; border: 1px solid #3c3c3c; border-radius: 4px; padding: 9px 14px; color: #d4d4d4; font-family: "Consolas","Courier New",monospace; font-size: 13px; outline: none; }
+.terminal-input-row input:focus { border-color: var(--accent); }
+.terminal-prompt { color: #6a9955; }
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); z-index: 1000; justify-content: center; align-items: center; }
+.modal-overlay.show { display: flex; }
+.modal { background: #fff; border-radius: 8px; width: 90%; max-width: 680px; max-height: 85vh; box-shadow: 0 8px 32px rgba(0,0,0,0.15); display: flex; flex-direction: column; }
+.modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border-lighter); display: flex; justify-content: space-between; align-items: center; }
+.modal-header h3 { font-size: 15px; font-weight: 500; }
+.modal-close { cursor: pointer; font-size: 20px; color: var(--text-secondary); padding: 4px; line-height: 1; }
+.modal-close:hover { color: var(--text-primary); }
+.modal-body { padding: 20px; overflow-y: auto; flex: 1; }
+.modal-footer { padding: 12px 20px; border-top: 1px solid var(--border-lighter); display: flex; justify-content: flex-end; gap: 8px; }
+.breadcrumb { font-size: 13px; color: var(--text-secondary); margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+.breadcrumb a { color: var(--accent); cursor: pointer; text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb .sep { color: var(--text-secondary); }
+.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.service-card { border: 1px solid var(--border-lighter); border-radius: 6px; padding: 16px; text-align: center; }
+.service-card .svc-name { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.service-card .svc-status { font-size: 12px; padding: 2px 10px; border-radius: 10px; display: inline-block; }
+.svc-running { background: #f0f9eb; color: var(--success); }
+.svc-stopped { background: #fef0f0; color: var(--danger); }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.info-item { padding: 8px 12px; background: #f5f7fa; border-radius: 4px; }
+.info-item .label { font-size: 12px; color: var(--text-secondary); }
+.info-item .value { font-size: 14px; color: var(--text-primary); font-weight: 500; margin-top: 2px; }
+.badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; font-size: 12px; }
+.badge-green { background: #f0f9eb; color: var(--success); }
+.badge-red { background: #fef0f0; color: var(--danger); }
+@media (max-width: 768px) {
+  .sidebar { width: 60px; }
+  .sidebar-header h1 span, .sidebar-header .subtitle, .menu-item span { display: none; }
+  .menu-item { justify-content: center; padding: 12px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .service-grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .content { padding: 12px; }
+}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <div class="logo">
-            <h1>BYO-OS</h1>
-            <p>Debian 12 Compatible | x86_64 | BT Panel Ready</p>
-        </div>
-        <div>
-            <span id="status-badge" class="status-badge status-err">Connecting...</span>
-        </div>
+<div class="layout">
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h1><svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg><span>BYO-OS</span></h1>
+      <div class="subtitle">管理面板 v15</div>
     </div>
-
-    <div class="grid">
-        <!-- Dashboard -->
-        <div class="card">
-            <h2><span>📊</span> 仪表盘</h2>
-            <div id="dashboard">
-                <div class="stat-row"><span class="stat-label">操作系统</span><span class="stat-value" id="d-os">-</span></div>
-                <div class="stat-row"><span class="stat-label">架构</span><span class="stat-value" id="d-arch">-</span></div>
-                <div class="stat-row"><span class="stat-label">内存 (已用/总计)</span><span class="stat-value" id="d-mem">-</span></div>
-                <div class="stat-row"><span class="stat-label">堆内存</span><span class="stat-value" id="d-heap">-</span></div>
-                <div class="stat-row"><span class="stat-label">运行时间</span><span class="stat-value" id="d-uptime">-</span></div>
-                <div class="stat-row"><span class="stat-label">任务数</span><span class="stat-value" id="d-tasks">-</span></div>
-                <div class="stat-row"><span class="stat-label">IP 地址</span><span class="stat-value" id="d-ip">-</span></div>
-            </div>
-        </div>
-
-        <!-- Debian 12 Info -->
-        <div class="card">
-            <h2><span>🐧</span> Debian 12 兼容性</h2>
-            <div id="debian-info">
-                <div class="stat-row"><span class="stat-label">发行版</span><span class="stat-value" id="deb-name">Debian GNU/Linux</span></div>
-                <div class="stat-row"><span class="stat-label">版本</span><span class="stat-value" id="deb-version">12 (bookworm)</span></div>
-                <div class="stat-row"><span class="stat-label">ID</span><span class="stat-value" id="deb-id">debian</span></div>
-                <div class="stat-row"><span class="stat-label">代号</span><span class="stat-value" id="deb-codename">bookworm</span></div>
-                <div class="stat-row"><span class="stat-label">BT Panel 兼容</span><span class="stat-value" style="color:#3fb950">✅ 完全兼容</span></div>
-            </div>
-        </div>
-
-        <!-- BT Panel -->
-        <div class="card bt-panel-card">
-            <h2><span>🔧</span> 宝塔面板</h2>
-            <div class="grid-2" style="margin-bottom:12px">
-                <button class="btn btn-primary" onclick="btAction('install')">安装面板</button>
-                <button class="btn btn-secondary" onclick="btAction('start')">启动</button>
-                <button class="btn btn-warning" onclick="btAction('restart')">重启</button>
-                <button class="btn btn-danger" onclick="btAction('stop')">停止</button>
-            </div>
-            <div id="bt-status" class="terminal" style="max-height:150px">等待操作...</div>
-        </div>
-
-        <!-- Services -->
-        <div class="card">
-            <h2><span>⚙️</span> 服务管理</h2>
-            <div id="services-list">
-                <div class="service-item"><span class="service-name">SSH</span><span class="service-status service-running">运行中</span></div>
-                <div class="service-item"><span class="service-name">Web Server</span><span class="service-status service-stopped">已停止</span></div>
-                <div class="service-item"><span class="service-name">Database</span><span class="service-status service-stopped">已停止</span></div>
-                <div class="service-item"><span class="service-name">Firewall</span><span class="service-status service-running">运行中</span></div>
-            </div>
-        </div>
-
-        <!-- Terminal -->
-        <div class="card full-width">
-            <h2><span>💻</span> 终端</h2>
-            <div id="terminal" class="terminal">BYO-OS Shell v2.0 - Type 'help' for commands</div>
-            <div class="terminal-input">
-                <input type="text" id="cmd-input" placeholder="输入命令..." onkeypress="if(event.key==='Enter')sendCmd()">
-                <button class="btn btn-primary" onclick="sendCmd()">发送</button>
-                <button class="btn btn-secondary" onclick="clearTerminal()">清空</button>
-            </div>
-        </div>
-
-        <!-- Quick Actions -->
-        <div class="card">
-            <h2><span>🚀</span> 快捷操作</h2>
-            <div class="grid-2">
-                <button class="btn btn-primary" onclick="quickCmd('sysinfo')">系统信息</button>
-                <button class="btn btn-primary" onclick="quickCmd('ps')">进程列表</button>
-                <button class="btn btn-primary" onclick="quickCmd('df')">磁盘使用</button>
-                <button class="btn btn-primary" onclick="quickCmd('net')">网络状态</button>
-                <button class="btn btn-primary" onclick="quickCmd('free')">内存使用</button>
-                <button class="btn btn-primary" onclick="quickCmd('users')">用户列表</button>
-                <button class="btn btn-primary" onclick="quickCmd('service list')">服务列表</button>
-                <button class="btn btn-primary" onclick="quickCmd('neofetch')">系统概览</button>
-            </div>
-        </div>
-
-        <!-- System Log -->
-        <div class="card">
-            <h2><span>📋</span> 系统日志</h2>
-            <div id="syslog" class="terminal" style="max-height:250px">加载中...</div>
-            <button class="btn btn-secondary" onclick="loadLog()" style="margin-top:8px">刷新</button>
-        </div>
-    </div>
+    <nav class="sidebar-menu" id="sidebar-menu">
+      <div class="menu-item active" data-page="dashboard" onclick="switchPage('dashboard')">
+        <svg viewBox="0 0 24 24"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg><span>仪表盘</span></div>
+      <div class="menu-item" data-page="files" onclick="switchPage('files')">
+        <svg viewBox="0 0 24 24"><path d="M20 6h-8l-2-2H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 12H4V8h16v10z"/></svg><span>文件管理</span></div>
+      <div class="menu-item" data-page="processes" onclick="switchPage('processes')">
+        <svg viewBox="0 0 24 24"><path d="M19 8h-1V6c0-2.76-2.24-5-5-5S8 3.24 8 6v2H6c-1.66 0-3 1.34-3 3v8c0 1.66 1.34 3 3 3h12c1.66 0 3-1.34 3-3v-8c0-1.66-1.34-3-3-3zm-8-2c0-1.1.9-2 2-2s2 .9 2 2v2H11V6zm8 13c0 .55-.45 1-1 1H6c-.55 0-1-.45-1-1v-8c0-.55.45-1 1-1h12c.55 0 1 .45 1 1v8z"/></svg><span>进程管理</span></div>
+      <div class="menu-item" data-page="terminal" onclick="switchPage('terminal')">
+        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6v-2zm0 4h6v2H6v-2zm8-4h4v2h-4v-2zm-2 4h4v2h-4v-2z"/></svg><span>终端</span></div>
+      <div class="menu-item" data-page="btpanel" onclick="switchPage('btpanel')">
+        <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg><span>宝塔面板</span></div>
+      <div class="menu-item" data-page="sysinfo" onclick="switchPage('sysinfo')">
+        <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.07.62-.07.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg><span>系统信息</span></div>
+      <div class="menu-item" data-page="users" onclick="switchPage('users')">
+        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg><span>用户管理</span></div>
+    </nav>
+    <div class="sidebar-footer">BYO-OS Gateway v15</div>
+  </aside>
+  <div class="main">
+    <header class="topbar">
+      <div class="topbar-left"><h2 id="page-title">仪表盘</h2></div>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span id="status-text" style="font-size:13px;color:var(--text-secondary);">检测中...</span>
+        <span class="status-dot offline" id="status-dot"></span>
+      </div>
+    </header>
+    <div class="content" id="main-content"></div>
+  </div>
 </div>
-
+<div class="modal-overlay" id="editor-modal">
+  <div class="modal">
+    <div class="modal-header"><h3 id="editor-title">编辑文件</h3><span class="modal-close" onclick="closeModal('editor-modal')">&times;</span></div>
+    <div class="modal-body">
+      <div class="form-group"><label>文件路径: <span id="editor-path" style="color:var(--accent);"></span></label></div>
+      <div class="form-group"><textarea class="form-input" id="editor-content" style="min-height:300px;"></textarea></div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('editor-modal')">取消</button><button class="btn btn-primary" onclick="saveFile()">保存</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="user-modal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header"><h3>添加用户</h3><span class="modal-close" onclick="closeModal('user-modal')">&times;</span></div>
+    <div class="modal-body">
+      <div class="form-group"><label>用户名</label><input class="form-input" id="user-name" placeholder="输入用户名" autocomplete="off"></div>
+      <div class="form-group"><label>密码（可选）</label><input class="form-input" id="user-pass" type="password" placeholder="留空则无密码" autocomplete="off"></div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('user-modal')">取消</button><button class="btn btn-primary" onclick="addUser()">添加</button></div>
+  </div>
+</div>
+<div class="modal-overlay" id="new-item-modal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header"><h3 id="new-item-title">新建项目</h3><span class="modal-close" onclick="closeModal('new-item-modal')">&times;</span></div>
+    <div class="modal-body">
+      <div class="form-group"><label>名称</label><input class="form-input" id="new-item-name" placeholder="输入名称" autocomplete="off"></div>
+    </div>
+    <div class="modal-footer"><button class="btn" onclick="closeModal('new-item-modal')">取消</button><button class="btn btn-primary" id="new-item-btn" onclick="createNewItem()">创建</button></div>
+  </div>
+</div>
 <script>
-const API = '';
-const term = document.getElementById('terminal');
-const input = document.getElementById('cmd-input');
-let cmdHistory = [];
-let histIdx = -1;
+var API = "";
+var currentPage = "dashboard";
+var currentDir = "/";
+var cmdHistory = [];
+var cmdHistoryIdx = -1;
+var editingPath = "";
+var newItemType = "file";
+var dashboardInterval = null;
+var processesInterval = null;
+var PAGE_TITLES = { dashboard:"仪表盘", files:"文件管理", processes:"进程管理", terminal:"终端", btpanel:"宝塔面板", sysinfo:"系统信息", users:"用户管理" };
 
-// Auto-refresh dashboard
-setInterval(loadDashboard, 3000);
-loadDashboard();
-
-function appendTerminal(text) {
-    term.textContent += '\n' + text;
-    term.scrollTop = term.scrollHeight;
+function switchPage(page) {
+  currentPage = page;
+  document.querySelectorAll(".menu-item").forEach(function(e){e.classList.remove("active")});
+  var a = document.querySelector('.menu-item[data-page="'+page+'"]');
+  if (a) a.classList.add("active");
+  document.getElementById("page-title").textContent = PAGE_TITLES[page] || page;
+  if (dashboardInterval) { clearInterval(dashboardInterval); dashboardInterval = null; }
+  if (processesInterval) { clearInterval(processesInterval); processesInterval = null; }
+  if (page === "dashboard") { renderDashboard(); dashboardInterval = setInterval(renderDashboard, 3000); }
+  else if (page === "files") renderFileManager();
+  else if (page === "processes") { renderProcesses(); processesInterval = setInterval(renderProcesses, 5000); }
+  else if (page === "terminal") renderTerminal();
+  else if (page === "btpanel") renderBTPanel();
+  else if (page === "sysinfo") renderSysInfo();
+  else if (page === "users") renderUsers();
 }
 
-function clearTerminal() { term.textContent = 'BYO-OS Shell v2.0'; }
+async function apiGet(u) { var r = await fetch(API + u); return await r.json(); }
+async function apiPost(u, d) { var r = await fetch(API + u, {method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(d)}); return await r.json(); }
+function openModal(id) { document.getElementById(id).classList.add("show"); }
+function closeModal(id) { document.getElementById(id).classList.remove("show"); }
+window.onclick = function(e) { if (e.target.classList.contains("modal-overlay")) e.target.classList.remove("show"); };
 
-async function sendCmd() {
-    const cmd = input.value.trim();
-    if (!cmd) return;
-    cmdHistory.push(cmd);
-    histIdx = cmdHistory.length;
-    appendTerminal('BYO-OS> ' + cmd);
-    input.value = '';
-    try {
-        const res = await fetch(API + '/api/exec', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({cmd})
-        });
-        const data = await res.json();
-        if (data.output) appendTerminal(data.output);
-        if (data.error) appendTerminal('ERROR: ' + data.error);
-    } catch(e) {
-        appendTerminal('ERROR: ' + e.message);
+setInterval(function() {
+  apiGet("/api/ping").then(function(d) {
+    var dot = document.getElementById("status-dot");
+    var txt = document.getElementById("status-text");
+    if (d.serial) { dot.className = "status-dot online"; txt.textContent = "已连接 | 发送:"+d.send_count+" 接收:"+d.recv_count; }
+    else { dot.className = "status-dot offline"; txt.textContent = "未连接"; }
+  }).catch(function(){});
+}, 3000);
+async function renderDashboard() {
+  try {
+    var s = await apiGet("/api/status");
+    var mp = s.memory_total > 0 ? Math.round(s.memory_used/s.memory_total*100) : 0;
+    var dp = s.disk_total > 0 ? Math.round(s.disk_used/s.disk_total*100) : 0;
+    var mc = mp > 80 ? "red" : mp > 60 ? "orange" : "blue";
+    var dc = dp > 80 ? "red" : dp > 60 ? "orange" : "green";
+    document.getElementById("main-content").innerHTML =
+      '<div class="stats-grid">' +
+      '<div class="stat-card"><div class="stat-icon">🧠</div><div class="stat-value">'+mp+'%</div><div class="stat-label">内存使用</div><div class="progress-bar"><div class="fill '+mc+'" style="width:'+mp+'%"></div></div><div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">'+fmtSize(s.memory_used)+' / '+fmtSize(s.memory_total)+'</div></div>' +
+      '<div class="stat-card"><div class="stat-icon">💾</div><div class="stat-value">'+dp+'%</div><div class="stat-label">磁盘使用</div><div class="progress-bar"><div class="fill '+dc+'" style="width:'+dp+'%"></div></div><div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">'+fmtSize(s.disk_used)+' / '+fmtSize(s.disk_total)+'</div></div>' +
+      '<div class="stat-card"><div class="stat-icon">⚙️</div><div class="stat-value">'+s.processes+'</div><div class="stat-label">进程数</div><div class="progress-bar"><div class="fill blue" style="width:'+Math.min(s.processes*5,100)+'%"></div></div><div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">CPU: '+s.cpu_load+'</div></div>' +
+      '<div class="stat-card"><div class="stat-icon">⏱️</div><div class="stat-value" style="font-size:20px;">'+s.uptime+'</div><div class="stat-label">运行时间</div><div style="font-size:12px;color:var(--text-secondary);margin-top:8px;">'+s.hostname+'</div></div></div>' +
+      '<div class="card"><div class="card-header">📋 系统信息</div><div class="info-grid">' +
+      '<div class="info-item"><div class="label">主机名</div><div class="value">'+esc(s.hostname)+'</div></div>' +
+      '<div class="info-item"><div class="label">操作系统</div><div class="value">'+esc(s.os)+'</div></div>' +
+      '<div class="info-item"><div class="label">运行时间</div><div class="value">'+esc(s.uptime)+'</div></div>' +
+      '<div class="info-item"><div class="label">CPU 负载</div><div class="value">'+esc(s.cpu_load)+'</div></div>' +
+      '<div class="info-item"><div class="label">内存总计</div><div class="value">'+fmtSize(s.memory_total)+'</div></div>' +
+      '<div class="info-item"><div class="label">磁盘总计</div><div class="value">'+fmtSize(s.disk_total)+'</div></div></div></div>';
+  } catch(e) {
+    document.getElementById("main-content").innerHTML = '<div class="card"><p style="color:var(--danger);">加载失败: '+e.message+'</p></div>';
+  }
+}
+async function renderFileManager(dir) {
+  if (dir !== undefined) currentDir = dir;
+  var el = document.getElementById("main-content");
+  el.innerHTML = '<div class="card"><div class="card-header">📁 文件管理</div><p>加载中...</p></div>';
+  try {
+    var data = await apiPost("/api/file/list", {path: currentDir});
+    el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><div class="breadcrumb" id="fb"></div><div class="btn-group">'+
+      (currentDir!=="/"?'<button class="btn" onclick="goUpDir()">⬆ 上级</button>':'')+
+      '<button class="btn" onclick="showNewItem(\'file\')">📄 新建文件</button>'+
+      '<button class="btn" onclick="showNewItem(\'dir\')">📁 新建目录</button>'+
+      '<button class="btn" onclick="renderFileManager()">🔄 刷新</button></div></div>';
+    var bc = document.getElementById("fb");
+    bc.innerHTML = '<a onclick="renderFileManager(\'/\')">/</a>';
+    var parts = currentDir.split("/").filter(Boolean);
+    var cum = "";
+    for (var i=0; i<parts.length; i++) { cum += "/"+parts[i]; bc.innerHTML += '<span class="sep">/</span><a onclick="renderFileManager(\''+cum+'\')">'+parts[i]+'</a>'; }
+    if (data.error) { el.innerHTML += '<div class="card" style="color:var(--danger);">错误: '+data.error+'</div>'; return; }
+    var html = '<div class="card"><div class="table-wrap"><table><thead><tr><th>名称</th><th>大小</th><th>权限</th><th>修改时间</th><th>操作</th></tr></thead><tbody>';
+    for (var i=0; i<data.files.length; i++) {
+      var f = data.files[i];
+      var icon = f.is_dir ? "📁" : "📄";
+      var sz = f.is_dir ? "-" : fmtSize(f.size);
+      var p = (currentDir.replace(/\\$/,"")+"/"+f.name).replace(/\/\//g,"/");
+      html += '<tr><td><span class="file-icon">'+icon+'</span>'+(f.is_dir?'<a onclick="renderFileManager(\''+p+'\')" style="color:var(--accent);cursor:pointer;">'+esc(f.name)+'</a>':esc(f.name))+
+        '</td><td>'+sz+'</td><td style="font-family:monospace;font-size:12px;">'+(f.perms||"-")+'</td><td style="font-size:12px;">'+(f.modified||"-")+'</td>'+
+        '<td>'+(f.is_dir?'':'<button class="btn btn-sm" onclick="editFile(\''+p+'\')">编辑</button> ')+
+        '<button class="btn btn-sm btn-danger" onclick="deleteFile(\''+p+'\','+f.is_dir+')">删除</button></td></tr>';
     }
+    html += '</tbody></table></div></div>';
+    el.innerHTML += html;
+  } catch(e) { el.innerHTML = '<div class="card" style="color:var(--danger);">加载失败: '+e.message+'</div>'; }
 }
-
-async function quickCmd(cmd) {
-    input.value = cmd;
-    await sendCmd();
+function goUpDir() { var p = currentDir.replace(/\\$/,"").split("/").filter(Boolean); p.pop(); renderFileManager("/"+p.join("/")); }
+function showNewItem(t) { newItemType=t; document.getElementById("new-item-title").textContent=t==="file"?"新建文件":"新建目录"; document.getElementById("new-item-btn").textContent=t==="file"?"创建文件":"创建目录"; document.getElementById("new-item-name").value=""; openModal("new-item-modal"); }
+async function createNewItem() {
+  var n = document.getElementById("new-item-name").value.trim();
+  if (!n) return alert("请输入名称");
+  var p = (currentDir.replace(/\\$/,"")+"/"+n).replace(/\/\//g,"/");
+  closeModal("new-item-modal");
+  try { if (newItemType==="dir") await apiPost("/api/file/mkdir",{path:p}); else await apiPost("/api/file/write",{path:p,content:""}); renderFileManager(); }
+  catch(e) { alert("创建失败: "+e.message); }
 }
-
-async function loadDashboard() {
-    try {
-        const badge = document.getElementById('status-badge');
-        const res = await fetch(API + '/api/sysinfo');
-        const data = await res.json();
-        if (data.serial) {
-            badge.textContent = '● 已连接';
-            badge.className = 'status-badge status-ok';
-        } else {
-            badge.textContent = '○ 未连接';
-            badge.className = 'status-badge status-err';
-        }
-        document.getElementById('d-os').textContent = data.os || '-';
-        document.getElementById('d-arch').textContent = data.arch || '-';
-        document.getElementById('d-mem').textContent = (data.mem_free || 0) + ' / ' + (data.mem_total || 0) + ' MB';
-        document.getElementById('d-heap').textContent = (data.heap_used || 0) + ' bytes';
-        document.getElementById('d-uptime').textContent = (data.uptime || 0) + 's';
-        document.getElementById('d-tasks').textContent = data.tasks || 0;
-        document.getElementById('d-ip').textContent = data.ip || '-';
-    } catch(e) {}
+async function editFile(path) {
+  editingPath=path; document.getElementById("editor-title").textContent="编辑文件"; document.getElementById("editor-path").textContent=path;
+  document.getElementById("editor-content").value="加载中..."; openModal("editor-modal");
+  try { var d=await apiPost("/api/file/read",{path:path}); document.getElementById("editor-content").value=d.content||""; }
+  catch(e) { document.getElementById("editor-content").value="加载失败: "+e.message; }
 }
-
-async function btAction(action) {
-    const el = document.getElementById('bt-status');
-    el.textContent = '执行: ' + action + '...';
-    try {
-        const res = await fetch(API + '/api/bt_install', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({action})
-        });
-        const data = await res.json();
-        el.textContent = data.output || data.error || '完成';
-        el.scrollTop = el.scrollHeight;
-    } catch(e) {
-        el.textContent = 'ERROR: ' + e.message;
+async function saveFile() {
+  var c=document.getElementById("editor-content").value;
+  try { await apiPost("/api/file/write",{path:editingPath,content:c}); closeModal("editor-modal"); renderFileManager(); }
+  catch(e) { alert("保存失败: "+e.message); }
+}
+async function deleteFile(path,isDir) {
+  if (!confirm("确定删除 "+path+" 吗？")) return;
+  try { await apiPost("/api/file/delete",{path:path,is_dir:isDir}); renderFileManager(); }
+  catch(e) { alert("删除失败: "+e.message); }
+}
+async function renderProcesses() {
+  var el = document.getElementById("main-content");
+  try {
+    var data = await apiGet("/api/processes");
+    el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h3 style="font-size:15px;font-weight:500;">⚙️ 进程管理</h3><button class="btn" onclick="renderProcesses()">🔄 刷新</button></div>'+
+      '<div class="card"><div class="table-wrap"><table><thead><tr><th>#</th><th>PID</th><th>名称/命令</th><th>状态</th><th>CPU</th><th>内存</th></tr></thead><tbody id="pt"></tbody></table></div></div>';
+    var tb = document.getElementById("pt");
+    var lines = data.output.split("\n");
+    for (var i=0; i<lines.length; i++) {
+      var l = lines[i].trim();
+      if (!l) continue;
+      if (i===0 && l.toLowerCase().indexOf("pid")>=0) continue;
+      var parts = l.split(/\s+/);
+      if (parts.length < 10) { tb.innerHTML += "<tr><td colspan=\"6\" style=\"font-family:monospace;font-size:12px;\">"+esc(l)+"</td></tr>"; continue; }
+      var pid=parts[1],cpu=parts[2],mem=parts[3],st=parts[7],cmd=parts.slice(10).join(" ")||parts[10]||"-";
+      tb.innerHTML += "<tr><td>"+(i)+"</td><td>"+pid+"</td><td style=\"font-family:monospace;font-size:12px;\">"+esc(cmd)+"</td><td>"+st+"</td><td>"+cpu+"%</td><td>"+mem+"%</td></tr>";
     }
+    if (!lines.length) tb.innerHTML = "<tr><td colspan=\"6\">无数据</td></tr>";
+  } catch(e) { el.innerHTML = '<div class="card" style="color:var(--danger);">加载失败: '+e.message+'</div>'; }
 }
 
-async function loadLog() {
-    try {
-        const res = await fetch(API + '/api/syslog');
-        const data = await res.json();
-        document.getElementById('syslog').textContent = data.output || '无日志';
-    } catch(e) {
-        document.getElementById('syslog').textContent = '加载失败';
+function renderTerminal() {
+  document.getElementById("main-content").innerHTML =
+    '<div class="card"><div class="card-header">💻 终端</div>'+
+    '<div class="terminal-box" id="to"><span class="terminal-prompt">BYO-OS></span> 终端已就绪</div>'+
+    '<div class="terminal-input-row"><input type="text" id="ti" placeholder="输入命令..." autocomplete="off" onkeydown="tk(event)">'+
+    '<button class="btn btn-primary" onclick="ts()">发送</button>'+
+    '<button class="btn" onclick="document.getElementById(\'to\').innerHTML=\'<span class=\\\"terminal-prompt\\\">BYO-OS></span> 终端已清空\'">清空</button></div></div>';
+  document.getElementById("ti").focus();
+}
+function tk(e) {
+  if (e.key === "Enter") ts();
+  else if (e.key === "ArrowUp") { e.preventDefault(); if (cmdHistoryIdx>0) { cmdHistoryIdx--; document.getElementById("ti").value=cmdHistory[cmdHistoryIdx]; } }
+  else if (e.key === "ArrowDown") { e.preventDefault(); if (cmdHistoryIdx<cmdHistory.length-1) { cmdHistoryIdx++; document.getElementById("ti").value=cmdHistory[cmdHistoryIdx]; } else { cmdHistoryIdx=cmdHistory.length; document.getElementById("ti").value=""; } }
+}
+async function ts() {
+  var inp=document.getElementById("ti"),out=document.getElementById("to");
+  var cmd=inp.value.trim();
+  if (!cmd) return;
+  cmdHistory.push(cmd); cmdHistoryIdx=cmdHistory.length;
+  out.innerHTML += "\n<span class=\"terminal-prompt\">BYO-OS></span> "+esc(cmd);
+  inp.value="";
+  try {
+    var data=await apiPost("/api/terminal",{cmd:cmd});
+    if (data.output) out.innerHTML += "\n"+esc(data.output);
+    if (data.error) out.innerHTML += "\n<span style=\"color:#f56c6c;\">ERROR: "+esc(data.error)+"</span>";
+  } catch(e) { out.innerHTML += "\n<span style=\"color:#f56c6c;\">ERROR: "+esc(e.message)+"</span>"; }
+  out.scrollTop = out.scrollHeight;
+}
+async function renderBTPanel() {
+  var el = document.getElementById("main-content");
+  el.innerHTML = '<div class="card"><div class="card-header">🔧 宝塔面板管理</div><p>加载中...</p></div>';
+  try {
+    var data = await apiGet("/api/panel");
+    var svcHtml = "";
+    for (var i=0; i<data.services.length; i++) {
+      var s = data.services[i];
+      svcHtml += '<div class="service-card"><div class="svc-name">'+s.name+'</div>'+
+        '<div class="svc-status '+(s.running?"svc-running":"svc-stopped")+'">'+(s.running?"● 运行中":"○ 已停止")+'</div>'+
+        '<div class="btn-group" style="margin-top:10px;justify-content:center;">'+
+        '<button class="btn btn-sm btn-success" onclick="sc(\''+s.name+'\',\'start\')">启动</button>'+
+        '<button class="btn btn-sm btn-warning" onclick="sc(\''+s.name+'\',\'restart\')">重启</button>'+
+        '<button class="btn btn-sm btn-danger" onclick="sc(\''+s.name+'\',\'stop\')">停止</button></div></div>';
     }
+    var portHtml = "";
+    for (var i=0; i<(data.ports||[]).length; i++) {
+      var p = data.ports[i];
+      portHtml += '<div class="info-item"><div class="label">端口 '+p.port+' - '+p.service+'</div><div class="value">'+
+        (p.status==="listening"? '<span class="badge badge-green">● 监听中</span>' : '<span class="badge badge-red">○ 未监听</span>')+'</div></div>';
+    }
+    el.innerHTML =
+      '<div class="card"><div class="card-header">🔧 宝塔面板管理</div>'+
+      '<div class="btn-group" style="margin-bottom:16px;">'+
+      '<button class="btn btn-primary" onclick="btAct(\'install\')">📥 安装面板</button>'+
+      '<button class="btn btn-success" onclick="btAct(\'start\')">▶ 启动</button>'+
+      '<button class="btn btn-warning" onclick="btAct(\'restart\')">🔄 重启</button>'+
+      '<button class="btn btn-danger" onclick="btAct(\'stop\')">⏹ 停止</button></div>'+
+      '<div id="bt-res" style="display:none;" class="terminal-box" style="margin-bottom:16px;"></div></div>'+
+      '<div class="card"><div class="card-header">📊 服务状态</div><div class="service-grid">'+svcHtml+'</div></div>'+
+      '<div class="card"><div class="card-header">🔌 端口状态</div><div class="info-grid">'+portHtml+'</div></div>';
+  } catch(e) { el.innerHTML = '<div class="card" style="color:var(--danger);">加载失败: '+e.message+'</div>'; }
+}
+async function sc(svc,act) { try { await apiPost("/api/service_control",{service:svc,action:act}); renderBTPanel(); } catch(e) { alert("操作失败: "+e.message); } }
+async function btAct(act) {
+  var r = document.getElementById("bt-res");
+  if (r) { r.style.display="block"; r.textContent="执行: "+act+"..."; }
+  try { var d=await apiPost("/api/bt_install",{action:act}); if (r) r.textContent=d.output||"完成"; renderBTPanel(); }
+  catch(e) { if (r) r.textContent="ERROR: "+e.message; }
 }
 
-input.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (histIdx > 0) { histIdx--; input.value = cmdHistory[histIdx]; }
-    } else if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        if (histIdx < cmdHistory.length - 1) { histIdx++; input.value = cmdHistory[histIdx]; }
-        else { histIdx = cmdHistory.length; input.value = ''; }
+async function renderSysInfo() {
+  var el = document.getElementById("main-content");
+  el.innerHTML = '<div class="card"><div class="card-header">ℹ️ 系统信息</div><p>加载中...</p></div>';
+  try {
+    var s=await apiGet("/api/status"), n=await apiGet("/api/network_stats");
+    var mp=s.memory_total>0?Math.round(s.memory_used/s.memory_total*100):0;
+    var dp=s.disk_total>0?Math.round(s.disk_used/s.disk_total*100):0;
+    var mc=mp>80?"red":mp>60?"orange":"blue", dc=dp>80?"red":dp>60?"orange":"green";
+    el.innerHTML =
+      '<div class="card"><div class="card-header">🧠 内存详情</div><div class="progress-bar" style="height:16px;"><div class="fill '+mc+'" style="width:'+mp+'%;line-height:16px;text-align:center;font-size:11px;color:#fff;">'+mp+'%</div></div>'+
+      '<div class="info-grid" style="margin-top:12px;"><div class="info-item"><div class="label">总计</div><div class="value">'+fmtSize(s.memory_total)+'</div></div>'+
+      '<div class="info-item"><div class="label">已用</div><div class="value">'+fmtSize(s.memory_used)+'</div></div>'+
+      '<div class="info-item"><div class="label">空闲</div><div class="value">'+fmtSize(s.memory_free)+'</div></div>'+
+      '<div class="info-item"><div class="label">使用率</div><div class="value">'+mp+'%</div></div></div></div>'+
+      '<div class="card"><div class="card-header">💾 磁盘详情</div><div class="progress-bar" style="height:16px;"><div class="fill '+dc+'" style="width:'+dp+'%;line-height:16px;text-align:center;font-size:11px;color:#fff;">'+dp+'%</div></div>'+
+      '<div class="info-grid" style="margin-top:12px;"><div class="info-item"><div class="label">总计</div><div class="value">'+fmtSize(s.disk_total)+'</div></div>'+
+      '<div class="info-item"><div class="label">已用</div><div class="value">'+fmtSize(s.disk_used)+'</div></div>'+
+      '<div class="info-item"><div class="label">空闲</div><div class="value">'+fmtSize(s.disk_free)+'</div></div>'+
+      '<div class="info-item"><div class="label">使用率</div><div class="value">'+dp+'%</div></div></div></div>';
+    el.innerHTML += '<div class="card"><div class="card-header">🌐 网络信息</div>';
+    if (n.interfaces && n.interfaces.length > 0) {
+      el.innerHTML += '<div class="info-grid">';
+      for (var i=0; i<n.interfaces.length; i++) {
+        var iface=n.interfaces[i];
+        el.innerHTML += '<div class="info-item"><div class="label">'+iface.name+' ('+iface.status+')</div><div class="value">IP: '+(iface.ip||"-")+' | MAC: '+(iface.mac||"-")+'</div></div>';
+      }
+      el.innerHTML += '</div>';
+    } else { el.innerHTML += '<pre style="font-size:12px;background:#f5f7fa;padding:12px;border-radius:4px;">'+esc(n.raw||"无数据")+'</pre>'; }
+    el.innerHTML += '</div>';
+    el.innerHTML += '<div class="card"><div class="card-header">🖥️ 主机信息</div><div class="info-grid">'+
+      '<div class="info-item"><div class="label">主机名</div><div class="value">'+esc(s.hostname)+'</div></div>'+
+      '<div class="info-item"><div class="label">操作系统</div><div class="value">'+esc(s.os)+'</div></div>'+
+      '<div class="info-item"><div class="label">运行时间</div><div class="value">'+esc(s.uptime)+'</div></div>'+
+      '<div class="info-item"><div class="label">CPU 负载</div><div class="value">'+esc(s.cpu_load)+'</div></div>'+
+      '<div class="info-item"><div class="label">进程数</div><div class="value">'+s.processes+'</div></div>'+
+      '<div class="info-item"><div class="label">串口状态</div><div class="value">'+(s.serial?"已连接":"未连接")+'</div></div></div></div>';
+  } catch(e) { el.innerHTML = '<div class="card" style="color:var(--danger);">加载失败: '+e.message+'</div>'; }
+}
+async function renderUsers() {
+  var el = document.getElementById("main-content");
+  el.innerHTML = '<div class="card"><div class="card-header">👥 用户管理</div><p>加载中...</p></div>';
+  try {
+    var data = await apiGet("/api/users");
+    el.innerHTML = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;"><h3 style="font-size:15px;font-weight:500;">👥 用户管理</h3>'+
+      '<button class="btn btn-primary" onclick="openModal(\'user-modal\')">➕ 添加用户</button></div>'+
+      '<div class="card"><div class="table-wrap"><table><thead><tr><th>用户名</th><th>UID</th><th>GID</th><th>描述</th><th>Shell</th></tr></thead><tbody id="ut"></tbody></table></div></div>';
+    var tb = document.getElementById("ut");
+    var lines = data.output.split("\n");
+    var n = 0;
+    for (var i=0; i<lines.length; i++) {
+      var parts = lines[i].split(":");
+      if (parts.length>=7 && parts[0] && parts[0][0]!=="#") {
+        n++;
+        tb.innerHTML += "<tr><td>"+esc(parts[0])+"</td><td>"+parts[2]+"</td><td>"+parts[3]+"</td><td>"+esc(parts[4]||"-")+"</td><td style=\"font-family:monospace;font-size:12px;\">"+esc(parts[6]||"-")+"</td></tr>";
+      }
     }
-});
+    if (!n) tb.innerHTML = "<tr><td colspan=\"5\" style=\"font-family:monospace;font-size:12px;white-space:pre-wrap;\">"+esc(data.output)+"</td></tr>";
+  } catch(e) { el.innerHTML = '<div class="card" style="color:var(--danger);">加载失败: '+e.message+'</div>'; }
+}
+async function addUser() {
+  var u = document.getElementById("user-name").value.trim();
+  var p = document.getElementById("user-pass").value;
+  if (!u) return alert("请输入用户名");
+  closeModal("user-modal");
+  try { await apiPost("/api/user_manage",{action:"add",username:u,password:p}); renderUsers(); }
+  catch(e) { alert("添加失败: "+e.message); }
+}
+function fmtSize(kb) { if (!kb||kb<=0) return "0 B"; if (kb<1024) return kb+" KB"; var mb=kb/1024; if (mb<1024) return mb.toFixed(1)+" MB"; return (mb/1024).toFixed(2)+" GB"; }
+function esc(s) { if (!s) return ""; return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+window.addEventListener("hashchange",function(){var p=window.location.hash.replace("#","")||"dashboard";if(PAGE_TITLES[p])switchPage(p);});
+var initPage = window.location.hash.replace("#","") || "dashboard";
+switchPage(initPage);
 </script>
 </body>
 </html>
