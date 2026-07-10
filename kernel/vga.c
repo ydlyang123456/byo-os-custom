@@ -1,4 +1,5 @@
 /* BYO-OS - VGA Text Mode Driver (VGA text buffer 0xB8000) */
+#include <stdarg.h>
 #include <kernel.h>
 
 static uint16_t* vga_buffer;
@@ -104,3 +105,45 @@ void vga_write_cell(int x, int y, char c, uint8_t color) {
         vga_buffer[y * 80 + x] = ((uint16_t)color << 8) | (uint8_t)c;
 }
 
+
+void vga_printf(const char* fmt, ...) {
+    char buf[512];
+    va_list ap;
+    __builtin_va_start(ap, fmt);
+    int bi = 0;
+    for (const char* p = fmt; *p && bi < 510; p++) {
+        if (*p != '%') { buf[bi++] = *p; continue; }
+        p++;
+        int pad = 0, padc = ' ';
+        if (*p == '0') { padc = '0'; p++; }
+        if (*p >= '1' && *p <= '9') { pad = *p - '0'; p++; }
+        if (*p == 'd' || *p == 'i') {
+            int val = __builtin_va_arg(ap, int);
+            char tmp[16]; int ti = 0;
+            if (val < 0) { buf[bi++] = '-'; val = -val; }
+            if (val == 0) tmp[ti++] = '0';
+            else { while (val > 0) { tmp[ti++] = '0' + val % 10; val /= 10; } }
+            while (pad > ti) { buf[bi++] = padc; pad--; }
+            for (int j = ti - 1; j >= 0; j--) buf[bi++] = tmp[j];
+        } else if (*p == 's') {
+            const char* s = __builtin_va_arg(ap, const char*);
+            if (!s) s = "NULL";
+            while (*s && bi < 510) buf[bi++] = *s++;
+        } else if (*p == 'c') {
+            buf[bi++] = (char)__builtin_va_arg(ap, int);
+        } else if (*p == 'x') {
+            unsigned int val = __builtin_va_arg(ap, unsigned int);
+            const char* hex = "0123456789abcdef";
+            char tmp[8]; int ti = 0;
+            if (val == 0) tmp[ti++] = '0';
+            else { while (val > 0) { tmp[ti++] = hex[val & 0xF]; val >>= 4; } }
+            while (pad > ti) { buf[bi++] = padc; pad--; }
+            for (int j = ti - 1; j >= 0; j--) buf[bi++] = tmp[j];
+        } else if (*p == '%') {
+            buf[bi++] = '%';
+        }
+    }
+    buf[bi] = 0;
+    __builtin_va_end(ap);
+    vga_puts(buf);
+}

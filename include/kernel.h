@@ -88,6 +88,7 @@ void vga_set_color(enum vga_color fg, enum vga_color bg);
 void vga_put_hex(uint32_t value);
 void vga_set_serial_mode(int mode);
 void vga_put_dec(int value);
+void vga_printf(const char* fmt, ...);
 
 /* ===== VGA/VBE Mode Switching ===== */
 void vga_init_from_multiboot(multiboot_info_t* mbi);
