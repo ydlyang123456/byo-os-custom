@@ -1,5 +1,5 @@
 /* BYO-OS - Linker Script for x86_64 ELF Kernel */
-ENTRY(_start64)
+ENTRY(_start32)
 
 SECTIONS {
     . = 1M;

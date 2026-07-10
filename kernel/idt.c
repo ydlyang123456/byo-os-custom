@@ -1,4 +1,4 @@
-/* BYO-OS IDT - x86_64 */
+﻿/* BYO-OS IDT - x86_64 */
 #include <kernel.h>
 static idt_entry_t idt[256];
 static idt_ptr_t idt_ptr;
@@ -22,7 +22,7 @@ void idt_set_gate(uint8_t num, uint32_t base_lo, uint16_t sel, uint8_t flags) {
     idt[num].always0 = 0;
     idt[num].flags = flags;
 }
-static void idt_set_gate64(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags) {
+void idt_set_gate64(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags) {
     idt[num].base_lo = base & 0xFFFF;
     idt[num].base_hi = (base >> 16) & 0xFFFF;
     idt[num].base_upper = (base >> 32) & 0xFFFFFFFF;

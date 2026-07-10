@@ -23,3 +23,16 @@ void serial_put_dec(uint32_t val) {
     itoa(val, buf, 10);
     serial_puts(buf);
 }
+
+void serial_put_dec_u64(uint64_t val) {
+    char buf[24];
+    int i = 23;
+    buf[23] = 0;
+    if (val == 0) { serial_putchar('0'); return; }
+    while (val > 0 && i > 0) {
+        i--;
+        buf[i] = '0' + (val % 10);
+        val /= 10;
+    }
+    serial_puts(&buf[i]);
+}

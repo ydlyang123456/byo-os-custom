@@ -6,6 +6,7 @@
 [BITS 32]
 
 MB_MAGIC    equ 0x1BADB002
+MB_BOOTLOADER_MAGIC equ 0x2BADB002
 MB_MEMINFO  equ 1 << 1
 MB_FLAGS    equ MB_MEMINFO
 MB_CHECKSUM equ -(MB_MAGIC + MB_FLAGS)
@@ -44,10 +45,12 @@ global _start32
 
 _start32:
     mov esp, stack_top
-    push ebx
-    push eax
 
-    cmp eax, MB_MAGIC
+    ; Save multiboot info in known memory locations
+    mov [mb_info_ptr], ebx
+    mov [mb_magic_val], eax
+
+    cmp eax, MB_BOOTLOADER_MAGIC
     jne .no_multiboot
 
     ; Enable PAE and PGE
@@ -97,7 +100,12 @@ _start32:
 
     ; Load GDT and jump to 64-bit
     lgdt [gdt64_ptr]
-    jmp 0x08:long_mode_entry
+    ; Far jump to 64-bit mode using push+retf
+    ; Far jump to 64-bit code segment
+    ; Manually encode: jmp far ptr 0x08:long_mode_entry
+    db 0xEA
+    dd long_mode_entry
+    dw 0x08
 
 .no_multiboot:
     cli
@@ -108,6 +116,7 @@ section .data
 mb_info_ptr:    dd 0
 mb_magic_val:   dd 0
 
+section .text
 [BITS 64]
 long_mode_entry:
     mov ax, 0x10
@@ -116,10 +125,9 @@ long_mode_entry:
     mov fs, ax
     mov gs, ax
     mov ss, ax
-    mov rsp, stack_top
-
-    pop rdi
-    pop rsi
+    ; Load saved multiboot parameters
+    mov edi, [mb_magic_val]
+    mov esi, [mb_info_ptr]
 
     ; Call kernel entry
     extern _start64

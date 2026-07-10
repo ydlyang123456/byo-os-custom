@@ -1,0 +1,5 @@
+﻿f=open("byo-os.kernel","rb")
+f.seek(0x1037d0)
+d=f.read(48)
+print(d.hex())
+f.close()

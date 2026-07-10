@@ -148,6 +148,7 @@ uint32_t heap_get_used(void);
 void vmm_init(void);
 void vmm_map(uint64_t virt, uint64_t phys, uint64_t flags);
 void vmm_unmap(uint64_t virt);
+uint64_t vmm_get_pml4_phys(void);
 
 /* ===== Serial ===== */
 void serial_init(void); void serial_putchar(char c);
@@ -365,3 +366,5 @@ int elf_load(const char* path);
 void* elf_get_entry(const char* path);
 int elf_execute(void* entry, int argc, char** argv);
 int elf_execute_file(const char* path, int argc, char** argv);
+void serial_put_dec_u64(uint64_t val); void serial_putchar(char c); uint64_t vmm_get_mapped_size(void); uint64_t vmm_translate(uint64_t virt);
+void idt_set_gate64(uint8_t num, uint64_t base, uint16_t sel, uint8_t flags);
