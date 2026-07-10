@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """BYO-OS Web Management Panel v13 - Robust serial + full API."""
 import socket, threading, time, json, urllib.parse, os, sys, traceback
 from http.server import HTTPServer, BaseHTTPRequestHandler
@@ -216,6 +216,9 @@ class H(BaseHTTPRequestHandler):
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.send_header("Access-Control-Allow-Origin", "*")
+                self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+                self.send_header("Pragma", "no-cache")
+                self.send_header("Expires", "0")
                 self.end_headers()
                 self.wfile.write(data)
             except Exception as e:
