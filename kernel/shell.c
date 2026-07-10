@@ -15475,6 +15475,62 @@ static void cmd_batch250_fargate2(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch250_lambda2(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch250_step_functions(int argc, char args[][CMD_MAX_LEN]);
 
+/* Batch 251: Networking Advanced */
+static void cmd_batch251_wireguard2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_openvpn2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_ipsec2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_bgp2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_ospf2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_isis2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_mpls2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_sdn2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_openflow2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_p4(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_netconf2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch251_yang(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 252: Storage and Database */
+static void cmd_batch252_ceph2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_gluster2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_minio3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_swift2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_mongo2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_couch2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_cassandra3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_scylla2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_neo4j2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_arango2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_dgraph2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch252_tigergraph(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 253: Frontend Frameworks */
+static void cmd_batch253_react2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_vue2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_angular2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_svelte2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_nextjs2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_nuxt2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_gatsby2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_astro2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_remix2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_solid2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_qwik2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch253_htmx2(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 254: Backend Frameworks */
+static void cmd_batch254_express2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_fastify2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_koa2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_nest2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_django3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_flask3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_rails3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_laravel3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_spring3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_actix2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_axum2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch254_fiber2(int argc, char args[][CMD_MAX_LEN]);
+
 
 
 
@@ -18795,6 +18851,25 @@ static const cmd_entry commands[] = {
     {"minikube3", cmd_batch250_minikube3}, {"microk8s", cmd_batch250_microk8s}, {"eks2", cmd_batch250_eks2},
     {"aks2", cmd_batch250_aks2}, {"gke2", cmd_batch250_gke2}, {"ecs2", cmd_batch250_ecs2},
     {"fargate2", cmd_batch250_fargate2}, {"lambda2", cmd_batch250_lambda2}, {"step-functions", cmd_batch250_step_functions},
+    {"wireguard2", cmd_batch251_wireguard2}, {"openvpn2", cmd_batch251_openvpn2}, {"ipsec2", cmd_batch251_ipsec2}, 
+    {"bgp2", cmd_batch251_bgp2}, {"ospf2", cmd_batch251_ospf2}, {"isis2", cmd_batch251_isis2}, 
+    {"mpls2", cmd_batch251_mpls2}, {"sdn2", cmd_batch251_sdn2}, {"openflow2", cmd_batch251_openflow2}, 
+    {"p4", cmd_batch251_p4}, {"netconf2", cmd_batch251_netconf2}, {"yang", cmd_batch251_yang}, 
+
+    {"ceph2", cmd_batch252_ceph2}, {"gluster2", cmd_batch252_gluster2}, {"minio3", cmd_batch252_minio3}, 
+    {"swift2", cmd_batch252_swift2}, {"mongo2", cmd_batch252_mongo2}, {"couch2", cmd_batch252_couch2}, 
+    {"cassandra3", cmd_batch252_cassandra3}, {"scylla2", cmd_batch252_scylla2}, {"neo4j2", cmd_batch252_neo4j2}, 
+    {"arango2", cmd_batch252_arango2}, {"dgraph2", cmd_batch252_dgraph2}, {"tigergraph", cmd_batch252_tigergraph}, 
+
+    {"react2", cmd_batch253_react2}, {"vue2", cmd_batch253_vue2}, {"angular2", cmd_batch253_angular2}, 
+    {"svelte2", cmd_batch253_svelte2}, {"nextjs2", cmd_batch253_nextjs2}, {"nuxt2", cmd_batch253_nuxt2}, 
+    {"gatsby2", cmd_batch253_gatsby2}, {"astro2", cmd_batch253_astro2}, {"remix2", cmd_batch253_remix2}, 
+    {"solid2", cmd_batch253_solid2}, {"qwik2", cmd_batch253_qwik2}, {"htmx2", cmd_batch253_htmx2}, 
+
+    {"express2", cmd_batch254_express2}, {"fastify2", cmd_batch254_fastify2}, {"koa2", cmd_batch254_koa2}, 
+    {"nest2", cmd_batch254_nest2}, {"django3", cmd_batch254_django3}, {"flask3", cmd_batch254_flask3}, 
+    {"rails3", cmd_batch254_rails3}, {"laravel3", cmd_batch254_laravel3}, {"spring3", cmd_batch254_spring3}, 
+    {"actix2", cmd_batch254_actix2}, {"axum2", cmd_batch254_axum2}, {"fiber2", cmd_batch254_fiber2}, 
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -46170,6 +46245,62 @@ static void cmd_batch250_ecs2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; 
 static void cmd_batch250_fargate2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fargate2: serverless compute for containers\n"); }
 static void cmd_batch250_lambda2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("lambda2: AWS serverless function compute service\n"); }
 static void cmd_batch250_step_functions(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("step-functions: AWS Step Functions workflow orchestration\n"); }
+
+/* Batch 251: Networking Advanced */
+static void cmd_batch251_wireguard2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("wireguard2: WireGuard2 VPN tunnel\n"); }
+static void cmd_batch251_openvpn2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("openvpn2: OpenVPN2 secure tunnel\n"); }
+static void cmd_batch251_ipsec2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("ipsec2: IPSec2 encrypted transport\n"); }
+static void cmd_batch251_bgp2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("bgp2: BGP2 border gateway routing\n"); }
+static void cmd_batch251_ospf2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("ospf2: OSPF2 link-state routing\n"); }
+static void cmd_batch251_isis2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("isis2: IS-IS2 intermediate system routing\n"); }
+static void cmd_batch251_mpls2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mpls2: MPLS2 label-switched paths\n"); }
+static void cmd_batch251_sdn2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("sdn2: SDN2 software-defined networking\n"); }
+static void cmd_batch251_openflow2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("openflow2: OpenFlow2 flow-based switching\n"); }
+static void cmd_batch251_p4(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("p4: P4 programmable data plane\n"); }
+static void cmd_batch251_netconf2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("netconf2: NetConf2 network configuration\n"); }
+static void cmd_batch251_yang(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("yang: YANG2 data modeling language\n"); }
+
+/* Batch 252: Storage and Database */
+static void cmd_batch252_ceph2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("ceph2: Ceph2 distributed storage cluster\n"); }
+static void cmd_batch252_gluster2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gluster2: Gluster2 distributed filesystem\n"); }
+static void cmd_batch252_minio3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("minio3: MinIO3 S3-compatible object store\n"); }
+static void cmd_batch252_swift2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("swift2: Swift2 OpenStack object storage\n"); }
+static void cmd_batch252_mongo2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mongo2: MongoDB2 document database\n"); }
+static void cmd_batch252_couch2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("couch2: CouchDB2 document store\n"); }
+static void cmd_batch252_cassandra3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("cassandra3: Cassandra3 wide-column store\n"); }
+static void cmd_batch252_scylla2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("scylla2: Scylla2 high-performance NoSQL\n"); }
+static void cmd_batch252_neo4j2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("neo4j2: Neo4j2 graph database\n"); }
+static void cmd_batch252_arango2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("arango2: ArangoDB2 multi-model database\n"); }
+static void cmd_batch252_dgraph2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("dgraph2: Dgraph2 distributed graph DB\n"); }
+static void cmd_batch252_tigergraph(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tigergraph: TigerGraph2 graph analytics\n"); }
+
+/* Batch 253: Frontend Frameworks */
+static void cmd_batch253_react2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("react2: React2 component library\n"); }
+static void cmd_batch253_vue2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("vue2: Vue2 progressive framework\n"); }
+static void cmd_batch253_angular2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("angular2: Angular2 platform framework\n"); }
+static void cmd_batch253_svelte2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("svelte2: Svelte2 compiled framework\n"); }
+static void cmd_batch253_nextjs2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nextjs2: NextJS2 React meta-framework\n"); }
+static void cmd_batch253_nuxt2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nuxt2: Nuxt2 Vue meta-framework\n"); }
+static void cmd_batch253_gatsby2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gatsby2: Gatsby2 static site generator\n"); }
+static void cmd_batch253_astro2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("astro2: Astro2 content framework\n"); }
+static void cmd_batch253_remix2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("remix2: Remix2 full-stack web\n"); }
+static void cmd_batch253_solid2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("solid2: Solid2 reactive UI\n"); }
+static void cmd_batch253_qwik2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("qwik2: Qwik2 resumable framework\n"); }
+static void cmd_batch253_htmx2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("htmx2: HTMX2 hypermedia toolkit\n"); }
+
+/* Batch 254: Backend Frameworks */
+static void cmd_batch254_express2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("express2: Express2 Node.js server\n"); }
+static void cmd_batch254_fastify2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fastify2: Fastify2 high-perf HTTP\n"); }
+static void cmd_batch254_koa2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("koa2: Koa2 middleware framework\n"); }
+static void cmd_batch254_nest2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nest2: NestJS2 enterprise Node\n"); }
+static void cmd_batch254_django3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("django3: Django3 Python web framework\n"); }
+static void cmd_batch254_flask3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("flask3: Flask3 Python micro framework\n"); }
+static void cmd_batch254_rails3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("rails3: Rails3 Ruby on Rails\n"); }
+static void cmd_batch254_laravel3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("laravel3: Laravel3 PHP framework\n"); }
+static void cmd_batch254_spring3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("spring3: Spring3 Java enterprise\n"); }
+static void cmd_batch254_actix2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("actix2: Actix2 Rust actor framework\n"); }
+static void cmd_batch254_axum2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("axum2: Axum2 Rust async runtime\n"); }
+static void cmd_batch254_fiber2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fiber2: Fiber2 Go web framework\n"); }
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
