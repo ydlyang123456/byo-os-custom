@@ -1,4 +1,4 @@
-﻿/* BYO-OS - Master Kernel Header (x86_64) */
+/* BYO-OS - Master Kernel Header (x86_64) */
 #ifndef KERNEL_H
 #define KERNEL_H
 #include <stdint.h>
@@ -228,3 +228,21 @@ void panel_network(void); void panel_settings(void);
 #endif
 /* String formatting */
 int snprintf(char* str, size_t size, const char* format, ...);
+/* ===== ATA Disk Driver ===== */
+int ata_identify(void);
+int ata_read_sectors(uint32_t lba, uint8_t count, uint16_t* buffer);
+int ata_write_sectors(uint32_t lba, uint8_t count, const uint16_t* buffer);
+int ata_is_present(void);
+uint32_t ata_get_sectors(void);
+const char* ata_get_model(void);
+int ata_get_reads(void);
+int ata_get_writes(void);
+void ata_init(void);
+
+
+/* ===== CMOS/RTC Driver ===== */
+void rtc_init(void);
+void rtc_get_time(int* hour, int* min, int* sec);
+void rtc_get_date(int* year, int* mon, int* day);
+int rtc_is_initialized(void);
+
