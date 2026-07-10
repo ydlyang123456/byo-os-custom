@@ -1,4 +1,4 @@
-
+﻿
 /*
  * BYO-OS Shell - Complete implementation with 58 commands
  * Kernel API: vga, serial, string, fs, task, timer, pmm, heap, net, user, journal, io
@@ -15610,6 +15610,56 @@ static void cmd_batch258_mqtt3(int argc, char args[][CMD_MAX_LEN]);
 
 
 
+
+/* Batches 259-262: Observability, DevOps, APIs, VCS */
+static void cmd_batch259_jaeger4(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_zipkin3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_tempo3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_loki3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_prometheus3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_grafana3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_thanos2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_mimir2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_cortex2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_alertmanager2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_opentelemetry2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch259_otel_collector(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_helm3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_kustomize3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_skaffold3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_tilt3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_devspace3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_telegraf2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_influxdb2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_chronograf2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_kapacitor2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_taskfile(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_justfile(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch260_act3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_openapi_gen(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_swagger_ui(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_redocly(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_graphql2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_apollo2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_hasura2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_postgraphile2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_strapi3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_directus2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_pocketbase2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_appwrite2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch261_supabase3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_git2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_gh2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_glab2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_jj2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_sapling2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_pijul2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_fossil2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_lazygit2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_tig2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_gitui2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_delta2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch262_bat2(int argc, char args[][CMD_MAX_LEN]);
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -18950,6 +19000,27 @@ static const cmd_entry commands[] = {
     {"activemq2", cmd_batch258_activemq2}, {"nservicebus2", cmd_batch258_nservicebus2}, {"mass-transit2", cmd_batch258_masstransit2},
     {"easyNetQ2", cmd_batch258_easyNetQ2}, {"rabbitmq3", cmd_batch258_rabbitmq3}, {"redis-streams", cmd_batch258_redis_streams},
     {"nats-streaming", cmd_batch258_nats_streaming}, {"zeromq2", cmd_batch258_zeromq2}, {"mqtt3", cmd_batch258_mqtt3},
+
+    /* Batch 259: Observability Stack */
+    {"jaeger4", cmd_batch259_jaeger4}, {"zipkin3", cmd_batch259_zipkin3}, {"tempo3", cmd_batch259_tempo3},
+    {"loki3", cmd_batch259_loki3}, {"prometheus3", cmd_batch259_prometheus3}, {"grafana3", cmd_batch259_grafana3},
+    {"thanos2", cmd_batch259_thanos2}, {"mimir2", cmd_batch259_mimir2}, {"cortex2", cmd_batch259_cortex2},
+    {"alertmanager2", cmd_batch259_alertmanager2}, {"opentelemetry2", cmd_batch259_opentelemetry2}, {"otel-collector", cmd_batch259_otel_collector},
+    /* Batch 260: DevOps Tooling */
+    {"helm3", cmd_batch260_helm3}, {"kustomize3", cmd_batch260_kustomize3}, {"skaffold3", cmd_batch260_skaffold3},
+    {"tilt3", cmd_batch260_tilt3}, {"devspace3", cmd_batch260_devspace3}, {"telegraf2", cmd_batch260_telegraf2},
+    {"influxdb2", cmd_batch260_influxdb2}, {"chronograf2", cmd_batch260_chronograf2}, {"kapacitor2", cmd_batch260_kapacitor2},
+    {"taskfile", cmd_batch260_taskfile}, {"justfile", cmd_batch260_justfile}, {"act3", cmd_batch260_act3},
+    /* Batch 261: API Tooling */
+    {"openapi-gen", cmd_batch261_openapi_gen}, {"swagger-ui", cmd_batch261_swagger_ui}, {"redocly", cmd_batch261_redocly},
+    {"graphql2", cmd_batch261_graphql2}, {"apollo2", cmd_batch261_apollo2}, {"hasura2", cmd_batch261_hasura2},
+    {"postgraphile2", cmd_batch261_postgraphile2}, {"strapi3", cmd_batch261_strapi3}, {"directus2", cmd_batch261_directus2},
+    {"pocketbase2", cmd_batch261_pocketbase2}, {"appwrite2", cmd_batch261_appwrite2}, {"supabase3", cmd_batch261_supabase3},
+    /* Batch 262: Version Control */
+    {"git2", cmd_batch262_git2}, {"gh2", cmd_batch262_gh2}, {"glab2", cmd_batch262_glab2},
+    {"jj2", cmd_batch262_jj2}, {"sapling2", cmd_batch262_sapling2}, {"pijul2", cmd_batch262_pijul2},
+    {"fossil2", cmd_batch262_fossil2}, {"lazygit2", cmd_batch262_lazygit2}, {"tig2", cmd_batch262_tig2},
+    {"gitui2", cmd_batch262_gitui2}, {"delta2", cmd_batch262_delta2}, {"bat2", cmd_batch262_bat2},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -46436,6 +46507,55 @@ static void cmd_batch258_redis_streams(int argc, char args[][CMD_MAX_LEN]) { (vo
 static void cmd_batch258_nats_streaming(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nats-streaming: NATS Streaming events\n"); }
 static void cmd_batch258_zeromq2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("zeromq2: ZeroMQ2 messaging library\n"); }
 static void cmd_batch258_mqtt3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mqtt3: MQTT3 IoT messaging protocol\n"); }
+
+static void cmd_batch259_jaeger4(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("jaeger4: Jaeger4 distributed tracing\n"); }
+static void cmd_batch259_zipkin3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("zipkin3: Zipkin3 distributed tracing\n"); }
+static void cmd_batch259_tempo3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tempo3: Tempo3 trace aggregation\n"); }
+static void cmd_batch259_loki3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("loki3: Loki3 log aggregation\n"); }
+static void cmd_batch259_prometheus3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("prometheus3: Prometheus3 monitoring\n"); }
+static void cmd_batch259_grafana3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("grafana3: Grafana3 dashboards\n"); }
+static void cmd_batch259_thanos2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("thanos2: Thanos2 long-term Prometheus\n"); }
+static void cmd_batch259_mimir2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mimir2: Mimir2 horizontally scalable Prometheus\n"); }
+static void cmd_batch259_cortex2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("cortex2: Cortex2 multi-tenant Prometheus\n"); }
+static void cmd_batch259_alertmanager2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("alertmanager2: Alertmanager2 alerting\n"); }
+static void cmd_batch259_opentelemetry2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("opentelemetry2: OpenTelemetry2 instrumentation\n"); }
+static void cmd_batch259_otel_collector(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("otel-collector: OpenTelemetry Collector agent\n"); }
+static void cmd_batch260_helm3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("helm3: Helm3 Kubernetes package manager\n"); }
+static void cmd_batch260_kustomize3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("kustomize3: Kustomize3 Kubernetes config\n"); }
+static void cmd_batch260_skaffold3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("skaffold3: Skaffold3 dev workflow\n"); }
+static void cmd_batch260_tilt3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tilt3: Tilt3 local dev environment\n"); }
+static void cmd_batch260_devspace3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("devspace3: DevSpace3 dev CLI\n"); }
+static void cmd_batch260_telegraf2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("telegraf2: Telegraf2 metrics agent\n"); }
+static void cmd_batch260_influxdb2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("influxdb2: InfluxDB2 time-series database\n"); }
+static void cmd_batch260_chronograf2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("chronograf2: Chronograf2 visualization\n"); }
+static void cmd_batch260_kapacitor2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("kapacitor2: Kapacitor2 stream processing\n"); }
+static void cmd_batch260_taskfile(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("taskfile: Taskfile task runner\n"); }
+static void cmd_batch260_justfile(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("justfile: Justfile command runner\n"); }
+static void cmd_batch260_act3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("act3: Act3 GitHub Actions runner\n"); }
+static void cmd_batch261_openapi_gen(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("openapi-gen: OpenAPI code generator\n"); }
+static void cmd_batch261_swagger_ui(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("swagger-ui: SwaggerUI API docs\n"); }
+static void cmd_batch261_redocly(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("redocly: Redocly API documentation\n"); }
+static void cmd_batch261_graphql2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("graphql2: GraphQL2 query language\n"); }
+static void cmd_batch261_apollo2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("apollo2: Apollo2 GraphQL platform\n"); }
+static void cmd_batch261_hasura2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("hasura2: Hasura2 GraphQL engine\n"); }
+static void cmd_batch261_postgraphile2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("postgraphile2: PostGraphile2 GraphQL API\n"); }
+static void cmd_batch261_strapi3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("strapi3: Strapi3 headless CMS\n"); }
+static void cmd_batch261_directus2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("directus2: Directus2 headless CMS\n"); }
+static void cmd_batch261_pocketbase2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pocketbase2: PocketBase2 backend\n"); }
+static void cmd_batch261_appwrite2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("appwrite2: Appwrite2 backend platform\n"); }
+static void cmd_batch261_supabase3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("supabase3: Supabase3 backend platform\n"); }
+static void cmd_batch262_git2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("git2: Git2 version control\n"); }
+static void cmd_batch262_gh2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gh2: GitHub2 CLI\n"); }
+static void cmd_batch262_glab2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("glab2: GitLab2 CLI\n"); }
+static void cmd_batch262_jj2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("jj2: Jujutsu2 VCS\n"); }
+static void cmd_batch262_sapling2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("sapling2: Sapling2 VCS\n"); }
+static void cmd_batch262_pijul2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("pijul2: Pijul2 patch-based VCS\n"); }
+static void cmd_batch262_fossil2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fossil2: Fossil2 VCS\n"); }
+static void cmd_batch262_lazygit2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("lazygit2: Lazygit2 TUI git\n"); }
+static void cmd_batch262_tig2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tig2: Tig2 git TUI\n"); }
+static void cmd_batch262_gitui2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gitui2: Gitui2 git TUI\n"); }
+static void cmd_batch262_delta2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("delta2: Delta2 git diff pager\n"); }
+static void cmd_batch262_bat2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("bat2: Bat2 cat replacement\n"); }
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
