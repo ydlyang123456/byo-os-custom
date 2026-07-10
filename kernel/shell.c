@@ -15419,6 +15419,61 @@ static void cmd_batch246_chainlink(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch246_uniswap(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_batch246_opensea(int argc, char args[][CMD_MAX_LEN]);
 
+/* Batch 247: Security Tools */
+static void cmd_batch247_nmap2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_masscan2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_zap2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_burp2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_sqlmap2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_nikto2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_metasploit2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_wireshark2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_tcpdump2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_snort2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_suricata2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch247_ossec(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 248: CI/CD and Build */
+static void cmd_batch248_jenkins2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_github2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_gitlab2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_drone3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_concourse2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_argocd3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_flux3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_tekton3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_buildkite(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_circleci(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_travis2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch248_azure_devops(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 249: Data Engineering */
+static void cmd_batch249_spark2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_hadoop2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_flink2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_storm2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_kafka3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_beam2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_airflow2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_prefect2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_dagster(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_luigi(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_mage2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch249_meltano(int argc, char args[][CMD_MAX_LEN]);
+
+/* Batch 250: Edge and IoT */
+static void cmd_batch250_k3s2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_k3d2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_kind2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_minikube3(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_microk8s(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_eks2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_aks2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_gke2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_ecs2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_fargate2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_lambda2(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_batch250_step_functions(int argc, char args[][CMD_MAX_LEN]);
 
 
 
@@ -18717,6 +18772,29 @@ static const cmd_entry commands[] = {
     {"remix", cmd_batch246_remix}, {"alchemy", cmd_batch246_alchemy}, {"infura", cmd_batch246_infura},
     {"moralis", cmd_batch246_moralis}, {"quicknode", cmd_batch246_quicknode}, {"the-graph", cmd_batch246_the_graph},
     {"chainlink", cmd_batch246_chainlink}, {"uniswap", cmd_batch246_uniswap}, {"opensea", cmd_batch246_opensea},
+/* Batch 247: Security Tools */
+    {"nmap2", cmd_batch247_nmap2}, {"masscan2", cmd_batch247_masscan2}, {"zap2", cmd_batch247_zap2},
+    {"burp2", cmd_batch247_burp2}, {"sqlmap2", cmd_batch247_sqlmap2}, {"nikto2", cmd_batch247_nikto2},
+    {"metasploit2", cmd_batch247_metasploit2}, {"wireshark2", cmd_batch247_wireshark2}, {"tcpdump2", cmd_batch247_tcpdump2},
+    {"snort2", cmd_batch247_snort2}, {"suricata2", cmd_batch247_suricata2}, {"ossec", cmd_batch247_ossec},
+
+    /* Batch 248: CI/CD and Build */
+    {"jenkins2", cmd_batch248_jenkins2}, {"github2", cmd_batch248_github2}, {"gitlab2", cmd_batch248_gitlab2},
+    {"drone3", cmd_batch248_drone3}, {"concourse2", cmd_batch248_concourse2}, {"argocd3", cmd_batch248_argocd3},
+    {"flux3", cmd_batch248_flux3}, {"tekton3", cmd_batch248_tekton3}, {"buildkite", cmd_batch248_buildkite},
+    {"circleci", cmd_batch248_circleci}, {"travis2", cmd_batch248_travis2}, {"azure-devops", cmd_batch248_azure_devops},
+
+    /* Batch 249: Data Engineering */
+    {"spark2", cmd_batch249_spark2}, {"hadoop2", cmd_batch249_hadoop2}, {"flink2", cmd_batch249_flink2},
+    {"storm2", cmd_batch249_storm2}, {"kafka3", cmd_batch249_kafka3}, {"beam2", cmd_batch249_beam2},
+    {"airflow2", cmd_batch249_airflow2}, {"prefect2", cmd_batch249_prefect2}, {"dagster", cmd_batch249_dagster},
+    {"luigi", cmd_batch249_luigi}, {"mage2", cmd_batch249_mage2}, {"meltano", cmd_batch249_meltano},
+
+    /* Batch 250: Edge and IoT */
+    {"k3s2", cmd_batch250_k3s2}, {"k3d2", cmd_batch250_k3d2}, {"kind2", cmd_batch250_kind2},
+    {"minikube3", cmd_batch250_minikube3}, {"microk8s", cmd_batch250_microk8s}, {"eks2", cmd_batch250_eks2},
+    {"aks2", cmd_batch250_aks2}, {"gke2", cmd_batch250_gke2}, {"ecs2", cmd_batch250_ecs2},
+    {"fargate2", cmd_batch250_fargate2}, {"lambda2", cmd_batch250_lambda2}, {"step-functions", cmd_batch250_step_functions},
 };
 
 /* ===== Batch 46: System Enhancements ===== */
@@ -46037,6 +46115,61 @@ static void cmd_batch246_the_graph(int argc, char args[][CMD_MAX_LEN]) { (void)a
 static void cmd_batch246_chainlink(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("chainlink: decentralized oracle network\n"); }
 static void cmd_batch246_uniswap(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("uniswap: decentralized token exchange protocol\n"); }
 static void cmd_batch246_opensea(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("opensea: NFT marketplace protocol\n"); }
+/* Batch 247: Security Tools */
+static void cmd_batch247_nmap2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nmap2: network exploration and port scanning tool\n"); }
+static void cmd_batch247_masscan2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("masscan2: fastest Internet port scanner\n"); }
+static void cmd_batch247_zap2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("zap2: OWASP Zed Attack Proxy for web app security\n"); }
+static void cmd_batch247_burp2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("burp2: Burp Suite web vulnerability scanner\n"); }
+static void cmd_batch247_sqlmap2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("sqlmap2: automatic SQL injection tool\n"); }
+static void cmd_batch247_nikto2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("nikto2: web server vulnerability scanner\n"); }
+static void cmd_batch247_metasploit2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("metasploit2: penetration testing framework\n"); }
+static void cmd_batch247_wireshark2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("wireshark2: network protocol analyzer\n"); }
+static void cmd_batch247_tcpdump2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tcpdump2: powerful command-line packet analyzer\n"); }
+static void cmd_batch247_snort2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("snort2: network intrusion detection system\n"); }
+static void cmd_batch247_suricata2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("suricata2: high-performance network threat detection\n"); }
+static void cmd_batch247_ossec(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("ossec: open-source host-based intrusion detection\n"); }
+
+/* Batch 248: CI/CD and Build */
+static void cmd_batch248_jenkins2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("jenkins2: open-source automation server for CI/CD\n"); }
+static void cmd_batch248_github2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("github2: GitHub Actions CI/CD platform\n"); }
+static void cmd_batch248_gitlab2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gitlab2: GitLab CI/CD pipeline automation\n"); }
+static void cmd_batch248_drone3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("drone3: container-native CI/CD platform\n"); }
+static void cmd_batch248_concourse2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("concourse2: continuous pipeline-based CI/CD system\n"); }
+static void cmd_batch248_argocd3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("argocd3: GitOps continuous delivery for Kubernetes\n"); }
+static void cmd_batch248_flux3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("flux3: GitOps toolkit for Kubernetes continuous delivery\n"); }
+static void cmd_batch248_tekton3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("tekton3: Kubernetes-native CI/CD building blocks\n"); }
+static void cmd_batch248_buildkite(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("buildkite: scalable self-hosted CI/CD platform\n"); }
+static void cmd_batch248_circleci(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("circleci: cloud-based CI/CD automation platform\n"); }
+static void cmd_batch248_travis2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("travis2: hosted continuous integration service\n"); }
+static void cmd_batch248_azure_devops(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("azure-devops: Microsoft Azure DevOps CI/CD pipelines\n"); }
+
+/* Batch 249: Data Engineering */
+static void cmd_batch249_spark2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("spark2: Apache Spark unified analytics engine\n"); }
+static void cmd_batch249_hadoop2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("hadoop2: Apache Hadoop distributed data processing\n"); }
+static void cmd_batch249_flink2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("flink2: Apache Flink stream processing framework\n"); }
+static void cmd_batch249_storm2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("storm2: Apache Storm real-time computation system\n"); }
+static void cmd_batch249_kafka3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("kafka3: Apache Kafka distributed event streaming\n"); }
+static void cmd_batch249_beam2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("beam2: Apache Beam unified batch and stream processing\n"); }
+static void cmd_batch249_airflow2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("airflow2: Apache Airflow workflow orchestration platform\n"); }
+static void cmd_batch249_prefect2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("prefect2: modern dataflow automation framework\n"); }
+static void cmd_batch249_dagster(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("dagster: data orchestrator for analytics and ML\n"); }
+static void cmd_batch249_luigi(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("luigi: pipeline automation and dependency management\n"); }
+static void cmd_batch249_mage2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("mage2: open-source data pipeline tool\n"); }
+static void cmd_batch249_meltano(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("meltano: open-source ELT data integration platform\n"); }
+
+/* Batch 250: Edge and IoT */
+static void cmd_batch250_k3s2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("k3s2: lightweight Kubernetes for edge computing\n"); }
+static void cmd_batch250_k3d2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("k3d2: k3s in Docker for local development\n"); }
+static void cmd_batch250_kind2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("kind2: Kubernetes in Docker for local testing\n"); }
+static void cmd_batch250_minikube3(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("minikube3: local Kubernetes cluster for development\n"); }
+static void cmd_batch250_microk8s(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("microk8s: lightweight Kubernetes from Canonical\n"); }
+static void cmd_batch250_eks2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("eks2: Amazon Elastic Kubernetes Service\n"); }
+static void cmd_batch250_aks2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("aks2: Azure Kubernetes Service managed platform\n"); }
+static void cmd_batch250_gke2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("gke2: Google Kubernetes Engine managed platform\n"); }
+static void cmd_batch250_ecs2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("ecs2: Amazon Elastic Container Service\n"); }
+static void cmd_batch250_fargate2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("fargate2: serverless compute for containers\n"); }
+static void cmd_batch250_lambda2(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("lambda2: AWS serverless function compute service\n"); }
+static void cmd_batch250_step_functions(int argc, char args[][CMD_MAX_LEN]) { (void)argc; (void)args; vga_puts("step-functions: AWS Step Functions workflow orchestration\n"); }
 void shell_run(void) {
     vga_clear();
     vga_set_color(VGA_LIGHT_GREEN, VGA_BLACK);
