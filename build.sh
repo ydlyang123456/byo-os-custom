@@ -17,7 +17,7 @@ echo "=== Compile x86_64 ==="
 CFLAGS="-m64 -ffreestanding -nostdlib -nostartfiles -nodefaultlibs -fno-builtin -fno-stack-protector -fno-exceptions -mcmodel=large -fno-pic -fno-pie -mno-red-zone -Wno-unused-function -Wno-unused-variable -Wno-pointer-sign -Iinclude"
 
 SOURCES=""
-for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c kernel/journal.c kernel/shell.c kernel/ata.c kernel/rtc.c; do
+for f in kernel/string.c kernel/font.c kernel/vga.c kernel/serial.c kernel/fs.c kernel/journal.c kernel/shell.c kernel/ata.c kernel/rtc.c kernel/pci.c; do
     [ -f "$f" ] && SOURCES="$SOURCES $f"
 done
 

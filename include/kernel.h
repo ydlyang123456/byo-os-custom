@@ -10,6 +10,8 @@ static inline void outb(uint16_t port, uint8_t val) { asm volatile("outb %0, %1"
 static inline uint8_t inb(uint16_t port) { uint8_t ret; asm volatile("inb %1, %0" : "=a"(ret) : "Nd"(port)); return ret; }
 static inline void outw(uint16_t port, uint16_t val) { asm volatile("outw %0, %1" : : "a"(val), "Nd"(port)); }
 static inline uint16_t inw(uint16_t port) { uint16_t ret; asm volatile("inw %1, %0" : "=a"(ret) : "Nd"(port)); return ret; }
+static inline void outl(uint16_t port, uint32_t val) { __asm__ volatile("outl %0, %1" : : "a"(val), "Nd"(port)); }
+static inline uint32_t inl(uint16_t port) { uint32_t ret; __asm__ volatile("inl %1, %0" : "=a"(ret) : "Nd"(port)); return ret; }
 static inline void io_wait(void) { outb(0x80, 0); }
 
 /* ===== String Utilities ===== */
@@ -20,6 +22,7 @@ char* strcpy(char* dest, const char* src);
 char* strncpy(char* dest, const char* src, size_t n);
 char* strcat(char* dest, const char* src);
 int sprintf(char *buf, const char *fmt, ...);
+int snprintf(char* str, size_t size, const char* format, ...);
 int atoi(const char* str);
 void itoa(int value, char* str, int base);
 void memset(void* dest, uint8_t val, size_t count);
@@ -48,7 +51,7 @@ typedef struct {
     uint8_t framebuffer_bpp, framebuffer_type;
 } __attribute__((packed)) multiboot_info_t;
 
-/* ===== 64-bit Register State (for ISR/IRQ) ===== */
+/* ===== 64-bit Register State ===== */
 typedef struct {
     uint64_t r15, r14, r13, r12, r11, r10, r9, r8;
     uint64_t rdi, rsi, rbp, rdx, rcx, rbx, rax;
@@ -75,17 +78,17 @@ int vga_set_mode_13h(void); void vga_set_mode_text(void);
 uint8_t* vga_get_framebuffer(void); uint16_t vga_get_width(void);
 uint16_t vga_get_height(void); uint16_t vga_get_pitch(void);
 void vga_putpixel(int x, int y, uint8_t color); void vga_fill_rect(int x, int y, int w, int h, uint8_t color);
+void vga_write_cell(int x, int y, char c, uint8_t color);
 
 /* ===== Desktop/GFX ===== */
 void gfx_draw_char(int x, int y, char ch, uint8_t color);
 void gfx_puts(int x, int y, const char* s, uint8_t color);
 void gfx_putdec(int x, int y, int val, uint8_t color);
-void panel_run(void); void vga_write_cell(int x, int y, char c, uint8_t color);
 
 /* ===== GDT ===== */
 void gdt_init(void);
 
-/* ===== IDT Entry (64-bit) ===== */
+/* ===== IDT ===== */
 typedef struct {
     uint16_t base_lo;
     uint16_t sel;
@@ -95,12 +98,10 @@ typedef struct {
     uint32_t base_upper;
     uint32_t reserved;
 } __attribute__((packed)) idt_entry_t;
-
 typedef struct {
     uint16_t limit;
     uint64_t base;
 } __attribute__((packed)) idt_ptr_t;
-/* ===== IDT ===== */
 void idt_init(void); void idt_set_gate(uint8_t num, uint32_t base, uint16_t sel, uint8_t flags);
 void isr_handler(registers_t* regs); void irq_handler(registers_t* regs);
 void irq_init(void);
@@ -121,14 +122,13 @@ uint64_t pmm_alloc_page_64(void);
 void pmm_free_page_64(uint64_t page);
 uint64_t pmm_get_free_pages_64(void);
 uint64_t pmm_get_total_pages_64(void);
-/* Legacy 32-bit stubs */
 void pmm_init(uint32_t mem_size);
 void* pmm_alloc_page(void);
 void pmm_free_page(void* page);
 uint32_t pmm_get_free_pages(void);
 uint32_t pmm_get_total_pages(void);
 
-/* ===== Heap (64-bit) ===== */
+/* ===== Heap ===== */
 void kmalloc_64_init(void);
 void* kmalloc_64(size_t size);
 void kfree_64(void* ptr);
@@ -225,9 +225,6 @@ void panel_dashboard(void); void panel_monitor(void);
 void panel_filemanager(void); void panel_users(void);
 void panel_network(void); void panel_settings(void);
 
-#endif
-/* String formatting */
-int snprintf(char* str, size_t size, const char* format, ...);
 /* ===== ATA Disk Driver ===== */
 int ata_identify(void);
 int ata_read_sectors(uint32_t lba, uint8_t count, uint16_t* buffer);
@@ -239,10 +236,30 @@ int ata_get_reads(void);
 int ata_get_writes(void);
 void ata_init(void);
 
-
 /* ===== CMOS/RTC Driver ===== */
 void rtc_init(void);
 void rtc_get_time(int* hour, int* min, int* sec);
 void rtc_get_date(int* year, int* mon, int* day);
 int rtc_is_initialized(void);
 
+/* ===== PCI Bus Driver ===== */
+typedef struct {
+    uint8_t bus, slot, func;
+    uint16_t vendor_id, device_id;
+    uint8_t class_code, subclass, prog_if;
+    uint8_t irq;
+    uint32_t bar0, bar1, bar2, bar3, bar4, bar5;
+    int valid;
+} pci_device_t;
+int pci_scan(void);
+int pci_get_count(void);
+const pci_device_t* pci_get_device(int index);
+int pci_find_device(uint16_t vendor_id, uint16_t device_id);
+int pci_find_class(uint8_t class_code, uint8_t subclass);
+void pci_enable_bus_master(int index);
+void pci_enable_irq(int index);
+uint16_t pci_get_io_base(int index);
+void pci_print_devices(void);
+void pci_init(void);
+
+#endif
