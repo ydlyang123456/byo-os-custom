@@ -12,4 +12,14 @@ void serial_putchar(char c) {
 }
 void serial_puts(const char* s) { while (*s) { serial_putchar(*s == '\n' ? '\r' : *s); s++; } }
 int serial_has_input(void) { return inb(0x3F8 + 5) & 1; }
-int serial_getchar(void) { return serial_has_input() ? inb(0x3F8) : -1; }
+int serial_getchar(void) { return serial_has_input() ? inb(0x3F8) : -1; }/* Missing functions referenced by vbe.c */
+void serial_put_hex(uint32_t val) {
+    char buf[12];
+    itoa(val, buf, 16);
+    serial_puts(buf);
+}
+void serial_put_dec(uint32_t val) {
+    char buf[12];
+    itoa(val, buf, 10);
+    serial_puts(buf);
+}

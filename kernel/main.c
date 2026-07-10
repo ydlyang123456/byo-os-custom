@@ -134,6 +134,8 @@ void kernel_main(uint32_t magic, void* mbi_ptr) {
     tcpip_init();
     sound_init();
     sound_play_melody();
+    usb_init();
+    vbe_init();
     journal_append(0, "Network initialized");
     serial_puts("[BOOT] Net OK\n");
 

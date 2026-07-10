@@ -308,4 +308,31 @@ void gfx_clear_area(int x, int y, int w, int h);
 void gfx_scroll_up(int lines);
 void gfx_demo(void);
 
+/* ===== USB Controller Driver ===== */
+void usb_init(void);
+int usb_scan_controllers(void);
+void usb_print_controllers(void);
+int usb_get_controller_count(void);
+
+/* ===== VBE Graphics Mode ===== */
+int vbe_init(void);
+int vbe_set_mode(uint16_t mode);
+void vbe_list_modes(void);
+int vbe_set_mode_1024x768(void);
+int vbe_set_mode_800x600(void);
+int vbe_set_mode_640x480(void);
+void vbe_putpixel(int x, int y, uint32_t color);
+void vbe_fill_rect(int x, int y, int w, int h, uint32_t color);
+void vbe_draw_char(int x, int y, char c, uint32_t fg, uint32_t bg);
+void vbe_puts(int x, int y, const char* s, uint32_t color);
+int vbe_get_mode_info(uint16_t mode, void* info);
+int vbe_get_controller_info(void* info);
+uint32_t vbe_get_width(void);
+uint32_t vbe_get_height(void);
+uint32_t vbe_get_bpp(void);
+void* vbe_get_framebuffer(void);
+int vbe_is_active(void);
+
 #endif
+
+
