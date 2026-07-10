@@ -16044,6 +16044,151 @@ static void cmd_triton294(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_onnx294(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_tensorrt294(int argc, char args[][CMD_MAX_LEN]);
 static void cmd_core294ml(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_godot295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unity295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_unreal295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_blender295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gimp295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_inkscape295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_krita295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_darktable295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rawtherapee295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_opencv295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vulkan295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_opengl295(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scipy296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sympy296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_matplotlib296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_plotly296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bokeh296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dask296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pyarrow296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_polars296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rapids296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jax296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_flax296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_haiku296(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ffmpeg297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sox297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_audacity297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ardour297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lmms297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_musescore297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fluidsynth297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timidity297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pipewire297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pulseaudio297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_alsa297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_jack297(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mpv298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vlc298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_obs298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kdenlive298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_shotcut298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_davinci298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_synfig298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tupi298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_mlt298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gstreamer298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_librav1e298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_svt298(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apt299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_yum299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dnf299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pacman299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_zypper299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_emerge299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_snap299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_flatpak299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_brew299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nix299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_conda299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pip299(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gcc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_clang300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tcc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_dmc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_pascal300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fpc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_javac300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_kotlinc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scalac300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_swc300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_esbuild300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sass300(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ftp2301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sftp301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_rsync2301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scp2301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_aria2c301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_curl2301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wget2301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_axel301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lftp301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nntp301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_irc301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_xmpp301(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openssl2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gpg2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ssh2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scp2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sftp2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keychain2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keyctl2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_seahorse2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_keybase2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gocryptfs2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_veracrypt2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cryptsetup2302(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_git303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_svn303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hg303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bzr303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cvs303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fossil303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_darcs303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_monotone303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_veracity303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tfs303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_perforce303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_clearcase303(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_systemd304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_sysvinit304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openrc304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_runit304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_s6304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_nginx2304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_apache2304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_lighttpd304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_cherokee304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_tengine304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_openresty304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_h2o304(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_aws2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_gcloud2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_azure2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_do2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_linode2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vultr2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_hetzner2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ovh2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_scaleway2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_koyeb2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_render2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_fly2305(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_todo2306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_taskwarrior306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bubblewrap306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_timers306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_chaos306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_litmus306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_k6306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_locust306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_vegeta306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_wrk306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_ab306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_siege306(int argc, char args[][CMD_MAX_LEN]);
+static void cmd_bombardier306(int argc, char args[][CMD_MAX_LEN]);
 static const cmd_entry commands[] = {
 
     /* Basic */
@@ -19405,7 +19550,67 @@ static const cmd_entry commands[] = {
     {"jj2", cmd_batch262_jj2}, {"sapling2", cmd_batch262_sapling2}, {"pijul2", cmd_batch262_pijul2},
     {"fossil2", cmd_batch262_fossil2}, {"lazygit2", cmd_batch262_lazygit2}, {"tig2", cmd_batch262_tig2},
     {"gitui2", cmd_batch262_gitui2}, {"delta2", cmd_batch262_delta2}, {"bat2", cmd_batch262_bat2},
-    /* Batch 263: Network Utilities */    /* Batch 291: Networking & Proxy */
+    /* Batch 263: Network Utilities */    /* Batch 303: Version Control */
+    {"git3", cmd_git303}, {"svn", cmd_svn303}, {"hg", cmd_hg303},
+    {"bzr", cmd_bzr303}, {"cvs", cmd_cvs303}, {"fossil2", cmd_fossil303},
+    {"darcs", cmd_darcs303}, {"monotone", cmd_monotone303}, {"veracity", cmd_veracity303},
+    {"tfs", cmd_tfs303}, {"p4", cmd_perforce303}, {"cleartool", cmd_clearcase303},
+    /* Batch 304: System Init & Web */
+    {"systemd2", cmd_systemd304}, {"sysvinit", cmd_sysvinit304}, {"openrc", cmd_openrc304},
+    {"runit", cmd_runit304}, {"s6", cmd_s6304}, {"nginx3", cmd_nginx2304},
+    {"apache3", cmd_apache2304}, {"lighttpd", cmd_lighttpd304}, {"cherokee", cmd_cherokee304},
+    {"tengine", cmd_tengine304}, {"openresty", cmd_openresty304}, {"h2o", cmd_h2o304},
+    /* Batch 305: Cloud SDK */
+    {"aws2", cmd_aws2305}, {"gcloud2", cmd_gcloud2305}, {"azure2", cmd_azure2305},
+    {"doctl", cmd_do2305}, {"linode", cmd_linode2305}, {"vultr", cmd_vultr2305},
+    {"hcloud", cmd_hetzner2305}, {"ovh", cmd_ovh2305}, {"scw", cmd_scaleway2305},
+    {"koyeb", cmd_koyeb2305}, {"render", cmd_render2305}, {"flyctl", cmd_fly2305},
+    /* Batch 306: Testing & Load */
+    {"todo", cmd_todo2306}, {"task", cmd_taskwarrior306}, {"timers", cmd_timers306},
+    {"chaos", cmd_chaos306}, {"litmus", cmd_litmus306}, {"k6", cmd_k6306},
+    {"locust", cmd_locust306}, {"vegeta", cmd_vegeta306}, {"wrk", cmd_wrk306},
+    {"ab", cmd_ab306}, {"siege", cmd_siege306}, {"bombardier", cmd_bombardier306},
+    /* Batch 299: Package Managers */
+    {"apt", cmd_apt299}, {"yum", cmd_yum299}, {"dnf", cmd_dnf299},
+    {"pacman", cmd_pacman299}, {"zypper", cmd_zypper299}, {"emerge", cmd_emerge299},
+    {"snap", cmd_snap299}, {"flatpak", cmd_flatpak299}, {"brew", cmd_brew299},
+    {"nix", cmd_nix299}, {"conda", cmd_conda299}, {"pip", cmd_pip299},
+    /* Batch 300: Compilers & Interpreters */
+    {"gcc2", cmd_gcc300}, {"clang", cmd_clang300}, {"tcc", cmd_tcc300},
+    {"dmc", cmd_dmc300}, {"fpc", cmd_fpc300}, {"pascal", cmd_pascal300},
+    {"javac", cmd_javac300}, {"kotlinc", cmd_kotlinc300}, {"scalac", cmd_scalac300},
+    {"swc", cmd_swc300}, {"esbuild", cmd_esbuild300}, {"sass", cmd_sass300},
+    /* Batch 301: Network Protocols */
+    {"ftp2", cmd_ftp2301}, {"sftp", cmd_sftp301}, {"rsync2", cmd_rsync2301},
+    {"scp", cmd_scp2301}, {"aria2c", cmd_aria2c301}, {"curl3", cmd_curl2301},
+    {"wget3", cmd_wget2301}, {"axel", cmd_axel301}, {"lftp", cmd_lftp301},
+    {"nntp", cmd_nntp301}, {"irc", cmd_irc301}, {"xmpp", cmd_xmpp301},
+    /* Batch 302: Encryption & Crypto */
+    {"openssl2", cmd_openssl2302}, {"gpg2", cmd_gpg2302}, {"ssh", cmd_ssh2302},
+    {"scp2", cmd_scp2302}, {"sftp2", cmd_sftp2302}, {"keychain", cmd_keychain2302},
+    {"keyctl", cmd_keyctl2302}, {"seahorse", cmd_seahorse2302}, {"keybase", cmd_keybase2302},
+    {"gocryptfs", cmd_gocryptfs2302}, {"veracrypt", cmd_veracrypt2302}, {"cryptsetup", cmd_cryptsetup2302},
+    /* Batch 295: Game Engine & Graphics */
+    {"godot", cmd_godot295}, {"unity", cmd_unity295}, {"unreal", cmd_unreal295},
+    {"blender", cmd_blender295}, {"gimp", cmd_gimp295}, {"inkscape", cmd_inkscape295},
+    {"krita", cmd_krita295}, {"darktable", cmd_darktable295}, {"rawtherapee", cmd_rawtherapee295},
+    {"opencv", cmd_opencv295}, {"vulkan", cmd_vulkan295}, {"opengl", cmd_opengl295},
+    /* Batch 296: Scientific Computing */
+    {"scipy", cmd_scipy296}, {"sympy", cmd_sympy296}, {"matplotlib2", cmd_matplotlib296},
+    {"plotly", cmd_plotly296}, {"bokeh", cmd_bokeh296}, {"dask", cmd_dask296},
+    {"pyarrow", cmd_pyarrow296}, {"polars", cmd_polars296}, {"rapids", cmd_rapids296},
+    {"jax", cmd_jax296}, {"flax", cmd_flax296}, {"haiku", cmd_haiku296},
+    /* Batch 297: Audio Processing */
+    {"ffmpeg2", cmd_ffmpeg297}, {"sox", cmd_sox297}, {"audacity", cmd_audacity297},
+    {"ardour", cmd_ardour297}, {"lmms", cmd_lmms297}, {"musescore", cmd_musescore297},
+    {"fluidsynth", cmd_fluidsynth297}, {"timidity", cmd_timidity297}, {"pipewire", cmd_pipewire297},
+    {"pulseaudio", cmd_pulseaudio297}, {"alsa", cmd_alsa297}, {"jack", cmd_jack297},
+    /* Batch 298: Video Processing */
+    {"mpv", cmd_mpv298}, {"vlc", cmd_vlc298}, {"obs", cmd_obs298},
+    {"kdenlive", cmd_kdenlive298}, {"shotcut", cmd_shotcut298}, {"davinci", cmd_davinci298},
+    {"synfig", cmd_synfig298}, {"tupi", cmd_tupi298}, {"mlt", cmd_mlt298},
+    {"gstreamer", cmd_gstreamer298}, {"rav1e", cmd_librav1e298}, {"svt-av1", cmd_svt298},
+    /* Batch 291: Networking & Proxy */
     {"traefik", cmd_traefik291}, {"envoy", cmd_envoy291}, {"consul", cmd_consul291},
     {"vault", cmd_vault291}, {"nomad", cmd_nomad291}, {"waypoint", cmd_waypoint291},
     {"boundary", cmd_boundary291}, {"packer", cmd_packer291}, {"terraform-cloud", cmd_terraform291_cloud},
@@ -49179,6 +49384,610 @@ static void cmd_tensorrt294(int argc, char args[][CMD_MAX_LEN]) {
 static void cmd_core294ml(int argc, char args[][CMD_MAX_LEN]) {
     (void)argc; (void)args;
     vga_puts("Core ML: Apple ML framework\n");
+}
+/* ===== Batch 295: Game Engine & Graphics ===== */
+static void cmd_godot295(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: godot <project>\n"); return; }
+    vga_printf("godot: opening project %s\n", args[1]);
+    vga_puts("godot: engine 4.1 loaded\n");
+}
+static void cmd_unity295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Unity: game engine\n");
+    vga_puts("unity: no GUI available\n");
+}
+static void cmd_unreal295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Unreal Engine: game engine\n");
+    vga_puts("unreal: no GUI available\n");
+}
+static void cmd_blender295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Blender 3.6: 3D creation suite\n");
+    vga_puts("blender: no GUI available\n");
+}
+static void cmd_gimp295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("GIMP 2.10: image editor\n");
+    vga_puts("gimp: no GUI available\n");
+}
+static void cmd_inkscape295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Inkscape: vector graphics editor\n");
+}
+static void cmd_krita295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Krita: digital painting\n");
+}
+static void cmd_darktable295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("darktable: photography workflow\n");
+}
+static void cmd_rawtherapee295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("RawTherapee: RAW image processor\n");
+}
+static void cmd_opencv295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OpenCV 4.8: computer vision\n");
+    vga_puts("opencv: camera initialized\n");
+}
+static void cmd_vulkan295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vulkan 1.3: graphics API\n");
+}
+static void cmd_opengl295(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OpenGL 4.6: graphics API\n");
+}
+/* ===== Batch 296: Scientific Computing ===== */
+static void cmd_scipy296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SciPy: scientific computing\n");
+}
+static void cmd_sympy296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SymPy: symbolic mathematics\n");
+    vga_puts("sympy: x**2 + 1 = 0 -> x = I\n");
+}
+static void cmd_matplotlib296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("matplotlib: plotting\n");
+}
+static void cmd_plotly296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Plotly: interactive charts\n");
+}
+static void cmd_bokeh296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bokeh: interactive visualization\n");
+}
+static void cmd_dask296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Dask: parallel computing\n");
+}
+static void cmd_pyarrow296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PyArrow: Apache Arrow bindings\n");
+}
+static void cmd_polars296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Polars: fast DataFrames\n");
+}
+static void cmd_rapids296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("RAPIDS: GPU data science\n");
+}
+static void cmd_jax296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("JAX: accelerated computing\n");
+}
+static void cmd_flax296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Flax: neural networks with JAX\n");
+}
+static void cmd_haiku296(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Haiku: neural networks with JAX\n");
+}
+/* ===== Batch 297: Audio Processing ===== */
+static void cmd_ffmpeg297(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ffmpeg <options>\n"); return; }
+    vga_puts("ffmpeg: audio/video converter\n");
+}
+static void cmd_sox297(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sox <input> <output>\n"); return; }
+    vga_printf("sox: processing %s\n", args[1]);
+}
+static void cmd_audacity297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Audacity: audio editor\n");
+    vga_puts("audacity: no GUI available\n");
+}
+static void cmd_ardour297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Ardour: digital audio workstation\n");
+}
+static void cmd_lmms297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("LMMS: music production\n");
+}
+static void cmd_musescore297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MuseScore: music notation\n");
+}
+static void cmd_fluidsynth297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("FluidSynth: MIDI synthesizer\n");
+}
+static void cmd_timidity297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TiMidity: MIDI player\n");
+}
+static void cmd_pipewire297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PipeWire: multimedia framework\n");
+}
+static void cmd_pulseaudio297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("PulseAudio: sound server\n");
+}
+static void cmd_alsa297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ALSA: sound driver\n");
+}
+static void cmd_jack297(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("JACK: audio connection kit\n");
+}
+/* ===== Batch 298: Video Processing ===== */
+static void cmd_mpv298(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: mpv <file>\n"); return; }
+    vga_printf("mpv: playing %s\n", args[1]);
+}
+static void cmd_vlc298(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: vlc <file>\n"); return; }
+    vga_printf("vlc: playing %s\n", args[1]);
+}
+static void cmd_obs298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OBS Studio: streaming\n");
+    vga_puts("obs: recording started\n");
+}
+static void cmd_kdenlive298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Kdenlive: video editor\n");
+}
+static void cmd_shotcut298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Shotcut: video editor\n");
+}
+static void cmd_davinci298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("DaVinci Resolve: professional video editing\n");
+}
+static void cmd_synfig298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Synfig: 2D animation\n");
+}
+static void cmd_tupi298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TupiTube: 2D animation\n");
+}
+static void cmd_mlt298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("MLT: multimedia framework\n");
+}
+static void cmd_gstreamer298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("GStreamer: multimedia framework\n");
+}
+static void cmd_librav1e298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("rav1e: AV1 encoder\n");
+}
+static void cmd_svt298(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SVT-AV1: AV1 encoder\n");
+}
+/* ===== Batch 299: Package Managers ===== */
+static void cmd_apt299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apt <install|update|remove>\n"); return; }
+    if (strcmp(args[1], "update") == 0) vga_puts("apt: updating package lists...\napt: done\n");
+    else if (strcmp(args[1], "install") == 0) vga_printf("apt: installing %s\n", argc > 2 ? args[2] : "?");
+    else vga_printf("apt: %s\n", args[1]);
+}
+static void cmd_yum299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: yum <install|update|remove>\n"); return; }
+    vga_printf("yum: %s\n", args[1]);
+}
+static void cmd_dnf299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dnf <install|update|remove>\n"); return; }
+    vga_printf("dnf: %s\n", args[1]);
+}
+static void cmd_pacman299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pacman <-S|-R|-Q>\n"); return; }
+    vga_printf("pacman: %s\n", args[1]);
+}
+static void cmd_zypper299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: zypper <install|remove>\n"); return; }
+    vga_printf("zypper: %s\n", args[1]);
+}
+static void cmd_emerge299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: emerge <package>\n"); return; }
+    vga_printf("emerge: %s\n", args[1]);
+}
+static void cmd_snap299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: snap <install|list>\n"); return; }
+    if (strcmp(args[1], "list") == 0) vga_puts("Name    Version  Publisher\nfirefox 120.0    mozilla\n");
+    else vga_printf("snap: %s\n", args[1]);
+}
+static void cmd_flatpak299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: flatpak <install|list>\n"); return; }
+    vga_printf("flatpak: %s\n", args[1]);
+}
+static void cmd_brew299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: brew <install|list>\n"); return; }
+    if (strcmp(args[1], "list") == 0) vga_puts("python  git  node  wget\n");
+    else vga_printf("brew: %s\n", args[1]);
+}
+static void cmd_nix299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nix <install|env>\n"); return; }
+    vga_printf("nix: %s\n", args[1]);
+}
+static void cmd_conda299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: conda <install|create>\n"); return; }
+    vga_printf("conda: %s\n", args[1]);
+}
+static void cmd_pip299(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pip <install|list>\n"); return; }
+    if (strcmp(args[1], "list") == 0) vga_puts("Package    Version\nnumpy      1.24.0\npandas     2.0.0\n");
+    else vga_printf("pip: %s\n", args[1]);
+}
+/* ===== Batch 300: Compilers & Interpreters ===== */
+static void cmd_gcc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gcc <file.c>\n"); return; }
+    vga_printf("gcc: compiling %s\n", args[1]);
+}
+static void cmd_clang300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: clang <file.c>\n"); return; }
+    vga_printf("clang: compiling %s\n", args[1]);
+}
+static void cmd_tcc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: tcc <file.c>\n"); return; }
+    vga_printf("tcc: compiling %s\n", args[1]);
+}
+static void cmd_dmc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: dmc <file.c>\n"); return; }
+    vga_printf("dmc: compiling %s\n", args[1]);
+}
+static void cmd_fpc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fpc <file.pas>\n"); return; }
+    vga_printf("fpc: compiling %s\n", args[1]);
+}
+static void cmd_pascal300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: pascal <file.pas>\n"); return; }
+    vga_printf("pascal: compiling %s\n", args[1]);
+}
+static void cmd_javac300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: javac <file.java>\n"); return; }
+    vga_printf("javac: compiling %s\n", args[1]);
+}
+static void cmd_kotlinc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: kotlinc <file.kt>\n"); return; }
+    vga_printf("kotlinc: compiling %s\n", args[1]);
+}
+static void cmd_scalac300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: scalac <file.scala>\n"); return; }
+    vga_printf("scalac: compiling %s\n", args[1]);
+}
+static void cmd_swc300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: swc <file>\n"); return; }
+    vga_printf("swc: transpiling %s\n", args[1]);
+}
+static void cmd_esbuild300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: esbuild <file>\n"); return; }
+    vga_printf("esbuild: bundling %s\n", args[1]);
+}
+static void cmd_sass300(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sass <file.scss>\n"); return; }
+    vga_printf("sass: compiling %s\n", args[1]);
+}
+/* ===== Batch 301: Network Protocols ===== */
+static void cmd_ftp2301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ftp <host>\n"); return; }
+    vga_printf("ftp: connecting to %s\n", args[1]);
+}
+static void cmd_sftp301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sftp <host>\n"); return; }
+    vga_printf("sftp: connecting to %s\n", args[1]);
+}
+static void cmd_rsync2301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: rsync <src> <dst>\n"); return; }
+    vga_printf("rsync: %s -> %s\n", args[1], args[2]);
+}
+static void cmd_scp2301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: scp <src> <dst>\n"); return; }
+    vga_printf("scp: %s -> %s\n", args[1], args[2]);
+}
+static void cmd_aria2c301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: aria2c <url>\n"); return; }
+    vga_printf("aria2c: downloading %s\n", args[1]);
+}
+static void cmd_curl2301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: curl <url>\n"); return; }
+    vga_printf("curl: fetching %s\n", args[1]);
+}
+static void cmd_wget2301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: wget <url>\n"); return; }
+    vga_printf("wget: downloading %s\n", args[1]);
+}
+static void cmd_axel301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: axel <url>\n"); return; }
+    vga_printf("axel: downloading %s\n", args[1]);
+}
+static void cmd_lftp301(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: lftp <host>\n"); return; }
+    vga_printf("lftp: connecting to %s\n", args[1]);
+}
+static void cmd_nntp301(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("nntp: network news transfer protocol\n");
+}
+static void cmd_irc301(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("irc: internet relay chat\n");
+}
+static void cmd_xmpp301(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("xmpp: extensible messaging protocol\n");
+}
+/* ===== Batch 302: Encryption & Crypto ===== */
+static void cmd_openssl2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: openssl <command>\n"); return; }
+    vga_printf("openssl: %s\n", args[1]);
+}
+static void cmd_gpg2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gpg <options>\n"); return; }
+    vga_printf("gpg: %s\n", args[1]);
+}
+static void cmd_ssh2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: ssh <host>\n"); return; }
+    vga_printf("ssh: connecting to %s\n", args[1]);
+}
+static void cmd_scp2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 3) { vga_puts("Usage: scp <src> <dst>\n"); return; }
+    vga_printf("scp: %s -> %s\n", args[1], args[2]);
+}
+static void cmd_sftp2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: sftp <host>\n"); return; }
+    vga_printf("sftp: connecting to %s\n", args[1]);
+}
+static void cmd_keychain2302(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("keychain: SSH/GPG agent manager\n");
+}
+static void cmd_keyctl2302(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("keyctl: kernel key management\n");
+}
+static void cmd_seahorse2302(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Seahorse: password & key manager\n");
+}
+static void cmd_keybase2302(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Keybase: encrypted messaging\n");
+}
+static void cmd_gocryptfs2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gocryptfs <dir>\n"); return; }
+    vga_printf("gocryptfs: mounting encrypted %s\n", args[1]);
+}
+static void cmd_veracrypt2302(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("VeraCrypt: disk encryption\n");
+}
+static void cmd_cryptsetup2302(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cryptsetup <open|close>\n"); return; }
+    vga_printf("cryptsetup: %s\n", args[1]);
+}
+/* ===== Batch 303: Version Control ===== */
+static void cmd_git303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: git <command>\n"); return; }
+    vga_printf("git: %s\n", args[1]);
+}
+static void cmd_svn303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: svn <command>\n"); return; }
+    vga_printf("svn: %s\n", args[1]);
+}
+static void cmd_hg303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: hg <command>\n"); return; }
+    vga_printf("hg: %s\n", args[1]);
+}
+static void cmd_bzr303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: bzr <command>\n"); return; }
+    vga_printf("bzr: %s\n", args[1]);
+}
+static void cmd_cvs303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: cvs <command>\n"); return; }
+    vga_printf("cvs: %s\n", args[1]);
+}
+static void cmd_fossil303(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: fossil <command>\n"); return; }
+    vga_printf("fossil: %s\n", args[1]);
+}
+static void cmd_darcs303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("darcs: patch-based VCS\n");
+}
+static void cmd_monotone303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("monotone: distributed VCS\n");
+}
+static void cmd_veracity303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("veracity: distributed VCS\n");
+}
+static void cmd_tfs303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("TFS: Team Foundation Server\n");
+}
+static void cmd_perforce303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Perforce: version control\n");
+}
+static void cmd_clearcase303(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ClearCase: version control\n");
+}
+/* ===== Batch 304: System Init & Web ===== */
+static void cmd_systemd304(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: systemd <command>\n"); return; }
+    vga_printf("systemd: %s\n", args[1]);
+}
+static void cmd_sysvinit304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("SysVinit: classic init\n");
+}
+static void cmd_openrc304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OpenRC: init system\n");
+}
+static void cmd_runit304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("runit: init system\n");
+}
+static void cmd_s6304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("s6: process supervision\n");
+}
+static void cmd_nginx2304(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: nginx <start|stop|reload>\n"); return; }
+    vga_printf("nginx: %s\n", args[1]);
+}
+static void cmd_apache2304(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: apache2 <start|stop|reload>\n"); return; }
+    vga_printf("apache2: %s\n", args[1]);
+}
+static void cmd_lighttpd304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("lighttpd: web server\n");
+}
+static void cmd_cherokee304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Cherokee: web server\n");
+}
+static void cmd_tengine304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Tengine: Nginx fork\n");
+}
+static void cmd_openresty304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OpenResty: Nginx + Lua\n");
+}
+static void cmd_h2o304(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("H2O: HTTP/2 web server\n");
+}
+/* ===== Batch 305: Cloud SDK ===== */
+static void cmd_aws2305(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: aws <command>\n"); return; }
+    vga_printf("aws: %s\n", args[1]);
+}
+static void cmd_gcloud2305(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: gcloud <command>\n"); return; }
+    vga_printf("gcloud: %s\n", args[1]);
+}
+static void cmd_azure2305(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: az <command>\n"); return; }
+    vga_printf("az: %s\n", args[1]);
+}
+static void cmd_do2305(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: doctl <command>\n"); return; }
+    vga_printf("doctl: %s\n", args[1]);
+}
+static void cmd_linode2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Linode: cloud computing\n");
+}
+static void cmd_vultr2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vultr: cloud computing\n");
+}
+static void cmd_hetzner2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Hetzner: cloud computing\n");
+}
+static void cmd_ovh2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("OVH: cloud computing\n");
+}
+static void cmd_scaleway2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Scaleway: cloud computing\n");
+}
+static void cmd_koyeb2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Koyeb: serverless platform\n");
+}
+static void cmd_render2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Render: cloud application platform\n");
+}
+static void cmd_fly2305(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Fly.io: edge computing\n");
+}
+/* ===== Batch 306: Testing & Load ===== */
+static void cmd_todo2306(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: todo <list|add|done>\n"); return; }
+    vga_printf("todo: %s\n", args[1]);
+}
+static void cmd_taskwarrior306(int argc, char args[][CMD_MAX_LEN]) {
+    if (argc < 2) { vga_puts("Usage: task <add|list|done>\n"); return; }
+    vga_printf("task: %s\n", args[1]);
+}
+static void cmd_timers306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("timers: system timers\n");
+}
+static void cmd_chaos306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Chaos: chaos engineering\n");
+}
+static void cmd_litmus306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Litmus: chaos engineering\n");
+}
+static void cmd_k6306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("k6: load testing\n");
+    vga_puts("k6: 100 VUs, 30s duration\n");
+}
+static void cmd_locust306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Locust: load testing\n");
+    vga_puts("locust: 50 users, 2s hatch rate\n");
+}
+static void cmd_vegeta306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Vegeta: HTTP load testing\n");
+}
+static void cmd_wrk306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("wrk: HTTP benchmarking\n");
+}
+static void cmd_ab306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("ab: Apache HTTP server benchmarking\n");
+}
+static void cmd_siege306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Siege: HTTP load testing\n");
+}
+static void cmd_bombardier306(int argc, char args[][CMD_MAX_LEN]) {
+    (void)argc; (void)args;
+    vga_puts("Bombardier: HTTP benchmarking\n");
 }
 void shell_run(void) {
     vga_clear();
