@@ -267,4 +267,13 @@ uint16_t pci_get_io_base(int index);
 void pci_print_devices(void);
 void pci_init(void);
 
+/* ===== FAT32 Filesystem ===== */
+int fat_mount(void);
+int fat_list(const char* path, char* output, uint32_t max_len);
+int fat_read(const char* name, char* buf, uint32_t max_len);
+int fat_is_mounted(void);
+uint32_t fat_get_total_clusters(void);
+uint32_t fat_get_bytes_per_cluster(void);
+void fat_init(void);
+
 #endif
